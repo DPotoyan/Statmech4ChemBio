@@ -1,8 +1,6 @@
 Python refresher
 =======================
 
-## These module serves as a quick dive into python for students that are not familiar with programming. For those that are will find link for more in depth tutorials and videos. 
-
 ### Short tutorials for for scientists new to python
 
    1. [Programming Python](http://swcarpentry.github.io/python-novice-inflammation/)
@@ -15,7 +13,7 @@ Python refresher
    2. [Introduction to Python for Computational Science and Engineering](https://fangohr.github.io/introduction-to-python-for-computational-science-and-engineering/)
    3. [SciPy lectures](http://scipy-lectures.org/index.html)
 
-### The official docs for python/numpy/scipy/pandas. Keep it within arms reach
+### The official docs
 
    1. [numpy.org](https://numpy.org/learn/)
    2. [scipy.org](https://www.scipy.org/)
