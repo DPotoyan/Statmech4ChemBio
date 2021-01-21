@@ -1,7 +1,12 @@
 Introduction
 ============================
 
-![](./intro_img.jpg)
+```{image} ./intro_img.jpg
+:alt: Intro
+:class: bg-primary
+:width: 150px
+:align: center
+```
 
 This website hosts lectures notes and computational content of the class **Chem563 "Statistical Mechanics for Chemistry and Biology"** hosted at Iowa State. The content of [this course](https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering/blob/master/Readme.md) is distributed into chapters, using one Jupyter Notebook for each chapter.
 
