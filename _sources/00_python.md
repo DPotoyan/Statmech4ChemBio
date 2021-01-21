@@ -10,7 +10,7 @@ Python refresher
 ### Resources for learning sicnetific python 
 
    1. [Python like you mean it](https://www.pythonlikeyoumeanit.com/)
-   2. [Introduction to Python for Computational Science and Engineering](https://fangohr.github.io/introduction-to-python-for-computational-science-and-engineering/)
+   2. [Intro to python for computational science and engineering](https://fangohr.github.io/introduction-to-python-for-computational-science-and-engineering/)
    3. [SciPy lectures](http://scipy-lectures.org/index.html)
 
 ### The official docs
@@ -25,6 +25,7 @@ Python refresher
    1. [Think Python](https://greenteapress.com/wp/think-python/)
    2. [A Byte of Python](https://python.swaroopch.com/)
    3. [Whirlwind tour of python](https://jakevdp.github.io/WhirlwindTourOfPython/)
+   4. [Python Dat aScience Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
    
 ### Youtube channels
 
