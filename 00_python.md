@@ -1,4 +1,4 @@
-Python refresher
+A. Python refresher
 =======================
 
 ### Short tutorials for for scientists new to python
@@ -7,7 +7,7 @@ Python refresher
    2. [Plotting and programming in Python ](http://swcarpentry.github.io/python-novice-gapminder/)
    3. [Python programming for Scientists](http://wwwstaff.ari.uni-heidelberg.de/mitarbeiter/rschmidt/pycourse/index.html)
    
-### Resources for learning sicnetific python 
+### Resources for learning scientific computing (in python) 
 
    1. [Python like you mean it](https://www.pythonlikeyoumeanit.com/)
    2. [Intro to python for computational science and engineering](https://fangohr.github.io/introduction-to-python-for-computational-science-and-engineering/)
