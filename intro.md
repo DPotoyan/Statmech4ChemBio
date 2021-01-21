@@ -4,7 +4,7 @@ Introduction
 ```{image} ./intro_img.jpg
 :alt: Intro
 :class: bg-primary
-:width: 150px
+:width: 250px
 :align: center
 ```
 
