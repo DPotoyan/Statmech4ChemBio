@@ -1,7 +1,4 @@
-Welcome to your Jupyter Book
+Statistical mechanics for chemistry and biology
 ============================
 
-This is a small sample book to give you a feel for how book content is
-structured.
-
-Check out the content pages bundled with this sample book to get started.
+This website hosts lectures notes and computational content used for Chem563 class at Iowa State
