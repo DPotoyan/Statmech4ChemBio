@@ -1,15 +1,13 @@
 Introduction
 ============================
 
-This website hosts lectures notes and computational content of the class Chem563 "Statistical Mechanics for Chemistry and Biology" at Iowa State. The content of [this course](https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering/blob/master/Readme.md) is distributed into chapters, using one Jupyter Notebook for each chapter.
+![](./intro_img.jpg)
 
-You can read the book on website or download pdf. To get the most out of the book however you should open it either (i) an interactive mode by clicking GoogleCollab or MyBinder badges (ii) locally by installing python distribution along with jupyter. In the interactive mode you will get hands on experience with code and examples.  
- 
-If you have not used the [Jupyter Notebook](https://jupyter.org/) before, please read the following instructions.
+This website hosts lectures notes and computational content of the class **Chem563 "Statistical Mechanics for Chemistry and Biology"** hosted at Iowa State. The content of [this course](https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering/blob/master/Readme.md) is distributed into chapters, using one Jupyter Notebook for each chapter.
 
-<iframe id="ytplayer" type="text/html" width="640" height="360"
-  src="https://www.youtube.com/watch?v=HW29067qVWk"
-  frameborder="0"></iframe> 
+You can read the book on website or download pdf. To get the most out of the book however you should open it either (i) an interactive mode by clicking GoogleCollab or MyBinder badges (ii) locally by installing python distribution along with jupyter. In the interactive mode you will get hands on experience with code and examples. If you have not used the [Jupyter Notebook](https://jupyter.org/) before, please read the following instructions.
+
+> [Watch this youtube tutorial on how to setup and run jupyter notebooks locally](https://www.youtube.com/watch?v=HW29067qVWk)
 
 1. Navigating the notebook
 
