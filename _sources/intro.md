@@ -13,9 +13,11 @@ name: directive-fig
 This website hosts lectures notes and computational content of the class Chem563 (Spring 2021) at Iowa State etitled "Statistical Mechanics for Chemistry and Biology".
 The content of [this course](https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering/blob/master/Readme.md) is distributed into chapters, using one Jupyter Notebook for each chapter.
 
-You can read the book on website or download pdf. To get the most out of the book however you should open it either (i) an interactive mode by clicking GoogleCollab or MyBinder badges (ii) locally by installing python distribution along with jupyter. In the interactive mode you will get hands on experience with code and examples. If you have not used the [Jupyter Notebook](https://jupyter.org/) before, please read the following instructions.
+You can read the book on website or download pdf. To get the most out of these notes you should execute code blocks and explore the itneractive content inside notebooks. Do it you have two options 
+- Open notebooks in the cloud, by clicking either on GoogleCollab or MyBinder badges. Google Collab allows you to save notebooks to GoogleDrive and has a free GPU! 
+- Open locally, by installing anaconda python distribution. If you have not used the [Jupyter Notebooks](https://jupyter.org/) before, please read the following instructions.
 
-> [Watch this youtube tutorial on how to setup and run jupyter notebooks locally](https://www.youtube.com/watch?v=HW29067qVWk)
+> [Get a qucikstart by wattching this youtube tutorial on how to setup and run jupyter notebooks](https://www.youtube.com/watch?v=HW29067qVWk)
 
 1. Navigating the notebook
 
@@ -33,7 +35,4 @@ You can read the book on website or download pdf. To get the most out of the boo
 
 *Comments? Questions?*
 
-For feedback, corrections go to Github page of the course and leave comments there [](). You can also find the most recent versions there.
-
-Enjoy!
-
+For feedback, corrections go to the [Github page](https://github.com/DPotoyan/Statmech4ChemBio/issues) of the course, open an issue and leave your comments, questions and suggestions. I would highly appreciate any feedback and contributions. If you are interested in contributing to the developent of the course please get in touch. I would love to have more people engaged in bettering the course and reaching out to wider scientific and engineering community. 
