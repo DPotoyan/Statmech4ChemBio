@@ -1,7 +1,8 @@
-Welcome to your Jupyter Book
+Statistical Mechanics for Chemistry and Biology
 ============================
 
-This is a small sample book to give you a feel for how book content is
-structured.
+This is a repository of materials for the class Chem563 "Statistical Mechanics for Chemistry and Biology"
 
-Check out the content pages bundled with this sample book to get started.
+The content is hsoted on the [web](https://dpotoyan.github.io/Statmech4ChemBio/intro.html) and cosists of markdown files and jupyter notebooks using the resources of the wonderful [jupyter-book](https://jupyterbook.org/intro.html) 
+
+Comments and suggestions to improve the content are highly appreciated. Feel free to open an issue. 
