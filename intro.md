@@ -8,9 +8,9 @@ name: directive-fig
 ---
 ```
 
-### Chem563 "Statistical Mechanics for Chemistry and Biology"
+### Statistical Mechanics for Chemistry and Biology
 
-This website hosts lectures notes and computational content of the class Chem563 at Iowa State etitled Statistical Mechanics for Chemistry and Biology. 
+This website hosts lectures notes and computational content of the class Chem563 (Spring 2021) at Iowa State etitled "Statistical Mechanics for Chemistry and Biology".
 The content of [this course](https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering/blob/master/Readme.md) is distributed into chapters, using one Jupyter Notebook for each chapter.
 
 You can read the book on website or download pdf. To get the most out of the book however you should open it either (i) an interactive mode by clicking GoogleCollab or MyBinder badges (ii) locally by installing python distribution along with jupyter. In the interactive mode you will get hands on experience with code and examples. If you have not used the [Jupyter Notebook](https://jupyter.org/) before, please read the following instructions.
