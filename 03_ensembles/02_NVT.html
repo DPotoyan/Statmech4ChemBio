@@ -1,0 +1,946 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NVT &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Statistical Mechanics for Chemistry and Biology</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../00_python.html">
+   A. Python refresher
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2py.html">
+     1. Why Python?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2numpy.html">
+     2. NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2viz.html">
+     3. Plotting with Matplotlib
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../01_stats.html">
+   B. Probability and randomness
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/01_SetsCounting.html">
+     1. Probability by counting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/02_RandVar.html">
+     2. Random variable, stochastic process and simulation.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/04_MC.html">
+     3. “Monte Carlo and the power of randomness”
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/05_InverseTransform.html">
+     4. The Inverse Transform of RVs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../02_thermo.html">
+   Thermodynamics refresher
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02_thermo/01_Thermo.html">
+     1. Review of the main principles of thermodynamics.
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../03_ensembles.html">
+   Statistical ensembles
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_NVE.html">
+     1. NVE
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/03_ensembles/02_NVT.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/03_ensembles/02_NVT.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/03_ensembles/02_NVT.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nve-rightarrow-nvt-by-releasing-e-const-constraint-to-get-t-const">
+   <span class="math notranslate nohighlight">
+    \(NVE \rightarrow NVT\)
+   </span>
+   by releasing E=const constraint to get
+   <span class="math notranslate nohighlight">
+    \(T=const\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nvt-ensemble">
+   NVT Ensemble
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivation-1-quick-n-dirty">
+   Derivation- 1 (quick n’ dirty)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivation-2-clean-n-insightful">
+   Derivation- 2 (clean n’ insightful)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#boltzmann-distribution">
+     Boltzmann distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partiation-function">
+     Partiation Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#free-energy">
+     Free Energy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#closer-look-at-the-z-the-partiation-function">
+   Closer look at the Z: The partiation function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-free-energy-is-a-central-quantity-in-the-nvt-ensemble">
+   Why free energy is a central quantity in the NVT ensemble.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logz-as-cumulant-generating-function">
+   logZ as cumulant generating function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#energy-fluctuations">
+   Energy fluctuations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applications-of-nvt">
+   Applications of NVT
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#two-state-model-nve-vs-nvt">
+     Two state model: NVE vs NVT
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parition-function-decouples-non-interacting-terms-in-energy">
+     Parition function decouples non-interacting terms in energy!
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-interacting-system">
+     Non-interacting system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2-ideal-gas-classical">
+     Example-2: Ideal gas (classical)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ideal-gas-qm-treatment-nve-vs-nvt">
+     Ideal gas QM treatment (NVE vs NVT)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#harmonic-oscillator-model">
+     Harmonic oscillator model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rigid-rotor-model">
+     Rigid rotor model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partition-function-for-a-molecular-gas">
+     Partition function for a molecular gas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#digression-boltzman-s-original-derivation">
+   Digression:  Boltzman’s original derivation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximizing-number-of-states-with-lagrange-multipliers">
+     Maximizing number of states with Lagrange multipliers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#systems-where-potential-energy-is-not-zero-energy-vs-entropy">
+   Systems where potential energy is not zero: Energy vs Entropy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#equipartition">
+     Equipartition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#grouping-microstates-into-states">
+     Grouping microstates into states
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relative-populations-of-states">
+     Relative populations of states
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#protein-folding-problem-with-1d-potential">
+     Protein folding problem with 1D potential
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="nvt">
+<h1>NVT<a class="headerlink" href="#nvt" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">widgets</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sci</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="nve-rightarrow-nvt-by-releasing-e-const-constraint-to-get-t-const">
+<h2><span class="math notranslate nohighlight">\(NVE \rightarrow NVT\)</span> by releasing E=const constraint to get <span class="math notranslate nohighlight">\(T=const\)</span><a class="headerlink" href="#nve-rightarrow-nvt-by-releasing-e-const-constraint-to-get-t-const" title="Permalink to this headline">¶</a></h2>
+<p>In the NVT ensemble system samples different <span class="math notranslate nohighlight">\(E_i\)</span> consistent with T=const constraint imposed by putting system in contact with infinitely large reservoir.</p>
+<div class="math notranslate nohighlight">
+\[E_{tot} = E_r + E_i\]</div>
+<div class="math notranslate nohighlight">
+\[\Omega_{tot}(E_{tot}) = \sum_i \Omega_r(E_{tot}-E_i) \cdot \Omega(E_i)\]</div>
+</div>
+<div class="section" id="nvt-ensemble">
+<h2>NVT Ensemble<a class="headerlink" href="#nvt-ensemble" title="Permalink to this headline">¶</a></h2>
+<p>Let us single out one micro-state <span class="math notranslate nohighlight">\(E_i\)</span> of our system <span class="math notranslate nohighlight">\(\Omega(E_i) =1\)</span> and see what would be its probability in NVT ensemble.</p>
+<div class="math notranslate nohighlight">
+\[p_i = \frac{\Omega_r(E_{tot}-E_i)}{\Omega_{tot} (E_{tot})} = \frac{e^{S_r(E_{tot}-E_i)/k_B}}{e^{S_{tot}(E)/k_B}}\]</div>
+<p>Where we have used use the microcanonical ensemble of <strong>system+reservoir</strong> to cast the problem in terms of probabilities of <strong>the system</strong>.</p>
+</div>
+<div class="section" id="derivation-1-quick-n-dirty">
+<h2>Derivation- 1 (quick n’ dirty)<a class="headerlink" href="#derivation-1-quick-n-dirty" title="Permalink to this headline">¶</a></h2>
+<p>Since entropy is a smoothly varying function of energy we can expand it around <span class="math notranslate nohighlight">\(E_{tot}\)</span> as <span class="math notranslate nohighlight">\(E_i\)</span> is a much smaller quantity.</p>
+<div class="math notranslate nohighlight">
+\[S_r(E_{tot}) \approx S_r(E_{tot}) - \Big( \frac{\partial S_r(E)}{\partial E}\Big) E_i = S_r(E_{tot}) -\frac{E_i}{T}\]</div>
+<p>This leads to $<span class="math notranslate nohighlight">\(p_i \sim e^{-\beta E_i}\,\,\,\, where \,\,\,\,\beta = \frac{1}{k_B T}\)</span>$ after normalizing we obtain:</p>
+<div class="math notranslate nohighlight">
+\[ p_i = \frac{e^{-\beta E_i}}{Z}\,\,\,\,\, Z= \sum_i e^{-\beta E_i}\]</div>
+</div>
+<div class="section" id="derivation-2-clean-n-insightful">
+<h2>Derivation- 2 (clean n’ insightful)<a class="headerlink" href="#derivation-2-clean-n-insightful" title="Permalink to this headline">¶</a></h2>
+<p>A more revealing is the expansion around system’s average energy <span class="math notranslate nohighlight">\(U = \sum_i p_i E_i\)</span> which has small fluctuations around it <span class="math notranslate nohighlight">\(U - E_i = \delta E_i \sim O(N^{1/2})\)</span>:</p>
+<ul class="simple">
+<li><p><strong>Entropy of reservoir</strong>
+$<span class="math notranslate nohighlight">\(S_r(E_{tot}-E_i) = S_r(E_{tot}-U + U-E_i) \approx S_r(E_{tot}-U) +\Big( \frac{\partial S_r(E)}{\partial E}\Big) (U-E_i)=  S_r(E_{tot}-U) +\frac{1}{T}(U-E_i)\)</span>$</p></li>
+</ul>
+<br>
+<ul class="simple">
+<li><p><strong>Entropy of total system.</strong>
+$<span class="math notranslate nohighlight">\( S_{tot}(E_{tot}) = S_r(E_{tot}-U)+S(U)\)</span>$</p></li>
+</ul>
+<br>
+<div class="math notranslate nohighlight">
+\[p_i =\frac{e^{S_r(E_{tot}-E_i)/k_B}}{e^{S_{tot}(E_{tot})/k_B}} = \frac{e^{S_r(E_{tot}-U)/k_B}e^{-\beta (U-E_i)}}{e^{S_r(E_{tot}-U)/k_B} e^{S(U)/k_B}} = \frac{e^{-\beta E_i}}{e^{-\beta F}}\]</div>
+<div class="section" id="boltzmann-distribution">
+<h3>Boltzmann distribution<a class="headerlink" href="#boltzmann-distribution" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\boxed{p_i = \frac{e^{-E_i/k_B T}}{Z}}\]</div>
+</div>
+<div class="section" id="partiation-function">
+<h3>Partiation Function<a class="headerlink" href="#partiation-function" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\boxed{Z = \sum_i E^{-\beta E_i}}\]</div>
+</div>
+<div class="section" id="free-energy">
+<h3>Free Energy<a class="headerlink" href="#free-energy" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\boxed{Z = e^{-{\beta F}}} \,\,\,\,\, \boxed{F = -\beta^{-1} log Z}\]</div>
+</div>
+</div>
+<div class="section" id="closer-look-at-the-z-the-partiation-function">
+<h2>Closer look at the Z: The partiation function<a class="headerlink" href="#closer-look-at-the-z-the-partiation-function" title="Permalink to this headline">¶</a></h2>
+<br>
+$$\boxed{Z(\beta) = \sum_i e^{-\beta E_i} = \int \Omega(E) e^{-\beta E}dE = \int e^{-\beta (E-TS)}dE }$$
+<br>
+<ul class="simple">
+<li><p>The parition function is “partitioning” or disirbuting (exponentially) the states of NVT ensemble with different energy levels/values:
+<br></p></li>
+<li><p>It can be seen that <span class="math notranslate nohighlight">\(Z\)</span>, the partition function of NVT is <strong>Laplace Transform</strong> of density of states of NVE. While connection between energy and free energy <span class="math notranslate nohighlight">\(F= E -TS\)</span> is  via <strong>Legendre Transform</strong>
+<br></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Omega(E)\sim e^N\)</span> rapidly increasing function with N eacsue of limit theorems: e.g the large deviation, central limit theorem, law of large numbers.
+<br></p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{-\beta E}\sim e^{-N}\)</span> rapidly decreasing function with N</p></li>
+<li><p>Thermodynamic limit <span class="math notranslate nohighlight">\(N, V\rightarrow \infty\)</span> and <span class="math notranslate nohighlight">\(N/V \rightarrow const\)</span> only the region of energy survivies hat guarantees non-negligible contribution</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\boxed{Z = \int e^{-\beta (E-TS)}dE \approx e^{-\beta(U-TS)} = e^{-\beta F}}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(U =\langle E \rangle\)</span> is the thermodynamic average energy, flucutatins around which are on order of <span class="math notranslate nohighlight">\(O(N^{1/2})\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">omega</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">omega</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f24c57a7390&gt;]
+</pre></div>
+</div>
+<img alt="../_images/02_NVT_10_1.png" src="../_images/02_NVT_10_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="why-free-energy-is-a-central-quantity-in-the-nvt-ensemble">
+<h2>Why free energy is a central quantity in the NVT ensemble.<a class="headerlink" href="#why-free-energy-is-a-central-quantity-in-the-nvt-ensemble" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>As we have learned in Thermodynamics, after legendre transorming total energy the equilibrium corresponds to the minimum of the free energy.</p>
+</div></blockquote>
+<p>Now time to see how free energy governes probabilities in the NVT ensemble:</p>
+<div class="math notranslate nohighlight">
+\[p_1 =\frac{\Omega (E_1) e^{-\beta E_1}}{Z} = \frac{e^{-\beta F_1}}{e^{-\beta F}}\]</div>
+<p>Often we re interested in relative probabilities of different states, e.g conformation A vs B of polymer:</p>
+<div class="math notranslate nohighlight">
+\[\frac{p_2}{p_1} = e^{-\beta (F_2-F_1)} \]</div>
+</div>
+<div class="section" id="logz-as-cumulant-generating-function">
+<h2>logZ as cumulant generating function<a class="headerlink" href="#logz-as-cumulant-generating-function" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Moment generation function <span class="math notranslate nohighlight">\(M(k)\)</span></strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[M(k) = \int f(x) e^{kx} dx = \langle e^{kx} \rangle\]</div>
+<div class="math notranslate nohighlight">
+\[M(k) = 1 +\langle x \rangle k + \frac{1}{2!} \langle x^2 \rangle k^2 + ...\]</div>
+<ul class="simple">
+<li><p><strong>Cumulant generation function <span class="math notranslate nohighlight">\(C(k)=log M(k)\)</span>:</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[C(k) = log \langle e^{kx} \rangle\]</div>
+<div class="math notranslate nohighlight">
+\[\langle e^{kx} \rangle = e^{C(k)} = e^{[1 +\langle x \rangle k + \frac{1}{2!} \langle x^2 \rangle k^2 + ...]}= 1+\kappa_1 k^2 +\kappa_2 k^2 + ...\]</div>
+<p>First two cumulants are mean and fluctuation!</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(k_1 = \langle x \rangle\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(k_2 = \langle (x-\langle x \rangle)^2 \rangle\)</span></p></li>
+</ol>
+</div>
+<div class="section" id="energy-fluctuations">
+<h2>Energy fluctuations<a class="headerlink" href="#energy-fluctuations" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle = \frac{\partial log Z}{\partial (-\beta)}\]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2_E = \frac{\partial^2 log Z}{\partial \beta^2} = -\frac{\partial \langle E \rangle}{\partial \beta} = k_BT^2 C_v\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\sigma_E}{\langle E\rangle} = \frac{(k_BT^2 C_v)^{1/2}}{\langle E\rangle}\sim O(N^{-1/2})\]</div>
+</div>
+<div class="section" id="applications-of-nvt">
+<h2>Applications of NVT<a class="headerlink" href="#applications-of-nvt" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="two-state-model-nve-vs-nvt">
+<h3>Two state model: NVE vs NVT<a class="headerlink" href="#two-state-model-nve-vs-nvt" title="Permalink to this headline">¶</a></h3>
+<p>Let us consider simple two level system where lower level <span class="math notranslate nohighlight">\(\epsilon_0 = 0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon_1 =\epsilon\)</span>. We will now use <span class="math notranslate nohighlight">\(NVE\)</span> ensemble to obtian thermodynamic quantities <span class="math notranslate nohighlight">\((S, T, C_v)\)</span> and then obtain same quantities with <span class="math notranslate nohighlight">\(NVT\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[E = n\epsilon\]</div>
+<div class="math notranslate nohighlight">
+\[\Omega(E) = \frac{N!}{(N-n)! n!}\]</div>
+<div class="math notranslate nohighlight">
+\[S = k_B log \Omega(E) = N k_B \Big [- \frac{n}{N}log \frac{n}{N} - \frac{N-n}{N}log \frac{N-n}{N} \Big]\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{1}{T} = \frac{\partial S(E)}{\partial E} =  \frac{k_B}{\epsilon}\frac{\partial log\Omega(n)}{\partial  n} = \frac{k_B}{\epsilon}log \frac{N-n}{N}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{n}{N} = \frac{1}{1+e^{\beta \epsilon}}\]</div>
+<div class="math notranslate nohighlight">
+\[E = n\epsilon = \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ee2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">beta</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">beta</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ee2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ee2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ee2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ee2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f24c570ab50&gt;]
+</pre></div>
+</div>
+<img alt="../_images/02_NVT_17_1.png" src="../_images/02_NVT_17_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="parition-function-decouples-non-interacting-terms-in-energy">
+<h3>Parition function decouples non-interacting terms in energy!<a class="headerlink" href="#parition-function-decouples-non-interacting-terms-in-energy" title="Permalink to this headline">¶</a></h3>
+<br>
+<div class="math notranslate nohighlight">
+\[Z = \sum^{n=N}_{n=0} e^{-\beta E_n} =  \Big (\sum^{i=1}_{i=0} e^{-\beta \epsilon_i} \Big)\Big (\sum^{i=1}_{i=0} e^{-\beta \epsilon_i} \Big)...\Big (\sum^{i=1}_{i=0} e^{-\beta \epsilon_i} \Big) = (1+e^{-\beta \epsilon})^N\]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[F= -k_B T log Z = -k_BT N log(1+e^{-\beta \epsilon})\]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle  = \frac{\partial log Z}{\partial (-\beta)} =  \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
+</div>
+<div class="section" id="non-interacting-system">
+<h3>Non-interacting system<a class="headerlink" href="#non-interacting-system" title="Permalink to this headline">¶</a></h3>
+<p>For <strong>distinguishable states</strong>:</p>
+<div class="math notranslate nohighlight">
+\[Z = z^N\]</div>
+<p>For <strong>indistinguishable states</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ Z = \frac{1}{N!}z^N \]</div>
+</div>
+<div class="section" id="example-2-ideal-gas-classical">
+<h3>Example-2: Ideal gas (classical)<a class="headerlink" href="#example-2-ideal-gas-classical" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[H(p^N, x^N) = K(p^N)  = \sum^{i=N}_{i=1}\frac{p^2_i}{2m}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{Z(\beta) = \frac{1}{h^{N} N!} \int dp^N dx^N e^{-\beta H(p^N,x^N)}}\]</div>
+<div class="math notranslate nohighlight">
+\[Z(\beta) = \frac{V^N}{h^{N} N!} \Big [ \int^{+\infty}_{-\infty} dp e^{-\beta \frac{p^2}{2m}}  \Big ]^N = \frac{V^N}{h^{N} N!} \Big [ \frac{2\pi m}{\beta} \Big]^N  \]</div>
+<p><br><br></p>
+<div class="math notranslate nohighlight">
+\[F = -k_B T log Z \approx -N k_B T log \Big [log \Big(\frac{V}{N}\Big)\frac{1}{\lambda^3} +1\Big]\]</div>
+<p><br><br></p>
+<ul class="simple">
+<li><p>Note linear dependence on N. Entropy is an extensive quantity!</p></li>
+<li><p>exponent 3/2 reflexts that each particle has 3 degrees of freedom</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda = \Big(\frac{3h^2 N}{4\pi m E}\Big)^{1/2}\)</span> thermal de Broglie wavelength.</p></li>
+</ul>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[\langle E \rangle = \frac{\partial log Z}{\partial (-\beta)} = \frac{3}{2}N k_B T\]</div>
+</li>
+</ul>
+<p><br><br></p>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[p = -\frac{\partial F}{\partial V} =\frac{N k_B T}{V}\]</div>
+</li>
+</ul>
+<p><br><br></p>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[S = \frac{E-F}{T} = k_B N \cdot  \Big [ log \Big(\frac{V}{N \lambda^3}\Big) + \frac{5}{2}\Big]\]</div>
+</li>
+</ul>
+<p><br><br></p>
+<blockquote>
+<div><p>Entropy of ideal gas is eactly the same expression as what we obtained in NVE!
+Thermodynamics is the same regardless of the ensemble used! Consequence of smallnes sof fluctuations.</p>
+</div></blockquote>
+</div>
+<div class="section" id="ideal-gas-qm-treatment-nve-vs-nvt">
+<h3>Ideal gas QM treatment (NVE vs NVT)<a class="headerlink" href="#ideal-gas-qm-treatment-nve-vs-nvt" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="03_ensembles/./pib-states.png" /></p>
+<div class="math notranslate nohighlight">
+\[\frac{N}{V} \ll \lambda^{-3}\]</div>
+<div class="math notranslate nohighlight">
+\[E({\bf n}) = \frac{h^2}{8mL^2} {\bf n^2}\]</div>
+<div class="math notranslate nohighlight">
+\[\vec{k} = \frac{\pi}{L}(n_x,n_y,n_z) = \frac{\pi}{L} \vec{n}\]</div>
+<div class="math notranslate nohighlight">
+\[ \psi_{\bf k}(k_,k_y,k_z) = sin k_x x \cdot sin k_y y \cdot sin k_z z\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{n-sphere} 1  = \int_{k-sphere} d k\]</div>
+</div>
+<div class="section" id="harmonic-oscillator-model">
+<h3>Harmonic oscillator model<a class="headerlink" href="#harmonic-oscillator-model" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[E_n = \hbar \omega (n+1/2)\]</div>
+<div class="math notranslate nohighlight">
+\[z = \sum^{n=+\infty}_{n=0} = e^{-\frac{1}{2}\beta \hbar \omega} (1 + e^{-\beta\hbar\omega}+e^{-2\beta\hbar\omega}+...) = \frac{e^{-\frac{1}{2}\beta \hbar \omega}}{1-e^{-\beta\hbar\omega}}\]</div>
+<div class="math notranslate nohighlight">
+\[Z = z^N\]</div>
+<div class="math notranslate nohighlight">
+\[E = \frac{\partial log Z}{\partial (-\beta)} = N\hbar \omega \Big(\frac{1}{2}+ \frac{1}{1+e^{\beta\hbar\omega}} \Big) \]</div>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow 0\)</span> we are left with zero point energies <span class="math notranslate nohighlight">\(E \rightarrow \frac{N \hbar \omega}{2}\)</span></p></li>
+<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow \infty\)</span> we get equipartion of energy! <span class="math notranslate nohighlight">\(E \rightarrow \frac{3}{2} N k_B T\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="rigid-rotor-model">
+<h3>Rigid rotor model<a class="headerlink" href="#rigid-rotor-model" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[E = \frac{\hbar^2}{2I} J (J+1) \]</div>
+<div class="math notranslate nohighlight">
+\[Z \approx \int^{J=\infty}_{J=0} (2J+1)e^{-\Big[\beta \frac{\hbar^2}{2I} J (J+1)\Big]}\approx \frac{T}{\theta_{rot}}\]</div>
+<ul class="simple">
+<li><p>Where <span class="math notranslate nohighlight">\(\theta_{rot} = \frac{\hbar^2}{2 I_0 k_B}\)</span> is called rotational temperature.</p></li>
+</ul>
+</div>
+<div class="section" id="partition-function-for-a-molecular-gas">
+<h3>Partition function for a molecular gas<a class="headerlink" href="#partition-function-for-a-molecular-gas" title="Permalink to this headline">¶</a></h3>
+<br>
+<div class="math notranslate nohighlight">
+\[E = E_{transl}+E_{vib}+E_{rot}+E_{elec} \]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[Z = Z_{transl} Z_{vib} Z_{rot} Z_{elec} \]</div>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\frac{1}{N!}\)</span> must go inside <span class="math notranslate nohighlight">\(Z_{tranls}\)</span> to account for indistinguishability</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="digression-boltzman-s-original-derivation">
+<h2>Digression:  Boltzman’s original derivation<a class="headerlink" href="#digression-boltzman-s-original-derivation" title="Permalink to this headline">¶</a></h2>
+<p>Boltzmann’s original derivation of canonical distirbution proceeds in a slightly different manner and it is worth discussing in some detail. The starting point is the fact that under <span class="math notranslate nohighlight">\(NVT\)</span> system is in equilibrium with some average energy <span class="math notranslate nohighlight">\(U\)</span> over the esnemble of states. That is in the ensemble of N memebers, <span class="math notranslate nohighlight">\(n_1\)</span> members are in E_1, <span class="math notranslate nohighlight">\(n_2\)</span> in <span class="math notranslate nohighlight">\(E_2\)</span>, … <span class="math notranslate nohighlight">\(n_k\)</span> in <span class="math notranslate nohighlight">\(E_k\)</span>. We realize that individual members of ensemble have different energies, but the fluctuations around the average <span class="math notranslate nohighlight">\(U\)</span> are expected to be very small <span class="math notranslate nohighlight">\(O(N^{1/2})\)</span>. Hence we would like to find the peak of the distirbution, that is most likely distribution of average energy among members of ensemble <span class="math notranslate nohighlight">\({n_1, n_2, ... n_k}\)</span> given the constant number of particles <span class="math notranslate nohighlight">\(N\)</span> average energy <span class="math notranslate nohighlight">\(U\)</span>. Thus we formulate the problem as <strong>constraint optimization problem</strong> with the following constraints:</p>
+<div class="math notranslate nohighlight">
+\[\sum_{k} n_{k}=N\]</div>
+<div class="math notranslate nohighlight">
+\[ \sum_k n_k E_k = N U\]</div>
+<p>Recall that we every configuration in the <span class="math notranslate nohighlight">\(NVE\)</span> ensemble is equally likely. Therefore the set of <span class="math notranslate nohighlight">\({n_1,n_2,...}\)</span>that maximizes <span class="math notranslate nohighlight">\(\Omega(U)\)</span> is the most likely to occur. This is the eseence of Boltzmann’s original derivation.</p>
+<div class="math notranslate nohighlight">
+\[\Omega(U) = \frac{N!}{n_1! n_2! n_3! ... }\]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[log \Omega(U) \approx  NlogN -\sum_k n_k log n_k = N \Big[ -\sum_k \frac{n_k}{N}log\frac{n_k}{N} \Big] = \frac{1}{k_B}S(U)\]</div>
+<p>Last equality, we will come to recognize as a general expression for the entropy (first derived by J W Gibbs)! Notice that it is an extensive quantity propotional to N where <span class="math notranslate nohighlight">\(p_i = \frac{n_i}{N}\)</span> can bee seen as probabilities of states in the ensemble.</p>
+<div class="math notranslate nohighlight">
+\[\boxed{S = -\sum_i p_i log p_i}\]</div>
+<div class="section" id="maximizing-number-of-states-with-lagrange-multipliers">
+<h3>Maximizing number of states with Lagrange multipliers<a class="headerlink" href="#maximizing-number-of-states-with-lagrange-multipliers" title="Permalink to this headline">¶</a></h3>
+<p>Constrained optimization is done via Lagrange multipliers. Here we also threw away constant facotrs <span class="math notranslate nohighlight">\(NlogN\)</span> keeping only terms dependening on <span class="math notranslate nohighlight">\(n_k\)</span> explicitely.</p>
+<div class="math notranslate nohighlight">
+\[I(n_1, n_2,...n_k...) = -\sum_k n_k log n_k - \lambda_1 \sum n_k -\lambda_2 \sum_k n_k E_k \]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial }{\partial n_k} I = 0  = -log n_k -\lambda_1 -\lambda_2 E_k\]</div>
+<div class="math notranslate nohighlight">
+\[n_k = e^{-(1+\lambda_1)} e^{-\lambda_2 E_k}\]</div>
+<p>After normalization we eliminate <span class="math notranslate nohighlight">\(\lambda_1\)</span> and identify <span class="math notranslate nohighlight">\(\lambda_2\)</span> with <span class="math notranslate nohighlight">\(\beta =\frac{1}{k_B T}\)</span> which has units of inverse energy.</p>
+<div class="math notranslate nohighlight">
+\[ p_k = \frac{n_k}{N} = \frac{e^{-\beta E_k}}{Z} \]</div>
+</div>
+</div>
+<div class="section" id="systems-where-potential-energy-is-not-zero-energy-vs-entropy">
+<h2>Systems where potential energy is not zero: Energy vs Entropy<a class="headerlink" href="#systems-where-potential-energy-is-not-zero-energy-vs-entropy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="equipartition">
+<h3>Equipartition<a class="headerlink" href="#equipartition" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[U(x) = U(x_0) +U^{'}(x-x_0) +\frac{1}{2}U^{''}(x-x_0)^2 +...\]</div>
+<div class="math notranslate nohighlight">
+\[ U_{harm}(x) = U(x_0) +  \frac{1}{2}U^{''}(x-x_0)^2 = U_0 + \frac{1}{2}\kappa (x-x_0)^2\]</div>
+<div class="math notranslate nohighlight">
+\[\langle U \rangle = \int p(x) U(x) dx = \frac{\int U(x) e^{-\beta U(x)}dx}{\int e^{-\beta U(x)}dx}\]</div>
+<div class="math notranslate nohighlight">
+\[U(x) = U_0 + \frac{k_B T}{2}\]</div>
+<blockquote>
+<div><p>Notice the spring constant does not figure in the average energy expression!</p>
+</div></blockquote>
+</div>
+<div class="section" id="grouping-microstates-into-states">
+<h3>Grouping microstates into states<a class="headerlink" href="#grouping-microstates-into-states" title="Permalink to this headline">¶</a></h3>
+<p>The word state is overloaded and is easilyt one of the more slippery defined concepts in physics/chemistry and biology. SO let us try to be more precise:</p>
+<ul class="simple">
+<li><p><strong>A microstate, <span class="math notranslate nohighlight">\(i\)</span>:</strong> a single frozen snapshot of atomic configurations (in CM). For instance instanenotus positions and momenta of all atoms in Ar gas.</p></li>
+<li><p><strong>A state, <span class="math notranslate nohighlight">\(A\)</span>:</strong> a collection (fairly large) of microstates. For instance open vs colsed states of a polymer.</p></li>
+</ul>
+</div>
+<div class="section" id="relative-populations-of-states">
+<h3>Relative populations of states<a class="headerlink" href="#relative-populations-of-states" title="Permalink to this headline">¶</a></h3>
+<p>Probabilities is what we observe experimentally. In a sense we can say that probability is the most objective thing we can know about a system. So let us reason in terms of probabilities as much as possible while treating entropies and free energies as utility quantieis for computing the probabilities</p>
+<div class="math notranslate nohighlight">
+\[ \frac{p_A}{p_B} = \frac{\int_{V_A} e^{-\beta U(x)}}{\int_{V_B} e^{-\beta U(x)}} = \frac{Z_A}{Z_B} = \frac{e^{-\beta F_A}}{e^{-\beta F_B}}= exp(-\beta \Delta F)\]</div>
+<div class="math notranslate nohighlight">
+\[\int_{V_A} e^{-\beta U(x)} \approx \int^{+\infty}_{-\infty} e^{-\beta \big[ U^0_A+ \frac{\kappa_A}{2}(x-x_A)^2\big]} = \Big(\frac{2\pi k_B T}{\kappa_A} \Big)^{1/2} e^{-\beta U^0_A}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{p_B}{p_A} = \Big(\frac{\kappa_A}{\kappa_B} \Big)^{1/2} e^{-\beta (U^0_B-U^0_A)}\]</div>
+<div class="math notranslate nohighlight">
+\[F_A(T) = U_A -T S_A\]</div>
+<div class="math notranslate nohighlight">
+\[F_A(T) = -k_B T log Z_A = U^0_A -k_B T log \frac{1}{V}\Big(\frac{2\pi k_B T}{\kappa_A} \Big)^{1/2}\]</div>
+</div>
+<div class="section" id="protein-folding-problem-with-1d-potential">
+<h3>Protein folding problem with 1D potential<a class="headerlink" href="#protein-folding-problem-with-1d-potential" title="Permalink to this headline">¶</a></h3>
+<p>As crazy as it sounds we can learn something about protein folding by using a simple 1D potential:</p>
+<p><img alt="" src="03_ensembles/./folding.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">U_fold1D</span><span class="p">(</span><span class="n">ratio</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">25</span><span class="p">,</span> <span class="n">deltaU</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;1D energy function, where</span>
+<span class="sd">    rationL: fraction of folded vs unfolded states (must be less than 1)</span>
+<span class="sd">    deltaU: energy difference between unfolded and folded states (must be positive) in units of kb = 1</span>
+<span class="sd">    T: temperature (must be possitive)</span>
+<span class="sd">    OUTPUT: x coordinate, U(x) potential, pf, pu&quot; fractions of folded and funfolded states respectively. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> 
+    <span class="k">assert</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">deltaU</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="n">U</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">ratio</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">U</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">ratio</span><span class="p">]</span> <span class="o">=</span> <span class="n">deltaU</span>
+    
+    <span class="n">pf</span> <span class="o">=</span> <span class="n">ratio</span><span class="o">/</span><span class="p">(</span><span class="n">ratio</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">deltaU</span><span class="o">/</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">pu</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pf</span>
+    
+    <span class="n">U</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># set end states to be high</span>
+    
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">pf</span><span class="p">,</span> <span class="n">pu</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">pf</span><span class="p">,</span> <span class="n">pu</span> <span class="o">=</span> <span class="n">U_fold1D</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">u</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$U(x)$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">u</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$p(x)$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/02_NVT_48_1.png" src="../_images/02_NVT_48_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">pf</span><span class="p">,</span> <span class="n">pu</span> <span class="o">=</span> <span class="n">U_fold1D</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">pf</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="n">pu</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature, T&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction of (un)folded&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;folded&#39;</span><span class="p">,</span><span class="s1">&#39;unfolded&#39;</span><span class="p">],</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f24c5689a50&gt;
+</pre></div>
+</div>
+<img alt="../_images/02_NVT_49_1.png" src="../_images/02_NVT_49_1.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./03_ensembles"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Davit Potoyan<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

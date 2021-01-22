@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Introduction &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>Statistical ensembles &#8212; Statistical Mechanics for Chemistry and Biology</title>
     
   <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -58,7 +58,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="A. Python refresher" href="00_python.html" />
+    <link rel="next" title="1. NVE" href="03_ensembles/01_NVE.html" />
+    <link rel="prev" title="1. Review of the main principles of thermodynamics." href="02_thermo/01_Thermo.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -89,13 +90,13 @@
 </form>
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
    Introduction
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="00_python.html">
    A. Python refresher
@@ -163,8 +164,8 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="03_ensembles.html">
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="current reference internal" href="#">
    Statistical ensembles
   </a>
   <ul class="collapse-ul">
@@ -217,7 +218,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/intro.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/03_ensembles.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -242,20 +243,6 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#statistical-mechanics-for-chemistry-and-biology">
-   Statistical Mechanics for Chemistry and Biology
-  </a>
- </li>
-</ul>
-
-        </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -263,39 +250,10 @@
         
               <div>
                 
-  <div class="section" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
-<div class="figure align-default" id="directive-fig">
-<a class="reference internal image-reference" href="_images/intro_img.jpg"><img alt="_images/intro_img.jpg" src="_images/intro_img.jpg" style="height: 300px;" /></a>
-</div>
-<div class="section" id="statistical-mechanics-for-chemistry-and-biology">
-<h2>Statistical Mechanics for Chemistry and Biology<a class="headerlink" href="#statistical-mechanics-for-chemistry-and-biology" title="Permalink to this headline">¶</a></h2>
-<p>This website hosts lectures notes and computational content of the class Chem563 (Spring 2021) at Iowa State etitled “Statistical Mechanics for Chemistry and Biology”.
-The content of <a class="reference external" href="https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering/blob/master/Readme.md">this course</a> is distributed into chapters, using one Jupyter Notebook for each chapter.</p>
-<p>You can read the book on website or download pdf. To get the most out of these notes you should execute code blocks and explore the itneractive content inside notebooks. Do it you have two options</p>
-<ul class="simple">
-<li><p>Open notebooks in the cloud, by clicking either on GoogleCollab or MyBinder badges. Google Collab allows you to save notebooks to GoogleDrive and has a free GPU!</p></li>
-<li><p>Open locally, by installing anaconda python distribution. If you have not used the <a class="reference external" href="https://jupyter.org/">Jupyter Notebooks</a> before, please read the following instructions.</p></li>
-</ul>
-<blockquote>
-<div><p><a class="reference external" href="https://www.youtube.com/watch?v=HW29067qVWk">Get a qucikstart by wattching this youtube tutorial on how to setup and run jupyter notebooks</a></p>
-</div></blockquote>
-<ol>
-<li><p>Navigating the notebook</p>
-<p>When you open a notebook, you will find that you can move a highlighted block (with a blue line at the left) with the cursor keys to move up and down. This block highlights a <em>cell</em>. (You can also use the mouse to select a cell.) This is called the <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html#Command-mode">Command mode</a>.</p>
-</li>
-<li><p>Executing code</p>
-<p>If you want to execute a cell (for example one that contains some Python code), you can press <code class="docutils literal notranslate"><span class="pre">Shift+ENTER</span></code>. If the cell creates some output, it will be displayed below the cell. (You may not notice if it just updates output that was displayed before, in particular if the new output is the same as the old output.)</p>
-</li>
-<li><p>Editing code</p>
-<p>If you want to <em>change</em> the code in the currently highlighted cell, you need to press <code class="docutils literal notranslate"><span class="pre">ENTER</span></code>. You have now entered the <a class="reference external" href="https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Notebook%20Basics.html#Edit-mode">Editing mode</a>, and the content of the cell can be edited. If you have completed your changes, and you want to execute them, use the <code class="docutils literal notranslate"><span class="pre">Shift+ENTER</span></code> short cut.</p>
-<p>Note that you can also edit blocks of text (or go into edit mode for a text cell unintentionally). Just press <code class="docutils literal notranslate"><span class="pre">Shift+ENTER</span></code> to render the text again, and go back into command mode.</p>
-</li>
-</ol>
-<p><em>Comments? Questions?</em></p>
-<p>For feedback, corrections go to the <a class="reference external" href="https://github.com/DPotoyan/Statmech4ChemBio/issues">Github page</a> of the course, open an issue and leave your comments, questions and suggestions. I would highly appreciate any feedback and contributions. If you are interested in contributing to the developent of the course please get in touch. I would love to have more people engaged in bettering the course and reaching out to wider scientific and engineering community.</p>
+  <div class="section" id="statistical-ensembles">
+<h1>Statistical ensembles<a class="headerlink" href="#statistical-ensembles" title="Permalink to this headline">¶</a></h1>
+<p>In this module we are going to learn the essence of equilibrium statistical mechanics the statistical ensembles which will serve as a bridge connecting the probablistic world with the world of thermodynamics.</p>
 <div class="toctree-wrapper compound">
-</div>
 </div>
 </div>
 
@@ -327,7 +285,8 @@ The content of <a class="reference external" href="https://github.com/fangohr/in
     
     <div class='prev-next-bottom'>
         
-    <a class='right-next' id="next-link" href="00_python.html" title="next page">A. Python refresher</a>
+    <a class='left-prev' id="prev-link" href="02_thermo/01_Thermo.html" title="previous page"><span class="section-number">1. </span>Review of the main principles of thermodynamics.</a>
+    <a class='right-next' id="next-link" href="03_ensembles/01_NVE.html" title="next page"><span class="section-number">1. </span>NVE</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

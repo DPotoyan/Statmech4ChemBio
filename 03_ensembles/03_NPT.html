@@ -1,0 +1,612 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NPT &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Statistical Mechanics for Chemistry and Biology</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../00_python.html">
+   A. Python refresher
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2py.html">
+     1. Why Python?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2numpy.html">
+     2. NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2viz.html">
+     3. Plotting with Matplotlib
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../01_stats.html">
+   B. Probability and randomness
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/01_SetsCounting.html">
+     1. Probability by counting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/02_RandVar.html">
+     2. Random variable, stochastic process and simulation.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/04_MC.html">
+     3. “Monte Carlo and the power of randomness”
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/05_InverseTransform.html">
+     4. The Inverse Transform of RVs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../02_thermo.html">
+   Thermodynamics refresher
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02_thermo/01_Thermo.html">
+     1. Review of the main principles of thermodynamics.
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../03_ensembles.html">
+   Statistical ensembles
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_NVE.html">
+     1. NVE
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/03_ensembles/03_NPT.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/03_ensembles/03_NPT.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/03_ensembles/03_NPT.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#open-systems">
+   Open systems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mu-v-t-ensemble">
+   <span class="math notranslate nohighlight">
+    \(\mu V T Ensemble\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deriving-probability-distribution-complete-analogy-with-nvt">
+   Deriving probability distribution (complete analogy with NVT).
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grand-canonical-distribution">
+   Grand canonical distribution
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Grand-Canonical distribution
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#grand-canonical-partiation-function">
+     Grand-Canonical Partiation Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#free-energy">
+     Free Energy
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#connections-with-nve-and-nvt">
+   Connections with
+   <span class="math notranslate nohighlight">
+    \(NVE\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(NVT\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grand-canonical-potential">
+   Grand-canonical potential
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fluctuations">
+   Fluctuations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ideal-gas">
+   Ideal Gas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#system-of-dilute-uncorrelated-particles-ideal-gas">
+     System of dilute uncorrelated particles = ideal gas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#molecular-adsorption-on-the-surface">
+   Molecular adsorption on the surface
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-site-one-molecule-model">
+     One site one molecule model**
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-stide-binding-of-molecular-gas-with-internal-states">
+     Multi-stide binding of molecular gas with internal states**
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="npt">
+<h1>NPT<a class="headerlink" href="#npt" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="open-systems">
+<h2>Open systems<a class="headerlink" href="#open-systems" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="../_images/bottleocean.jpg" /></p>
+<p><span class="math notranslate nohighlight">\(NVT \rightarrow \mu VT\)</span> by releasing N=const constraint to get <span class="math notranslate nohighlight">\(\mu=const\)</span></p>
+<p>In the <span class="math notranslate nohighlight">\(\mu VT\)</span> ensemble, the system samples different number of particles <span class="math notranslate nohighlight">\(N\)</span> consistent with <span class="math notranslate nohighlight">\(\mu =const\)</span> constraint imposed by putting system in contact with infinitely large chemostat.</p>
+<div class="math notranslate nohighlight">
+\[E_{tot} = E_r + E_i\]</div>
+<div class="math notranslate nohighlight">
+\[N_{tot} = N_r + N_i\]</div>
+<div class="math notranslate nohighlight">
+\[\Omega_{tot}(E_{tot}, N_{tot}) = \sum_N \sum_i \Omega_r(E_{tot}-E_i, N_{tot}-N_i) \cdot \Omega(E_i, N_i)\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">widgets</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sci</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="mu-v-t-ensemble">
+<h2><span class="math notranslate nohighlight">\(\mu V T Ensemble\)</span><a class="headerlink" href="#mu-v-t-ensemble" title="Permalink to this headline">¶</a></h2>
+<p>Let us single out one micro-state <span class="math notranslate nohighlight">\(E_i, N\)</span> of our system <span class="math notranslate nohighlight">\(\Omega(E_i, N) =1\)</span> and see what would be its probability in <span class="math notranslate nohighlight">\(\mu VT\)</span> ensemble.</p>
+<div class="math notranslate nohighlight">
+\[p(E_i, N_i) = \frac{\Omega_r(E_{tot}-E_i, N_{tot}-N_i)}{\Omega_{tot} (E_{tot}, N_{tot})} = \frac{e^{S_r(E_{tot}-E_i, N_{tot}-N_i)/k_B}}{e^{S_{tot}(E_{tot}, N_{tot})/k_B}}\]</div>
+<p>Where we have used use the microcanonical ensemble of <strong>system+reservoir</strong> to cast the problem in terms of probabilities of <strong>the system</strong>.</p>
+</div>
+<div class="section" id="deriving-probability-distribution-complete-analogy-with-nvt">
+<h2>Deriving probability distribution (complete analogy with NVT).<a class="headerlink" href="#deriving-probability-distribution-complete-analogy-with-nvt" title="Permalink to this headline">¶</a></h2>
+<p>A more revealing is the expansion around system’s average energy <span class="math notranslate nohighlight">\(U = \bar{E} = \sum_i p_i E_i\)</span> and average particle number <span class="math notranslate nohighlight">\(\bar{N} = \sum_i p_i N_i\)</span> fluctuations around which are small:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\frac{U - E_i}{U}  \sim O(N^{1/2})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\bar{N} - N}{\bar{N}}  \sim O(N^{1/2})\)</span>:</p></li>
+</ul>
+<p><strong>Entropy of reservoir</strong></p>
+<br>
+<div class="math notranslate nohighlight">
+\[S_r(E_{tot}-E_i, N_{tot}-N) = S_r(E_{tot}-U + \color{blue}{ [U-E_i]}, N_{tot}-\bar{N} + \color{green}{[\bar{N}-N_i]})\]</div>
+<br>
+$$S_r(E_{tot}-U + \color{blue}{ [U-E_i]}, N_{tot}-\bar{N} + \color{green}{[\bar{N}-N_i]}) \approx S_r(E_{tot}-U, N_{tot}-\bar{N}) +\Big( \frac{\partial S_r(E, N)}{\partial E}\Big) \color{blue}{ [U-E_i]} + \Big( \frac{\partial S_r(E, N)}{\partial N}\Big) \color{green}{[\bar{N}-N_i]}$$
+<br>
+$$ S_r =  S_r(E_{tot}-U, N_{tot}-\bar{N}) + \frac{1}{T}\color{blue}{ [U-E_i]} - \frac{\mu}{T} \color{green}{[\bar{N}-N_i]}$$
+<p><strong>Entropy of total system</strong></p>
+<p>Let us now use additivity of entropy of the combined syste+resoervioir in equilibrium:</p>
+<div class="math notranslate nohighlight">
+\[S_{tot}(E_{tot}, N_{tot}) = S_r(E_{tot}-U, N_{tot}-\bar{N})+S(U, \bar{N})\]</div>
+</div>
+<div class="section" id="grand-canonical-distribution">
+<h2>Grand canonical distribution<a class="headerlink" href="#grand-canonical-distribution" title="Permalink to this headline">¶</a></h2>
+<p>Combining expansions of total and reservoir entropies we get:</p>
+<div class="math notranslate nohighlight">
+\[p(E_i, N_i) =\frac{e^{S_r(E_{tot}-E_i, N_{tot}-N_i)/k_B}}{e^{S_{tot}(E_{tot}, N_{tot})/k_B}} = \frac{e^{-\beta E_i} e^{\beta \mu N}}{e^{-\beta \Psi}}\]</div>
+<div class="section" id="id1">
+<h3>Grand-Canonical distribution<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\boxed{p(E_i, N_i) = \frac{e^{-\beta(E_i -\mu N_i)}}{Z_G}}\]</div>
+</div>
+<div class="section" id="grand-canonical-partiation-function">
+<h3>Grand-Canonical Partiation Function<a class="headerlink" href="#grand-canonical-partiation-function" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\boxed{Z_G = \sum_i E^{-\beta (E_i-\mu N_i)}}\]</div>
+</div>
+<div class="section" id="free-energy">
+<h3>Free Energy<a class="headerlink" href="#free-energy" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\boxed{Z_G = e^{-{\beta \Psi}}} \,\,\,\,\, \boxed{\Psi = -\beta^{-1} log Z_G}\]</div>
+</div>
+</div>
+<div class="section" id="connections-with-nve-and-nvt">
+<h2>Connections with <span class="math notranslate nohighlight">\(NVE\)</span> and <span class="math notranslate nohighlight">\(NVT\)</span><a class="headerlink" href="#connections-with-nve-and-nvt" title="Permalink to this headline">¶</a></h2>
+<p><strong>Grand canonical partition function</strong></p>
+<div class="math notranslate nohighlight">
+\[Z_G = \sum^{N=\infty}_{N=0} \Big [ \sum_i e^{-\beta E_i}  \Big ]e^{\beta \mu N} = \sum^{N=\infty}_{N=0} Z(N,V,T)e^{\beta \mu N}\]</div>
+<p>Hence why we call partition function <strong>Grand canononical</strong> as it is expresed as exponentially  weighted (by <span class="math notranslate nohighlight">\(e^{\beta \mu N}\)</span>) summation of canonical parition functions over all values of N.</p>
+<p><strong>Laplace and Legendre transform connection with NVE and NVT</strong></p>
+<div class="math notranslate nohighlight">
+\[\boxed{p(E,N) = \frac{1}{Z_G} \Omega(E,N) e^{-\beta(E-\mu N)} = \frac{1}{Z_G} e^{-\beta \Psi(T,V,\mu))}}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{\Psi(T,V, \mu) = E- TS -\mu N}\]</div>
+<p>The free energy in grand canonical parition function is obtained by legendre transforming microcanonical ensemble over conjugate variables: <span class="math notranslate nohighlight">\((S, T)\)</span> and <span class="math notranslate nohighlight">\((N, \mu)\)</span>.</p>
+<p><strong>Using Euler’s relation</strong></p>
+<div class="math notranslate nohighlight">
+\[\boxed{\Psi(T,V, \mu) = -PV}\]</div>
+</div>
+<div class="section" id="grand-canonical-potential">
+<h2>Grand-canonical potential<a class="headerlink" href="#grand-canonical-potential" title="Permalink to this headline">¶</a></h2>
+<p><strong>Recall Gibbs equation of thermodynamics</strong></p>
+<div class="math notranslate nohighlight">
+\[dE = TdS -pdV +\mu dN\]</div>
+<p><strong>Free energy minimization with <span class="math notranslate nohighlight">\((T,V, \mu)\)</span></strong></p>
+<br>
+$$d\Psi = d (E-TS-\mu N) = (TdS -pdV +\mu dN) - (TS + \mu N)$$
+<br>
+$$\boxed{d\Psi = -SdT -p dV -Nd \mu}$$
+<blockquote>
+<div><p>Could also obtain via writing full differential of partition function, derivative s of which are various thermodynamic averages:  <span class="math notranslate nohighlight">\(d log Z_G(\beta,V,\mu) = -U d\beta - \beta p dV -  \beta N d \mu  = d PV\)</span></p>
+</div></blockquote>
+<p><strong>Equations of state</strong>
+<br></p>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[S = -\frac{\partial \Psi}{\partial T}\]</div>
+</li>
+</ul>
+<br>
+- $$p = -\frac{\partial \Psi}{\partial V}$$
+<br>
+- $$N = -\frac{\partial \Psi}{\partial \mu}$$</div>
+<div class="section" id="fluctuations">
+<h2>Fluctuations<a class="headerlink" href="#fluctuations" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\langle N \rangle  = \sum_i p_i N_i = \frac{\partial log Z_G}{\partial (\beta \mu)}\]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2_N =\langle N^2\rangle - \langle N \rangle^2 = \frac{\partial^2 log Z_G}{\partial (\beta \mu)^2} = \frac{\partial \langle N \rangle}{\partial (\beta \mu)}\]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2_N = \frac{N^2 k_B T \kappa_T}{V} \sim O(N)\]</div>
+<blockquote>
+<div><p>Notice anology with NVT where we found <span class="math notranslate nohighlight">\(\sigma^2_E = k_B T^2 C_v\)</span> for energy fluctuations with <span class="math notranslate nohighlight">\(C_v\geq 0\)</span> implying stability. For particle fluctuataions instead of heat capacity we have the isothermal compressibility <span class="math notranslate nohighlight">\(\kappa_T = -\frac{1}{V}\frac{\partial V}{\partial p} \geq 0\)</span></p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\frac{\sigma_N}{\langle N \rangle} \sim O(N^{-1/2})\]</div>
+</div>
+<div class="section" id="ideal-gas">
+<h2>Ideal Gas<a class="headerlink" href="#ideal-gas" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[Z(T,V,N) = \frac{1}{N!} \Big( \frac{V}{\lambda^3} \Big)^N\,\,\,\,\]</div>
+<ul class="simple">
+<li><p><strong>Thermal wavelength</strong> <span class="math notranslate nohighlight">\(\lambda = \frac{h}{(2 \pi mk_B T)^{1/2}}\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z_G = \sum^{N=\infty}_{N =0} Z(T,V,N) e^{\beta \mu N} = \sum^{N=\infty}_{N =0} \frac{1}{N!} \Big( e^{\beta \mu} \frac{V}{\lambda^3} \Big)^N = exp\Big(z \frac{V}{\lambda^3} \Big)\]</div>
+<ul class="simple">
+<li><p><strong>Fugacity</strong> <span class="math notranslate nohighlight">\(z = e^{\beta \mu}\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\langle N \rangle = \frac{\partial log Z_G}{\partial (\beta \mu)} = \frac{V}{\lambda^3} e^{\beta \mu}\]</div>
+<div class="math notranslate nohighlight">
+\[\mu  = k_B T log \frac{N \lambda^3}{V} = k_B T log [(k_B T)\lambda^3 \cdot p ] = \mu^0 (T) + k_B Tlog p \]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2_N = \frac{N^2 k_B T \kappa_T}{V} = N\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa_T = \frac{NV }{N^2 k_B T} = \frac{1}{p} \geq 0\]</div>
+<div class="section" id="system-of-dilute-uncorrelated-particles-ideal-gas">
+<h3>System of dilute uncorrelated particles = ideal gas<a class="headerlink" href="#system-of-dilute-uncorrelated-particles-ideal-gas" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\sigma^2_N = \langle N \rangle\]</div>
+</div>
+</div>
+<div class="section" id="molecular-adsorption-on-the-surface">
+<h2>Molecular adsorption on the surface<a class="headerlink" href="#molecular-adsorption-on-the-surface" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="../_images/adsorption.png" /></p>
+<div class="math notranslate nohighlight">
+\[Z_G = z^N_G\]</div>
+<div class="section" id="one-site-one-molecule-model">
+<h3>One site one molecule model**<a class="headerlink" href="#one-site-one-molecule-model" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[z_G = 1 +e^{-\beta (\epsilon-\mu)}\]</div>
+<div class="math notranslate nohighlight">
+\[\langle n \rangle =\frac{0+1\cdot e^{-\beta(\epsilon - \mu)}}{Z_G} = \frac{1}{e^{-\beta(\mu-\epsilon)}+1}\]</div>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle =\frac{0+\epsilon\cdot e^{-\beta(\epsilon - \mu)}}{Z_G} = \epsilon \langle n \rangle \]</div>
+<p>For the idea gas <span class="math notranslate nohighlight">\(\mu  = k_B T log \frac{p}{p_0}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\langle n \rangle = \frac{p}{p_0e^{\beta \epsilon}+p}\]</div>
+<blockquote>
+<div><p>This is known as Langmuir isotherm.</p>
+</div></blockquote>
+</div>
+<div class="section" id="multi-stide-binding-of-molecular-gas-with-internal-states">
+<h3>Multi-stide binding of molecular gas with internal states**<a class="headerlink" href="#multi-stide-binding-of-molecular-gas-with-internal-states" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Molecule A binds to one site and adopts 2 conformations.</p></li>
+<li><p>Two molecules of B can bind one site. When one molecle is bound it has one conformation and when two bound there are 5 conformations.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[z_G = 1 + 2 e^{-\beta(\epsilon_A - \mu_A)}+ e^{-\beta(\epsilon_B - \mu_B)} +5 e^{-2\beta(\epsilon_B - \mu_B)}\]</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./03_ensembles"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Davit Potoyan<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
