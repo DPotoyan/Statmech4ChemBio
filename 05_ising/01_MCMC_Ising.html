@@ -1,0 +1,1381 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MCMC sampling of NVT ensemble. Ising models and Metropolis-Hastings algorithm &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Statistical Mechanics for Chemistry and Biology</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../00_python.html">
+   A. Python refresher
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2py.html">
+     1. Why Python?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2numpy.html">
+     2. NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2viz.html">
+     3. Plotting with Matplotlib
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../01_stats.html">
+   B. Probability and randomness
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/01_SetsCounting.html">
+     1. Probability by counting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/02_RandVar.html">
+     2. Random variable, stochastic process and simulation.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/04_MC.html">
+     3. “Monte Carlo and the power of randomness”
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../01_stats/05_InverseTransform.html">
+     4. The Inverse Transform of RVs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../02_thermo.html">
+   C. Thermodynamics refresher
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../02_thermo/01_Thermo.html">
+     1. Review of the main principles of thermodynamics.
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../03_ensembles.html">
+   D. Statistical ensembles
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03_ensembles/01_NVE.html">
+     1. NVE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03_ensembles/02_NVT.html">
+     2. NVT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../03_ensembles/03_NPT.html">
+     3. NPT
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_entropy.html">
+   E. Entropy and Information
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_ising.html">
+   E. Phase transitions and Ising models
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/05_ising/01_MCMC_Ising.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/05_ising/01_MCMC_Ising.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/05_ising/01_MCMC_Ising.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   MCMC sampling of NVT ensemble.  Ising models and Metropolis-Hastings algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-pi-via-direct-mc">
+     Estimate pi via direct MC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#estimate-pi-via-mcmc">
+     Estimate
+     <span class="math notranslate nohighlight">
+      \(\pi\)
+     </span>
+     via MCMC
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ising-models-the-h-atom-of-phase-transitions">
+   Ising models: The H atom of phase transitions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">
+     Enforcing periodic boundary conditions
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-thermodynamic-quantities">
+     Computing Thermodynamic quantities
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#energy-e">
+       Energy
+       <span class="math notranslate nohighlight">
+        \(E\)
+       </span>
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#magnetization">
+       Magnetization
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#heat-capacity-c-v">
+       Heat capacity
+       <span class="math notranslate nohighlight">
+        \(C_v\)
+       </span>
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#susceptibility-chi">
+       Susceptibility
+       <span class="math notranslate nohighlight">
+        \(\chi\)
+       </span>
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#correlation-function-c-i-j-and-correlation-length">
+       Correlation function
+       <span class="math notranslate nohighlight">
+        \(c(i,j)\)
+       </span>
+       and correlation length
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parition-function-and-free-energy">
+       Parition function and Free energy
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc">
+     Sampliing of Boltzmann distribution (NVT). MC vs MCMC
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#master-equation-and-detailed-balance">
+     Master Equation and Detailed Balance
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#detailed-balance-equilibrium">
+     Detailed Balance = Equilibrium
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">
+     How to pick the moves for Markov chain?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metropolis-algorithm">
+   Metropolis algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#carry-out-explorative-simulations">
+     Carry out explorative simulations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parameter-sweeps-run-mc-simulatons-of-2d-ising-model-at-different-ts">
+       Parameter sweeps: run MC simulatons  of 2D Ising model at different  Ts
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="mcmc-sampling-of-nvt-ensemble-ising-models-and-metropolis-hastings-algorithm">
+<h1>MCMC sampling of NVT ensemble.  Ising models and Metropolis-Hastings algorithm<a class="headerlink" href="#mcmc-sampling-of-nvt-ensemble-ising-models-and-metropolis-hastings-algorithm" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="c1"># Load scientific and plotting libraries </span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">rand</span><span class="p">,</span> <span class="n">random</span><span class="p">,</span> <span class="n">randint</span><span class="p">,</span> <span class="n">choice</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">uniform</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="estimate-pi-via-direct-mc">
+<h2>Estimate pi via direct MC<a class="headerlink" href="#estimate-pi-via-direct-mc" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">directMC_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    
+    <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">),</span> <span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">xs</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">ys</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">n_hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">)</span> 
+    
+    <span class="n">pi_estimate</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">n_hits</span><span class="o">/</span><span class="n">N</span>
+
+
+    <span class="k">if</span> <span class="n">plot</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">r</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">],</span><span class="n">ys</span><span class="p">[</span><span class="n">r</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;b.&#39;</span><span class="p">)</span> <span class="c1"># points inside are blue</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">r</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">],</span><span class="n">ys</span><span class="p">[</span><span class="n">r</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;g.&#39;</span><span class="p">)</span> <span class="c1"># points outside are red</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimate of $\pi$ = </span><span class="si">{</span><span class="n">pi_estimate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    
+    <span class="k">return</span>  <span class="mi">4</span><span class="o">*</span><span class="n">n_hits</span><span class="o">/</span><span class="n">N</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">directMC_pi</span><span class="p">(</span><span class="n">plot</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1588
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_4_1.png" src="../_images/01_MCMC_Ising_4_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_runs</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">pi</span>      <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">[</span><span class="n">directMC_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_runs</span><span class="p">)]</span>  <span class="p">)</span>
+ 
+<span class="n">sum_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n_runs</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">sum_N</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n_runs</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;-s&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$N$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$S_N/N$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Var: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Mean: 3.1427, Var: 0.0520&#39;)
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_5_1.png" src="../_images/01_MCMC_Ising_5_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="estimate-pi-via-mcmc">
+<h2>Estimate <span class="math notranslate nohighlight">\(\pi\)</span> via MCMC<a class="headerlink" href="#estimate-pi-via-mcmc" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hastings_samples</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    
+    <span class="n">pts</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># array for points in square</span>
+    
+    <span class="n">r_old</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 2 points within [0, 1] for x and y</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="n">r_new</span> <span class="o">=</span> <span class="n">r_old</span> <span class="o">+</span> <span class="n">dr</span>
+        
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">:</span>
+            
+            <span class="n">pts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span>
+            
+            <span class="n">r_old</span> <span class="o">=</span> <span class="n">r_new</span>
+    
+    <span class="n">pts</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+    <span class="n">hits</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pts</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">pts</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">pts</span><span class="p">,</span> <span class="n">hits</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot points</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="n">pts</span><span class="p">,</span> <span class="n">hits</span> <span class="o">=</span> <span class="n">hastings_samples</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pts</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pts</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hits</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">hits</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+
+
+<span class="c1"># Plot paths</span>
+<span class="kn">from</span> <span class="nn">matplotlib.path</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">pts</span><span class="p">,</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">MOVETO</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">Path</span><span class="o">.</span><span class="n">LINETO</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">patch</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">PathPatch</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">patch</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.patches.PathPatch at 0x7fc532357390&gt;
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_8_1.png" src="../_images/01_MCMC_Ising_8_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pts</span><span class="p">,</span> <span class="n">hits</span> <span class="o">=</span> <span class="n">hastings_samples</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">pi_value</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated Pi value is: &quot;</span><span class="p">,</span> <span class="n">pi_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated Pi value is:  3.2967714884696018
+</pre></div>
+</div>
+</div>
+</div>
+<p><mark><strong><span class="math notranslate nohighlight">\(\boxed{Exercsie!}\)</span>: Study dependence of variance on delta</strong> </mark></p>
+</div>
+</div>
+<div class="section" id="ising-models-the-h-atom-of-phase-transitions">
+<h1>Ising models: The H atom of phase transitions<a class="headerlink" href="#ising-models-the-h-atom-of-phase-transitions" title="Permalink to this headline">¶</a></h1>
+<div class="math notranslate nohighlight">
+\[\boxed{H([s])= \sum_{\langle ij \rangle} J_{ij}s_i s_j - \mu B \sum_i s_i}\]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[\boxed{Z=\sum_{[s]}e^{-H([s])/k_B T}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span> <span class="o">=</span> <span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1  1 -1  1  1  1 -1 -1]
+ [ 1 -1 -1  1  1 -1  1  1]
+ [-1  1 -1 -1 -1 -1  1  1]
+ [-1 -1  1 -1 -1  1 -1 -1]
+ [-1  1 -1  1  1 -1 -1 -1]
+ [-1  1  1 -1 -1 -1 -1  1]
+ [ 1  1 -1 -1 -1 -1  1 -1]
+ [ 1 -1 -1 -1  1 -1 -1  1]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fc53229d790&gt;
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_12_2.png" src="../_images/01_MCMC_Ising_12_2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lattice</span><span class="p">[:,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1,  1, -1,  1,  1,  1, -1, -1],
+       [ 1, -1, -1,  1,  1, -1,  1,  1],
+       [-1,  1, -1, -1, -1, -1,  1,  1],
+       [-1, -1,  1, -1, -1,  1, -1, -1],
+       [-1,  1, -1,  1,  1, -1, -1, -1],
+       [-1,  1,  1, -1, -1, -1, -1,  1],
+       [ 1,  1, -1, -1, -1, -1,  1, -1],
+       [ 1, -1, -1, -1,  1, -1, -1,  1]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">E</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        
+        <span class="n">E</span> <span class="o">+=</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-12
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="enforcing-periodic-boundary-conditions">
+<h2>Enforcing periodic boundary conditions<a class="headerlink" href="#enforcing-periodic-boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Method-1: Creating roll over indes using modulo operator %</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span><span class="o">%</span><span class="k">8</span>, 1%8, 2%8, 3%8, 8%8
+<span class="c1">#lattice[8%8,5]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 1, 2, 3, 0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="n">lattice</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span> , 3])
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+-1
+-1
+1
+-1
+-1
+-1
+1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">E</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        
+        <span class="n">E</span> <span class="o">+=</span> <span class="n">lattice</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span> <span class="n">lattice</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span> , j] + lattice[i,j-1] + lattice[i+1,j] + lattice[i-1,j])
+
+<span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-14
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><strong>Method-2: Creating roll over indes using numpy roll function</strong></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">lattice</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1, -1, -1, -1,  1, -1, -1,  1],
+       [-1,  1, -1,  1,  1,  1, -1, -1],
+       [ 1, -1, -1,  1,  1, -1,  1,  1],
+       [-1,  1, -1, -1, -1, -1,  1,  1],
+       [-1, -1,  1, -1, -1,  1, -1, -1],
+       [-1,  1, -1,  1,  1, -1, -1, -1],
+       [-1,  1,  1, -1, -1, -1, -1,  1],
+       [ 1,  1, -1, -1, -1, -1,  1, -1]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="computing-thermodynamic-quantities">
+<h2>Computing Thermodynamic quantities<a class="headerlink" href="#computing-thermodynamic-quantities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="energy-e">
+<h3>Energy <span class="math notranslate nohighlight">\(E\)</span><a class="headerlink" href="#energy-e" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Energy of a configuration</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}E[s] = H([s])= \sum_{\langle ij \rangle} J_{ij}s_i s_j - \mu B \sum_i s_i$$. \\
+- **Ensemble average Energy**\\$$ \langle E \rangle \approx \frac{1}{n_{MC}} \sum^{i=n_{MC}}_{i=1} H[s_i] \end{aligned}\end{align} \]</div>
+</div>
+<div class="section" id="magnetization">
+<h3>Magnetization<a class="headerlink" href="#magnetization" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Total magnetization, <span class="math notranslate nohighlight">\(M\)</span></strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[M([s])=\sum_is_i \]</div>
+<ul class="simple">
+<li><p><strong>Magnetization per spin <span class="math notranslate nohighlight">\(m\)</span></strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[m([s])=\frac{1}{N}\sum_is_i =\frac{M}{N}\]</div>
+<ul class="simple">
+<li><p><strong>Ensemble averaged Magnetization</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\langle M \rangle  \approx \frac{1}{n_{MC}} \sum^{i=n_{MC}}_{i=1} M[s_i]\]</div>
+</div>
+<div class="section" id="heat-capacity-c-v">
+<h3>Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span><a class="headerlink" href="#heat-capacity-c-v" title="Permalink to this headline">¶</a></h3>
+<p>Heat capacity is again the familiar expression established in our treatment of canonical ensemble.</p>
+<div class="math notranslate nohighlight">
+\[ C_V(T) = \Big (\frac{\partial E}{\partial T} \Big )_V= \frac{1}{k_B T^2} \big(\langle E^2 \rangle-\langle E \rangle^2 \big) \]</div>
+</div>
+<div class="section" id="susceptibility-chi">
+<h3>Susceptibility <span class="math notranslate nohighlight">\(\chi\)</span><a class="headerlink" href="#susceptibility-chi" title="Permalink to this headline">¶</a></h3>
+<p>Magnetic susceptibility quantifies response of the ssytem to the variation of magnetic field.</p>
+<div class="math notranslate nohighlight">
+\[\chi_T=\Big (\frac{\partial M}{\partial B} \Big )_T= \frac{1}{k_B T} \big(\langle M^2 \rangle-\langle M \rangle^2 \big) \]</div>
+</div>
+<div class="section" id="correlation-function-c-i-j-and-correlation-length">
+<h3>Correlation function <span class="math notranslate nohighlight">\(c(i,j)\)</span>  and correlation length<a class="headerlink" href="#correlation-function-c-i-j-and-correlation-length" title="Permalink to this headline">¶</a></h3>
+<p>At high temperatures, spins on an ising lattice point up and down randomly. While at low temperatures, all spins tend to align. To quantify the degree of alignment, we can define a quantity named correlation length <span class="math notranslate nohighlight">\(\xi\)</span>, which can be defined mathematically through correlation function <span class="math notranslate nohighlight">\(c(i,j)\)</span></p>
+<div class="math notranslate nohighlight">
+\[c(i,j)=\langle s_i-\langle s_i\rangle\rangle \langle s_j-\langle s_j\rangle\rangle\]</div>
+</div>
+<div class="section" id="parition-function-and-free-energy">
+<h3>Parition function and Free energy<a class="headerlink" href="#parition-function-and-free-energy" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[Z=\sum_{[s]}e^{-\beta H([s])}=\sum_{[s]}e^{-\beta \big ( \sum_{\langle ij \rangle} J_{ij}s_i s_j - \mu B M \big )}\]</div>
+<p><br><br></p>
+<div class="math notranslate nohighlight">
+\[F=-\beta^{-1} log Z \]</div>
+<ul class="simple">
+<li><p><strong>Free energy as a function of M (Potential of mean force)</strong></p></li>
+</ul>
+<br>
+<div class="math notranslate nohighlight">
+\[Z(M) = \sum_{[s]} e^{-\beta H([s])} \delta (M-M([s]))\]</div>
+<div class="math notranslate nohighlight">
+\[F(M)=-\beta^{-1} log Z(M)\]</div>
+<p>The  Z(M) is a partial sum over states for which magnetization is equal to a particular value M as opposed to Z where summation is unrestricted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>    
+    
+    <span class="sd">&#39;&#39;&#39;Compute energy of spin lattice by lopping over each spin </span>
+<span class="sd">        with periodic boundary conditions enforced </span>
+<span class="sd">        via rollover index implemented using modulo operator %&#39;&#39;&#39;</span>
+    
+    <span class="n">E</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>   
+            
+            <span class="n">z</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] +\
+                <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>] +  spins[i,(j-1)%N]
+            
+            <span class="n">E</span> <span class="o">+=</span> <span class="o">-</span><span class="n">J</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="mi">4</span> <span class="c1"># Since we overcounted interactions 4 times divide by 4.</span>
+
+    <span class="k">return</span> <span class="n">E</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span> <span class="c1">#Field contribution added</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getEE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;Compute energy of spin lattice by lopping over each spin </span>
+<span class="sd">    with periodic boundary conditions enforced </span>
+<span class="sd">    via numpy roll&#39;&#39;&#39;</span> 
+    
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> \
+    <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">eij</span> <span class="o">=</span> <span class="o">-</span><span class="n">J</span><span class="o">*</span><span class="n">spins</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="mi">4</span>  
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">eij</span><span class="p">)</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spins</span> <span class="o">=</span> <span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">ee</span> <span class="o">=</span> <span class="n">getE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1">#print(ee)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.52 s ± 8.2 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">ee2</span> <span class="o">=</span> <span class="n">getEE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="c1">#print(ee2)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.7 ms ± 228 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getM</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getC</span><span class="p">(</span><span class="n">Ei</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    
+    <span class="n">Ei</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Ei</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">Ei</span><span class="p">))</span><span class="o">/</span><span class="n">T</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getXi</span><span class="p">(</span><span class="n">Mi</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    
+    <span class="n">Mi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Mi</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">Mi</span><span class="p">))</span><span class="o">/</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getCorr</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+    
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc">
+<h2>Sampliing of Boltzmann distribution (NVT). MC vs MCMC<a class="headerlink" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc" title="Permalink to this headline">¶</a></h2>
+<p>How to compute the expectation value of an observable <span class="math notranslate nohighlight">\(A\)</span>. In theory everything is simple:</p>
+<div class="math notranslate nohighlight">
+\[P(E_i)=\frac{e^{-\beta E_i}}{Z} = \frac{e^{-\beta E_i}}{\sum_i e^{-\beta E_i}}\]</div>
+<div class="math notranslate nohighlight">
+\[\langle A\rangle = \sum_i A_iP(E_i)\]</div>
+<p><strong>1. Question: What we know and what we want to know?</strong></p>
+<ul class="simple">
+<li><p>We don’t always know the <strong>(micro)states</strong> <span class="math notranslate nohighlight">\(i\)</span> of a system.</p></li>
+<li><p>We only know <strong>macroscopic quantities:</strong> temperature <span class="math notranslate nohighlight">\(T\)</span> with <span class="math notranslate nohighlight">\(\beta = 1/(k_BT)\)</span>, volume, etc.</p></li>
+</ul>
+<p><strong>2. Answer: MC sampling</strong></p>
+<ul class="simple">
+<li><p>Simulate different states of the system with Monte Carlo, according to the thermal probability function</p></li>
+</ul>
+<p><strong>3. What are challanges?</strong></p>
+<ul class="simple">
+<li><p>most probabilities <span class="math notranslate nohighlight">\(P(E_k)\)</span> are tiny =&gt; exponentially small</p></li>
+<li><p>there is an extremely large number of possible states</p></li>
+</ul>
+<p><strong>4. Concludion: We need Importance sampling!</strong></p>
+<ul class="simple">
+<li><p>Use the Boltzmann probability <span class="math notranslate nohighlight">\(P(E_i)\)</span> as probability distribution to generate <span class="math notranslate nohighlight">\(N\)</span> samples:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\boxed{\langle A\rangle \rightarrow\frac{1}{N}\sum_{i=1}^N \underbrace{A_i}_{{\rm chosen}\ {\rm acc.}\ {\rm to}\ P(E_i)}}\]</div>
+<p><strong>MCMC Simulation</strong> Generating random walks in configuration space of thte system states.</p>
+</div>
+<div class="section" id="master-equation-and-detailed-balance">
+<h2>Master Equation and Detailed Balance<a class="headerlink" href="#master-equation-and-detailed-balance" title="Permalink to this headline">¶</a></h2>
+<p><strong>Random process:</strong></p>
+<div class="math notranslate nohighlight">
+\[P(X_1, X_2, ... X_N) = P_1(X_1)\cdot P_2(X_2)... P_1(X_N)\]</div>
+<br>
+<p><strong>Probabilities</strong></p>
+<div class="math notranslate nohighlight">
+\[P(X_1)\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{X'} P(X') =1\]</div>
+<p><strong>Markov chain:</strong></p>
+<div class="math notranslate nohighlight">
+\[p(X_1, X_2, ... X_N) = P_1(X_1)\cdot P_2(X_2| X_1) \cdot P_2(X_3| X_2)... P_1(X_N | X_{N-1})\]</div>
+<br>
+<p><strong>Conditional (transition) probabilities:</strong></p>
+<div class="math notranslate nohighlight">
+\[T(X_1 \rightarrow X_2) = P(X_2|X_1)\]</div>
+<div class="math notranslate nohighlight">
+\[\sum_{X'} T(X\rightarrow X') =1 \]</div>
+<p><strong>Probability of being at <span class="math notranslate nohighlight">\(X\)</span> at <span class="math notranslate nohighlight">\(t+\Delta t\)</span> given prior state at <span class="math notranslate nohighlight">\((X',t)\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[P(X, t+\Delta t) = \sum_X' P(X', t) T(X' \rightarrow X, t)\]</div>
+<p><strong>Master equation: A continuity equation in probability space.</strong></p>
+<div class="math notranslate nohighlight">
+\[P(X, t+\Delta t) -P(X,t)= \sum_X' P(X', t) T(X' \rightarrow X, t) - P(X, t)\sum_{X'} T(X\rightarrow X')\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{\frac{\partial P(X,t)}{\partial t} = \sum_X' P(X', t) w(X' \rightarrow X, t) - \sum_{X'} P(X, t) w(X\rightarrow X')}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w(X' \rightarrow X, t) = lim_{\Delta t \rightarrow 0}\frac{T(X' \rightarrow X, t)}{\Delta t}\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="detailed-balance-equilibrium">
+<h2>Detailed Balance = Equilibrium<a class="headerlink" href="#detailed-balance-equilibrium" title="Permalink to this headline">¶</a></h2>
+<br>
+<div class="math notranslate nohighlight">
+\[\boxed{\frac{\partial P(X,t)}{\partial t}  = \sum_{X'} P(X', t) w_{X'X} - \sum_{X'} P(X, t) w_{X X'}}=0\]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[\boxed{ p_i w_{ij} = p_j w_{ji}  }\]</div>
+<p><strong>Master equation for a two state dynamics</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac{dP(x_1,t)}{dt} = p_1 w_{12} - p_2 w_{21}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{dP(x_2,t)}{dt} = p_2 w_{21} - p_1 w_{12}\]</div>
+</div>
+<div class="section" id="how-to-pick-the-moves-for-markov-chain">
+<h2>How to pick the moves for Markov chain?<a class="headerlink" href="#how-to-pick-the-moves-for-markov-chain" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[[transition] = [move] \cdot [acceptance]\]</div>
+<div class="math notranslate nohighlight">
+\[T(X\rightarrow X') = \alpha_{X X'}\cdot A_{X X'} \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha_{X X'}\geq 0\)</span>, <span class="math notranslate nohighlight">\(\alpha_{X X'} = \alpha_{X' X}\)</span>
+<br></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p(X') &lt; p(X)\)</span>, <span class="math notranslate nohighlight">\(A_{XX'}=\frac{p(X')}{p(X)}\)</span>
+<br></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p(X') \geq p(X)\)</span>, <span class="math notranslate nohighlight">\(A_{XX'}=1\)</span></p></li>
+</ul>
+<p><strong>For 2D Ising model of size <span class="math notranslate nohighlight">\((L,L)\)</span></strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha_{X X'} = \frac{1}{L^2}\)</span></p></li>
+</ul>
+<p>Where <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(X'\)</span> differ in one spin configuration.</p>
+</div>
+</div>
+<div class="section" id="metropolis-algorithm">
+<h1>Metropolis algorithm<a class="headerlink" href="#metropolis-algorithm" title="Permalink to this headline">¶</a></h1>
+<p><span class="math notranslate nohighlight">\({\bf i. Initialization.}\)</span> Generate some initiaal configuration for spins <span class="math notranslate nohighlight">\([s_0]=(s_1,...s_N)\)</span>. For instnace Choosing random orientation for each spins <span class="math notranslate nohighlight">\((+1, -1)\)</span> or giving them  the same orientation.</p>
+<p><span class="math notranslate nohighlight">\({\bf ii. Attempt\,\, spin\,\, flip.\,\,}\)</span> Pick a spin at random and flip it. E.g multiply by -1 so that +1 state becomes -1 and vice versa. this generated a new configuration <span class="math notranslate nohighlight">\([s_1]\)</span></p>
+<p><span class="math notranslate nohighlight">\({\bf iii. Acceptance/Rejection}\)</span> Evaluate energy differene between old configuration <span class="math notranslate nohighlight">\([s_{0}]\)</span> and new one <span class="math notranslate nohighlight">\([s_{1}]\)</span> with flipped spin which has created in previous step. The <span class="math notranslate nohighlight">\(\Delta E=E_{1}-E_{0}\)</span> is used for deciding weather the move is accepted or rejected in a way that is consistent with Boltzman distribution:</p>
+<div class="math notranslate nohighlight">
+\[w=\frac{P[s_{1}]}{P[s_{0}]}=exp\big(-\beta[E_{1}-E_{0}] \big ) \]</div>
+<p>This is done by generating a unifor random number <span class="math notranslate nohighlight">\(r\)</span> between <span class="math notranslate nohighlight">\([0,1]\)</span> and</p>
+<p>(a) if <span class="math notranslate nohighlight">\(r  \leq w\)</span> Accept the spin flip thereby keeping <span class="math notranslate nohighlight">\([s_1]\)</span> and proceeding to try new spin flip via step ii.</p>
+<p>(b) if <span class="math notranslate nohighlight">\(r  &gt; w\)</span> reject the spin flip and set  <span class="math notranslate nohighlight">\([s_1]=[s_0]\)</span> and proceeding to try a new spin flip via step ii.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;Create square lattice of spin states, stored as 2D numpy array&#39;&#39;&#39;</span>  
+                        
+    <span class="n">spins</span> <span class="o">=</span> <span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>  
+    
+    <span class="k">return</span> <span class="n">spins</span>    
+    
+
+<span class="k">def</span> <span class="nf">get_dE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span> 
+    
+    <span class="sd">&#39;&#39;&#39;Compute energy difference betwee old and spin flipped configuration.</span>
+<span class="sd">    Peridoic boundary conditions have been imposed. </span>
+<span class="sd">    Study this function carefully and understand the meaning of each term&#39;&#39;&#39;</span>
+    
+    <span class="n">z</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i+1)%N, j] + spins[i, (j-1)%N] + spins[i, (j+1)%N]
+    
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">J</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39; Attempt a flip of a randomly chosen spin at ij location of lattice&#39;&#39;&#39;</span> 
+    
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">choice</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    
+    <span class="n">deltaE</span> <span class="o">=</span> <span class="n">get_dE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+    
+    
+    <span class="k">if</span> <span class="n">deltaE</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        
+        <span class="sd">&#39;&#39;&#39;For negative dE always accept&#39;&#39;&#39;</span>
+        
+        <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+            
+    <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">deltaE</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">random</span><span class="p">():</span>
+        
+        <span class="sd">&#39;&#39;&#39;For positive dE distribute acceptance according to Boltzman dist&#39;&#39;&#39;</span>
+        
+        <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">spins</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="o">=</span><span class="mi">250</span>
+<span class="n">J</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">B</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">n_mcsteps</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Try different temps. For J=1 vary T between 1-3 to see qualitative change. </span>
+
+<span class="sd">&#39;&#39;&#39; We run the Monte Carlo using a loop of n_mcsteps iterations. Later one we can create a more </span>
+<span class="sd">sophisticated object oriented code where one can simply execute single command. &#39;&#39;&#39;</span>
+
+<span class="n">spins</span> <span class="o">=</span> <span class="n">initialize</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_mcsteps</span><span class="p">):</span>
+    
+    <span class="n">spins</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Plot the lattice before and after</span>
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;spin, $ s_i$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;spin, $ s_j$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/01_MCMC_Ising_51_0.png" src="../_images/01_MCMC_Ising_51_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">0.7</span>  
+
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">spins</span> <span class="o">=</span> <span class="n">initialize</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">images</span><span class="o">=</span><span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+    
+    <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spins</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span> <span class="c1"># use copy becasue spins keep on being updates</span>
+    
+    <span class="n">spins</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="o">%</span><span class="k">time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2 µs, sys: 1e+03 ns, total: 3 µs
+Wall time: 6.44 µs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n_steps</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_image</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "5d5c1811c6194f28bcd958149ac52048"}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">J</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">B</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">n_mcsteps</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">n_mcsteps2</span> <span class="o">=</span> <span class="mi">20000</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Try different temps. For J=1 vary T between 1-3 to see qualitative change. </span>
+
+<span class="sd">&#39;&#39;&#39; Record some observables form simulation and plot as a function of time to visually inspect equilibration&#39;&#39;&#39;</span>
+
+<span class="n">obs</span><span class="p">,</span> <span class="n">obs2</span><span class="p">,</span> <span class="n">obs3</span><span class="p">,</span>  <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+
+<span class="n">spins</span> <span class="o">=</span> <span class="n">initialize</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_mcsteps</span><span class="p">):</span>
+    
+    <span class="n">spins</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_mcsteps2</span><span class="p">):</span>
+    
+    <span class="n">spins</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    
+    <span class="n">obs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">spins</span><span class="p">))</span>
+    
+<span class="c1">#    obs2.append(spins[1,5])</span>
+    <span class="c1">#obs3.append(getE(spins,N,J,B))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc52bf47f90&gt;]
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_56_1.png" src="../_images/01_MCMC_Ising_56_1.png" />
+</div>
+</div>
+<div class="section" id="carry-out-explorative-simulations">
+<h2>Carry out explorative simulations<a class="headerlink" href="#carry-out-explorative-simulations" title="Permalink to this headline">¶</a></h2>
+<p><span class="math notranslate nohighlight">\(\bf{i.}\)</span> Test the dependence of observables on system size.</p>
+<p><span class="math notranslate nohighlight">\(\bf{ii.}\)</span> Test the dependence of observables on initital conditions.</p>
+<p><span class="math notranslate nohighlight">\(\bf{iii.}\)</span> Vary intensive parameters, e.g temperature and field strength. Investigate changes in observables such as magnetization, energy, susceptibility, heat capacity.</p>
+<p><span class="math notranslate nohighlight">\(\bf{iv.}\)</span> How do we know if simulation has done enough sampling? How do we assess covnergence and errors?</p>
+<p><span class="math notranslate nohighlight">\(\bf{v.}\)</span> Think about alternative ways of accelerating and enhancing the sampling.</p>
+<div class="section" id="parameter-sweeps-run-mc-simulatons-of-2d-ising-model-at-different-ts">
+<h3>Parameter sweeps: run MC simulatons  of 2D Ising model at different  Ts<a class="headerlink" href="#parameter-sweeps-run-mc-simulatons-of-2d-ising-model-at-different-ts" title="Permalink to this headline">¶</a></h3>
+<p>For more rigirous analysis we can either optimize the code (using cython or numba) or run on HPCs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>                       <span class="c1"># Small trial system, e.g 10-20 spins</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">B</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="c1">#vary temp</span>
+
+<span class="n">n_mcsteps</span><span class="o">=</span><span class="mi">10000</span>   <span class="c1"># Equilibrate!</span>
+<span class="n">n_mcsteps2</span><span class="o">=</span><span class="mi">20000</span>   <span class="c1"># Collect data!</span>
+
+
+<span class="sd">&#39;&#39;&#39;Carry out mulitple MC runs at differnet Temperatures. This calculation may take ~5 mins.  </span>
+<span class="sd">    Think about equilibration, convergence and statistical errors&#39;&#39;&#39;</span>
+
+<span class="n">Es</span><span class="p">,</span> <span class="n">Ms</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="n">Cs</span><span class="p">,</span> <span class="n">Xis</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>   
+
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">Ts</span><span class="p">:</span>
+    
+    <span class="n">Ei</span><span class="p">,</span><span class="n">Mi</span><span class="o">=</span><span class="p">[],[]</span>
+    
+    <span class="n">spins</span> <span class="o">=</span> <span class="n">initialize</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_mcsteps</span><span class="p">):</span>
+        
+        <span class="n">spins</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_mcsteps2</span><span class="p">):</span>  
+        
+        <span class="n">spins</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+        
+        <span class="n">Ei</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
+        <span class="n">Mi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getM</span><span class="p">(</span><span class="n">spins</span><span class="p">))</span>
+ 
+
+    <span class="c1"># First L steps discarded as equilibration</span>
+    <span class="n">Es</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Ei</span><span class="p">))</span>
+    <span class="n">Ms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Mi</span><span class="p">))</span>
+    
+    <span class="c1"># C and Xi computed from energies </span>
+    <span class="n">Cs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getC</span><span class="p">(</span><span class="n">Ei</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+    <span class="n">Xis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getXi</span><span class="p">(</span><span class="n">Ei</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">Es</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Energy of a </span><span class="si">%d</span><span class="s2">x</span><span class="si">%d</span><span class="s2"> spin lattice&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature T&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy E&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Energy E&#39;)
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_60_1.png" src="../_images/01_MCMC_Ising_60_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">Ms</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Magnetization of a </span><span class="si">%d</span><span class="s2">x</span><span class="si">%d</span><span class="s2"> spin lattice&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature T&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Magnetization M&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Magnetization M&#39;)
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_61_1.png" src="../_images/01_MCMC_Ising_61_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Heat Capacity of a </span><span class="si">%d</span><span class="s2">x</span><span class="si">%d</span><span class="s2"> spin lattice&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature T&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Heat capacity $C_v(T)$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Heat capacity $C_v(T)$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_62_1.png" src="../_images/01_MCMC_Ising_62_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">Xis</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Suscpetibility of a </span><span class="si">%d</span><span class="s2">x</span><span class="si">%d</span><span class="s2"> spin lattice&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature T&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Susceptibility $\Xi(T)$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Susceptibility $\\Xi(T)$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/01_MCMC_Ising_63_1.png" src="../_images/01_MCMC_Ising_63_1.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./05_ising"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Davit Potoyan<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
