@@ -1,0 +1,1201 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2. Random variable, stochastic process and simulation. &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. “Monte Carlo and the power of randomness”" href="04_MC.html" />
+    <link rel="prev" title="1. Probability by counting" href="01_SetsCounting.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Statistical Mechanics for Chemistry and Biology</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../00_python.html">
+   A. Python refresher
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2py.html">
+     1. Why Python?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2numpy.html">
+     2. NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2viz.html">
+     3. Plotting with Matplotlib
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="../01_stats.html">
+   B. Probability and randomness
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_SetsCounting.html">
+     1. Probability by counting
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2. Random variable, stochastic process and simulation.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_MC.html">
+     3. “Monte Carlo and the power of randomness”
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_InverseTransform.html">
+     4. The Inverse Transform of RVs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/01_stats/02_RandVar.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/01_stats/02_RandVar.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/01_stats/02_RandVar.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-numbers-probability-distribution-and-infernece-libraries">
+   2.1. Random numbers, probability distribution and infernece libraries.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#general-overview-of-random-numbers-in-python">
+   2.2. General overview of random numbers in python
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-random-numbers-to-get-answers-via-simulations">
+     2.2.1. Using random numbers to get answers via simulations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simple-discrete-unbiased-random-walk-in-1d">
+     2.2.2. Simple, discrete, unbiased random walk in 1D.
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">
+     2.2.3. Simulating a 1D unbiased random walk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statistics-of-random-walk">
+     2.2.4. Statistics of random walk
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connection-with-diffusion-mean-square-displacement">
+     2.2.5. Connection with diffusion: Mean square displacement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#binomial-distribution-of-a-random-walker">
+     2.2.6. Binomial distribution of a random walker
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continuous-time-random-walk-brownian-motion">
+   2.3. Continuous time random walk:  Brownian motion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#brownian-motion-in-1d">
+     2.3.1. Brownian motion in 1D
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#brownian-motion-in-2d">
+     2.3.2. Brownian motion in 2D
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statistics-of-brownian-motion">
+     2.3.3. Statistics of Brownian motion
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#diffusion-equation">
+     2.3.4. Diffusion Equation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   2.4. References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="random-variable-stochastic-process-and-simulation">
+<h1><span class="section-number">2. </span>Random variable, stochastic process and simulation.<a class="headerlink" href="#random-variable-stochastic-process-and-simulation" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+
+<span class="c1">#First let&#39;s load the main scientific and plotting libraries we will need </span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="random-numbers-probability-distribution-and-infernece-libraries">
+<h2><span class="section-number">2.1. </span>Random numbers, probability distribution and infernece libraries.<a class="headerlink" href="#random-numbers-probability-distribution-and-infernece-libraries" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/routines.random.html"><strong>numpy.random</strong></a> has the fastest random number generators that are based on low level code written in C. <br></p></li>
+<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html"><strong>Scipy.stats</strong></a> has an extensive library of statistical distributions and tools for statistical analysis. <br></p></li>
+<li><p>The <a class="reference external" href="https://www.statsmodels.org/stable/"><strong>Statsmodels</strong></a> Enhancing Scipy functionality with more tools for stat snslysis</p></li>
+<li><p>The <a class="reference external" href="https://docs.pymc.io/"><strong>Seaborn</strong></a> library that enhanced matplotlib functionality for easy stat visualization.<br />
+<br></p></li>
+<li><p><a class="reference external" href="https://docs.pymc.io/"><strong>PyMC3</strong></a> and <a class="reference external" href="https://pystan.readthedocs.io/en/latest/"><strong>PyStan</strong></a> powerhouse libaries for Probabilistic modeling, MCMC and Bayesian inference.</p></li>
+<li><p>Also check out <a class="reference external" href="http://mcleonard.github.io/sampyl/"><strong>Sampyl</strong></a>.
+<br></p></li>
+</ul>
+</div>
+<div class="section" id="general-overview-of-random-numbers-in-python">
+<h2><span class="section-number">2.2. </span>General overview of random numbers in python<a class="headerlink" href="#general-overview-of-random-numbers-in-python" title="Permalink to this headline">¶</a></h2>
+<p>First we take a look at most widely used random numbers of numpy also called standard random numbers. These are rand (uniform random number on interval 0,1) and randn (stnadard normal random number with 0 mean and 1 variance). Useful Tip: when writing any code withr andom numbers is pay attention to the seed. If you want to test your code use the same seed to check for reproducability.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#np.random.seed(8376743) </span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># Generates standard uniform random numbers U(0,1)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.75685286, 0.7887893 , 0.31652929, 0.56418809, 0.2121211 ,
+       0.8104951 , 0.61392809, 0.53928915, 0.93341057, 0.52188157])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#plt.plot(np.random.rand(1000), &#39;o&#39;, color=&#39;green&#39;, alpha=0.5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([507., 491., 491., 499., 488., 494., 525., 488., 501., 545., 506.,
+        525., 468., 482., 510., 523., 489., 473., 499., 496.]),
+ array([6.33134334e-05, 5.00553942e-02, 1.00047475e-01, 1.50039556e-01,
+        2.00031637e-01, 2.50023717e-01, 3.00015798e-01, 3.50007879e-01,
+        3.99999960e-01, 4.49992041e-01, 4.99984121e-01, 5.49976202e-01,
+        5.99968283e-01, 6.49960364e-01, 6.99952445e-01, 7.49944525e-01,
+        7.99936606e-01, 8.49928687e-01, 8.99920768e-01, 9.49912848e-01,
+        9.99904929e-01]),
+ &lt;BarContainer object of 20 artists&gt;)
+</pre></div>
+</div>
+<img alt="../_images/02_RandVar_6_1.png" src="../_images/02_RandVar_6_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#np.random.seed(18493) </span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># Generates standard random numbers N(0,1)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.35531959, -0.855878  , -1.12245422,  0.00618735,  1.62134179,
+        0.51173579,  1.42760179,  1.31668627,  2.12812173,  0.39318414])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#plt.plot(np.random.randn(1000), &#39;o&#39;, alpha=0.5)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([ 10.,  27.,  73., 210., 262., 216., 136.,  50.,  12.,   4.]),
+ array([-2.9191032 , -2.29717971, -1.67525621, -1.05333272, -0.43140922,
+         0.19051427,  0.81243777,  1.43436126,  2.05628476,  2.67820825,
+         3.30013175]),
+ &lt;BarContainer object of 10 artists&gt;)
+</pre></div>
+</div>
+<img alt="../_images/02_RandVar_8_1.png" src="../_images/02_RandVar_8_1.png" />
+</div>
+</div>
+<p>Parametraized random number allow you to set parameters like value of mean and interval length and therefore can be viewed as generalized versions of standard random numbers. Below we take a look at examples of continuous (random and unofrm RVs) and discrete random numbers generated by paratmerized distributions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.36922366, -0.74288972,  0.60656882, -0.59506907],
+       [ 0.65704148,  0.84716227,  0.8655337 ,  0.93195938],
+       [ 0.89585975, -0.82132398,  0.30472547,  0.54252675]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.59780540e+01,  2.62979218e+01,  1.51763264e+01,
+         1.70933478e+01],
+       [-1.14121169e+01,  1.12228873e+01, -1.66026810e+00,
+         1.11566505e+01],
+       [-2.34100674e+01, -2.39706097e-02,  5.89361994e+00,
+         3.88995196e+00],
+       [ 5.40802220e+00,  7.73399097e-01,  8.83887624e+00,
+         1.17742343e+01]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="c1"># This one is Binomial distributions. You can see it is discrete as  exepcted. </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([5, 6, 5, 9, 7, 5, 7, 5, 9, 5, 4, 7, 7, 5, 5, 6, 4, 8, 5, 7])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-random-numbers-to-get-answers-via-simulations">
+<h3><span class="section-number">2.2.1. </span>Using random numbers to get answers via simulations<a class="headerlink" href="#using-random-numbers-to-get-answers-via-simulations" title="Permalink to this headline">¶</a></h3>
+<p>One of the major uses of random numbers is for conducting numerical simulations. What is a simulation? It is a recreation of a process on a computer. And this recreation is done by random numbers. E.g to simulate coint tosses, die throws, diffusion of molecules, conformational change of polymers we use random number to recreate the process on a computer. Let’s start off by asking some simple questions</p>
+<ul class="simple">
+<li><p>How often do we get a run of 5 or more consecutive heads in 100 coin tosses if we repeat the experiment 1000 times?
+<br></p></li>
+<li><p>What if the coin is biased to generate heads only 40% of the time?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># length of each trajectory</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># number of experiments: stochastic trajecotries generated</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># (i) Unbiased coin p=[0.5,0.5] by default</span>
+
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>  <span class="c1"># (ii) biased coin</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ys</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb7d01de390&gt;]
+</pre></div>
+</div>
+<img alt="../_images/02_RandVar_16_1.png" src="../_images/02_RandVar_16_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12738</span><span class="p">)</span>
+<span class="c1"># Non-fancy way of simulating the answer</span>
+<span class="n">runs</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>    <span class="c1"># plug either xs or ys</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;=</span><span class="mi">5</span><span class="p">:</span>
+                <span class="n">runs</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">runs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="simple-discrete-unbiased-random-walk-in-1d">
+<h3><span class="section-number">2.2.2. </span>Simple, discrete, unbiased random walk in 1D.<a class="headerlink" href="#simple-discrete-unbiased-random-walk-in-1d" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start off by simulating a random walk outlined in class by using a random number generators from numpy called choice and normal. Type help(np.random.choice) and help(np.random.normal) to learn more.</p>
+<ul class="simple">
+<li><p>The <em>numpy.random.choice(A,size=(M,N,K))</em> returns element from a list of objects, A with uniform and equal probabilities (default, customizable for unequal probabilities)  in the form of 1D, 2D or 3D arays of length M,N,K.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s import random numbers we will need</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">normal</span><span class="p">,</span> <span class="n">choice</span><span class="p">,</span> <span class="n">uniform</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;bagel&#39;</span><span class="p">,</span><span class="s1">&#39;muffin&#39;</span><span class="p">,</span><span class="s1">&#39;croissant&#39;</span><span class="p">],</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&#39;bagel&#39;, &#39;croissant&#39;, &#39;muffin&#39;, &#39;muffin&#39;, &#39;croissant&#39;],
+       [&#39;muffin&#39;, &#39;croissant&#39;, &#39;bagel&#39;, &#39;croissant&#39;, &#39;bagel&#39;],
+       [&#39;croissant&#39;, &#39;croissant&#39;, &#39;muffin&#39;, &#39;croissant&#39;, &#39;bagel&#39;]],
+      dtype=&#39;&lt;U9&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>The <em>numpy.random.normal(mu,sigma,size=(M,N,K))</em> retruns random number distributed according to gausian probability function in the form of 1D, 2D or 3D arays of length N,M,K</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we generate 3 sequences of normally distributed random variables of length 5</span>
+<span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2.69161384, -1.76025845,  2.6359338 , -1.27629114,  0.28905087],
+       [ 1.10431222, -2.35128534,  1.62603244, -0.08737834,  0.95731216],
+       [-0.47182587, -0.10790324,  0.85141111,  0.9185157 , -0.58355616]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="simulating-a-1d-unbiased-random-walk">
+<h3><span class="section-number">2.2.3. </span>Simulating a 1D unbiased random walk<a class="headerlink" href="#simulating-a-1d-unbiased-random-walk" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;Step 1: Generate random walks&#39;&#39;&#39;</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># number of steps in a random walk</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># number of independent random walkers</span>
+
+<span class="c1"># i. Create N by L matrix filled with {+1,-1} numbers. </span>
+<span class="n">walk</span> <span class="o">=</span> <span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> 
+
+<span class="c1"># ii. Compute cumulative sum: make each element of array the sum of the previous ones: </span>
+<span class="n">rw_sum</span> <span class="o">=</span> <span class="n">walk</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1">#iii. Specify initital condition. </span>
+<span class="n">rw_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">=</span><span class="mi">0</span>                    <span class="c1">#rw_sum = np.r_[np.zeros((1,N)), rw_sum] # what does this do? </span>
+
+<span class="n">rw_sum</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(500, 50)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;Step 2: Visualize random walks&#39;&#39;&#39;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rw_sum</span><span class="p">)</span>  <span class="c1"># plot each column from 0 to L-th row. [plt.plot(rw_sum[:,i]) for i in np.arange(N)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1"> random walks&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$Steps$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$Position$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_RandVar_27_0.png" src="../_images/02_RandVar_27_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#rows acessed via first index and correspond to individual trajectories</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rw_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rw_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(50,)
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># jth column acessed viasecond index corresponds to jth positions of awalker</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rw_sum</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="c1">#print(rw_sum[:,0])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(500,)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="statistics-of-random-walk">
+<h3><span class="section-number">2.2.4. </span>Statistics of random walk<a class="headerlink" href="#statistics-of-random-walk" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span> <span class="c1"># we need this to fit to normal distribution</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#help(norm.pdf) </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rw_1d</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;1d random walk function:</span>
+<span class="sd">    L: trajectory length</span>
+<span class="sd">    N: Number of trajecotry</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">rw</span> <span class="o">=</span> <span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+    
+    <span class="n">rw_sum</span><span class="o">=</span><span class="n">rw</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">rw_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">=</span><span class="mi">0</span>
+    
+    <span class="k">return</span> <span class="n">rw_sum</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="n">L</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">1000</span>
+<span class="n">rw_sum</span> <span class="o">=</span> <span class="n">rw_1d</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">N</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>  
+    
+    <span class="n">t</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">L</span><span class="o">/</span><span class="mi">5</span><span class="p">))</span> <span class="o">+</span> <span class="mi">5</span>                   <span class="c1"># record dist at 5 equidist points</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rw_sum</span><span class="p">[</span><span class="n">t</span><span class="p">,:],</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># generate histogram at different points</span>
+    
+    <span class="c1"># Fit histogram to normal dist </span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    
+    <span class="n">y</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>  
+    
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t = </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_RandVar_34_0.png" src="../_images/02_RandVar_34_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="connection-with-diffusion-mean-square-displacement">
+<h3><span class="section-number">2.2.5. </span>Connection with diffusion: Mean square displacement<a class="headerlink" href="#connection-with-diffusion-mean-square-displacement" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determine the time evolution of the mean square distance.</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rw_sum</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># why only rw**2 and not mean(rw-mean(rw))**2 ? </span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Compute mean square deviation of 1D random walker&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of steps, n&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$MSD(n)=\langle x(n)^2 \rangle$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$MSD(n)=\\langle x(n)^2 \\rangle$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/02_RandVar_36_1.png" src="../_images/02_RandVar_36_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Questions: </span>
+<span class="c1"># (i)  Compute MSD for @D random walk show the expected scaling </span>
+<span class="c1"># (ii) Generate random walks from different positions</span>
+<span class="c1"># (iii) choice between [-1,1] </span>
+<span class="c1"># (iv)  Multinomial choice</span>
+<span class="c1"># (v)  Self avoiding walks</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rw_2d</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;2d random walk function:</span>
+<span class="sd">    L: trajectory length</span>
+<span class="sd">    N: Number of trajecotry</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">verteces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+    
+    <span class="n">rw</span>       <span class="o">=</span> <span class="n">verteces</span><span class="p">[</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">))]</span>
+    
+    <span class="n">rw_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="k">return</span> <span class="n">rw</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">rw_sum</span> <span class="o">=</span> <span class="n">rw_2d</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">rw_sum</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+
+<span class="nn">&lt;ipython-input-25-1c2508210c24&gt;</span> in <span class="ni">rw_2d</span><span class="nt">(L, N)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">rw</span>       <span class="o">=</span> <span class="n">verteces</span><span class="p">[</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">N</span><span class="p">))]</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="ne">---&gt; </span><span class="mi">11</span>     <span class="n">rw_sum</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> 
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="k">return</span> <span class="n">rw</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="ne">IndexError</span>: too many indices for array: array is 2-dimensional, but 3 were indexed
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rw_sum</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">rw_sum</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">27</span><span class="o">-</span><span class="n">f13f1168ceba</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rw_sum</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">rw_sum</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="ne">IndexError</span>: too many indices for array: array is 2-dimensional, but 3 were indexed
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="binomial-distribution-of-a-random-walker">
+<h3><span class="section-number">2.2.6. </span>Binomial distribution of a random walker<a class="headerlink" href="#binomial-distribution-of-a-random-walker" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>In previous example we started with random variables with no reference to probability distribution.
+This time we will generate random numbers from a binomial distribution.</p></li>
+<li><p>This time we will use scipy.stats library which contains probability distirbution functions. That is in addition to generating random variables we can also compute probability distributions and related quantities analytically.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">poisson</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#help(binom)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span>  <span class="n">binom</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c1"># Let us declare s to be a binomial RV</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>          <span class="c1"># 20 random samples form X</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>           <span class="c1"># P(X = 5)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>           <span class="c1"># P(X &lt;= 5)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>           <span class="c1"># E[X], mean</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>            <span class="c1"># Var(X), variance</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>            <span class="c1"># Std(X), standard deviation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7 4 4 4 7 3 5 6 5 3 4 5 4 4 9 3 6 5 7 3]
+0.24609375000000025
+0.6230468749999999
+5.0
+2.5
+1.5811388300841898
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coin_flip</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    L: flip coint L times </span>
+<span class="sd">    q: with p probability</span>
+<span class="sd">    N: Repeat experiment N times</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+    <span class="n">coin</span>       <span class="o">=</span> <span class="n">binom</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>   <span class="c1"># Binomial RV</span>
+    
+    <span class="n">coin_flips</span> <span class="o">=</span> <span class="n">coin</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>   <span class="c1"># Generate sample of N points</span>
+    <span class="n">coin_pmf</span>   <span class="o">=</span> <span class="n">coin</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">L</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Generate PMF from 0 to L </span>
+    <span class="n">coin_cdf</span>   <span class="o">=</span> <span class="n">coin</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">L</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">coin_flips</span><span class="p">,</span> <span class="n">coin_pmf</span><span class="p">,</span> <span class="n">coin_cdf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1">#Coin flip 1 time.</span>
+<span class="n">X1</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">CP1</span> <span class="o">=</span> <span class="n">coin_flip</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="s1">&#39;--s&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">CP1</span><span class="p">,</span><span class="s1">&#39;-d&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x137d08cc0&gt;]
+</pre></div>
+</div>
+<img alt="../_images/02_RandVar_47_1.png" src="../_images/02_RandVar_47_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="continuous-time-random-walk-brownian-motion">
+<h2><span class="section-number">2.3. </span>Continuous time random walk:  Brownian motion<a class="headerlink" href="#continuous-time-random-walk-brownian-motion" title="Permalink to this headline">¶</a></h2>
+<p>We have learned about random variables, random walk and have encorunetred a concept of stochastic process on the example of discrete step 1D random walk. Now let us generate the prototypical stochasic process in continuous time; the brownian motion. Brownian motion was first discoverd by a botanist Brown who noticed that a pollen in solution undergo erratic and incessant motion. To simulate brownian motion we take the continuous time limit of random walk and approximate dsiplacements of our particle as normally distributed (binomial-&gt;normal, time step-&gt;continuous time)</p>
+<div class="math notranslate nohighlight">
+\[x(t+dt)-x(t)=N(0,\sqrt{2D dt})\]</div>
+<p>We assume we have started at position <span class="math notranslate nohighlight">\(\mu=0\)</span> and our variance is given by <span class="math notranslate nohighlight">\(\sigma^2=2Dt\)</span> Where D is the diffusion coefficnets which is related to parameters of discree random walk as shown in the lecture.</p>
+<div class="math notranslate nohighlight">
+\[x(t+dt)=x(t)+\sqrt{2D dt} \cdot N(0,1)\]</div>
+<p>In the last step we re-wrote brownian motion equation in a convenient way by shifting normally distributed radnom variable by <span class="math notranslate nohighlight">\(\mu\)</span> and scaling it by <span class="math notranslate nohighlight">\(\sigma\)</span></p>
+<p>$<span class="math notranslate nohighlight">\(N(\mu, \sigma^2)=\mu+\sigma N(0,1)\)</span>$.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">brown</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">D</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates 2D brownian path given:</span>
+<span class="sd">    time T </span>
+<span class="sd">    N=1 trajecotires</span>
+<span class="sd">    dim=2: 2D by default</span>
+<span class="sd">    dt=1 timestep</span>
+<span class="sd">    D=1 diffusion coeff</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">nT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="c1"># how many points to sample</span>
+    
+    <span class="n">dR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">D</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">nT</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># 3D position of brownian particle</span>
+    
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dR</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># accumulated 3D position of brownian particle</span>
+    
+    <span class="k">return</span> <span class="n">R</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="brownian-motion-in-1d">
+<h3><span class="section-number">2.3.1. </span>Brownian motion in 1D<a class="headerlink" href="#brownian-motion-in-1d" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">=</span><span class="n">brown</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">N</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">R</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 1000, 50)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<img alt="../_images/02_RandVar_52_1.png" src="../_images/02_RandVar_52_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="brownian-motion-in-2d">
+<h3><span class="section-number">2.3.2. </span>Brownian motion in 2D<a class="headerlink" href="#brownian-motion-in-2d" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">=</span><span class="n">brown</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">N</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">R</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 1000, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_RandVar_55_0.png" src="../_images/02_RandVar_55_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the 3D plotting toolkit</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    
+    <span class="n">R</span><span class="o">=</span><span class="n">brown</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">N</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot3D</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,</span><span class="mi">0</span><span class="p">],</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,:,</span><span class="mi">0</span><span class="p">],</span><span class="n">R</span><span class="p">[</span><span class="mi">2</span><span class="p">,:,</span><span class="mi">0</span><span class="p">],</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="c1">#ax.set_axis_off()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_RandVar_56_0.png" src="../_images/02_RandVar_56_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="statistics-of-brownian-motion">
+<h3><span class="section-number">2.3.3. </span>Statistics of Brownian motion<a class="headerlink" href="#statistics-of-brownian-motion" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">brown</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">R</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 1000, 10000)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,:],</span>   <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">25</span><span class="p">,:],</span>  <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">,:],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">250</span><span class="p">,:],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([4.72389807e-05, 3.41170416e-04, 2.75560721e-03, 8.79694796e-03,
+        1.65651359e-02, 1.54314004e-02, 6.74467669e-03, 1.64811555e-03,
+        1.41716942e-04, 1.57463269e-05]),
+ array([-92.68669146, -73.63462923, -54.582567  , -35.53050477,
+        -16.47844254,   2.57361969,  21.62568192,  40.67774415,
+         59.72980638,  78.78186861,  97.83393084]),
+ &lt;a list of 10 Patch objects&gt;)
+</pre></div>
+</div>
+<img alt="../_images/02_RandVar_59_1.png" src="../_images/02_RandVar_59_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="diffusion-equation">
+<h3><span class="section-number">2.3.4. </span>Diffusion Equation<a class="headerlink" href="#diffusion-equation" title="Permalink to this headline">¶</a></h3>
+<p>The movement of individual random walkers <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> density of walkers <span class="math notranslate nohighlight">\(\rho(\vec{r},t)\)</span></p>
+<p><strong>Diffusion equation</strong>:</p>
+<p>Formulated empirically as <a class="reference external" href="https://en.wikipedia.org/wiki/Fick%27s_laws_of_diffusion">Fick’s laws</a></p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial\rho}{\partial t} = \mathcal{D}\nabla^2\rho\]</div>
+<ul class="simple">
+<li><p>This is a 2nd order PDE! Unlike equations of motion diff eq shows irreersibile behaviour</p></li>
+<li><p>This one exactly solvable. But in general reaction-diffusion PDEs difficult to solve analytically.</p></li>
+<li><p>Can solve numerically by writing derivatives as finite differences!</p></li>
+<li><p>Can also simulate via random walk!</p></li>
+<li><p>Diffusion coefficient <span class="math notranslate nohighlight">\(D\)</span>, Units <span class="math notranslate nohighlight">\([L^2]/[T]\)</span></p></li>
+</ul>
+<p>Important special case solution (here written in 1d):</p>
+<div class="math notranslate nohighlight">
+\[\rho(x,t) = \frac{1}{\sqrt{2\pi \sigma(t)^2}}\exp\left(-\frac{x^2}{2\sigma(t)^2}\right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma(t)=\sqrt{2{D}t}\)</span></p>
+<ul class="simple">
+<li><p>density remains Gaussian</p></li>
+<li><p>Gaussian becomes wider with time</p></li>
+<li><p>check that this is indeed a solution by plugging into the diffusion equation!</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="c1"># time dependent sigma</span>
+<span class="k">def</span> <span class="nf">sigma</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">D</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># density function is gaussian</span>
+<span class="k">def</span> <span class="nf">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span>  <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="c1">#</span>
+
+<span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.001</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">diffusion</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mf">0.001</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">),</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "7a56a93d99f5411eb2e211ee779319a9", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2><span class="section-number">2.4. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p><strong>The mighty little books</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/Random-Walks-Biology-Howard-Berg/dp/0691000646">“Random Wlaks in Biology”,  H Berg (1993)</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/gp/product/1464140294/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&amp;psc=1">“Physical models of Living systems”,  P Nelson (2015)</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/Noise-and-Fluctuations-An-Introduction/dp/0486785157/ref=sr_1_1?keywords=fluctuation+noise&amp;qid=1579882150&amp;s=books&amp;sr=1-1">“Noise and fluctuations”,  DKC MacDonald (2003)</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/Investigations-Theory-Brownian-Movement-Physics/dp/0486603040/ref=sr_1_2?keywords=einstein+brownian&amp;qid=1579882356&amp;sr=8-2">“Investigations on the Theory of the Brownian Movement”, A Einstein (1956 preprint)</a></p></li>
+</ul>
+<p><strong>More in depth</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/Simple-Brownian-Diffusion-Introduction-Theoretical/dp/0199664501/ref=sr_1_1?keywords=diffusion+brownian&amp;qid=1579882520&amp;sr=8-1">“Simple Brownian Diffusion: An Introduction to the Standard Theoretical Models”, D Gillespie</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/Stochastic-Processes-Physicists-Understanding-Systems/dp/0521765420/ref=sr_1_1?keywords=kurt+jacobs+stochastic&amp;qid=1579882738&amp;sr=8-1">“Stochastic Processes for Physicists” K Jacobs</a></p></li>
+</ul>
+<p><strong>On the applied side</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/Brownian-Motion-Elements-Dynamics-Undergraduate/dp/3319980521/ref=sr_1_7?keywords=einstein+brownian&amp;qid=1579882356&amp;sr=8-7">Brownian Motion: Elements of Colloid Dynamics A P Philipse (2018)</a></p></li>
+</ul>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./01_stats"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="01_SetsCounting.html" title="previous page"><span class="section-number">1. </span>Probability by counting</a>
+    <a class='right-next' id="next-link" href="04_MC.html" title="next page"><span class="section-number">3. </span>“Monte Carlo and the power of randomness”</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Davit Potoyan<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

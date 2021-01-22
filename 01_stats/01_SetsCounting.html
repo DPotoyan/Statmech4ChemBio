@@ -1,0 +1,850 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. Probability by counting &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Random variable, stochastic process and simulation." href="02_RandVar.html" />
+    <link rel="prev" title="B. Probability and randomness" href="../01_stats.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Statistical Mechanics for Chemistry and Biology</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../00_python.html">
+   A. Python refresher
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2py.html">
+     1. Why Python?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2numpy.html">
+     2. NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../00_python/intro2viz.html">
+     3. Plotting with Matplotlib
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="../01_stats.html">
+   B. Probability and randomness
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1. Probability by counting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_RandVar.html">
+     2. Random variable, stochastic process and simulation.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_MC.html">
+     3. “Monte Carlo and the power of randomness”
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_InverseTransform.html">
+     4. The Inverse Transform of RVs
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/01_stats/01_SetsCounting.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/01_stats/01_SetsCounting.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/01_stats/01_SetsCounting.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sample-space">
+   1.1. Sample space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#events">
+   1.2. Events
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-probability-calculations">
+   1.3. Simple probability calculations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composite-events-and-venn-diagrams">
+   1.4. Composite events and Venn diagrams
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-measures-of-events">
+     1.4.1. What are measures of events
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-new-events-out-of-sets">
+     1.4.2. Creating new events out of sets
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#translate-words-into-probabilities">
+   1.5. Translate words into probabilities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-axioms">
+   1.6. Probability Axioms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combinatorics">
+   1.7. Combinatorics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multinomial-combination">
+     1.7.1. Multinomial combination.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stirling-s-approximation">
+   1.8. Stirling’s approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-stirling-s-approx-to-binomial">
+   1.9. Applying Stirling’s approx to Binomial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gamma-function-generalizing-the-factorial">
+   1.10. Gamma function: generalizing the factorial
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="probability-by-counting">
+<h1><span class="section-number">1. </span>Probability by counting<a class="headerlink" href="#probability-by-counting" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1">#Load the basics</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>    
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="c1"># Increase resolution for retina display</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">set_matplotlib_formats</span>
+<span class="n">set_matplotlib_formats</span><span class="p">(</span><span class="s1">&#39;retina&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For this lecture we will use venn visualization module for matplotlib. Needs to be installed separately via conda or pip</span>
+<span class="c1"># conda install -c conda-forge matplotlib-venn</span>
+<span class="kn">import</span> <span class="nn">matplotlib_venn</span> <span class="k">as</span> <span class="nn">venn</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">bf7b62d40c0d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># For this lecture we will use venn visualization module for matplotlib. Needs to be installed separately via conda or pip</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># conda install -c conda-forge matplotlib-venn</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib_venn</span> <span class="k">as</span> <span class="nn">venn</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib_venn&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="sample-space">
+<h2><span class="section-number">1.1. </span>Sample space<a class="headerlink" href="#sample-space" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>sample space</strong>, often signified by an <code class="docutils literal notranslate"><span class="pre">S</span></code> is a set of <strong>all possible outcomes</strong> of a trial.</p>
+<ul class="simple">
+<li><p>if our trial is a single roll of a six-sided die, then the sample space will be:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">{1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6}</span></code></p>
+<ul class="simple">
+<li><p>If our trial is choosing a coin from a bag, then the sample space might be:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">{quarter,</span> <span class="pre">dime,</span> <span class="pre">nickel,</span> <span class="pre">penny}</span></code></p>
+</div>
+<div class="section" id="events">
+<h2><span class="section-number">1.2. </span>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h2>
+<p>An <strong>Event</strong> specifies the outcome of a trial. Events can be the outcome of a single trial OR a set of outcomes.</p>
+<p>Events are often designated with an <code class="docutils literal notranslate"><span class="pre">E</span></code>.</p>
+<ul class="simple">
+<li><p>If we roll a die and want to specify our event to be that we get a one (1), then our event might be defined:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span> <span class="pre">{1}</span></code></p>
+<ul class="simple">
+<li><p>If we want to specify our event to be that we get an even number, then our event might be defined:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span> <span class="pre">{2,</span> <span class="pre">4,</span> <span class="pre">6}</span></code></p>
+</div>
+<div class="section" id="simple-probability-calculations">
+<h2><span class="section-number">1.3. </span>Simple probability calculations<a class="headerlink" href="#simple-probability-calculations" title="Permalink to this headline">¶</a></h2>
+<p>To calculate a simple probability of an event, labeled <code class="docutils literal notranslate"><span class="pre">P(E)</span></code>, we divide the number of ways of getting the event, <code class="docutils literal notranslate"><span class="pre">n(E)</span></code> by the number of elements in the sample space, <code class="docutils literal notranslate"><span class="pre">n(S)</span></code>.</p>
+<div class="math notranslate nohighlight">
+\[\boxed{\Large P(E) = \frac{n(E)}{n(S)}}\]</div>
+<p>For example, if we calculate the probability of rolling a <code class="docutils literal notranslate"><span class="pre">1</span></code> on a six sided die…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+<span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+
+
+<span class="n">n</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># number of ways to get the event</span>
+<span class="n">n</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">=</span> <span class="mi">6</span>      <span class="c1"># number of elements in the sample space</span>
+
+<span class="n">P</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">6</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span> <span class="n">E</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Simple function to calculate probability of die rolls</span>
+<span class="sd">    Return the probability of an event given the event measure and the sample size measure</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">}</span>
+<span class="n">E</span><span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">}</span> 
+<span class="n">probability</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">}</span>
+<span class="n">E</span><span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span> 
+<span class="n">probability</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="composite-events-and-venn-diagrams">
+<h2><span class="section-number">1.4. </span>Composite events and Venn diagrams<a class="headerlink" href="#composite-events-and-venn-diagrams" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">}</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">}</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="p">{</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">}</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="mi">100</span><span class="p">}</span>
+
+<span class="n">venn</span><span class="o">.</span><span class="n">venn3</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x10f80b978&gt;
+</pre></div>
+</div>
+<img alt="../_images/01_SetsCounting_11_1.png" src="../_images/01_SetsCounting_11_1.png" />
+</div>
+</div>
+<div class="section" id="what-are-measures-of-events">
+<h3><span class="section-number">1.4.1. </span>What are measures of events<a class="headerlink" href="#what-are-measures-of-events" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n(S) = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n(A) = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n(B) = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n(C) = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">C</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n(D) = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">C</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n(S) =  10
+n(A) =  5
+n(B) =  5
+n(C) =  2
+n(D) =  2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-new-events-out-of-sets">
+<h3><span class="section-number">1.4.2. </span>Creating new events out of sets<a class="headerlink" href="#creating-new-events-out-of-sets" title="Permalink to this headline">¶</a></h3>
+<p>Note that in python the ‘&amp;’ is not same ‘and’. ‘or’ is not same ‘|’. &amp; means intersection and | means union_ <br>
+We apply these operators to create composite sets</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∩𝐵 = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">&amp;</span><span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∩C = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">&amp;</span><span class="n">C</span><span class="p">)</span>        <span class="c1"># &amp; = intersection</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∩D = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">&amp;</span><span class="n">D</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∩S = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">&amp;</span><span class="n">S</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∪B = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">|</span><span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∪C = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">|</span><span class="n">C</span><span class="p">)</span>       <span class="c1"># | = union</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∪B∪C = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">|</span><span class="n">B</span><span class="o">|</span><span class="n">C</span><span class="p">,</span> <span class="s2">&quot; = S&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴-C = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">-</span><span class="n">C</span><span class="p">)</span>       
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴-B = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span>          
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>𝐴∩𝐵 =  {2, 5}
+𝐴∩C =  set()
+𝐴∩D =  set()
+𝐴∩S =  {1, 2, 3, 4, 5}
+𝐴∪B =  {0, 1, 2, 3, 4, 5, 7, -1}
+𝐴∪C =  {1, 2, 3, 4, 5, 20, 90}
+𝐴∪B∪C =  {0, 1, 2, 3, 4, 5, 7, 20, 90, -1}  = S
+𝐴-C =  {1, 2, 3, 4, 5}
+𝐴-B =  {1, 3, 4}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Computing complements of sets</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="o">-</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="o">-</span><span class="n">B</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(𝐴∪𝐵)^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="o">-</span><span class="p">(</span><span class="n">𝐴</span><span class="o">|</span><span class="n">𝐵</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴^c ∩ B^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">((</span><span class="n">S</span><span class="o">-</span><span class="n">A</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">S</span><span class="o">-</span><span class="n">B</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A^c =  5
+B^c =  5
+(𝐴∪𝐵)^c =  2
+𝐴^c  ∩ B^c =  2
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="translate-words-into-probabilities">
+<h2><span class="section-number">1.5. </span>Translate words into probabilities<a class="headerlink" href="#translate-words-into-probabilities" title="Permalink to this headline">¶</a></h2>
+<p><strong>Give a possible sample space <span class="math notranslate nohighlight">\(\Omega\)</span> for each of the follow experiments</strong></p>
+<ul class="simple">
+<li><p>A two-sided coin is tossed.</p></li>
+</ul>
+<p>$\Omega$ = {H,T} <p>
+<ul class="simple">
+<li><p>You choose the color of your new car’s exterior (choices: red, black, silver, green) and interior (choices: black, beige)?</p></li>
+</ul>
+<p>
+$\Omega$ = {red, black, silver, green} x {black, beige}
+<p><strong>Define Sample space</strong></p>
+<ul class="simple">
+<li><p>A fair coin is tossed 200 times in a row <p>
+<span class="math notranslate nohighlight">\(\Omega\)</span> = {H,T}<span class="math notranslate nohighlight">\(^{200}\)</span> <p></p></li>
+<li><p>You count the number of people who enter a department store on a particular Sunday <p>
+<span class="math notranslate nohighlight">\(\Omega\)</span> = {All numbers from 0 to 6 billion} <p></p></li>
+<li><p>You open up <i> Hamlet </i> and pick a word at random <p>
+<span class="math notranslate nohighlight">\(\Omega\)</span> = {words in <i> Hamlet}</p></li>
+</ul>
+<p><strong>Let A, B, and C be events defined on a particular sample <span class="math notranslate nohighlight">\(\Omega\)</span>. Write expressions for the following combinations of events</strong></p>
+<ul class="simple">
+<li><p>All three events occur. <p>
+A <span class="math notranslate nohighlight">\(\cap\)</span> B <span class="math notranslate nohighlight">\(\cap\)</span> C <p></p></li>
+<li><p>At least one of the events occurs <p>
+A <span class="math notranslate nohighlight">\(\cup\)</span> B <span class="math notranslate nohighlight">\(\cup\)</span> C <p></p></li>
+<li><p>A and B occur, but not C <p>
+A <span class="math notranslate nohighlight">\(\cup\)</span> B <span class="math notranslate nohighlight">\(\cup\)</span> C<span class="math notranslate nohighlight">\(^{c}\)</span></p></li>
+</ul>
+ <p></div>
+<div class="section" id="probability-axioms">
+<h2><span class="section-number">1.6. </span>Probability Axioms<a class="headerlink" href="#probability-axioms" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><strong>Nonnegativity</strong> - For every event <em>A</em>, <span class="math notranslate nohighlight">\(P(A) \ge 0\)</span>
+<br><br></p></li>
+<li><p><strong>Additivity</strong> - For any sequence of <strong>disjoint</strong> events, <span class="math notranslate nohighlight">\(A_i \cap A_j = \emptyset \)</span>, the probability of their union is the sum of their individual probabilities <br/> <br/>
+$<span class="math notranslate nohighlight">\(P\left( A_1 \cup A_2 \cup \ldots \right) = P\left(A_1\right) + P\left(A_2\right) + \ldots\)</span>$ <br/>
+<br><br></p></li>
+<li><p><strong>Normalization</strong> - The probability of the entire sample space is equal to 1. $<span class="math notranslate nohighlight">\(P(S)=1\)</span>$
+<br><br></p></li>
+<li><p><strong>Product</strong> Probability of A and B happening: $<span class="math notranslate nohighlight">\(P(A,B,C)=P(A)P(B)P(C)\)</span>$
+<br><br></p></li>
+<li><p><strong>Complement</strong>  <span class="math notranslate nohighlight">\(A \cap \bar A=\emptyset\)</span> and <span class="math notranslate nohighlight">\(A \cup \bar A=S\)</span>.  $<span class="math notranslate nohighlight">\(P(\bar A)=1-P(A)\)</span>$
+<br><br></p></li>
+<li><p><strong>Conditional probability and Bayes Theorem</strong> $<span class="math notranslate nohighlight">\(P(A,B)=P(A|B)P(B)=P(B|A)P(A)\)</span>$</p></li>
+</ol>
+</div>
+<div class="section" id="combinatorics">
+<h2><span class="section-number">1.7. </span>Combinatorics<a class="headerlink" href="#combinatorics" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sampling</p></th>
+<th class="head"><p>Combinatorics</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Ordered</strong> sampling <strong>without</strong> replacement</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\boxed{P^n_r = \frac{n!}{(n-r)!}}\)</span>$</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Unordered</strong> sampling <strong>without</strong> replacement</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\boxed{P = \frac{n!}{r!(n-r)!}}\)</span>$</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Ordered</strong> sampling <strong>with</strong> replacement</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\boxed{P^n_r = r^n}\)</span>$</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Unordered</strong> sampling <strong>with</strong> replacement</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\boxed{P = \frac{(n+r-1)!}{r!(n-1)!}}\)</span>$</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="multinomial-combination">
+<h3><span class="section-number">1.7.1. </span>Multinomial combination.<a class="headerlink" href="#multinomial-combination" title="Permalink to this headline">¶</a></h3>
+<p>Cominatoria forumla can be readily generalized for k&gt;2 partitions. A classic problem we will encounter is partitioning <span class="math notranslate nohighlight">\(N\)</span> indistinguishable molecules among <span class="math notranslate nohighlight">\(n_1\)</span> energy level, <span class="math notranslate nohighlight">\(n_2\)</span>, … <span class="math notranslate nohighlight">\(n_k\)</span>. <span class="math notranslate nohighlight">\(\sum n_i = N\)</span></p>
+<div class="math notranslate nohighlight">
+\[\boxed{C^N_{n_1,n_2,...n_k}=\frac{N!}{n_1! \cdot n_2! \cdot ... n_k!} }\]</div>
+<p><strong>Exercsie-1:</strong> Container has 100 atoms of gas.</p>
+<ul class="simple">
+<li><p>What is a probability that left half has 40 atoms?</p></li>
+<li><p>What is a probability that left half has 50 atoms?</p></li>
+<li><p>What is a probability that 1/3 has 10 next 1/3 has 20 and next 1/3 has 70?</p></li>
+<li><p>What is the total number of all possible partitionings or staets of gas atoms in container?</p></li>
+</ul>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n(A) = \frac{1000!}{400! \cdot 600 !}\)</span>
+<br><br></p></li>
+<li><p><span class="math notranslate nohighlight">\(n(B) = \frac{1000!}{500! \cdot 500 !}\)</span>
+<br><br></p></li>
+<li><p><span class="math notranslate nohighlight">\(n(C) = \frac{1000!}{100!\cdot 200! \cdot 700!}\)</span>
+<br><br></p></li>
+<li><p><span class="math notranslate nohighlight">\(n(S) = \sum^{n=N}_{n=0}\frac{N!}{n!\cdot (N-n)!} = 2^N\)</span>
+Each N lattice site in the container can be either vacant or filled hene <span class="math notranslate nohighlight">\(2^N\)</span> states.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
+
+<span class="k">def</span> <span class="nf">gas_partition</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k1</span><span class="p">)</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k2</span><span class="p">)</span><span class="o">**</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">gas_partition</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gas_partition</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">45</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07958923738717874
+0.04847429662643074
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercsie-2:</strong> Solids metal has 100 atoms. Magnetic measurments shows that there are 10 atoms with spin down. If ten atoms are chosen at random, what is the probability that they all have spin up?</p>
+<div class="math notranslate nohighlight">
+\[n(S) = \frac{100!}{10!(90)!}\]</div>
+<br>
+$$n(up) = \frac{90!}{10!(80)!}$$
+<br>
+$$p(up) =\frac{n(up)}{n(S)}$$<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_S</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
+
+<span class="n">n_up</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">80</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">n_up</span><span class="o">/</span><span class="n">n_S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.33047621108672515
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">permutations</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="c1"># print(&quot;&quot;.join(p))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;A&#39;, &#39;B&#39;)
+(&#39;A&#39;, &#39;C&#39;)
+(&#39;A&#39;, &#39;D&#39;)
+(&#39;B&#39;, &#39;A&#39;)
+(&#39;B&#39;, &#39;C&#39;)
+(&#39;B&#39;, &#39;D&#39;)
+(&#39;C&#39;, &#39;A&#39;)
+(&#39;C&#39;, &#39;B&#39;)
+(&#39;C&#39;, &#39;D&#39;)
+(&#39;D&#39;, &#39;A&#39;)
+(&#39;D&#39;, &#39;B&#39;)
+(&#39;D&#39;, &#39;C&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;A&#39;, &#39;B&#39;)
+(&#39;A&#39;, &#39;C&#39;)
+(&#39;A&#39;, &#39;D&#39;)
+(&#39;B&#39;, &#39;C&#39;)
+(&#39;B&#39;, &#39;D&#39;)
+(&#39;C&#39;, &#39;D&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations_with_replacement</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">combinations_with_replacement</span><span class="p">(</span><span class="s1">&#39;ABCD&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;A&#39;, &#39;A&#39;)
+(&#39;A&#39;, &#39;B&#39;)
+(&#39;A&#39;, &#39;C&#39;)
+(&#39;A&#39;, &#39;D&#39;)
+(&#39;B&#39;, &#39;B&#39;)
+(&#39;B&#39;, &#39;C&#39;)
+(&#39;B&#39;, &#39;D&#39;)
+(&#39;C&#39;, &#39;C&#39;)
+(&#39;C&#39;, &#39;D&#39;)
+(&#39;D&#39;, &#39;D&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="stirling-s-approximation">
+<h2><span class="section-number">1.8. </span>Stirling’s approximation<a class="headerlink" href="#stirling-s-approximation" title="Permalink to this headline">¶</a></h2>
+<p>A crude approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span></p>
+<br>
+<div class="math notranslate nohighlight">
+\[\boxed{logN! \approx NlogN -N}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{N! \approx N^N e^{-N}}\]</div>
+<br>
+<p>A quick derivation
+$<span class="math notranslate nohighlight">\(logN! \approx \sum log N_i = \int log N dN \)</span>$</p>
+<div class="math notranslate nohighlight">
+\[logN! \approx NlogN-N \]</div>
+</div>
+<div class="section" id="applying-stirling-s-approx-to-binomial">
+<h2><span class="section-number">1.9. </span>Applying Stirling’s approx to Binomial<a class="headerlink" href="#applying-stirling-s-approx-to-binomial" title="Permalink to this headline">¶</a></h2>
+<br>
+<div class="math notranslate nohighlight">
+\[r+r' = N\]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[\frac{N!}{r! \cdot r'!} \approx \frac{N^N e^{-N}}{r^{r} e^{-r}\cdot r'^{r'} e^{-r'}} =\frac{N^N }{r^{r} \cdot r'^{r'} } \]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[log\frac{N!}{r! \cdot r'!} \approx NlogN -rlogr - r'log r'\]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[\boxed{log\frac{N!}{r! \cdot r'!} \approx  N \Big[ -x log x - x' log x' \Big]}\]</div>
+<p>The expression <span class="math notranslate nohighlight">\(S = \Big[ -x log x - x' log x' \Big]\)</span> is significant. We are going to associate it with entropy further down the road.</p>
+</div>
+<div class="section" id="gamma-function-generalizing-the-factorial">
+<h2><span class="section-number">1.10. </span>Gamma function: generalizing the factorial<a class="headerlink" href="#gamma-function-generalizing-the-factorial" title="Permalink to this headline">¶</a></h2>
+<br>
+<div class="math notranslate nohighlight">
+\[
+\Gamma (n) = \int x^{n-1} e^{-x}dx
+\]</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./01_stats"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../01_stats.html" title="previous page">B. Probability and randomness</a>
+    <a class='right-next' id="next-link" href="02_RandVar.html" title="next page"><span class="section-number">2. </span>Random variable, stochastic process and simulation.</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Davit Potoyan<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
