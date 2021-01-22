@@ -7,10 +7,10 @@ A. Python refresher
    2. [Plotting and programming in Python ](http://swcarpentry.github.io/python-novice-gapminder/)
    3. [Python programming for Scientists](http://wwwstaff.ari.uni-heidelberg.de/mitarbeiter/rschmidt/pycourse/index.html)
    
-### Resources for learning scientific computing (in python) 
+### Resources for learning scientific and numerical uses of python 
 
    1. [Python like you mean it](https://www.pythonlikeyoumeanit.com/)
-   2. [Intro to python for computational science and engineering](https://fangohr.github.io/introduction-to-python-for-computational-science-and-engineering/)
+   2. [G4G python tutorials](https://www.geeksforgeeks.org/python-programming-language/)
    3. [SciPy lectures](http://scipy-lectures.org/index.html)
 
 ### The official docs
