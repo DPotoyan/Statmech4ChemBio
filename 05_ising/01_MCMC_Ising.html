@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MCMC sampling of NVT ensemble. Ising models and Metropolis-Hastings algorithm &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>1. Ising models and Metropolis-Hastings algorithm &#8212; Statistical Mechanics for Chemistry and Biology</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -58,6 +58,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="F. Phase transitions and Ising models" href="../05_ising.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -94,7 +95,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../00_python.html">
    A. Python refresher
@@ -186,15 +187,33 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../04_entropy.html">
    E. Entropy and Information
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../04_entropy/01_InformationEnt.html">
+     1. What is Information?
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="../05_ising.html">
-   E. Phase transitions and Ising models
+   F. Phase transitions and Ising models
   </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1. Ising models and Metropolis-Hastings algorithm
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 
@@ -288,122 +307,115 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   MCMC sampling of NVT ensemble.  Ising models and Metropolis-Hastings algorithm
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-pi-via-direct-mc">
+   1.1. Estimate pi via direct MC
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#estimate-pi-via-direct-mc">
-     Estimate pi via direct MC
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#estimate-pi-via-mcmc">
-     Estimate
-     <span class="math notranslate nohighlight">
-      \(\pi\)
-     </span>
-     via MCMC
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-pi-via-mcmc">
+   1.2. Estimate
+   <span class="math notranslate nohighlight">
+    \(\pi\)
+   </span>
+   via MCMC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ising-models-the-h-atom-of-phase-transitions">
-   Ising models: The H atom of phase transitions
+   1.3. Ising models: The H atom of phase transitions
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">
-     Enforcing periodic boundary conditions
+     1.3.1. Enforcing periodic boundary conditions
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#computing-thermodynamic-quantities">
-     Computing Thermodynamic quantities
+     1.3.2. Computing Thermodynamic quantities
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#energy-e">
-       Energy
+       1.3.2.1. Energy
        <span class="math notranslate nohighlight">
         \(E\)
        </span>
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#magnetization">
-       Magnetization
+       1.3.2.2. Magnetization
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#heat-capacity-c-v">
-       Heat capacity
+       1.3.2.3. Heat capacity
        <span class="math notranslate nohighlight">
         \(C_v\)
        </span>
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#susceptibility-chi">
-       Susceptibility
+       1.3.2.4. Susceptibility
        <span class="math notranslate nohighlight">
         \(\chi\)
        </span>
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#correlation-function-c-i-j-and-correlation-length">
-       Correlation function
+       1.3.2.5. Correlation function
        <span class="math notranslate nohighlight">
         \(c(i,j)\)
        </span>
        and correlation length
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#parition-function-and-free-energy">
-       Parition function and Free energy
+       1.3.2.6. Parition function and Free energy
       </a>
      </li>
     </ul>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc">
-     Sampliing of Boltzmann distribution (NVT). MC vs MCMC
+     1.3.3. Sampliing of Boltzmann distribution (NVT). MC vs MCMC
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#master-equation-and-detailed-balance">
-     Master Equation and Detailed Balance
+     1.3.4. Master Equation and Detailed Balance
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#detailed-balance-equilibrium">
-     Detailed Balance = Equilibrium
+     1.3.5. Detailed Balance = Equilibrium
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">
-     How to pick the moves for Markov chain?
+     1.3.6. How to pick the moves for Markov chain?
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#metropolis-algorithm">
-   Metropolis algorithm
+   1.4. Metropolis algorithm
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#carry-out-explorative-simulations">
-     Carry out explorative simulations
+     1.4.1. Carry out explorative simulations
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#parameter-sweeps-run-mc-simulatons-of-2d-ising-model-at-different-ts">
-       Parameter sweeps: run MC simulatons  of 2D Ising model at different  Ts
+       1.4.1.1. Parameter sweeps: run MC simulatons  of 2D Ising model at different  Ts
       </a>
      </li>
     </ul>
@@ -421,16 +433,14 @@
         
               <div>
                 
-  <div class="section" id="mcmc-sampling-of-nvt-ensemble-ising-models-and-metropolis-hastings-algorithm">
-<h1>MCMC sampling of NVT ensemble.  Ising models and Metropolis-Hastings algorithm<a class="headerlink" href="#mcmc-sampling-of-nvt-ensemble-ising-models-and-metropolis-hastings-algorithm" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="ising-models-and-metropolis-hastings-algorithm">
+<h1><span class="section-number">1. </span>Ising models and Metropolis-Hastings algorithm<a class="headerlink" href="#ising-models-and-metropolis-hastings-algorithm" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
 
-<span class="c1"># Load scientific and plotting libraries </span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
 
@@ -440,7 +450,7 @@
 </div>
 </div>
 <div class="section" id="estimate-pi-via-direct-mc">
-<h2>Estimate pi via direct MC<a class="headerlink" href="#estimate-pi-via-direct-mc" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Estimate pi via direct MC<a class="headerlink" href="#estimate-pi-via-direct-mc" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">directMC_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -473,7 +483,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1588
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1424
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_Ising_4_1.png" src="../_images/01_MCMC_Ising_4_1.png" />
@@ -496,7 +506,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Mean: 3.1427, Var: 0.0520&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Mean: 3.1434, Var: 0.0524&#39;)
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_Ising_5_1.png" src="../_images/01_MCMC_Ising_5_1.png" />
@@ -504,7 +514,7 @@
 </div>
 </div>
 <div class="section" id="estimate-pi-via-mcmc">
-<h2>Estimate <span class="math notranslate nohighlight">\(\pi\)</span> via MCMC<a class="headerlink" href="#estimate-pi-via-mcmc" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Estimate <span class="math notranslate nohighlight">\(\pi\)</span> via MCMC<a class="headerlink" href="#estimate-pi-via-mcmc" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hastings_samples</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
@@ -558,7 +568,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.patches.PathPatch at 0x7fc532357390&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.patches.PathPatch at 0x7f04d6d86f50&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_Ising_8_1.png" src="../_images/01_MCMC_Ising_8_1.png" />
@@ -575,16 +585,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated Pi value is:  3.2967714884696018
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated Pi value is:  3.247226424609178
 </pre></div>
 </div>
 </div>
 </div>
 <p><mark><strong><span class="math notranslate nohighlight">\(\boxed{Exercsie!}\)</span>: Study dependence of variance on delta</strong> </mark></p>
 </div>
-</div>
 <div class="section" id="ising-models-the-h-atom-of-phase-transitions">
-<h1>Ising models: The H atom of phase transitions<a class="headerlink" href="#ising-models-the-h-atom-of-phase-transitions" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">1.3. </span>Ising models: The H atom of phase transitions<a class="headerlink" href="#ising-models-the-h-atom-of-phase-transitions" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[\boxed{H([s])= \sum_{\langle ij \rangle} J_{ij}s_i s_j - \mu B \sum_i s_i}\]</div>
 <br>
@@ -601,17 +610,17 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1  1 -1  1  1  1 -1 -1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1 -1 -1 -1 -1 -1 -1  1]
  [ 1 -1 -1  1  1 -1  1  1]
- [-1  1 -1 -1 -1 -1  1  1]
- [-1 -1  1 -1 -1  1 -1 -1]
- [-1  1 -1  1  1 -1 -1 -1]
- [-1  1  1 -1 -1 -1 -1  1]
- [ 1  1 -1 -1 -1 -1  1 -1]
- [ 1 -1 -1 -1  1 -1 -1  1]]
+ [-1 -1  1 -1 -1 -1 -1 -1]
+ [ 1  1  1  1  1 -1  1 -1]
+ [-1 -1  1 -1 -1  1 -1  1]
+ [-1 -1 -1 -1 -1  1 -1  1]
+ [ 1  1 -1 -1 -1  1  1 -1]
+ [ 1  1 -1  1  1 -1 -1  1]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fc53229d790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f04d6be5950&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_Ising_12_2.png" src="../_images/01_MCMC_Ising_12_2.png" />
@@ -624,14 +633,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1,  1, -1,  1,  1,  1, -1, -1],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1, -1, -1, -1, -1, -1, -1,  1],
        [ 1, -1, -1,  1,  1, -1,  1,  1],
-       [-1,  1, -1, -1, -1, -1,  1,  1],
-       [-1, -1,  1, -1, -1,  1, -1, -1],
-       [-1,  1, -1,  1,  1, -1, -1, -1],
-       [-1,  1,  1, -1, -1, -1, -1,  1],
-       [ 1,  1, -1, -1, -1, -1,  1, -1],
-       [ 1, -1, -1, -1,  1, -1, -1,  1]])
+       [-1, -1,  1, -1, -1, -1, -1, -1],
+       [ 1,  1,  1,  1,  1, -1,  1, -1],
+       [-1, -1,  1, -1, -1,  1, -1,  1],
+       [-1, -1, -1, -1, -1,  1, -1,  1],
+       [ 1,  1, -1, -1, -1,  1,  1, -1],
+       [ 1,  1, -1,  1,  1, -1, -1,  1]])
 </pre></div>
 </div>
 </div>
@@ -652,13 +661,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="enforcing-periodic-boundary-conditions">
-<h2>Enforcing periodic boundary conditions<a class="headerlink" href="#enforcing-periodic-boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.3.1. </span>Enforcing periodic boundary conditions<a class="headerlink" href="#enforcing-periodic-boundary-conditions" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><strong>Method-1: Creating roll over indes using modulo operator %</strong></p></li>
 </ul>
@@ -688,12 +697,12 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 -1
--1
 1
 -1
 -1
 -1
 1
+-1
 </pre></div>
 </div>
 </div>
@@ -714,7 +723,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-14
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-6
 </pre></div>
 </div>
 </div>
@@ -729,23 +738,23 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1, -1, -1, -1,  1, -1, -1,  1],
-       [-1,  1, -1,  1,  1,  1, -1, -1],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  1, -1,  1,  1, -1, -1,  1],
+       [ 1, -1, -1, -1, -1, -1, -1,  1],
        [ 1, -1, -1,  1,  1, -1,  1,  1],
-       [-1,  1, -1, -1, -1, -1,  1,  1],
-       [-1, -1,  1, -1, -1,  1, -1, -1],
-       [-1,  1, -1,  1,  1, -1, -1, -1],
-       [-1,  1,  1, -1, -1, -1, -1,  1],
-       [ 1,  1, -1, -1, -1, -1,  1, -1]])
+       [-1, -1,  1, -1, -1, -1, -1, -1],
+       [ 1,  1,  1,  1,  1, -1,  1, -1],
+       [-1, -1,  1, -1, -1,  1, -1,  1],
+       [-1, -1, -1, -1, -1,  1, -1,  1],
+       [ 1,  1, -1, -1, -1,  1,  1, -1]])
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 <div class="section" id="computing-thermodynamic-quantities">
-<h2>Computing Thermodynamic quantities<a class="headerlink" href="#computing-thermodynamic-quantities" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.3.2. </span>Computing Thermodynamic quantities<a class="headerlink" href="#computing-thermodynamic-quantities" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="energy-e">
-<h3>Energy <span class="math notranslate nohighlight">\(E\)</span><a class="headerlink" href="#energy-e" title="Permalink to this headline">¶</a></h3>
+<h4><span class="section-number">1.3.2.1. </span>Energy <span class="math notranslate nohighlight">\(E\)</span><a class="headerlink" href="#energy-e" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Energy of a configuration</strong></p></li>
 </ul>
@@ -754,7 +763,7 @@
 - **Ensemble average Energy**\\$$ \langle E \rangle \approx \frac{1}{n_{MC}} \sum^{i=n_{MC}}_{i=1} H[s_i] \end{aligned}\end{align} \]</div>
 </div>
 <div class="section" id="magnetization">
-<h3>Magnetization<a class="headerlink" href="#magnetization" title="Permalink to this headline">¶</a></h3>
+<h4><span class="section-number">1.3.2.2. </span>Magnetization<a class="headerlink" href="#magnetization" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p><strong>Total magnetization, <span class="math notranslate nohighlight">\(M\)</span></strong></p></li>
 </ul>
@@ -772,25 +781,25 @@
 \[\langle M \rangle  \approx \frac{1}{n_{MC}} \sum^{i=n_{MC}}_{i=1} M[s_i]\]</div>
 </div>
 <div class="section" id="heat-capacity-c-v">
-<h3>Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span><a class="headerlink" href="#heat-capacity-c-v" title="Permalink to this headline">¶</a></h3>
+<h4><span class="section-number">1.3.2.3. </span>Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span><a class="headerlink" href="#heat-capacity-c-v" title="Permalink to this headline">¶</a></h4>
 <p>Heat capacity is again the familiar expression established in our treatment of canonical ensemble.</p>
 <div class="math notranslate nohighlight">
 \[ C_V(T) = \Big (\frac{\partial E}{\partial T} \Big )_V= \frac{1}{k_B T^2} \big(\langle E^2 \rangle-\langle E \rangle^2 \big) \]</div>
 </div>
 <div class="section" id="susceptibility-chi">
-<h3>Susceptibility <span class="math notranslate nohighlight">\(\chi\)</span><a class="headerlink" href="#susceptibility-chi" title="Permalink to this headline">¶</a></h3>
+<h4><span class="section-number">1.3.2.4. </span>Susceptibility <span class="math notranslate nohighlight">\(\chi\)</span><a class="headerlink" href="#susceptibility-chi" title="Permalink to this headline">¶</a></h4>
 <p>Magnetic susceptibility quantifies response of the ssytem to the variation of magnetic field.</p>
 <div class="math notranslate nohighlight">
 \[\chi_T=\Big (\frac{\partial M}{\partial B} \Big )_T= \frac{1}{k_B T} \big(\langle M^2 \rangle-\langle M \rangle^2 \big) \]</div>
 </div>
 <div class="section" id="correlation-function-c-i-j-and-correlation-length">
-<h3>Correlation function <span class="math notranslate nohighlight">\(c(i,j)\)</span>  and correlation length<a class="headerlink" href="#correlation-function-c-i-j-and-correlation-length" title="Permalink to this headline">¶</a></h3>
+<h4><span class="section-number">1.3.2.5. </span>Correlation function <span class="math notranslate nohighlight">\(c(i,j)\)</span>  and correlation length<a class="headerlink" href="#correlation-function-c-i-j-and-correlation-length" title="Permalink to this headline">¶</a></h4>
 <p>At high temperatures, spins on an ising lattice point up and down randomly. While at low temperatures, all spins tend to align. To quantify the degree of alignment, we can define a quantity named correlation length <span class="math notranslate nohighlight">\(\xi\)</span>, which can be defined mathematically through correlation function <span class="math notranslate nohighlight">\(c(i,j)\)</span></p>
 <div class="math notranslate nohighlight">
 \[c(i,j)=\langle s_i-\langle s_i\rangle\rangle \langle s_j-\langle s_j\rangle\rangle\]</div>
 </div>
 <div class="section" id="parition-function-and-free-energy">
-<h3>Parition function and Free energy<a class="headerlink" href="#parition-function-and-free-energy" title="Permalink to this headline">¶</a></h3>
+<h4><span class="section-number">1.3.2.6. </span>Parition function and Free energy<a class="headerlink" href="#parition-function-and-free-energy" title="Permalink to this headline">¶</a></h4>
 <div class="math notranslate nohighlight">
 \[Z=\sum_{[s]}e^{-\beta H([s])}=\sum_{[s]}e^{-\beta \big ( \sum_{\langle ij \rangle} J_{ij}s_i s_j - \mu B M \big )}\]</div>
 <p><br><br></p>
@@ -862,7 +871,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.52 s ± 8.2 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.67 s ± 27.6 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -876,7 +885,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.7 ms ± 228 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19 ms ± 984 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
@@ -923,7 +932,7 @@
 </div>
 </div>
 <div class="section" id="sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc">
-<h2>Sampliing of Boltzmann distribution (NVT). MC vs MCMC<a class="headerlink" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.3.3. </span>Sampliing of Boltzmann distribution (NVT). MC vs MCMC<a class="headerlink" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc" title="Permalink to this headline">¶</a></h3>
 <p>How to compute the expectation value of an observable <span class="math notranslate nohighlight">\(A\)</span>. In theory everything is simple:</p>
 <div class="math notranslate nohighlight">
 \[P(E_i)=\frac{e^{-\beta E_i}}{Z} = \frac{e^{-\beta E_i}}{\sum_i e^{-\beta E_i}}\]</div>
@@ -952,7 +961,7 @@
 <p><strong>MCMC Simulation</strong> Generating random walks in configuration space of thte system states.</p>
 </div>
 <div class="section" id="master-equation-and-detailed-balance">
-<h2>Master Equation and Detailed Balance<a class="headerlink" href="#master-equation-and-detailed-balance" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.3.4. </span>Master Equation and Detailed Balance<a class="headerlink" href="#master-equation-and-detailed-balance" title="Permalink to this headline">¶</a></h3>
 <p><strong>Random process:</strong></p>
 <div class="math notranslate nohighlight">
 \[P(X_1, X_2, ... X_N) = P_1(X_1)\cdot P_2(X_2)... P_1(X_N)\]</div>
@@ -984,7 +993,7 @@
 </ul>
 </div>
 <div class="section" id="detailed-balance-equilibrium">
-<h2>Detailed Balance = Equilibrium<a class="headerlink" href="#detailed-balance-equilibrium" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.3.5. </span>Detailed Balance = Equilibrium<a class="headerlink" href="#detailed-balance-equilibrium" title="Permalink to this headline">¶</a></h3>
 <br>
 <div class="math notranslate nohighlight">
 \[\boxed{\frac{\partial P(X,t)}{\partial t}  = \sum_{X'} P(X', t) w_{X'X} - \sum_{X'} P(X, t) w_{X X'}}=0\]</div>
@@ -998,7 +1007,7 @@
 \[\frac{dP(x_2,t)}{dt} = p_2 w_{21} - p_1 w_{12}\]</div>
 </div>
 <div class="section" id="how-to-pick-the-moves-for-markov-chain">
-<h2>How to pick the moves for Markov chain?<a class="headerlink" href="#how-to-pick-the-moves-for-markov-chain" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.3.6. </span>How to pick the moves for Markov chain?<a class="headerlink" href="#how-to-pick-the-moves-for-markov-chain" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[[transition] = [move] \cdot [acceptance]\]</div>
 <div class="math notranslate nohighlight">
@@ -1018,7 +1027,7 @@
 </div>
 </div>
 <div class="section" id="metropolis-algorithm">
-<h1>Metropolis algorithm<a class="headerlink" href="#metropolis-algorithm" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">1.4. </span>Metropolis algorithm<a class="headerlink" href="#metropolis-algorithm" title="Permalink to this headline">¶</a></h2>
 <p><span class="math notranslate nohighlight">\({\bf i. Initialization.}\)</span> Generate some initiaal configuration for spins <span class="math notranslate nohighlight">\([s_0]=(s_1,...s_N)\)</span>. For instnace Choosing random orientation for each spins <span class="math notranslate nohighlight">\((+1, -1)\)</span> or giving them  the same orientation.</p>
 <p><span class="math notranslate nohighlight">\({\bf ii. Attempt\,\, spin\,\, flip.\,\,}\)</span> Pick a spin at random and flip it. E.g multiply by -1 so that +1 state becomes -1 and vice versa. this generated a new configuration <span class="math notranslate nohighlight">\([s_1]\)</span></p>
 <p><span class="math notranslate nohighlight">\({\bf iii. Acceptance/Rejection}\)</span> Evaluate energy differene between old configuration <span class="math notranslate nohighlight">\([s_{0}]\)</span> and new one <span class="math notranslate nohighlight">\([s_{1}]\)</span> with flipped spin which has created in previous step. The <span class="math notranslate nohighlight">\(\Delta E=E_{1}-E_{0}\)</span> is used for deciding weather the move is accepted or rejected in a way that is consistent with Boltzman distribution:</p>
@@ -1134,7 +1143,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2 µs, sys: 1e+03 ns, total: 3 µs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3 µs, sys: 1e+03 ns, total: 4 µs
 Wall time: 6.44 µs
 </pre></div>
 </div>
@@ -1151,7 +1160,7 @@ Wall time: 6.44 µs
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "5d5c1811c6194f28bcd958149ac52048"}
+{"version_major": 2, "version_minor": 0, "model_id": "78a8f667afd441199481bf0a709486f0"}
 </script></div>
 </div>
 <div class="cell docutils container">
@@ -1196,21 +1205,21 @@ Wall time: 6.44 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc52bf47f90&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f04d6cd3a10&gt;]
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_Ising_56_1.png" src="../_images/01_MCMC_Ising_56_1.png" />
 </div>
 </div>
 <div class="section" id="carry-out-explorative-simulations">
-<h2>Carry out explorative simulations<a class="headerlink" href="#carry-out-explorative-simulations" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.4.1. </span>Carry out explorative simulations<a class="headerlink" href="#carry-out-explorative-simulations" title="Permalink to this headline">¶</a></h3>
 <p><span class="math notranslate nohighlight">\(\bf{i.}\)</span> Test the dependence of observables on system size.</p>
 <p><span class="math notranslate nohighlight">\(\bf{ii.}\)</span> Test the dependence of observables on initital conditions.</p>
 <p><span class="math notranslate nohighlight">\(\bf{iii.}\)</span> Vary intensive parameters, e.g temperature and field strength. Investigate changes in observables such as magnetization, energy, susceptibility, heat capacity.</p>
 <p><span class="math notranslate nohighlight">\(\bf{iv.}\)</span> How do we know if simulation has done enough sampling? How do we assess covnergence and errors?</p>
 <p><span class="math notranslate nohighlight">\(\bf{v.}\)</span> Think about alternative ways of accelerating and enhancing the sampling.</p>
 <div class="section" id="parameter-sweeps-run-mc-simulatons-of-2d-ising-model-at-different-ts">
-<h3>Parameter sweeps: run MC simulatons  of 2D Ising model at different  Ts<a class="headerlink" href="#parameter-sweeps-run-mc-simulatons-of-2d-ising-model-at-different-ts" title="Permalink to this headline">¶</a></h3>
+<h4><span class="section-number">1.4.1.1. </span>Parameter sweeps: run MC simulatons  of 2D Ising model at different  Ts<a class="headerlink" href="#parameter-sweeps-run-mc-simulatons-of-2d-ising-model-at-different-ts" title="Permalink to this headline">¶</a></h4>
 <p>For more rigirous analysis we can either optimize the code (using cython or numba) or run on HPCs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1325,6 +1334,7 @@ Wall time: 6.44 µs
 </div>
 </div>
 </div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1354,6 +1364,7 @@ Wall time: 6.44 µs
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="../05_ising.html" title="previous page">F. Phase transitions and Ising models</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

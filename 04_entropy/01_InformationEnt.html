@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is Information? &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>1. What is Information? &#8212; Statistical Mechanics for Chemistry and Biology</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -58,6 +58,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="F. Phase transitions and Ising models" href="../05_ising.html" />
+    <link rel="prev" title="E. Entropy and Information" href="../04_entropy.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -94,7 +96,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../00_python.html">
    A. Python refresher
@@ -186,15 +188,33 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="../04_entropy.html">
    E. Entropy and Information
   </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1. What is Information?
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../05_ising.html">
-   E. Phase transitions and Ising models
+   F. Phase transitions and Ising models
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../05_ising/01_MCMC_Ising.html">
+     1. Ising models and Metropolis-Hastings algorithm
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
 </ul>
 
@@ -288,148 +308,141 @@
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   What is Information?
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-candidate-function-for-information">
+   1.1. A candidate function for information!
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-candidate-function-for-information">
-     A candidate function for information!
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#why-bit-base-two">
-     Why bit (base two)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-many-yes-or-no-on-average-to-reconstruct-random-walk">
-     How many yes or no on average to reconstruct random walk?
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#back-to-the-roots-of-infromation-theory-decoding-secret-messages">
-     Back to the roots of Infromation theory: decoding (secret) messages
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#alphabets-are-not-random-hghjxcjxcc">
-     Alphabets are not random! hghjxcjxcc
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#shanon-measure-of-information">
-     Shanon Measure of Information
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#information-per-letter-of-english">
-     Information per Letter of English
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#game-of-message-decoding">
-     Game of message decoding:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#quantifying-the-knowledge-through-shannon-measure-of-information">
-     Quantifying the knowledge ( through Shannon measure of information)
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#two-kittens">
-     Two kittens
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#monty-hall-problem">
-     Monty Hall problem
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#non-integer-number-of-yes-no-questions">
-     Non integer number of YES/NO questions??
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-bit-base-two">
+   1.2. Why bit (base two)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-many-yes-or-no-on-average-to-reconstruct-random-walk">
+   1.3. How many yes or no on average to reconstruct random walk?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#back-to-the-roots-of-infromation-theory-decoding-secret-messages">
+   1.4. Back to the roots of Infromation theory: decoding (secret) messages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alphabets-are-not-random-hghjxcjxcc">
+   1.5. Alphabets are not random! hghjxcjxcc
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shanon-measure-of-information">
+   1.6. Shanon Measure of Information
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#information-per-letter-of-english">
+   1.7. Information per Letter of English
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#game-of-message-decoding">
+   1.8. Game of message decoding:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quantifying-the-knowledge-through-shannon-measure-of-information">
+   1.9. Quantifying the knowledge ( through Shannon measure of information)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-kittens">
+   1.10. Two kittens
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monty-hall-problem">
+   1.11. Monty Hall problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-integer-number-of-yes-no-questions">
+   1.12. Non integer number of YES/NO questions??
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-entropy">
-   What is Entropy?
+   1.13. What is Entropy?
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#back-to-statistical-mechanics-and-thermodynamics">
-   Back to statistical mechanics and thermodynamics
+   1.14. Back to statistical mechanics and thermodynamics
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#thermodynamic-unit-of-information">
-     Thermodynamic unit of information
+     1.14.1. Thermodynamic unit of information
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#is-information-physical">
-     Is information physical?
+     1.14.2. Is information physical?
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#relation-between-heat-and-information-entropy">
-     Relation between Heat and information (Entropy)
+     1.14.3. Relation between Heat and information (Entropy)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#jayne-s-maxent-maximum-entropy-principle">
-     Jayne’s MaxEnt (Maximum Entropy principle)
+     1.14.4. Jayne’s MaxEnt (Maximum Entropy principle)
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#large-deviation-theory-and-sanov-s-theorem">
-     Large deviation Theory and Sanov’s theorem
+     1.14.5. Large deviation Theory and Sanov’s theorem
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#increasing-entropy-surprising-or-not">
-     Increasing Entropy: surprising or not?
+     1.14.6. Increasing Entropy: surprising or not?
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-maxwell-s-demon">
-   What is Maxwell’s demon?
+   1.15. What is Maxwell’s demon?
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#playing-maxwell-s-demon-s-advocate">
-   Playing Maxwell’s demon’s advocate
+   1.16. Playing Maxwell’s demon’s advocate
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#information-erasure-and-landauer-s-principle">
-   Information erasure and Landauer’s principle
+   1.17. Information erasure and Landauer’s principle
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#szilard-s-engine">
-     Szilard’s Engine
+     1.17.1. Szilard’s Engine
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#conditional-entropy">
-     Conditional Entropy
+     1.17.2. Conditional Entropy
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#mutual-infromation">
-     Mutual Infromation
+     1.17.3. Mutual Infromation
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#additional-references">
-       Additional References
+       1.17.3.1. Additional References
       </a>
      </li>
     </ul>
@@ -447,10 +460,11 @@
         
               <div>
                 
-  <div class="cell docutils container">
+  <div class="section" id="what-is-information">
+<h1><span class="section-number">1. </span>What is Information?<a class="headerlink" href="#what-is-information" title="Permalink to this headline">¶</a></h1>
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Entropy_flip_2_coins.jpg" alt="Information" style="width:50%"><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
 
 <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">widgets</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -461,10 +475,7 @@
 </div>
 </div>
 </div>
-<div class="section" id="what-is-information">
-<h1>What is Information?<a class="headerlink" href="#what-is-information" title="Permalink to this headline">¶</a></h1>
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Entropy_flip_2_coins.jpg" alt="Information" style="width:50%"><h1>Table of Contents<span class="tocSkip"></span></h1>
-<div class="toc"><ul class="toc-item"><li><span><a href="#What-is-Information?" data-toc-modified-id="What-is-Information?-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>What is Information?</a></span><ul class="toc-item"><li><span><a href="#A-candidate-function-for-information!" data-toc-modified-id="A-candidate-function-for-information!-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>A candidate function for information!</a></span></li><li><span><a href="#Why-bit-(base-two)" data-toc-modified-id="Why-bit-(base-two)-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>Why bit (base two)</a></span></li><li><span><a href="#How-many-yes-or-no-on-average-to-reconstruct-random-walk?" data-toc-modified-id="How-many-yes-or-no-on-average-to-reconstruct-random-walk?-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>How many yes or no on average to reconstruct random walk?</a></span></li><li><span><a href="#Back-to-the-roots-of-Infromation-theory:-decoding-(secret)-messages" data-toc-modified-id="Back-to-the-roots-of-Infromation-theory:-decoding-(secret)-messages-1.4"><span class="toc-item-num">1.4&nbsp;&nbsp;</span>Back to the roots of Infromation theory: decoding (secret) messages</a></span></li><li><span><a href="#Alphabets-are-not-random!-hghjxcjxcc" data-toc-modified-id="Alphabets-are-not-random!-hghjxcjxcc-1.5"><span class="toc-item-num">1.5&nbsp;&nbsp;</span>Alphabets are not random! hghjxcjxcc</a></span></li><li><span><a href="#Shanon-Measure-of-Information" data-toc-modified-id="Shanon-Measure-of-Information-1.6"><span class="toc-item-num">1.6&nbsp;&nbsp;</span>Shanon Measure of Information</a></span></li><li><span><a href="#Information-per-Letter-of-English" data-toc-modified-id="Information-per-Letter-of-English-1.7"><span class="toc-item-num">1.7&nbsp;&nbsp;</span>Information per Letter of English</a></span></li><li><span><a href="#Game-of-message-decoding:" data-toc-modified-id="Game-of-message-decoding:-1.8"><span class="toc-item-num">1.8&nbsp;&nbsp;</span>Game of message decoding:</a></span></li><li><span><a href="#Quantifying-the-knowledge-(-through-Shannon-measure-of-information)" data-toc-modified-id="Quantifying-the-knowledge-(-through-Shannon-measure-of-information)-1.9"><span class="toc-item-num">1.9&nbsp;&nbsp;</span>Quantifying the knowledge ( through Shannon measure of information)</a></span></li><li><span><a href="#Two-kittens" data-toc-modified-id="Two-kittens-1.10"><span class="toc-item-num">1.10&nbsp;&nbsp;</span>Two kittens</a></span></li><li><span><a href="#Monty-Hall-problem" data-toc-modified-id="Monty-Hall-problem-1.11"><span class="toc-item-num">1.11&nbsp;&nbsp;</span>Monty Hall problem</a></span></li><li><span><a href="#Non-integer-number-of-YES/NO-questions??" data-toc-modified-id="Non-integer-number-of-YES/NO-questions??-1.12"><span class="toc-item-num">1.12&nbsp;&nbsp;</span>Non integer number of YES/NO questions??</a></span></li></ul></li><li><span><a href="#What-is-Entropy?" data-toc-modified-id="What-is-Entropy?-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>What is Entropy?</a></span></li><li><span><a href="#Back-to-statistical-mechanics-and-thermodynamics" data-toc-modified-id="Back-to-statistical-mechanics-and-thermodynamics-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Back to statistical mechanics and thermodynamics</a></span><ul class="toc-item"><li><span><a href="#Thermodynamic-unit-of-information" data-toc-modified-id="Thermodynamic-unit-of-information-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>Thermodynamic unit of information</a></span></li><li><span><a href="#Is-information-physical?" data-toc-modified-id="Is-information-physical?-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>Is information physical?</a></span></li><li><span><a href="#Relation-between-Heat-and-information-(Entropy)" data-toc-modified-id="Relation-between-Heat-and-information-(Entropy)-3.3"><span class="toc-item-num">3.3&nbsp;&nbsp;</span>Relation between Heat and information (Entropy)</a></span></li><li><span><a href="#Jayne's-MaxEnt-(Maximum-Entropy-principle)" data-toc-modified-id="Jayne's-MaxEnt-(Maximum-Entropy-principle)-3.4"><span class="toc-item-num">3.4&nbsp;&nbsp;</span>Jayne's MaxEnt (Maximum Entropy principle)</a></span></li><li><span><a href="#Large-deviation-Theory-and-Sanov's-theorem" data-toc-modified-id="Large-deviation-Theory-and-Sanov's-theorem-3.5"><span class="toc-item-num">3.5&nbsp;&nbsp;</span>Large deviation Theory and Sanov's theorem</a></span></li><li><span><a href="#Increasing-Entropy:-surprising-or-not?" data-toc-modified-id="Increasing-Entropy:-surprising-or-not?-3.6"><span class="toc-item-num">3.6&nbsp;&nbsp;</span>Increasing Entropy: surprising or not?</a></span></li></ul></li><li><span><a href="#What-is-Maxwell's-demon?" data-toc-modified-id="What-is-Maxwell's-demon?-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>What is Maxwell's demon?</a></span></li><li><span><a href="#Playing-Maxwell's-demon's-advocate" data-toc-modified-id="Playing-Maxwell's-demon's-advocate-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>Playing Maxwell's demon's advocate</a></span></li><li><span><a href="#Information-erasure-and-Landauer's-principle" data-toc-modified-id="Information-erasure-and-Landauer's-principle-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>Information erasure and Landauer's principle</a></span><ul class="toc-item"><li><span><a href="#Szilard's-Engine" data-toc-modified-id="Szilard's-Engine-6.1"><span class="toc-item-num">6.1&nbsp;&nbsp;</span>Szilard's Engine</a></span></li><li><span><a href="#Conditional-Entropy" data-toc-modified-id="Conditional-Entropy-6.2"><span class="toc-item-num">6.2&nbsp;&nbsp;</span>Conditional Entropy</a></span></li><li><span><a href="#Mutual-Infromation" data-toc-modified-id="Mutual-Infromation-6.3"><span class="toc-item-num">6.3&nbsp;&nbsp;</span>Mutual Infromation</a></span><ul class="toc-item"><li><span><a href="#Additional-References" data-toc-modified-id="Additional-References-6.3.1"><span class="toc-item-num">6.3.1&nbsp;&nbsp;</span>Additional References</a></span></li></ul></li></ul></li></ul></div><p><strong>Which of these two statements conveys the most information?</strong></p>
+<p><strong>Which of these two statements conveys the most information?</strong></p>
 <ul class="simple">
 <li><p>I will eat some food tomorrow.</p></li>
 <li><p>I will see a giraffe walking by my apartment.</p></li>
@@ -501,7 +512,7 @@
 </ol>
 </div></blockquote>
 <div class="section" id="a-candidate-function-for-information">
-<h2>A candidate function for information!<a class="headerlink" href="#a-candidate-function-for-information" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>A candidate function for information!<a class="headerlink" href="#a-candidate-function-for-information" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[I(E) = - C' log_D p(E)\]</div>
 <div class="math notranslate nohighlight">
@@ -511,7 +522,7 @@
 </div></blockquote>
 </div>
 <div class="section" id="why-bit-base-two">
-<h2>Why bit (base two)<a class="headerlink" href="#why-bit-base-two" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2. </span>Why bit (base two)<a class="headerlink" href="#why-bit-base-two" title="Permalink to this headline">¶</a></h2>
 <p>Consider symmetric Bernouli process, e.g 1D random walk with equal jump probabilities:</p>
 <div class="math notranslate nohighlight">
 \[I(X=0) = I(X=1) = -log_2 \frac{1}{2} = 1\]</div>
@@ -544,7 +555,7 @@
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;p&#39;)
 </pre></div>
 </div>
-<img alt="../_images/01_InformationEnt_11_2.png" src="../_images/01_InformationEnt_11_2.png" />
+<img alt="../_images/01_InformationEnt_10_2.png" src="../_images/01_InformationEnt_10_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -561,10 +572,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9196e0fe10&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f3c94daa650&gt;]
 </pre></div>
 </div>
-<img alt="../_images/01_InformationEnt_12_1.png" src="../_images/01_InformationEnt_12_1.png" />
+<img alt="../_images/01_InformationEnt_11_1.png" src="../_images/01_InformationEnt_11_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -592,7 +603,7 @@
 </div>
 </div>
 <div class="section" id="how-many-yes-or-no-on-average-to-reconstruct-random-walk">
-<h2>How many yes or no on average to reconstruct random walk?<a class="headerlink" href="#how-many-yes-or-no-on-average-to-reconstruct-random-walk" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.3. </span>How many yes or no on average to reconstruct random walk?<a class="headerlink" href="#how-many-yes-or-no-on-average-to-reconstruct-random-walk" title="Permalink to this headline">¶</a></h2>
 <p><strong>Answer</strong>
 <br>
 $<span class="math notranslate nohighlight">\(H(X) = \langle -log p(X) \rangle\)</span>$</p>
@@ -606,7 +617,7 @@ $<span class="math notranslate nohighlight">\(H = -\sum_i p_i log p_i\)</span>$<
 </div></blockquote>
 </div>
 <div class="section" id="back-to-the-roots-of-infromation-theory-decoding-secret-messages">
-<h2>Back to the roots of Infromation theory: decoding (secret) messages<a class="headerlink" href="#back-to-the-roots-of-infromation-theory-decoding-secret-messages" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.4. </span>Back to the roots of Infromation theory: decoding (secret) messages<a class="headerlink" href="#back-to-the-roots-of-infromation-theory-decoding-secret-messages" title="Permalink to this headline">¶</a></h2>
 <p>Information per letter <span class="math notranslate nohighlight">\(I(m)\)</span> to decode the message</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(m:\)</span> Letters in the alphabet (Russian: 33,Enlgish: 26,  Korean: 24)</p></li>
@@ -618,7 +629,7 @@ $<span class="math notranslate nohighlight">\(H = -\sum_i p_i log p_i\)</span>$<
 </div></blockquote>
 </div>
 <div class="section" id="alphabets-are-not-random-hghjxcjxcc">
-<h2>Alphabets are not random! hghjxcjxcc<a class="headerlink" href="#alphabets-are-not-random-hghjxcjxcc" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.5. </span>Alphabets are not random! hghjxcjxcc<a class="headerlink" href="#alphabets-are-not-random-hghjxcjxcc" title="Permalink to this headline">¶</a></h2>
 <p>Some letters happen more often than the others! Probability of each letter in an independent sequence is <span class="math notranslate nohighlight">\(p_m = \frac{1}{m}\)</span></p>
 <div class="math notranslate nohighlight">
 \[\boxed{H(p) = - \sum_m p_m log_m p_m}\]</div>
@@ -627,7 +638,7 @@ $<span class="math notranslate nohighlight">\(H = -\sum_i p_i log p_i\)</span>$<
 </div></blockquote>
 </div>
 <div class="section" id="shanon-measure-of-information">
-<h2>Shanon Measure of Information<a class="headerlink" href="#shanon-measure-of-information" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.6. </span>Shanon Measure of Information<a class="headerlink" href="#shanon-measure-of-information" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[\boxed{H = -\sum_i p_i log p_i}\]</div>
 <blockquote>
@@ -637,13 +648,13 @@ In the second place, and more importantly, no one knows what entropy really is, 
 </div></blockquote>
 </div>
 <div class="section" id="information-per-letter-of-english">
-<h2>Information per Letter of English<a class="headerlink" href="#information-per-letter-of-english" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.7. </span>Information per Letter of English<a class="headerlink" href="#information-per-letter-of-english" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><p>If the symbols of English alphabet (+ blank) appear equally probably, what is the information carried by a single symbol? This must be <span class="math notranslate nohighlight">\(log_2(26 + 1) = 4.755\)</span> bits, but for actual English sentences, it is known to be about <strong><span class="math notranslate nohighlight">\(1.3\)</span> bits. Why?</strong></p>
 </div></blockquote>
 </div>
 <div class="section" id="game-of-message-decoding">
-<h2>Game of message decoding:<a class="headerlink" href="#game-of-message-decoding" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.8. </span>Game of message decoding:<a class="headerlink" href="#game-of-message-decoding" title="Permalink to this headline">¶</a></h2>
 <p>Given some 70 letters decode a 250 letter paragraph!</p>
 <div class="math notranslate nohighlight">
 \[\frac{70}{250}log_2 27 = 1.3\]</div>
@@ -652,7 +663,7 @@ In the second place, and more importantly, no one knows what entropy really is, 
 </div></blockquote>
 </div>
 <div class="section" id="quantifying-the-knowledge-through-shannon-measure-of-information">
-<h2>Quantifying the knowledge ( through Shannon measure of information)<a class="headerlink" href="#quantifying-the-knowledge-through-shannon-measure-of-information" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.9. </span>Quantifying the knowledge ( through Shannon measure of information)<a class="headerlink" href="#quantifying-the-knowledge-through-shannon-measure-of-information" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>How much knowledge we need to find out outcome of fair dice?</p></li>
 <li><p>We are told die shows a digit higher than 2 (3, 4,5 or6). How much knowledge does this information carry?</p></li>
@@ -663,7 +674,7 @@ In the second place, and more importantly, no one knows what entropy really is, 
 </ul>
 </div>
 <div class="section" id="two-kittens">
-<h2>Two kittens<a class="headerlink" href="#two-kittens" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.10. </span>Two kittens<a class="headerlink" href="#two-kittens" title="Permalink to this headline">¶</a></h2>
 <p>There are two kittens. We are told that at least one of them is a male. What is the information we get from this message?</p>
 <div class="math notranslate nohighlight">
 \[E_1 = \{mm,mf,fm, ff \} \]</div>
@@ -673,7 +684,7 @@ In the second place, and more importantly, no one knows what entropy really is, 
 \[H(E_1) -H(E_2) = log_2 4 -log_2 3 = 0.41\]</div>
 </div>
 <div class="section" id="monty-hall-problem">
-<h2>Monty Hall problem<a class="headerlink" href="#monty-hall-problem" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.11. </span>Monty Hall problem<a class="headerlink" href="#monty-hall-problem" title="Permalink to this headline">¶</a></h2>
 <p>There are five boxes, of which one contains a prize. A game participant is asked to choose one box. After they choose one of the five boxes, the “coordinator” of the game identifies as empty three of the four unchosen boxes. What is the information of this message?</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(H(E_1) = log_2 5 = 2.322\)</span></p></li>
@@ -682,15 +693,14 @@ In the second place, and more importantly, no one knows what entropy really is, 
 </ul>
 </div>
 <div class="section" id="non-integer-number-of-yes-no-questions">
-<h2>Non integer number of YES/NO questions??<a class="headerlink" href="#non-integer-number-of-yes-no-questions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.12. </span>Non integer number of YES/NO questions??<a class="headerlink" href="#non-integer-number-of-yes-no-questions" title="Permalink to this headline">¶</a></h2>
 <p>We have encountered a fraction of bit of information several times now. What does it imply in terms of number of YES/NO questions. That is becasue in some cases single YES/NO question can rule out more than one elementary event.</p>
 <blockquote>
 <div><p>999 blue balls and 1 red ball. how many questions we need to ask to determin the colors of all balls? <span class="math notranslate nohighlight">\(S = 9.97\)</span> bit or 0.01 bit per ball. Divide the container by 500 and 500 and ask where the red ball is? 1 questions rules out 500 balls at once.</p>
 </div></blockquote>
 </div>
-</div>
 <div class="section" id="what-is-entropy">
-<h1>What is Entropy?<a class="headerlink" href="#what-is-entropy" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">1.13. </span>What is Entropy?<a class="headerlink" href="#what-is-entropy" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><strong>Clausius (1865)</strong> $<span class="math notranslate nohighlight">\(\boxed{dS = \frac{\delta Q}{T}}\)</span>$</p></li>
 </ul>
@@ -717,7 +727,7 @@ In the second place, and more importantly, no one knows what entropy really is, 
 </div></blockquote>
 </div>
 <div class="section" id="back-to-statistical-mechanics-and-thermodynamics">
-<h1>Back to statistical mechanics and thermodynamics<a class="headerlink" href="#back-to-statistical-mechanics-and-thermodynamics" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">1.14. </span>Back to statistical mechanics and thermodynamics<a class="headerlink" href="#back-to-statistical-mechanics-and-thermodynamics" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[S = -k_B \sum_i p_i log p_i\]</div>
 <ul class="simple">
@@ -729,7 +739,7 @@ In the second place, and more importantly, no one knows what entropy really is, 
 <div><p>How many YES/NO questions do we need to ask to pinpoint single microsate among the ensemble of microstates of a macrostate.</p>
 </div></blockquote>
 <div class="section" id="thermodynamic-unit-of-information">
-<h2>Thermodynamic unit of information<a class="headerlink" href="#thermodynamic-unit-of-information" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.14.1. </span>Thermodynamic unit of information<a class="headerlink" href="#thermodynamic-unit-of-information" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[k_B log_e W \rightarrow C log_2 W \]</div>
 <p><strong>C = 1 bit/molecule = 9.57 × 10^{-24} J/(K·molecule))</strong></p>
@@ -738,14 +748,14 @@ In the second place, and more importantly, no one knows what entropy really is, 
 </div></blockquote>
 </div>
 <div class="section" id="is-information-physical">
-<h2>Is information physical?<a class="headerlink" href="#is-information-physical" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.14.2. </span>Is information physical?<a class="headerlink" href="#is-information-physical" title="Permalink to this headline">¶</a></h3>
 <p><strong>Wheeler’s It from bit.</strong></p>
 <blockquote>
 <div><p>Every it — every particle, every field of force, even the space-time continuum itself — derives its function, its meaning, its very existence entirely — even if in some contexts indirectly — from the apparatus-elicited answers to yes-or-no questions, binary choices, bits. It from bit symbolizes the idea that every item of the physical world has at bottom — a very deep bottom, in most instances — an immaterial source and explanation; that which we call reality arises in the last analysis from the posing of yes-no questions and the registering of equipment-evoked responses; in short, that <strong>all things physical are information-theoretic in origin</strong>” John Weeler</p>
 </div></blockquote>
 </div>
 <div class="section" id="relation-between-heat-and-information-entropy">
-<h2>Relation between Heat and information (Entropy)<a class="headerlink" href="#relation-between-heat-and-information-entropy" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.14.3. </span>Relation between Heat and information (Entropy)<a class="headerlink" href="#relation-between-heat-and-information-entropy" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[U(p(x), E(x)) = \langle E(x) \rangle = \int p(x) E(x) dx\]</div>
 <div class="math notranslate nohighlight">
@@ -767,7 +777,7 @@ $<span class="math notranslate nohighlight">\(dS = - \int log p(x) \delta x dp\)
 \[dS = - \int \beta(-E(x) + F) \delta x dp =  \int \beta E(x) \delta x dp = \beta \delta Q\]</div>
 </div>
 <div class="section" id="jayne-s-maxent-maximum-entropy-principle">
-<h2>Jayne’s MaxEnt (Maximum Entropy principle)<a class="headerlink" href="#jayne-s-maxent-maximum-entropy-principle" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.14.4. </span>Jayne’s MaxEnt (Maximum Entropy principle)<a class="headerlink" href="#jayne-s-maxent-maximum-entropy-principle" title="Permalink to this headline">¶</a></h3>
 <p>Probability is an expression of incomplete information. Given that we have some
 information, how should we construct a probability distribution that reflects that
 knowledge, but is otherwise unbiased? The best general procedure, known as Jaynes
@@ -802,7 +812,7 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 \[p_i \sim e^{-B x_i}\]</div>
 </div>
 <div class="section" id="large-deviation-theory-and-sanov-s-theorem">
-<h2>Large deviation Theory and Sanov’s theorem<a class="headerlink" href="#large-deviation-theory-and-sanov-s-theorem" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.14.5. </span>Large deviation Theory and Sanov’s theorem<a class="headerlink" href="#large-deviation-theory-and-sanov-s-theorem" title="Permalink to this headline">¶</a></h3>
 <p>Consider a symmetric random walk again with <span class="math notranslate nohighlight">\(p=1/2\)</span></p>
 <div class="math notranslate nohighlight">
 \[W_N (n) = \frac{N!}{(N-n)! n!} \Big(\frac{1}{2} \Big)^N\]</div>
@@ -836,7 +846,7 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 </div></blockquote>
 </div>
 <div class="section" id="increasing-entropy-surprising-or-not">
-<h2>Increasing Entropy: surprising or not?<a class="headerlink" href="#increasing-entropy-surprising-or-not" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.14.6. </span>Increasing Entropy: surprising or not?<a class="headerlink" href="#increasing-entropy-surprising-or-not" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Entropy of an isolated system increases <span class="math notranslate nohighlight">\(S_{high}-S_{low}\geq 0\)</span> for a simple, almost tautological reason that a majority of states of a system are consistent with higher entropy values <span class="math notranslate nohighlight">\(S_{high}\)</span>.</p></li>
 </ul>
@@ -854,11 +864,11 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 </div>
 </div>
 <div class="section" id="what-is-maxwell-s-demon">
-<h1>What is Maxwell’s demon?<a class="headerlink" href="#what-is-maxwell-s-demon" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">1.15. </span>What is Maxwell’s demon?<a class="headerlink" href="#what-is-maxwell-s-demon" title="Permalink to this headline">¶</a></h2>
 <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Maxwell%27s_demon.svg" alt="MaxDemon" style="width:80%">
 </div>
 <div class="section" id="playing-maxwell-s-demon-s-advocate">
-<h1>Playing Maxwell’s demon’s advocate<a class="headerlink" href="#playing-maxwell-s-demon-s-advocate" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">1.16. </span>Playing Maxwell’s demon’s advocate<a class="headerlink" href="#playing-maxwell-s-demon-s-advocate" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> ./code/maxwells_demon.py
@@ -904,7 +914,7 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 </div></blockquote>
 <img src="./figs/LandauerExperiment.png" alt="landauer1" style="width:40%"> </div>
 <div class="section" id="information-erasure-and-landauer-s-principle">
-<h1>Information erasure and Landauer’s principle<a class="headerlink" href="#information-erasure-and-landauer-s-principle" title="Permalink to this headline">¶</a></h1>
+<h2><span class="section-number">1.17. </span>Information erasure and Landauer’s principle<a class="headerlink" href="#information-erasure-and-landauer-s-principle" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><p>When a physical system performs a logical operation that erases or loses information, without a copy being preserved, it must transfer a minimum amount of heat, <span class="math notranslate nohighlight">\(k_BT log(2)\)</span>, to the environment.</p>
 </div></blockquote>
@@ -912,7 +922,7 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 <div><p>Put another way: if an observer loses information about a physical system, the observer loses the ability to extract work from that system. There is a minimal price to be payed for erasing one bit it is <span class="math notranslate nohighlight">\(k_BT log(2)\)</span> (Landauer’s bound)</p>
 </div></blockquote>
 <img src="./figs/LandauerExperiment2.jpg" alt="landauer1" style="width:40%">  <div class="section" id="szilard-s-engine">
-<h2>Szilard’s Engine<a class="headerlink" href="#szilard-s-engine" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.17.1. </span>Szilard’s Engine<a class="headerlink" href="#szilard-s-engine" title="Permalink to this headline">¶</a></h3>
 <p>Recording inforation we can extract work from the environment: <span class="math notranslate nohighlight">\(W = k_B log 2\)</span> and <span class="math notranslate nohighlight">\(Q = k_B log 2\)</span></p>
 <ul class="simple">
 <li><p><strong>No ghost principle:</strong> information must be carried by something. Information is physical!</p></li>
@@ -928,7 +938,7 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 \[\Delta F \geq W + k_B T I \]</div>
 </div>
 <div class="section" id="conditional-entropy">
-<h2>Conditional Entropy<a class="headerlink" href="#conditional-entropy" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.17.2. </span>Conditional Entropy<a class="headerlink" href="#conditional-entropy" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>System + Aparatus: S, A. After a measurment we have the following ucnertainty about system+apparatus states:</p></li>
 </ul>
@@ -942,11 +952,11 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 \[H(S | A) = H(S) - H(S,A) =  -\sum_{s_i} p(s_i, a_j)log \frac{p(s_i, a_j)}{p_A(a_j)}\]</div>
 </div>
 <div class="section" id="mutual-infromation">
-<h2>Mutual Infromation<a class="headerlink" href="#mutual-infromation" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.17.3. </span>Mutual Infromation<a class="headerlink" href="#mutual-infromation" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[I(S,A) = H(S) - H(S | A) = H(S) +H(A) - H(S A) = \sum_{s_i} p(s_i, a_j)log \frac{p(s_i, a_j)}{p_S(s_i)p_A(a_j)}\geq 0\]</div>
 <div class="section" id="additional-references">
-<h3>Additional References<a class="headerlink" href="#additional-references" title="Permalink to this headline">¶</a></h3>
+<h4><span class="section-number">1.17.3.1. </span>Additional References<a class="headerlink" href="#additional-references" title="Permalink to this headline">¶</a></h4>
 <ol class="simple">
 <li><p>JMR Parrondo, JM Horowtiz, T Segawa “Thermodynamics of Information” <a class="reference external" href="https://www.nature.com/articles/nphys3230">Nature Physics volume 11, 131 (2015)</a>
 <br></p></li>
@@ -956,6 +966,7 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 <br></p></li>
 <li><p>Observing a quantum Maxwell demon at work <a class="reference internal" href="../04_entropy.html"><span class="doc std std-doc">E. Entropy and Information</span></a></p></li>
 </ol>
+</div>
 </div>
 </div>
 </div>
@@ -988,6 +999,8 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="../04_entropy.html" title="previous page">E. Entropy and Information</a>
+    <a class='right-next' id="next-link" href="../05_ising.html" title="next page">F. Phase transitions and Ising models</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
