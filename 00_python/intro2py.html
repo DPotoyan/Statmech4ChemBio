@@ -394,37 +394,49 @@
     <a class="reference internal nav-link" href="#list-comprehensions">
      1.8.4. List comprehensions:
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-range-command">
+       1.8.4.1. The range() command
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#control-flow-and-the-if-then-else-statement">
+     1.8.5. Control Flow and the if-then-else statement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionaries">
+     1.8.6. Dictionaries
+    </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-if-statement">
-   1.9. The if statement
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#functions">
-   1.10. Functions
+   1.9. Functions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#anonymous-functions">
-     1.10.1. Anonymous functions
+     1.9.1. Anonymous functions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#positional-and-optional-arguments">
-     1.10.2. Positional and optional arguments
+     1.9.2. Positional and optional arguments
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercises">
-     1.10.3. Exercises
+     1.9.3. Exercises
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#problems">
-     1.10.4. Problems
+     1.9.4. Problems
     </a>
    </li>
   </ul>
@@ -851,6 +863,19 @@ world
 <div class="section" id="containers">
 <h2><span class="section-number">1.8. </span>Containers<a class="headerlink" href="#containers" title="Permalink to this headline">¶</a></h2>
 <p>Python includes several built-in container types: <strong>lists, dictionaries, sets, and tuples.</strong> Lists will be the most useful for our objectives in this course so we only cover lists.</p>
+<p>Strings, lists and tuples are <em>sequences</em>. They can be <em>indexed</em> and <em>sliced</em> in the same way.</p>
+<p>Tuples and strings are “immutable” (which basically means we can’t change individual elements within the tuple, and we cannot change individual characters within a string) whereas lists are “mutable” (<em>.i.e</em> we can change elements in a list.)</p>
+<p>Sequences share the following operations</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a[i]</span></code> returns i-th element of <code class="docutils literal notranslate"><span class="pre">a</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a[i:j]</span></code> returns elements i up to j-1</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len(a)</span></code> returns number of elements in sequence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min(a)</span></code> returns smallest value in sequence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max(a)</span></code> returns largest value in sequence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">a</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">x</span></code> is element in <code class="docutils literal notranslate"><span class="pre">a</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> concatenates <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n</span> <span class="pre">*</span> <span class="pre">a</span></code> creates <code class="docutils literal notranslate"><span class="pre">n</span></code> copies of sequence <code class="docutils literal notranslate"><span class="pre">a</span></code></p></li>
+</ul>
 <div class="section" id="lists">
 <h3><span class="section-number">1.8.1. </span>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h3>
 <p><img alt="" src="../_images/list.png" /></p>
@@ -1003,10 +1028,89 @@ lion
 </div>
 </div>
 </div>
+<div class="section" id="the-range-command">
+<h4><span class="section-number">1.8.4.1. </span>The range() command<a class="headerlink" href="#the-range-command" title="Permalink to this headline">¶</a></h4>
+<p>A special type of list is frequently required (often together with <code class="docutils literal notranslate"><span class="pre">for-loops</span></code>) and therefor a command exists to generate that list: the <code class="docutils literal notranslate"><span class="pre">range(n)</span></code> command generates integers starting from 0 and going up to <em>but not including</em> n. Here are a few examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
 </div>
 </div>
-<div class="section" id="the-if-statement">
-<h2><span class="section-number">1.9. </span>The if statement<a class="headerlink" href="#the-if-statement" title="Permalink to this headline">¶</a></h2>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This command is often used with for loops. For example, to print the numbers 0<sup>2</sup>,1<sup>2</sup>,2<sup>2</sup>,3<sup>2</sup>,…,10<sup>2</sup>, the following program can be used:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+4
+9
+16
+25
+36
+49
+64
+81
+100
+</pre></div>
+</div>
+</div>
+</div>
+<p>The range command takes an optional parameter for the beginning of the integer sequence (start) and another optional parameter for the step size. This is often written as <code class="docutils literal notranslate"><span class="pre">range([start],stop,[step])</span></code> where the arguments in square brackets (<em>i.e.</em> start and step) are optional. Here are some examples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 5, 7, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Why are we calling <code class="docutils literal notranslate"><span class="pre">list(range())</span></code>?</p>
+<p>In Python 3, <code class="docutils literal notranslate"><span class="pre">range()</span></code> generates the numbers on demand. When you use <code class="docutils literal notranslate"><span class="pre">range()</span></code> in a for loop, this is more efficient, because it doesn’t take up memory with a list of numbers. Passing it to <code class="docutils literal notranslate"><span class="pre">list()</span></code> forces it to generate all of its numbers, so we can see what it does.</p>
+<p>To get the same efficient behaviour in Python 2, use <code class="docutils literal notranslate"><span class="pre">xrange()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">range()</span></code>.</p>
+</div>
+</div>
+<div class="section" id="control-flow-and-the-if-then-else-statement">
+<h3><span class="section-number">1.8.5. </span>Control Flow and the if-then-else statement<a class="headerlink" href="#control-flow-and-the-if-then-else-statement" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">statement</span></code> allows you to execute a block of code optionally, if certain conditions are met. An expression which evaluates to True or False, called the <em>conditional statement</em>, must be in the parentheses following the <code class="docutils literal notranslate"><span class="pre">if</span></code> keyword.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1050,9 +1154,212 @@ lion
 </div>
 </div>
 </div>
+<p><strong>While loop</strong></p>
+<p>The <span><code class="docutils literal notranslate"><span class="pre">while</span></code></span> keyword allows to repeat an operation while a condition is true. Suppose we’d like to know for how many years we have to keep 100 pounds on a savings account to reach 200 pounds simply due to annual payment of interest at a rate of 5%. Here is a program to compute that this will take 15 years:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mymoney</span> <span class="o">=</span> <span class="mi">100</span>         <span class="c1"># in GBP</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="mf">1.05</span>           <span class="c1"># 5% interest</span>
+<span class="n">years</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">mymoney</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">:</span>  <span class="c1"># repeat until 20 pounds reached</span>
+    <span class="n">mymoney</span> <span class="o">=</span> <span class="n">mymoney</span> <span class="o">*</span> <span class="n">rate</span>
+    <span class="n">years</span> <span class="o">=</span> <span class="n">years</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;We need&#39;</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="s1">&#39;years to reach&#39;</span><span class="p">,</span> <span class="n">mymoney</span><span class="p">,</span> <span class="s1">&#39;pounds.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We need 15 years to reach 207.89281794113688 pounds.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dictionaries">
+<h3><span class="section-number">1.8.6. </span>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h3>
+<p>Dictionaries are also called “associative arrays” and “hash tables”. Dictionaries are <em>unordered</em> sets of <em>key-value pairs</em>.</p>
+<p>An empty dictionary can be created using curly braces:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;today&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;22 deg C&#39;</span>    <span class="c1"># &#39;today&#39; is the keyword</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;yesterday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;19 deg C&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">d.keys()</span></code> returns a list of all keys:</p>
+<p>We can retrieve values by using the keyword as the index:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;today&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Other ways of populating a dictionary if the data is known at creation time are:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="mi">25</span><span class="p">}</span>
+<span class="n">d2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{2: 4, 3: 9, 4: 16, 5: 25}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d3</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">d3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">dict()</span></code> creates an empty dictionary.</p>
+<p>Other useful dictionary methods include <code class="docutils literal notranslate"><span class="pre">values()</span></code>, <code class="docutils literal notranslate"><span class="pre">items()</span></code> and <code class="docutils literal notranslate"><span class="pre">get()</span></code>. You can use <code class="docutils literal notranslate"><span class="pre">in</span></code> to check for the presence of values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_values([&#39;22 deg C&#39;, &#39;19 deg C&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_items([(&#39;today&#39;, &#39;22 deg C&#39;), (&#39;yesterday&#39;, &#39;19 deg C&#39;)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The method <code class="docutils literal notranslate"><span class="pre">get(key,default)</span></code> will provide the value for a given <code class="docutils literal notranslate"><span class="pre">key</span></code> if that key exists, otherwise it will return the <code class="docutils literal notranslate"><span class="pre">default</span></code> object.</p>
+<p>Here is a more complex example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;today&#39;</span><span class="p">,</span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;22 deg C&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tomorrow&#39;</span><span class="p">,</span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;unknown&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;today&#39;</span> <span class="ow">in</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;tomorrow&#39;</span> <span class="ow">in</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>Some more technicalities:</p>
+<ul class="simple">
+<li><p>The keyword can be any (immutable) Python object. This includes:</p>
+<ul>
+<li><p>numbers</p></li>
+<li><p>strings</p></li>
+<li><p>tuples.</p></li>
+</ul>
+</li>
+<li><p>dictionaries are very fast in retrieving values (when given the key)</p></li>
+</ul>
+<p>An other example to demonstrate an advantage of using dictionaries over pairs of lists:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="p">{}</span>        <span class="c1"># create empty dictionary</span>
+
+<span class="c1">#add orders as they come in</span>
+<span class="n">order</span><span class="p">[</span><span class="s1">&#39;Peter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Pint of bitter&#39;</span>
+<span class="n">order</span><span class="p">[</span><span class="s1">&#39;Paul&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Half pint of Hoegarden&#39;</span>
+<span class="n">order</span><span class="p">[</span><span class="s1">&#39;Mary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Gin Tonic&#39;</span>
+
+<span class="c1">#deliver order at bar</span>
+<span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">order</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="s2">&quot;requests&quot;</span><span class="p">,</span> <span class="n">order</span><span class="p">[</span><span class="n">person</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Without dictionary:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hans&quot;</span><span class="p">,</span><span class="s2">&quot;Andy C&quot;</span><span class="p">,</span><span class="s2">&quot;Ken&quot;</span><span class="p">]</span>
+<span class="n">rooms</span>  <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;room 1033&quot;</span><span class="p">,</span><span class="s2">&quot;room 1031&quot;</span><span class="p">,</span><span class="s2">&quot;room 1027&quot;</span><span class="p">]</span>
+
+<span class="c1">#possible inconsistency here since we have two lists</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span> <span class="n">people</span> <span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span> <span class="n">rooms</span> <span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;people and rooms differ in length&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span> <span class="n">rooms</span> <span class="p">)</span> <span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">people</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;works in&quot;</span><span class="p">,</span><span class="n">rooms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="functions">
-<h2><span class="section-number">1.10. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.9. </span>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
 <p>Python functions are defined using the <code class="docutils literal notranslate"><span class="pre">def</span></code> keyword. For example let us write a polynomial function</p>
 <div class="math notranslate nohighlight">
 \[f(x)=3.0x^3 + x^2 + 10x+1.0\]</div>
@@ -1106,7 +1413,7 @@ lion
 <li><p>Write a function that take M argument generates M by M shaped 2D array filled with random numbers then visualizes it as an image.</p></li>
 </ul>
 <div class="section" id="anonymous-functions">
-<h3><span class="section-number">1.10.1. </span>Anonymous functions<a class="headerlink" href="#anonymous-functions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.9.1. </span>Anonymous functions<a class="headerlink" href="#anonymous-functions" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes we need to quickly define a function wihtout giving it pet names. This can be accomplished by anonymous <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function definition</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1156,7 +1463,7 @@ lion
 </div>
 </div>
 <div class="section" id="positional-and-optional-arguments">
-<h3><span class="section-number">1.10.2. </span>Positional and optional arguments<a class="headerlink" href="#positional-and-optional-arguments" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.9.2. </span>Positional and optional arguments<a class="headerlink" href="#positional-and-optional-arguments" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes we like to specify default values for funciton variables. E.g in science context this will be physical parameters, like the stiffness constant and quilibrium length of a spring. Note that the positional argument must always come first followed by any number of optional arguments.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1186,7 +1493,7 @@ lion
 </div>
 </div>
 <div class="section" id="exercises">
-<h3><span class="section-number">1.10.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.9.3. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
 <div class="admonition-exercise-1 admonition">
 <p class="admonition-title">Exercise-1</p>
 <p><strong>Predict and explain the following statements</strong></p>
@@ -1252,7 +1559,7 @@ lion
 </div>
 </div>
 <div class="section" id="problems">
-<h3><span class="section-number">1.10.4. </span>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.9.4. </span>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h3>
 <div class="admonition-problem-1-core-data-types-of-python admonition">
 <p class="admonition-title">Problem-1: Core data types of python</p>
 <ol class="simple">
