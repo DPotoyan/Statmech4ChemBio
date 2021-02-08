@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>4. The Inverse Transform of RVs &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>5. The Inverse Transform of RVs &#8212; Statistical Mechanics for Chemistry and Biology</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -59,7 +59,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="C. Thermodynamics refresher" href="../02_thermo.html" />
-    <link rel="prev" title="3. “Monte Carlo and the power of randomness”" href="04_MC.html" />
+    <link rel="prev" title="4. “Monte Carlo and the power of randomness”" href="04_MC.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -137,13 +137,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="03_LimitTheorems.html">
+     3. Probability distirbutions functions (PDFs) and limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="04_MC.html">
-     3. “Monte Carlo and the power of randomness”
+     4. “Monte Carlo and the power of randomness”
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     4. The Inverse Transform of RVs
+     5. The Inverse Transform of RVs
     </a>
    </li>
   </ul>
@@ -330,22 +335,22 @@
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-idea">
-   4.1. The idea
+   5.1. The idea
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example-drawing-from-the-exponential-distribution">
-     4.1.1. Example: Drawing from the exponential distribution.
+     5.1.1. Example: Drawing from the exponential distribution.
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#let-us-formalize-this-procedure">
-     4.1.2. Let us formalize this procedure:
+     5.1.2. Let us formalize this procedure:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#box-muller-algorithm">
-     4.1.3. Box-Muller algorithm
+     5.1.3. Box-Muller algorithm
     </a>
    </li>
   </ul>
@@ -362,7 +367,7 @@
               <div>
                 
   <div class="section" id="the-inverse-transform-of-rvs">
-<h1><span class="section-number">4. </span>The Inverse Transform of RVs<a class="headerlink" href="#the-inverse-transform-of-rvs" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">5. </span>The Inverse Transform of RVs<a class="headerlink" href="#the-inverse-transform-of-rvs" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -375,7 +380,7 @@
 </div>
 </div>
 <div class="section" id="the-idea">
-<h2><span class="section-number">4.1. </span>The idea<a class="headerlink" href="#the-idea" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">5.1. </span>The idea<a class="headerlink" href="#the-idea" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_transform_sampling">Inverse transform sampling</a> is a basic method for <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudo-random_number_sampling">pseudo-random number sampling</a>, i.e. for generating sample numbers at random from any probability distribution given its cumulative distribution function. That is, by drawing from a uniform distribution, we make it possible to draw from the other distribution in question.</p>
 <p>Let’s start by defining uniform distribution <span class="math notranslate nohighlight">\(U(0,1)\)</span> which geneerates random numbers <span class="math notranslate nohighlight">\(Z\sim U(0,1)\)</span> falling on <span class="math notranslate nohighlight">\([0,1]\)</span> range. Now let’s look for a way of transforming random number <span class="math notranslate nohighlight">\(Z\)</span> with <span class="math notranslate nohighlight">\(p(z)=\frac{1}{1-0}\)</span> unifrom pdf into a function <span class="math notranslate nohighlight">\(X(Z)\)</span> where x is distributed according to some pdf <span class="math notranslate nohighlight">\(p(x)\)</span>. The probability to find <span class="math notranslate nohighlight">\(x\)</span> between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(x+dx\)</span> is equal to:</p>
 <div class="math notranslate nohighlight">
@@ -388,7 +393,7 @@
 <p>Thus if we can (i) integrate expression on the left analytically and (ii) solve for <span class="math notranslate nohighlight">\(x\)</span> then we are done!
 For most of the pdf at least one of the two is not possible. Below is a typical example where both (i) and (ii) states are easily done.</p>
 <div class="section" id="example-drawing-from-the-exponential-distribution">
-<h3><span class="section-number">4.1.1. </span>Example: Drawing from the exponential distribution.<a class="headerlink" href="#example-drawing-from-the-exponential-distribution" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.1.1. </span>Example: Drawing from the exponential distribution.<a class="headerlink" href="#example-drawing-from-the-exponential-distribution" title="Permalink to this headline">¶</a></h3>
 <p>For example, lets assume we would like
 to generate random numbers that follow the exponential distribution
 $<span class="math notranslate nohighlight">\(p(x) = \frac{1}{\lambda} e^{-x/\lambda}\)</span>$</p>
@@ -400,7 +405,7 @@ $<span class="math notranslate nohighlight">\(p(x) = \frac{1}{\lambda} e^{-x/\la
 \[x = - \lambda \ln (1-u) \]</div>
 </div>
 <div class="section" id="let-us-formalize-this-procedure">
-<h3><span class="section-number">4.1.2. </span>Let us formalize this procedure:<a class="headerlink" href="#let-us-formalize-this-procedure" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.1.2. </span>Let us formalize this procedure:<a class="headerlink" href="#let-us-formalize-this-procedure" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p><strong>Get a uniform sample <span class="math notranslate nohighlight">\(u\)</span> from <span class="math notranslate nohighlight">\(U(0,1)\)</span></strong></p></li>
 <li><p><strong>Solve for <span class="math notranslate nohighlight">\(x\)</span> yielding a new equation <span class="math notranslate nohighlight">\(x=F^{-1}(u)\)</span> where <span class="math notranslate nohighlight">\(F\)</span> is the CDF of the distribution we desire.</strong></p></li>
@@ -448,7 +453,7 @@ $<span class="math notranslate nohighlight">\(p(x) = \frac{1}{\lambda} e^{-x/\la
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb4947f09d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f40eb57f090&gt;
 </pre></div>
 </div>
 <img alt="../_images/05_InverseTransform_3_1.png" src="../_images/05_InverseTransform_3_1.png" />
@@ -456,7 +461,7 @@ $<span class="math notranslate nohighlight">\(p(x) = \frac{1}{\lambda} e^{-x/\la
 </div>
 </div>
 <div class="section" id="box-muller-algorithm">
-<h3><span class="section-number">4.1.3. </span><a class="reference external" href="https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform">Box-Muller algorithm</a><a class="headerlink" href="#box-muller-algorithm" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.1.3. </span><a class="reference external" href="https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform">Box-Muller algorithm</a><a class="headerlink" href="#box-muller-algorithm" title="Permalink to this headline">¶</a></h3>
 <p>In many cases the integral to calculate the CDF may not be easy to calculate analytically
 and we need to come with clever algorithms. For example
 there is no closed form formula for the integral of the normal distribution
@@ -506,7 +511,7 @@ from two independent uniforms.</p>
   FutureWarning
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7fb4925ca8d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7f40eb57f690&gt;
 </pre></div>
 </div>
 <img alt="../_images/05_InverseTransform_5_2.png" src="../_images/05_InverseTransform_5_2.png" />
@@ -544,7 +549,7 @@ from two independent uniforms.</p>
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="04_MC.html" title="previous page"><span class="section-number">3. </span>“Monte Carlo and the power of randomness”</a>
+    <a class='left-prev' id="prev-link" href="04_MC.html" title="previous page"><span class="section-number">4. </span>“Monte Carlo and the power of randomness”</a>
     <a class='right-next' id="next-link" href="../02_thermo.html" title="next page">C. Thermodynamics refresher</a>
 
     </div>
