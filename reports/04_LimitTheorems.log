@@ -1,0 +1,65 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/client.py", line 1107, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/client.py", line 852, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+hv.extension('plotly')
+
+def uniform_dist(a, b, npts = 100, label ='Uniform Distribution'):
+    
+    dist    = uniform(loc=a, scale=b)
+
+    x       = np.linspace(a, a+b, npts)
+    
+    return get_overlay(x, dist.pdf(x), dist.cdf(x), dist.rvs(npts), label)
+
+dmap = hv.HoloMap(uniform_dist, kdims=['a', 'b'])
+dmap.redim.range(a=(0.0,1.0), b=(2.0,10.0))
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-3-2fa5f841509b>[0m in [0;36m<module>[0;34m[0m
+[1;32m      9[0m     [0;32mreturn[0m [0mget_overlay[0m[0;34m([0m[0mx[0m[0;34m,[0m [0mdist[0m[0;34m.[0m[0mpdf[0m[0;34m([0m[0mx[0m[0;34m)[0m[0;34m,[0m [0mdist[0m[0;34m.[0m[0mcdf[0m[0;34m([0m[0mx[0m[0;34m)[0m[0;34m,[0m [0mdist[0m[0;34m.[0m[0mrvs[0m[0;34m([0m[0mnpts[0m[0;34m)[0m[0;34m,[0m [0mlabel[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     10[0m [0;34m[0m[0m
+[0;32m---> 11[0;31m [0mdmap[0m [0;34m=[0m [0mhv[0m[0;34m.[0m[0mHoloMap[0m[0;34m([0m[0muniform_dist[0m[0;34m,[0m [0mkdims[0m[0;34m=[0m[0;34m[[0m[0;34m'a'[0m[0;34m,[0m [0;34m'b'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     12[0m [0mdmap[0m[0;34m.[0m[0mredim[0m[0;34m.[0m[0mrange[0m[0;34m([0m[0ma[0m[0;34m=[0m[0;34m([0m[0;36m0.0[0m[0;34m,[0m[0;36m1.0[0m[0;34m)[0m[0;34m,[0m [0mb[0m[0;34m=[0m[0;34m([0m[0;36m2.0[0m[0;34m,[0m[0;36m10.0[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/holoviews/core/spaces.py[0m in [0;36m__init__[0;34m(self, initial_items, kdims, group, label, **params)[0m
+[1;32m     39[0m [0;34m[0m[0m
+[1;32m     40[0m     [0;32mdef[0m [0m__init__[0m[0;34m([0m[0mself[0m[0;34m,[0m [0minitial_items[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mkdims[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mgroup[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0mlabel[0m[0;34m=[0m[0;32mNone[0m[0;34m,[0m [0;34m**[0m[0mparams[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 41[0;31m         [0msuper[0m[0;34m([0m[0mHoloMap[0m[0;34m,[0m [0mself[0m[0;34m)[0m[0;34m.[0m[0m__init__[0m[0;34m([0m[0minitial_items[0m[0;34m,[0m [0mkdims[0m[0;34m,[0m [0mgroup[0m[0;34m,[0m [0mlabel[0m[0;34m,[0m [0;34m**[0m[0mparams[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     42[0m [0;34m[0m[0m
+[1;32m     43[0m     [0;34m@[0m[0mproperty[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/holoviews/core/ndmapping.py[0m in [0;36m__init__[0;34m(self, initial_items, kdims, group, label, **params)[0m
+[1;32m    809[0m         [0mself[0m[0;34m.[0m[0m_group_check[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0mgroup[0m [0;34m=[0m [0;32mNone[0m[0;34m,[0m [0mgroup[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    810[0m         [0mself[0m[0;34m.[0m[0m_label_check[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0mlabel[0m [0;34m=[0m [0;32mNone[0m[0;34m,[0m [0mlabel[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 811[0;31m         [0msuper[0m[0;34m([0m[0mUniformNdMapping[0m[0;34m,[0m [0mself[0m[0;34m)[0m[0;34m.[0m[0m__init__[0m[0;34m([0m[0minitial_items[0m[0;34m,[0m [0mkdims[0m[0;34m=[0m[0mkdims[0m[0;34m,[0m [0;34m**[0m[0mparams[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    812[0m [0;34m[0m[0m
+[1;32m    813[0m     def clone(self, data=None, shared_data=True, new_type=None, link=True,
+
+[0;32m/opt/hostedtoolcache/Python/3.7.10/x64/lib/python3.7/site-packages/holoviews/core/ndmapping.py[0m in [0;36m__init__[0;34m(self, initial_items, kdims, **params)[0m
+[1;32m    122[0m                 [0mself[0m[0;34m.[0m[0m_resort[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    123[0m         [0;32melif[0m [0minitial_items[0m [0;32mis[0m [0;32mnot[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 124[0;31m             [0mself[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mOrderedDict[0m[0;34m([0m[0minitial_items[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    125[0m [0;34m[0m[0m
+[1;32m    126[0m [0;34m[0m[0m
+
+[0;31mTypeError[0m: 'function' object is not iterable
+TypeError: 'function' object is not iterable
+
