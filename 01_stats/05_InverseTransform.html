@@ -54,6 +54,8 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="C. Thermodynamics refresher" href="../02_thermo.html" />
@@ -381,29 +383,33 @@
 <div class="section" id="the-idea">
 <h2><span class="section-number">5.1. </span>The idea<a class="headerlink" href="#the-idea" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Inverse_transform_sampling">Inverse transform sampling</a> is a basic method for <a class="reference external" href="https://en.wikipedia.org/wiki/Pseudo-random_number_sampling">pseudo-random number sampling</a>, i.e. for generating sample numbers at random from any probability distribution given its cumulative distribution function. That is, by drawing from a uniform distribution, we make it possible to draw from the other distribution in question.</p>
-<p>Let’s start by defining uniform distribution $U(0,1)$ which geneerates random numbers $Z\sim U(0,1)$ falling on $[0,1]$ range. Now let’s look for a way of transforming random number $Z$ with $p(z)=\frac{1}{1-0}$ unifrom pdf into a function $X(Z)$ where x is distributed according to some pdf $p(x)$. The probability to find $x$ between $x$ and $x+dx$ is equal to:</p>
-<p>$$p(x)dx = p(z)dz = dz$$</p>
-<p>This relation is simply transform of variables. Now the key point to realize is that integrals from over $[-\infty, x(z)]$ for X and $[0, z]$ for Z are equal (these are comulative distribution functions (CDF).</p>
-<p>$$
-\int_{-\infty}^{x(z)} p(x’) dx’ = \int_0^z dz’= z
-$$</p>
-<p>Thus if we can (i) integrate expression on the left analytically and (ii) solve for $x$ then we are done!
+<p>Let’s start by defining uniform distribution <span class="math notranslate nohighlight">\(U(0,1)\)</span> which geneerates random numbers <span class="math notranslate nohighlight">\(Z\sim U(0,1)\)</span> falling on <span class="math notranslate nohighlight">\([0,1]\)</span> range. Now let’s look for a way of transforming random number <span class="math notranslate nohighlight">\(Z\)</span> with <span class="math notranslate nohighlight">\(p(z)=\frac{1}{1-0}\)</span> unifrom pdf into a function <span class="math notranslate nohighlight">\(X(Z)\)</span> where x is distributed according to some pdf <span class="math notranslate nohighlight">\(p(x)\)</span>. The probability to find <span class="math notranslate nohighlight">\(x\)</span> between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(x+dx\)</span> is equal to:</p>
+<div class="math notranslate nohighlight">
+\[p(x)dx = p(z)dz = dz\]</div>
+<p>This relation is simply transform of variables. Now the key point to realize is that integrals from over <span class="math notranslate nohighlight">\([-\infty, x(z)]\)</span> for X and <span class="math notranslate nohighlight">\([0, z]\)</span> for Z are equal (these are comulative distribution functions (CDF).</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^{x(z)} p(x') dx' = \int_0^z dz'= z
+\]</div>
+<p>Thus if we can (i) integrate expression on the left analytically and (ii) solve for <span class="math notranslate nohighlight">\(x\)</span> then we are done!
 For most of the pdf at least one of the two is not possible. Below is a typical example where both (i) and (ii) states are easily done.</p>
 <div class="section" id="example-drawing-from-the-exponential-distribution">
 <h3><span class="section-number">5.1.1. </span>Example: Drawing from the exponential distribution.<a class="headerlink" href="#example-drawing-from-the-exponential-distribution" title="Permalink to this headline">¶</a></h3>
 <p>For example, lets assume we would like
 to generate random numbers that follow the exponential distribution
-$$p(x) = \frac{1}{\lambda} e^{-x/\lambda}$$</p>
-<p>for $x\ge0$ and $f(x)=0$ otherwise. Following the recipe from the above we have</p>
-<p>$$u = \int_{0}^{x} \frac{1}{\lambda} e^{-x’/\lambda} dx’  = 1- e^{-x/\lambda} $$</p>
-<p>Solving for $x$ we get</p>
-<p>$$x = - \lambda \ln (1-u) $$</p>
+$<span class="math notranslate nohighlight">\(p(x) = \frac{1}{\lambda} e^{-x/\lambda}\)</span>$</p>
+<p>for <span class="math notranslate nohighlight">\(x\ge0\)</span> and <span class="math notranslate nohighlight">\(f(x)=0\)</span> otherwise. Following the recipe from the above we have</p>
+<div class="math notranslate nohighlight">
+\[u = \int_{0}^{x} \frac{1}{\lambda} e^{-x'/\lambda} dx'  = 1- e^{-x/\lambda} \]</div>
+<p>Solving for <span class="math notranslate nohighlight">\(x\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[x = - \lambda \ln (1-u) \]</div>
 </div>
 <div class="section" id="let-us-formalize-this-procedure">
 <h3><span class="section-number">5.1.2. </span>Let us formalize this procedure:<a class="headerlink" href="#let-us-formalize-this-procedure" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
-<li><p><strong>Get a uniform sample $u$ from $U(0,1)$</strong></p></li>
-<li><p><strong>Solve for $x$ yielding a new equation $x=F^{-1}(u)$ where $F$ is the CDF of the distribution we desire.</strong></p></li>
+<li><p><strong>Get a uniform sample <span class="math notranslate nohighlight">\(u\)</span> from <span class="math notranslate nohighlight">\(U(0,1)\)</span></strong></p></li>
+<li><p><strong>Solve for <span class="math notranslate nohighlight">\(x\)</span> yielding a new equation <span class="math notranslate nohighlight">\(x=F^{-1}(u)\)</span> where <span class="math notranslate nohighlight">\(F\)</span> is the CDF of the distribution we desire.</strong></p></li>
 <li><p><strong>Repeat.</strong></p></li>
 </ol>
 <div class="cell docutils container">
@@ -448,7 +454,7 @@ $$p(x) = \frac{1}{\lambda} e^{-x/\lambda}$$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3c87190c90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f74ba120350&gt;
 </pre></div>
 </div>
 <img alt="../_images/05_InverseTransform_3_1.png" src="../_images/05_InverseTransform_3_1.png" />
@@ -460,24 +466,30 @@ $$p(x) = \frac{1}{\lambda} e^{-x/\lambda}$$</p>
 <p>In many cases the integral to calculate the CDF may not be easy to calculate analytically
 and we need to come with clever algorithms. For example
 there is no closed form formula for the integral of the normal distribution
-$ I=\frac{1}{2\pi} \int_{-\infty}^{x} e^{-x’^2/2}dx’ $.</p>
+<span class="math notranslate nohighlight">\( I=\frac{1}{2\pi} \int_{-\infty}^{x} e^{-x'^2/2}dx' \)</span>.</p>
 <p>The <strong>Box Muller method</strong> is a brilliant trick to overcome this by producing two independent standard normals
 from two independent uniforms.</p>
 <p>The idea is this. Consider the  product of two independent normals N(0,1):</p>
-<p>$$ X \sim N(0,1), Y \sim N(0,1) \implies X,Y \sim N(0,1)N(0,1)$$</p>
+<div class="math notranslate nohighlight">
+\[ X \sim N(0,1), Y \sim N(0,1) \implies X,Y \sim N(0,1)N(0,1)\]</div>
 <p>The pdf then is:</p>
-<p>$$f_{XY}(x,y)  =  \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \times \frac{1}{\sqrt{2\pi}} e^{-y^2/2} = \frac{1}{2\pi} \times e^{-r^2/2}$$</p>
-<p>where $r^2 = x^2 + y^2$.</p>
-<p>If you think of this in terms of polar co-ordinates $r$ and $\theta$, we have</p>
-<p>$$\Theta \sim U(0, 2\pi) \   S = R^2 \sim Exp(1/2)$$</p>
+<div class="math notranslate nohighlight">
+\[f_{XY}(x,y)  =  \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \times \frac{1}{\sqrt{2\pi}} e^{-y^2/2} = \frac{1}{2\pi} \times e^{-r^2/2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(r^2 = x^2 + y^2\)</span>.</p>
+<p>If you think of this in terms of polar co-ordinates <span class="math notranslate nohighlight">\(r\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\Theta \sim U(0, 2\pi) \\   S = R^2 \sim Exp(1/2)\end{split}\]</div>
 <p>From the inverse method for the exponential above:</p>
-<p>$$ s = r^2 = -2 ln(1-u) $$</p>
-<p>where u is a sample from $U \sim U(0,1)$. Now if $U \sim U(0,1)$, then $1-U \sim U(0,1)$.</p>
+<div class="math notranslate nohighlight">
+\[ s = r^2 = -2 ln(1-u) \]</div>
+<p>where u is a sample from <span class="math notranslate nohighlight">\(U \sim U(0,1)\)</span>. Now if <span class="math notranslate nohighlight">\(U \sim U(0,1)\)</span>, then <span class="math notranslate nohighlight">\(1-U \sim U(0,1)\)</span>.</p>
 <p>Thus  we can write:</p>
-<p>$$r = \sqrt{-2,ln(u_1)} \ \ \theta = 2\pi, u_2$$</p>
-<p>where $u_1$ and $u_2$ are both drawn from a $U(0,1)$. Now we can use:</p>
-<p>$$x = r,cos\theta, y = r,sin\theta$$</p>
-<p>to generate samples for the normally distributed random variables $X$ and $Y$.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r = \sqrt{-2\,ln(u_1)} \\ \\ \theta = 2\pi\, u_2\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_1\)</span> and <span class="math notranslate nohighlight">\(u_2\)</span> are both drawn from a <span class="math notranslate nohighlight">\(U(0,1)\)</span>. Now we can use:</p>
+<div class="math notranslate nohighlight">
+\[x = r\,cos\theta, y = r\,sin\theta\]</div>
+<p>to generate samples for the normally distributed random variables <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span>
@@ -500,7 +512,7 @@ from two independent uniforms.</p>
   FutureWarning
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7f3c83b93710&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.JointGrid at 0x7f74c05a4390&gt;
 </pre></div>
 </div>
 <img alt="../_images/05_InverseTransform_5_2.png" src="../_images/05_InverseTransform_5_2.png" />
