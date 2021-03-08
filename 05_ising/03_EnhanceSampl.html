@@ -54,8 +54,6 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="2. Phase transitions through the lense of Ising models" href="02_ising_analytic.html" />
@@ -356,11 +354,7 @@
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#finding-energy-minima-of-any-thermal-system-leftrightarrow-finding-minimum-of-any-abstract-function">
-     5.3.1. Finding energy minima of any thermal  system
-     <span class="math notranslate nohighlight">
-      \(\leftrightarrow\)
-     </span>
-     finding minimum of any abstract function
+     5.3.1. Finding energy minima of any thermal  system $\leftrightarrow$ finding minimum of any abstract function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -379,19 +373,12 @@
      <strong>
       Example:
      </strong>
-     find global minimum of the function via simulated annealing:
-     <span class="math notranslate nohighlight">
-      \(f(x) = x^2 -\cos (4\pi x)\)
-     </span>
+     find global minimum of the function via simulated annealing: $f(x) = x^2 -\cos (4\pi x)$
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#search-for-global-minima-of-f-x-using-simulated-annealing">
-       5.3.4.1. Search for global minima of
-       <span class="math notranslate nohighlight">
-        \(f(x)\)
-       </span>
-       using simulated annealing
+       5.3.4.1. Search for global minima of $f(x)$ using simulated annealing
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
@@ -494,36 +481,30 @@
 </div>
 </div>
 </div>
-<p>Suppse we have a system in NVT ensemble with energies <span class="math notranslate nohighlight">\(E_{\nu}\)</span> but it is hard to sample via straight MCMC. On the other hand if we reshape energy levels into <span class="math notranslate nohighlight">\(E^0_{\nu}\)</span> sampling would be greatly enhanced:</p>
-<div class="math notranslate nohighlight">
-\[E_{\nu} =  E^0_{\nu}+\Delta E_{\nu} \]</div>
+<p>Suppse we have a system in NVT ensemble with energies $E_{\nu}$ but it is hard to sample via straight MCMC. On the other hand if we reshape energy levels into $E^0_{\nu}$ sampling would be greatly enhanced:</p>
+<p>$$E_{\nu} =  E^0_{\nu}+\Delta E_{\nu} $$</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(E_{\nu}\)</span>   target system.</p></li>
-<li><p><span class="math notranslate nohighlight">\(E^0_{\nu}\)</span> convneient for sampling system.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\Delta E_{\nu}\)</span> pertrubation.</p></li>
+<li><p>$E_{\nu}$   target system.</p></li>
+<li><p>$E^0_{\nu}$ convneient for sampling system.</p></li>
+<li><p>$\Delta E_{\nu}$ pertrubation.</p></li>
 </ul>
 <div class="section" id="boltzman-exponent-factorization-to-the-rescue">
 <h2><span class="section-number">5.1. </span>Boltzman exponent factorization to the rescue!<a class="headerlink" href="#boltzman-exponent-factorization-to-the-rescue" title="Permalink to this headline">¶</a></h2>
-<div class="math notranslate nohighlight">
-\[\boxed{e^{-\beta E_{\nu}} =  e^{-\beta E^0_{\nu}} e^{-\beta \Delta E_{\nu}}}\]</div>
-<div class="math notranslate nohighlight">
-\[Z = \sum_{\nu} e^{-\beta E_{\nu}}  = \frac{Z_0}{Z_0} \sum_{\nu} e^{-\beta E^0_{\nu}} e^{-\beta \Delta E_{\nu}} = Z_0 \langle e^{-\beta \Delta E_{\nu}} \rangle_0 \]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{e^{-\beta(F-F_0)} = \langle e^{-\beta \Delta E_{\nu}} \rangle_0}\]</div>
+<p>$$\boxed{e^{-\beta E_{\nu}} =  e^{-\beta E^0_{\nu}} e^{-\beta \Delta E_{\nu}}}$$</p>
+<p>$$Z = \sum_{\nu} e^{-\beta E_{\nu}}  = \frac{Z_0}{Z_0} \sum_{\nu} e^{-\beta E^0_{\nu}} e^{-\beta \Delta E_{\nu}} = Z_0 \langle e^{-\beta \Delta E_{\nu}} \rangle_0 $$</p>
+<p>$$\boxed{e^{-\beta(F-F_0)} = \langle e^{-\beta \Delta E_{\nu}} \rangle_0}$$</p>
 <ul class="simple">
-<li><p>Where <span class="math notranslate nohighlight">\(\langle ... \rangle_0\)</span> indicates canonical average with <span class="math notranslate nohighlight">\(E^0_{\nu}\)</span></p></li>
+<li><p>Where $\langle … \rangle_0$ indicates canonical average with $E^0_{\nu}$</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\langle G\rangle = \frac{1}{Z}\sum_{\nu} G_{\nu}e^{-\beta E_{\nu}}  = \frac{Z_0}{Z} \langle G_{\nu} e^{-\beta \Delta E_{\nu}} \rangle_0 \]</div>
+<p>$$\langle G\rangle = \frac{1}{Z}\sum_{\nu} G_{\nu}e^{-\beta E_{\nu}}  = \frac{Z_0}{Z} \langle G_{\nu} e^{-\beta \Delta E_{\nu}} \rangle_0 $$</p>
 </div>
 <div class="section" id="umbrella-sampling">
 <h2><span class="section-number">5.2. </span>Umbrella Sampling<a class="headerlink" href="#umbrella-sampling" title="Permalink to this headline">¶</a></h2>
-<div class="math notranslate nohighlight">
-\[E_{\nu} =  E^0_{\nu}+ W_{\nu}\]</div>
+<p>$$E_{\nu} =  E^0_{\nu}+ W_{\nu}$$</p>
 <ul class="simple">
-<li><p>Where <span class="math notranslate nohighlight">\(W_{\nu} \approx 0\)</span> in the interesting regions
+<li><p>Where $W_{\nu} \approx 0$ in the interesting regions
 <br><br></p></li>
-<li><p>Where <span class="math notranslate nohighlight">\(W_{\nu} \gg 0\)</span> outside of interesting regions
+<li><p>Where $W_{\nu} \gg 0$ outside of interesting regions
 <br><br></p></li>
 <li><p>Read more about US in <a class="reference external" href="https://onlinelibrary.wiley.com/doi/full/10.1002/wcms.66?casa_token=KxOXA8oqPO4AAAAA%3AR78Iv0cMhe3NaCNe86T0AnQBJ57euERM3h20FTeSRcM9wOzEHIJq-6FD7J4_kZHg4UZ1RKuGm_OoCPw">J Kastner; WIREs Comp Mol Sci (2011)</a></p></li>
 </ul>
@@ -533,26 +514,19 @@
 <ul class="simple">
 <li><p>Free energy as a function of order parameter (reaction-coordinate)</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[Z(m) = \sum_{\nu} \delta(M(s_{\nu})-m) e^{-\beta E_{\nu}} = e^{-\beta F(m)}\]</div>
-<div class="math notranslate nohighlight">
-\[F(m) = -\frac{1}{\beta}log\, p(m) +const\]</div>
+<p>$$Z(m) = \sum_{\nu} \delta(M(s_{\nu})-m) e^{-\beta E_{\nu}} = e^{-\beta F(m)}$$</p>
+<p>$$F(m) = -\frac{1}{\beta}log, p(m) +const$$</p>
 <ul class="simple">
 <li><p>Biased and unbiased probability distributions (historgrams)</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[P(m) = \langle \delta(M(s)-m) \rangle\]</div>
-<div class="math notranslate nohighlight">
-\[P^0(m) = \langle \delta(M(s)-m) \rangle_0\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{P(m)}{P^0(m)} = e^{\beta w(m)} \langle e^{-\beta w(m)} \rangle_0 \]</div>
-<div class="math notranslate nohighlight">
-\[F(m) = F^0(m) -w(m) +C\]</div>
+<p>$$P(m) = \langle \delta(M(s)-m) \rangle$$</p>
+<p>$$P^0(m) = \langle \delta(M(s)-m) \rangle_0$$</p>
+<p>$$\frac{P(m)}{P^0(m)} = e^{\beta w(m)} \langle e^{-\beta w(m)} \rangle_0 $$</p>
+<p>$$F(m) = F^0(m) -w(m) +C$$</p>
 <ul class="simple">
 <li><p>For multiple umbrellas centered at i=1…N locations:</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[F_i(m) = F_i^0(m) -w_i(m) +C_i\]</div>
+<p>$$F_i(m) = F_i^0(m) -w_i(m) +C_i$$</p>
 <p><img alt="" src="../_images/umbrealla-2.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -620,12 +594,12 @@ Wall time: 5.95 s
 <li><p>Idea: Monte Carlo search of the function domain</p></li>
 </ol>
 <div class="section" id="finding-energy-minima-of-any-thermal-system-leftrightarrow-finding-minimum-of-any-abstract-function">
-<h3><span class="section-number">5.3.1. </span>Finding energy minima of any thermal  system <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> finding minimum of any abstract function<a class="headerlink" href="#finding-energy-minima-of-any-thermal-system-leftrightarrow-finding-minimum-of-any-abstract-function" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.3.1. </span>Finding energy minima of any thermal  system $\leftrightarrow$ finding minimum of any abstract function<a class="headerlink" href="#finding-energy-minima-of-any-thermal-system-leftrightarrow-finding-minimum-of-any-abstract-function" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Introduce (artificial) temperature parameter <span class="math notranslate nohighlight">\(T\)</span></p></li>
-<li><p>Metropolis algorithm with acceptance probability min<span class="math notranslate nohighlight">\((1, e^{-\Delta f/T})\)</span></p></li>
-<li><p>Here <span class="math notranslate nohighlight">\(f\)</span> can be any function we want to minimize (not only energy)</p></li>
-<li><p>For maximum simply change the sign: min<span class="math notranslate nohighlight">\((1, e^{+\Delta f/T})\)</span></p></li>
+<li><p>Introduce (artificial) temperature parameter $T$</p></li>
+<li><p>Metropolis algorithm with acceptance probability min$(1, e^{-\Delta f/T})$</p></li>
+<li><p>Here $f$ can be any function we want to minimize (not only energy)</p></li>
+<li><p>For maximum simply change the sign: min$(1, e^{+\Delta f/T})$</p></li>
 <li><p>Slowly reduce the temperature</p></li>
 </ul>
 </div>
@@ -633,8 +607,8 @@ Wall time: 5.95 s
 <h3><span class="section-number">5.3.2. </span>“Slow cooling” is the main idea of simulated annealing<a class="headerlink" href="#slow-cooling-is-the-main-idea-of-simulated-annealing" title="Permalink to this headline">¶</a></h3>
 <table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>very high <span class="math notranslate nohighlight">\(T\)</span></p></th>
-<th class="head"><p>very low <span class="math notranslate nohighlight">\(T\)</span></p></th>
+<tr class="row-odd"><th class="head"><p>very high $T$</p></th>
+<th class="head"><p>very low $T$</p></th>
 </tr>
 </thead>
 <tbody>
@@ -650,7 +624,7 @@ Wall time: 5.95 s
 </tbody>
 </table>
 <ul class="simple">
-<li><p>if we slowly cool from high <span class="math notranslate nohighlight">\(T\)</span> to low <span class="math notranslate nohighlight">\(T\)</span> we will explore the entire space until we converge to the (hopefully) global minimum</p></li>
+<li><p>if we slowly cool from high $T$ to low $T$ we will explore the entire space until we converge to the (hopefully) global minimum</p></li>
 <li><p>success is not guaranteed, but the methods works very well with good cooling schemes</p></li>
 <li><p>Inspiration: annealing in metallurgy.</p></li>
 <li><p>This is a great method to tackle <strong>NP-hard</strong> optimization problems, such as the traveling salesman!</p></li>
@@ -664,18 +638,17 @@ Wall time: 5.95 s
 <li><p>initial temperature should be high enough so that the system is essentially random and equilibrates quickly</p></li>
 <li><p>final temperature should be small enough so that we are essentially in the ground state (system no longer changes)</p></li>
 <li><p>exponential <strong>cooling schedule</strong> is commonly used</p>
-<div class="math notranslate nohighlight">
-\[\boxed{T(t)=T_0e^{-t/\tau}}\]</div>
-<p>where <span class="math notranslate nohighlight">\(t\)</span> is the Monte Carlo time and the constant <span class="math notranslate nohighlight">\(\tau\)</span> needs to be determined (usually empirically)</p>
+<p>$$\boxed{T(t)=T_0e^{-t/\tau}}$$</p>
+<p>where $t$ is the Monte Carlo time and the constant $\tau$ needs to be determined (usually empirically)</p>
 </li>
 <li><p>alternative cooling schedules:</p>
-<p>linear: <span class="math notranslate nohighlight">\(T(t)=T_0 - t/\tau\)</span> (also widely used)</p>
-<p>logarithmic: <span class="math notranslate nohighlight">\(T(t) = c/\log(1+t/\tau)\)</span></p>
+<p>linear: $T(t)=T_0 - t/\tau$ (also widely used)</p>
+<p>logarithmic: $T(t) = c/\log(1+t/\tau)$</p>
 </li>
 </ul>
 </div>
 <div class="section" id="example-find-global-minimum-of-the-function-via-simulated-annealing-f-x-x-2-cos-4-pi-x">
-<h3><span class="section-number">5.3.4. </span><strong>Example:</strong> find global minimum of the function via simulated annealing: <span class="math notranslate nohighlight">\(f(x) = x^2 -\cos (4\pi x)\)</span><a class="headerlink" href="#example-find-global-minimum-of-the-function-via-simulated-annealing-f-x-x-2-cos-4-pi-x" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">5.3.4. </span><strong>Example:</strong> find global minimum of the function via simulated annealing: $f(x) = x^2 -\cos (4\pi x)$<a class="headerlink" href="#example-find-global-minimum-of-the-function-via-simulated-annealing-f-x-x-2-cos-4-pi-x" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> 
@@ -694,7 +667,7 @@ Wall time: 5.95 s
 </div>
 </div>
 <div class="section" id="search-for-global-minima-of-f-x-using-simulated-annealing">
-<h4><span class="section-number">5.3.4.1. </span>Search for global minima of <span class="math notranslate nohighlight">\(f(x)\)</span> using simulated annealing<a class="headerlink" href="#search-for-global-minima-of-f-x-using-simulated-annealing" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">5.3.4.1. </span>Search for global minima of $f(x)$ using simulated annealing<a class="headerlink" href="#search-for-global-minima-of-f-x-using-simulated-annealing" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">MCupdate</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
@@ -811,7 +784,7 @@ Wall time: 5.95 s
 <div class="section" id="lessons-learened-in-this-example-for-finding-minimum-of-a-continuous-function">
 <h4><span class="section-number">5.3.4.2. </span>Lessons learened In this example: for finding minimum of a continuous function<a class="headerlink" href="#lessons-learened-in-this-example-for-finding-minimum-of-a-continuous-function" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
-<li><p>always slightly above true minimum if <span class="math notranslate nohighlight">\(T&gt;0\)</span></p></li>
+<li><p>always slightly above true minimum if $T&gt;0$</p></li>
 <li><p>best combined with a steepest descent method</p></li>
 </ul>
 </div>
@@ -849,10 +822,10 @@ Wall time: 5.95 s
 <li><p><strong>Automating and generalizing sim annealing: parallel tempering (aka Replica Exchange MCMC)</strong></p>
 <ul class="simple">
 <li><p>Simulate several copies of the system in parallel</p></li>
-<li><p>Each copy is at a different constant temperature <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p>Each copy is at a different constant temperature $T$</p></li>
 <li><p>Usual Metropolis updates for each copy</p></li>
 <li><p>Every certain number of steps attempt to exchange copies at neighboring temperatures</p></li>
-<li><p>Exchange acceptance probability is min(1, <span class="math notranslate nohighlight">\(e^{-\Delta f\Delta\beta}\)</span>)</p></li>
+<li><p>Exchange acceptance probability is min(1, $e^{-\Delta f\Delta\beta}$)</p></li>
 <li><p>If temperature difference small enough, the energy histograms of the copies will overlap and exhcanges will happen often.
 <br><br></p></li>
 </ul>
@@ -875,9 +848,8 @@ Wall time: 5.95 s
 <ul>
 <li><p>exchange acceptance probability should be between about 20% and 80%</p></li>
 <li><p>exchange acceptance probability should be approximately temperature-independent</p></li>
-<li><p>commonly used: geometric progression for <span class="math notranslate nohighlight">\(N\)</span> temperatures <span class="math notranslate nohighlight">\(T_n\)</span> between and including <span class="math notranslate nohighlight">\(T_{\rm min}\)</span> and <span class="math notranslate nohighlight">\(T_{\rm max}\)</span> (ensures more steps around <span class="math notranslate nohighlight">\(T_{\rm min}\)</span>)</p>
-<div class="math notranslate nohighlight">
-\[T_n = T_{\rm min}\left(\frac{T_{\rm max}}{T_{\rm min}}\right)^{\frac{n-1}{N-1}}\]</div>
+<li><p>commonly used: geometric progression for $N$ temperatures $T_n$ between and including $T_{\rm min}$ and $T_{\rm max}$ (ensures more steps around $T_{\rm min}$)</p>
+<p>$$T_n = T_{\rm min}\left(\frac{T_{\rm max}}{T_{\rm min}}\right)^{\frac{n-1}{N-1}}$$</p>
 </li>
 </ul>
 </li>
@@ -969,7 +941,7 @@ Wall time: 5.95 s
 <div class="section" id="problem-1">
 <h3><span class="section-number">5.4.1. </span>Problem-1<a class="headerlink" href="#problem-1" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Use umbrealla sampling to obtain free energy profile as a function of magnetization below <span class="math notranslate nohighlight">\(T_c\)</span> at <span class="math notranslate nohighlight">\(T_c\)</span> and above <span class="math notranslate nohighlight">\(T_c\)</span>. E.g <span class="math notranslate nohighlight">\(T=2, 2.5, 3\)</span> Consider using the inputs from adjecent umbrella simulations. E.g input for umbrella 4 can come from umbrella 3 to speed up simulations.</p></li>
+<li><p>Use umbrealla sampling to obtain free energy profile as a function of magnetization below $T_c$ at $T_c$ and above $T_c$. E.g $T=2, 2.5, 3$ Consider using the inputs from adjecent umbrella simulations. E.g input for umbrella 4 can come from umbrella 3 to speed up simulations.</p></li>
 </ul>
 </div>
 <div class="section" id="problem-2">
@@ -981,7 +953,7 @@ Wall time: 5.95 s
 <div class="section" id="problem-3">
 <h3><span class="section-number">5.4.3. </span>Problem-3<a class="headerlink" href="#problem-3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Use parallell tempering to enhanced sampling at <span class="math notranslate nohighlight">\(T =1\)</span> by coupling 8 replicas with <span class="math notranslate nohighlight">\(T&gt;1\)</span>. Find the optimal T spacing between replicas, Calculate histograms of magnetization to show enhancment of sampling with repsect to constant T MCMC.</p></li>
+<li><p>Use parallell tempering to enhanced sampling at $T =1$ by coupling 8 replicas with $T&gt;1$. Find the optimal T spacing between replicas, Calculate histograms of magnetization to show enhancment of sampling with repsect to constant T MCMC.</p></li>
 </ul>
 </div>
 </div>

@@ -54,8 +54,6 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Appendix B1: Probability distirbutions functions (PDFs) and Limit theorems" href="04_LimitTheorems.html" />
@@ -355,11 +353,7 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#variance-shrinks-as-n-0-5-thanks-to-lln-clt">
-     3.3.2. Variance shrinks as
-     <span class="math notranslate nohighlight">
-      \(N^{0.5}\)
-     </span>
-     thanks to LLN, CLT.
+     3.3.2. Variance shrinks as $N^{0.5}$ thanks to LLN, CLT.
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -480,9 +474,8 @@
 </div>
 <div class="section" id="throughing-pebbles-on-the-beach-and-estimatiing-pi">
 <h2><span class="section-number">3.1. </span>Throughing pebbles on the beach and estimatiing pi<a class="headerlink" href="#throughing-pebbles-on-the-beach-and-estimatiing-pi" title="Permalink to this headline">¶</a></h2>
-<p>The idea behind the program is that the ratio of the area of the  circle to the square area that inscribes it is <span class="math notranslate nohighlight">\(\pi/4\)</span>, so by counting the fraction of the random points in the square that are inside the circle, we get increasingly good estimates to <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
-<div class="math notranslate nohighlight">
-\[V_{c}/V_{s} = \pi r^2 / (2r)^2 = \frac{\pi}{4}\]</div>
+<p>The idea behind the program is that the ratio of the area of the  circle to the square area that inscribes it is $\pi/4$, so by counting the fraction of the random points in the square that are inside the circle, we get increasingly good estimates to $\pi$.</p>
+<p>$$V_{c}/V_{s} = \pi r^2 / (2r)^2 = \frac{\pi}{4}$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">circle_pi_estimate</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">r0</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -523,13 +516,12 @@
 </div>
 <div class="section" id="shapes-more-complex-than-a-circle">
 <h2><span class="section-number">3.2. </span>Shapes more complex than a circle<a class="headerlink" href="#shapes-more-complex-than-a-circle" title="Permalink to this headline">¶</a></h2>
-<div class="math notranslate nohighlight">
-\[I = \int_0^2 \sin^2(\frac{1}{x(2-x)})dx\]</div>
-<p>We will solve this problem using the same technique.  From the curve, we approximately could draw a rectangle to cover the curve in which x=[0,2], y = [0,1]. The area(volume for higher dimensions) of the rectangle is simply <span class="math notranslate nohighlight">\(A\)</span>=2. And the area under the curve is <span class="math notranslate nohighlight">\(I\)</span> which appears to be difficult to solve. If we choose a point uniformly at random in the rectangle, What’s the probability that the point falls into the region under the curve? It is obviously that <span class="math notranslate nohighlight">\(p\)</span> = <span class="math notranslate nohighlight">\(I/A\)</span>.</p>
+<p>$$I = \int_0^2 \sin^2(\frac{1}{x(2-x)})dx$$</p>
+<p>We will solve this problem using the same technique.  From the curve, we approximately could draw a rectangle to cover the curve in which x=[0,2], y = [0,1]. The area(volume for higher dimensions) of the rectangle is simply $A$=2. And the area under the curve is $I$ which appears to be difficult to solve. If we choose a point uniformly at random in the rectangle, What’s the probability that the point falls into the region under the curve? It is obviously that $p$ = $I/A$.</p>
 <ol class="simple">
-<li><p>Generate a large number of <span class="math notranslate nohighlight">\(N\)</span> random points in the bouding rectangle</p></li>
-<li><p>Count number of points <span class="math notranslate nohighlight">\(n\)</span> which are falling under the curve.</p></li>
-<li><p>Estimate area according to <span class="math notranslate nohighlight">\(I=Ap=A\frac{n}{N}\)</span></p></li>
+<li><p>Generate a large number of $N$ random points in the bouding rectangle</p></li>
+<li><p>Count number of points $n$ which are falling under the curve.</p></li>
+<li><p>Estimate area according to $I=Ap=A\frac{n}{N}$</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -628,62 +620,53 @@
 </div>
 <div class="section" id="basic-idea-behind-monte-carlo">
 <h2><span class="section-number">3.3. </span>Basic Idea behind Monte Carlo<a class="headerlink" href="#basic-idea-behind-monte-carlo" title="Permalink to this headline">¶</a></h2>
-<p>The basic idea of Monte Carlo integration is simple. Suppose you want to find the value of the following integral in some region with volume <span class="math notranslate nohighlight">\(V\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[I = \int_a^b f(x) dx\]</div>
-<p>Monte Carlo integration estimates this integral by computing the fraction of random points that fall under <span class="math notranslate nohighlight">\(f(x)\)</span>  curve multiplied by <span class="math notranslate nohighlight">\(V\)</span>. In other words we are follwing the same procedure as for evaluating pi but this time our area is the area under some general function instead of a circle inscribed in a square.</p>
+<p>The basic idea of Monte Carlo integration is simple. Suppose you want to find the value of the following integral in some region with volume $V$:</p>
+<p>$$I = \int_a^b f(x) dx$$</p>
+<p>Monte Carlo integration estimates this integral by computing the fraction of random points that fall under $f(x)$  curve multiplied by $V$. In other words we are follwing the same procedure as for evaluating pi but this time our area is the area under some general function instead of a circle inscribed in a square.</p>
 <div class="section" id="computing-expectations-by-drawing-random-numbers">
 <h3><span class="section-number">3.3.1. </span>Computing expectations by drawing random numbers<a class="headerlink" href="#computing-expectations-by-drawing-random-numbers" title="Permalink to this headline">¶</a></h3>
 <p>Using probability language, Monte Carlo simulation tallows us to obtain an estimate of the expectation</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 E[g(X)] = \int g(x) p(x) dx
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\bar{g}_n = \frac{1}{n} \sum_{i=1}^n g(x_i)
-\]</div>
-<p>where points <span class="math notranslate nohighlight">\(x_i \sim p\)</span> are draw from the probability density <span class="math notranslate nohighlight">\(p\)</span>.</p>
+$$</p>
+<p>$$
+\bar{g}<em>n = \frac{1}{n} \sum</em>{i=1}^n g(x_i)
+$$</p>
+<p>where points $x_i \sim p$ are draw from the probability density $p$.</p>
 </div>
 <div class="section" id="variance-shrinks-as-n-0-5-thanks-to-lln-clt">
-<h3><span class="section-number">3.3.2. </span>Variance shrinks as <span class="math notranslate nohighlight">\(N^{0.5}\)</span> thanks to LLN, CLT.<a class="headerlink" href="#variance-shrinks-as-n-0-5-thanks-to-lln-clt" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.3.2. </span>Variance shrinks as $N^{0.5}$ thanks to LLN, CLT.<a class="headerlink" href="#variance-shrinks-as-n-0-5-thanks-to-lln-clt" title="Permalink to this headline">¶</a></h3>
 <p>Sine random variables are i.i.d we can use Central Limit Theorem toestimate the Monte Carlo variance of the approximation as</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 \sigma^2_n = \frac{1}{n^2} \sum_{i=1}^n (g(x_i) - \bar{g_n})^2)
-\]</div>
+$$</p>
 <p>Also, according to Central Limit Theorem, expectation of sum of random variables scaled by standard deviaton tends to normal distribution:</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 \frac{\bar{g_n} - E[g(X)]}{\sigma_n} \sim \mathcal{N}(0, 1)
-\]</div>
-<p>Therefore the convergence of Monte Carlo integration is <span class="math notranslate nohighlight">\(\mathcal{0}(n^{1/2})\)</span> and independent of the dimensionality. Hence Monte Carlo integration generally beats numerical integration for moderate- and high-dimensional integration since numerical integration (quadrature) converges as <span class="math notranslate nohighlight">\(\mathcal{0}(n^{d})\)</span>. Even for low dimensional problems, Monte Carlo integration may have an advantage when the volume to be integrated is concentrated in a very small region and we can use information from the distribution to draw samples more often in the region of importance.</p>
+$$
+Therefore the convergence of Monte Carlo integration is $\mathcal{0}(n^{1/2})$ and independent of the dimensionality. Hence Monte Carlo integration generally beats numerical integration for moderate- and high-dimensional integration since numerical integration (quadrature) converges as $\mathcal{0}(n^{d})$. Even for low dimensional problems, Monte Carlo integration may have an advantage when the volume to be integrated is concentrated in a very small region and we can use information from the distribution to draw samples more often in the region of importance.</p>
 </div>
 <div class="section" id="the-essence-of-mc-casting-integrals-as-epexctations">
 <h3><span class="section-number">3.3.3. </span>The essence of MC: Casting integrals as epexctations!<a class="headerlink" href="#the-essence-of-mc-casting-integrals-as-epexctations" title="Permalink to this headline">¶</a></h3>
 <p>Back to evaluating integrals. We want to have an efficient way of finding integrals like this:</p>
-<div class="math notranslate nohighlight">
-\[I = \int{f(x)} \, dx\]</div>
-<p>Consider the expectation of a function <span class="math notranslate nohighlight">\(g(x)\)</span> with respect to some distribution <span class="math notranslate nohighlight">\(p(x)\)</span>. By definition, we have</p>
-<div class="math notranslate nohighlight">
-\[
-E[g(x)] = \int{g(x) \, p(x) \, dx}
-\]</div>
-<p>If we choose <span class="math notranslate nohighlight">\(g(x) = f(x)/p(x)\)</span>, then we have</p>
-<div class="math notranslate nohighlight">
-\[
-E[g(x)] = \int{\frac{f(x)}{p(x)} \, p(x) \, dx} = \int{f(x) dx} = I
-\]</div>
+<p>$$I = \int{f(x)} , dx$$
+Consider the expectation of a function $g(x)$ with respect to some distribution $p(x)$. By definition, we have</p>
+<p>$$
+E[g(x)] = \int{g(x) , p(x) , dx}
+$$
+If we choose $g(x) = f(x)/p(x)$, then we have</p>
+<p>$$
+E[g(x)] = \int{\frac{f(x)}{p(x)} , p(x) , dx} = \int{f(x) dx} = I
+$$</p>
 <p>By the law of large numbers, the average converges on the expectation, so we have</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 I \approx \bar{g_n} = \frac{1}{n} \sum_{i=1}^n g(x_i)
-\]</div>
-<p>Where random points <span class="math notranslate nohighlight">\(x_i\)</span> are generated from the distribution <span class="math notranslate nohighlight">\(p(x)\)</span>. If <span class="math notranslate nohighlight">\(f(x)\)</span> is a proper integral (i.e. bounded), and <span class="math notranslate nohighlight">\(p(x)\)</span> is the uniform distribution on <span class="math notranslate nohighlight">\([0,1]\)</span>, then <span class="math notranslate nohighlight">\(g(x) = f(x)\)</span> and this is known as ordinary Monte Carlo. If the integral of <span class="math notranslate nohighlight">\(f(x)\)</span> is improper, then we need to use another distribution with the same support as <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
+$$</p>
+<p>Where random points $x_i$ are generated from the distribution $p(x)$. If $f(x)$ is a proper integral (i.e. bounded), and $p(x)$ is the uniform distribution on $[0,1]$, then $g(x) = f(x)$ and this is known as ordinary Monte Carlo. If the integral of $f(x)$ is improper, then we need to use another distribution with the same support as $f(x)$.</p>
 </div>
 <div class="section" id="using-monte-carlo-evaluation-of-a-definite-integral">
 <h3><span class="section-number">3.3.4. </span>Using Monte Carlo: evaluation of a definite integral<a class="headerlink" href="#using-monte-carlo-evaluation-of-a-definite-integral" title="Permalink to this headline">¶</a></h3>
-<p>We want to estimate the following integral <span class="math notranslate nohighlight">\(I=\int_0^1 e^x dx\)</span>.</p>
+<p>We want to estimate the following integral $I=\int_0^1 e^x dx$.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -726,16 +709,18 @@ I \approx \bar{g_n} = \frac{1}{n} \sum_{i=1}^n g(x_i)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exact result: 1.7182818284590453 1.9076760487502457e-14
-N of samples:         10 1.797526
-N of samples:        100 1.696967
-N of samples:       1000 1.731121
-N of samples:      10000 1.718869
-N of samples:     100000 1.719369
-N of samples:    1000000 1.718682
-N of samples:   10000000 1.718354
+N of samples:         10 1.769016
+N of samples:        100 1.813992
+N of samples:       1000 1.711400
+N of samples:      10000 1.714841
+N of samples:     100000 1.719080
+N of samples:    1000000 1.718594
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N of samples:  100000000 1.718373
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N of samples:   10000000 1.718272
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N of samples:  100000000 1.718409
 </pre></div>
 </div>
 </div>
@@ -744,23 +729,20 @@ N of samples:   10000000 1.718354
 <div class="section" id="intuition-for-error-rate-why-monte-carlo-can-beat-brute-force-integration">
 <h3><span class="section-number">3.3.5. </span>Intuition for error rate: Why Monte Carlo can beat brute force integration.<a class="headerlink" href="#intuition-for-error-rate-why-monte-carlo-can-beat-brute-force-integration" title="Permalink to this headline">¶</a></h3>
 <p>Consider summing over many such IID (independent identically distributed) points:</p>
-<div class="math notranslate nohighlight">
-\[S_n = f(x_1) + f(x_2) + ... + f(x_n)\]</div>
-<p>The sample mean is an approximation to the integral we are hoping to estimate via MC sampling <span class="math notranslate nohighlight">\(I \approx S_n/n\)</span></p>
+<p>$$S_n = f(x_1) + f(x_2) + … + f(x_n)$$</p>
+<p>The sample mean is an approximation to the integral we are hoping to estimate via MC sampling $I \approx S_n/n$</p>
 <p>Using Chebyshev’s inequality we can see how fast the sample eman converges to true value wiht the number of samples:</p>
-<div class="math notranslate nohighlight">
-\[ P \left( \left| \frac{S_n}{n} - I \right| \ge \epsilon \right) \le \frac{V(S_1)}{\epsilon^2 N} =\delta\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\delta\)</span> quantifies simulation error frequency and <span class="math notranslate nohighlight">\(\epsilon\)</span> accuracy of the desired result.</p>
-<p>Suppose we want 1% accuracy and 99% confidence - i.e. set <span class="math notranslate nohighlight">\(\epsilon =\delta =  0.01\)</span>. The above inequality tells us that we can achieve this with just <span class="math notranslate nohighlight">\(N = 1/(\delta \epsilon^2) = 1,000,000\)</span> samples, regardless of the data dimensionality.</p>
+<p>$$ P \left( \left| \frac{S_n}{n} - I \right| \ge \epsilon \right) \le \frac{V(S_1)}{\epsilon^2 N} =\delta$$</p>
+<p>Where $\delta$ quantifies simulation error frequency and $\epsilon$ accuracy of the desired result.</p>
+<p>Suppose we want 1% accuracy and 99% confidence - i.e. set $\epsilon =\delta =  0.01$. The above inequality tells us that we can achieve this with just $N = 1/(\delta \epsilon^2) = 1,000,000$ samples, regardless of the data dimensionality.</p>
 </div>
 <div class="section" id="example-3-of-using-monte-carlo-monitoring-the-convergence-decresase-of-variance">
 <h3><span class="section-number">3.3.6. </span>Example-3 of using Monte Carlo: monitoring the convergence (decresase of variance)<a class="headerlink" href="#example-3-of-using-monte-carlo-monitoring-the-convergence-decresase-of-variance" title="Permalink to this headline">¶</a></h3>
 <p>We are often interested in knowing how many iterations it takes for Monte Carlo integration to “converge”. To do this, we would like some estimate of the variance, and it is useful to inspect such plots. One simple way to get confidence intervals for the plot of Monte Carlo estimate against number of iterations is simply to do many such simulations.</p>
 <p>For the example, we will try to estimate the function (again)</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 f(x) = x \cos 71 x + \sin 13x, \ \  0 \le x \le 1
-\]</div>
+$$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -795,12 +777,12 @@ f(x) = x \cos 71 x + \sin 13x, \ \  0 \le x \le 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.008098309735019188
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07731140129771141
 </pre></div>
 </div>
 </div>
 </div>
-<p>We vary the sample size from 1 to 100 and calculate the value of <span class="math notranslate nohighlight">\(y = \sum{x}/n\)</span> for 1000 replicates. We then plot the 2.5th and 97.5th percentile of the 1000 values of <span class="math notranslate nohighlight">\(y\)</span> to see how the variation in <span class="math notranslate nohighlight">\(y\)</span> changes with sample size. The blue lines indicate the 2.5th and 97.5th percentiles, and the red line a sample path.</p>
+<p>We vary the sample size from 1 to 100 and calculate the value of $y = \sum{x}/n$ for 1000 replicates. We then plot the 2.5th and 97.5th percentile of the 1000 values of $y$ to see how the variation in $y$ changes with sample size. The blue lines indicate the 2.5th and 97.5th percentiles, and the red line a sample path.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
@@ -830,36 +812,32 @@ f(x) = x \cos 71 x + \sin 13x, \ \  0 \le x \le 1
 </div>
 <div class="section" id="on-variance-reduction">
 <h3><span class="section-number">3.3.7. </span>On variance Reduction<a class="headerlink" href="#on-variance-reduction" title="Permalink to this headline">¶</a></h3>
-<p>With independent samples <span class="math notranslate nohighlight">\(y_i = f(x_i)/p(x_i)\)</span> the variance of the Monte Carlo estimate is</p>
-<div class="math notranslate nohighlight">
-\[
+<p>With independent samples $y_i = f(x_i)/p(x_i)$ the variance of the Monte Carlo estimate is</p>
+<p>$$
 \text{Var}[\bar{g_n}] = \text{Var} \left[ \frac{1}{n} \sum_i y_i \right ]= \frac{1}{n^2} \sum_{i=1}^{n} \text{Var}[y_i] = \frac{1}{n} \text{Var}[y_i]
-\]</div>
-<p>The objective is to make <span class="math notranslate nohighlight">\(\text{Var}[\bar{g_n}]\sim n^{-1}\)</span> as small as possible for the same number of samples <span class="math notranslate nohighlight">\(n\)</span>.</p>
+$$</p>
+<p>The objective is to make $\text{Var}[\bar{g_n}]\sim n^{-1}$ as small as possible for the same number of samples $n$.</p>
 <p>There are several variance reduction techniques (also colorfully known as Monte Carlo swindles). We will illustrate one such powerful tecnique called the importance sampling technique.</p>
 </div>
 <div class="section" id="importance-sampling">
 <h3><span class="section-number">3.3.8. </span>Importance sampling<a class="headerlink" href="#importance-sampling" title="Permalink to this headline">¶</a></h3>
 <p>Suppose we want to evaluate</p>
-<div class="math notranslate nohighlight">
-\[
-I = \int{h(x)\,p(x) \, dx}
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(h(x)\)</span> is some function and <span class="math notranslate nohighlight">\(p(x)\)</span> is the PDF of <span class="math notranslate nohighlight">\(x\)</span>. If it is hard to sample directly from <span class="math notranslate nohighlight">\(p\)</span>, we can introduce a new density function  <span class="math notranslate nohighlight">\(q(x)\)</span> that is easy to sample from, and write</p>
-<div class="math notranslate nohighlight">
-\[
-I = \int{h(x)\, p(x)\, dx} = \int{h(x)\, \frac{p(x)}{q(x)} \, q(x) \, dx}
-\]</div>
-<p>In other words, we sample from <span class="math notranslate nohighlight">\(h(y)\)</span> where <span class="math notranslate nohighlight">\(y \sim q\)</span> and weight it by the likelihood ratio <span class="math notranslate nohighlight">\(\frac{p(y)}{q(y)}\)</span>, estimating the integral as</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
+I = \int{h(x),p(x) , dx}
+$$
+where $h(x)$ is some function and $p(x)$ is the PDF of $x$. If it is hard to sample directly from $p$, we can introduce a new density function  $q(x)$ that is easy to sample from, and write</p>
+<p>$$
+I = \int{h(x), p(x), dx} = \int{h(x), \frac{p(x)}{q(x)} , q(x) , dx}
+$$
+In other words, we sample from $h(y)$ where $y \sim q$ and weight it by the likelihood ratio $\frac{p(y)}{q(y)}$, estimating the integral as</p>
+<p>$$
 I \approx \frac{1}{n}\sum_{i=1}^n \frac{p(y_i)}{q(y_i)} h(y_i)
-\]</div>
-<p>Sometimes, even if we can sample from <span class="math notranslate nohighlight">\(p\)</span> directly, it is more efficient to use another distribution.</p>
+$$
+Sometimes, even if we can sample from $p$ directly, it is more efficient to use another distribution.</p>
 </div>
 <div class="section" id="example-of-importance-sampling">
 <h3><span class="section-number">3.3.9. </span>Example of importance sampling<a class="headerlink" href="#example-of-importance-sampling" title="Permalink to this headline">¶</a></h3>
-<p>Suppose we want to estimate the tail probability of <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span> for <span class="math notranslate nohighlight">\(P(X \gt 5)\)</span>. Regular MC integration using samples from <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span> is hopeless since nearly all samples will be rejected. However, we can use the exponential density truncated at 5 as the importance function and use importance sampling. Note that <span class="math notranslate nohighlight">\(h\)</span> here is simply the identify function.</p>
+<p>Suppose we want to estimate the tail probability of $\mathcal{N}(0, 1)$ for $P(X \gt 5)$. Regular MC integration using samples from $\mathcal{N}(0, 1)$ is hopeless since nearly all samples will be rejected. However, we can use the exponential density truncated at 5 as the importance function and use importance sampling. Note that $h$ here is simply the identify function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -869,13 +847,13 @@ I \approx \frac{1}{n}\sum_{i=1}^n \frac{p(y_i)}{q(y_i)} h(y_i)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fdb7e6db0d0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f0e6defccd0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/03_MC_30_1.png" src="../_images/03_MC_30_1.png" />
 </div>
 </div>
-<p>We expect about 3 draws out of 10,000,000 from <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span> to have a value greater than 5. Hence simply sampling from <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span> is hopelessly inefficient for Monte Carlo integration.</p>
+<p>We expect about 3 draws out of 10,000,000 from $\mathcal{N}(0, 1)$ to have a value greater than 5. Hence simply sampling from $\mathcal{N}(0, 1)$ is hopelessly inefficient for Monte Carlo integration.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v_true</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sci</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
@@ -912,7 +890,7 @@ I \approx \frac{1}{n}\sum_{i=1}^n \frac{p(y_i)}{q(y_i)} h(y_i)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Direct MC &amp; error: 0.0 1.0
-Direct IS MC &amp; error: 2.8469494601225316e-07 0.006825798645206649
+Direct IS MC &amp; error: 2.864458304308086e-07 0.0007177406750151959
 </pre></div>
 </div>
 </div>
@@ -1013,16 +991,14 @@ Direct IS MC &amp; error: 2.8469494601225316e-07 0.006825798645206649
 <div class="section" id="eigenvector-solution">
 <h3><span class="section-number">3.4.1. </span>Eigenvector solution<a class="headerlink" href="#eigenvector-solution" title="Permalink to this headline">¶</a></h3>
 <p>At steady state, we have</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 p^T A = p^T
-\]</div>
+$$</p>
 <p>Taking the transpose on both sides, we see that</p>
-<div class="math notranslate nohighlight">
-\[
+<p>$$
 A^Tp = p
-\]</div>
-<p>suggesting that the steady state probability vector is the normalized eigenvector of <span class="math notranslate nohighlight">\(A^T\)</span> with <span class="math notranslate nohighlight">\(\lambda = 1\)</span>.</p>
+$$</p>
+<p>suggesting that the steady state probability vector is the normalized eigenvector of $A^T$ with $\lambda = 1$.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
@@ -1050,7 +1026,7 @@ A^Tp = p
 </div>
 </div>
 </div>
-<p>We simulate a Markov chain on the finite space <span class="math notranslate nohighlight">\(0,1,...,N.\)</span> Each state represents a population size. The x vector will contain the population size at each time step. We set the initial state to <span class="math notranslate nohighlight">\(x_0=25\)</span> (that is, there are 25 individuals in the population at initialization time):</p>
+<p>We simulate a Markov chain on the finite space $0,1,…,N.$ Each state represents a population size. The x vector will contain the population size at each time step. We set the initial state to $x_0=25$ (that is, there are 25 individuals in the population at initialization time):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nsteps</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -1060,7 +1036,7 @@ A^Tp = p
 </div>
 </div>
 </div>
-<p>Now we simulate our chain. At each time step t, there is a new birth with probability <span class="math notranslate nohighlight">\(ax_t\)</span>, and independently, there is a new death with probability <span class="math notranslate nohighlight">\(bx_t\)</span>. These <strong>probabilities are proportional to the size of the population</strong> at that time. If the population size reaches <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(N\)</span>, the evolution stops:</p>
+<p>Now we simulate our chain. At each time step t, there is a new birth with probability $ax_t$, and independently, there is a new death with probability $bx_t$. These <strong>probabilities are proportional to the size of the population</strong> at that time. If the population size reaches $0$ or $N$, the evolution stops:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
@@ -1088,7 +1064,7 @@ A^Tp = p
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fdb7e754190&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f0e6df42610&gt;]
 </pre></div>
 </div>
 <img alt="../_images/03_MC_47_1.png" src="../_images/03_MC_47_1.png" />
@@ -1158,34 +1134,34 @@ Study how root mean square deviation of position scales with time. Carry out sim
 <p>Simulate 1D random walk but instead of picking times at regular intervals pick them from  exponential distribution. <br>
 Hint: you may want to use random variables from scipy.stats.exp <br></p>
 <p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.expon.html">scipy.stats.expon</a> <br></p>
-<p>Study the root mean square deviation as a function of exponential decay parameter <span class="math notranslate nohighlight">\(\lambda\)</span> of exponential distribution <span class="math notranslate nohighlight">\(e^{-\lambda x}\)</span>.</p>
+<p>Study the root mean square deviation as a function of exponential decay parameter $\lambda$ of exponential distribution $e^{-\lambda x}$.</p>
 </div>
 <div class="section" id="problem-3-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d">
 <h3><span class="section-number">3.5.3. </span>Problem-3: Breaking the CLT; Cauchy vs Normal random walk in 2D<a class="headerlink" href="#problem-3-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d" title="Permalink to this headline">¶</a></h3>
 <p>For this problem we are going to simulate two kinds of random walks in continuum space (not lattice): Levy flights and Normal distributd random walk.</p>
-<p>To simulate a 2D continuum space random walk we need to generate random step sizes <span class="math notranslate nohighlight">\(r_x\)</span>, <span class="math notranslate nohighlight">\(r_y\)</span>.
-Also you will need unifrom random namber to sample angles in 2D giving you a conitnuum random walk in 2D space: <span class="math notranslate nohighlight">\(x = r_x sin\theta\)</span> and <span class="math notranslate nohighlight">\(y=r_ycos\theta\)</span></p>
+<p>To simulate a 2D continuum space random walk we need to generate random step sizes $r_x$, $r_y$.
+Also you will need unifrom random namber to sample angles in 2D giving you a conitnuum random walk in 2D space: $x = r_x sin\theta$ and $y=r_ycos\theta$</p>
 <ul class="simple">
-<li><p>Normally: <span class="math notranslate nohighlight">\(r\sim N(0,1)\)</span></p></li>
-<li><p>Cauchy distribution (long tails, infinite variance) <span class="math notranslate nohighlight">\(r\sim Cauchy(0,1)\)</span></p></li>
-<li><p>Unform angles <span class="math notranslate nohighlight">\(\theta \sim U(0,1)\)</span></p></li>
+<li><p>Normally: $r\sim N(0,1)$</p></li>
+<li><p>Cauchy distribution (long tails, infinite variance) $r\sim Cauchy(0,1)$</p></li>
+<li><p>Unform angles $\theta \sim U(0,1)$</p></li>
 </ul>
 <p>Visualize random walk using matplotlib and study statistics of random walkers the way that is done for normal random walk/brownian motion examples!</p>
 </div>
 <div class="section" id="problem-4-mc-the-crude-version">
 <h3><span class="section-number">3.5.4. </span>Problem-4: MC, the crude version<a class="headerlink" href="#problem-4-mc-the-crude-version" title="Permalink to this headline">¶</a></h3>
-<p>Evaluate the following integral <span class="math notranslate nohighlight">\(\int^{\infty}_0 \frac{e^{-x}}{1+(x-1)^2} dx\)</span> using Monte Carlo methods.</p>
+<p>Evaluate the following integral $\int^{\infty}_0 \frac{e^{-x}}{1+(x-1)^2} dx$ using Monte Carlo methods.</p>
 <ul class="simple">
 <li><p>Start by doing a direct monte carlo on uniform interval.</p></li>
 <li><p>Try an importance sampling approach using en exponential probability distribution.</p></li>
-<li><p>Find the optimal value of <span class="math notranslate nohighlight">\(\lambda \)</span> that gives the most rapid reduction of variance [Hint: experiment with different values of <span class="math notranslate nohighlight">\(\lambda\)</span>]</p></li>
+<li><p>Find the optimal value of $\lambda $ that gives the most rapid reduction of variance [Hint: experiment with different values of $\lambda$]</p></li>
 </ul>
 </div>
 <div class="section" id="problem-5-mc-method-for-evaluating-1d-and-2d-integrals">
 <h3><span class="section-number">3.5.5. </span>Problem-5 MC method for evaluating 1D and 2D integrals<a class="headerlink" href="#problem-5-mc-method-for-evaluating-1d-and-2d-integrals" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Since you got some experience doing MC integrations maybe you feel like generalizing your apporach a bit. Can you write a function called mc_int(f, x0, x1, N) which does monte carlo integration of simple well behaved functions f over interval x0 to x1 using N unifrom distributed random numbers on <span class="math notranslate nohighlight">\([x0, x1]\)</span>. You can also make do_mc() plot where the random points fell on the f(x) function in addition to returning the value of the evaluated integral.</p></li>
-<li><p>Generalize your function to compute 2D integral mc_int(f, x0, x1, y0, y1 N). Test this function by computing simple rectangular shaped area functions, e.g <span class="math notranslate nohighlight">\(x_0=1, x_1 =3, y_0=1, y_1=5\)</span></p></li>
+<li><p>Since you got some experience doing MC integrations maybe you feel like generalizing your apporach a bit. Can you write a function called mc_int(f, x0, x1, N) which does monte carlo integration of simple well behaved functions f over interval x0 to x1 using N unifrom distributed random numbers on $[x0, x1]$. You can also make do_mc() plot where the random points fell on the f(x) function in addition to returning the value of the evaluated integral.</p></li>
+<li><p>Generalize your function to compute 2D integral mc_int(f, x0, x1, y0, y1 N). Test this function by computing simple rectangular shaped area functions, e.g $x_0=1, x_1 =3, y_0=1, y_1=5$</p></li>
 </ul>
 </div>
 </div>
