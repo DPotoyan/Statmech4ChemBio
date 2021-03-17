@@ -458,6 +458,42 @@
      1.5.3. Hamiltonian, conservative dynamics in phase space
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problems">
+     1.5.4. Problems
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#problem-1">
+       1.5.4.1. Problem-1
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#problem-2-2d-spin-lattice">
+         1.5.4.1.1. Problem-2: 2D Spin lattice
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3-shottky-defects-in-nve-computing-number-of-states-via-lattice-models">
+     1.5.5. Problem-3: Shottky defects in NVE: Computing number of states via lattice models
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#problem-4-lattice-gas">
+       1.5.5.1. Problem-4: Lattice gas
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#problem-5-entropic-origin-of-polymer-elasticity">
+       1.5.5.2. Problem-5: Entropic origin of polymer elasticity
+      </a>
+     </li>
+    </ul>
+   </li>
   </ul>
  </li>
 </ul>
@@ -840,6 +876,58 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <div class="cell_output docutils container">
 <img alt="../_images/01_NVE_48_0.png" src="../_images/01_NVE_48_0.png" />
 </div>
+</div>
+</div>
+<div class="section" id="problems">
+<h3><span class="section-number">1.5.4. </span>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="problem-1">
+<h4><span class="section-number">1.5.4.1. </span>Problem-1<a class="headerlink" href="#problem-1" title="Permalink to this headline">¶</a></h4>
+<p>Write a python code to quantify the number of states of particle in a box at energy E $<span class="math notranslate nohighlight">\(E = C(n^2_x +n^2_y+n^2_z)\)</span><span class="math notranslate nohighlight">\( where C is a constant which you can set  to 1. You can do this by generating three integer numbers satisfying \)</span><span class="math notranslate nohighlight">\( n^2_x +n^2_y+n^2_z &lt; E\)</span>$.</p>
+<ul class="simple">
+<li><p>Try differnet energy values, <span class="math notranslate nohighlight">\(E = 10, 20, 50, 100\)</span></p></li>
+<li><p>Can you think of some Monte Carlo ideas to estimate number of states?</p></li>
+</ul>
+<div class="section" id="problem-2-2d-spin-lattice">
+<h5><span class="section-number">1.5.4.1.1. </span>Problem-2: 2D Spin lattice<a class="headerlink" href="#problem-2-2d-spin-lattice" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><p>Generate  16 by 16 lattice with spin up and down states. This can be done by using</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">np.random.choice([-1,1],size=(16,16))</span> </code></p>
+<p>Visualize the lattice via plt.imshow(latttice)</p>
+<ul class="simple">
+<li><p>Write a function to compute the total energy by using <span class="math notranslate nohighlight">\(E_{ij} = -\sum_{ij} s_i s_j\)</span> where the summation runs only between nearest neighbours of the lattice. E.g each spin has only four neighbours to interact with.</p></li>
+<li><p>Generate 1000 states by randomly flipping spins in batches of 1,2,4,8. E.g pick random spins and flip the sign. Plot the distribution of energies that results. Comment on the number of states as a function of energy.</p></li>
+<li><p>What is the probability of observing each configuration? What are the total number of states? Can you comment on efficiency of estimating total energy via random sampling.</p></li>
+<li><p>Enforce periodic boundary conditions, e.g allow each spin at the endge to interact with spin on the other side. E.g spin at <span class="math notranslate nohighlight">\((5,16)\)</span> now can interact with spin at (5,1). Can you comment on the contribution of energy that results from inclduing the surface spins?</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="problem-3-shottky-defects-in-nve-computing-number-of-states-via-lattice-models">
+<h3><span class="section-number">1.5.5. </span>Problem-3: Shottky defects in NVE: Computing number of states via lattice models<a class="headerlink" href="#problem-3-shottky-defects-in-nve-computing-number-of-states-via-lattice-models" title="Permalink to this headline">¶</a></h3>
+<p>Schotky defects are vacancies in a lattice of atoms. Creating a single vacancy costs an energy. Consider NVE ensemble of lattice with n vacacnies(defects) in an N-lattice model of solid material. The total energy is solely a function of defects in this model <span class="math notranslate nohighlight">\(E=n\epsilon\)</span></p>
+<ul class="simple">
+<li><p>Write down number of states in NVE ensemble and compute the entropy via Boltzman formula. Plot number of states as a function of energy. You can use log of number of states for plotting.</p></li>
+<li><p>Compute how the temperature would affect the fraction of vacancies on the lattice. Plot fraction of vacancies as a function of temperature.</p></li>
+<li><p>How would the total energy depend on temperature <span class="math notranslate nohighlight">\(T\)</span>. Derive expression for the high temeprature limit (<span class="math notranslate nohighlight">\(\frac{\epsilon}{k_b T} \gg 1\)</span>).</p></li>
+<li><p>Plot total energy as a function of temperature E(T)</p></li>
+</ul>
+<div class="section" id="problem-4-lattice-gas">
+<h4><span class="section-number">1.5.5.1. </span>Problem-4: Lattice gas<a class="headerlink" href="#problem-4-lattice-gas" title="Permalink to this headline">¶</a></h4>
+<p>Consider a lattice gas of N particles distributed among V cells (with <span class="math notranslate nohighlight">\(N\geq V\)</span>). Suppose that each cell may be either empty or occupied by a single particle. The number of microscopic states of this syste will be given by:</p>
+<div class="math notranslate nohighlight">
+\[\Omega (N, V) = \frac{V!}{N! (V-N)!}\]</div>
+<ul class="simple">
+<li><p>Obtain an expression for the entropy per particle <span class="math notranslate nohighlight">\(s(v)=\frac{1}{N} \cdot S(N,V)\)</span> where v=\frac{V}{N}.</p></li>
+<li><p>From this simple fundamental equation, obtain an expression of equation of state <span class="math notranslate nohighlight">\(p/T\)</span>. - Write an expansion of <span class="math notranslate nohighlight">\(p/T\)</span> in terms of density <span class="math notranslate nohighlight">\(1/v\)</span>. Show that the first term gives Boyle law of ideal gases.</p></li>
+<li><p>Sketch a graph of <span class="math notranslate nohighlight">\(\mu/T\)</span>, where <span class="math notranslate nohighlight">\(\mu(\rho)\)</span> is a chemical potential as a function of density. Comment on <span class="math notranslate nohighlight">\(\rho\rightarrow 0\)</span> and <span class="math notranslate nohighlight">\(\rho\rightarrow 1\)</span> limits</p></li>
+</ul>
+</div>
+<div class="section" id="problem-5-entropic-origin-of-polymer-elasticity">
+<h4><span class="section-number">1.5.5.2. </span>Problem-5: Entropic origin of polymer elasticity<a class="headerlink" href="#problem-5-entropic-origin-of-polymer-elasticity" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><p>Solve the problem 3.3 from the book.</p>
+</div></blockquote>
 </div>
 </div>
 </div>
