@@ -199,33 +199,27 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../05_ising.html">
-   F. Phase transitions and Ising models
+  <a class="reference internal" href="../04_ideal_systems.html">
+   E. Entropy and Information
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/01_MCMC_Ising.html">
-     1. Ising models and Metropolis-Hastings algorithm
+    <a class="reference internal" href="../04_ideal_systems/02_Quantum.html">
+     1. Quantum
     </a>
    </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../05_entropy.html">
+   E. Entropy and Information
+  </a>
+  <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/02_ising_analytic.html">
-     2. Phase transitions through the lense of Ising models
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/02_ising_analytic.html#a-bit-of-history-ising-model-and-phase-transitions">
-     3. A. bit of history: Ising model and phase transitions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/02_ising_analytic.html#homework-7">
-     4. Homework-7
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/03_EnhanceSampl.html">
-     5. Non-boltzman (enhanced) sampling ideas
+    <a class="reference internal" href="../05_entropy/01_InformationEnt.html">
+     1. What is Information?
     </a>
    </li>
   </ul>
@@ -433,18 +427,28 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quasistatic-process">
+     1.5.2. Quasistatic process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#irreversibility">
+     1.5.3. Irreversibility
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#problems">
-     1.5.2. Problems
+     1.5.4. Problems
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#problem-1">
-       1.5.2.1. Problem-1
+       1.5.4.1. Problem-1
       </a>
       <ul class="nav section-nav flex-column">
        <li class="toc-h5 nav-item toc-entry">
         <a class="reference internal nav-link" href="#problem-2-2d-spin-lattice">
-         1.5.2.1.1. Problem-2: 2D Spin lattice
+         1.5.4.1.1. Problem-2: 2D Spin lattice
         </a>
        </li>
       </ul>
@@ -453,17 +457,17 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#problem-3-shottky-defects-in-nve-computing-number-of-states-via-lattice-models">
-     1.5.3. Problem-3: Shottky defects in NVE: Computing number of states via lattice models
+     1.5.5. Problem-3: Shottky defects in NVE: Computing number of states via lattice models
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#problem-4-lattice-gas">
-       1.5.3.1. Problem-4: Lattice gas
+       1.5.5.1. Problem-4: Lattice gas
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#problem-5-entropic-origin-of-polymer-elasticity">
-       1.5.3.2. Problem-5: Entropic origin of polymer elasticity
+       1.5.5.2. Problem-5: Entropic origin of polymer elasticity
       </a>
      </li>
     </ul>
@@ -647,18 +651,15 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <div class="math notranslate nohighlight">
 \[{\Omega(E) = \frac{1}{N! h^{3N}}\int_{p^N,q^N} dp^N dq^N \delta(H(p,q) -E) =\frac{V^N}{N! h^{3N}} \int dp^N \delta(p^2/2m -E)}\]</div>
 <div class="math notranslate nohighlight">
-\[ \Omega(E) = \frac{V^N}{N! h^{3N}} V(R, \delta R)\]</div>
-<p>Where <span class="math notranslate nohighlight">\(V(R,\delta R)\)</span> is a volume of a spherical shell with radius <span class="math notranslate nohighlight">\(R = (2mE)^{1/2}\)</span> and thickness <span class="math notranslate nohighlight">\(\delta R = 1/2 (2m/E)^{1/2} \delta E\)</span></p>
+\[ \Omega(E) = \frac{V^N}{N! h^{3N}} \delta V(R)\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\delta V(R)\)</span> is a volume of a spherical shell with radius <span class="math notranslate nohighlight">\(R = (2mE)^{1/2}\)</span> and thickness <span class="math notranslate nohighlight">\(\delta R = 1/2 (2m/E)^{1/2} \delta E\)</span></p>
 <p><strong>Volume of a sphere in N dimesnional space</strong></p>
 <div class="math notranslate nohighlight">
 \[V(R) = \frac{\pi^{D/2}}{(D/2)!} R^D\]</div>
 <p>For <span class="math notranslate nohighlight">\(D\rightarrow \infty\)</span> we discover that most of the volume of the sphere is concentrated at its surface!
 <br></p>
 <div class="math notranslate nohighlight">
-\[V(R, \delta R) = V(R) -V(R-\delta R) = C [R^D - (R-\delta R)^D] = CR^D [1-(1- (\delta R/R)^D)] \rightarrow CR^D\]</div>
-<p>Hence</p>
-<div class="math notranslate nohighlight">
-\[\boxed{V(R,\delta R)= V(R)} \]</div>
+\[\delta V(R) = V(R) -V(R-\delta R) = C [R^D - (R-\delta R)^D] = CR^D [1-(1- (\delta R/R)^D)] = CR^D = V(R)\]</div>
 </div>
 <div class="section" id="classical-density-of-states-of-an-ideal-gas">
 <h3><span class="section-number">1.4.3. </span>Classical density of states of an ideal gas<a class="headerlink" href="#classical-density-of-states-of-an-ideal-gas" title="Permalink to this headline">¶</a></h3>
@@ -693,7 +694,7 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 \[log \Omega(E) = log \Omega_1(E_1) + log \Omega_2(E-E_1)\]</div>
 <p>Recall that for ideal gas we have <span class="math notranslate nohighlight">\(\Omega(E) = C V^N E^{3/2 N}\)</span>. And now consider a probability <span class="math notranslate nohighlight">\(P(E_1) = \Omega_1(E_1) \Omega_2 (E-E_1)\)</span> for a one particular energy partitioning among systems with <span class="math notranslate nohighlight">\(E_1\)</span> going to first subsystem and <span class="math notranslate nohighlight">\(E-E_1\)</span> to second.</p>
 <div class="math notranslate nohighlight">
-\[\frac{\partial logP(E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{3}{2}\frac{N_1}{E_1} - \frac{3}{2}\frac{N_2}{E_2} = 0\]</div>
+\[\frac{\partial logP(E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{3}{2}\frac{N_1}{U_1} - \frac{3}{2}\frac{N_2}{U_2} = 0\]</div>
 <p>Using definition of entropy we get the most probable value of energy <span class="math notranslate nohighlight">\((U_1)\)</span> corresponding to the equilibirum state
 $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac{N_1}{U_1} = \frac{3}{2}\frac{N_2}{U_2}\)</span>$</p>
 <div class="section" id="equations-of-state-for-ideal-gas">
@@ -707,17 +708,29 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
 <div class="math notranslate nohighlight">
 \[\frac{\mu}{T} = -\frac{\partial S}{\partial N} = k_B T \cdot log \frac{N}{V} \lambda^3\]</div>
 </div>
+<div class="section" id="quasistatic-process">
+<h3><span class="section-number">1.5.2. </span>Quasistatic process<a class="headerlink" href="#quasistatic-process" title="Permalink to this headline">¶</a></h3>
+<p>From the NVE esnsemble reasoning we can now state that quasistatic process corresponds to process which does not change in the number of microstates. That is removal of a constraint keeps the “volume” of microstates intact.</p>
+<div class="math notranslate nohighlight">
+\[\Delta S = k_B log \frac{\Omega_f}{\Omega_i} = 0\]</div>
+</div>
+<div class="section" id="irreversibility">
+<h3><span class="section-number">1.5.3. </span>Irreversibility<a class="headerlink" href="#irreversibility" title="Permalink to this headline">¶</a></h3>
+<p>On the other hand once the number of microstates grows upon removal of a constraint then re-instating the constraint will not shrink the “volume” of microstate space.</p>
+<div class="math notranslate nohighlight">
+\[\Delta S = k_B log \frac{\Omega_f}{\Omega_i} &gt; 0\]</div>
+</div>
 <div class="section" id="problems">
-<h3><span class="section-number">1.5.2. </span>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.5.4. </span>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="problem-1">
-<h4><span class="section-number">1.5.2.1. </span>Problem-1<a class="headerlink" href="#problem-1" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">1.5.4.1. </span>Problem-1<a class="headerlink" href="#problem-1" title="Permalink to this headline">¶</a></h4>
 <p>Write a python code to quantify the number of states of particle in a box at energy <span class="math notranslate nohighlight">\(E = C(n^2_x +n^2_y+n^2_z)\)</span> where C is a constant which you can set  to 1. You can do this by generating three integer numbers satisfying <span class="math notranslate nohighlight">\(n^2_x +n^2_y+n^2_z &lt; E\)</span>.</p>
 <ul class="simple">
 <li><p>Try differnet energy values, <span class="math notranslate nohighlight">\(E = 10, 20, 50, 100\)</span></p></li>
 <li><p>Can you think of some Monte Carlo ideas to estimate number of states?</p></li>
 </ul>
 <div class="section" id="problem-2-2d-spin-lattice">
-<h5><span class="section-number">1.5.2.1.1. </span>Problem-2: 2D Spin lattice<a class="headerlink" href="#problem-2-2d-spin-lattice" title="Permalink to this headline">¶</a></h5>
+<h5><span class="section-number">1.5.4.1.1. </span>Problem-2: 2D Spin lattice<a class="headerlink" href="#problem-2-2d-spin-lattice" title="Permalink to this headline">¶</a></h5>
 <ul class="simple">
 <li><p>Generate  16 by 16 lattice with spin up and down states. This can be done by using</p></li>
 </ul>
@@ -735,7 +748,7 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
 </div>
 </div>
 <div class="section" id="problem-3-shottky-defects-in-nve-computing-number-of-states-via-lattice-models">
-<h3><span class="section-number">1.5.3. </span>Problem-3: Shottky defects in NVE: Computing number of states via lattice models<a class="headerlink" href="#problem-3-shottky-defects-in-nve-computing-number-of-states-via-lattice-models" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.5.5. </span>Problem-3: Shottky defects in NVE: Computing number of states via lattice models<a class="headerlink" href="#problem-3-shottky-defects-in-nve-computing-number-of-states-via-lattice-models" title="Permalink to this headline">¶</a></h3>
 <p>Schotky defects are vacancies in a lattice of atoms. Creating a single vacancy costs an energy. Consider NVE ensemble of lattice with n vacacnies(defects) in an N-lattice model of solid material. The total energy is solely a function of defects in this model <span class="math notranslate nohighlight">\(E=n\epsilon\)</span></p>
 <ul class="simple">
 <li><p>Write down number of states in NVE ensemble and compute the entropy via Boltzman formula. Plot number of states as a function of energy. You can use log of number of states for plotting.</p></li>
@@ -744,7 +757,7 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
 <li><p>Plot total energy as a function of temperature E(T)</p></li>
 </ul>
 <div class="section" id="problem-4-lattice-gas">
-<h4><span class="section-number">1.5.3.1. </span>Problem-4: Lattice gas<a class="headerlink" href="#problem-4-lattice-gas" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">1.5.5.1. </span>Problem-4: Lattice gas<a class="headerlink" href="#problem-4-lattice-gas" title="Permalink to this headline">¶</a></h4>
 <p>Consider a lattice gas of N particles distributed among V cells (with <span class="math notranslate nohighlight">\(N\geq V\)</span>). Suppose that each cell may be either empty or occupied by a single particle. The number of microscopic states of this syste will be given by:</p>
 <div class="math notranslate nohighlight">
 \[\Omega (N, V) = \frac{V!}{N! (V-N)!}\]</div>
@@ -755,7 +768,7 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
 </ul>
 </div>
 <div class="section" id="problem-5-entropic-origin-of-polymer-elasticity">
-<h4><span class="section-number">1.5.3.2. </span>Problem-5: Entropic origin of polymer elasticity<a class="headerlink" href="#problem-5-entropic-origin-of-polymer-elasticity" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">1.5.5.2. </span>Problem-5: Entropic origin of polymer elasticity<a class="headerlink" href="#problem-5-entropic-origin-of-polymer-elasticity" title="Permalink to this headline">¶</a></h4>
 <blockquote>
 <div><p>Solve the problem 3.3 from the book.</p>
 </div></blockquote>

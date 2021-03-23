@@ -199,33 +199,27 @@
   </i>
  </li>
  <li class="toctree-l1 collapsible-parent">
-  <a class="reference internal" href="../05_ising.html">
-   F. Phase transitions and Ising models
+  <a class="reference internal" href="../04_ideal_systems.html">
+   E. Entropy and Information
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/01_MCMC_Ising.html">
-     1. Ising models and Metropolis-Hastings algorithm
+    <a class="reference internal" href="../04_ideal_systems/02_Quantum.html">
+     1. Quantum
     </a>
    </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="../05_entropy.html">
+   E. Entropy and Information
+  </a>
+  <ul class="collapse-ul">
    <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/02_ising_analytic.html">
-     2. Phase transitions through the lense of Ising models
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/02_ising_analytic.html#a-bit-of-history-ising-model-and-phase-transitions">
-     3. A. bit of history: Ising model and phase transitions
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/02_ising_analytic.html#homework-7">
-     4. Homework-7
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../06_ising/03_EnhanceSampl.html">
-     5. Non-boltzman (enhanced) sampling ideas
+    <a class="reference internal" href="../05_entropy/01_InformationEnt.html">
+     1. What is Information?
     </a>
    </li>
   </ul>
@@ -338,13 +332,13 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#derivation-1">
-     2.1.1. Derivation-1
+    <a class="reference internal nav-link" href="#derivation-of-boltzmann-distribution">
+     2.1.1. Derivation of Boltzmann distribution
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#derivation-2">
-     2.1.2. Derivation- 2
+    <a class="reference internal nav-link" href="#another-derivation-of-boltzmann-distribution">
+     2.1.2. Another derivation of Boltzmann distribution
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
@@ -387,6 +381,11 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#microscopic-origins-of-quasistatic-process-heat-work-and-entropy-and-all-that">
      2.1.7. Microscopic origins of quasistatic process, heat, work and entropy and all that
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-criteria-of-equilibrium">
+     2.1.8. General criteria of equilibrium
     </a>
    </li>
   </ul>
@@ -461,8 +460,8 @@
 <div class="math notranslate nohighlight">
 \[p_i = \frac{\Omega_r(E_{t}-E_i)}{\Omega_{t} (E_{t})} = \frac{e^{S_r(E_{t}-E_i)/k_B}}{e^{S_{t}(E)/k_B}}\]</div>
 <p>Where we have used use the microcanonical ensemble of <strong>system+reservoir</strong> to cast the problem in terms of probabilities of <strong>the system</strong>.</p>
-<div class="section" id="derivation-1">
-<h3><span class="section-number">2.1.1. </span>Derivation-1<a class="headerlink" href="#derivation-1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="derivation-of-boltzmann-distribution">
+<h3><span class="section-number">2.1.1. </span>Derivation of Boltzmann distribution<a class="headerlink" href="#derivation-of-boltzmann-distribution" title="Permalink to this headline">¶</a></h3>
 <p>Since entropy is a smoothly varying function of energy we can expand it around <span class="math notranslate nohighlight">\(E_{tot}\)</span> as <span class="math notranslate nohighlight">\(E_i\)</span> is a much smaller quantity.</p>
 <div class="math notranslate nohighlight">
 \[S_r(E_{t}-E_i) \approx S_r(E_{t}) - \Big( \frac{\partial S_r}{\partial E}\Big) E_i = S_r(E_{t}) -\frac{E_i}{T}\]</div>
@@ -470,26 +469,22 @@
 <div class="math notranslate nohighlight">
 \[ p_i = \frac{e^{-\beta E_i}}{Z}\,\,\,\,\, Z= \sum_i e^{-\beta E_i}\]</div>
 </div>
-<div class="section" id="derivation-2">
-<h3><span class="section-number">2.1.2. </span>Derivation- 2<a class="headerlink" href="#derivation-2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="another-derivation-of-boltzmann-distribution">
+<h3><span class="section-number">2.1.2. </span>Another derivation of Boltzmann distribution<a class="headerlink" href="#another-derivation-of-boltzmann-distribution" title="Permalink to this headline">¶</a></h3>
 <p>A more revealing is the expansion around system’s average energy</p>
 <div class="math notranslate nohighlight">
 \[U = \sum_i p_i E_i\]</div>
 <p>which has small fluctuations around it</p>
 <div class="math notranslate nohighlight">
 \[U - E_i = \delta E_i \sim O(N^{1/2})\]</div>
-<ul class="simple">
-<li><p><strong>Entropy of reservoir</strong>
-$<span class="math notranslate nohighlight">\(S_r(E_{t}-E_i) = S_r(E_{t}-U + U-E_i) \approx S_r(E_{t}-U) +\Big( \frac{\partial S_r(E)}{\partial E}\Big) (U-E_i)=  S_r(E_{t}-U) +\frac{1}{T}(U-E_i)\)</span>$</p></li>
-</ul>
-<br>
-<ul class="simple">
-<li><p><strong>Entropy of total system.</strong>
-$<span class="math notranslate nohighlight">\( S_{t}(E_{t}) = S_r(E_{t}-U)+S(U)\)</span>$</p></li>
-</ul>
-<br>
+<p><strong>Entropy of the reservoir</strong>
+$<span class="math notranslate nohighlight">\(S_r(E_{t}-E_i) = S_r(E_{t}-U + U-E_i) \approx S_r(E_{t}-U) +\Big( \frac{\partial S_r(E)}{\partial E}\Big) (U-E_i)\)</span>$</p>
 <div class="math notranslate nohighlight">
-\[p_i =\frac{exp[{S_r(E_{t}-E_i)/k_B}]}{exp[{S_{t}(E_{t})/k_B}]} = \frac{exp[S_r(E_{t}-U)/k_B] \cdot exp[-\beta (U-E_i)]}{exp [ S_r(E_{t}-U)/k_B] \cdot exp[S(U)/k_B]} = \frac{exp[-\beta (U-E_i)]}{exp[S(U)/k_B]}\]</div>
+\[S_r(E_{t}-E_i) =  S_r(E_{t}-U) +\frac{1}{T}(U-E_i)\]</div>
+<p><strong>Entropy of the total system.</strong>
+$<span class="math notranslate nohighlight">\( S_{t}(E_{t}) = S_r(E_{t}-U)+S(U)\)</span>$</p>
+<p><strong>Probability of a microstate</strong>
+$<span class="math notranslate nohighlight">\(p_i =\frac{exp[{S_r(E_{t}-E_i)/k_B}]}{exp[{S_{t}(E_{t})/k_B}]} = \frac{exp[-\beta (U-E_i)]}{exp[S(U)/k_B]}\)</span>$</p>
 <div class="math notranslate nohighlight">
 \[\boxed{ p_i = \frac{e^{-\beta E_i}}{e^{-\beta F}} = \frac{e^{-\beta E_i}}{Z} }\]</div>
 <div class="section" id="boltzmann-distribution">
@@ -510,9 +505,8 @@ $<span class="math notranslate nohighlight">\( S_{t}(E_{t}) = S_r(E_{t}-U)+S(U)\
 </div>
 <div class="section" id="closer-look-at-the-z-the-partiation-function">
 <h3><span class="section-number">2.1.3. </span>Closer look at the Z: The partiation function<a class="headerlink" href="#closer-look-at-the-z-the-partiation-function" title="Permalink to this headline">¶</a></h3>
-<br>
-$$\boxed{Z(\beta) = \sum_i e^{-\beta E_i} = \int \Omega(E) e^{-\beta E}dE = \int e^{-\beta (E-TS)}dE }$$
-<br>
+<div class="math notranslate nohighlight">
+\[\boxed{Z(\beta) = \sum_i e^{-\beta E_i} = \int \Omega(E) e^{-\beta E}dE = \int e^{-\beta (E-TS)}dE }\]</div>
 <ul class="simple">
 <li><p>The parition function is “partitioning” or disirbuting (exponentially) the states of NVT ensemble with different energy levels/values:
 <br></p></li>
@@ -570,10 +564,8 @@ $$\boxed{Z(\beta) = \sum_i e^{-\beta E_i} = \int \Omega(E) e^{-\beta E}dE = \int
 </div>
 <div class="section" id="why-free-energy-is-a-central-quantity-in-the-nvt-ensemble">
 <h3><span class="section-number">2.1.4. </span>Why free energy is a central quantity in the NVT ensemble.<a class="headerlink" href="#why-free-energy-is-a-central-quantity-in-the-nvt-ensemble" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>As we have learned in Thermodynamics, after legendre transorming total energy the equilibrium corresponds to the minimum of the free energy.</p>
-</div></blockquote>
-<p>Now time to see how free energy governes probabilities in the NVT ensemble:</p>
+<p>As we have learned in Thermodynamics, after legendre transorm <span class="math notranslate nohighlight">\(NVE\rightarrow NVT\)</span> the entropy maximiziation (energy minimization) principle gets replaced by the free energy minimization prinicple.</p>
+<p>Now we can show thatn indded the free energy governs probabilities of states in the NVT ensemble:</p>
 <div class="math notranslate nohighlight">
 \[p_1 =\frac{\Omega (E_1) e^{-\beta E_1}}{Z} = \frac{e^{-\beta F_1}}{e^{-\beta F}}\]</div>
 <p>Often we re interested in relative probabilities of different states, e.g conformation A vs B of polymer:</p>
@@ -614,24 +606,36 @@ $$\boxed{Z(\beta) = \sum_i e^{-\beta E_i} = \int \Omega(E) e^{-\beta E}dE = \int
 <div class="section" id="microscopic-origins-of-quasistatic-process-heat-work-and-entropy-and-all-that">
 <h3><span class="section-number">2.1.7. </span>Microscopic origins of quasistatic process, heat, work and entropy and all that<a class="headerlink" href="#microscopic-origins-of-quasistatic-process-heat-work-and-entropy-and-all-that" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
-\[U(p(x), E(x)) = \langle E(x) \rangle = \int p(x) E(x) dx\]</div>
+\[U = \langle E\rangle =\sum_i p_i E_i\]</div>
 <div class="math notranslate nohighlight">
-\[S(p(x)) = \langle -log p(x) \rangle = \int p(x) log p(x) dx\]</div>
-<p><strong>Microscopic origin of the First law</strong></p>
+\[dU = \sum_i p_i dE_i + \sum_i E_i dp_i = \delta W +\delta Q\]</div>
+</div>
+<div class="section" id="general-criteria-of-equilibrium">
+<h3><span class="section-number">2.1.8. </span>General criteria of equilibrium<a class="headerlink" href="#general-criteria-of-equilibrium" title="Permalink to this headline">¶</a></h3>
+<p>Consider a total system consisting of a heat reservoir and a subsystem.</p>
+<ul class="simple">
+<li><p>Subsystem exchanges heat <span class="math notranslate nohighlight">\(Q = -Q^{'}\)</span> with reservoir at a constant temperature <span class="math notranslate nohighlight">\(T\)</span></p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[d U = \frac{\partial U}{\partial V} dV +\frac{\partial U}{\partial p}dp \]</div>
+\[\Delta S_0 = \Delta S + \Delta S^{'}\]</div>
 <div class="math notranslate nohighlight">
-\[d U = \delta W +\delta Q\]</div>
+\[log \Omega^{'}(U^{'}+Q^{'}) \approx log \Omega^{'}(U^{'}) + \frac{\partial \Omega^{'}}{\partial U^{'}}+ ... = log \Omega^{'}(U^{'})  + \beta^{'} Q^{'}\]</div>
 <div class="math notranslate nohighlight">
-\[\delta W = \Big [ \frac{\partial E_V(x)}{\partial V}\delta x \Big ]dV\]</div>
+\[log \Omega^{'}(U^{'}+Q^{'}) - log \Omega^{'}(U^{'}) = \Delta S^{'} = \frac{Q^{'}}{T} = -\frac{Q}{T}\]</div>
+<p>Now consider that subssytem does work agains the reservoir <span class="math notranslate nohighlight">\(Q = \Delta U + W\)</span></p>
 <div class="math notranslate nohighlight">
-\[\delta Q = \Big [ E_V(x)\delta x \Big ] dp\]</div>
-<p><strong>Microscopic origin of the Second law</strong>
-$<span class="math notranslate nohighlight">\(dS = - \int log p(x) \delta x dp\)</span>$</p>
+\[\Delta S_0 = \Delta S - \frac{\Delta U + W}{T} \geq 0\]</div>
+<p>Defining <span class="math notranslate nohighlight">\(F = U-TS\)</span> we define a new thermodynamic potential that for <span class="math notranslate nohighlight">\(T=T^{'}=const\)</span> predicts equilibrium.</p>
 <div class="math notranslate nohighlight">
-\[p(x) = \frac{e^{-\beta E(x)}}{e^{-\beta F}} \]</div>
+\[ -\frac{\Delta (U-TS)+W}{T} = -\frac{\Delta F + W}{T} \geq 0\]</div>
+<p><strong>maxmimum amount of work</strong>  <span class="math notranslate nohighlight">\(W\)</span> that a system can do in a contact with a heat bath is <span class="math notranslate nohighlight">\(-\Delta F\)</span> which correpsonds to a reversible work. Irreversible work leads to dissipation of the free energy into the reservioir in the form of heat.</p>
+<p><strong>Free energy decreases in the sponteneous process (fixed work coordinates)</strong> reaching a minimium corresponding to an equilibrium state</p>
 <div class="math notranslate nohighlight">
-\[dS = - \int \beta(-E(x) + F) \delta x dp =  \int \beta E(x) \delta x dp = \beta \delta Q\]</div>
+\[\Delta F \leq 0 \]</div>
+<ul class="simple">
+<li><p>Note that <span class="math notranslate nohighlight">\(U=const\)</span>, <span class="math notranslate nohighlight">\(V=const\)</span> correspond to <span class="math notranslate nohighlight">\(\Delta S \geq 0\)</span> (Entropy maximization)</p></li>
+<li><p>Note that <span class="math notranslate nohighlight">\(S=const\)</span>, <span class="math notranslate nohighlight">\(V=const\)</span> correspond to <span class="math notranslate nohighlight">\(\Delta E \leq 0\)</span> (Energy minimization)</p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="ensemble-equivalence">
@@ -755,7 +759,7 @@ Thermodynamics is the same regardless of the ensemble used! Consequence of small
 \[S = - \Big(\frac{\partial F}{\partial T} \Big)_H = k_B log \Big [ 2 cosh (\beta \mu H )  \Big ] - k_B (\beta \mu H)\cdot tanh (\beta \mu H)\]</div>
 <p><strong>Magnetization</strong></p>
 <p>Magnetization <span class="math notranslate nohighlight">\(M\)</span> (extensive quantity) or magnetization per particle <span class="math notranslate nohighlight">\(m=M/N\)</span> (intensive quantity) is given as another free energy derivative:</p>
-<p>M = - \Big(\frac{\partial F}{\partial H} \Big)_T = \mu tanh \Big(\beta \mu H \Big) $$</p>
+<p>M = - \Big(\frac{\partial F}{\partial H} \Big)_T = \mu tanh \Big(\beta \mu H \Big)$$</p>
 <blockquote>
 <div><p>Note that the same expression is obtained when computing average value of magnetization as expected <span class="math notranslate nohighlight">\(M = \langle \mu \sum_{s_j} \rangle\)</span></p>
 </div></blockquote>
