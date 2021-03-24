@@ -736,7 +736,7 @@ $<span class="math notranslate nohighlight">\(\boxed{Z= \sum_i e^{-\beta E_i} }\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f7c869efad0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc658c3bed0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/02_NVT_16_1.png" src="../_images/02_NVT_16_1.png" />
@@ -820,6 +820,27 @@ Thermodynamics is the same regardless of the ensemble used! Consequence of small
 <p>Finally as a consitency check we can combine enetrpy and free energy expressions to obtain internal energy:</p>
 <div class="math notranslate nohighlight">
 \[U = F+TS = -\mu B tanh(\beta \mu B)\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">beta</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">beta</span><span class="o">*</span><span class="n">x</span><span class="p">))</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$m/\mu$&#39;</span><span class="p">)</span>    
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;B&#39;)
+</pre></div>
+</div>
+<img alt="../_images/02_NVT_23_1.png" src="../_images/02_NVT_23_1.png" />
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="boltzman-gas-and-the-original-derivation-of-boltzman-distribution">
