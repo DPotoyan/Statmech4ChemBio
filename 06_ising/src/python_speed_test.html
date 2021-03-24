@@ -441,11 +441,18 @@
 <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 
 <span class="nn">~/work/Statmech4ChemBio/Statmech4ChemBio/06_ising/src/basic_Ising2d.py</span> in <span class="ni">ising2d_mcmc</span><span class="nt">(N, J, B, T, n_steps, out_freq)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> 
-<span class="g g-Whitespace">     </span><span class="mi">18</span>         <span class="c1">#Pick random spin</span>
-<span class="ne">---&gt; </span><span class="mi">19</span>         <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> 
-<span class="g g-Whitespace">     </span><span class="mi">21</span>         <span class="c1">#Compute energy change</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>             <span class="n">confs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spins</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>             <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getM</span><span class="p">(</span><span class="n">spins</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">35</span>             <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">B</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> 
+<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="k">return</span> <span class="n">confs</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">E</span>
+
+<span class="nn">~/work/Statmech4ChemBio/Statmech4ChemBio/06_ising/src/basic_Ising2d.py</span> in <span class="ni">getE</span><span class="nt">(spins, J, B)</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span> 
+<span class="g g-Whitespace">     </span><span class="mi">55</span>             <span class="n">z</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] +\
+<span class="ne">---&gt; </span><span class="mi">56</span>                 <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>] +  spins[i,(j-1)%N]
+<span class="g g-Whitespace">     </span><span class="mi">57</span> 
+<span class="g g-Whitespace">     </span><span class="mi">58</span>             <span class="n">E</span> <span class="o">+=</span> <span class="o">-</span><span class="n">J</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="mi">4</span> <span class="c1"># Since we overcounted interactions 4 times divide by 4.</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
