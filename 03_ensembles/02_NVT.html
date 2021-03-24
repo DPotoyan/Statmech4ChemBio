@@ -204,8 +204,13 @@
   </a>
   <ul class="collapse-ul">
    <li class="toctree-l2">
+    <a class="reference internal" href="../04_ideal_systems/01_Classical.html">
+     1. Classical gases
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../04_ideal_systems/02_Quantum.html">
-     1. Quantum
+     2. Quantum
     </a>
    </li>
   </ul>
@@ -465,9 +470,9 @@
 <p>Since entropy is a smoothly varying function of energy we can expand it around <span class="math notranslate nohighlight">\(E_{tot}\)</span> as <span class="math notranslate nohighlight">\(E_i\)</span> is a much smaller quantity.</p>
 <div class="math notranslate nohighlight">
 \[S_r(E_{t}-E_i) \approx S_r(E_{t}) - \Big( \frac{\partial S_r}{\partial E}\Big) E_i = S_r(E_{t}) -\frac{E_i}{T}\]</div>
-<p>This leads to $<span class="math notranslate nohighlight">\(p_i \sim e^{-\beta E_i}\,\,\,\, where \,\,\,\,\beta = \frac{1}{k_B T}\)</span>$ after normalizing we obtain:</p>
+<p>This leads to <span class="math notranslate nohighlight">\(p_i \sim e^{-\beta E_i}\)</span> were <span class="math notranslate nohighlight">\(\beta = \frac{1}{k_B T}\)</span> after normalizing we obtain:</p>
 <div class="math notranslate nohighlight">
-\[ p_i = \frac{e^{-\beta E_i}}{Z}\,\,\,\,\, Z= \sum_i e^{-\beta E_i}\]</div>
+\[p_i = \frac{e^{-\beta E_i}}{Z}\,\,\,\,\, Z= \sum_i e^{-\beta E_i}\]</div>
 </div>
 <div class="section" id="another-derivation-of-boltzmann-distribution">
 <h3><span class="section-number">2.1.2. </span>Another derivation of Boltzmann distribution<a class="headerlink" href="#another-derivation-of-boltzmann-distribution" title="Permalink to this headline">¶</a></h3>
@@ -477,14 +482,17 @@
 <p>which has small fluctuations around it</p>
 <div class="math notranslate nohighlight">
 \[U - E_i = \delta E_i \sim O(N^{1/2})\]</div>
-<p><strong>Entropy of the reservoir</strong>
-$<span class="math notranslate nohighlight">\(S_r(E_{t}-E_i) = S_r(E_{t}-U + U-E_i) \approx S_r(E_{t}-U) +\Big( \frac{\partial S_r(E)}{\partial E}\Big) (U-E_i)\)</span>$</p>
+<p><strong>Entropy of the reservoir</strong></p>
+<div class="math notranslate nohighlight">
+\[S_r(E_{t}-E_i) = S_r(E_{t}-U + U-E_i) \approx S_r(E_{t}-U) +\Big( \frac{\partial S_r(E)}{\partial E}\Big) (U-E_i)\]</div>
 <div class="math notranslate nohighlight">
 \[S_r(E_{t}-E_i) =  S_r(E_{t}-U) +\frac{1}{T}(U-E_i)\]</div>
-<p><strong>Entropy of the total system.</strong>
-$<span class="math notranslate nohighlight">\( S_{t}(E_{t}) = S_r(E_{t}-U)+S(U)\)</span>$</p>
-<p><strong>Probability of a microstate</strong>
-$<span class="math notranslate nohighlight">\(p_i =\frac{exp[{S_r(E_{t}-E_i)/k_B}]}{exp[{S_{t}(E_{t})/k_B}]} = \frac{exp[-\beta (U-E_i)]}{exp[S(U)/k_B]}\)</span>$</p>
+<p><strong>Entropy of the total system.</strong></p>
+<div class="math notranslate nohighlight">
+\[ S_{t}(E_{t}) = S_r(E_{t}-U)+S(U)\]</div>
+<p><strong>Probability of a microstate</strong></p>
+<div class="math notranslate nohighlight">
+\[p_i =\frac{exp[{S_r(E_{t}-E_i)/k_B}]}{exp[{S_{t}(E_{t})/k_B}]} = \frac{exp[-\beta (U-E_i)]}{exp[S(U)/k_B]}\]</div>
 <div class="math notranslate nohighlight">
 \[\boxed{ p_i = \frac{e^{-\beta E_i}}{e^{-\beta F}} = \frac{e^{-\beta E_i}}{Z} }\]</div>
 <div class="section" id="boltzmann-distribution">
@@ -522,44 +530,32 @@ $<span class="math notranslate nohighlight">\(p_i =\frac{exp[{S_r(E_{t}-E_i)/k_B
 <p>Where <span class="math notranslate nohighlight">\(U =\langle E \rangle\)</span> is the thermodynamic average energy, flucutatins around which are on order of <span class="math notranslate nohighlight">\(O(N^{1/2})\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">kbT</span> <span class="o">=</span> <span class="mf">2.5</span>
 
-<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="n">N</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">omega</span>  <span class="o">=</span> <span class="n">E</span><span class="o">**</span><span class="p">(</span><span class="mf">1.5</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
+<span class="n">boltzf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">kbT</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\Omega(E)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">boltzf</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$exp(-E/k_B T)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">omega</span><span class="o">*</span><span class="n">boltzf</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$\Omega(E) exp(-E/k_B T)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$E$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">cebc44aee55c</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">N</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="o">*</span><span class="n">N</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;$E$&#39;)
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">omega</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">omega</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1170175f8&gt;]
-</pre></div>
-</div>
-<img alt="../_images/02_NVT_8_1.png" src="../_images/02_NVT_8_1.png" />
-</div>
+<img alt="../_images/02_NVT_7_1.svg" src="../_images/02_NVT_7_1.svg" /></div>
 </div>
 </div>
 <div class="section" id="why-free-energy-is-a-central-quantity-in-the-nvt-ensemble">
@@ -614,14 +610,14 @@ $<span class="math notranslate nohighlight">\(p_i =\frac{exp[{S_r(E_{t}-E_i)/k_B
 <h3><span class="section-number">2.1.8. </span>General criteria of equilibrium<a class="headerlink" href="#general-criteria-of-equilibrium" title="Permalink to this headline">¶</a></h3>
 <p>Consider a total system consisting of a heat reservoir and a subsystem.</p>
 <ul class="simple">
-<li><p>Subsystem exchanges heat <span class="math notranslate nohighlight">\(Q = -Q^{'}\)</span> with reservoir at a constant temperature <span class="math notranslate nohighlight">\(T\)</span></p></li>
+<li><p>Subsystem exchanges heat <span class="math notranslate nohighlight">\(Q=-Q^{'}\)</span> with reservoir at a constant temperature <span class="math notranslate nohighlight">\(T\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\Delta S_0 = \Delta S + \Delta S^{'}\]</div>
 <div class="math notranslate nohighlight">
 \[log \Omega^{'}(U^{'}+Q^{'}) \approx log \Omega^{'}(U^{'}) + \frac{\partial \Omega^{'}}{\partial U^{'}}+ ... = log \Omega^{'}(U^{'})  + \beta^{'} Q^{'}\]</div>
 <div class="math notranslate nohighlight">
-\[log \Omega^{'}(U^{'}+Q^{'}) - log \Omega^{'}(U^{'}) = \Delta S^{'} = \frac{Q^{'}}{T} = -\frac{Q}{T}\]</div>
+\[log \Omega^{'}(U^{'}+Q^{'}) - log \Omega^{'}(U^{'}) = \Delta S^{'} = \frac{Q^{'}}{T}\]</div>
 <p>Now consider that subssytem does work agains the reservoir <span class="math notranslate nohighlight">\(Q = \Delta U + W\)</span></p>
 <div class="math notranslate nohighlight">
 \[\Delta S_0 = \Delta S - \frac{\Delta U + W}{T} \geq 0\]</div>
@@ -672,7 +668,7 @@ $<span class="math notranslate nohighlight">\(p_i =\frac{exp[{S_r(E_{t}-E_i)/k_B
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x116c81828&gt;]
 </pre></div>
 </div>
-<img alt="../_images/02_NVT_15_1.png" src="../_images/02_NVT_15_1.png" />
+<img alt="../_images/02_NVT_14_1.png" src="../_images/02_NVT_14_1.png" />
 </div>
 </div>
 </div>
@@ -759,7 +755,8 @@ Thermodynamics is the same regardless of the ensemble used! Consequence of small
 \[S = - \Big(\frac{\partial F}{\partial T} \Big)_H = k_B log \Big [ 2 cosh (\beta \mu H )  \Big ] - k_B (\beta \mu H)\cdot tanh (\beta \mu H)\]</div>
 <p><strong>Magnetization</strong></p>
 <p>Magnetization <span class="math notranslate nohighlight">\(M\)</span> (extensive quantity) or magnetization per particle <span class="math notranslate nohighlight">\(m=M/N\)</span> (intensive quantity) is given as another free energy derivative:</p>
-<p>M = - \Big(\frac{\partial F}{\partial H} \Big)_T = \mu tanh \Big(\beta \mu H \Big)$$</p>
+<div class="math notranslate nohighlight">
+\[M = - \Big(\frac{\partial F}{\partial H} \Big)_T = \mu tanh \Big(\beta \mu H \Big)\]</div>
 <blockquote>
 <div><p>Note that the same expression is obtained when computing average value of magnetization as expected <span class="math notranslate nohighlight">\(M = \langle \mu \sum_{s_j} \rangle\)</span></p>
 </div></blockquote>

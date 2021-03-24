@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>1. Classical gases &#8212; Statistical Mechanics for Chemistry and Biology</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -54,9 +54,11 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Quantum" href="02_Quantum.html" />
+    <link rel="next" title="2. Quantum" href="02_Quantum.html" />
     <link rel="prev" title="E. Entropy and Information" href="../04_ideal_systems.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -94,7 +96,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="../00_python.html">
    A. Python refresher
@@ -196,14 +198,19 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="../04_ideal_systems.html">
    E. Entropy and Information
   </a>
-  <ul class="collapse-ul">
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     1. Classical gases
+    </a>
+   </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_Quantum.html">
-     1. Quantum
+     2. Quantum
     </a>
    </li>
   </ul>
@@ -264,9 +271,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/04_ideal_systems/01_Classical.md"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/04_ideal_systems/01_Classical.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
+                data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -284,6 +291,28 @@
 
             <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/04_ideal_systems/01_Classical.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/04_ideal_systems/01_Classical.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
         </div>
 
         <!-- Table of contents -->
@@ -294,7 +323,44 @@
             Contents
         </div>
         <nav id="bd-toc-nav">
-            <ul class="simple nav section-nav flex-column">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phase-space-liuville-s-theorem-and-ergoicity-ideas">
+   1.1. Phase Space, Liuville’s Theorem and Ergoicity ideas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuity-equation-and-liuville-s-theorem">
+     1.1.1. Continuity equation and Liuville’s theorem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#liuville-theorem-illustrated">
+     1.1.2. Liuville theorem illustrated
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hamiltonian-conservative-dynamics-in-phase-space">
+     1.1.3. Hamiltonian, conservative dynamics in phase space
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rigid-rotor-model">
+     1.1.4. Rigid rotor model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#harmonic-oscillator-model">
+     1.1.5. Harmonic oscillator model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#partition-function-for-a-molecular-gas">
+     1.1.6. Partition function for a molecular gas
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
         </nav>
@@ -307,7 +373,182 @@
         
               <div>
                 
-  
+  <div class="section" id="classical-gases">
+<h1><span class="section-number">1. </span>Classical gases<a class="headerlink" href="#classical-gases" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="phase-space-liuville-s-theorem-and-ergoicity-ideas">
+<h2><span class="section-number">1.1. </span>Phase Space, Liuville’s Theorem and Ergoicity ideas<a class="headerlink" href="#phase-space-liuville-s-theorem-and-ergoicity-ideas" title="Permalink to this headline">¶</a></h2>
+<p>Conservative systems are govenred by Hamilton’s equation of motion. That is changes in position and momenta stay on the surface: <span class="math notranslate nohighlight">\(H(p,q)=E\)</span></p>
+<div class="math notranslate nohighlight">
+\[\dot{q} = \frac{\partial H}{\partial p}\]</div>
+<div class="math notranslate nohighlight">
+\[\dot{p} = -\frac{\partial H}{\partial q}\]</div>
+<p>To see how ensemble N body mechanical conervative system evoleves we are introducing probability distribution of classical trajecotires in phase space</p>
+<div class="math notranslate nohighlight">
+\[\rho(p,q,t)dq dp \]</div>
+<div class="section" id="continuity-equation-and-liuville-s-theorem">
+<h3><span class="section-number">1.1.1. </span>Continuity equation and Liuville’s theorem<a class="headerlink" href="#continuity-equation-and-liuville-s-theorem" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \rho(p,q,t)}{\partial t} = -\nabla J = - \nabla(\rho \vec{v})\]</div>
+<p>Where flux <span class="math notranslate nohighlight">\(J= \rho \vec{v}\)</span> is defined in terms of the velcotiy of points in phase space <span class="math notranslate nohighlight">\(v = (\dot{q},\dot{p})\)</span>. Combinging the continuity expression combined with Hamilton’s equation of motion:</p>
+<div class="math notranslate nohighlight">
+\[\dot{p_i} = -\partial_{q_i} H \,\,\,\,\ \dot{q_i} = \partial_{p_i} H\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \rho(p,q,t)}{\partial t} + \sum_i \Big [ \frac{\partial \rho}{\partial q_i}\dot{q_i}+\frac{\partial \rho}{\partial p_i} \dot{p_i} \Big] + \rho \sum_i \Big [ \frac{\partial \dot{q_i}}{\partial q_i}+  \frac{\partial \dot{p_i}}{\partial p_i}  \Big]=0\]</div>
+<p>Where the last term is zero one we plug Hamilton’s equation. We thus arrive at a crucial conclusion that the space volume is preserved during conservative dynamics</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \rho(p,q,t)}{\partial t} + \sum_i \Big [ \frac{\partial \rho}{\partial q_i}\dot{q_i}+\frac{\partial \rho}{\partial p_i} \dot{p_i} \Big]=\frac{d \rho}{ dt} = 0\]</div>
+<p>Furthermore we see that the time dependence of phase space probability density vanishes if it is a function of hamiltonian <span class="math notranslate nohighlight">\(\rho = f(H)\)</span></p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial \rho}{\partial t} = \sum_i \Big [ \frac{\partial \rho}{\partial q_i}\cdot{q_i}+\frac{\partial \rho}{\partial p_i}\cdot{p_i} \Big] = -\{H,\rho \}\]</div>
+</div>
+<div class="section" id="liuville-theorem-illustrated">
+<h3><span class="section-number">1.1.2. </span>Liuville theorem illustrated<a class="headerlink" href="#liuville-theorem-illustrated" title="Permalink to this headline">¶</a></h3>
+<p>According to Liuvile’s theorem small phase space area element under time evolution gets deform but preserves the volume. For example, assume the initial distribution is a rectangle in phase space (x , v)</p>
+<div class="math notranslate nohighlight">
+\[{x 0 − d x ≤ x ≤ x 0 + d x}\]</div>
+<div class="math notranslate nohighlight">
+\[ {v 0 − d v ≤ v ≤ v 0 + d v } \]</div>
+<p>As time progresses this rectangle will deform, but its area will not change (assuming <span class="math notranslate nohighlight">\(d x\)</span>  and <span class="math notranslate nohighlight">\(d v\)</span>  are sufficiently small which ensure energy conservation)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sci</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Polygon</span> <span class="c1"># for making rectangles from four points</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mf">1.0</span>             <span class="c1"># acceleration</span>
+<span class="n">x0</span><span class="p">,</span> <span class="n">v0</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span>    <span class="c1"># center of initial phase space element</span>
+<span class="n">dx</span><span class="p">,</span> <span class="n">dv</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span>  <span class="c1"># (half of) width of initial phase space element</span>
+
+<span class="n">p0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(((</span><span class="n">x0</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="n">v0</span><span class="o">-</span><span class="n">dv</span><span class="p">),(</span><span class="n">x0</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="n">v0</span><span class="o">+</span><span class="n">dv</span><span class="p">),(</span><span class="n">x0</span><span class="o">+</span><span class="n">dx</span><span class="p">,</span><span class="n">v0</span><span class="o">+</span><span class="n">dv</span><span class="p">),(</span><span class="n">x0</span><span class="o">+</span><span class="n">dx</span><span class="p">,</span><span class="n">v0</span><span class="o">-</span><span class="n">dv</span><span class="p">)))</span>     <span class="c1"># initial phase space element</span>
+
+<span class="k">def</span> <span class="nf">propagate</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;Propagates a phase space patch p0 for time t.&quot;&quot;&quot;</span>
+    
+    <span class="n">x0</span><span class="p">,</span> <span class="n">v0</span> <span class="o">=</span> <span class="n">p0</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">v0</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">t</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="hamiltonian-conservative-dynamics-in-phase-space">
+<h3><span class="section-number">1.1.3. </span>Hamiltonian, conservative dynamics in phase space<a class="headerlink" href="#hamiltonian-conservative-dynamics-in-phase-space" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># range of x and y grid</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">ymax</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># make a grid of x and y values, Y = dot X</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">xmax</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">ymax</span><span class="p">,</span><span class="n">ymax</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">Y</span><span class="o">*</span><span class="n">Y</span> <span class="o">+</span><span class="mf">0.5</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>   <span class="c1">#here is the Hamiltonian</span>
+
+<span class="c1">#cs = plt.contour(X,Y,H,20,cmap=&#39;inferno&#39;)</span>
+<span class="c1">#plt.clabel(cs,inline=1,fontsize=10)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;dq/dt&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">1.1</span><span class="o">*</span><span class="n">xmax</span><span class="p">,</span> <span class="mf">1.1</span><span class="o">*</span><span class="n">xmax</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.1</span><span class="o">*</span><span class="n">ymax</span><span class="p">,</span> <span class="mf">1.1</span><span class="o">*</span><span class="n">ymax</span><span class="p">])</span>
+
+<span class="c1"># Hamilton&#39;s equations define a vector field U,V</span>
+<span class="n">U</span> <span class="o">=</span>   <span class="n">Y</span>
+<span class="n">V</span> <span class="o">=</span> <span class="o">-</span> <span class="n">X</span>
+
+<span class="n">Q</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/01_Classical_6_0.png" src="../_images/01_Classical_6_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># range of x and y grid</span>
+<span class="n">xmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mf">2.0</span>
+<span class="n">ymax</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># make a grid of x and y values, Y = dot X</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">xmax</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">ymax</span><span class="p">,</span><span class="n">ymax</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">epsilon</span><span class="o">=</span><span class="mf">0.3</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">Y</span><span class="o">*</span><span class="n">Y</span>  <span class="o">-</span> <span class="n">epsilon</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>    <span class="c1">#here is the Hamiltonian</span>
+
+<span class="c1"># Hamilton&#39;s equations define a vector field U,V</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">Y</span>
+<span class="n">V</span> <span class="o">=</span> <span class="o">-</span><span class="n">epsilon</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1">#cs =plt.contour(X,Y,H,10,cmap=&#39;inferno&#39;)</span>
+<span class="c1">#plt.clabel(cs,inline=1,fontsize=10)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;dx/dt&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="n">xmax</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="o">-</span><span class="n">ymax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+
+
+
+<span class="n">Q</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">streamplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># plot the vector field </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/01_Classical_7_0.png" src="../_images/01_Classical_7_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="rigid-rotor-model">
+<h3><span class="section-number">1.1.4. </span>Rigid rotor model<a class="headerlink" href="#rigid-rotor-model" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[E = \frac{\hbar^2}{2I} J (J+1) \]</div>
+<div class="math notranslate nohighlight">
+\[Z \approx \int^{J=\infty}_{J=0} (2J+1)e^{-\Big[\beta \frac{\hbar^2}{2I} J (J+1)\Big]}\approx \frac{T}{\theta_{rot}}\]</div>
+<ul class="simple">
+<li><p>Where <span class="math notranslate nohighlight">\(\theta_{rot} = \frac{\hbar^2}{2 I_0 k_B}\)</span> is called rotational temperature.</p></li>
+</ul>
+</div>
+<div class="section" id="harmonic-oscillator-model">
+<h3><span class="section-number">1.1.5. </span>Harmonic oscillator model<a class="headerlink" href="#harmonic-oscillator-model" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[E_n = \hbar \omega (n+1/2)\]</div>
+<div class="math notranslate nohighlight">
+\[z = \sum^{n=+\infty}_{n=0} = e^{-\frac{1}{2}\beta \hbar \omega} (1 + e^{-\beta\hbar\omega}+e^{-2\beta\hbar\omega}+...) = \frac{e^{-\frac{1}{2}\beta \hbar \omega}}{1-e^{-\beta\hbar\omega}}\]</div>
+<div class="math notranslate nohighlight">
+\[Z = z^N\]</div>
+<div class="math notranslate nohighlight">
+\[E = \frac{\partial log Z}{\partial (-\beta)} = N\hbar \omega \Big(\frac{1}{2}+ \frac{1}{1+e^{\beta\hbar\omega}} \Big) \]</div>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow 0\)</span> we are left with zero point energies <span class="math notranslate nohighlight">\(E \rightarrow \frac{N \hbar \omega}{2}\)</span></p></li>
+<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow \infty\)</span> we get equipartion of energy! <span class="math notranslate nohighlight">\(E \rightarrow \frac{3}{2} N k_B T\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="partition-function-for-a-molecular-gas">
+<h3><span class="section-number">1.1.6. </span>Partition function for a molecular gas<a class="headerlink" href="#partition-function-for-a-molecular-gas" title="Permalink to this headline">¶</a></h3>
+<br>
+<div class="math notranslate nohighlight">
+\[E = E_{transl}+E_{vib}+E_{rot}+E_{elec} \]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[Z = Z_{transl} Z_{vib} Z_{rot} Z_{elec} \]</div>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\frac{1}{N!}\)</span> must go inside <span class="math notranslate nohighlight">\(Z_{tranls}\)</span> to account for indistinguishability</p>
+</div></blockquote>
+</div>
+</div>
+</div>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -334,7 +575,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="../04_ideal_systems.html" title="previous page">E. Entropy and Information</a>
-    <a class='right-next' id="next-link" href="02_Quantum.html" title="next page"><span class="section-number">1. </span>Quantum</a>
+    <a class='right-next' id="next-link" href="02_Quantum.html" title="next page"><span class="section-number">2. </span>Quantum</a>
 
         </div>
         
