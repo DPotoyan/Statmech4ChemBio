@@ -54,6 +54,8 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. NVE" href="03_ensembles/01_NVE.html" />
@@ -189,7 +191,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_ensembles/04_Applications.html">
-     4. Applications of NVT
+     4. Applications
     </a>
    </li>
   </ul>
@@ -328,6 +330,87 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nve">
+   NVE
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#statistical-picture">
+     Statistical picture
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thermodynamic-picture">
+     Thermodynamic picture
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nvt">
+   NVT
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Statistical picture
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Thermodynamic picture
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#muvt">
+   <span class="math notranslate nohighlight">
+    \(\mu\)
+   </span>
+   VT
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Statistical picture
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Thermodynamic picture
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ensemble-equivalence">
+   Ensemble equivalence
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smallness-of-fluctuations">
+     Smallness of fluctuations
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#legendre-transform">
+     Legendre transform
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
         </div>
     </div>
 </div>
@@ -339,7 +422,136 @@
   <div class="section" id="d-statistical-ensembles">
 <h1>D. Statistical ensembles<a class="headerlink" href="#d-statistical-ensembles" title="Permalink to this headline">¶</a></h1>
 <p>In this module we are going to learn the essence of equilibrium statistical mechanics the statistical ensembles which will serve as a bridge connecting the probablistic world with the deterministic world of thermodynamics.</p>
+<p><img alt="" src="figs/ensembl.png" /></p>
+<div class="section" id="nve">
+<h2>NVE<a class="headerlink" href="#nve" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="statistical-picture">
+<h3>Statistical picture<a class="headerlink" href="#statistical-picture" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\Omega(N,V,E) = \sum^{number\, of\, microstates,}_{i} 1\]</div>
+<div class="math notranslate nohighlight">
+\[S(N,V,E) = k_B log \Omega(N, V, E)\]</div>
+<ul class="simple">
+<li><p>Computing a weight of a microstate <span class="math notranslate nohighlight">\(E_i\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E_i) = \frac{1}{\Omega(N, V, E_i)}\]</div>
+<ul class="simple">
+<li><p>Computing a weight of sub-sytem macrostate <span class="math notranslate nohighlight">\(E=E_1+E_2\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E_1, E-E_1) = \frac{\Omega(E_1) \Omega(E-E_1)}{\sum_{E_1} \Omega(E_1) \Omega(E-E_1)} = \frac{e^{S_1(E_1)+S_2(E-E_1)}}{e^{S(E)}}\]</div>
+</div>
+<div class="section" id="thermodynamic-picture">
+<h3>Thermodynamic picture<a class="headerlink" href="#thermodynamic-picture" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>First and second law</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[dU = TdS-pdV+\mu dN\]</div>
+<ul class="simple">
+<li><p>Irreversible vs reversible process</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[dS_{tot}\geq 0\]</div>
+<div class="math notranslate nohighlight">
+\[dE\leq 0\]</div>
+</div>
+</div>
+<div class="section" id="nvt">
+<h2>NVT<a class="headerlink" href="#nvt" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Statistical picture<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[Z(N,V,T) = \sum^{number\, of\, microstates,}_{i} e^{-E_i/k_B T} = \sum_E \Omega(E) e^{-E/k_B T}\]</div>
+<div class="math notranslate nohighlight">
+\[F=-k_BT log Z\]</div>
+<ul class="simple">
+<li><p>Computing a weight of a microstate <span class="math notranslate nohighlight">\(E_i\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E_i) = \frac{e^{-E_i/k_BT}}{Z}\]</div>
+<ul class="simple">
+<li><p>Computing a weight of a sub-sytem macrostate <span class="math notranslate nohighlight">\(E_1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E_1) = \frac{\Omega(E) e^{-E_1/k_BT}}{Z} = \frac{e^{-F_1/k_BT}}{Z}\]</div>
+</div>
+<div class="section" id="id2">
+<h3>Thermodynamic picture<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>First and second law</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[dF_{T} = d(U-TS) = -pdV+\mu dN\]</div>
+<ul class="simple">
+<li><p>Irreversible vs reversible process</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[dS_{tot}\geq 0\]</div>
+<div class="math notranslate nohighlight">
+\[dF\leq 0\]</div>
+</div>
+</div>
+<div class="section" id="muvt">
+<h2><span class="math notranslate nohighlight">\(\mu\)</span>VT<a class="headerlink" href="#muvt" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3>Statistical picture<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[Z_G(\mu,V,T) = \sum^{number\, of\, microstates,}_{i, N_i} e^{-E_i/k_B T} \cdot e^{-\mu N_i/k_B T} = \sum_E \Omega(E, N) e^{-E/k_B T} e^{-\mu N/k_B T}\]</div>
+<div class="math notranslate nohighlight">
+\[Z_G(\mu, V, T) =-k_BT log Z_G\]</div>
+<ul class="simple">
+<li><p>Computing a weight of a microstate <span class="math notranslate nohighlight">\(E_i\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E_i) = \frac{e^{-E_i/k_BT} e^{-\mu N_i/k_BT}}{Z_G}\]</div>
+<ul class="simple">
+<li><p>Computing a weight of a sub-sytem macrostate <span class="math notranslate nohighlight">\(E_1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E_1, N_1) = \frac{\Omega(E, N) e^{-E_1/k_BT} e^{-\mu N/k_BT}}{Z_G} = \frac{e^{-\Phi_1/k_BT}}{Z_G}\]</div>
+</div>
+<div class="section" id="id4">
+<h3>Thermodynamic picture<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The First and the second law</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[d\Phi_{\mu, T} = d(U-TS - \mu N) = -pdV\]</div>
+<ul class="simple">
+<li><p>Irreversible vs reversible process</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[dS_{tot}\geq 0\]</div>
+<div class="math notranslate nohighlight">
+\[d\Phi\leq 0\]</div>
+</div>
+</div>
+<div class="section" id="ensemble-equivalence">
+<h2>Ensemble equivalence<a class="headerlink" href="#ensemble-equivalence" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="smallness-of-fluctuations">
+<h3>Smallness of fluctuations<a class="headerlink" href="#smallness-of-fluctuations" title="Permalink to this headline">¶</a></h3>
+<p>Consider the extensive variable X and intensive variable Y where X (fluctuating) and Y (fixed) form a pair of conjugate variables. The sign will depend on the specific definitions of the variables X and Y. An example would be X = volume and Y = pressure.</p>
+<div class="math notranslate nohighlight">
+\[\langle X \rangle  = \frac{\partial log Z}{\partial \beta Y}\]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2_X = \langle X^2 \rangle - \langle X \rangle^2  = \frac{\partial^2 log Z}{\partial (\beta Y)^2}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma^2_E = k_B T^2 C_v(T) \sim O(N)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma^2_N = \frac{k_B T}{v} \kappa_T \sim O(N)\)</span></p></li>
+</ul>
+<p>Ensembles with flcutuating extensive variables still end up being dominanted by averages hence being effectively in microcanonical regime with constant values repalced by aveages:</p>
+<div class="math notranslate nohighlight">
+\[S = k_B log \Omega(\bar{E}, \bar{N}, \bar{V})\]</div>
+</div>
+<div class="section" id="legendre-transform">
+<h3>Legendre transform<a class="headerlink" href="#legendre-transform" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{x_{0}, ... x_{n}}} E (x_0, ... x_t) \big)\]</div>
 <div class="toctree-wrapper compound">
+</div>
+</div>
 </div>
 </div>
 
