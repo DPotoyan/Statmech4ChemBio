@@ -68,17 +68,17 @@ $$dF\leq 0$$
 
 ### Statistical picture
 
-$$Z_G(\mu,V,T) = \sum^{number\, of\, microstates,}_{i, N_i} e^{-E_i/k_B T} \cdot e^{-\mu N_i/k_B T} = \sum_E \Omega(E, N) e^{-E/k_B T} e^{-\mu N/k_B T}$$
+$$Z_G(\mu,V,T) = \sum^{number\, of\, microstates,}_{i, N_i} e^{-E_i/k_B T} \cdot e^{\mu N_i/k_B T} = \sum_E \Omega(E, N) e^{-E/k_B T} e^{\mu N/k_B T}$$
 
 $$Z_G(\mu, V, T) =-k_BT log Z_G$$
 
 - Computing a weight of a microstate $E_i$ 
 
-$$p(E_i) = \frac{e^{-E_i/k_BT} e^{-\mu N_i/k_BT}}{Z_G}$$
+$$p(E_i) = \frac{e^{-E_i/k_BT} e^{\mu N_i/k_BT}}{Z_G}$$
 
 - Computing a weight of a sub-sytem macrostate $E_1$ 
 
-$$p(E_1, N_1) = \frac{\Omega(E, N) e^{-E_1/k_BT} e^{-\mu N/k_BT}}{Z_G} = \frac{e^{-\Phi_1/k_BT}}{Z_G}$$
+$$p(E_1, N_1) = \frac{\Omega(E, N) e^{-E_1/k_BT} e^{\mu N/k_BT}}{Z_G} = \frac{e^{-\Phi_1/k_BT}}{Z_G}$$
 
 ### Thermodynamic picture
 
