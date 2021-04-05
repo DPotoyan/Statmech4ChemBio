@@ -359,38 +359,79 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#phase-space-liuville-s-theorem-and-ergoicity-ideas">
-   1.1. Phase Space, Liuville’s Theorem and Ergoicity ideas
+  <a class="reference internal nav-link" href="#maxwell-boltzmann-statistics">
+   1.1. Maxwell-Boltzmann statistics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#continuity-equation-and-liuville-s-theorem">
-     1.1.1. Continuity equation and Liuville’s theorem
+    <a class="reference internal nav-link" href="#occupation-numbers-representation-of-a-microstate">
+     1.1.1. Occupation numbers representation of a microstate
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#liuville-theorem-illustrated">
-     1.1.2. Liuville theorem illustrated
+    <a class="reference internal nav-link" href="#grand-canonical-ensemble-makes-constrained-summations-easy">
+     1.1.2. Grand-canonical ensemble makes constrained summations easy
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hamiltonian-conservative-dynamics-in-phase-space">
-     1.1.3. Hamiltonian, conservative dynamics in phase space
+    <a class="reference internal nav-link" href="#validity-of-the-classical-regime">
+     1.1.3. Validity of the classical regime
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-interacting-molecular-gases">
+   1.2. Non-interacting molecular gases
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#rigid-rotor-model">
-     1.1.4. Rigid rotor model
+     1.2.1. Rigid rotor model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#harmonic-oscillator-model">
-     1.1.5. Harmonic oscillator model
+     1.2.2. Harmonic oscillator model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#partition-function-for-a-molecular-gas">
-     1.1.6. Partition function for a molecular gas
+     1.2.3. Partition function for a molecular gas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#density-states-dos-for-an-ideal-gas">
+   1.3. Density  states (DOS) for an ideal gas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-visiting-the-microcanonical-derivation-of-dos">
+     1.3.1. Re-visiting the microcanonical derivation of DOS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#phase-space-liuville-s-theorem-and-ergoicity-ideas">
+   1.4. Phase Space, Liuville’s Theorem and Ergoicity ideas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuity-equation-and-liuville-s-theorem">
+     1.4.1. Continuity equation and Liuville’s theorem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#liuville-theorem-illustrated">
+     1.4.2. Liuville theorem illustrated
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hamiltonian-conservative-dynamics-in-phase-space">
+     1.4.3. Hamiltonian, conservative dynamics in phase space
     </a>
    </li>
   </ul>
@@ -409,8 +450,160 @@
                 
   <div class="section" id="classical-gases">
 <h1><span class="section-number">1. </span>Classical gases<a class="headerlink" href="#classical-gases" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="maxwell-boltzmann-statistics">
+<h2><span class="section-number">1.1. </span>Maxwell-Boltzmann statistics<a class="headerlink" href="#maxwell-boltzmann-statistics" title="Permalink to this headline">¶</a></h2>
+<p><strong>Distingusihable vs indistingusihable particles</strong></p>
+<div class="math notranslate nohighlight">
+\[Z_N = \frac{1}{N!} Z^{dist}_N\]</div>
+<div class="math notranslate nohighlight">
+\[\Omega_N = \frac{1}{N!} \Omega^{dist}_N\]</div>
+<ul class="simple">
+<li><p>Treat particles as distinguishable but divide in the end by <span class="math notranslate nohighlight">\(N!\)</span> to get the correct extensive entropy and free energies.</p></li>
+<li><p>This way of handling parititon functions is called “Maxwell-Boltzmann” statistics which is widely applicalble in the “classical regime”</p></li>
+</ul>
+<p><strong>Example of MB statistics</strong></p>
+<p>Consider 2 particles each having 3 energy levels <span class="math notranslate nohighlight">\(\epsilon_1, \epsilon_2, \epsilon_3\)</span></p>
+<div class="math notranslate nohighlight">
+\[Z_2 = \frac{1}{2!}(e^{-\beta \epsilon_1}+e^{-\beta \epsilon_2}+e^{-\beta \epsilon_3})^2\]</div>
+<div class="math notranslate nohighlight">
+\[Z_2 = \frac{1}{2} \big[e^{-2\beta \epsilon_1}+e^{-2\beta \epsilon_2}+e^{-2\beta \epsilon_3}\big]+\big[e^{-2\beta (\epsilon_1+\epsilon_2)}+e^{-2\beta (\epsilon_1+\epsilon_3)}+e^{-2\beta (\epsilon_2+\epsilon_3)}\big]\]</div>
+<ul class="simple">
+<li><p><strong>Multiply occupied states</strong> are unphysically suppressed.</p></li>
+<li><p><strong>Single occupied states</strong> are nicely weighted which removes the double-counting.</p></li>
+</ul>
+<p>Two possiblitites for fixing unphysical states can be devised based on the type of particles</p>
+<ul class="simple">
+<li><p><strong>Ferminons:</strong> Remove multiple occupancies altogether.</p></li>
+<li><p><strong>Bosons:</strong>   Democratically count every state.</p></li>
+</ul>
+<div class="section" id="occupation-numbers-representation-of-a-microstate">
+<h3><span class="section-number">1.1.1. </span>Occupation numbers representation of a microstate<a class="headerlink" href="#occupation-numbers-representation-of-a-microstate" title="Permalink to this headline">¶</a></h3>
+<p>Preparing ground for the quantum statistics we adopt an <strong>occupation number representation of a microstate</strong>. Occupation number or orbital representation explicitely tracks the occupation of single particle eigenvelues. In this representation a <strong>microstate</strong> is idenitfied with the  occupancy vector <span class="math notranslate nohighlight">\([n_1, n_2, ... n_N]\)</span> specifiying number of particles populating every fixed energy level.</p>
+<div class="math notranslate nohighlight">
+\[E= \sum_i n_i \epsilon_i\]</div>
+<div class="math notranslate nohighlight">
+\[N = \sum_i n_i\]</div>
+<p>Thanks to the non-interacting nature of the system we can focus on single particles <span class="math notranslate nohighlight">\(Z = Z^N_1 = (e^{-\beta \epsilon_1}+e^{-\beta \epsilon_2}+ ...)^N\)</span></p>
+<div class="math notranslate nohighlight">
+\[\langle n_i \rangle = - \frac{1}{\beta}\frac{\partial log Z}{\partial \epsilon_i}\]</div>
+<div class="math notranslate nohighlight">
+\[p_i = \frac{n_i}{N} = \frac{e^{-\beta \epsilon_i}}{Z_i}\]</div>
+<blockquote>
+<div><p>TIP: do not confuse single particle energy levels with microstate.</p>
+</div></blockquote>
+</div>
+<div class="section" id="grand-canonical-ensemble-makes-constrained-summations-easy">
+<h3><span class="section-number">1.1.2. </span>Grand-canonical ensemble makes constrained summations easy<a class="headerlink" href="#grand-canonical-ensemble-makes-constrained-summations-easy" title="Permalink to this headline">¶</a></h3>
+<p>Evaluating partition functions in the occupation number representaiton is easier in grand-caoninical ensemble where there are no restrictions <span class="math notranslate nohighlight">\(N=\sum_i n_i\)</span> placed on sums.</p>
+<div class="math notranslate nohighlight">
+\[Y = \sum_{n_1, n_2, ...} e^{-\beta E} e^{\beta \mu N} = \sum_{n_1} \Big[e^{-\beta(\epsilon_1-\mu)n_1}\Big]\cdot  \sum_{n_2}   \Big[e^{-\beta(\epsilon_2-\mu)n_2} \Big]...\]</div>
+<div class="math notranslate nohighlight">
+\[Y = \prod_j Y_j\]</div>
+<div class="math notranslate nohighlight">
+\[Y_j = \sum_j e^{-\beta(\epsilon_j-\mu)n_j}\]</div>
+<div class="math notranslate nohighlight">
+\[\bar{n}_j = \frac{1}{\beta} \frac{\partial logY_j}{\partial \mu}\]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2(n_j) = \frac{1}{\beta^2} \frac{\partial^2 logY_j}{\partial \mu^2}\]</div>
+</div>
+<div class="section" id="validity-of-the-classical-regime">
+<h3><span class="section-number">1.1.3. </span>Validity of the classical regime<a class="headerlink" href="#validity-of-the-classical-regime" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\bar{n}_j \ll 1\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{N}{V} \Big(\frac{h^2}{2\pi m k_B T} \Big)^{3/2} \ll 1\]</div>
+<div class="math notranslate nohighlight">
+\[\lambda^3_T \ll \frac{N}{V} = l^3\]</div>
+</div>
+</div>
+<div class="section" id="non-interacting-molecular-gases">
+<h2><span class="section-number">1.2. </span>Non-interacting molecular gases<a class="headerlink" href="#non-interacting-molecular-gases" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rigid-rotor-model">
+<h3><span class="section-number">1.2.1. </span>Rigid rotor model<a class="headerlink" href="#rigid-rotor-model" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[E = \frac{\hbar^2}{2I} J (J+1) \]</div>
+<div class="math notranslate nohighlight">
+\[Z \approx \int^{J=\infty}_{J=0} (2J+1)e^{-\Big[\beta \frac{\hbar^2}{2I} J (J+1)\Big]}\approx \frac{T}{\theta_{rot}}\]</div>
+<ul class="simple">
+<li><p>Where <span class="math notranslate nohighlight">\(\theta_{rot} = \frac{\hbar^2}{2 I_0 k_B}\)</span> is called rotational temperature.</p></li>
+</ul>
+</div>
+<div class="section" id="harmonic-oscillator-model">
+<h3><span class="section-number">1.2.2. </span>Harmonic oscillator model<a class="headerlink" href="#harmonic-oscillator-model" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[E_n = \hbar \omega (n+1/2)\]</div>
+<div class="math notranslate nohighlight">
+\[z = \sum^{n=+\infty}_{n=0} = e^{-\frac{1}{2}\beta \hbar \omega} (1 + e^{-\beta\hbar\omega}+e^{-2\beta\hbar\omega}+...) = \frac{e^{-\frac{1}{2}\beta \hbar \omega}}{1-e^{-\beta\hbar\omega}}\]</div>
+<div class="math notranslate nohighlight">
+\[Z = z^N\]</div>
+<div class="math notranslate nohighlight">
+\[E = \frac{\partial log Z}{\partial (-\beta)} = N\hbar \omega \Big(\frac{1}{2}+ \frac{1}{1+e^{\beta\hbar\omega}} \Big) \]</div>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow 0\)</span> we are left with zero point energies <span class="math notranslate nohighlight">\(E \rightarrow \frac{N \hbar \omega}{2}\)</span></p></li>
+<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow \infty\)</span> we get equipartion of energy! <span class="math notranslate nohighlight">\(E \rightarrow \frac{3}{2} N k_B T\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="partition-function-for-a-molecular-gas">
+<h3><span class="section-number">1.2.3. </span>Partition function for a molecular gas<a class="headerlink" href="#partition-function-for-a-molecular-gas" title="Permalink to this headline">¶</a></h3>
+<br>
+<div class="math notranslate nohighlight">
+\[E = E_{transl}+E_{vib}+E_{rot}+E_{elec} \]</div>
+<br>
+<div class="math notranslate nohighlight">
+\[Z = Z_{transl} Z_{vib} Z_{rot} Z_{elec} \]</div>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\frac{1}{N!}\)</span> must go inside <span class="math notranslate nohighlight">\(Z_{tranls}\)</span> to account for indistinguishability</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="density-states-dos-for-an-ideal-gas">
+<h2><span class="section-number">1.3. </span>Density  states (DOS) for an ideal gas<a class="headerlink" href="#density-states-dos-for-an-ideal-gas" title="Permalink to this headline">¶</a></h2>
+<p>Let us analyze the density of states of free particles in volume V in some detail starting from fundamental equation governing state of such particles.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{H}\psi(r) = E \psi(r)\]</div>
+<p>Solution for free particles are plane waves for which we need to impose boundary conditions.</p>
+<div class="math notranslate nohighlight">
+\[\psi(r) = exp(i k \cdot r) = exp[i(k_x x + k_y y + k_z z)]\]</div>
+<p>We impose periodic boundary conditions  <span class="math notranslate nohighlight">\(k_x(x + Lx) = k_x x + 2πn\)</span></p>
+<div class="math notranslate nohighlight">
+\[k_x = \frac{2 \pi}{L_x} n_x ;\,\,\, k_y = \frac{2 \pi}{L_y} n_y ;\,\,\, k_z = \frac{2 \pi}{L_z} n_z\]</div>
+<p>Discrete eigenvalues emerge from boundary conditions</p>
+<div class="math notranslate nohighlight">
+\[\epsilon = \frac{\hbar^2}{2m} (k^2_x+k^2_y+k^2_z) \]</div>
+<p>Now we want to count the number of modes or waves that have wavevectors between <span class="math notranslate nohighlight">\(([k_x, k_x+dk_x], [k_y, k_y+dk_y], [k_z, k_z+dk_z])\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Delta n_x = \frac{L_x}{2 \pi} dk_x = \frac{L_x}{h} dp_x\]</div>
+<p>Number of states within <span class="math notranslate nohighlight">\(\Delta n_x \Delta n_y \Delta n_z\)</span> region is given in terms of momenta values <span class="math notranslate nohighlight">\(\rho(p) d^3p\)</span></p>
+<div class="math notranslate nohighlight">
+\[\Delta n_x \Delta n_y \Delta n_z = \frac{L_x L_y L_z}{(2\pi)^3} d^3 k = \frac{V}{h^3}d^3p = \rho(p) d^3p\]</div>
+<ul class="simple">
+<li><p>Density of states in cartesian coordines</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\boxed{\rho(p) = \frac{V}{h^3}}\]</div>
+<ul class="simple">
+<li><p>Azimuthally averaged density of states <span class="math notranslate nohighlight">\(g(p)\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[g(p)dp = \int^{\pi}_{0} d\theta \int^{2\pi}_{0} d\phi \rho(p)d^3 p\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{g(p) = \frac{V}{h^3} 4\pi p^2}\]</div>
+<div class="section" id="re-visiting-the-microcanonical-derivation-of-dos">
+<h3><span class="section-number">1.3.1. </span>Re-visiting the microcanonical derivation of DOS<a class="headerlink" href="#re-visiting-the-microcanonical-derivation-of-dos" title="Permalink to this headline">¶</a></h3>
+<p>Same expression can be obtained from the microcanonical partiion functions we calculated in NVE section by changing vaiables</p>
+<div class="math notranslate nohighlight">
+\[\Omega (E) dE = \Omega(k) dk\]</div>
+<p>Or alternatively we divide the volume of a sphere with radius <span class="math notranslate nohighlight">\(k\)</span> <span class="math notranslate nohighlight">\(V_k = \frac{4\pi }{3} k^3\)</span> by the volume availible per one state <span class="math notranslate nohighlight">\(1/\rho(k) = \frac{(2\pi)^3}{V}\)</span></p>
+<div class="math notranslate nohighlight">
+\[N(k) = \frac{Vk^3}{6\pi^2}\]</div>
+<div class="math notranslate nohighlight">
+\[N(k) = \frac{d\Omega(k)}{dk}dk = \frac{Vk^2}{2\pi^2}dk\]</div>
+<div class="math notranslate nohighlight">
+\[g(p)dp = \Omega(k)dk = \frac{V}{h^3}4\pi p^2 dp\]</div>
+</div>
+</div>
 <div class="section" id="phase-space-liuville-s-theorem-and-ergoicity-ideas">
-<h2><span class="section-number">1.1. </span>Phase Space, Liuville’s Theorem and Ergoicity ideas<a class="headerlink" href="#phase-space-liuville-s-theorem-and-ergoicity-ideas" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.4. </span>Phase Space, Liuville’s Theorem and Ergoicity ideas<a class="headerlink" href="#phase-space-liuville-s-theorem-and-ergoicity-ideas" title="Permalink to this headline">¶</a></h2>
 <p>Conservative systems are govenred by Hamilton’s equation of motion. That is changes in position and momenta stay on the surface: <span class="math notranslate nohighlight">\(H(p,q)=E\)</span></p>
 <div class="math notranslate nohighlight">
 \[\dot{q} = \frac{\partial H}{\partial p}\]</div>
@@ -420,7 +613,7 @@
 <div class="math notranslate nohighlight">
 \[\rho(p,q,t)dq dp \]</div>
 <div class="section" id="continuity-equation-and-liuville-s-theorem">
-<h3><span class="section-number">1.1.1. </span>Continuity equation and Liuville’s theorem<a class="headerlink" href="#continuity-equation-and-liuville-s-theorem" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.4.1. </span>Continuity equation and Liuville’s theorem<a class="headerlink" href="#continuity-equation-and-liuville-s-theorem" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[\frac{\partial \rho(p,q,t)}{\partial t} = -\nabla J = - \nabla(\rho \vec{v})\]</div>
 <p>Where flux <span class="math notranslate nohighlight">\(J= \rho \vec{v}\)</span> is defined in terms of the velcotiy of points in phase space <span class="math notranslate nohighlight">\(v = (\dot{q},\dot{p})\)</span>. Combinging the continuity expression combined with Hamilton’s equation of motion:</p>
@@ -436,7 +629,7 @@
 \[\frac{\partial \rho}{\partial t} = \sum_i \Big [ \frac{\partial \rho}{\partial q_i}\cdot{q_i}+\frac{\partial \rho}{\partial p_i}\cdot{p_i} \Big] = -\{H,\rho \}\]</div>
 </div>
 <div class="section" id="liuville-theorem-illustrated">
-<h3><span class="section-number">1.1.2. </span>Liuville theorem illustrated<a class="headerlink" href="#liuville-theorem-illustrated" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.4.2. </span>Liuville theorem illustrated<a class="headerlink" href="#liuville-theorem-illustrated" title="Permalink to this headline">¶</a></h3>
 <p>According to Liuvile’s theorem small phase space area element under time evolution gets deform but preserves the volume. For example, assume the initial distribution is a rectangle in phase space (x , v)</p>
 <div class="math notranslate nohighlight">
 \[{x 0 − d x ≤ x ≤ x 0 + d x}\]</div>
@@ -477,7 +670,7 @@
 </div>
 </div>
 <div class="section" id="hamiltonian-conservative-dynamics-in-phase-space">
-<h3><span class="section-number">1.1.3. </span>Hamiltonian, conservative dynamics in phase space<a class="headerlink" href="#hamiltonian-conservative-dynamics-in-phase-space" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.4.3. </span>Hamiltonian, conservative dynamics in phase space<a class="headerlink" href="#hamiltonian-conservative-dynamics-in-phase-space" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># range of x and y grid</span>
@@ -505,7 +698,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01_Classical_6_0.png" src="../_images/01_Classical_6_0.png" />
+<img alt="../_images/01_Classical_17_0.png" src="../_images/01_Classical_17_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -539,46 +732,9 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01_Classical_7_0.png" src="../_images/01_Classical_7_0.png" />
+<img alt="../_images/01_Classical_18_0.png" src="../_images/01_Classical_18_0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="rigid-rotor-model">
-<h3><span class="section-number">1.1.4. </span>Rigid rotor model<a class="headerlink" href="#rigid-rotor-model" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[E = \frac{\hbar^2}{2I} J (J+1) \]</div>
-<div class="math notranslate nohighlight">
-\[Z \approx \int^{J=\infty}_{J=0} (2J+1)e^{-\Big[\beta \frac{\hbar^2}{2I} J (J+1)\Big]}\approx \frac{T}{\theta_{rot}}\]</div>
-<ul class="simple">
-<li><p>Where <span class="math notranslate nohighlight">\(\theta_{rot} = \frac{\hbar^2}{2 I_0 k_B}\)</span> is called rotational temperature.</p></li>
-</ul>
-</div>
-<div class="section" id="harmonic-oscillator-model">
-<h3><span class="section-number">1.1.5. </span>Harmonic oscillator model<a class="headerlink" href="#harmonic-oscillator-model" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[E_n = \hbar \omega (n+1/2)\]</div>
-<div class="math notranslate nohighlight">
-\[z = \sum^{n=+\infty}_{n=0} = e^{-\frac{1}{2}\beta \hbar \omega} (1 + e^{-\beta\hbar\omega}+e^{-2\beta\hbar\omega}+...) = \frac{e^{-\frac{1}{2}\beta \hbar \omega}}{1-e^{-\beta\hbar\omega}}\]</div>
-<div class="math notranslate nohighlight">
-\[Z = z^N\]</div>
-<div class="math notranslate nohighlight">
-\[E = \frac{\partial log Z}{\partial (-\beta)} = N\hbar \omega \Big(\frac{1}{2}+ \frac{1}{1+e^{\beta\hbar\omega}} \Big) \]</div>
-<ul class="simple">
-<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow 0\)</span> we are left with zero point energies <span class="math notranslate nohighlight">\(E \rightarrow \frac{N \hbar \omega}{2}\)</span></p></li>
-<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow \infty\)</span> we get equipartion of energy! <span class="math notranslate nohighlight">\(E \rightarrow \frac{3}{2} N k_B T\)</span></p></li>
-</ul>
-</div>
-<div class="section" id="partition-function-for-a-molecular-gas">
-<h3><span class="section-number">1.1.6. </span>Partition function for a molecular gas<a class="headerlink" href="#partition-function-for-a-molecular-gas" title="Permalink to this headline">¶</a></h3>
-<br>
-<div class="math notranslate nohighlight">
-\[E = E_{transl}+E_{vib}+E_{rot}+E_{elec} \]</div>
-<br>
-<div class="math notranslate nohighlight">
-\[Z = Z_{transl} Z_{vib} Z_{rot} Z_{elec} \]</div>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(\frac{1}{N!}\)</span> must go inside <span class="math notranslate nohighlight">\(Z_{tranls}\)</span> to account for indistinguishability</p>
-</div></blockquote>
 </div>
 </div>
 </div>
