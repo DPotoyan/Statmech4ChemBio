@@ -10,7 +10,7 @@ name: directive-fig
 
 ### Statistical Mechanics for Chemistry and Biology
 
-This website hosts the lectures notes and computational content of the class Chem563 (Spring 2021) at Iowa State etitled "Statistical Mechanics for Chemistry and Biology".
+This website hosts lectures notes and computational content of the class Chem563 (Spring 2021) at Iowa State etitled "Statistical Mechanics for Chemistry and Biology".
 The content of [this course](https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering/blob/master/Readme.md) is distributed into chapters, using one Jupyter Notebook for each chapter.
 
 You can read the book on website or download pdf. To get the most out of these notes you should execute code blocks and explore the itneractive content inside notebooks. Do it you have two options 
