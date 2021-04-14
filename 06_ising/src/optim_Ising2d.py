@@ -1,77 +1,54 @@
-import numpy as np
-from numpy.random import choice, rand, randint
-from numba import jit, njit
+import numpy  as np
+import pandas as pd
+#from numba import jit, njit
 
-######## Main Code ###########
+def compute_ising2d(spins, J, B):
+  '''Computes thermodynamic variables given the spin lattice'''
+  
+  N = len(spins)
 
-@njit
-def ising2d_mcmc(N,J,B,T, n_steps=10**7, out_freq = 10**4):
+  # Energy 
+  z = np.roll(spins, 1, axis = 0) + np.roll(spins, -1, axis = 0) + np.roll(spins, 1, axis = 1) + np.roll(spins, -1, axis = 1)
+  E = np.sum(-J*spins*z/4) - B*np.sum(spins)
 
-    #Initialize
-    spins    =  np.ones((N,N))   # choice([-1,1], (N,N))
+  # Magnetization
+  M   = np.mean(spins)
 
-    #Empty array/matrix for recording
-    confs       = []
-    M, E        = [], []
-    
+  return M, E  
+
+def run_ising2d(spins, J, B, T, n_steps, out_freq):
+
+    #Initialize data arrays
+    M, E, traj = [], [], []
+    N = len(spins)
+
     for step in range(n_steps):
 
         #Pick random spin
-        i, j = randint(N), randint(N)
+        i, j = np.random.randint(N), np.random.randint(N)
 
-        #Compute energy change
-        z  = spins[(i+1)%N, j] + spins[(i-1)%N, j] + spins[i, (j+1)%N] + spins[i, (j-1)%N] # nearest neighbours of i,j
+        #Compute energy change due to a flip of spin at i,j
+        z  = spins[(i+1)%N, j] + spins[(i-1)%N, j] + spins[i, (j+1)%N] + spins[i, (j-1)%N] 
         dE = 2*spins[i,j]*(J*z + B)
 
         #Metropolis condition
-        if dE <= 0 or np.exp(-dE/T) > rand():
-            
+        if dE <= 0 or np.exp(-dE/T) > np.random.rand():
+          
             spins[i,j] *= -1 
 
-        #Store the spin configuration
+        #Compute and store data
         if step % out_freq == 0:
+
+            M_t, E_t = compute_ising2d(spins, J, B)
             
-            confs.append(spins.copy())
-            M.append(getM(spins))
-            E.append(getE(spins,J,B))
+            M.append(M_t)
+            E.append(E_t)
+            traj.append(spins.copy())
 
-    return confs, M, E
+    return traj, E, M
 
+if __name__ == "__main__":
 
-###### Initializing function #######
+    traj, E, M = ising2d_mcmc(spins=np.ones((20,20)), J=1, B=0, T=3, n_steps=1e7, out_freq = 1e4);
 
-def initalize(N, mode='random'):
-    
-    if mode =='random'
-        spins = choice([-1,1],(N,N))
-        
-    if mode == 'ones'
-        spins = ones((N,N))
-        
-    return spins
-
-####### Thermo Output  #######
-@njit
-def getM(spins):
-    
-    return np.mean(spins)
-
-
-@njit
-def getE(spins,J,B):    
-    
-    E = 0
-    N = len(spins)
-    
-    for i in range(N):
-        for j in range(N):   
-            
-            z = spins[(i+1)%N, j] + spins[(i-1)%N, j] + spins[i,(j+1)%N] +  spins[i,(j-1)%N]
-            
-            E += -J*z*spins[i,j]/4 # Since we overcounted interactions 4 times divide by 4.
-
-    return E - B*np.sum(spins) #Field contribution added
-
-
-####### Print  #######
-
+    thermo = pd.DataFrame({'E': E, 'M': M})
