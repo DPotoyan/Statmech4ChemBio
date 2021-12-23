@@ -1,7 +1,7 @@
 Introduction
 ============================
 
-```{figure} ./intro_img.jpg
+```{figure} ./index_fig.jpg
 ---
 height: 300px
 name: directive-fig
