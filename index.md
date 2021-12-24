@@ -1,23 +1,21 @@
-Introduction
+Statistical Mechanics for Chemistry and Biology
 ============================
 
 ```{figure} ./index_fig.jpg
 ---
-height: 300px
+height: 150px
 name: directive-fig
 ---
 ```
 
-### Statistical Mechanics for Chemistry and Biology
+This website hosts lectures notes and computational content for the "Statistical Mechanics for Chemistry and Biology" course Chem563 taught at Iowa State University.
 
-This website hosts lectures notes and computational content of the class Chem563 (Spring 2021) at Iowa State etitled "Statistical Mechanics for Chemistry and Biology".
-The content of [this course](https://github.com/fangohr/introduction-to-python-for-computational-science-and-engineering/blob/master/Readme.md) is distributed into chapters, using one Jupyter Notebook for each chapter.
 
-You can read the book on website or download pdf. To get the most out of these notes you should execute code blocks and explore the itneractive content inside notebooks. Do it you have two options 
-- Open notebooks in the cloud, by clicking either on GoogleCollab or MyBinder badges. Google Collab allows you to save notebooks to GoogleDrive and has a free GPU! 
-- Open locally, by installing anaconda python distribution. If you have not used the [Jupyter Notebooks](https://jupyter.org/) before, please read the following instructions.
-
-> [Get a qucikstart by wattching this youtube tutorial on how to setup and run jupyter notebooks](https://www.youtube.com/watch?v=HW29067qVWk)
+You can read the book on website or download pdf. To get the most out of these notes you should execute code blocks and explore the interactive content in the notebooks. There are several ways to use notebook content:  
+- **Open notebooks in the cloud (preferred)**. . Google Collab allows you to save notebooks to GoogleDrive, requires no installations and provides some free GPUs for simulations and machine learning exercises! 
+- **Open locally in jupyter notebook/lab (advanced users)** Requires installing anaconda python distribution and all the required packages which can be found on github repository.  
+  
+> [New to jupyter? Then get a qucikstart by watching this youtube tutorial on how to setup and run jupyter notebooks](https://www.youtube.com/watch?v=HW29067qVWk)
 
 1. Navigating the notebook
 
