@@ -1,4 +1,4 @@
-Statistical Mechanics for Chemistry and Biology
+Preface
 ============================
 
 ```{figure} ./index_fig.jpg
@@ -7,9 +7,8 @@ height: 150px
 name: directive-fig
 ---
 ```
-
+### Chem563: Itroduction to Statistical Mechanics 
 This website hosts lectures notes and computational content for the "Statistical Mechanics for Chemistry and Biology" course Chem563 taught at Iowa State University.
-
 
 You can read the book on website or download pdf. To get the most out of these notes you should execute code blocks and explore the interactive content in the notebooks. There are several ways to use notebook content:  
 - **Open notebooks in the cloud (preferred)**. . Google Collab allows you to save notebooks to GoogleDrive, requires no installations and provides some free GPUs for simulations and machine learning exercises! 
