@@ -1,4 +1,4 @@
-Python refresher
+python
 =======================
 
 ### Short tutorials for for scientists new to python
