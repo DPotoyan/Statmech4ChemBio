@@ -1,4 +1,4 @@
-E. Ideal Systems
+Ideal Systems
 =======================
 
 In this module we are going to apply the machinery of equilibirum statistical mechanics to gain microscopic insight into thermodynamics of non-interacting (ideal) systems. 
