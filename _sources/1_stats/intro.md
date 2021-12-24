@@ -1,4 +1,4 @@
-Probability and randomness
+Stats
 =======================
 
 This module serves as a refresher on probability theory and random processes.  
