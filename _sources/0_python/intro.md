@@ -1,4 +1,4 @@
-python
+Python
 =======================
 
 ### Short tutorials for for scientists new to python
