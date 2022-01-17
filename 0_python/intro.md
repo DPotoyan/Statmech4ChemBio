@@ -1,6 +1,10 @@
 Python
 =======================
 
+The objective of these first few modules is to learn the basics of python and its scientific ecosystem of libraries. With numerical tools of python we will be in a position to easily turn theoretical ideas of statistical mechanics into models and simulations and also be able to leverage the existing computational libraries. 
+
+For obvious reasons our coverage will not be as comprehensive as in the official tutorials [python.org](https://docs.python.org/3/tutorial/) reading of which is strongly reccomended for serious study of the language later on. Below you may find a veriety of tutorials with a spefici focus on STEM application.  
+ 
 ### Short tutorials for for scientists new to python
 
    1. [Programming Python](http://swcarpentry.github.io/python-novice-inflammation/)
@@ -12,23 +16,11 @@ Python
    1. [Python like you mean it](https://www.pythonlikeyoumeanit.com/)
    2. [G4G python tutorials](https://www.geeksforgeeks.org/python-programming-language/)
    3. [SciPy lectures](http://scipy-lectures.org/index.html)
-
-### The official docs
-
-   1. [numpy.org](https://numpy.org/learn/)
-   2. [scipy.org](https://www.scipy.org/)
-   3. [pandas.pydata.org](https://pandas.pydata.org/docs/getting_started/index.html)
-   4. [python.org](https://docs.python.org/3/tutorial/)
-   
 ### Free Books
 
    1. [Think Python](https://greenteapress.com/wp/think-python/)
    2. [A Byte of Python](https://python.swaroopch.com/)
-   3. [Whirlwind tour of python](https://jakevdp.github.io/WhirlwindTourOfPython/)
-   4. [Python Dat aScience Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
-   
 ### Youtube channels
-
   1. [Enthought](https://www.youtube.com/c/enthought/videos)
   2. [Data Camp](https://www.youtube.com/c/Datacamp/videos)
   3. [Programming with Mosh](https://www.youtube.com/c/programmingwithmosh/videos)
