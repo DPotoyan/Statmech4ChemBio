@@ -41,11 +41,11 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -118,7 +118,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../0_python/intro2py.html">
-     Why Python?
+     A quick dive into python
     </a>
    </li>
    <li class="toctree-l2">
@@ -370,7 +370,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -413,7 +413,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -526,7 +526,123 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Probability by counting</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sample-space">
+   Sample space
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#events">
+   Events
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-probability-calculations">
+   Simple probability calculations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#composite-events-and-venn-diagrams">
+   Composite events and Venn diagrams
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-are-measures-of-events">
+     What are measures of events
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-new-events-out-of-sets">
+     Creating new events out of sets
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#translate-words-into-probabilities">
+   Translate words into probabilities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-axioms">
+   Probability Axioms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayes-theorem">
+   Bayes theorem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computations-with-joint-and-codnitional-probability">
+     Computations with joint and codnitional probability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combinatorics">
+   Combinatorics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multinomial-combination">
+     Multinomial combination.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dealinig-with-large-numbers-striling-approximation">
+   Dealinig with large numbers: Striling approximation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stirlings-approximation">
+     Stirling’s approximation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applying-stirlings-approx-to-binomial">
+     Applying Stirling’s approx to Binomial
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gamma-function-generalizing-the-factorial">
+     Gamma function: generalizing the factorial
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problems">
+   Problems
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="probability-by-counting">
@@ -553,22 +669,24 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting matplotlib-venn
-  Downloading matplotlib-venn-0.11.6.tar.gz (29 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading matplotlib-venn-0.11.6.tar.gz (29 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Preparing metadata (setup.py) ... ?25l- done
 ?25hRequirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-venn) (3.5.1)
-Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-venn) (1.20.3)
+Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-venn) (1.21.5)
 Requirement already satisfied: scipy in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-venn) (1.7.3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (0.11.0)
-Requirement already satisfied: pillow&gt;=6.2.0 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (8.4.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (4.28.5)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (2.8.2)
+Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (0.11.0)
 Requirement already satisfied: kiwisolver&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (1.3.2)
+Requirement already satisfied: pillow&gt;=6.2.0 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (9.0.0)
 Requirement already satisfied: pyparsing&gt;=2.2.1 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (3.0.6)
 Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (21.3)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (4.28.5)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (2.8.2)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;matplotlib-venn) (1.16.0)
@@ -579,7 +697,7 @@ Building wheels for collected packages: matplotlib-venn
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for matplotlib-venn: filename=matplotlib_venn-0.11.6-py3-none-any.whl size=32062 sha256=c6113fc3c104e529c634c1f7d8162fa9b2b8a519217b61e7ecc1b5dad3753290
+?25h  Created wheel for matplotlib-venn: filename=matplotlib_venn-0.11.6-py3-none-any.whl size=32062 sha256=621e39670cc94524f81f2c0957aa5a58877901402eb50ce5c2165af1aac9a50b
   Stored in directory: /home/runner/.cache/pip/wheels/83/b1/0d/2f0c1d1b8ac6eb051dac0775adc44c8a83a0bf1dafc2b2becc
 Successfully built matplotlib-venn
 </pre></div>
@@ -707,7 +825,7 @@ Successfully built matplotlib-venn
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f563e8653d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f4359261190&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_SetsCounting_12_1.png" src="../_images/01_SetsCounting_12_1.png" />
@@ -1373,8 +1491,8 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1391,19 +1509,17 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Davit Potoyan<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Davit Potoyan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

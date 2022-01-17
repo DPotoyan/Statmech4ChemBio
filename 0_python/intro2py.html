@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Why Python? &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>A quick dive into python &#8212; Statistical Mechanics for Chemistry and Biology</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -41,11 +41,11 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -118,7 +118,7 @@
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Why Python?
+     A quick dive into python
     </a>
    </li>
    <li class="toctree-l2">
@@ -370,7 +370,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -413,7 +413,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -541,15 +541,152 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>A quick dive into python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-versions">
+   Python versions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comments">
+   Comments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#whitespace">
+   Whitespace
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-data-types">
+   Basic data types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#numbers">
+   Numbers
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complex-numbers-are-handled-just-as-easily">
+     Complex numbers are handled just as easily
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#booleans">
+   Booleans
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#strings">
+   Strings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#containers">
+   Containers
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lists">
+     Lists
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slicing">
+     Slicing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loops">
+     Loops
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#list-comprehensions">
+     List comprehensions:
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#the-range-command">
+       The range() command
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#control-flow-and-the-if-then-else-statement">
+     Control Flow and the if-then-else statement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dictionaries">
+     Dictionaries
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#anonymous-functions">
+     Anonymous functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#positional-and-optional-arguments">
+     Positional and optional arguments
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problems">
+   Problems
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="why-python">
-<h1>Why Python?<a class="headerlink" href="#why-python" title="Permalink to this headline">¶</a></h1>
-<p>Python is a fantastic general-purpose programming language on its own, but with the help of a few popular libraries (numpy, scipy, matplotlib) it becomes a powerful environment for scientific computing. You may already know some Python and that’s great! For the rest of you, this section will serve as a quick crash course both on the Python programming language and on the use of Python for scientific computing. This module will cover everything we will need for this course.</p>
-<p><img alt="" src="../_images/py-popular2.png" /></p>
-<p>Python is a high-level, dynamically-typed, multiparadigm programming language.</p>
-<p>Python code is often said to be almost like pseudocode, since it allows you to express very powerful ideas in very few lines of code while being very readable. A few examples without explanations are below:</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="a-quick-dive-into-python">
+<h1>A quick dive into python<a class="headerlink" href="#a-quick-dive-into-python" title="Permalink to this headline">¶</a></h1>
+<img src="./figs/py-popular2.png" width=40%><p>What is so special about python?</p>
+<ul class="simple">
+<li><p>Python code is very intutive and human readable. It allows you to express very powerful ideas in very few lines of code while being very readable.</p></li>
+<li><p>Python is a high-level, dynamically-typed, multiparadigm programming language.</p></li>
+<li><p>What makes python special for STEM fields is its vast ecosystem of scientific libraries (numpy,  pandas, scipy, matplotlib).</p></li>
+</ul>
+<blockquote>
+<div><p>Some of you may already know Python and that’s great! You can sit back and relax and can skim through this notebook. For the rest of you, this section will serve as a quick crash course of python programming language and some of its most essential scientific libraries. This module will cover everything we will need for this course.</p>
+</div></blockquote>
+<p>Let’s start with an example/appetizer</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">menu</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pizza&quot;</span><span class="p">,</span> <span class="s2">&quot;sushi&quot;</span><span class="p">,</span> <span class="s2">&quot;taco&quot;</span><span class="p">]</span> 
@@ -595,7 +732,7 @@ eww
 <p>While these are silly examples for illustration, with the same simplicity of code you can do fairly sophisticated calculations. Do not worry if some of these commands seem unfamiliar, we are going to explain them later on.</p>
 <div class="section" id="python-versions">
 <h2>Python versions<a class="headerlink" href="#python-versions" title="Permalink to this headline">¶</a></h2>
-<p>There are older version of Python (Python 2.7) and newer versions (Python 3.9+). We will always use the latest version. If you have installed Python on your computer you can check your Python version at the command line by running <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">--version</span></code>.</p>
+<p>Just like any piece of code python is constantly evolving with new improvements and additions. Currently most of scientific packages and libraries are based python3 (we will be using python 3.7+). If you have installed Python on your computer you can check your Python version at the command line by running <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">--version</span></code>.</p>
 </div>
 <div class="section" id="comments">
 <h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
@@ -648,7 +785,7 @@ World
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;/tmp/ipykernel_1670/2014736835.py&quot;</span><span class="gt">, line </span><span class="mi">2</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;/tmp/ipykernel_1688/2014736835.py&quot;</span><span class="gt">, line </span><span class="mi">2</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">)</span> <span class="c1"># Unnecessary indentation, this code will not work</span>
     <span class="o">^</span>
 <span class="ne">IndentationError</span>: unexpected indent
@@ -1497,8 +1634,8 @@ groups, separated by spaces) and establish if it is valid or not. For example, t
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1515,19 +1652,17 @@ groups, separated by spaces) and establish if it is valid or not. For example, t
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Davit Potoyan<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Davit Potoyan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

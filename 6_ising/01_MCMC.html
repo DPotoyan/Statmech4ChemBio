@@ -41,11 +41,11 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe,.cell"
@@ -118,7 +118,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../0_python/intro2py.html">
-     Why Python?
+     A quick dive into python
     </a>
    </li>
    <li class="toctree-l2">
@@ -370,7 +370,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -413,7 +413,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -563,7 +563,160 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Ising models and Metropolis-Hastings algorithm</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimate-pi-via-mcmc">
+   Estimate
+   <span class="math notranslate nohighlight">
+    \(\pi\)
+   </span>
+   via MCMC
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ising-models-the-h-atom-of-phase-transitions">
+   Ising models: The H atom of phase transitions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">
+     Enforcing periodic boundary conditions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-thermodynamic-quantities">
+     Computing Thermodynamic quantities
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#energy-e">
+       Energy
+       <span class="math notranslate nohighlight">
+        \(E\)
+       </span>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#magnetization">
+       Magnetization
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#heat-capacity-c-v">
+       Heat capacity
+       <span class="math notranslate nohighlight">
+        \(C_v\)
+       </span>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#susceptibility-chi">
+       Susceptibility
+       <span class="math notranslate nohighlight">
+        \(\chi\)
+       </span>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#correlation-function-c-i-j-and-correlation-length">
+       Correlation function
+       <span class="math notranslate nohighlight">
+        \(c(i,j)\)
+       </span>
+       and correlation length
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parition-function-and-free-energy">
+       Parition function and Free energy
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc">
+     Sampliing of Boltzmann distribution (NVT). MC vs MCMC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#master-equation-and-detailed-balance">
+     Master Equation and Detailed Balance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#detailed-balance-equilibrium">
+     Detailed Balance = Equilibrium
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">
+     How to pick the moves for Markov chain?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metropolis-algorithm">
+   Metropolis algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#carry-out-explorative-simulations">
+     Carry out explorative simulations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#parameter-sweeps-run-mc-simulatons-of-2d-ising-model-at-different-ts">
+       Parameter sweeps: run MC simulatons  of 2D Ising model at different  Ts
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problems">
+     Problems
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-1">
+     Problem-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-2">
+     Problem-2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-3">
+     Problem-3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem-4">
+     Problem-4
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="ising-models-and-metropolis-hastings-algorithm">
@@ -620,7 +773,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated Pi value is:  3.4456385107023353
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated Pi value is:  3.4419331356639384
 </pre></div>
 </div>
 </div>
@@ -646,7 +799,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Mean: 3.4390, Var: 0.1903&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Mean: 3.4268, Var: 0.1902&#39;)
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_5_1.png" src="../_images/01_MCMC_5_1.png" />
@@ -671,17 +824,17 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1  1 -1  1 -1 -1 -1 -1]
- [ 1 -1 -1 -1 -1 -1 -1 -1]
- [-1  1  1  1  1  1 -1 -1]
- [-1  1  1 -1  1  1 -1 -1]
- [ 1 -1 -1 -1  1  1  1 -1]
- [-1 -1  1  1  1  1 -1 -1]
- [ 1  1  1  1 -1  1 -1  1]
- [-1 -1  1  1  1  1 -1 -1]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1 -1 -1 -1 -1 -1  1 -1]
+ [-1  1  1 -1  1 -1  1 -1]
+ [-1  1 -1 -1 -1  1 -1  1]
+ [ 1 -1 -1 -1 -1 -1 -1  1]
+ [ 1  1 -1  1 -1  1  1  1]
+ [ 1  1  1 -1 -1  1  1 -1]
+ [ 1  1  1  1 -1  1  1  1]
+ [-1  1 -1  1  1  1 -1  1]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7ff97ad6f990&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f556c12be50&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_7_2.png" src="../_images/01_MCMC_7_2.png" />
@@ -694,14 +847,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1,  1, -1,  1, -1, -1, -1, -1],
-       [ 1, -1, -1, -1, -1, -1, -1, -1],
-       [-1,  1,  1,  1,  1,  1, -1, -1],
-       [-1,  1,  1, -1,  1,  1, -1, -1],
-       [ 1, -1, -1, -1,  1,  1,  1, -1],
-       [-1, -1,  1,  1,  1,  1, -1, -1],
-       [ 1,  1,  1,  1, -1,  1, -1,  1],
-       [-1, -1,  1,  1,  1,  1, -1, -1]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1, -1, -1, -1, -1, -1,  1, -1],
+       [-1,  1,  1, -1,  1, -1,  1, -1],
+       [-1,  1, -1, -1, -1,  1, -1,  1],
+       [ 1, -1, -1, -1, -1, -1, -1,  1],
+       [ 1,  1, -1,  1, -1,  1,  1,  1],
+       [ 1,  1,  1, -1, -1,  1,  1, -1],
+       [ 1,  1,  1,  1, -1,  1,  1,  1],
+       [-1,  1, -1,  1,  1,  1, -1,  1]])
 </pre></div>
 </div>
 </div>
@@ -722,7 +875,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
 </pre></div>
 </div>
 </div>
@@ -757,13 +910,13 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1
-1
 -1
 -1
 1
+-1
 1
 1
-1
+-1
 </pre></div>
 </div>
 </div>
@@ -784,7 +937,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
 </pre></div>
 </div>
 </div>
@@ -799,14 +952,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1, -1,  1,  1,  1,  1, -1, -1],
-       [-1,  1, -1,  1, -1, -1, -1, -1],
-       [ 1, -1, -1, -1, -1, -1, -1, -1],
-       [-1,  1,  1,  1,  1,  1, -1, -1],
-       [-1,  1,  1, -1,  1,  1, -1, -1],
-       [ 1, -1, -1, -1,  1,  1,  1, -1],
-       [-1, -1,  1,  1,  1,  1, -1, -1],
-       [ 1,  1,  1,  1, -1,  1, -1,  1]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1,  1, -1,  1,  1,  1, -1,  1],
+       [-1, -1, -1, -1, -1, -1,  1, -1],
+       [-1,  1,  1, -1,  1, -1,  1, -1],
+       [-1,  1, -1, -1, -1,  1, -1,  1],
+       [ 1, -1, -1, -1, -1, -1, -1,  1],
+       [ 1,  1, -1,  1, -1,  1,  1,  1],
+       [ 1,  1,  1, -1, -1,  1,  1, -1],
+       [ 1,  1,  1,  1, -1,  1,  1,  1]])
 </pre></div>
 </div>
 </div>
@@ -932,7 +1085,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.45 s ± 7.2 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.44 s ± 15.1 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -946,7 +1099,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.9 ms ± 224 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.7 ms ± 96.5 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
@@ -1198,7 +1351,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2 µs, sys: 0 ns, total: 2 µs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3 µs, sys: 0 ns, total: 3 µs
 Wall time: 6.44 µs
 </pre></div>
 </div>
@@ -1215,7 +1368,7 @@ Wall time: 6.44 µs
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "41f7a2a7e04947aa8743870c55eae6ad"}
+{"version_major": 2, "version_minor": 0, "model_id": "b29d7870904c4677888bc7bbe93a6991"}
 </script></div>
 </div>
 <div class="cell docutils container">
@@ -1260,7 +1413,7 @@ Wall time: 6.44 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7ff9782b0650&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f556843fe90&gt;]
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_51_1.png" src="../_images/01_MCMC_51_1.png" />
@@ -1323,19 +1476,19 @@ Wall time: 6.44 µs
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2001</span><span class="o">/</span><span class="mf">3295904899.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2018</span><span class="o">/</span><span class="mf">3295904899.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">27</span>         <span class="n">spins</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">28</span> 
 <span class="ne">---&gt; </span><span class="mi">29</span>         <span class="n">Ei</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
 <span class="g g-Whitespace">     </span><span class="mi">30</span>         <span class="n">Mi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getM</span><span class="p">(</span><span class="n">spins</span><span class="p">))</span>
 <span class="g g-Whitespace">     </span><span class="mi">31</span> 
 
-<span class="nn">/tmp/ipykernel_2001/1270693805.py</span> in <span class="ni">getE</span><span class="nt">(spins, N, J, B)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>                 <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>] +  spins[i,(j-1)%N]
+<span class="nn">/tmp/ipykernel_2018/1270693805.py</span> in <span class="ni">getE</span><span class="nt">(spins, N, J, B)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> 
+<span class="g g-Whitespace">     </span><span class="mi">12</span>             <span class="n">z</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] +\
+<span class="ne">---&gt; </span><span class="mi">13</span>                 <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>] +  spins[i,(j-1)%N]
 <span class="g g-Whitespace">     </span><span class="mi">14</span> 
-<span class="ne">---&gt; </span><span class="mi">15</span>             <span class="n">E</span> <span class="o">+=</span> <span class="o">-</span><span class="n">J</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="mi">4</span> <span class="c1"># Since we overcounted interactions 4 times divide by 4.</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> 
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">return</span> <span class="n">E</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span> <span class="c1">#Field contribution added</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>             <span class="n">E</span> <span class="o">+=</span> <span class="o">-</span><span class="n">J</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="mi">4</span> <span class="c1"># Since we overcounted interactions 4 times divide by 4.</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1542,8 +1695,8 @@ configuration as an input to the system to undergo equilibriation again.</p>
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1560,19 +1713,17 @@ configuration as an input to the system to undergo equilibriation again.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Davit Potoyan<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Davit Potoyan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

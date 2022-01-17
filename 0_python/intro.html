@@ -41,7 +41,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
@@ -53,7 +53,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Why Python?" href="intro2py.html" />
+    <link rel="next" title="A quick dive into python" href="intro2py.html" />
     <link rel="prev" title="About" href="../index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -116,7 +116,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="intro2py.html">
-     Why Python?
+     A quick dive into python
     </a>
    </li>
    <li class="toctree-l2">
@@ -368,7 +368,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -386,7 +386,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -401,11 +401,6 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#resources-for-learning-scientific-and-numerical-uses-of-python">
    Resources for learning scientific and numerical uses of python
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-official-docs">
-   The official docs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -426,11 +421,51 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#short-tutorials-for-for-scientists-new-to-python">
+   Short tutorials for for scientists new to python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resources-for-learning-scientific-and-numerical-uses-of-python">
+   Resources for learning scientific and numerical uses of python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#free-books">
+   Free Books
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#youtube-channels">
+   Youtube channels
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="python">
 <h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<p>The objective of these first few modules is to learn the basics of python and its scientific ecosystem of libraries. With numerical tools of python we will be in a position to easily turn theoretical ideas of statistical mechanics into models and simulations and also be able to leverage the existing computational libraries.</p>
+<p>For obvious reasons our coverage will not be as comprehensive as in the official tutorials <a class="reference external" href="https://docs.python.org/3/tutorial/">python.org</a> reading of which is strongly reccomended for serious study of the language later on. Below you may find a veriety of tutorials with a spefici focus on STEM application.</p>
 <div class="section" id="short-tutorials-for-for-scientists-new-to-python">
 <h2>Short tutorials for for scientists new to python<a class="headerlink" href="#short-tutorials-for-for-scientists-new-to-python" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
@@ -447,22 +482,11 @@
 <li><p><a class="reference external" href="http://scipy-lectures.org/index.html">SciPy lectures</a></p></li>
 </ol>
 </div>
-<div class="section" id="the-official-docs">
-<h2>The official docs<a class="headerlink" href="#the-official-docs" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p><a class="reference external" href="https://numpy.org/learn/">numpy.org</a></p></li>
-<li><p><a class="reference external" href="https://www.scipy.org/">scipy.org</a></p></li>
-<li><p><a class="reference external" href="https://pandas.pydata.org/docs/getting_started/index.html">pandas.pydata.org</a></p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/tutorial/">python.org</a></p></li>
-</ol>
-</div>
 <div class="section" id="free-books">
 <h2>Free Books<a class="headerlink" href="#free-books" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p><a class="reference external" href="https://greenteapress.com/wp/think-python/">Think Python</a></p></li>
 <li><p><a class="reference external" href="https://python.swaroopch.com/">A Byte of Python</a></p></li>
-<li><p><a class="reference external" href="https://jakevdp.github.io/WhirlwindTourOfPython/">Whirlwind tour of python</a></p></li>
-<li><p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">Python Dat aScience Handbook</a></p></li>
 </ol>
 </div>
 <div class="section" id="youtube-channels">
@@ -500,8 +524,8 @@
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="../index.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -513,24 +537,22 @@
     <a class='right-next' id="next-link" href="intro2py.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Why Python?</p>
+        <p class="prev-next-title">A quick dive into python</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Davit Potoyan<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Davit Potoyan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
