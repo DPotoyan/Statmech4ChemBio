@@ -8,7 +8,7 @@ name: directive-fig
 ---
 ```
 
-#### Statistical Mechanics for Chemistry and Biology (SMCB)  
+#### Statistical Mechanics for Chemistry and Biology  
 
 This website hosts jupyter notebooks containing lectures notes and computational content for the **"Chem 563 Statistical Mechanics"**  course, taught at the Department of Chemistry of Iowa State University. The course has two major objectives. 
 - Firstly to provide PhD students in STEM field with a solid theoretical foundation of statistical mechanics.
