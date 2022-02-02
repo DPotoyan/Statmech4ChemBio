@@ -679,10 +679,12 @@
 <div class="section" id="objectives-of-the-module">
 <h2>Objectives of the module<a class="headerlink" href="#objectives-of-the-module" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Sample space</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> is a set whose elements are called outcomes</p></li>
-<li><p><strong>Events</strong> are called the collection of subsets (A, B, C etc) of <span class="math notranslate nohighlight">\(\Omega\)</span></p></li>
-<li><p>A function P on the set of these events is called a <strong>probability function</strong> and P(A) which associates probability to each event A.</p></li>
-<li><p>Probablity function is defined on [0,1] interval and satisfies a number of <strong>probability axioms</strong> defining a set of logical rules for creating composite events from trivial ones.</p></li>
+<li><p><strong>Sample space</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> is a set whose elements are called outcomes or events.</p></li>
+<li><p><strong>Events</strong> can be constructed by forming subsets (A, B, C etc) of <span class="math notranslate nohighlight">\(\Omega\)</span></p></li>
+<li><p><strong>Probability function</strong> P(A) associates a numeric value of probability to each event A.</p></li>
+<li><p><strong>Venn diagrams</strong> visualize P(A) as a “volume fraction” of our confidence in the event expressed on 0-1 scale.</p></li>
+<li><p><strong>Probability axioms</strong> defining a set of logical rules for creating composite events from trivial ones.</p></li>
+<li><p><strong>Probability of mutually exclusive events is additive”</strong> P(A or B)= P(A) +P(B)</p></li>
 <li><p>The sample space can be <strong>discrete:</strong> examples are the possible outcomes for a coin. We call probability function a <strong>probability mass function</strong></p>
 <ul>
 <li><p>An important example is <strong>Binomial distribution</strong></p></li>
@@ -791,58 +793,9 @@
 <h2>Composite events and Venn diagrams<a class="headerlink" href="#composite-events-and-venn-diagrams" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#uncomment and install if running locally. </span>
-<span class="o">!</span>pip install matplotlib-venn 
-<span class="kn">import</span> <span class="nn">matplotlib_venn</span> <span class="k">as</span> <span class="nn">venn</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting matplotlib-venn
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading matplotlib-venn-0.11.6.tar.gz (29 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Preparing metadata (setup.py) ... ?25l- done
-?25hRequirement already satisfied: matplotlib in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-venn) (3.5.1)
-Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-venn) (1.21.5)
-Requirement already satisfied: scipy in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-venn) (1.7.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: kiwisolver&gt;=1.0.1 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (1.3.2)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (2.8.2)
-Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (21.3)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (4.29.1)
-Requirement already satisfied: cycler&gt;=0.10 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (0.11.0)
-Requirement already satisfied: pyparsing&gt;=2.2.1 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (3.0.7)
-Requirement already satisfied: pillow&gt;=6.2.0 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from matplotlib-&gt;matplotlib-venn) (9.0.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;matplotlib-venn) (1.16.0)
-Building wheels for collected packages: matplotlib-venn
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for matplotlib-venn (setup.py) ... ?25l-
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for matplotlib-venn: filename=matplotlib_venn-0.11.6-py3-none-any.whl size=32062 sha256=c18ae47a9a06f8694c427368c537a6811428e3dd5dd7da035d2994de1f7bd546
-  Stored in directory: /home/runner/.cache/pip/wheels/83/b1/0d/2f0c1d1b8ac6eb051dac0775adc44c8a83a0bf1dafc2b2becc
-Successfully built matplotlib-venn
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: matplotlib-venn
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed matplotlib-venn-0.11.6
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">WARNING: You are using pip version 21.3.1; however, version 22.0.2 is available.</span>
-<span class=" -Color -Color-Yellow">You should consider upgrading via the &#39;/opt/hostedtoolcache/Python/3.7.12/x64/bin/python -m pip install --upgrade pip&#39; command.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
+!pip install matplotlib-venn #install if running locally
+import matplotlib_venn as venn
 </pre></div>
 </div>
 </div>
@@ -864,7 +817,7 @@ Successfully built matplotlib-venn
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f48a3964cd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f73a0b2b850&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_SetsCounting_12_1.png" src="../_images/01_SetsCounting_12_1.png" />
@@ -1066,13 +1019,12 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 <p class="admonition-title">Example</p>
 <details class="sphinx-bs dropdown card mb-3">
 <summary class="summary-title card-header">
-A test for cancer is known to be 90% accurate either in detecting cancer if present<div class="summary-down docutils">
+A test for cancer is known to be 90% accurate either in detecting cancer if present or in giving an all-clear if cancer is absent. The prevalence of cancer in the population<div class="summary-down docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="summary-up docutils">
 <svg version="1.1" width="24" height="24" class="octicon octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="summary-content card-body docutils">
-<p class="card-text">or in giving an all-clear if cancer is absent. The prevalence of cancer in the population
-is 1%. How worried should you be if you test positive? Try answering this question
+<p class="card-text">is 1%. How worried should you be if you test positive? Try answering this question
 with and without Bayes’ theorem.</p>
 <ul class="simple">
 <li><p class="card-text">Only 1% population has cancer hence we get probability of an inidivual having (not having) cancer as:</p></li>
@@ -1341,7 +1293,7 @@ Combinations with replacement
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f489996f4d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f739ea4b250&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_SetsCounting_36_1.png" src="../_images/01_SetsCounting_36_1.png" />
@@ -1398,42 +1350,6 @@ of head/tails or 1s and 0s</p>
 <li><p>What is the average number of molecules in each part?</p></li>
 <li><p>What are the relative fluctuations of the number of particles in each part?</p></li>
 </ul>
-<p><strong>DNA synthesis.</strong></p>
-<p>Suppose that upon synthesizing a molecule of DNA, you introduce a wrong base pair, on average, every 1000 base pairs. Suppose you synthesize a DNA molecule that is 1000 bases long.</p>
-<ul class="simple">
-<li><p>Calculate and draw a bar graph indicating the yield (probability) of each product DNA, containing 0, 1, 2, and 3 mutations (wrong base pairs).</p></li>
-<li><p>Calculate how many combinations of DNA sequ- ences of 1000 base pairs contain exactly 2 mutant base pairs.</p></li>
-<li><p>What is the probability of having specifically the 500th base pair and the 888th base pair mutated in the pool of DNA that has only two mutations?</p></li>
-<li><p>What is the probability of having two mutations side-by-side in the pool of DNA that has only two mutations?</p></li>
-</ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<p><strong>Stirling, factorial, Gamma and divergent series. “Approximate don’t hesitate.</strong></p>
-<p>There are several version of Stirling’s formula approximating facorial ranging from: <br> pretty good <span class="math notranslate nohighlight">\(logn! \approx nlogn-n+\frac{1}{2}log(2\pi N)\)</span> <br> to  “OMG can’t believe this works” <span class="math notranslate nohighlight">\(logn! \approx nlogn-n\)</span>. <br></p>
-<p>Here we will numiercally evaluate how good these apprixmations are for different values of n. <br></p>
-<ul class="simple">
-<li><p>On the same graph plot (i) <span class="math notranslate nohighlight">\(logn!\)</span> vs n, (ii) two stirling approximations of <span class="math notranslate nohighlight">\(logn!\)</span> vs n and (iii) Continous <span class="math notranslate nohighlight">\(\Gamma(n)\)</span> function vs n.</p></li>
-<li><p>Do another plot where you plot the ration of stirling’s approximations for <span class="math notranslate nohighlight">\(logn!\)</span> to exact <span class="math notranslate nohighlight">\(logn!\)</span> as a function of n</p></li>
-</ul>
-<blockquote>
-<div><p>Compute factorials of n using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.factorial.html">scipy.special.factorial(n)</a></p>
-</div></blockquote>
-<blockquote>
-<div><p>Compute Gamma function of n using <span class="xref myst">scipy.special.gamma</span></p>
-</div></blockquote>
-<blockquote>
-<div><p>You can import these via <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">scipy.special</span> <span class="pre">import</span> <span class="pre">factorial,</span> <span class="pre">gamma</span></code> and simply use shorthand factorial(n) and gamma(n).</p>
-</div></blockquote>
-<blockquote>
-<div><p>Read more about Striling approximations <a class="reference external" href="https://en.wikipedia.org/wiki/Stirling%27s_approximation">here</a> and also <a class="reference external" href="https://www.youtube.com/watch?v=rHVlS9i80x8">here</a></p>
-</div></blockquote>
-<blockquote>
-<div><p>Read apendix “A.8 Stirling’s formula”</p>
-</div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 <p><strong>Binomial, Gaussian and Poisson: The 3 distributions to know before heading to Las Vegas.</strong></p>
 <ul class="simple">
 <li><p>Show that in large number limit binomial distribution tends to gaussian. Show is by expanding binomial distirbution <span class="math notranslate nohighlight">\(logp(n)\)</span> in power series showing that terms beyond quadratic can be ignored.</p></li>
