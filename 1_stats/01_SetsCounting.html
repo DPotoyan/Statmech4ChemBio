@@ -56,7 +56,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Random variable, stochastic process and simulation." href="02_RandVar.html" />
+    <link rel="next" title="Large N approximations" href="RW_theory.html" />
     <link rel="prev" title="Stats" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -147,6 +147,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Probability by counting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RW_theory.html">
+     Large N approximations
     </a>
    </li>
    <li class="toctree-l2">
@@ -496,25 +501,7 @@
   <a class="reference internal nav-link" href="#permutations-and-combinations-in-python">
    Permutations and combinations in python
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dealinig-with-large-numbers-striling-approximation">
-   Dealinig with large numbers: Striling approximation
-  </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stirlings-approximation-a-crude-approximation-that-works-out-for-n-gg-1">
-     Stirling’s approximation  A crude approximation that works out for
-     <span class="math notranslate nohighlight">
-      \(N\gg 1\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#applying-stirling-approximation-to-the-binomial">
-     Applying Stirling approximation to the Binomial
-    </a>
-   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#gamma-function-generalizing-the-factorial">
      Gamma function: generalizing the factorial
@@ -622,25 +609,7 @@
   <a class="reference internal nav-link" href="#permutations-and-combinations-in-python">
    Permutations and combinations in python
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dealinig-with-large-numbers-striling-approximation">
-   Dealinig with large numbers: Striling approximation
-  </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#stirlings-approximation-a-crude-approximation-that-works-out-for-n-gg-1">
-     Stirling’s approximation  A crude approximation that works out for
-     <span class="math notranslate nohighlight">
-      \(N\gg 1\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#applying-stirling-approximation-to-the-binomial">
-     Applying Stirling approximation to the Binomial
-    </a>
-   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#gamma-function-generalizing-the-factorial">
      Gamma function: generalizing the factorial
@@ -822,7 +791,7 @@ import matplotlib_venn as venn
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7faeb1aa5550&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fdc82741110&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_SetsCounting_12_1.png" src="../_images/01_SetsCounting_12_1.png" />
@@ -1239,32 +1208,6 @@ Combinations with replacement
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="dealinig-with-large-numbers-striling-approximation">
-<h2>Dealinig with large numbers: Striling approximation<a class="headerlink" href="#dealinig-with-large-numbers-striling-approximation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="stirlings-approximation-a-crude-approximation-that-works-out-for-n-gg-1">
-<h3>Stirling’s approximation  A crude approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span><a class="headerlink" href="#stirlings-approximation-a-crude-approximation-that-works-out-for-n-gg-1" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[logN! \approx \sum log N_i = \int log N dN\]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{logN! \approx NlogN-N}\]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{N! \approx N^N e^{-N}}\]</div>
-</div>
-<div class="section" id="applying-stirling-approximation-to-the-binomial">
-<h3>Applying Stirling approximation to the Binomial<a class="headerlink" href="#applying-stirling-approximation-to-the-binomial" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[r+r' = N\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{N!}{r! \cdot r'!} \approx \frac{N^N e^{-N}}{r^{r} e^{-r}\cdot r'^{r'} e^{-r'}} =\frac{N^N }{r^{r} \cdot r'^{r'} }\]</div>
-<div class="math notranslate nohighlight">
-\[log\frac{N!}{r! \cdot r'!} \approx NlogN -rlogr - r'log r'\]</div>
-<div class="math notranslate nohighlight">
-\[{log\frac{N!}{r! \cdot r'!} \approx  N \Big[ -x log x - x' log x' \Big]}\]</div>
-<blockquote>
-<div><p>The expression <span class="math notranslate nohighlight">\(S = \Big[ -x log x - x' log x' \Big]\)</span> is significant. We are going to associate it with entropy further down the road.</p>
-</div></blockquote>
-</div>
 <div class="section" id="gamma-function-generalizing-the-factorial">
 <h3>Gamma function: generalizing the factorial<a class="headerlink" href="#gamma-function-generalizing-the-factorial" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
@@ -1276,34 +1219,6 @@ Combinations with replacement
 </ul>
 <div class="math notranslate nohighlight">
 \[\Gamma(n)=(n-1)!\]</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">gamma</span>
-
-<span class="c1"># Plot gamma function </span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gamma</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\Gamma(x)$&#39;</span><span class="p">)</span>
-
-<span class="c1"># Plot (x-1)! for x = 1, 2, ..., 6</span>
-<span class="n">xint</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-<span class="n">factorials</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xint</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xint</span><span class="p">,</span> <span class="n">factorials</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$(x-1)!$&#39;</span><span class="p">)</span>
-
-<span class="c1"># Style</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7faea7a17dd0&gt;
-</pre></div>
-</div>
-<img alt="../_images/01_SetsCounting_36_1.png" src="../_images/01_SetsCounting_36_1.png" />
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="exercises">
@@ -1415,10 +1330,10 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
             <p class="prev-next-title">Stats</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02_RandVar.html" title="next page">
+    <a class='right-next' id="next-link" href="RW_theory.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Random variable, stochastic process and simulation.</p>
+        <p class="prev-next-title">Large N approximations</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

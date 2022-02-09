@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Large N approximations &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Random variable, stochastic process and simulation." href="02_RandVar.html" />
+    <link rel="prev" title="Probability by counting" href="01_SetsCounting.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistical Mechanics for Chemistry and Biology</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   About
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../0_python/intro.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../0_python/intro2py.html">
+     Python3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../0_python/intro2numpy.html">
+     NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../0_python/intro2viz.html">
+     Plotting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   Stats
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_SetsCounting.html">
+     Probability by counting
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Large N approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_RandVar.html">
+     Random variable, stochastic process and simulation.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_Diffusion.html">
+     Brownian motion and Diffusion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_MC.html">
+     “Monte Carlo and the power of randomness”
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_LimitTheorems.html">
+     Appendix A: Limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_InverseTransform.html">
+     Appendix B: The Inverse Transform of RVs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../2_thermo/intro.html">
+   Thermodynamics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../2_thermo/01_Thermo.html">
+     Review of thermodynamics principles
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapters
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../3_ensembles/intro.html">
+   Statistical ensembles
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/nve.html">
+     NVE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/phase_space.html">
+     NVE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/nvt.html">
+     NVT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/npt.html">
+     NPT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/applications.html">
+     Applications
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../4_ideal_systems/intro.html">
+   Ideal Systems
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../4_ideal_systems/classical_systems.html">
+     Classical gases
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../4_ideal_systems/quantum_systems.html">
+     Quantum non-interacting systems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../5_entropy/intro.html">
+   Entropy and Information
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5_entropy/shannon.html">
+     What is Information?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../6_ising/intro.html">
+   Phase transitions and Ising models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../6_ising/01_MCMC.html">
+     Ising models and Metropolis-Hastings algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../6_ising/02_ising_analytic.html">
+     Phase transitions through the lense of Ising models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../6_ising/03_MeanField.html">
+     Mean Field Theory
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../6_ising/04_EnhanceSampl.html">
+     Non-boltzman (enhanced) sampling ideas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../7_fluids/intro.html">
+   Fluids and introduction to Molecular Dynamics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../7_fluids/Intro2Fluids.html">
+     Introduction to statistical mechanics of fluids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../7_fluids/mc_lj.html">
+     Monte Carlo simulations of Lennard-Jones fluids
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/1_stats/RW_theory.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stirlings-approximation-a-crude-approximation-that-works-out-for-n-gg-1">
+   Stirling’s approximation  A crude approximation that works out for
+   <span class="math notranslate nohighlight">
+    \(N\gg 1\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-stirling-approximation-to-the-binomial">
+   Applying Stirling approximation to the Binomial
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gamma-function-generalizing-the-factorial">
+     Gamma function: generalizing the factorial
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-approximation-to-the-binomial-distribution-in-the-large-n-limit">
+   Gaussian approximation to the Binomial Distribution in the large N limit.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-alternative-derivation-of-gaussian-from-binomial-making-use-of-stirlings-approximation">
+   An Alternative derivation of Gaussian from Binomial making use of Stirling’s approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deriving-poisson-distribution-from-binomial-in-the-limit-of-large-n-and-small-p-such-that-np-const">
+   Deriving Poisson distribution from Binomial in the limit of large N and small p such that Np=const.
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Large N approximations</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stirlings-approximation-a-crude-approximation-that-works-out-for-n-gg-1">
+   Stirling’s approximation  A crude approximation that works out for
+   <span class="math notranslate nohighlight">
+    \(N\gg 1\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applying-stirling-approximation-to-the-binomial">
+   Applying Stirling approximation to the Binomial
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gamma-function-generalizing-the-factorial">
+     Gamma function: generalizing the factorial
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-approximation-to-the-binomial-distribution-in-the-large-n-limit">
+   Gaussian approximation to the Binomial Distribution in the large N limit.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-alternative-derivation-of-gaussian-from-binomial-making-use-of-stirlings-approximation">
+   An Alternative derivation of Gaussian from Binomial making use of Stirling’s approximation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deriving-poisson-distribution-from-binomial-in-the-limit-of-large-n-and-small-p-such-that-np-const">
+   Deriving Poisson distribution from Binomial in the limit of large N and small p such that Np=const.
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="large-n-approximations">
+<h1>Large N approximations<a class="headerlink" href="#large-n-approximations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="stirlings-approximation-a-crude-approximation-that-works-out-for-n-gg-1">
+<h2>Stirling’s approximation  A crude approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span><a class="headerlink" href="#stirlings-approximation-a-crude-approximation-that-works-out-for-n-gg-1" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[logN! \approx \sum log N_i = \int log N dN\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{logN! \approx NlogN-N}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{N! \approx N^N e^{-N}}\]</div>
+</div>
+<div class="section" id="applying-stirling-approximation-to-the-binomial">
+<h2>Applying Stirling approximation to the Binomial<a class="headerlink" href="#applying-stirling-approximation-to-the-binomial" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[N = N_1+N_2\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{N!}{N_1! \cdot N_2!} \approx \frac{N^N e^{-N}}{N_1^{N_1} e^{-N_1}\cdot N_2^{N_2} e^{-N_2}} =\frac{N^N }{N_1^{N_1} \cdot N_2^{N_2} }\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}log\frac{N!}{N_1! \cdot N_2!} \approx NlogN -N_1 log N_1 - N_2log N_2 = \\ = N \Big[ -\frac{N_1}{N} log \frac{N_1}{N} - \frac{N_2}{N} log \frac{N_2}{N} \Big] = N[-p_1 log p_1 -p_2log p_2]\end{split}\]</div>
+<blockquote>
+<div><p>The expression $<span class="math notranslate nohighlight">\(S =  \sum_i -p_i log p_i\)</span>$ is significant. We are going to associate it with entropy further down the road.</p>
+</div></blockquote>
+<div class="section" id="gamma-function-generalizing-the-factorial">
+<h3>Gamma function: generalizing the factorial<a class="headerlink" href="#gamma-function-generalizing-the-factorial" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\Gamma (n) = \int^{\infty}_0 x^{n-1} e^{-x}dx\]</div>
+<ul class="simple">
+<li><p>The gamma function <span class="math notranslate nohighlight">\(\Gamma(n)\)</span> provides an extension of the factorial function to domain of noninteger and complex numbers.</p></li>
+<li><p>The gamma function is defined for all complex numbers except the non-positive integers.</p></li>
+<li><p>For any positive integer gamma function reduces to factorials</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Gamma(n)=(n-1)!\]</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">gamma</span>
+
+<span class="c1"># Plot gamma function </span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gamma</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\Gamma(x)$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot (x-1)! for x = 1, 2, ..., 6</span>
+<span class="n">xint</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">factorials</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xint</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xint</span><span class="p">,</span> <span class="n">factorials</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$(x-1)!$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Style</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="gaussian-approximation-to-the-binomial-distribution-in-the-large-n-limit">
+<h2>Gaussian approximation to the Binomial Distribution in the large N limit.<a class="headerlink" href="#gaussian-approximation-to-the-binomial-distribution-in-the-large-n-limit" title="Permalink to this headline">¶</a></h2>
+<p>Binomial distribution for large values of <span class="math notranslate nohighlight">\(N\)</span> has a sharply peaked distribution around its maximum (most likely) value <span class="math notranslate nohighlight">\(\bar{n}\)</span>. This motivates us to seek a continuous approximation by Taylor expanding probability distribution around its max value <span class="math notranslate nohighlight">\(\Delta n = n-\bar{n}\)</span> and keeping up to quadratic terms.
+$<span class="math notranslate nohighlight">\(
+P_N(n) = \frac{N!}{n! (N-n)!} p^n (1-p)^{(N-n)}
+\)</span><span class="math notranslate nohighlight">\(
+Thus from the onset we are aiming for a Gaussian distribution. The task then is to find coefficients and to then justify that third term of Taylor expansion is negligible compared to the second!
+\)</span><span class="math notranslate nohighlight">\(
+logP(n) = logP(\bar{n}) + \frac{1}{2}B_2\Delta n^2 + O(\delta n^3)
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+log P(n) = log N! - log n! - log(N-n)! + nlog(p) + (N-n)log(1-p)
+\]</div>
+<p>Taking derivatives of factorials <span class="math notranslate nohighlight">\(logx!\)</span> in the limit of <span class="math notranslate nohighlight">\(x\gg1\)</span> Is easy once we recognize that:
+$<span class="math notranslate nohighlight">\(
+\frac{d}{dn} log n! = \frac{log(n+1)! - log n!}{n+1-n} \approx log(n+1) \approx log(n)
+\)</span>$</p>
+<ul class="simple">
+<li><p>We could also arrive at the same result by using Stirling approximation <span class="math notranslate nohighlight">\(logN! \approx  NlogN -n\)</span></p></li>
+<li><p>Taking first derivative of Taylor expansion to Binomial we find the peak of the distribution around which we are making expansion:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dn}log P(n) \Big |_{n=\bar{n}} = - log n + log(n-n) + log(p)  -log(1-p)=0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+log \Big( \frac{N-n}{n} \frac{p}{1-p}\Big)=0\,\, \rightarrow \,\, \bar{n} = Np
+\]</div>
+<ul class="simple">
+<li><p>We recall that <span class="math notranslate nohighlight">\(\bar{n} = Np\)</span> is also mean of the binomial!</p></li>
+<li><p>Having found the peak of distribution and knowing first derivative we now proceed to compute the second derivative:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+B_2 = \frac{d^2}{d n^2} logP(n) \Big |_{n = \bar{n}} = \frac{d}{dn} log \Big( \frac{N-n}{n} \frac{p}{1-p}\Big) = \Big( - \frac{1}{N-n}-\frac{1}{n} \Big) \Big |_{n = \bar{n}} = - \frac{1}{Npq}
+\]</div>
+<ul class="simple">
+<li><p>While first derivative gave us the mean of binomial we notice that second derivative produces the variance <span class="math notranslate nohighlight">\(\sigma^2 = Npq\)</span></p></li>
+<li><p>Now all that remains to do is to plug  the coefficients into our approximated probability distribution and then normalize it. Why normalize? After all Binomial was already properly normalized.  But since we made approximation by leaving our some terms we have to re-normalize again!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(n) \approx P(\bar{n}) e^{-(n-\bar{n})^2/ 2Npq}
+\]</div>
+<ul class="simple">
+<li><p>Normalizing gaussian distribution is done via the following table integral</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\int^{+\infty}_{-\infty} e^{-ax^2} = \Big(\frac{\pi}{a} \Big)^{1/2}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\int P(\bar{n}) e^{-(n-\bar{n})^2/ 2Npq} dn  = P(\bar{n}) (2\pi Npq)^{1/2}=1
+\]</div>
+<ul class="simple">
+<li><p>At last we have the normalized approximation to Binomial which is a guassian distribution arond mean!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(n) \approx \frac{1}{(2\pi Npq)^{1/2}} e^{-(n-\bar{n})^2/ 2Npq} = \frac{1}{(2\pi \sigma^2)^{1/2}}e^{(n-\mu)^2/2\sigma^2}
+\]</div>
+</div>
+<div class="section" id="an-alternative-derivation-of-gaussian-from-binomial-making-use-of-stirlings-approximation">
+<h2>An Alternative derivation of Gaussian from Binomial making use of Stirling’s approximation<a class="headerlink" href="#an-alternative-derivation-of-gaussian-from-binomial-making-use-of-stirlings-approximation" title="Permalink to this headline">¶</a></h2>
+<p>Here we would like to start by choosing as a new independent variable the net right displacement of a random walker <span class="math notranslate nohighlight">\(m\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m = n - (N-n) = 2n-N\)</span>.</p></li>
+<li><p>Hence the number of moves to the right and left are  <span class="math notranslate nohighlight">\(n = \frac{N+m}{2}\)</span> and  <span class="math notranslate nohighlight">\((N - n)=\frac{N-m}{2}\)</span> respectively.</p></li>
+<li><p>The left and right moves sum to the total move number <span class="math notranslate nohighlight">\(\frac{N-m}{2} + \frac{N-m}{2} = N\)</span></p></li>
+<li><p>Let us also assume <span class="math notranslate nohighlight">\(p = 1/2\)</span> for the sake of simplicity.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P_N(m) = \frac{N!}{(\frac{N+m}{2})! \cdot (\frac{N-m}{2})!} \frac{1}{2^N}
+\]</div>
+<ul class="simple">
+<li><p>Now we make use of Stirling approximation  valid for <span class="math notranslate nohighlight">\(N\gg1\)</span> <span class="math notranslate nohighlight">\(N! = N^N e^N\)</span>. and start group with common exponents containing N and m respectively.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P_N(m) \approx \frac{N^N e^N}{ (N-m)^{(N-m)/2} (N+m)^{(N+m)/2}  \cdot 2^{-N} e^N } \cdot \frac{1}{2^N}  = \frac{N^N}{ (N-m)^{(N-m)/2} (N+m)^{(N+m)/2}} \\= \frac{N^N}{ (N-m)^{N/2} (N+m)^{N/2}} \cdot  \Big( \frac{N-m}{N+m}\Big)^{m/2} = \frac{1}{[(1-m/N)(1+m/N)]^{N/2}} \cdot  \Big( \frac{N-m}{N+m}\Big)^{m/2} \\= \Big[(1-m^2/N^2) \Big]^{-N/2} \Big( \frac{1-m/N}{1+m/N}\Big)^{m/2}  \approx (e^{-m^2/N^2})^{-N/2} (e^{-m/N})^{m/2} (e^{+m/N})^{-m/2}= e^{-m^2/2N}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Notice how factors involving <span class="math notranslate nohighlight">\(2^N\)</span> and <span class="math notranslate nohighlight">\(e^N\)</span> cancell in the first line.</p></li>
+<li><p>We have casted all terms in terms of <span class="math notranslate nohighlight">\(m/N\)</span>. This allowed us to make use of <span class="math notranslate nohighlight">\((1\pm x)\approx e^{\pm x}\)</span> approximation for small <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="deriving-poisson-distribution-from-binomial-in-the-limit-of-large-n-and-small-p-such-that-np-const">
+<h2>Deriving Poisson distribution from Binomial in the limit of large N and small p such that Np=const.<a class="headerlink" href="#deriving-poisson-distribution-from-binomial-in-the-limit-of-large-n-and-small-p-such-that-np-const" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This is a situation of rare events like rains in forest or radioactive decay of uranium where each individual event has small chance of happening <span class="math notranslate nohighlight">\(p \rightarrow 0\)</span>  yet there are large number of samples <span class="math notranslate nohighlight">\(N\rightarrow \infty\)</span> such that one has a constant average rate of events <span class="math notranslate nohighlight">\(\lambda = pN = const\)</span></p></li>
+<li><p>In this limit distirbution is no longer well described by the gaussian as the shape of distribution is heavily skewed due to tiny values of p.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P_N(n) = \frac{N!}{n! (N-n)!} p^n (1-p)^{(N-n)}
+\]</div>
+<ul class="simple">
+<li><p>Writing factorial <span class="math notranslate nohighlight">\(N!/(N-n)!\)</span> explicitely we realize that it is dominated <span class="math notranslate nohighlight">\(N^n\)</span> and also <span class="math notranslate nohighlight">\(N-n \approx N\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P_N(n) = \frac{N(N-1)...(N-1+1))}{n!} p^n (1-p)^{(N-n)} \approx \frac{N^n}{n!} p^n (1-p)^{N}
+\]</div>
+<ul class="simple">
+<li><p>Next let us plug in <span class="math notranslate nohighlight">\(\lambda = pN = const\)</span> and recall the definition of exponential <span class="math notranslate nohighlight">\(lim_{x\rightarrow \infty }(1-1/x)^x = e^{-x}\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(n) = \frac{N^n}{n!} \Big( \frac{\lambda}{N} \Big)^n \Big( 1-\frac{\lambda}{N} \Big)^{N} = \frac{\lambda^n}{n!} \Big( 1-\frac{\lambda}{N} \Big)^{N} \approx \frac{\lambda^n}{n!} e^{-\lambda}
+\]</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "DPotoyan/Statmech4ChemBio",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./1_stats"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="01_SetsCounting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Probability by counting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="02_RandVar.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Random variable, stochastic process and simulation.</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Davit Potoyan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
