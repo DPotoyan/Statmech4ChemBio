@@ -1,4 +1,4 @@
-# Large N approximations
+# Appendix A: Large N approximations
 
 ###  Stirling's approximation  
 
