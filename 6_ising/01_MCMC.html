@@ -37,9 +37,12 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -150,11 +153,6 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../1_stats/RW_theory.html">
-     Large N approximations
-    </a>
-   </li>
-   <li class="toctree-l2">
     <a class="reference internal" href="../1_stats/02_RandVar.html">
      Random variable, stochastic process and simulation.
     </a>
@@ -170,13 +168,18 @@
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="../1_stats/RW_theory.html">
+     Appendix A: Large N approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="../1_stats/04_LimitTheorems.html">
-     Appendix A: Limit theorems
+     Appendix B: Limit theorems
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../1_stats/05_InverseTransform.html">
-     Appendix B: The Inverse Transform of RVs
+     Appendix C: The Inverse Transform of RVs
     </a>
    </li>
   </ul>
@@ -432,15 +435,6 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#estimate-pi-via-mcmc">
-   Estimate
-   <span class="math notranslate nohighlight">
-    \(\pi\)
-   </span>
-   via MCMC
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ising-models-the-h-atom-of-phase-transitions">
    Ising models: The H atom of phase transitions
   </a>
@@ -586,15 +580,6 @@
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#estimate-pi-via-mcmc">
-   Estimate
-   <span class="math notranslate nohighlight">
-    \(\pi\)
-   </span>
-   via MCMC
-  </a>
- </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ising-models-the-h-atom-of-phase-transitions">
    Ising models: The H atom of phase transitions
@@ -744,79 +729,6 @@
 </div>
 </div>
 </div>
-<div class="section" id="estimate-pi-via-mcmc">
-<h2>Estimate <span class="math notranslate nohighlight">\(\pi\)</span> via MCMC<a class="headerlink" href="#estimate-pi-via-mcmc" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mcmc_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Using MCMC algorithm to estimate the value of pi&#39;&#39;&#39;</span>
-    
-    <span class="n">pts</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># array for points in square</span>
-    
-    <span class="n">r_old</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 2 points within [0, 1] for x and y</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        
-        <span class="n">dr</span> <span class="o">=</span> <span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">delta</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        
-        <span class="n">r_new</span> <span class="o">=</span> <span class="n">r_old</span> <span class="o">+</span> <span class="n">dr</span>
-        
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">:</span>
-            
-            <span class="n">pts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span>
-            
-            <span class="n">r_old</span> <span class="o">=</span> <span class="n">r_new</span>
-    
-    <span class="n">pts</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
-    <span class="n">hits</span> <span class="o">=</span> <span class="n">pts</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pts</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">pts</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">]</span>
-    
-    <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">pts</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_value</span> <span class="o">=</span>  <span class="n">mcmc_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated Pi value is: &quot;</span><span class="p">,</span> <span class="n">pi_value</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated Pi value is:  3.4357606886554395
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_runs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1001</span><span class="p">)</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
-
-<span class="c1">#Estimate pi via a number of mcmc simulations</span>
-<span class="n">pi_vals</span>      <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mcmc_pi</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">n_runs</span><span class="p">]</span> <span class="p">)</span>
- 
-<span class="c1"># Calculaate how mean improves with number of runs</span>
-<span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pi_vals</span> <span class="p">)</span><span class="o">/</span><span class="n">n_runs</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n_runs</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="s1">&#39;-s&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$N$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$S_N/N$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pi_vals</span> <span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, Var: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">pi_vals</span> <span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Mean: 3.4203, Var: 0.2003&#39;)
-</pre></div>
-</div>
-<img alt="../_images/01_MCMC_5_1.png" src="../_images/01_MCMC_5_1.png" />
-</div>
-</div>
-</div>
 <div class="section" id="ising-models-the-h-atom-of-phase-transitions">
 <h2>Ising models: The H atom of phase transitions<a class="headerlink" href="#ising-models-the-h-atom-of-phase-transitions" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
@@ -835,20 +747,20 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1  1  1  1 -1  1  1  1]
- [ 1  1  1  1  1 -1 -1  1]
- [-1  1  1 -1  1 -1 -1 -1]
- [-1 -1 -1  1  1  1  1 -1]
- [-1  1 -1  1  1  1 -1  1]
- [ 1 -1 -1  1 -1 -1  1 -1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1 -1  1  1  1  1 -1  1]
+ [ 1 -1 -1 -1 -1  1 -1  1]
+ [ 1 -1 -1 -1 -1 -1 -1 -1]
+ [-1 -1 -1 -1  1  1  1 -1]
+ [-1  1 -1  1  1 -1 -1  1]
+ [ 1  1  1 -1 -1 -1  1  1]
  [-1 -1 -1 -1 -1 -1 -1  1]
- [-1 -1  1  1 -1 -1  1 -1]]
+ [ 1 -1 -1  1 -1 -1  1 -1]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f720e5e35d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fc9083a5fd0&gt;
 </pre></div>
 </div>
-<img alt="../_images/01_MCMC_7_2.png" src="../_images/01_MCMC_7_2.png" />
+<img alt="../_images/01_MCMC_3_2.png" src="../_images/01_MCMC_3_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -858,14 +770,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1,  1,  1,  1, -1,  1,  1,  1],
-       [ 1,  1,  1,  1,  1, -1, -1,  1],
-       [-1,  1,  1, -1,  1, -1, -1, -1],
-       [-1, -1, -1,  1,  1,  1,  1, -1],
-       [-1,  1, -1,  1,  1,  1, -1,  1],
-       [ 1, -1, -1,  1, -1, -1,  1, -1],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1, -1,  1,  1,  1,  1, -1,  1],
+       [ 1, -1, -1, -1, -1,  1, -1,  1],
+       [ 1, -1, -1, -1, -1, -1, -1, -1],
+       [-1, -1, -1, -1,  1,  1,  1, -1],
+       [-1,  1, -1,  1,  1, -1, -1,  1],
+       [ 1,  1,  1, -1, -1, -1,  1,  1],
        [-1, -1, -1, -1, -1, -1, -1,  1],
-       [-1, -1,  1,  1, -1, -1,  1, -1]])
+       [ 1, -1, -1,  1, -1, -1,  1, -1]])
 </pre></div>
 </div>
 </div>
@@ -886,7 +798,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
 </pre></div>
 </div>
 </div>
@@ -920,11 +832,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1
+-1
 -1
 1
-1
-1
+-1
 -1
 1
 1
@@ -948,7 +860,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16
 </pre></div>
 </div>
 </div>
@@ -963,13 +875,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1, -1,  1,  1, -1, -1,  1, -1],
-       [-1,  1,  1,  1, -1,  1,  1,  1],
-       [ 1,  1,  1,  1,  1, -1, -1,  1],
-       [-1,  1,  1, -1,  1, -1, -1, -1],
-       [-1, -1, -1,  1,  1,  1,  1, -1],
-       [-1,  1, -1,  1,  1,  1, -1,  1],
-       [ 1, -1, -1,  1, -1, -1,  1, -1],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1, -1, -1,  1, -1, -1,  1, -1],
+       [ 1, -1,  1,  1,  1,  1, -1,  1],
+       [ 1, -1, -1, -1, -1,  1, -1,  1],
+       [ 1, -1, -1, -1, -1, -1, -1, -1],
+       [-1, -1, -1, -1,  1,  1,  1, -1],
+       [-1,  1, -1,  1,  1, -1, -1,  1],
+       [ 1,  1,  1, -1, -1, -1,  1,  1],
        [-1, -1, -1, -1, -1, -1, -1,  1]])
 </pre></div>
 </div>
@@ -1096,7 +1008,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.64 s ± 29.3 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.76 s ± 14.8 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1110,7 +1022,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16.1 ms ± 311 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.6 ms ± 568 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
 </div>
@@ -1332,7 +1244,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01_MCMC_46_0.png" src="../_images/01_MCMC_46_0.png" />
+<img alt="../_images/01_MCMC_42_0.png" src="../_images/01_MCMC_42_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1362,8 +1274,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2 µs, sys: 0 ns, total: 2 µs
-Wall time: 6.44 µs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3 µs, sys: 1 µs, total: 4 µs
+Wall time: 6.91 µs
 </pre></div>
 </div>
 </div>
@@ -1379,7 +1291,7 @@ Wall time: 6.44 µs
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "2fef127dc70b460fb2a6cb466e749d91"}
+{"version_major": 2, "version_minor": 0, "model_id": "6bb03d0375444a2997e1b5f0265310f8"}
 </script></div>
 </div>
 <div class="cell docutils container">
@@ -1424,10 +1336,10 @@ Wall time: 6.44 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f7206a77b10&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc8d4434910&gt;]
 </pre></div>
 </div>
-<img alt="../_images/01_MCMC_51_1.png" src="../_images/01_MCMC_51_1.png" />
+<img alt="../_images/01_MCMC_47_1.png" src="../_images/01_MCMC_47_1.png" />
 </div>
 </div>
 <div class="section" id="carry-out-explorative-simulations">
@@ -1487,19 +1399,27 @@ Wall time: 6.44 µs
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2161</span><span class="o">/</span><span class="mf">3295904899.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2244</span><span class="o">/</span><span class="mf">3295904899.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_mcsteps2</span><span class="p">):</span>
 <span class="g g-Whitespace">     </span><span class="mi">26</span> 
 <span class="ne">---&gt; </span><span class="mi">27</span>         <span class="n">spins</span> <span class="o">=</span> <span class="n">mcmc</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">28</span> 
 <span class="g g-Whitespace">     </span><span class="mi">29</span>         <span class="n">Ei</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">getE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
 
-<span class="nn">/tmp/ipykernel_2161/3245995785.py</span> in <span class="ni">mcmc</span><span class="nt">(spins, N, J, B, T)</span>
+<span class="nn">/tmp/ipykernel_2244/3245995785.py</span> in <span class="ni">mcmc</span><span class="nt">(spins, N, J, B, T)</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="sd">&#39;&#39;&#39; Attempt a flip of a randomly chosen spin at ij location of lattice&#39;&#39;&#39;</span>
 <span class="g g-Whitespace">     </span><span class="mi">24</span> 
 <span class="ne">---&gt; </span><span class="mi">25</span>     <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">choice</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">26</span> 
 <span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">deltaE</span> <span class="o">=</span> <span class="n">get_dE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+
+<span class="nn">mtrand.pyx</span> in <span class="ni">numpy.random.mtrand.RandomState.choice</span><span class="nt">()</span>
+
+<span class="nn">mtrand.pyx</span> in <span class="ni">numpy.random.mtrand.RandomState.randint</span><span class="nt">()</span>
+
+<span class="nn">_bounded_integers.pyx</span> in <span class="ni">numpy.random._bounded_integers._rand_int64</span><span class="nt">()</span>
+
+<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">prod</span><span class="nt">(*args, **kwargs)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1519,7 +1439,7 @@ Wall time: 6.44 µs
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Energy E&#39;)
 </pre></div>
 </div>
-<img alt="../_images/01_MCMC_55_1.png" src="../_images/01_MCMC_55_1.png" />
+<img alt="../_images/01_MCMC_51_1.png" src="../_images/01_MCMC_51_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1535,7 +1455,7 @@ Wall time: 6.44 µs
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Magnetization M&#39;)
 </pre></div>
 </div>
-<img alt="../_images/01_MCMC_56_1.png" src="../_images/01_MCMC_56_1.png" />
+<img alt="../_images/01_MCMC_52_1.png" src="../_images/01_MCMC_52_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1551,7 +1471,7 @@ Wall time: 6.44 µs
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Heat capacity $C_v(T)$&#39;)
 </pre></div>
 </div>
-<img alt="../_images/01_MCMC_57_1.png" src="../_images/01_MCMC_57_1.png" />
+<img alt="../_images/01_MCMC_53_1.png" src="../_images/01_MCMC_53_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1567,7 +1487,7 @@ Wall time: 6.44 µs
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Susceptibility $\\Xi(T)$&#39;)
 </pre></div>
 </div>
-<img alt="../_images/01_MCMC_58_1.png" src="../_images/01_MCMC_58_1.png" />
+<img alt="../_images/01_MCMC_54_1.png" src="../_images/01_MCMC_54_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
