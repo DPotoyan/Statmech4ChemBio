@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -533,13 +533,27 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="math notranslate nohighlight">
 \[ \frac{p_A}{p_B} = \frac{\int_{V_A} e^{-\beta U(x)}}{\int_{V_B} e^{-\beta U(x)}} = \frac{Z_A}{Z_B} = \frac{e^{-\beta F_A}}{e^{-\beta F_B}}= exp(-\beta \Delta F)\]</div>
 <div class="math notranslate nohighlight">
-\[\int_{V_A} e^{-\beta U(x)} \approx \int^{+\infty}_{-\infty} e^{-\beta \big[ U^0_A+ \frac{\kappa_A}{2}(x-x_A)^2\big]} = \Big(\frac{2\pi k_B T}{\kappa_A} \Big)^{1/2} e^{-\beta U^0_A}\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{p_B}{p_A} = \Big(\frac{\kappa_A}{\kappa_B} \Big)^{1/2} e^{-\beta (U^0_B-U^0_A)}\]</div>
-<div class="math notranslate nohighlight">
-\[F_A(T) = U_A -T S_A\]</div>
+\[Z_A = \int_{V_A} e^{-\beta U(x)} \approx \int^{+\infty}_{-\infty} e^{-\beta \big[ U^0_A+ \frac{\kappa_A}{2}(x-x_A)^2\big]} = \Big(\frac{2\pi k_B T}{\kappa_A} \Big)^{1/2} e^{-\beta U^0_A}\]</div>
 <div class="math notranslate nohighlight">
 \[F_A(T) = -k_B T log Z_A = U^0_A -k_B T log \frac{1}{V}\Big(\frac{2\pi k_B T}{\kappa_A} \Big)^{1/2}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{p_B}{p_A} = \Big(\frac{\kappa_A}{\kappa_B} \Big)^{1/2} e^{-\beta (U^0_B-U^0_A)}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">E</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">U0</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U0</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">FE</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">U0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kbT</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">U0</span> <span class="o">-</span> <span class="n">kbT</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">kbT</span><span class="o">/</span><span class="n">k</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">Ea</span> <span class="o">=</span> <span class="n">E</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="n">x0</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">U0</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+<span class="n">Fa</span> <span class="o">=</span> <span class="n">FE</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">U0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kbT</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="protein-folding-problem-with-1d-potential">
 <h3>Protein folding problem with 1D potential<a class="headerlink" href="#protein-folding-problem-with-1d-potential" title="Permalink to this headline">¶</a></h3>
@@ -595,7 +609,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$p(x)$&#39;)
 </pre></div>
 </div>
-<img alt="../_images/applications_12_1.png" src="../_images/applications_12_1.png" />
+<img alt="../_images/applications_13_1.png" src="../_images/applications_13_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -615,10 +629,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f0e46639b50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f40de482bd0&gt;
 </pre></div>
 </div>
-<img alt="../_images/applications_13_1.png" src="../_images/applications_13_1.png" />
+<img alt="../_images/applications_14_1.png" src="../_images/applications_14_1.png" />
 </div>
 </div>
 </div>

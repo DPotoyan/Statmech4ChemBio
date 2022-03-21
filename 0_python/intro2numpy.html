@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -713,7 +713,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.08 ms ± 872 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.06 ms ± 800 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 </pre></div>
 </div>
 </div>
@@ -726,7 +726,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.48 µs ± 2.97 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.96 µs ± 4.62 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -775,10 +775,10 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.8906911  0.86668799 0.38477693 0.66934898]
- [0.7814168  0.25840115 0.3634669  0.01858643]
- [0.90891833 0.44791025 0.31279184 0.103072  ]
- [0.69854732 0.6297398  0.85895968 0.2334604 ]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.94315868 0.15895881 0.52635368 0.92833942]
+ [0.60190172 0.69299713 0.35346645 0.79205788]
+ [0.72722217 0.24316138 0.24400594 0.54096342]
+ [0.94897857 0.46082855 0.70808907 0.3453584 ]]
 </pre></div>
 </div>
 </div>
@@ -1538,6 +1538,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Extract the last column of <code class="docutils literal notranslate"><span class="pre">B</span></code> and store it in an array called <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></li>
 <li><p>Store a transposed version of <code class="docutils literal notranslate"><span class="pre">B</span></code> in an array called <code class="docutils literal notranslate"><span class="pre">t</span></code>.</p></li>
 </ol>
+<p><strong>Arrray slicing</strong></p>
 <p>The 1D NumPy array <code class="docutils literal notranslate"><span class="pre">G</span></code> is defined below.  But your code should work with any 1D NumPy array filled with numeric values.</p>
 <p><code class="docutils literal notranslate"><span class="pre">G</span> <span class="pre">=</span> <span class="pre">np.array([5,</span> <span class="pre">-4.7,</span> <span class="pre">99,</span> <span class="pre">50,</span> <span class="pre">6,</span> <span class="pre">-1,</span> <span class="pre">0,</span> <span class="pre">50,</span> <span class="pre">-78,</span> <span class="pre">27,</span> <span class="pre">10])</span></code></p>
 <ul class="simple">
@@ -1545,94 +1546,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Select all the numbers in <code class="docutils literal notranslate"><span class="pre">G</span></code> between <code class="docutils literal notranslate"><span class="pre">0</span></code> and  <code class="docutils literal notranslate"><span class="pre">30</span></code> and store them in <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
 <li><p>Select all of the numbers in <code class="docutils literal notranslate"><span class="pre">G</span></code> that are either less than <code class="docutils literal notranslate"><span class="pre">-50</span></code> or greater than <code class="docutils literal notranslate"><span class="pre">50</span></code> and store them in <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></li>
 </ul>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<p><strong>Basic numpy operations</strong></p>
-<ol>
-<li><p>Import the numpy package under the name <code class="docutils literal notranslate"><span class="pre">np</span></code>
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">import</span> <span class="pre">…</span> <span class="pre">as</span></code></p></li>
-<li><p>Print the numpy version and the configuration
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.__version__,</span> <span class="pre">np.show_config)</span></code></p></li>
-<li><p>Create a null vector of size 10
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.zeros</span></code></p></li>
-<li><p>How to find the memory size of any array
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">size,</span> <span class="pre">itemsize</span></code></p></li>
-<li><p>How to get the documentation of the numpy add function from the command line?
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.info</span></code></p></li>
-<li><p>Create a null vector of size 10 but the fifth value which is 1
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">array[4]</span></code></p></li>
-<li><p>Create a vector with values ranging from 10 to 49
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">arange</span></code></p></li>
-<li><p>Reverse a vector (first element becomes last)
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">array[::-1]</span></code></p></li>
-<li><p>Create a 3x3 matrix with values ranging from 0 to 8
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">reshape</span></code></p></li>
-<li><p>Find indices of non-zero elements from [1,2,0,0,4,0]
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.nonzero</span></code></p></li>
-<li><p>Create a 3x3 identity matrix
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.eye</span></code></p></li>
-<li><p>Create a 3x3x3 array with random values
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.random.random</span></code></p></li>
-<li><p>Create a 10x10 array with random values and find the minimum and maximum values
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">min,</span> <span class="pre">max</span></code></p></li>
-<li><p>Create a random vector of size 30 and find the mean value
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">mean</span></code></p></li>
-<li><p>Create a 2d array with 1 on the border and 0 inside
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">array[1:-1,</span> <span class="pre">1:-1]</span></code></p></li>
-<li><p>How to add a border (filled with 0’s) around an existing array?
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.pad</span></code></p></li>
-<li><p>Create a 5x5 matrix with values 1,2,3,4 just below the diagonal
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.diag</span></code></p></li>
-<li><p>Create a 8x8 matrix and fill it with a checkerboard pattern
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">array[::2]</span></code></p></li>
-<li><p>Consider a (6,7,8) shape array, what is the index (x,y,z) of the 100th element?
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.unravel_index</span></code></p></li>
-<li><p>Create a checkerboard 8x8 matrix using the tile function
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.tile</span></code></p></li>
-<li><p>Normalize a 5x5 random matrix
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">(x</span> <span class="pre">-mean)/std</span></code></p></li>
-<li><p>Create a custom dtype that describes a color as four unsigned bytes (RGBA)
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.dtype</span></code></p></li>
-<li><p>Multiply a 5x3 matrix by a 3x2 matrix (real matrix product)
-<code class="docutils literal notranslate"><span class="pre">hint:</span></code></p></li>
-<li><p>Given a 1D array, negate all elements which are between 3 and 8, in place.
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">&gt;,</span> <span class="pre">&lt;</span></code></p></li>
-<li><p>What is the output of the following script?</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Author: Jake VanderPlas</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<p><code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.sum</span></code></p>
-<ol>
-<li><p>Consider an integer vector Z, which of these expressions are legal?</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span><span class="o">**</span><span class="n">Z</span>
-<span class="mi">2</span> <span class="o">&lt;&lt;</span> <span class="n">Z</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span>
-<span class="n">Z</span> <span class="o">&lt;-</span> <span class="n">Z</span>
-<span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">Z</span>
-<span class="n">Z</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span>
-    <span class="n">Z</span><span class="o">&lt;</span><span class="n">Z</span><span class="o">&gt;</span><span class="n">Z</span>
-</pre></div>
-</div>
-</li>
-<li><p>What are the result of the following expressions?</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">//</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>How to round away from zero a float array ?
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.uniform,</span> <span class="pre">np.copysign,</span> <span class="pre">np.ceil,</span> <span class="pre">np.abs,</span> <span class="pre">np.where</span></code></p></li>
-<li><p>How to find common values between two arrays?
-<code class="docutils literal notranslate"><span class="pre">hint:</span> <span class="pre">np.intersect1d</span></code></p></li>
-<li><p>Create random vector of size 10 and replace the maximum value by 0</p></li>
-</ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
