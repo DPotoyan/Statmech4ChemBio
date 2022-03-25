@@ -444,8 +444,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#closer-look-at-the-z-the-partiation-function">
-     Closer look at the Z: The partiation function
+    <a class="reference internal nav-link" href="#computing-z-via-classical-vs-quantum-mechanics">
+     Computing Z via classical vs quantum mechanics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-closer-look-at-the-z-the-partiation-function">
+     A closer look at the Z: The partiation function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -597,8 +602,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#closer-look-at-the-z-the-partiation-function">
-     Closer look at the Z: The partiation function
+    <a class="reference internal nav-link" href="#computing-z-via-classical-vs-quantum-mechanics">
+     Computing Z via classical vs quantum mechanics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-closer-look-at-the-z-the-partiation-function">
+     A closer look at the Z: The partiation function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -794,23 +804,43 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="math notranslate nohighlight">
 \[\boxed{F = -\beta^{-1} log Z}\]</div>
 </div>
-<div class="section" id="closer-look-at-the-z-the-partiation-function">
-<h3>Closer look at the Z: The partiation function<a class="headerlink" href="#closer-look-at-the-z-the-partiation-function" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[\boxed{Z(\beta) = \sum_i e^{-\beta E_i} = \int \Omega(E) e^{-\beta E}dE = \int e^{-\beta (E-TS)}dE }\]</div>
+<div class="section" id="computing-z-via-classical-vs-quantum-mechanics">
+<h3>Computing Z via classical vs quantum mechanics<a class="headerlink" href="#computing-z-via-classical-vs-quantum-mechanics" title="Permalink to this headline">¶</a></h3>
+<p><strong>Quantum Mechanics</strong></p>
 <ul class="simple">
-<li><p>The parition function is “partitioning” or disirbuting (exponentially) the states of NVT ensemble with different energy levels/values:
-<br></p></li>
-<li><p>It can be seen that <span class="math notranslate nohighlight">\(Z\)</span>, the partition function of NVT is <strong>Laplace Transform</strong> of density of states of NVE. While connection between energy and free energy <span class="math notranslate nohighlight">\(F= E -TS\)</span> is  via <strong>Legendre Transform</strong>
-<br></p></li>
-<li><p><span class="math notranslate nohighlight">\(\Omega(E)\sim e^N\)</span> rapidly increasing function with N eacsue of limit theorems: e.g the large deviation, central limit theorem, law of large numbers.
-<br></p></li>
+<li><p>Counting in quantum emchanics requires knowing the solutions to Schrodinger equation <span class="math notranslate nohighlight">\(H |\psi_i\rangle = E_i | \psi_i\rangle\)</span> whcih are used for constructing parition function:
+$<span class="math notranslate nohighlight">\(\boxed{Z(\beta) = \sum_i e^{-\beta E_i}}\)</span>$</p></li>
+<li><p>Given the huge degenerace for N “particle” thermodynamic systems the partion function can also be written as a sum over the energy values <span class="math notranslate nohighlight">\(E\)</span> instead of eigenvalues:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\boxed{Z(\beta) = \int \Omega(E) e^{-\beta E}dE}\]</div>
+<p><strong>Classical Mechanics</strong></p>
+<ul class="simple">
+<li><p>Recall taht counting microstates in classical mechanics is done by discretizing phase space <span class="math notranslate nohighlight">\(\Gamma = (x^{3N}, p^{3N})\)</span> into the smallest possible quantum units <span class="math notranslate nohighlight">\(dxdp\sim h\)</span>. In other words we replace summation over quantum states with integral over phase space <span class="math notranslate nohighlight">\(\sum_i \rightarrow \int \frac{dpdx}{h}\)</span></p></li>
+<li><p>Recall that we need to correct classical mechanics for “double counting” microstates if we have N indinstinguishable “particles” with a factor of <span class="math notranslate nohighlight">\(N!\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Omega(E) = \frac{1}{N! h^{3N}} \int_{\Gamma}  \delta \big( H(\Gamma)-E) d \Gamma\]</div>
+<div class="math notranslate nohighlight">
+\[Z(\beta) = \int_{E} \Omega(E) e^{-\beta E} dE  = \frac{1}{N! h^{3N}} \int_{\Gamma} \Bigg[\int_{E} d \Gamma \delta \big( H(\Gamma)-E) e^{-\beta E}dE \Bigg] d\Gamma\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{Z(\beta) = \frac{1}{N! h^{3N}} \int_{\Gamma} e^{-\beta H(\Gamma)} d\Gamma}\]</div>
+</div>
+<div class="section" id="a-closer-look-at-the-z-the-partiation-function">
+<h3>A closer look at the Z: The partiation function<a class="headerlink" href="#a-closer-look-at-the-z-the-partiation-function" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\boxed{Z(\beta) = \int \Omega(E) e^{-\beta E}dE = \int e^{-\beta (E-T S(E))}dE }\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Omega(E)\sim e^N\)</span> rapidly increasing function with N eacsue of limit theorems: e.g the large deviation, central limit theorem, law of large numbers.</p></li>
 <li><p><span class="math notranslate nohighlight">\(e^{-\beta E}\sim e^{-N}\)</span> rapidly decreasing function with N</p></li>
 <li><p>Thermodynamic limit <span class="math notranslate nohighlight">\(N, V\rightarrow \infty\)</span> and <span class="math notranslate nohighlight">\(N/V \rightarrow const\)</span> only the region of energy survivies hat guarantees non-negligible contribution</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{Z = \int e^{-\beta (E-TS)}dE \approx e^{-\beta(U-TS)} = e^{-\beta F}}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(U =\langle E \rangle\)</span> is the thermodynamic average energy, flucutatins around which are on order of <span class="math notranslate nohighlight">\(O(N^{1/2})\)</span></p>
+\[\boxed{Z = \int e^{-\beta (E-TS)}dE \approx e^{min_E [-\beta(E-TS)]} = e^{-\beta(U-TS)} = e^{-\beta F}}\]</div>
+<ul class="simple">
+<li><p>Where <span class="math notranslate nohighlight">\(U =\langle E \rangle\)</span> is the thermodynamic average energy, flucutatins around which are on order of <span class="math notranslate nohighlight">\(O(N^{1/2})\)</span></p></li>
+<li><p>It can be seen that <span class="math notranslate nohighlight">\(Z\)</span>, the partition function of NVT is <strong>Laplace Transform</strong> of density of states of NVE. While connection between energy and free energy <span class="math notranslate nohighlight">\(F= E -TS\)</span> is via <strong>Legendre Transform</strong></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -838,7 +868,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;$E$&#39;)
 </pre></div>
 </div>
-<img alt="../_images/nvt_9_1.png" src="../_images/nvt_9_1.png" />
+<img alt="../_images/nvt_10_1.png" src="../_images/nvt_10_1.png" />
 </div>
 </div>
 </div>
@@ -1055,7 +1085,7 @@ Thermodynamics is the same regardless of the ensemble used! Consequence of small
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;B&#39;)
 </pre></div>
 </div>
-<img alt="../_images/nvt_25_1.png" src="../_images/nvt_25_1.png" />
+<img alt="../_images/nvt_26_1.png" src="../_images/nvt_26_1.png" />
 </div>
 </div>
 </div>
