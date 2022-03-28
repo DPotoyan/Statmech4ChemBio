@@ -535,6 +535,11 @@ const thebe_selector_output = ".output, .cell_output"
      Equipartion theorem
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entropy-of-mixing">
+     Entropy of mixing
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -689,6 +694,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#equipartion-theorem">
      Equipartion theorem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#entropy-of-mixing">
+     Entropy of mixing
     </a>
    </li>
   </ul>
@@ -1010,39 +1020,45 @@ const thebe_selector_output = ".output, .cell_output"
 \[H(p^N, x^N) = K(p^N)  = \sum^{i=N}_{i=1}\frac{p^2_i}{2m}\]</div>
 <div class="math notranslate nohighlight">
 \[\boxed{Z(\beta) = \frac{1}{h^{N} N!} \int dp^N dx^N e^{-\beta H(p^N,x^N)}}\]</div>
-<div class="math notranslate nohighlight">
-\[Z(\beta) = \frac{V^N}{h^{N} N!} \Big [ \int^{+\infty}_{-\infty} dp e^{-\beta \frac{p^2}{2m}}  \Big ]^N = \frac{V^N}{h^{N} N!} \Big [ \frac{2\pi m}{\beta} \Big]^N  \]</div>
-<p><br><br></p>
-<div class="math notranslate nohighlight">
-\[F = -k_B T log Z \approx -N k_B T log \Big [log \Big(\frac{V}{N}\Big)\frac{1}{\lambda^3} +1\Big]\]</div>
-<p><br><br></p>
 <ul class="simple">
-<li><p>Note linear dependence on <span class="math notranslate nohighlight">\(N\)</span>. Entropy is an extensive quantity!</p></li>
-<li><p>exponent 3/2 reflexts that each particle has 3 degrees of freedom</p></li>
-<li><p><span class="math notranslate nohighlight">\(\lambda = \Big(\frac{3h^2 N}{4\pi m E}\Big)^{1/2}\)</span> thermal de Broglie wavelength.</p></li>
+<li><p>Let us evaluate the partion function for a single particle in 3D:</p></li>
 </ul>
-<ul>
-<li><div class="math notranslate nohighlight">
-\[\langle E \rangle = \frac{\partial log Z}{\partial (-\beta)} = \frac{3}{2}N k_B T\]</div>
-</li>
-</ul>
-<p><br><br></p>
-<ul>
-<li><div class="math notranslate nohighlight">
-\[p = -\frac{\partial F}{\partial V} =\frac{N k_B T}{V}\]</div>
-</li>
-</ul>
-<p><br><br></p>
-<ul>
-<li><div class="math notranslate nohighlight">
-\[S = \frac{E-F}{T} = k_B N \cdot  \Big [ log \Big(\frac{V}{N \lambda^3}\Big) + \frac{5}{2}\Big]\]</div>
-</li>
-</ul>
-<p><br><br></p>
+<div class="math notranslate nohighlight">
+\[Z(\beta) =  \Bigg [\frac{1}{h} \int_{L} dx \int^{+\infty}_{-\infty} dp e^{-\beta \frac{p^2}{2m}}  \Bigg ]^3 = V \Big [ \frac{2\pi m}{h \beta} \Big]^{3/2} = V n_Q\]</div>
+<p>We wrote down the partion sum in terms of volume of container and a quantum density <span class="math notranslate nohighlight">\(n_Q\)</span> or De-Broglie thermal wavelength <span class="math notranslate nohighlight">\(\lambda_T\)</span></p>
 <blockquote>
-<div><p>Entropy of ideal gas is eactly the same expression as what we obtained in NVE!
-Thermodynamics is the same regardless of the ensemble used! Consequence of smallnes sof fluctuations.</p>
+<div><div class="math notranslate nohighlight">
+\[n_Q = \Big [ \frac{m k_B T}{2 \hbar^2} \Big]^{3/2} = \frac{1}{\lambda^3_T}\]</div>
+<div class="math notranslate nohighlight">
+\[\lambda_T = \frac{h}{2mk_BT} \sim \frac{h}{m \bar{v}}\]</div>
 </div></blockquote>
+<ul class="simple">
+<li><p>For the N particles we have:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z = \frac{Z^N}{N!}  = \frac{(V n_Q)^N}{N!}\]</div>
+<ul class="simple">
+<li><p>Using the curdest version of Striling’s approximation <span class="math notranslate nohighlight">\(N!\approx N^N e^{-N}\)</span> we get</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z = \Big[ \frac{n_Q}{n}\Big]^N e^N\]</div>
+<p>Where <span class="math notranslate nohighlight">\(n = N/V\)</span> is the density</p>
+<div class="math notranslate nohighlight">
+\[F = -k_B T log Z = -N k_B T  log \Big( \frac{n_Q}{n} \Big) - Nk_BT\]</div>
+<p>We can also calcularte entropy and compare the expression with the one obtained from microcanonical ensemble:</p>
+<div class="math notranslate nohighlight">
+\[S = -\Big( \frac{\partial F}{\partial T}\Big)_{N,V} = Nk_B log \Big( \frac{n_Q}{n} \Big) + Nk_B + \frac{3}{2}Nk_B\]</div>
+<p>And unsurprisingly we get the same expression for entropy in the canonical ensmeble known as <strong>Sackur-Tetrode equation</strong>
+$<span class="math notranslate nohighlight">\(S = Nk_B \Bigg[log \Big( \frac{n_Q}{n} \Big)+ \frac{5}{2} \Bigg]\)</span>$</p>
+<p>Similarily other thermodynamic variables can be inferred by taking derivatives of free energy:</p>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle = \frac{\partial log Z}{\partial (-\beta)} = \frac{3}{2}N k_B T\]</div>
+<ul class="simple">
+<li><p>Ideal gas equation of state is obtained by calculating pressure
+$<span class="math notranslate nohighlight">\(p = -\frac{\partial F}{\partial V} =\frac{N k_B T}{V}\)</span>$</p></li>
+<li><p>One more way of calculating entropy by using the definition of free energy
+$<span class="math notranslate nohighlight">\(S = \frac{E-F}{T} = k_B N \cdot  \Big [ log \Big(\frac{V}{N \lambda^3}\Big) + \frac{5}{2}\Big]\)</span>$</p></li>
+</ul>
 </div>
 <div class="section" id="example-3-ideal-paramagnet-of-spin-1-2">
 <h3>Example-3 Ideal paramagnet of spin 1/2<a class="headerlink" href="#example-3-ideal-paramagnet-of-spin-1-2" title="Permalink to this headline">¶</a></h3>
@@ -1109,9 +1125,9 @@ Thermodynamics is the same regardless of the ensemble used! Consequence of small
 <div class="section" id="translational-degrees-of-freedom-particle-in-a-box">
 <h3>Translational degrees of freedom: particle in a box<a class="headerlink" href="#translational-degrees-of-freedom-particle-in-a-box" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
-\[E_{n_x, n_y, n_z} = \frac{h^2}{8m L^2}(n^2_x+n^2_y+n^2_z)^2\]</div>
+\[E_{n_x, n_y, n_z} = \frac{\hbar^2 \pi^2}{2m L^2} \big(n^2_x+n^2_y+n^2_z \big)\]</div>
 <div class="math notranslate nohighlight">
-\[ Z \approx \Bigg [\int dn e^{-\beta \frac{h^2 n^2}{8m L^2}} \Bigg]^{3N} = V \Bigg[\frac{2\pi m k_B T}{h^2} \Bigg]^{3N/2}\]</div>
+\[ Z \approx \Bigg [\int^{\infty}_0 dn e^{-\frac{\hbar^2 \pi^2}{2m k_B TL^2}n^2} \Bigg]^{3} = V \Bigg[\frac{m k_B T}{2\pi \hbar^2} \Bigg]^{3/2} = V n_Q\]</div>
 </div>
 <div class="section" id="rotatational-degrees-of-freedom-rigid-rotor-model">
 <h3>Rotatational degrees of freedom: Rigid rotor model<a class="headerlink" href="#rotatational-degrees-of-freedom-rigid-rotor-model" title="Permalink to this headline">¶</a></h3>
@@ -1163,6 +1179,31 @@ Thermodynamics is the same regardless of the ensemble used! Consequence of small
 <blockquote>
 <div><p>Notice the spring constant does not figure in the average energy expression!</p>
 </div></blockquote>
+</div>
+<div class="section" id="entropy-of-mixing">
+<h3>Entropy of mixing<a class="headerlink" href="#entropy-of-mixing" title="Permalink to this headline">¶</a></h3>
+<p>Consider box divided into two volumes <span class="math notranslate nohighlight">\(V\)</span> containing <span class="math notranslate nohighlight">\(N\)</span> number of atoms of a gas each. Let us computee the entropy of mixing when we lift the divider and allow particles to diffuse freely and mix with one another.</p>
+<p><strong>Identical gas atoms A on both sides</strong></p>
+<ul class="simple">
+<li><p>The two halfs contains same gas atoms A. The entropy of initial state is twice the entropy of N particles in volume V of each side</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S_i = 2 Nk_B \Bigg[log \Big( \frac{n_Q V}{N} \Big)+ \frac{5}{2} \Bigg]\]</div>
+<ul class="simple">
+<li><p>entropy of the final state is that of <span class="math notranslate nohighlight">\(2N\)</span> particles occupying <span class="math notranslate nohighlight">\(2V\)</span> volume
+$<span class="math notranslate nohighlight">\(S_f = 2 Nk_B \Bigg[log \Big( \frac{n_Q 2V}{2N} \Big)+ \frac{5}{2} \Bigg]\)</span>$</p></li>
+<li><p>As a result entropy difference is zero as one should expect since atoms of gas are indistinugioshable:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Delta S = S_f - S_i = 0\]</div>
+<p><strong>Different gas atoms A/B</strong></p>
+<p>Two different gases will make additive contribution to entropy proprotional to <span class="math notranslate nohighlight">\(N\)</span> number of atoms.
+$<span class="math notranslate nohighlight">\(S_i = Nk_B \Bigg[log \Big( \frac{n^A_Q V}{N} \Big)+ \frac{5}{2} \Bigg]+ Nk_B \Bigg[log \Big( \frac{n^B_Q V}{N} \Big)+ \frac{5}{2} \Bigg]\)</span>$</p>
+<p>Final state enetropy is that of two non-interactiing ideal gases occupying volume <span class="math notranslate nohighlight">\(2V\)</span></p>
+<div class="math notranslate nohighlight">
+\[S_f = Nk_B \Bigg[log \Big( \frac{n^A_Q 2V}{N} \Big)+ \frac{5}{2} \Bigg]+ Nk_B \Bigg[log \Big( \frac{n^B_Q 2V}{N} \Big)+ \frac{5}{2} \Bigg]\]</div>
+<div class="math notranslate nohighlight">
+\[\Delta S = 2N k_B log 2\]</div>
 </div>
 </div>
 <div class="section" id="problems">
