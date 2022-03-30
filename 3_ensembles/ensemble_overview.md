@@ -103,19 +103,41 @@ $$p(E_1, N_1) = \frac{\Omega(E, N) e^{-E_1/k_BT} e^{\mu N/k_BT}}{Z_G} = \frac{e^
 
 ### Smallness of fluctuations
 
-Consider the extensive variable X and intensive variable Y where X (fluctuating) and Y (fixed) form a pair of conjugate variables. The sign will depend on the specific definitions of the variables X and Y. An example would be X = volume and Y = pressure.
+$$dU = SdT -VdP +\mu dN + BdM +... = \sum_i Y_i dX_i$$
+
+Consider a conjucate pair of extensive $X_i$ and intensive $Y_i$ variables. For instnace $(1, E)$, $(S, T)$ or $(V, -p)$. The average and fluctuations of extensive variable $X$ for constant $Y$ is given by derivatives of parition function:
 
 $$\langle X \rangle  = \frac{\partial log Z}{\partial \beta Y}$$
 
 $$\sigma^2_X = \langle X^2 \rangle - \langle X \rangle^2  = \frac{\partial^2 log Z}{\partial (\beta Y)^2}$$
 
- - $\sigma^2_E = k_B T^2 C_v(T) \sim O(N)$
- - $\sigma^2_N = \frac{k_B T}{v} \kappa_T \sim O(N)$
+- **Fluctuations in energy and numbers of particles is on the order of $N$**
+
+ $$\sigma^2_E = k_B T^2 C_v(T) $$
+ $$\sigma^2_N = \frac{k_B T}{v} \kappa_T$$
  
 Ensembles with flcutuating extensive variables still end up being dominanted by averages hence being effectively in microcanonical regime with constant values repalced by aveages:
 
-$$S = k_B log \Omega(\bar{E}, \bar{N}, \bar{V})$$
+### Legendre and Laplace transforms
 
-### Legendre transform
+Legendre transformation is a way to express variation problem for equilibrium (maximization of entropy or minimization of free energies) in terms of convenient variables. 
 
-$$Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{x_{0}, ... x_{n}}} E (x_0, ... x_t) \big)$$
+- Free energies are legedre transform of internal energy function $E(S,V,N,...)$
+
+$$F(N, V, T) = \mathcal{L}_{S} E(S,V,N) = U - T\cdot S$$ 
+
+$$G(N, p, T) = \mathcal{L}_{S, V} E(S,V,N) = U - T\cdot S + pV$$
+
+**General expression of Legendtre transform**
+
+A general expression for legendre transform of energy $U(X_0, X_1, ...X_n, X_n+1, ... X_t)$ with respect to its extensive variables can be written down as:
+
+$$\mathcal{L}_{X_{0}, ... X_{n}} U = U - \sum Y_k X_k = \Psi(Y_0,... Y_{n}, X_{n+1}, ...X_{t})$$
+
+The various partion functions can then be seen to be of general form $e^{\beta \Psi}$ where the free energy function is obtained via legendre transform over fluctuating quantities (energy, number of particles etc):
+
+$$Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{X_{0}, ... X_{n}}} E (x_0, ... x_t) \big)$$
+
+- Free energies as Laplace transform of internal energy function $E(S,V,N,...)$
+
+$$Z(\beta, N, V) = e^{-\beta F(\beta, N, V)}$$
