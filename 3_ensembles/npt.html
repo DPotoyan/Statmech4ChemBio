@@ -623,12 +623,12 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="math notranslate nohighlight">
 \[E_{tot} = E_r + E_i\]</div>
 <div class="math notranslate nohighlight">
-\[N_{tot} = N_r + N_i\]</div>
+\[N_{tot} = N_r + N\]</div>
 <div class="math notranslate nohighlight">
-\[\Omega_{tot}(E_{tot}, N_{tot}) = \sum_N \sum_i \Omega_r(E_{tot}-E_i, N_{tot}-N_i) \cdot \Omega(E_i, N_i)\]</div>
+\[\Omega_{tot}(E_{tot}, N_{tot}) = \sum_N \sum_i \Omega_r(E_{tot}-E_i, N_{tot}-N) \cdot \Omega(E_i, N)\]</div>
 <p>Let us single out one micro-state <span class="math notranslate nohighlight">\(E_i, N\)</span> of our system <span class="math notranslate nohighlight">\(\Omega(E_i, N) =1\)</span> and see what would be its probability in <span class="math notranslate nohighlight">\(\mu VT\)</span> ensemble.</p>
 <div class="math notranslate nohighlight">
-\[p(E_i, N_i) = \frac{\Omega_r(E_{tot}-E_i, N_{tot}-N_i)}{\Omega_{tot} (E_{tot}, N_{tot})} = \frac{e^{S_r(E_{tot}-E_i, N_{tot}-N_i)/k_B}}{e^{S_{tot}(E_{tot}, N_{tot})/k_B}}\]</div>
+\[p(E_i, N) = \frac{\Omega_r(E_{tot}-E_i, N_{tot}-N)}{\Omega_{tot} (E_{tot}, N_{tot})} = \frac{e^{S_r(E_{tot}-E_i, N_{tot}-N)/k_B}}{e^{S_{tot}(E_{tot}, N_{tot})/k_B}}\]</div>
 <p>Where we have used use the microcanonical ensemble of <strong>system+reservoir</strong> to cast the problem in terms of probabilities of <strong>the system</strong>.</p>
 </div>
 <div class="section" id="deriving-probability-distribution-complete-analogy-with-nvt">
@@ -636,24 +636,24 @@ const thebe_selector_output = ".output, .cell_output"
 <p>A more revealing is the expansion around system’s average energy <span class="math notranslate nohighlight">\(\delta E = E-U \sim O(N^{1/2})\)</span>  and average particle number  fluctuations  <span class="math notranslate nohighlight">\(\delta N = N-\bar{N} \sim O(N^{1/2})\)</span> around which are small:</p>
 <p><strong>Entropy of reservoir</strong></p>
 <div class="math notranslate nohighlight">
-\[S_r(E_{tot}-E_i, N_{tot}-N) = S_r(E_{tot}-U + \color{blue}{ [U-E_i]}, N_{tot}-\bar{N} + \color{green}{[\bar{N}-N_i]})\]</div>
+\[S_r(E_{tot}-E_i, N_{tot}-N) = S_r(E_{tot}-U + {\color{blue}[U-E_i]}, N_{tot}-\bar{N} + \color{green}{[\bar{N}-N_i]})\]</div>
 <div class="math notranslate nohighlight">
-\[S_r(E_{tot}-U + \color{blue}{ \delta E}, N_{tot}-\bar{N} + \color{green}{\delta N}) \approx S_r(E_{tot}-U, N_{tot}-\bar{N}) +\frac{\partial S_r(E, N)}{\partial E} \color{blue}{\delta E} + \frac{\partial S_r(E, N)}{\partial N} \color{green}{\delta N}\]</div>
+\[S_r(E_{tot}-U + { \color{blue}\delta E}, N_{tot}-\bar{N} + {\color{green}\delta N}) \approx S_r(E_{tot}-U, N_{tot}-\bar{N}) +\frac{\partial S_r(E, N)}{\partial E} {\color{blue} \delta E} + \frac{\partial S_r(E, N)}{\partial N} \color{green}{\delta N}\]</div>
 <div class="math notranslate nohighlight">
-\[ S_r =  S_r(E_{tot}-U, N_{tot}-\bar{N}) + \frac{1}{T}\color{blue}{ \delta E} - \frac{\mu}{T} \color{green}{\delta N}\]</div>
+\[ S_r =  S_r(E_{tot}-U, N_{tot}-\bar{N}) + \frac{1}{T}{\color{blue} \delta E} - \frac{\mu}{T} { \color{green} \delta N}\]</div>
 <p><strong>Entropy of total system</strong></p>
 <p>Let us now use additivity of entropy of the combined syste+resoervioir in equilibrium:</p>
 <div class="math notranslate nohighlight">
 \[S_{tot}(E_{tot}, N_{tot}) = S_r(E_{tot}-U, N_{tot}-\bar{N})+S(U, \bar{N})\]</div>
 <p>Combining the expressions of total and reservoir entropies we get the probability distirbution of system’s energy and particle numbers</p>
 <div class="math notranslate nohighlight">
-\[p(E_i, N_i) =\frac{e^{S_r(E_{tot}-E_i, N_{tot}-N_i)/k_B}}{e^{S_{tot}(E_{tot}, N_{tot})/k_B}} = \frac{e^{-\beta E_i} e^{\beta \mu N}}{e^{-\beta \Psi}}\]</div>
+\[p(E_i, N) =\frac{e^{S_r(E_{tot}-E_i, N_{tot}-N)/k_B}}{e^{S_{tot}(E_{tot}, N_{tot})/k_B}} = \frac{e^{-\beta E_i} e^{\beta \mu N}}{e^{-\beta \Psi}}\]</div>
 <p><strong>Grand-Canonical distribution</strong></p>
 <div class="math notranslate nohighlight">
-\[\boxed{p(E_i, N_i) = \frac{e^{-\beta(E_i -\mu N_i)}}{Z_G}}\]</div>
+\[\boxed{p(E_i, N) = \frac{e^{-\beta(E_i -\mu N)}}{Z_G}}\]</div>
 <p><strong>Grand-Canonical Partiation Function</strong></p>
 <div class="math notranslate nohighlight">
-\[\boxed{Z_G = \sum_i E^{-\beta (E_i-\mu N_i)}}\]</div>
+\[\boxed{Z_G = \sum_i E^{-\beta (E_i-\mu N)}}\]</div>
 <p><strong>Free Energy</strong></p>
 <div class="math notranslate nohighlight">
 \[\boxed{Z_G = e^{-{\beta \Psi}}}\]</div>
@@ -779,7 +779,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Consider a three level single particle system with five microstates with energies 0, ε, ε, ε, and 2ε. What is <span class="math notranslate nohighlight">\(\Omega(\epsilon n)\)</span>  n=0,1,2 for this system? What is the mean energy of the system if is in equilibrium with a heat bath at temperature T ?</p></li>
 <li><p>Derive an expression for the chemical potential of an ideal gas using clssical mechanics model for energy <span class="math notranslate nohighlight">\(E=\frac{p^2}{2m}\)</span> in the <span class="math notranslate nohighlight">\(\mu VT\)</span> ensemble evaluate the fluctuations in particle number.</p></li>
 <li><p>Consider a system in equilibrium with a heat bath at temperature <span class="math notranslate nohighlight">\(T\)</span> and a particle reservoir at chemical potential <span class="math notranslate nohighlight">\(\mu\)</span>. The system can have a minimum of one and a maximum of four distinguishable particles. The particles in the system do not interact and can be in one of two states with energies zero or <span class="math notranslate nohighlight">\(\Delta\)</span>. Determine the (grand) partition function of the system.</p></li>
-<li><p>Combine the Gibbs formula of Entropy <span class="math notranslate nohighlight">\(S=-k_B \sum_i p_i log p_i\)</span> with the Grand canonical prbability distribution <span class="math notranslate nohighlight">\(P(E_i,N_i)=\frac{e^{-\beta E_i+\mu N_i}}{Z_G}\)</span> to show that <span class="math notranslate nohighlight">\(\beta PV=log Z_G\)</span><br></p></li>
+<li><p>Combine the Gibbs formula of Entropy <span class="math notranslate nohighlight">\(S=-k_B \sum_i p_i log p_i\)</span> with the Grand canonical prbability distribution <span class="math notranslate nohighlight">\(P(E_i,N)=\frac{e^{-\beta E_i+\mu N}}{Z_G}\)</span> to show that <span class="math notranslate nohighlight">\(\beta PV=log Z_G\)</span><br></p></li>
 <li><p>Derive partition function for a pressure ensemble <span class="math notranslate nohighlight">\((T, p, N)\)</span> and show its connection with microcanonical ensemble <span class="math notranslate nohighlight">\(N V E\)</span></p></li>
 <li><p>At a given temperature T a surface with N_0 adsorption centers has <span class="math notranslate nohighlight">\(N\neq N_0\)</span> adsorbed molecules. Suppose hat there are no interactions between molecules.</p>
 <ul class="simple">
