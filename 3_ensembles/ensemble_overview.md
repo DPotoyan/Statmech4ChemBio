@@ -21,6 +21,8 @@ $$dS(E,V,N)\geq 0\,\,\,\,\,\,\,\,\, dE(S,V,N)\leq 0$$
 
 ### Statistical mechanics 
 
+- **Bridge equation**
+
 $$\Omega(N,V,E) = \sum^{}_{i} 1$$
 
 $$S(N,V,E) = k_B log \Omega(N, V, E)$$
@@ -52,9 +54,9 @@ $$dF(T,V,N)\leq 0$$
 
 ### Statistical mechanics
 
-$$Z(N,V,T) = \sum^{}_{i} e^{-E_i/k_B T} = \sum_E \Omega(E) e^{-E/k_B T}$$
+- **Bridge equation**
 
-$$Z(N,V,T) = Z_{ideal\, gas} \cdot \int dx^N e^{-\beta{U(x^N)}}$$
+$$Z(N,V,T) = \sum^{}_{i} e^{-E_i/k_B T} = \sum_E \Omega(E) e^{-E/k_B T}$$
 
 $$F=-k_BT log Z$$
 
@@ -74,21 +76,26 @@ $$p(E') = \frac{\Omega(E^{'}) e^{-E^{'}/k_BT}}{Z} = \frac{e^{-\beta F^{'}}}{Z}$$
 
 ### Thermodynamics
 
-- The First and the second law
+- **Fundamental relation**
 
-$$d\Phi_{\mu, T} = d(U-TS - \mu N) = -pdV$$
+$$d\Phi_{\mu, T} = d(U-TS - \mu N) = -SdT-pdV-Nd\mu$$
 
-- Irreversible vs reversible process
+- **Derivatives of free energy**
 
-$$dS_{tot}\geq 0$$ 
+$$S = -\Big(\frac{\partial \Phi}{\partial T}\Big)_{V,N}\,\,\,\,\,\, p = -\Big(\frac{\partial \Phi}{\partial V}\Big)_{T,\mu} \,\,\,\,\,\, N = - \Big(\frac{\partial \Phi}{\partial \mu}\Big)_{T,V}$$
+
+
+- **Second law**
 
 $$d\Phi\leq 0$$
 
 ### Statistical mechanics
 
+- **Bridge equation**
+
 $$Z_G(\mu,V,T) = \sum^{}_{i, N} e^{-E_i/k_B T} \cdot e^{\mu N/k_B T} = \sum_E \Omega(E, N) e^{-E/k_B T} e^{\mu N/k_B T}$$
 
-$$Z_G(\mu, V, T) =-k_BT log Z_G$$
+$$\Phi(\mu, V, T) =-k_BT log Z_G$$
 
 - **Probability of a microstate**
 
@@ -96,7 +103,7 @@ $$p(E_i) = \frac{e^{-E_i/k_BT} e^{\mu N_i/k_BT}}{Z_G}$$
 
 - **Probability of a macrostate**
 
-$$p(E_1, N_1) = \frac{\Omega(E, N) e^{-E_1/k_BT} e^{\mu N/k_BT}}{Z_G} = \frac{e^{-\Phi_1/k_BT}}{Z_G}$$
+$$p(E', N') = \frac{\Omega(E', N') e^{-E'/k_BT} e^{ \beta \mu N'}}{Z_G} = \frac{e^{-\beta \Phi'}}{Z_G}$$
 
 
 ## Ensemble equivalence
@@ -111,22 +118,21 @@ $$\langle X \rangle  = \frac{\partial log Z}{\partial \beta Y}$$
 
 $$\sigma^2_X = \langle X^2 \rangle - \langle X \rangle^2  = \frac{\partial^2 log Z}{\partial (\beta Y)^2}$$
 
-- **Fluctuations in energy and numbers of particles is on the order of $N$**
+- **Smallness of fluctuations**
 
  $$\sigma^2_E = k_B T^2 C_v(T) $$
+
  $$\sigma^2_N = \frac{k_B T}{v} \kappa_T$$
- 
-Ensembles with flcutuating extensive variables still end up being dominanted by averages hence being effectively in microcanonical regime with constant values repalced by aveages:
 
 ### Legendre and Laplace transforms
 
-Legendre transformation is a way to express variation problem for equilibrium (maximization of entropy or minimization of free energies) in terms of convenient variables. 
+Legendre transformation enables expressing the condition of equilibrium (e.g. maximium of entropy function) in terms of convenient variables (e.g minimum of some free eneergy function). 
 
-- Free energies are legedre transform of internal energy function $E(S,V,N,...)$
+- **Free energies are Legedre transforms of internal energy function $E(S,V,N,...)$**
 
-$$F(N, V, T) = \mathcal{L}_{S} E(S,V,N) = U - T\cdot S$$ 
+$$\mathcal{L}_{S} E(S,V,N) = U - T\cdot S = F(N, V, T)$$ 
 
-$$G(N, p, T) = \mathcal{L}_{S, V} E(S,V,N) = U - T\cdot S + pV$$
+$$\mathcal{L}_{S, V} E(S,V,N) = U - T\cdot S + pV = G(N, p, T)$$
 
 **General expression of Legendtre transform**
 
@@ -134,9 +140,9 @@ A general expression for legendre transform of energy $U(X_0, X_1, ...X_n, X_n+1
 
 $$\mathcal{L}_{X_{0}, ... X_{n}} U = U - \sum Y_k X_k = \Psi(Y_0,... Y_{n}, X_{n+1}, ...X_{t})$$
 
-The various partion functions can then be seen to be of general form $e^{\beta \Psi}$ where the free energy function is obtained via legendre transform over fluctuating quantities (energy, number of particles etc):
+The various **partion functions** can then be seen to be of general form $e^{\beta \Psi}$ where the free energy function is a **Legendre transform over fluctuating quantities.**
 
-$$Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{X_{0}, ... X_{n}}} E (x_0, ... x_t) \big)$$
+$$Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{X_{0}, ... X_{n}}} E (X_0, ... X_t) \big)$$
 
 - Free energies as Laplace transform of internal energy function $E(S,V,N,...)$
 
