@@ -198,6 +198,11 @@ const thebe_selector_output = ".output, .cell_output"
      Review of thermodynamics principles
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../2_thermo/02_Legendre.html">
+     Legendre transform
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -611,6 +616,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="statistical-mechanics">
 <h3>Statistical mechanics<a class="headerlink" href="#statistical-mechanics" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Bridge equation</strong></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\Omega(N,V,E) = \sum^{}_{i} 1\]</div>
 <div class="math notranslate nohighlight">
@@ -649,10 +657,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="section" id="id2">
 <h3>Statistical mechanics<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Bridge equation</strong></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[Z(N,V,T) = \sum^{}_{i} e^{-E_i/k_B T} = \sum_E \Omega(E) e^{-E/k_B T}\]</div>
-<div class="math notranslate nohighlight">
-\[Z(N,V,T) = Z_{ideal\, gas} \cdot \int dx^N e^{-\beta{U(x^N)}}\]</div>
 <div class="math notranslate nohighlight">
 \[F=-k_BT log Z\]</div>
 <ul class="simple">
@@ -672,24 +681,30 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="section" id="id3">
 <h3>Thermodynamics<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>The First and the second law</p></li>
+<li><p><strong>Fundamental relation</strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[d\Phi_{\mu, T} = d(U-TS - \mu N) = -pdV\]</div>
+\[d\Phi_{\mu, T} = d(U-TS - \mu N) = -SdT-pdV-Nd\mu\]</div>
 <ul class="simple">
-<li><p>Irreversible vs reversible process</p></li>
+<li><p><strong>Derivatives of free energy</strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[dS_{tot}\geq 0\]</div>
+\[S = -\Big(\frac{\partial \Phi}{\partial T}\Big)_{V,N}\,\,\,\,\,\, p = -\Big(\frac{\partial \Phi}{\partial V}\Big)_{T,\mu} \,\,\,\,\,\, N = - \Big(\frac{\partial \Phi}{\partial \mu}\Big)_{T,V}\]</div>
+<ul class="simple">
+<li><p><strong>Second law</strong></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[d\Phi\leq 0\]</div>
 </div>
 <div class="section" id="id4">
 <h3>Statistical mechanics<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Bridge equation</strong></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[Z_G(\mu,V,T) = \sum^{}_{i, N} e^{-E_i/k_B T} \cdot e^{\mu N/k_B T} = \sum_E \Omega(E, N) e^{-E/k_B T} e^{\mu N/k_B T}\]</div>
 <div class="math notranslate nohighlight">
-\[Z_G(\mu, V, T) =-k_BT log Z_G\]</div>
+\[\Phi(\mu, V, T) =-k_BT log Z_G\]</div>
 <ul class="simple">
 <li><p><strong>Probability of a microstate</strong></p></li>
 </ul>
@@ -699,7 +714,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><strong>Probability of a macrostate</strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p(E_1, N_1) = \frac{\Omega(E, N) e^{-E_1/k_BT} e^{\mu N/k_BT}}{Z_G} = \frac{e^{-\Phi_1/k_BT}}{Z_G}\]</div>
+\[p(E', N') = \frac{\Omega(E', N') e^{-E'/k_BT} e^{ \beta \mu N'}}{Z_G} = \frac{e^{-\beta \Phi'}}{Z_G}\]</div>
 </div>
 </div>
 <div class="section" id="ensemble-equivalence">
@@ -714,31 +729,30 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="math notranslate nohighlight">
 \[\sigma^2_X = \langle X^2 \rangle - \langle X \rangle^2  = \frac{\partial^2 log Z}{\partial (\beta Y)^2}\]</div>
 <ul class="simple">
-<li><p><strong>Fluctuations in energy and numbers of particles is on the order of <span class="math notranslate nohighlight">\(N\)</span></strong></p></li>
+<li><p><strong>Smallness of fluctuations</strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\sigma^2_E = k_B T^2 C_v(T) \]</div>
 <div class="math notranslate nohighlight">
 \[\sigma^2_N = \frac{k_B T}{v} \kappa_T\]</div>
-<p>Ensembles with flcutuating extensive variables still end up being dominanted by averages hence being effectively in microcanonical regime with constant values repalced by aveages:</p>
 </div>
 <div class="section" id="legendre-and-laplace-transforms">
 <h3>Legendre and Laplace transforms<a class="headerlink" href="#legendre-and-laplace-transforms" title="Permalink to this headline">¶</a></h3>
-<p>Legendre transformation is a way to express variation problem for equilibrium (maximization of entropy or minimization of free energies) in terms of convenient variables.</p>
+<p>Legendre transformation enables expressing the condition of equilibrium (e.g. maximium of entropy function) in terms of convenient variables (e.g minimum of some free eneergy function).</p>
 <ul class="simple">
-<li><p>Free energies are legedre transform of internal energy function <span class="math notranslate nohighlight">\(E(S,V,N,...)\)</span></p></li>
+<li><p><strong>Free energies are Legedre transforms of internal energy function <span class="math notranslate nohighlight">\(E(S,V,N,...)\)</span></strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[F(N, V, T) = \mathcal{L}_{S} E(S,V,N) = U - T\cdot S\]</div>
+\[\mathcal{L}_{S} E(S,V,N) = U - T\cdot S = F(N, V, T)\]</div>
 <div class="math notranslate nohighlight">
-\[G(N, p, T) = \mathcal{L}_{S, V} E(S,V,N) = U - T\cdot S + pV\]</div>
+\[\mathcal{L}_{S, V} E(S,V,N) = U - T\cdot S + pV = G(N, p, T)\]</div>
 <p><strong>General expression of Legendtre transform</strong></p>
 <p>A general expression for legendre transform of energy <span class="math notranslate nohighlight">\(U(X_0, X_1, ...X_n, X_n+1, ... X_t)\)</span> with respect to its extensive variables can be written down as:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{X_{0}, ... X_{n}} U = U - \sum Y_k X_k = \Psi(Y_0,... Y_{n}, X_{n+1}, ...X_{t})\]</div>
-<p>The various partion functions can then be seen to be of general form <span class="math notranslate nohighlight">\(e^{\beta \Psi}\)</span> where the free energy function is obtained via legendre transform over fluctuating quantities (energy, number of particles etc):</p>
+<p>The various <strong>partion functions</strong> can then be seen to be of general form <span class="math notranslate nohighlight">\(e^{\beta \Psi}\)</span> where the free energy function is a <strong>Legendre transform over fluctuating quantities.</strong></p>
 <div class="math notranslate nohighlight">
-\[Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{X_{0}, ... X_{n}}} E (x_0, ... x_t) \big)\]</div>
+\[Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{X_{0}, ... X_{n}}} E (X_0, ... X_t) \big)\]</div>
 <ul class="simple">
 <li><p>Free energies as Laplace transform of internal energy function <span class="math notranslate nohighlight">\(E(S,V,N,...)\)</span></p></li>
 </ul>
