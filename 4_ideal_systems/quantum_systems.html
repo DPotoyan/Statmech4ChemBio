@@ -58,8 +58,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Entropy and Information" href="../5_entropy/intro.html" />
-    <link rel="prev" title="Classical gases" href="classical_systems.html" />
+    <link rel="next" title="Photons and Phonons" href="photons_phonons.html" />
+    <link rel="prev" title="Gases" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -249,16 +249,11 @@ const thebe_selector_output = ".output, .cell_output"
      Overview of ensembles
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../3_ensembles/applications.html">
-     Applications
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="intro.html">
-   Ideal Systems
+   Gases
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
@@ -266,14 +261,14 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="classical_systems.html">
-     Classical gases
-    </a>
-   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Quantum non-interacting systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="photons_phonons.html">
+     Photons and Phonons
     </a>
    </li>
   </ul>
@@ -329,7 +324,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../7_fluids/intro.html">
-   Fluids and introduction to Molecular Dynamics
+   Fluids
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
   <label for="toctree-checkbox-8">
@@ -446,13 +441,35 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#occupation-number-representaiton-of-energy">
-   Occupation number representaiton of energy
+  <a class="reference internal nav-link" href="#occupation-number-representatiton-of-energy">
+   Occupation number representatiton of energy
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#grand-canonical-partiion-function">
-   Grand canonical partiion function
+  <a class="reference internal nav-link" href="#boltzmann-distribution">
+   Boltzmann distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#validity-of-the-classical-regime">
+   Validity of the classical regime
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#average-and-fluctuations-of-occupancy-numbers">
+     Average and fluctuations of occupancy numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thermal-wavelength-demarcates-classical-vs-quantum-regimes">
+     Thermal wavelength demarcates classical vs quantum regimes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partition-functions-for-quantum-statistics">
+   Partition functions for quantum statistics
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -511,13 +528,35 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#occupation-number-representaiton-of-energy">
-   Occupation number representaiton of energy
+  <a class="reference internal nav-link" href="#occupation-number-representatiton-of-energy">
+   Occupation number representatiton of energy
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#grand-canonical-partiion-function">
-   Grand canonical partiion function
+  <a class="reference internal nav-link" href="#boltzmann-distribution">
+   Boltzmann distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#validity-of-the-classical-regime">
+   Validity of the classical regime
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#average-and-fluctuations-of-occupancy-numbers">
+     Average and fluctuations of occupancy numbers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thermal-wavelength-demarcates-classical-vs-quantum-regimes">
+     Thermal wavelength demarcates classical vs quantum regimes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partition-functions-for-quantum-statistics">
+   Partition functions for quantum statistics
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -566,16 +605,79 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="quantum-non-interacting-systems">
 <h1>Quantum non-interacting systems<a class="headerlink" href="#quantum-non-interacting-systems" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="occupation-number-representaiton-of-energy">
-<h2>Occupation number representaiton of energy<a class="headerlink" href="#occupation-number-representaiton-of-energy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="occupation-number-representatiton-of-energy">
+<h2>Occupation number representatiton of energy<a class="headerlink" href="#occupation-number-representatiton-of-energy" title="Permalink to this headline">¶</a></h2>
+<p>Preparing ground for the quantum statistics we adopt an <strong>occupation number representation of a microstate</strong>. Occupation number or orbital representation explicitly tracks the occupation of single particle eigenvalues. In this representation a <strong>microstate</strong> is identified with the  occupancy vector <span class="math notranslate nohighlight">\([n_1, n_2, ... n_N]\)</span> specifying number of particles populating every fixed energy level.</p>
 <div class="math notranslate nohighlight">
 \[E = \sum_i n_i \epsilon_i\]</div>
 <div class="math notranslate nohighlight">
 \[N = \sum_i n_i\]</div>
 </div>
-<div class="section" id="grand-canonical-partiion-function">
-<h2>Grand canonical partiion function<a class="headerlink" href="#grand-canonical-partiion-function" title="Permalink to this headline">¶</a></h2>
-<p>Evaluating partition functions in the occupation number representaiton is easier in grand-caoninical ensemble where there are no restrictions <span class="math notranslate nohighlight">\(N=\sum_i n_i\)</span> placed on sums.</p>
+<div class="section" id="boltzmann-distribution">
+<h2>Boltzmann distribution<a class="headerlink" href="#boltzmann-distribution" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The number of states in the occupation representation is given by the multinomial factor:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Omega(E) = \frac{N!}{n_1! n_2! n_3! ... }\]</div>
+<div class="math notranslate nohighlight">
+\[Z_N = \sum_{n_1, n_2, ... n_N} \Omega(n_1, n_2, ...) e^{-\beta (n_1 \epsilon_1 +n_2 \epsilon_2 + ...)} = \sum_{n_1, n_2, ... n_N} \frac{N!}{n_1! n_2!... n_N!} [e^{-\beta \epsilon_1}]^{n_1} [e^{-\beta \epsilon_2}]^{n_2} ...\]</div>
+<ul class="simple">
+<li><p>The last expression is seen as a a polynomial expression leading to the factorization of partition function as we would expect for the non-interacting nature of the system.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z =(e^{-\beta \epsilon_1}+e^{-\beta \epsilon_2}+ ...)^N= Z^N_1 \]</div>
+<div class="math notranslate nohighlight">
+\[Z_1 =\sum_j e^{-\beta \epsilon_j}  \]</div>
+<ul class="simple">
+<li><p>Thus, we see that the factor of <span class="math notranslate nohighlight">\(N!\)</span> needs to br introduced to correct for multiple counting of states.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z = \frac{1}{N!}Z^N_1\]</div>
+<ul class="simple">
+<li><p>This way of handling partition functions is called <strong>Maxwell-Boltzmann statistics</strong> which is widely applicable in the “classical regime”.</p></li>
+<li><p>Boltzmann derived a distribution bearing his name by maximizing <span class="math notranslate nohighlight">\(\Omega(E)\)</span> subject to <span class="math notranslate nohighlight">\(\sum_{k} n_{k}=N\)</span> and <span class="math notranslate nohighlight">\(\sum_k n_k E_k = N U\)</span> constraints. This is essentially a MaxEnt derivation seen in the module on <strong>Entropy</strong></p></li>
+</ul>
+<p><strong>Example of MB statistics</strong></p>
+<p>Consider 2 particles each having 3 energy levels <span class="math notranslate nohighlight">\(\epsilon_1, \epsilon_2, \epsilon_3\)</span></p>
+<div class="math notranslate nohighlight">
+\[Z_2 = \frac{1}{2!}(e^{-\beta \epsilon_1}+e^{-\beta \epsilon_2}+e^{-\beta \epsilon_3})^2\]</div>
+<div class="math notranslate nohighlight">
+\[Z_2 = \frac{1}{2} \big[e^{-2\beta \epsilon_1}+e^{-2\beta \epsilon_2}+e^{-2\beta \epsilon_3}\big]+\big[e^{-2\beta (\epsilon_1+\epsilon_2)}+e^{-2\beta (\epsilon_1+\epsilon_3)}+e^{-2\beta (\epsilon_2+\epsilon_3)}\big]\]</div>
+<ul class="simple">
+<li><p><strong>Multiply occupied states</strong> are unphysically suppressed.</p></li>
+<li><p><strong>Single occupied states</strong> are nicely weighted which removes the double-counting.</p></li>
+</ul>
+</div>
+<div class="section" id="validity-of-the-classical-regime">
+<h2>Validity of the classical regime<a class="headerlink" href="#validity-of-the-classical-regime" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="average-and-fluctuations-of-occupancy-numbers">
+<h3>Average and fluctuations of occupancy numbers<a class="headerlink" href="#average-and-fluctuations-of-occupancy-numbers" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\langle n_i \rangle = - \frac{1}{\beta}\frac{\partial log Z}{\partial \epsilon_i}\]</div>
+<div class="math notranslate nohighlight">
+\[p_i = \frac{n_i}{N} = \frac{e^{-\beta \epsilon_i}}{Z_i}\]</div>
+</div>
+<div class="section" id="thermal-wavelength-demarcates-classical-vs-quantum-regimes">
+<h3>Thermal wavelength demarcates classical vs quantum regimes<a class="headerlink" href="#thermal-wavelength-demarcates-classical-vs-quantum-regimes" title="Permalink to this headline">¶</a></h3>
+<p>A sufficient condition for the validity of the classical regime is the low mean occupancy of energy levels <span class="math notranslate nohighlight">\(\epsilon_i\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\bar{n}_i \ll 1\,\,\,\,\, for\,\,\,\, all\,\,\,\, i\]</div>
+<p>Using translational partition function for a free particle in a box <span class="math notranslate nohighlight">\(Z_1 = V \Big(\frac{2\pi m k_B T}{h^2} \Big)^{3/2}\)</span> we express low mean occupancy limit in terms of microsocipic parameters:</p>
+<div class="math notranslate nohighlight">
+\[\bar{n}_i = N e^{-\beta \epsilon_i}/Z_1 \ll 1\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{N}{V} \Big(\frac{h^2}{2\pi m k_B T} \Big)^{3/2} \ll 1\]</div>
+<div class="math notranslate nohighlight">
+\[n/n_Q \ll 1\]</div>
+<div class="math notranslate nohighlight">
+\[\lambda^3_T \ll n = \frac{N}{V} = l^3\]</div>
+<p>Classical limit is the limit where thermal wavelength is much smaller than interatomic distances.</p>
+</div>
+</div>
+<div class="section" id="partition-functions-for-quantum-statistics">
+<h2>Partition functions for quantum statistics<a class="headerlink" href="#partition-functions-for-quantum-statistics" title="Permalink to this headline">¶</a></h2>
+<p>Evaluating partition functions in the occupation number representation is easier in grand-canonical ensemble where there are no restrictions <span class="math notranslate nohighlight">\(N=\sum_i n_i\)</span> placed on sums.</p>
 <div class="math notranslate nohighlight">
 \[Y(\beta, \mu) = \sum_{n_1, n_2, ...} e^{-\beta E} e^{\beta \mu N}\]</div>
 <div class="math notranslate nohighlight">
@@ -699,17 +801,17 @@ const thebe_selector_output = ".output, .cell_output"
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="classical_systems.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Classical gases</p>
+            <p class="prev-next-title">Gases</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../5_entropy/intro.html" title="next page">
+    <a class='right-next' id="next-link" href="photons_phonons.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Entropy and Information</p>
+        <p class="prev-next-title">Photons and Phonons</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
