@@ -58,7 +58,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Phase transitions" href="../6_ising/intro.html" />
+    <link rel="next" title="Information erasure and Landauer’s principle" href="landauer.html" />
     <link rel="prev" title="Entropy" href="intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -286,6 +286,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      What is Information?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="landauer.html">
+     Information erasure and Landauer’s principle
     </a>
    </li>
   </ul>
@@ -546,33 +551,11 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#playing-maxwells-demons-advocate">
    Playing Maxwell’s demon’s advocate
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#information-erasure-and-landauers-principle">
-   Information erasure and Landauer’s principle
-  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#szilards-engine">
-     Szilard’s Engine
+    <a class="reference internal nav-link" href="#additional-references">
+     Additional References
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conditional-entropy">
-     Conditional Entropy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mutual-infromation">
-     Mutual Infromation
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#additional-references">
-       Additional References
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -702,33 +685,11 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#playing-maxwells-demons-advocate">
    Playing Maxwell’s demon’s advocate
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#information-erasure-and-landauers-principle">
-   Information erasure and Landauer’s principle
-  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#szilards-engine">
-     Szilard’s Engine
+    <a class="reference internal nav-link" href="#additional-references">
+     Additional References
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#conditional-entropy">
-     Conditional Entropy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mutual-infromation">
-     Mutual Infromation
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#additional-references">
-       Additional References
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
@@ -854,7 +815,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f297aab8090&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f5aeaf7d690&gt;]
 </pre></div>
 </div>
 <img alt="../_images/shannon_11_1.png" src="../_images/shannon_11_1.png" />
@@ -1130,94 +1091,13 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 <h2>Playing Maxwell’s demon’s advocate<a class="headerlink" href="#playing-maxwells-demons-advocate" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> ./code/maxwells_demon.py
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TclError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
-<span class="o">~/</span><span class="n">work</span><span class="o">/</span><span class="n">Statmech4ChemBio</span><span class="o">/</span><span class="n">Statmech4ChemBio</span><span class="o">/</span><span class="mi">5</span><span class="n">_entropy</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">maxwells_demon</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">    </span><span class="mi">405</span>     <span class="c1">#the window!)</span>
-<span class="g g-Whitespace">    </span><span class="mi">406</span> 
-<span class="ne">--&gt; </span><span class="mi">407</span> <span class="n">run</span><span class="p">()</span>
-
-<span class="nn">~/work/Statmech4ChemBio/Statmech4ChemBio/5_entropy/code/maxwells_demon.py</span> in <span class="ni">run</span><span class="nt">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">388</span>     <span class="c1"># create the root and the canvas</span>
-<span class="g g-Whitespace">    </span><span class="mi">389</span>     <span class="k">global</span> <span class="n">canvas</span>
-<span class="ne">--&gt; </span><span class="mi">390</span>     <span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">391</span>     <span class="n">canvas</span> <span class="o">=</span> <span class="n">Canvas</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">392</span>     <span class="n">canvas</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/tkinter/__init__.py</span> in <span class="ni">__init__</span><span class="nt">(self, screenName, baseName, className, useTk, sync, use)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2021</span>                 <span class="n">baseName</span> <span class="o">=</span> <span class="n">baseName</span> <span class="o">+</span> <span class="n">ext</span>
-<span class="g g-Whitespace">   </span><span class="mi">2022</span>         <span class="n">interactive</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="ne">-&gt; </span><span class="mi">2023</span>         <span class="bp">self</span><span class="o">.</span><span class="n">tk</span> <span class="o">=</span> <span class="n">_tkinter</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">screenName</span><span class="p">,</span> <span class="n">baseName</span><span class="p">,</span> <span class="n">className</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">wantobjects</span><span class="p">,</span> <span class="n">useTk</span><span class="p">,</span> <span class="n">sync</span><span class="p">,</span> <span class="n">use</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2024</span>         <span class="k">if</span> <span class="n">useTk</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2025</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_loadtk</span><span class="p">()</span>
-
-<span class="ne">TclError</span>: no display name and no $DISPLAY environment variable
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%run ./code/maxwells_demon.py</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Learn more about making GUIs with python from the following links:</p>
-<blockquote>
-<div><p><strong><a class="reference external" href="https://docs.python.org/3/library/tkinter.html">Tkinter</a></strong></p>
-</div></blockquote>
-<blockquote>
-<div><p><strong><a class="reference external" href="https://pysimplegui.readthedocs.io/en/latest/">PySimpleGUI</a></strong></p>
-</div></blockquote>
-<img alt="landauer1" src="../_images/LandauerExperiment.png" />
-</div>
-<div class="section" id="information-erasure-and-landauers-principle">
-<h2>Information erasure and Landauer’s principle<a class="headerlink" href="#information-erasure-and-landauers-principle" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div><p>When a physical system performs a logical operation that erases or loses information, without a copy being preserved, it must transfer a minimum amount of heat, <span class="math notranslate nohighlight">\(k_BT log(2)\)</span>, to the environment.</p>
-</div></blockquote>
-<blockquote>
-<div><p>Put another way: if an observer loses information about a physical system, the observer loses the ability to extract work from that system. There is a minimal price to be payed for erasing one bit it is <span class="math notranslate nohighlight">\(k_BT log(2)\)</span> (Landauer’s bound)</p>
-</div></blockquote>
-<img alt="landauer1" src="../_images/LandauerExperiment2.jpg" />
-<div class="section" id="szilards-engine">
-<h3>Szilard’s Engine<a class="headerlink" href="#szilards-engine" title="Permalink to this headline">¶</a></h3>
-<p>Recording inforation we can extract work from the environment: <span class="math notranslate nohighlight">\(W = k_B log 2\)</span> and <span class="math notranslate nohighlight">\(Q = k_B log 2\)</span></p>
-<ul class="simple">
-<li><p><strong>No ghost principle:</strong> information must be carried by something. Information is physical!</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\Delta S = \Delta S + k_B I \geq \frac{Q}{T}\]</div>
-<div class="math notranslate nohighlight">
-\[\Delta S = \Delta S  \geq \frac{Q}{T} - k_B I\]</div>
-<ul class="simple">
-<li><p>Therefore Information can be used to do work. Knowledge is power!</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\Delta F \geq W + k_B T I \]</div>
-</div>
-<div class="section" id="conditional-entropy">
-<h3>Conditional Entropy<a class="headerlink" href="#conditional-entropy" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>System + Aparatus: S, A. After a measurment we have the following ucnertainty about system+apparatus states:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[H(S,A) = - \sum_{i,j} p(s_i, a_j)log p(s_i a_j)\]</div>
-<div class="math notranslate nohighlight">
-\[H(S) = - \sum_{s_i} p_S(s_i)log p_S(s_i)\]</div>
-<div class="math notranslate nohighlight">
-\[H(S | A) = - \sum_{s_i} p_S(s_i)log p_S(s_i)\]</div>
-<div class="math notranslate nohighlight">
-\[H(S | A) = H(S) - H(S,A) =  -\sum_{s_i} p(s_i, a_j)log \frac{p(s_i, a_j)}{p_A(a_j)}\]</div>
-</div>
-<div class="section" id="mutual-infromation">
-<h3>Mutual Infromation<a class="headerlink" href="#mutual-infromation" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[I(S,A) = H(S) - H(S | A) = H(S) +H(A) - H(S A) = \sum_{s_i} p(s_i, a_j)log \frac{p(s_i, a_j)}{p_S(s_i)p_A(a_j)}\geq 0\]</div>
 <div class="section" id="additional-references">
-<h4>Additional References<a class="headerlink" href="#additional-references" title="Permalink to this headline">¶</a></h4>
+<h3>Additional References<a class="headerlink" href="#additional-references" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p>JMR Parrondo, JM Horowtiz, T Segawa “Thermodynamics of Information” <a class="reference external" href="https://www.nature.com/articles/nphys3230">Nature Physics volume 11, 131 (2015)</a>
 <br></p></li>
@@ -1227,7 +1107,6 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 <br></p></li>
 <li><p>Observing a quantum Maxwell demon at work <span class="xref myst"></span></p></li>
 </ol>
-</div>
 </div>
 </div>
 </div>
@@ -1264,10 +1143,10 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
             <p class="prev-next-title">Entropy</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../6_ising/intro.html" title="next page">
+    <a class='right-next' id="next-link" href="landauer.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Phase transitions</p>
+        <p class="prev-next-title">Information erasure and Landauer’s principle</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
