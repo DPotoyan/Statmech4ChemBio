@@ -786,17 +786,17 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1 -1  1  1  1  1 -1  1]
- [ 1  1 -1  1 -1  1  1  1]
- [-1 -1 -1 -1 -1 -1 -1  1]
- [ 1 -1  1  1 -1  1 -1  1]
- [-1  1 -1 -1  1  1 -1 -1]
- [ 1  1  1 -1  1 -1 -1  1]
- [-1  1 -1 -1  1 -1  1  1]
- [ 1 -1  1 -1  1  1 -1  1]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1 -1 -1  1 -1 -1 -1 -1]
+ [-1  1 -1 -1 -1 -1 -1 -1]
+ [-1  1 -1 -1 -1 -1  1 -1]
+ [-1 -1  1 -1  1 -1  1  1]
+ [-1  1  1 -1 -1 -1 -1  1]
+ [ 1 -1  1  1  1 -1  1  1]
+ [ 1 -1  1 -1 -1  1  1  1]
+ [ 1  1 -1 -1  1  1 -1 -1]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fda6b732450&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fbf4e82b750&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_7_2.png" src="../_images/01_MCMC_7_2.png" />
@@ -821,7 +821,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fda68b89a90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fbf4c253c10&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_9_1.png" src="../_images/01_MCMC_9_1.png" />
@@ -1008,8 +1008,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#from numba import jit</span>
-<span class="c1">#@jit</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+<span class="nd">@jit</span>
 <span class="k">def</span> <span class="nf">run_ising2d</span><span class="p">(</span><span class="n">spins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span> 
                 <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
                 <span class="n">J</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
@@ -1030,7 +1030,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="sd">    &#39;&#39;&#39;</span>
     
     <span class="c1">#### Initialize simulation</span>
-    <span class="n">N</span>   <span class="o">=</span> <span class="n">spins</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">N</span>   <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
     
     <span class="n">M_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
     <span class="n">E_t</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1079,6 +1079,101 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2224/189129091.py:2: NumbaWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Compilation is falling back to object mode WITH looplifting enabled because Function &quot;run_ising2d&quot; failed type inference due to: No implementation of function Function(&lt;built-in function array&gt;) found for signature:</span>
+<span class=" -Color -Color-Bold"> </span>
+<span class=" -Color -Color-Bold"> &gt;&gt;&gt; array(list(array(int64, 2d, C))&lt;iv=None&gt;)</span>
+<span class=" -Color -Color-Bold"> </span>
+<span class=" -Color -Color-Bold">There are 4 candidate implementations:</span>
+<span class=" -Color -Color-Bold">     - Of which 4 did not match due to:</span>
+<span class=" -Color -Color-Bold">     Overload in function &#39;_OverloadWrapper._build.&lt;locals&gt;.ol_generated&#39;: File: numba/core/overload_glue.py: Line 131.</span>
+<span class=" -Color -Color-Bold">       With argument(s): &#39;(list(array(int64, 2d, C))&lt;iv=None&gt;)&#39;:</span>
+<span class=" -Color -Color-Bold">      Rejected as the implementation raised a specific error:</span>
+<span class=" -Color -Color-Bold">        TypingError: Failed in nopython mode pipeline (step: nopython frontend)</span>
+<span class=" -Color -Color-Bold">      No implementation of function Function(&lt;intrinsic stub&gt;) found for signature:</span>
+<span class=" -Color -Color-Bold">       </span>
+<span class=" -Color -Color-Bold">       &gt;&gt;&gt; stub(list(array(int64, 2d, C))&lt;iv=None&gt;)</span>
+<span class=" -Color -Color-Bold">       </span>
+<span class=" -Color -Color-Bold">      There are 2 candidate implementations:</span>
+<span class=" -Color -Color-Bold">        - Of which 2 did not match due to:</span>
+<span class=" -Color -Color-Bold">        Intrinsic in function &#39;stub&#39;: File: numba/core/overload_glue.py: Line 35.</span>
+<span class=" -Color -Color-Bold">          With argument(s): &#39;(list(array(int64, 2d, C))&lt;iv=None&gt;)&#39;:</span>
+      <span class=" -Color -Color-Bold">   Rejected as the implementation raised a specific error:</span>
+<span class=" -Color -Color-Bold">           TypingError: array(int64, 2d, C) not allowed in a homogeneous sequence</span>
+        raised from /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/typing/npydecl.py:487
+      
+      <span class=" -Color -Color-Bold">During: resolving callee type: Function(&lt;intrinsic stub&gt;)</span>
+      <span class=" -Color -Color-Bold">During: typing of call at &lt;string&gt; (3)</span>
+<span class=" -Color -Color-Bold">      </span>
+      <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">      File &quot;&lt;string&gt;&quot;, line 3:</span>
+      <span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  raised from /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/typeinfer.py:1086
+
+<span class=" -Color -Color-Bold">During: resolving callee type: Function(&lt;built-in function array&gt;)</span>
+<span class=" -Color -Color-Bold">During: typing of call at /tmp/ipykernel_2224/189129091.py (55)</span>
+
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 55:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  @jit
+/tmp/ipykernel_2224/189129091.py:2: NumbaWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Compilation is falling back to object mode WITHOUT looplifting enabled because Function &quot;run_ising2d&quot; failed type inference due to: Cannot determine Numba type of &lt;class &#39;numba.core.dispatcher.LiftedLoop&#39;&gt;</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 27:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  @jit
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/object_mode_passes.py:152: NumbaWarning: <span class=" -Color -Color-Bold">Function &quot;run_ising2d&quot; was compiled in object mode without forceobj=True, but has lifted loops.</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 23:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  state.func_ir.loc))
+/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/object_mode_passes.py:162: NumbaDeprecationWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Fall-back from the nopython compilation path to the object mode compilation path has been detected, this is deprecated behaviour.</span>
+
+<span class=" -Color -Color-Bold">For more information visit https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 23:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  state.func_ir.loc))
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2224/189129091.py:2: NumbaWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Compilation is falling back to object mode WITHOUT looplifting enabled because Function &quot;run_ising2d&quot; failed type inference due to: non-precise type pyobject</span>
+<span class=" -Color -Color-Bold">During: typing of argument at /tmp/ipykernel_2224/189129091.py (34)</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 34:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  @jit
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/object_mode_passes.py:152: NumbaWarning: <span class=" -Color -Color-Bold">Function &quot;run_ising2d&quot; was compiled in object mode without forceobj=True.</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 34:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  state.func_ir.loc))
+/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/object_mode_passes.py:162: NumbaDeprecationWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Fall-back from the nopython compilation path to the object mode compilation path has been detected, this is deprecated behaviour.</span>
+
+<span class=" -Color -Color-Bold">For more information visit https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 34:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  state.func_ir.loc))
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1087,7 +1182,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((50000, 40, 40), (50000,), (50000,))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((1, 40, 40), (1,), (1,))
 </pre></div>
 </div>
 </div>
@@ -1112,7 +1207,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "d6cff58fb3d24c4c9c8f9ad2127098d1"}
+{"version_major": 2, "version_minor": 0, "model_id": "35599dec442a403c8dba501795e2772e"}
 </script></div>
 </div>
 <div class="cell docutils container">
@@ -1188,23 +1283,109 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2195</span><span class="o">/</span><span class="mf">827518612.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>                           <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>                           <span class="n">n_steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n_equil</span><span class="p">),</span>
-<span class="ne">---&gt; </span><span class="mi">18</span>                           <span class="n">out_freq</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> 
-<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">n_equil</span><span class="o">//</span><span class="n">out</span><span class="p">:]</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2224/189129091.py:2: NumbaWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Compilation is falling back to object mode WITH looplifting enabled because Function &quot;run_ising2d&quot; failed type inference due to: No implementation of function Function(&lt;built-in function array&gt;) found for signature:</span>
+<span class=" -Color -Color-Bold"> </span>
+<span class=" -Color -Color-Bold"> &gt;&gt;&gt; array(list(array(int64, 2d, C))&lt;iv=None&gt;)</span>
+<span class=" -Color -Color-Bold"> </span>
+<span class=" -Color -Color-Bold">There are 4 candidate implementations:</span>
+<span class=" -Color -Color-Bold">      - Of which 4 did not match due to:</span>
+<span class=" -Color -Color-Bold">      Overload in function &#39;_OverloadWrapper._build.&lt;locals&gt;.ol_generated&#39;: File: numba/core/overload_glue.py: Line 131.</span>
+<span class=" -Color -Color-Bold">        With argument(s): &#39;(list(array(int64, 2d, C))&lt;iv=None&gt;)&#39;:</span>
+<span class=" -Color -Color-Bold">       Rejected as the implementation raised a specific error:</span>
+<span class=" -Color -Color-Bold">         TypingError: Failed in nopython mode pipeline (step: nopython frontend)</span>
+<span class=" -Color -Color-Bold">       No implementation of function Function(&lt;intrinsic stub&gt;) found for signature:</span>
+<span class=" -Color -Color-Bold">        </span>
+<span class=" -Color -Color-Bold">        &gt;&gt;&gt; stub(list(array(int64, 2d, C))&lt;iv=None&gt;)</span>
+<span class=" -Color -Color-Bold">        </span>
+<span class=" -Color -Color-Bold">       There are 2 candidate implementations:</span>
+<span class=" -Color -Color-Bold">         - Of which 2 did not match due to:</span>
+<span class=" -Color -Color-Bold">         Intrinsic in function &#39;stub&#39;: File: numba/core/overload_glue.py: Line 35.</span>
+<span class=" -Color -Color-Bold">           With argument(s): &#39;(list(array(int64, 2d, C))&lt;iv=None&gt;)&#39;:</span>
+       <span class=" -Color -Color-Bold">   Rejected as the implementation raised a specific error:</span>
+<span class=" -Color -Color-Bold">            TypingError: array(int64, 2d, C) not allowed in a homogeneous sequence</span>
+         raised from /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/typing/npydecl.py:487
+       
+       <span class=" -Color -Color-Bold">During: resolving callee type: Function(&lt;intrinsic stub&gt;)</span>
+       <span class=" -Color -Color-Bold">During: typing of call at &lt;string&gt; (3)</span>
+<span class=" -Color -Color-Bold">       </span>
+       <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">       File &quot;&lt;string&gt;&quot;, line 3:</span>
+       <span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
 
-<span class="nn">/tmp/ipykernel_2195/183084139.py</span> in <span class="ni">run_ising2d</span><span class="nt">(spins, T, J, B, n_steps, out_freq)</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span>             <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span>             <span class="n">E_t</span>        <span class="o">+=</span> <span class="n">dE</span>
-<span class="ne">---&gt; </span><span class="mi">47</span>             <span class="n">M_t</span>        <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> 
-<span class="g g-Whitespace">     </span><span class="mi">49</span>         <span class="c1"># Save Thermo data</span>
+  raised from /opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/typeinfer.py:1086
 
-<span class="ne">KeyboardInterrupt</span>: 
+<span class=" -Color -Color-Bold">During: resolving callee type: Function(&lt;built-in function array&gt;)</span>
+<span class=" -Color -Color-Bold">During: typing of call at /tmp/ipykernel_2224/189129091.py (55)</span>
+
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 55:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  @jit
+/tmp/ipykernel_2224/189129091.py:2: NumbaWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Compilation is falling back to object mode WITHOUT looplifting enabled because Function &quot;run_ising2d&quot; failed type inference due to: Cannot determine Numba type of &lt;class &#39;numba.core.dispatcher.LiftedLoop&#39;&gt;</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 27:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  @jit
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/object_mode_passes.py:152: NumbaWarning: <span class=" -Color -Color-Bold">Function &quot;run_ising2d&quot; was compiled in object mode without forceobj=True, but has lifted loops.</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 23:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  state.func_ir.loc))
+/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/object_mode_passes.py:162: NumbaDeprecationWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Fall-back from the nopython compilation path to the object mode compilation path has been detected, this is deprecated behaviour.</span>
+
+<span class=" -Color -Color-Bold">For more information visit https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 23:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  state.func_ir.loc))
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2224/189129091.py:2: NumbaWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Compilation is falling back to object mode WITHOUT looplifting enabled because Function &quot;run_ising2d&quot; failed type inference due to: non-precise type pyobject</span>
+<span class=" -Color -Color-Bold">During: typing of argument at /tmp/ipykernel_2224/189129091.py (34)</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 34:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  @jit
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/object_mode_passes.py:152: NumbaWarning: <span class=" -Color -Color-Bold">Function &quot;run_ising2d&quot; was compiled in object mode without forceobj=True.</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 34:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  state.func_ir.loc))
+/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numba/core/object_mode_passes.py:162: NumbaDeprecationWarning: <span class=" -Color -Color-Bold"></span>
+<span class=" -Color -Color-Bold">Fall-back from the nopython compilation path to the object mode compilation path has been detected, this is deprecated behaviour.</span>
+
+<span class=" -Color -Color-Bold">For more information visit https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit</span>
+
+<span class=" -Color -Color-Bold">File &quot;../../../../../../tmp/ipykernel_2224/189129091.py&quot;, line 34:</span>
+<span class=" -Color -Color-Bold">&lt;source missing, REPL/exec in use?&gt;</span>
+
+  state.func_ir.loc))
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numpy/core/fromnumeric.py:3441: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numpy/core/_methods.py:189: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numpy/core/fromnumeric.py:3724: RuntimeWarning: Degrees of freedom &lt;= 0 for slice
+  **kwargs)
+/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numpy/core/_methods.py:223: RuntimeWarning: invalid value encountered in true_divide
+  subok=False)
+/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/numpy/core/_methods.py:254: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
 </pre></div>
 </div>
 </div>
@@ -1334,6 +1515,12 @@ configuration as an input to the system to undergo equilibriation again.</p>
 </div>
 </div>
 </div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"861aad916436489ea80b496ae92332d1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "35599dec442a403c8dba501795e2772e": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_aa144c4bf3164646a6e65a650adbf003", "IPY_MODEL_1280e160d804400c826523558ad8269e"], "layout": "IPY_MODEL_861aad916436489ea80b496ae92332d1"}}, "8a326afc272e46c6a558848c900ad269": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "64e0e7b64d3e405391e614f3697f80a3": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "aa144c4bf3164646a6e65a650adbf003": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_8a326afc272e46c6a558848c900ad269", "max": 9999, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_64e0e7b64d3e405391e614f3697f80a3", "value": 0}}, "e15b1edddfce4976877ba7ea502c0710": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1280e160d804400c826523558ad8269e": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_e15b1edddfce4976877ba7ea502c0710", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"needs_background": "light"}, "data": {"text/plain": "<Figure size 720x288 with 3 Axes>", "image/png": "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\n"}}]}}}, "version_major": 2, "version_minor": 0}
+</script>
+
 
     <script type="text/x-thebe-config">
     {
