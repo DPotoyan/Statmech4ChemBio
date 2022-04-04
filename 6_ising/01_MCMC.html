@@ -777,17 +777,17 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1 -1 -1 -1 -1  1  1 -1]
- [ 1  1 -1 -1 -1 -1 -1 -1]
- [ 1  1  1 -1 -1  1 -1  1]
- [ 1  1  1 -1 -1  1 -1 -1]
- [ 1  1  1 -1 -1 -1 -1  1]
- [ 1  1  1 -1 -1 -1  1 -1]
- [ 1  1 -1 -1 -1 -1 -1  1]
- [-1  1 -1 -1 -1 -1  1  1]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1  1  1  1 -1 -1  1 -1]
+ [-1  1 -1 -1  1 -1 -1  1]
+ [-1  1 -1 -1 -1  1 -1 -1]
+ [-1 -1  1  1 -1  1 -1 -1]
+ [-1  1 -1  1 -1 -1  1 -1]
+ [-1 -1 -1 -1  1  1  1  1]
+ [-1 -1 -1 -1  1 -1  1  1]
+ [ 1 -1 -1 -1  1  1 -1  1]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f0024363d10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fbd2b2c7050&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_7_2.png" src="../_images/01_MCMC_7_2.png" />
@@ -812,7 +812,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f0021d1dd10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fbd28bcad50&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_9_1.png" src="../_images/01_MCMC_9_1.png" />
@@ -1009,20 +1009,20 @@ const thebe_selector_output = ".output, .cell_output"
                 <span class="n">out_freq</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Basic Metropolis Monte Carlo simulator of 2D Ising model</span>
 <span class="sd">    ---</span>
-<span class="sd">    spins: 2D numy array</span>
-<span class="sd">    T, J, B: temperature, coupling constant and magnetic field</span>
-<span class="sd">    n_steps: simulation steeps</span>
-<span class="sd">    out_freq: How often to compute and save data</span>
+<span class="sd">    spins:    (int, int) 2D numpy array</span>
+<span class="sd">    T, J, B:  (floats) corresponding to temperature, coupling and field variables</span>
+<span class="sd">    n_steps:  (int), simulation steeps</span>
+<span class="sd">    out_freq: (int), How often to compute and save data</span>
 <span class="sd">    ---</span>
 <span class="sd">    Returns:</span>
-<span class="sd">    Et: Energy over n steps  </span>
-<span class="sd">    Mt: magnetization over n steps </span>
-<span class="sd">    St: spin configurations over n steps </span>
+<span class="sd">    E/N: per-spin energy over n steps  </span>
+<span class="sd">    M/N: per-spin magnetization over n steps </span>
+<span class="sd">    S:   2D spin configurations over n steps </span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
-    <span class="c1"># Initialize simulation</span>
+    <span class="c1">#### Initialize simulation</span>
     <span class="n">N</span>   <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
-    <span class="n">M_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
+    <span class="n">M_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
     <span class="n">E_t</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span> 
@@ -1033,26 +1033,26 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
         
-        <span class="c1">#Pick random spin</span>
+        <span class="c1"># Pick random spin</span>
         <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
-        <span class="c1">#Compute energy change resulting from a flip of spin at i,j</span>
+        <span class="c1"># Compute energy change resulting from a flip of spin at i,j</span>
         <span class="n">z</span>  <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] + spins[i, (j+1)%N] + spins[i, (j-1)%N] 
         <span class="n">dE</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">J</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
 
-        <span class="c1">#Metropolis condition</span>
+        <span class="c1"># Metropolis condition</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dE</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">():</span>
             <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span> 
             <span class="n">E_t</span>        <span class="o">+=</span> <span class="n">dE</span>
             <span class="n">M_t</span>        <span class="o">+=</span> <span class="mi">2</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
 
-        <span class="c1">#### Save Thermo data</span>
+        <span class="c1"># Save Thermo data</span>
         <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">out_freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">M_t</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
-            <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E_t</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+            <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">M_t</span><span class="p">)</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E_t</span><span class="p">)</span>
             <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spins</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
 
-    <span class="k">return</span> <span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">/</span><span class="n">N</span>
 </pre></div>
 </div>
 </div>
@@ -1070,24 +1070,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.02 s ± 4.94 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2284</span><span class="o">/</span><span class="mf">2324250724.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">S</span>
-
-<span class="ne">NameError</span>: name &#39;S&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.07 s ± 8.98 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1112,8 +1095,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "0588007602684c48b2c6113c766bceb8", "version_major": 2, "version_minor": 0}
-</script></div>
+{"version_major": 2, "version_minor": 0, "model_id": "4e8d3ce6220447a9bcbaff65a724ca8f"}
+</script><img alt="../_images/01_MCMC_27_1.png" src="../_images/01_MCMC_27_1.png" />
+</div>
 </div>
 </div>
 <div class="section" id="carry-out-explorative-simulations">
@@ -1168,6 +1152,27 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2601</span><span class="o">/</span><span class="mf">827518612.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>                           <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>                           <span class="n">n_steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n_equil</span><span class="p">),</span>
+<span class="ne">---&gt; </span><span class="mi">18</span>                           <span class="n">out_freq</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> 
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">n_equil</span><span class="o">//</span><span class="n">out</span><span class="p">:]</span>
+
+<span class="nn">/tmp/ipykernel_2601/679771127.py</span> in <span class="ni">run_ising2d</span><span class="nt">(spins, T, J, B, n_steps, out_freq)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> 
+<span class="g g-Whitespace">     </span><span class="mi">35</span>         <span class="c1"># Pick random spin</span>
+<span class="ne">---&gt; </span><span class="mi">36</span>         <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> 
+<span class="g g-Whitespace">     </span><span class="mi">38</span>         <span class="c1"># Compute energy change resulting from a flip of spin at i,j</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1189,7 +1194,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01_MCMC_33_0.png" src="../_images/01_MCMC_33_0.png" />
+<img alt="../_images/01_MCMC_32_0.png" src="../_images/01_MCMC_32_0.png" />
 </div>
 </div>
 </div>
