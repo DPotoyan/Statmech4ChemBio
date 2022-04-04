@@ -487,13 +487,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc">
-     Sampliing of Boltzmann distribution (NVT). MC vs MCMC
+    <a class="reference internal nav-link" href="#sampling-of-boltzmann-distribution-mc-vs-mcmc">
+     Sampling of Boltzmann distribution: MC vs MCMC
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#master-equation-and-detailed-balance">
-     Master Equation and Detailed Balance
+    <a class="reference internal nav-link" href="#generating-chains-master-equation-and-detailed-balance">
+     Generating chains! Master Equation and Detailed Balance
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -621,13 +621,13 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc">
-     Sampliing of Boltzmann distribution (NVT). MC vs MCMC
+    <a class="reference internal nav-link" href="#sampling-of-boltzmann-distribution-mc-vs-mcmc">
+     Sampling of Boltzmann distribution: MC vs MCMC
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#master-equation-and-detailed-balance">
-     Master Equation and Detailed Balance
+    <a class="reference internal nav-link" href="#generating-chains-master-equation-and-detailed-balance">
+     Generating chains! Master Equation and Detailed Balance
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -766,17 +766,17 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1  1  1 -1  1 -1  1 -1]
- [-1 -1 -1  1 -1  1  1 -1]
- [ 1  1  1 -1  1 -1  1  1]
- [-1 -1 -1  1  1 -1  1 -1]
- [-1 -1  1 -1  1  1  1  1]
- [ 1 -1  1  1  1 -1  1  1]
- [-1  1  1 -1 -1 -1 -1  1]
- [-1  1 -1  1 -1 -1  1 -1]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1 -1  1 -1 -1  1 -1 -1]
+ [ 1 -1  1 -1 -1  1 -1 -1]
+ [-1 -1  1 -1  1  1 -1  1]
+ [-1  1 -1  1  1  1  1  1]
+ [ 1 -1  1 -1 -1 -1 -1 -1]
+ [-1  1 -1  1 -1 -1 -1 -1]
+ [ 1 -1  1  1  1 -1  1 -1]
+ [ 1 -1  1 -1  1  1  1  1]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f5cee0ab690&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f432f8e6cd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_7_2.png" src="../_images/01_MCMC_7_2.png" />
@@ -801,7 +801,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f5ceb908f10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f432cccbad0&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_MCMC_9_1.png" src="../_images/01_MCMC_9_1.png" />
@@ -860,65 +860,71 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="section" id="sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc">
-<h3>Sampliing of Boltzmann distribution (NVT). MC vs MCMC<a class="headerlink" href="#sampliing-of-boltzmann-distribution-nvt-mc-vs-mcmc" title="Permalink to this headline">¶</a></h3>
-<p>How to compute the expectation value of an observable <span class="math notranslate nohighlight">\(A\)</span>. In theory everything is simple:</p>
-<div class="math notranslate nohighlight">
-\[P(E_i)=\frac{e^{-\beta E_i}}{Z} = \frac{e^{-\beta E_i}}{\sum_i e^{-\beta E_i}}\]</div>
-<div class="math notranslate nohighlight">
-\[\langle A\rangle = \sum_i A_iP(E_i)\]</div>
-<p><strong>1. Question: What we know and what we want to know?</strong></p>
+<div class="section" id="sampling-of-boltzmann-distribution-mc-vs-mcmc">
+<h3>Sampling of Boltzmann distribution: MC vs MCMC<a class="headerlink" href="#sampling-of-boltzmann-distribution-mc-vs-mcmc" title="Permalink to this headline">¶</a></h3>
+<p><strong>MC sampling</strong></p>
 <ul class="simple">
-<li><p>We don’t always know the <strong>(micro)states</strong> <span class="math notranslate nohighlight">\(i\)</span> of a system.</p></li>
-<li><p>We only know <strong>macroscopic quantities:</strong> temperature <span class="math notranslate nohighlight">\(T\)</span> with <span class="math notranslate nohighlight">\(\beta = 1/(k_BT)\)</span>, volume, etc.</p></li>
-</ul>
-<p><strong>2. Answer: MC sampling</strong></p>
-<ul class="simple">
-<li><p>Simulate different states of the system with Monte Carlo, according to the thermal probability function</p></li>
-</ul>
-<p><strong>3. What are challanges?</strong></p>
-<ul class="simple">
-<li><p>most probabilities <span class="math notranslate nohighlight">\(P(E_k)\)</span> are tiny =&gt; exponentially small</p></li>
-<li><p>there is an extremely large number of possible states</p></li>
-</ul>
-<p><strong>4. Concludion: We need Importance sampling!</strong></p>
-<ul class="simple">
-<li><p>Use the Boltzmann probability <span class="math notranslate nohighlight">\(P(E_i)\)</span> as probability distribution to generate <span class="math notranslate nohighlight">\(N\)</span> samples:</p></li>
+<li><p>How to compute the expectation value of a thermodynamic variable <span class="math notranslate nohighlight">\(A\)</span>. In theory everything is simple: we need to sample from the exponential distribution.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{\langle A\rangle \rightarrow\frac{1}{N}\sum_{i=1}^N \underbrace{A_i}_{{\rm chosen}\ {\rm acc.}\ {\rm to}\ P(E_i)}}\]</div>
-<p><strong>MCMC Simulation</strong> Generating random walks in configuration space of thte system states.</p>
+\[P(E_i)= \frac{e^{-\beta E_i}}{\sum_i e^{-\beta E_i}}\]</div>
+<div class="math notranslate nohighlight">
+\[\langle A\rangle = \sum_i A_iP(E_i) \approx\frac{1}{N}\sum_{i=1}^N \underbrace{A_i}_{{\rm chosen}\ {\rm acc.}\ {\rm to}\ P(E_i)}\]</div>
+<ul class="simple">
+<li><p>In practice the brute force MC sampling of exponential fails for even smallest ising lattices.</p></li>
+</ul>
+<p><strong>Problems with MC</strong></p>
+<ul class="simple">
+<li><p>There is an astronomical number of states, <span class="math notranslate nohighlight">\(i = 1... N^2\)</span>!</p></li>
+<li><p>Most of these microstates make exponentially small contribution to probability distribution! <span class="math notranslate nohighlight">\(P(E_i)\)</span></p></li>
+<li><p>Brute force MC will not be efficient for sampling important portions of <span class="math notranslate nohighlight">\(P(E_i)\)</span>.</p></li>
+<li><p><strong>Conclusion: We need Importance sampling!</strong></p></li>
+</ul>
+<p><strong>MCMC Sampling</strong></p>
+<ul class="simple">
+<li><p>Instead of ranodmly picking states we generate chain of states. This sampling technique is known as Markov Chain Monte Carlo (MCMC). MCMC generates random walks in configuration space and is more efficient at finding sampling states than basic MC.</p></li>
+</ul>
 </div>
-<div class="section" id="master-equation-and-detailed-balance">
-<h3>Master Equation and Detailed Balance<a class="headerlink" href="#master-equation-and-detailed-balance" title="Permalink to this headline">¶</a></h3>
-<p><strong>Random process:</strong></p>
+<div class="section" id="generating-chains-master-equation-and-detailed-balance">
+<h3>Generating chains! Master Equation and Detailed Balance<a class="headerlink" href="#generating-chains-master-equation-and-detailed-balance" title="Permalink to this headline">¶</a></h3>
+<p><strong>Random chain</strong></p>
+<ul class="simple">
+<li><p>In simple MC each sampled state <span class="math notranslate nohighlight">\(X_i\)</span> at steo <span class="math notranslate nohighlight">\(i\)</span> is independet of the next or previous steps.</p></li>
+<li><p>Thus, MC sampling generates totally uncorrelated samples which is good for rapid convergence according to Central Limit Theorem. But as we remarked above the samples are most likely not covering important areas!</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[P(X_1, X_2, ... X_N) = P_1(X_1)\cdot P_2(X_2)... P_1(X_N)\]</div>
-<br>
-<p><strong>Probabilities</strong></p>
-<div class="math notranslate nohighlight">
-\[P(X_1)\]</div>
-<div class="math notranslate nohighlight">
-\[\sum_{X'} P(X') =1\]</div>
+\[P(X_N, ..., X_2, X_1) = P_N(X_N)\cdot ... P_2(X_2) \cdot P_1(X_1)\]</div>
 <p><strong>Markov chain:</strong></p>
+<ul class="simple">
+<li><p>In simple MCMC each sampled state <span class="math notranslate nohighlight">\(X_i\)</span> at steo <span class="math notranslate nohighlight">\(i\)</span> is generated from <span class="math notranslate nohighlight">\(i-1\)</span>.</p></li>
+<li><p>This introduces correlations between samples which means slower covnergence to the mean.</p></li>
+<li><p>On the other hand MCMC find the important areas for sampling much faster so in the hand it wins big compared to MC.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[p(X_1, X_2, ... X_N) = P_1(X_1)\cdot P_2(X_2| X_1) \cdot P_2(X_3| X_2)... P_1(X_N | X_{N-1})\]</div>
-<br>
-<p><strong>Conditional (transition) probabilities:</strong></p>
+\[P(X_N, ..., X_2, X_1) = P_N(X_N)\cdot ... P_3(X_3| X_2) \cdot P_2(X_2| X_1)... P_1(X_1)\]</div>
+<ul class="simple">
+<li><p>The probability of picking state <span class="math notranslate nohighlight">\(i+1\)</span> given taht we started from <span class="math notranslate nohighlight">\(i\)</span> is referred to as <strong>transition probability</strong> <span class="math notranslate nohighlight">\(T_{ij}\)</span></p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[T(X_1 \rightarrow X_2) = P(X_2|X_1)\]</div>
+\[T(X_2 \leftarrow X_1) = T_{21} = P(X_2|X_1)\]</div>
+<ul class="simple">
+<li><p>As any probability it should be normalized meaning summing over all possible states should yield one:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[\sum_{X'} T(X\rightarrow X') =1 \]</div>
-<p><strong>Probability of being at <span class="math notranslate nohighlight">\(X\)</span> at <span class="math notranslate nohighlight">\(t+\Delta t\)</span> given prior state at <span class="math notranslate nohighlight">\((X',t)\)</span></strong></p>
+\[\sum_{X} T(X\leftarrow X') = 1\]</div>
+<p><strong>Probability of being at <span class="math notranslate nohighlight">\(X\)</span> at <span class="math notranslate nohighlight">\(t+\Delta t\)</span> given a prior state at <span class="math notranslate nohighlight">\((X',t)\)</span></strong></p>
 <div class="math notranslate nohighlight">
-\[P(X, t+\Delta t) = \sum_X' P(X', t) T(X' \rightarrow X, t)\]</div>
+\[P(X, t+\Delta t) = \sum_{X'}  T(X \leftarrow X') P(X', t)\]</div>
+<ul class="simple">
+<li><p>Subtracting P(X,t) from both states we can obtain equation of motion for Markov chain.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(X, t+\Delta t) -P(X,t)= \sum_{X'}  T(X \leftarrow X') P(X', t) - P(X, t)\sum_{X'} T(X'\leftarrow X)\]</div>
 <p><strong>Master equation: A continuity equation in probability space.</strong></p>
 <div class="math notranslate nohighlight">
-\[P(X, t+\Delta t) -P(X,t)= \sum_X' P(X', t) T(X' \rightarrow X, t) - P(X, t)\sum_{X'} T(X\rightarrow X')\]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{\frac{\partial P(X,t)}{\partial t} = \sum_X' P(X', t) w(X' \rightarrow X, t) - \sum_{X'} P(X, t) w(X\rightarrow X')}\]</div>
+\[\boxed{\frac{\partial P(X,t)}{\partial t} = \sum_{X'}  w_{X X'} P(X', t) - \sum_{X'} w_{X' X} P(X, t)}\]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(w(X' \rightarrow X, t) = lim_{\Delta t \rightarrow 0}\frac{T(X' \rightarrow X, t)}{\Delta t}\)</span></p></li>
+<li><p>Where we have defined transition rates as: <span class="math notranslate nohighlight">\(w(X' \rightarrow X, t) = lim_{\Delta t \rightarrow 0}\frac{T(X' \rightarrow X, t)}{\Delta t}\)</span></p></li>
 </ul>
 </div>
 <div class="section" id="detailed-balance-equilibrium">
@@ -934,25 +940,35 @@ const thebe_selector_output = ".output, .cell_output"
 \[\frac{dP(x_1,t)}{dt} = p_1 w_{12} - p_2 w_{21}\]</div>
 <div class="math notranslate nohighlight">
 \[\frac{dP(x_2,t)}{dt} = p_2 w_{21} - p_1 w_{12}\]</div>
+<ul class="simple">
+<li><p>In the equilibrium we see that equilibrium is established when probability ratio matches the ratio of tranistions <span class="math notranslate nohighlight">\(\frac{p_1}{p_2} = \frac{w_{21}}{w_{12}}\)</span></p></li>
+<li><p>In the <span class="math notranslate nohighlight">\(NVT\)</span> ensemble we have an explicit requirment for transition rates <span class="math notranslate nohighlight">\(\frac{p_1}{p_2} = e^{-\beta (E_1-E_2)} = \frac{w_{21}}{w_{12}}\)</span></p></li>
+</ul>
 </div>
 <div class="section" id="how-to-pick-the-moves-for-markov-chain">
 <h3>How to pick the moves for Markov chain?<a class="headerlink" href="#how-to-pick-the-moves-for-markov-chain" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[[transition] = [move] \cdot [acceptance]\]</div>
-<div class="math notranslate nohighlight">
-\[T(X\rightarrow X') = \alpha_{X X'}\cdot A_{X X'} \]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\alpha_{X X'}\geq 0\)</span>, <span class="math notranslate nohighlight">\(\alpha_{X X'} = \alpha_{X' X}\)</span>
-<br></p></li>
-<li><p>If <span class="math notranslate nohighlight">\(p(X') &lt; p(X)\)</span>, <span class="math notranslate nohighlight">\(A_{XX'}=\frac{p(X')}{p(X)}\)</span>
-<br></p></li>
-<li><p>If <span class="math notranslate nohighlight">\(p(X') \geq p(X)\)</span>, <span class="math notranslate nohighlight">\(A_{XX'}=1\)</span></p></li>
+<li><p>Now it is time to consider practical aspects of conducting MCMC. How to pick states and transitions?</p></li>
 </ul>
-<p><strong>For 2D Ising model of size <span class="math notranslate nohighlight">\((L,L)\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[[transition] =  [accept/reject] \cdot [move]\]</div>
+<div class="math notranslate nohighlight">
+\[T(X' \leftarrow X) = \alpha_{X' X}\cdot A_{X' X} \]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\alpha_{X X'} = \frac{1}{L^2}\)</span></p></li>
+<li><p>We have great freedom in picking states and moves as long as we satisfy the detailed balance! E.g as long as the ratio of transition probabilities matches ration of Botlzman factors!</p></li>
 </ul>
-<p>Where <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(X'\)</span> differ in one spin configuration.</p>
+<ul class="simple">
+<li><p>The simplest case for move is to pick one spins at random per iteration:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\alpha_{X' X} = \frac{1}{L^2}\]</div>
+<ul class="simple">
+<li><p>For transitions we adopt criteria that favors our chain to explore low energy (high probability) configurations:</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p(X') &lt; p(X),\,\,\,\,\)</span> <span class="math notranslate nohighlight">\(A_{X'X}=\frac{p(X')}{p(X)}\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(p(X') \geq p(X),\,\,\,\)</span> <span class="math notranslate nohighlight">\(A_{X'X}=1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{T_{X'X}}{T_{XX'}} = \frac{1/L^2}{1/L^2} \cdot \frac{p(X')/p(X)}{1}\]</div>
 </div>
 </div>
 <div class="section" id="metropolis-algorithm">
@@ -1044,7 +1060,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.15 s ± 12.9 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>910 ms ± 4.86 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
 </pre></div>
 </div>
 </div>
@@ -1069,8 +1085,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "17eaa1da2563474d8cc6fde88fe0a408"}
-</script><img alt="../_images/01_MCMC_28_1.png" src="../_images/01_MCMC_28_1.png" />
+{"version_major": 2, "version_minor": 0, "model_id": "4ce75b0d55624e169238d23b5273745e"}
+</script><img alt="../_images/01_MCMC_27_1.png" src="../_images/01_MCMC_27_1.png" />
 </div>
 </div>
 </div>
@@ -1129,19 +1145,19 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2207</span><span class="o">/</span><span class="mf">827518612.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2285</span><span class="o">/</span><span class="mf">827518612.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span>                           <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="g g-Whitespace">     </span><span class="mi">17</span>                           <span class="n">n_steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n_equil</span><span class="p">),</span>
 <span class="ne">---&gt; </span><span class="mi">18</span>                           <span class="n">out_freq</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">19</span> 
 <span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">n_equil</span><span class="o">//</span><span class="n">out</span><span class="p">:]</span>
 
-<span class="nn">/tmp/ipykernel_2207/3691252898.py</span> in <span class="ni">run_ising2d</span><span class="nt">(spins, T, J, B, n_steps, out_freq)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span> 
-<span class="g g-Whitespace">     </span><span class="mi">35</span>         <span class="c1">#Pick random spin</span>
-<span class="ne">---&gt; </span><span class="mi">36</span>         <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span> 
-<span class="g g-Whitespace">     </span><span class="mi">38</span>         <span class="c1">#Compute energy change resulting from a flip of spin at i,j</span>
+<span class="nn">/tmp/ipykernel_2285/3691252898.py</span> in <span class="ni">run_ising2d</span><span class="nt">(spins, T, J, B, n_steps, out_freq)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span> 
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="c1">#Metropolis condition</span>
+<span class="ne">---&gt; </span><span class="mi">43</span>         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dE</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">():</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>             <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>             <span class="n">E_t</span>        <span class="o">+=</span> <span class="n">dE</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1168,7 +1184,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01_MCMC_33_0.png" src="../_images/01_MCMC_33_0.png" />
+<img alt="../_images/01_MCMC_32_0.png" src="../_images/01_MCMC_32_0.png" />
 </div>
 </div>
 </div>
