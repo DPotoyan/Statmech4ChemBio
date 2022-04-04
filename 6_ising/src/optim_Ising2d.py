@@ -2,7 +2,7 @@ import numpy  as np
 import pandas as pd
 #from numba import jit, njit
 
-def compute_ising2d(spins, J, B):
+def compute_thermo(spins, J, B):
   '''Computes thermodynamic variables given the spin lattice'''
   
   N = len(spins)
@@ -39,7 +39,7 @@ def run_ising2d(spins, J, B, T, n_steps, out_freq):
         #Compute and store data
         if step % out_freq == 0:
 
-            M_t, E_t = compute_ising2d(spins, J, B)
+            M_t, E_t = compute_thermo(spins, J, B)
             
             M.append(M_t)
             E.append(E_t)
