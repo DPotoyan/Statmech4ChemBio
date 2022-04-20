@@ -12,7 +12,7 @@ name: directive-fig
 
 This website hosts jupyter notebooks containing lectures notes and computational content for the **"Chem 563 Statistical Mechanics"**  course, taught at the Department of Chemistry of Iowa State University. The course has two major objectives. 
 - Firstly to provide PhD students in STEM field with a solid theoretical foundation of statistical mechanics.
-    -  The only pre-requiestes is having taken standard  physical-chemistry which assumes basic knowledge of thermodynamics, kinetics and calculus.    
+    -  The only pre-requiestes are having taken standard  physical-chemistry which assumes basic knowledge of thermodynamics, kinetics and calculus.    
 - Secondly, to show how to utilize the variety of powerful computational techniques of statistical mechanics such as Monte Carlo, Molecular Dynamics, Stochastic Processes, Machine Learning. The course.   
     - All the examples and applications are primarily inspired from chemistry, materials science and biology problems and as such this course is different in its choice of materials compared to traditional statistical physics courses taught at chemistry departments. 
     - No programing expreience is assumed. Python3 and its ecosystem of scientific libraries will be introduced at the beginning of the course in an accessible manner.    
