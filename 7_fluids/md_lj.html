@@ -448,8 +448,33 @@ const thebe_selector_output = ".output, .cell_output"
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thermodynamic-parameters-of-simulation">
+   Thermodynamic parameters of simulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-positions-velocities-and-forces">
+   Initial positions, velocities and forces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#computation-of-forces">
    Computation of forces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-stepping">
+   Time stepping
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-md-simulation">
+   Running MD simulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-md-simulation">
+   Analysis of MD simulation
   </a>
  </li>
 </ul>
@@ -473,8 +498,33 @@ const thebe_selector_output = ".output, .cell_output"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thermodynamic-parameters-of-simulation">
+   Thermodynamic parameters of simulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initial-positions-velocities-and-forces">
+   Initial positions, velocities and forces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#computation-of-forces">
    Computation of forces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-stepping">
+   Time stepping
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-md-simulation">
+   Running MD simulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#analysis-of-md-simulation">
+   Analysis of MD simulation
   </a>
  </li>
 </ul>
@@ -497,11 +547,18 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
+<div class="section" id="thermodynamic-parameters-of-simulation">
+<h2>Thermodynamic parameters of simulation<a class="headerlink" href="#thermodynamic-parameters-of-simulation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>These are exactly the same parameters that we used for MC simulations.</p></li>
+<li><p>We are going to show that regardless of what sampling stratgy we use (MC or MD) in the end we are always sampling from Boltzmann distribution. Thus we expect thermodynamical predicitons to be the same.</p></li>
+<li><p>Thermodynamical properties should not depend on sampling method!</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span>    <span class="o">=</span> <span class="mf">.88</span> <span class="c1"># density of Argon in natural units</span>
 <span class="n">dt</span>     <span class="o">=</span> <span class="mf">0.004</span> <span class="c1"># time step size</span>
-<span class="n">T_0</span>    <span class="o">=</span> <span class="mi">1</span> <span class="c1"># temperature</span>
+<span class="n">T</span>    <span class="o">=</span> <span class="mi">1</span> <span class="c1"># temperature</span>
 <span class="n">N_cell</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># number of unitcells in one direction    </span>
 
 
@@ -512,9 +569,16 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="initial-positions-velocities-and-forces">
+<h2>Initial positions, velocities and forces<a class="headerlink" href="#initial-positions-velocities-and-forces" title="Permalink to this headline">¶</a></h2>
+<p>Unlike MC simulation where the initial condition is fully specified by positin arrray in MD simulations we must also specify initial velocities which allows us to determine initial forces!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">IC_pos</span><span class="p">(</span><span class="n">N_cell</span><span class="p">,</span> <span class="n">L_cell</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Generate initial positions of LJ fluid where particles are ordered on a lattice with </span>
+<span class="sd">    number of unitcells N_cell of length L_lcell </span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">pos</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">x</span><span class="p">,</span>  <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">z</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">z</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">]]</span> 
            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">))]</span>
@@ -525,52 +589,51 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <span class="k">def</span> <span class="nf">IC_vel</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Genreate initial distribution of velocities according to Maxwell-Botlzmann&#39;&#39;&#39;</span>
 
     <span class="n">vel</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">vel</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">vel</span> 
+
+<span class="k">def</span> <span class="nf">IC_F</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Generate force matrix objects to be used throughout simulation</span>
+<span class="sd">    ---</span>
+<span class="sd">    F:  (N, N, 3) array that contains all the forces between i, j particles in 3D</span>
+<span class="sd">    ind: arrays of size N and N. These are indices of upper triangular matrix e.g (i, j) such that  i&lt;j. </span>
+<span class="sd">    Having indices of all inter-particle forces allows us to avoid using for loops</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">F</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>       
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   
+    
+    <span class="k">return</span> <span class="n">F</span><span class="p">,</span> <span class="n">ind</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
 <div class="section" id="computation-of-forces">
 <h2>Computation of forces<a class="headerlink" href="#computation-of-forces" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Most of the computational heavy lifting in MD simulations goes into evaluation of forces.</p></li>
+<li><p>As the number of particles goes so does the need to evaluate the number of interacting pairs</p></li>
+<li><p>In realistic simulations neighbor lists and cutoff distances are used to minimize and keep track of smaller number of particle pairs</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">N_cell</span><span class="p">,</span> <span class="n">L_cell</span><span class="p">)</span>    <span class="c1"># Initialize position</span>
-<span class="n">vel</span> <span class="o">=</span> <span class="n">IC_vel</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>                 <span class="c1"># Initialize velocity</span>
-
-<span class="n">F</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>       <span class="c1"># matrix that contains all the forces between i, j particles in 3D</span>
-
-<span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># Indices of upper triangular matrix. Created to avoid acessing force elements via loop</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;position array&#39;</span><span class="p">,</span> <span class="n">pos</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;velocity array&#39;</span><span class="p">,</span> <span class="n">vel</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;force array&#39;</span><span class="p">,</span> <span class="n">F</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Indices of relevant portion of force array</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> 
-      <span class="n">ind</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>position array (108, 3)
-velocity array (108, 3)
-force array (108, 108, 3)
-Indices of relevant portion of force array
- (array([  0,   0,   0, ..., 105, 105, 106]), array([  1,   2,   3, ..., 106, 107, 107]))
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_force</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L_box</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">force_update</span><span class="p">(</span><span class="n">pos</span><span class="p">):</span>   
+    <span class="sd">&#39;&#39;&#39;This function is used to update the force matrix F which has been created via IC_F function earlier</span>
+<span class="sd">    pos: (N, 3) position array is specified as input</span>
+<span class="sd">    </span>
+<span class="sd">    returns</span>
+<span class="sd">    ---</span>
+<span class="sd">    forces:</span>
+<span class="sd">    U:    potential energy</span>
+<span class="sd">    P:    pressure</span>
+<span class="sd">    hist: histogram of r^2 distances</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># Compute all unique ij distances</span>
     <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">ind</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">ind</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
@@ -598,17 +661,27 @@ Indices of relevant portion of force array
 
     <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">F_vec</span> <span class="o">*</span> <span class="n">r_vec</span><span class="p">)</span>
 
-    <span class="n">hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">r_sq</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L_box</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">r_sq</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L_box</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
     
     <span class="k">return</span> <span class="n">forces</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">hist</span>
-
-<span class="k">def</span> <span class="nf">time_step</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="time-stepping">
+<h2>Time stepping<a class="headerlink" href="#time-stepping" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">time_step</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Update velocities, positions and forces after dt time step of integration</span>
+<span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">vel</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">F</span> <span class="o">*</span> <span class="n">dt</span>
     
     <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="n">vel</span> <span class="o">*</span> <span class="n">dt</span><span class="p">,</span> <span class="n">L_box</span><span class="p">)</span>
 
-    <span class="n">F</span><span class="p">,</span> <span class="n">pot</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">find_force</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+    <span class="n">F</span><span class="p">,</span> <span class="n">pot</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">force_update</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
     
     <span class="n">vel</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">F</span> <span class="o">*</span> <span class="n">dt</span>
     <span class="n">kin</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vel</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -620,20 +693,27 @@ Indices of relevant portion of force array
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">L_box</span><span class="p">,</span> <span class="n">freq_T</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freq_out</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">nsteps</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>      
-    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> 
+             <span class="n">vel</span><span class="p">,</span> 
+             <span class="n">T</span><span class="p">,</span> 
+             <span class="n">freq_out</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> 
+             <span class="n">nsteps</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Main MD simulation loop. All of the variables and force matrix must be initialized </span>
+<span class="sd">    so that functions can acess them&#39;&#39;&#39;</span>
+
     <span class="n">kins</span><span class="p">,</span> <span class="n">pots</span><span class="p">,</span> <span class="n">Ps</span><span class="p">,</span> <span class="n">hists</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    
+    <span class="n">F</span> <span class="o">=</span> <span class="n">force_update</span><span class="p">(</span><span class="n">pos</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="n">F</span> <span class="o">=</span> <span class="n">find_force</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L_box</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
 
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
-
+        <span class="c1"># Update positions, velocities, forces</span>
         <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">pot</span><span class="p">,</span> <span class="n">kin</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">time_step</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">F</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="n">freq_T</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-
-          <span class="n">vel</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">T_0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">kin</span><span class="p">))</span>
+        <span class="c1"># Scaling velocitites to keep T constant</span>
+        <span class="n">vel</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">kin</span><span class="p">))</span>
         
+        <span class="c1"># Save thermo output</span>
         <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="n">freq_out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 
             <span class="n">kins</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kin</span><span class="p">)</span>
@@ -646,34 +726,42 @@ Indices of relevant portion of force array
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="running-md-simulation">
+<h2>Running MD simulation<a class="headerlink" href="#running-md-simulation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Once again we collect all the relevant parameters of simulation in once cell to make it easy to do various exploratons</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kins</span><span class="p">,</span> <span class="n">pots</span><span class="p">,</span> <span class="n">Ps</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#------- Main imulation parameters ----</span>
+<span class="n">rho</span>    <span class="o">=</span> <span class="mf">.88</span> <span class="c1"># Density of Argon in natural units</span>
+<span class="n">T</span>      <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># Temperature</span>
+<span class="n">N_cell</span> <span class="o">=</span> <span class="mi">3</span>   <span class="c1"># Number of unitcells in one direction    </span>
 
-<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kins</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span>
-<span class="n">P</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Ps</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">N</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="n">L_box</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1">#------- Auxiliary quantities-------</span>
+<span class="n">N</span>      <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">N_cell</span> <span class="o">**</span> <span class="mi">3</span> <span class="c1"># the total number of particles in the system</span>
+<span class="n">L_box</span>  <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># length of the whole box</span>
+<span class="n">L_cell</span> <span class="o">=</span>  <span class="n">L_box</span> <span class="o">/</span> <span class="n">N_cell</span> <span class="c1"># length of a unitcell</span>
+
+<span class="c1">#------- Initalize positions, velocities and Forces-------</span>
+<span class="n">pos</span>    <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">N_cell</span><span class="p">,</span> <span class="n">L_cell</span><span class="p">)</span>
+<span class="n">vel</span>    <span class="o">=</span> <span class="n">IC_vel</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">F</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">IC_F</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="c1">#Run simulation</span>
+<span class="n">kins</span><span class="p">,</span> <span class="n">pots</span><span class="p">,</span> <span class="n">Ps</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">freq_out</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">nsteps</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2371</span><span class="o">/</span><span class="mf">1421777266.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">kins</span><span class="p">,</span> <span class="n">pots</span><span class="p">,</span> <span class="n">Ps</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">kins</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">N</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">P</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Ps</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">N</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="n">L_box</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="ne">TypeError</span>: simulate() missing 3 required positional arguments: &#39;pos&#39;, &#39;vel&#39;, and &#39;L_box&#39;
-</pre></div>
 </div>
 </div>
-</div>
+<div class="section" id="analysis-of-md-simulation">
+<h2>Analysis of MD simulation<a class="headerlink" href="#analysis-of-md-simulation" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L_box</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">bins</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L_box</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 <span class="n">pair_correlation</span> <span class="o">=</span> <span class="n">hist</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
-
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">pair_correlation</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r$&#39;</span><span class="p">)</span>  
@@ -682,14 +770,14 @@ Indices of relevant portion of force array
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in true_divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/ipykernel_launcher.py:2: RuntimeWarning: invalid value encountered in true_divide
   
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$g(r)$&#39;)
 </pre></div>
 </div>
-<img alt="../_images/md_lj_10_2.png" src="../_images/md_lj_10_2.png" />
+<img alt="../_images/md_lj_15_2.png" src="../_images/md_lj_15_2.png" />
 </div>
 </div>
 </div>
