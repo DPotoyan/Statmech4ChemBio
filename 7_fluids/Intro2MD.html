@@ -1,0 +1,1622 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Molecular Dynamics &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MD simulations of fluids" href="md_lj.html" />
+    <link rel="prev" title="MC simulations of fluids" href="mc_lj.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Statistical Mechanics for Chemistry and Biology</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   About
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../0_python/intro.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../0_python/intro2py.html">
+     Python3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../0_python/intro2numpy.html">
+     NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../0_python/intro2viz.html">
+     Plotting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../1_stats/intro.html">
+   Stats
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../1_stats/01_SetsCounting.html">
+     Probability by counting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../1_stats/02_RandVar.html">
+     Random variable, stochastic process and simulation.
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../1_stats/02_Diffusion.html">
+     Brownian motion and Diffusion
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../1_stats/03_MC.html">
+     Monte Carlo and “the power of randomness”
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../1_stats/RW_theory.html">
+     Appendix A: Large N approximations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../1_stats/04_LimitTheorems.html">
+     Appendix B: Limit theorems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../1_stats/05_InverseTransform.html">
+     Appendix C: The Inverse Transform of RVs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../2_thermo/intro.html">
+   Thermodynamics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../2_thermo/01_Thermo.html">
+     Review of thermodynamics principles
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../2_thermo/02_Legendre.html">
+     Legendre transform
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapters
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../3_ensembles/intro.html">
+   Ensembles
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/phase_space.html">
+     Phase Space
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/nve.html">
+     NVE
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/nvt.html">
+     NVT
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/npt.html">
+     <span class="math notranslate nohighlight">
+      \(\mu V T\)
+     </span>
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../3_ensembles/ensemble_overview.html">
+     Overview of ensembles
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../4_ideal_systems/intro.html">
+   Gases
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../4_ideal_systems/quantum_systems.html">
+     Quantum non-interacting systems
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../4_ideal_systems/photons_phonons.html">
+     Photons and Phonons
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../5_entropy/intro.html">
+   Entropy
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5_entropy/shannon.html">
+     What is Information?
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../5_entropy/landauer.html">
+     Information erasure and Landauer’s principle
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../6_ising/intro.html">
+   Phase transitions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../6_ising/01_MCMC.html">
+     Ising models and Metropolis algorithm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../6_ising/02_ising_analytic.html">
+     Phase transitions through the lense of Ising models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../6_ising/03_MeanField.html">
+     Mean Field Theory
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../6_ising/04_EnhanceSampl.html">
+     Non-boltzman (enhanced) sampling ideas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro.html">
+   Fluids
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="Intro2Fluids.html">
+     Statistical mechanics of fluids
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="mc_lj.html">
+     MC simulations of fluids
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Molecular Dynamics
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="md_lj.html">
+     MD simulations of fluids
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/7_fluids/Intro2MD.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/7_fluids/Intro2MD.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/7_fluids/Intro2MD.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#is-md-is-just-newton-laws-applied-on-big-systems">
+   Is MD is just Newton laws applied on big systems?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#timescales-and-lengthscales">
+   Timescales and Lengthscales
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#energy-function-force-fields-used-in-classical-md">
+   Energy function (force fields) used in classical MD
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-bonded-interactions-van-der-waals">
+     Non-bonded interactions: Van der Waals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-bonded-interactions-electrostatics">
+     Non-bonded interactions: Electrostatics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#integrating-equations-of-motion">
+   Integrating equations of motion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#no-thanks-euler">
+     No thanks, Euler
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#verlet-algortihm">
+     Verlet algortihm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-verlet-updating-scheme">
+     Basic Verlet updating scheme
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#need-for-a-better-velocity-update-scheme">
+       Need for a better Velocity update scheme
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#velocity-verlet-scheme">
+     Velocity Verlet scheme
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#velocity-verlet-algorithm">
+     Velocity Verlet  Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparison-of-rk-and-verlet">
+     Comparison of RK and Verlet
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#average-properties">
+   Average Properties
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ensemble-vs-time-average-and-ergodicity">
+     Ensemble vs time average and ergodicity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kinetic-potential-and-total-energies">
+     Kinetic, Potential and Total Energies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#temperature">
+     Temperature
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pressure">
+     Pressure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#molecular-dynaamics-of-classical-harmonic-oscillator">
+   Molecular Dynaamics of Classical Harmonic Oscillator
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nve">
+     Molecualr Dynamics of Harmonic oscillator (NVE)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nvt">
+     Molecualr Dynamics of Harmonic oscillator (NVT)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#langevin-equation">
+     Langevin equation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#double-well-potential">
+     Double well potential
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problems">
+     Problems
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#d-harmonic-potential">
+       1D harmonic potential
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#beads-and-springs">
+       Beads and springs
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Molecular Dynamics</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#is-md-is-just-newton-laws-applied-on-big-systems">
+   Is MD is just Newton laws applied on big systems?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#timescales-and-lengthscales">
+   Timescales and Lengthscales
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#energy-function-force-fields-used-in-classical-md">
+   Energy function (force fields) used in classical MD
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-bonded-interactions-van-der-waals">
+     Non-bonded interactions: Van der Waals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#non-bonded-interactions-electrostatics">
+     Non-bonded interactions: Electrostatics
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#integrating-equations-of-motion">
+   Integrating equations of motion
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#no-thanks-euler">
+     No thanks, Euler
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#verlet-algortihm">
+     Verlet algortihm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-verlet-updating-scheme">
+     Basic Verlet updating scheme
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#need-for-a-better-velocity-update-scheme">
+       Need for a better Velocity update scheme
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#velocity-verlet-scheme">
+     Velocity Verlet scheme
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#velocity-verlet-algorithm">
+     Velocity Verlet  Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#comparison-of-rk-and-verlet">
+     Comparison of RK and Verlet
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#average-properties">
+   Average Properties
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ensemble-vs-time-average-and-ergodicity">
+     Ensemble vs time average and ergodicity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#kinetic-potential-and-total-energies">
+     Kinetic, Potential and Total Energies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#temperature">
+     Temperature
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pressure">
+     Pressure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#molecular-dynaamics-of-classical-harmonic-oscillator">
+   Molecular Dynaamics of Classical Harmonic Oscillator
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nve">
+     Molecualr Dynamics of Harmonic oscillator (NVE)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nvt">
+     Molecualr Dynamics of Harmonic oscillator (NVT)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#langevin-equation">
+     Langevin equation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#double-well-potential">
+     Double well potential
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problems">
+     Problems
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#d-harmonic-potential">
+       1D harmonic potential
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#beads-and-springs">
+       Beads and springs
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="molecular-dynamics">
+<h1>Molecular Dynamics<a class="headerlink" href="#molecular-dynamics" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">rand</span><span class="p">,</span> <span class="n">randint</span><span class="p">,</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">choice</span><span class="p">,</span> <span class="n">normal</span><span class="p">,</span> <span class="n">randn</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="&quot;Cu atoms&quot;" src="https://upload.wikimedia.org/wikipedia/commons/4/42/Cudeposition.gif" /></p>
+<p><img alt="&quot;Water molecules&quot;" src="https://upload.wikimedia.org/wikipedia/commons/f/f4/MD_water.gif" /></p>
+<div class="section" id="is-md-is-just-newton-laws-applied-on-big-systems">
+<h2>Is MD is just Newton laws applied on big systems?<a class="headerlink" href="#is-md-is-just-newton-laws-applied-on-big-systems" title="Permalink to this headline">¶</a></h2>
+<p><strong>Not quite: Noble prize in Chemistry 2013 just for MD</strong></p>
+<p>Classical molecular dynamics (MD) is a common computational chemistry technique for studying complex systems, such as proteins, polymers, and energy materials. More and more molecular dynamics simulation is being used to aid in the analysis of experimental data from NMR, IR, UV spectroscopies as well as elastic-scattering techniques, such as small angle scattering or diffraction.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=NuaeD9xYBtY">2013 Noble Lectures by M Karplus, A Warshell, M Levitt</a></p></li>
+</ul>
+<p><img alt="" src="../_images/1466565515216.jpg" /></p>
+</div>
+<div class="section" id="timescales-and-lengthscales">
+<h2>Timescales and Lengthscales<a class="headerlink" href="#timescales-and-lengthscales" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="../_images/md-timescales.png" /></p>
+</div>
+<div class="section" id="energy-function-force-fields-used-in-classical-md">
+<h2>Energy function (force fields) used in classical MD<a class="headerlink" href="#energy-function-force-fields-used-in-classical-md" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="non-bonded-interactions-van-der-waals">
+<h3>Non-bonded interactions: Van der Waals<a class="headerlink" href="#non-bonded-interactions-van-der-waals" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">E_lj</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">sig</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;Lennard-Jones potential for Van der Waals interaction energy.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r: Distance between two particles (Å)</span>
+<span class="sd">    epsilon: Negative of the potential energy at equilibrium bond length (eV)</span>
+<span class="sd">    sigma:   Distance at which the potential energy is zero (Å)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">eps</span> <span class="o">*</span>  <span class="p">(</span> <span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">12</span> <span class="o">-</span><span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">6</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">eps</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_lj</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">E_lj</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">sig</span><span class="p">,</span><span class="n">eps</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">eps</span><span class="o">*</span><span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>  <span class="mi">4</span><span class="o">*</span><span class="n">eps</span><span class="o">*</span><span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">12</span><span class="p">,</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;LJ&#39;</span><span class="p">,</span> <span class="s1">&#39;attr-LJ&#39;</span><span class="p">,</span><span class="s1">&#39;repuls-LJ&#39;</span> <span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "f0b0e296481645f792dac32011d69966"}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">E_buck</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">10540.313</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">3.66</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">63.670</span><span class="p">):</span> 
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Buckingham potential for Van der Waals interaction energy.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r: Distance between two particles (Å)</span>
+<span class="sd">    a,b,c: parameters for the interaction (eV)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">-</span> <span class="n">c</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">E_lj</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">,</span> <span class="mf">0.0103</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">E_buck</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="mf">10540.313</span><span class="p">,</span> <span class="mf">3.66</span><span class="p">,</span> <span class="mf">63.670</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;LJ&#39;</span><span class="p">,</span> <span class="s1">&#39;Buckingham&#39;</span> <span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro2MD_13_0.png" src="../_images/Intro2MD_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="non-bonded-interactions-electrostatics">
+<h3>Non-bonded interactions: Electrostatics<a class="headerlink" href="#non-bonded-interactions-electrostatics" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">E_DH</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">kappa</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;Debye-Huckel potential for acouting electrostaitc interactions in salt averaged (mean-field) manner.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    r: Distance between two particles (Å)</span>
+<span class="sd">    kappa: screening constant (inverse of screening length)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">kappa</span><span class="o">*</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">r</span>
+
+<span class="k">def</span> <span class="nf">E_coul</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="n">r</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">kappa</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_lj</span><span class="p">(</span><span class="n">kappa</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+    
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">E_DH</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">kappa</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;DH&#39;</span><span class="p">])</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "90170c8e050e4df6bce26f657a930bd2"}
+</script></div>
+</div>
+</div>
+</div>
+<div class="section" id="integrating-equations-of-motion">
+<h2>Integrating equations of motion<a class="headerlink" href="#integrating-equations-of-motion" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="no-thanks-euler">
+<h3>No thanks, Euler<a class="headerlink" href="#no-thanks-euler" title="Permalink to this headline">¶</a></h3>
+<p>The simplest integrating scheme for ODEs is the Euler’s method. Given the <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors from the ODE standard form</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d\mathbf{y}}{dt} = \mathbf{f}(t, \mathbf{y})
+\]</div>
+<p>the <strong>Euler rule</strong> amounts to</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d69ad2db-c0be-4723-91d7-a3232b3eb556">
+<span class="eqno">(1)<a class="headerlink" href="#equation-d69ad2db-c0be-4723-91d7-a3232b3eb556" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\mathbf{f}(t, \mathbf{y}) = \frac{d\mathbf{y}(t)}{dt} &amp;\approx \frac{\mathbf{y}(t_{n+1}) - \mathbf{y}(t_n)}{h}\\
+\mathbf{y}_{n+1} &amp;\approx \mathbf{y}_n + h \mathbf{f}(t_n, \mathbf{y}_n) \quad \text{with} \quad \mathbf{y}_n := \mathbf{y}(t_n)
+\end{align}\]</div>
+<p><strong>Much better integrators are known under the names of Runge Kutta, 2nd, 4th, 6th … order</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">euler</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;Euler integrator:</span>
+<span class="sd">    Returns new y at t+h.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">rk2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;Runge-Kutta RK2 midpoint&quot;&quot;&quot;</span>
+    
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">k1</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">k2</span>
+
+<span class="k">def</span> <span class="nf">rk4</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;Runge-Kutta RK4&quot;&quot;&quot;</span>
+    
+    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">k1</span><span class="p">)</span>
+    <span class="n">k3</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">k2</span><span class="p">)</span>
+    <span class="n">k4</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">k3</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="o">/</span><span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="n">k1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">k4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="verlet-algortihm">
+<h3>Verlet algortihm<a class="headerlink" href="#verlet-algortihm" title="Permalink to this headline">¶</a></h3>
+<p><strong>Taylor expansion of position <span class="math notranslate nohighlight">\(\vec{r}(t)\)</span> after timestep <span class="math notranslate nohighlight">\(\Delta t\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[{r(t+\Delta t) = r(t) +v(t+\Delta t) +\frac{1}{2}a \Delta t^2+...}\]</div>
+<div class="math notranslate nohighlight">
+\[r(t-\Delta t) = r(t) -v(t+\Delta t) +\frac{1}{2}a \Delta t^2+...\]</div>
+</div>
+<div class="section" id="basic-verlet-updating-scheme">
+<h3>Basic Verlet updating scheme<a class="headerlink" href="#basic-verlet-updating-scheme" title="Permalink to this headline">¶</a></h3>
+<p><strong>In 1967 Loup Verlet introduced a central difference based algorithm into
+molecular simulations</strong></p>
+<div class="math notranslate nohighlight">
+\[r(t+\Delta t) = 2r(t) - r(t-\Delta t) +a(t) \Delta t^2+O(\Delta t^4)\]</div>
+<div class="math notranslate nohighlight">
+\[ v(t) = \frac{r(t+\Delta t)-r(t-\Delta t)}{2\Delta t} +O(\Delta t^2) \]</div>
+<ul class="simple">
+<li><p>Not how terms of order <span class="math notranslate nohighlight">\(O(\Delta t^3)\)</span> cancel in position giving position an accuracy of order <span class="math notranslate nohighlight">\(O(\Delta t^4)\)</span></p></li>
+<li><p>Note how to update position we need positing in the past at two different time points</p></li>
+<li><p>How to get acceleration; <span class="math notranslate nohighlight">\(\vec{a} = \frac{\vec{F}}{m}\)</span> We need to compute forces!</p></li>
+</ul>
+<div class="section" id="need-for-a-better-velocity-update-scheme">
+<h4>Need for a better Velocity update scheme<a class="headerlink" href="#need-for-a-better-velocity-update-scheme" title="Permalink to this headline">¶</a></h4>
+<p>While velcotiy does not enter in the positing updating scheme of basic Verlet, we need the velcoity to set the temperature and to start the simulation from initital codnitions! This algorithms has shortcomings such as being of order <span class="math notranslate nohighlight">\(O(\Delta t^2)\)</span> aaccuracy nd dependance on previous step. A better velocity updating scheme has been proposed known as Velocity-verlet which store positions, velocities and accelerations at the same time and which also minimize round-off errors:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{v(t+\Delta t) = v(t)+ \frac{a(t)+a(t+\Delta t)}{2}\Delta t +O(\Delta t^3)}\]</div>
+</div>
+</div>
+<div class="section" id="velocity-verlet-scheme">
+<h3>Velocity Verlet scheme<a class="headerlink" href="#velocity-verlet-scheme" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[r(t+\Delta t) = r(t) + v(t)\Delta t + \frac{a(t)}{2}\Delta t^2 +O(\Delta t^3)\]</div>
+</li>
+</ul>
+<br>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[v(t+\Delta t) = v(t)+ \frac{a(t)+a(t+\Delta t)}{2}\Delta t+ O(\Delta t^3)\]</div>
+</li>
+</ul>
+</div>
+<div class="section" id="velocity-verlet-algorithm">
+<h3>Velocity Verlet  Algorithm<a class="headerlink" href="#velocity-verlet-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>The velocity verletequations can be decomposed into four steps:</p>
+<ol class="simple">
+<li><p>Velcoity half-update-1: $<span class="math notranslate nohighlight">\(v(t+\Delta t/2) = v(t)+\frac{1}{2}a(t) \Delta t\)</span>$</p></li>
+<li><p>Position update: $<span class="math notranslate nohighlight">\(r(t+\Delta t)  = r(t) +v(t+\Delta t/2)\Delta t\)</span>$</p></li>
+<li><p>Force/acceleration evalutation: $<span class="math notranslate nohighlight">\(F = -\frac{\partial U(r)}{\partial r}\Big |_{r(t+\Delta t)} = m a(t+\Delta t)\)</span>$</p></li>
+<li><p>Velcoity half-update-2: $<span class="math notranslate nohighlight">\(v(t+\Delta t) = v(t+\Delta t/2)+\frac{1}{2}a(t+\Delta t) \Delta t\)</span>$</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">velv</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;Velocity Verlet</span>
+<span class="sd">    </span>
+<span class="sd">    Low-performance implementation because the force is calculated</span>
+<span class="sd">    twice; should remember the second force calculation and use as</span>
+<span class="sd">    input for the next step.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># 1. Half step velocity</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span> <span class="o">*</span> <span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># 2. Full step position</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">h</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># 3. Force re-eval</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    
+    <span class="c1"># 4. Full step velocity </span>
+    <span class="c1">#NOTE: force evaluation gets used in the the next iteration! Not very efficient</span>
+    <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span> <span class="o">*</span> <span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  
+
+    <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="comparison-of-rk-and-verlet">
+<h3>Comparison of RK and Verlet<a class="headerlink" href="#comparison-of-rk-and-verlet" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39; Define a simple harmonic potential&#39;&#39;&#39;</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="n">pos</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="n">t</span>  <span class="o">=</span> <span class="mi">0</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># Change integration method and h=0.1</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    
+    <span class="n">y</span> <span class="o">=</span> <span class="n">velv</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> 
+    <span class="n">t</span><span class="o">+=</span><span class="n">h</span>
+    
+    <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">vel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="n">pos</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">pos</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">vel</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f4886b88790&gt;]
+</pre></div>
+</div>
+<img alt="../_images/Intro2MD_30_1.png" src="../_images/Intro2MD_30_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="average-properties">
+<h2>Average Properties<a class="headerlink" href="#average-properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ensemble-vs-time-average-and-ergodicity">
+<h3>Ensemble vs time average and ergodicity<a class="headerlink" href="#ensemble-vs-time-average-and-ergodicity" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\langle A \rangle  = \frac{1}{T_{prod}} \int^{T_{eq} +T_{prod}}_{T_{eq}} A(t)\]</div>
+</div>
+<div class="section" id="kinetic-potential-and-total-energies">
+<h3>Kinetic, Potential and Total Energies<a class="headerlink" href="#kinetic-potential-and-total-energies" title="Permalink to this headline">¶</a></h3>
+<p>Energies are flcutuation quantities in the Molecualr dynamics:</p>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[KE(t) = \sum_i \frac{p^2(t)}{2m}\]</div>
+</li>
+<li><div class="math notranslate nohighlight">
+\[PE(t) = \sum_{ij}u_{ij}(r_i(t), r_j(t))\]</div>
+</li>
+<li><div class="math notranslate nohighlight">
+\[E(t) = \sum_i \frac{p^2(t)}{2m} \]</div>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle = \langle KE \rangle +\langle PE \rangle \approx const \]</div>
+</div>
+<div class="section" id="temperature">
+<h3>Temperature<a class="headerlink" href="#temperature" title="Permalink to this headline">¶</a></h3>
+<p>According to equipariting result of equilibrium statistical mechanics in the NVT ensmeble</p>
+<div class="math notranslate nohighlight">
+\[\langle \sum_i \frac{p^2(t)}{2m} \rangle =\frac{3 }{2}N  k_B T\]</div>
+<div class="math notranslate nohighlight">
+\[T_t = \frac{2}{3 N k_B} \langle KE \rangle_t \]</div>
+</div>
+<div class="section" id="pressure">
+<h3>Pressure<a class="headerlink" href="#pressure" title="Permalink to this headline">¶</a></h3>
+<p>The microscopic expression for the pressure can be derived through mechanica considerations:</p>
+<div class="math notranslate nohighlight">
+\[P = \frac{1}{3V} \sum^N_i \Big [\frac{p^2_i}{m} +\vec{F}_i(r) \cdot \vec{r}_i(t) \Big ]\]</div>
+</div>
+</div>
+<div class="section" id="molecular-dynaamics-of-classical-harmonic-oscillator">
+<h2>Molecular Dynaamics of Classical Harmonic Oscillator<a class="headerlink" href="#molecular-dynaamics-of-classical-harmonic-oscillator" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ho_en_force</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    
+    <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">force</span>  <span class="o">=</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="n">force</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_harm_force</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="n">energy</span><span class="p">,</span> <span class="n">force</span> <span class="o">=</span> <span class="n">ho_en_force</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> 
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;$U(x)$&#39;</span><span class="p">,</span> <span class="s1">&#39;$F=-\partial_x U(x)$&#39;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "247446b43e3e48bf929e302863acb236"}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ho_xv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    
+    <span class="n">x_t</span> <span class="o">=</span>  <span class="n">A</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="n">phi</span><span class="p">)</span>
+    
+    <span class="n">v_t</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span><span class="o">*</span><span class="n">omega</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">omega</span><span class="o">*</span><span class="n">t</span><span class="o">+</span><span class="n">phi</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">x_t</span><span class="p">,</span> <span class="n">v_t</span>
+
+<span class="k">def</span> <span class="nf">plot_ho_xv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="n">x_t</span><span class="p">,</span> <span class="n">v_t</span> <span class="o">=</span> <span class="n">ho_xv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span> 
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_t</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v_t</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;x(t)&#39;</span><span class="p">,</span><span class="s1">&#39;v(t)&#39;</span><span class="p">])</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">v_t</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">omega</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_ho_xv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">phi</span><span class="p">):</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="n">x_t</span><span class="p">,</span> <span class="n">v_t</span> <span class="o">=</span> <span class="n">ho_xv</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span> 
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">x_t</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">v_t</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;x(t)&#39;</span><span class="p">,</span><span class="s1">&#39;v(t)&#39;</span><span class="p">])</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_t</span><span class="p">,</span> <span class="n">v_t</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "88ea1f850a424daca148da36c14ed0e9"}
+</script></div>
+</div>
+<div class="section" id="molecualr-dynamics-of-harmonic-oscillator-nve">
+<h3>Molecualr Dynamics of Harmonic oscillator (NVE)<a class="headerlink" href="#molecualr-dynamics-of-harmonic-oscillator-nve" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">md_nve_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">en_force</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;Minimalistic MD code </span>
+<span class="sd">    applied to a harmonic oscillator&#39;&#39;&#39;</span>
+    
+    <span class="n">times</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">KE</span><span class="p">,</span> <span class="n">PE</span>  <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    
+    <span class="c1">#Intialize force</span>
+    <span class="n">pe</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">en_force</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>  
+    
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">t_max</span><span class="o">/</span><span class="n">dt</span><span class="p">)):</span>
+        
+        <span class="c1">#1. Half update velocity</span>
+        <span class="n">v</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">F</span><span class="o">*</span><span class="n">dt</span>
+        
+        <span class="c1">#2. Update the positions</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">dt</span><span class="o">*</span><span class="n">v</span> 
+        
+        <span class="c1">#3. Re-compute the energy and force</span>
+        <span class="n">pe</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">en_force</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        
+        <span class="c1">#4. Update velocity</span>
+        <span class="n">v</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">F</span><span class="o">*</span><span class="n">dt</span>
+            
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+        
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">%</span><span class="k">freq</span> == 0:
+            
+            <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">vel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">KE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="p">),</span> <span class="n">PE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pe</span><span class="p">)</span>    
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">KE</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">PE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E_tot</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># Exact value of total energy, let&#39;s see how MD preserves it</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">E_tot</span><span class="o">/</span><span class="n">k</span><span class="p">)</span>
+<span class="n">v0</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1">#let&#39;s set a good timestep based on dt = tau/100 where tau=2 pi/ omega</span>
+<span class="n">omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">omega</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">tau</span><span class="o">/</span><span class="mf">100.0</span>
+
+<span class="n">t_max</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">freq</span>  <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">times</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">KE</span><span class="p">,</span> <span class="n">PE</span> <span class="o">=</span> <span class="n">md_nve_1d</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ho_en_force</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="mi">40</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro2MD_45_0.png" src="../_images/Intro2MD_45_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="molecualr-dynamics-of-harmonic-oscillator-nvt">
+<h3>Molecualr Dynamics of Harmonic oscillator (NVT)<a class="headerlink" href="#molecualr-dynamics-of-harmonic-oscillator-nvt" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="langevin-equation">
+<h3>Langevin equation<a class="headerlink" href="#langevin-equation" title="Permalink to this headline">¶</a></h3>
+<p><strong>Newton: force  = gradient of energy landscape</strong></p>
+<div class="math notranslate nohighlight">
+\[F =  m \ddot{x} = -\nabla_x U\]</div>
+<p><strong>Langevin: force = friction (dissipation) + noise (fluctuation) on top of energy landscape</strong></p>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[F = m \ddot{x} = -\nabla_x U - \lambda \dot{x} + \eta(t)\]</div>
+</li>
+</ul>
+<p><strong>Overdamped Langevin  <span class="math notranslate nohighlight">\(m\dot{v} =0\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[ \lambda \dot{x} = \nabla_x U + \eta(t)\]</div>
+<p><strong>Fluctuation-dissipation theorem</strong></p>
+<ul>
+<li><div class="math notranslate nohighlight">
+\[\langle \eta(t) \eta(t') \rangle = 2\lambda k_B T \delta(t-t')\]</div>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ v(t_0+t) = v(t_0)e^{-\lambda  t} + (1-e^{-2\gamma t})^{1/2} (k_B T)^{1/2} \cdot N(0,1)\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">langevin_md_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">kBT</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">en_force</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;Langevin dynamics applied to 1D potentials</span>
+<span class="sd">    Using integration scheme known as BA-O-AB.</span>
+<span class="sd">    INPUT: Any 1D function with its parameters</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">times</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">KE</span><span class="p">,</span> <span class="n">PE</span>  <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>  
+    
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">t_max</span><span class="o">/</span><span class="n">dt</span><span class="p">)):</span>
+        
+        <span class="c1">#B-step</span>
+        <span class="n">pe</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">en_force</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">+=</span> <span class="n">F</span><span class="o">*</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span>
+        
+        <span class="c1">#A-step</span>
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">v</span><span class="o">*</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span>
+
+        <span class="c1">#O-step</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">gamma</span><span class="o">*</span><span class="n">dt</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">kBT</span><span class="p">)</span> <span class="o">*</span> <span class="n">normal</span><span class="p">()</span>
+        
+        <span class="c1">#A-step</span>
+        <span class="n">x</span> <span class="o">+=</span>  <span class="n">v</span><span class="o">*</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span>
+        
+        <span class="c1">#B-step</span>
+        <span class="n">pe</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="n">en_force</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">+=</span>  <span class="n">F</span><span class="o">*</span><span class="n">dt</span><span class="o">/</span><span class="mi">2</span>
+        
+        <span class="c1">### Save output</span>
+        <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">%</span><span class="k">freq</span> == 0:
+            
+            <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">vel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">KE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="p">),</span> <span class="n">PE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pe</span><span class="p">)</span>    
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">KE</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">PE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ininital conditions</span>
+<span class="n">x</span>     <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">v</span>     <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="c1"># Input parameters of simulation</span>
+<span class="n">kBT</span>   <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">dt</span>    <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">t_max</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">freq</span>  <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">times</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">KE</span><span class="p">,</span> <span class="n">PE</span> <span class="o">=</span> <span class="n">langevin_md_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">kBT</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">ho_en_force</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gaussian_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">kBT</span><span class="p">):</span> <span class="k">return</span>  <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">kBT</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">kBT</span><span class="o">/</span><span class="n">k</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">gaussian_v</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">kBT</span><span class="p">):</span>    <span class="k">return</span>  <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">kBT</span><span class="p">))</span>  <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">kBT</span><span class="p">)</span> 
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gaussian_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">kBT</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> 
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">gaussian_v</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">kBT</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2300</span><span class="o">/</span><span class="mf">2225769335.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="mi">50</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> 
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gaussian_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">kBT</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">inner</span><span class="nt">(ax, data, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1410</span>     <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1411</span>         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1412</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">sanitize_sequence</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1413</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1414</span>         <span class="n">bound</span> <span class="o">=</span> <span class="n">new_sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/matplotlib/axes/_axes.py</span> in <span class="ni">hist</span><span class="nt">(self, x, bins, range, density, weights, cumulative, bottom, histtype, align, orientation, rwidth, log, color, label, stacked, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6789</span>             <span class="k">if</span> <span class="n">patch</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6790</span>                 <span class="n">p</span> <span class="o">=</span> <span class="n">patch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="ne">-&gt; </span><span class="mi">6791</span>                 <span class="n">p</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">6792</span>                 <span class="k">if</span> <span class="n">lbl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">6793</span>                     <span class="n">p</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">lbl</span><span class="p">)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.12/x64/lib/python3.7/site-packages/matplotlib/artist.py</span> in <span class="ni">update</span><span class="nt">(self, props)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1062</span>                     <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;set_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1063</span>                     <span class="k">if</span> <span class="ow">not</span> <span class="n">callable</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1064</span>                         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">!r}</span><span class="s2"> object &quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1065</span>                                              <span class="sa">f</span><span class="s2">&quot;has no property </span><span class="si">{</span><span class="n">k</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1066</span>                     <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+
+<span class="ne">AttributeError</span>: &#39;Rectangle&#39; object has no property &#39;normed&#39;
+</pre></div>
+</div>
+<img alt="../_images/Intro2MD_51_1.png" src="../_images/Intro2MD_51_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="double-well-potential">
+<h3>Double well potential<a class="headerlink" href="#double-well-potential" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">double_well</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+    
+    <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="n">a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">force</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">a</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="n">force</span>
+
+<span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">a</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">plot_harm_force</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="n">energy</span><span class="p">,</span> <span class="n">force</span> <span class="o">=</span> <span class="n">double_well</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> 
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;$U(x)$&#39;</span><span class="p">,</span> <span class="s1">&#39;$F=-\partial_x U(x)$&#39;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "3f7e9ad1f3544c298ccf9c480635a5b8", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ininital conditions</span>
+<span class="n">x</span>     <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">v</span>     <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="c1"># Input parameters of simulation</span>
+<span class="n">kBT</span>   <span class="o">=</span> <span class="mi">5</span> <span class="c1"># vary this</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># vary this</span>
+
+<span class="n">dt</span>    <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">t_max</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">freq</span>  <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">times</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">KE</span><span class="p">,</span> <span class="n">PE</span> <span class="o">=</span> <span class="n">langevin_md_1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">kBT</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">double_well</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="mi">50</span><span class="p">)</span>
+
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">normed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="c1">#ax[0].plot(x, gaussian_x(x, k, kBT), lw=3)</span>
+
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro2MD_55_0.png" src="../_images/Intro2MD_55_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="problems">
+<h3>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="d-harmonic-potential">
+<h4>1D harmonic potential<a class="headerlink" href="#d-harmonic-potential" title="Permalink to this headline">¶</a></h4>
+<p>Given a 1D potential <span class="math notranslate nohighlight">\(U(x)\)</span> write code to carry out  molecular dynamics</p>
+<div class="math notranslate nohighlight">
+\[U(x) = Ax^2 +B x^3 + C x^4\]</div>
+<ul class="simple">
+<li><p>Using langevin dynamics to simulate the system in NVT ensemble.</p></li>
+<li><p>Your input should read in A, B, C parameters, starting point and velocity, timestep and number of iterations, kBT, gamma.</p></li>
+<li><p>Output should be the positions which should then be histogrammed to obtain probability distribution</p></li>
+<li><p>Use A=-1, B = 0.0, C = 1.0. Try various initial positions.  Look for some interesting regions to sample by adjusting initital positions.</p></li>
+<li><p>Use A=-1, B = -1, C = 1.0. Again try various initial strting positions.</p></li>
+</ul>
+</div>
+<div class="section" id="beads-and-springs">
+<h4>Beads and springs<a class="headerlink" href="#beads-and-springs" title="Permalink to this headline">¶</a></h4>
+<p>Simulate a chain of harmonic oscillators with the following potential energy function</p>
+<div class="math notranslate nohighlight">
+\[U(x_1, x_2, ...) = \sum_j \frac{p^2_j}{2m} + \frac{1}{2} K \sum_j (x_j -x_{j-1})^2\]</div>
+<ul class="simple">
+<li><p>Take the particle at <span class="math notranslate nohighlight">\(x_0 = 0\)</span> fixed. Carry out constant T MD using langevin dynamics</p></li>
+<li><p>Try N = 2, N=10 particles and obtain equilibrium distributions of <span class="math notranslate nohighlight">\(x_{j}-x_{j-1}\)</span> for various temperatures.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "DPotoyan/Statmech4ChemBio",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./7_fluids"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="mc_lj.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">MC simulations of fluids</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="md_lj.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">MD simulations of fluids</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Davit Potoyan<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
