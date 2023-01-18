@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>NVE &#8212; Statistical Mechanics for Chemistry and Biology</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,12 +37,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -55,7 +55,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="NVT" href="nvt.html" />
@@ -67,7 +66,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -76,9 +89,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -96,14 +110,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../index.html">
-   About
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Getting Started
  </span>
@@ -362,99 +377,200 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/3_ensembles/nve.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/3_ensembles/nve.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/3_ensembles/nve.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        <button type="button" class="btn btn-secondary topbarbtn"
-            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
-                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/3_ensembles/nve.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/3_ensembles/nve.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/3_ensembles/nve.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-the-relationship-between-statmech-and-thermo">
    What is the relationship between StatMech and Thermo?
@@ -598,12 +714,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>NVE</h1>
@@ -763,13 +878,14 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="nve">
-<h1>NVE<a class="headerlink" href="#nve" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="what-is-the-relationship-between-statmech-and-thermo">
-<h2>What is the relationship between StatMech and Thermo?<a class="headerlink" href="#what-is-the-relationship-between-statmech-and-thermo" title="Permalink to this headline">¶</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="nve">
+<h1>NVE<a class="headerlink" href="#nve" title="Permalink to this headline">#</a></h1>
+<section id="what-is-the-relationship-between-statmech-and-thermo">
+<h2>What is the relationship between StatMech and Thermo?<a class="headerlink" href="#what-is-the-relationship-between-statmech-and-thermo" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Statistical mechanics establishes a bridge between the <strong>macroscopic thermodynamics</strong> and <strong>microscopic dynamics</strong>. The strength of this bridge rests on probabilsitic arguments, in partcular on law of large numbers, and large deviation theory.</p></li>
 <li><p>The connection between macro and micro worlds is established through Entropy via Boltzman/Gibbs equation</p></li>
@@ -778,8 +894,8 @@ const thebe_selector_output = ".output, .cell_output"
 <blockquote>
 <div><p>Thermodynamics while agnostic to atomic details is an exact theory. Predictions of statistical mechanicss must obey the rules of thermodynamics and often thermodynamic arguments (second law, linear scaling of extensive quantities, Gibbs-duhem equation) are used to validate statistical mechanics claims.</p>
 </div></blockquote>
-<div class="section" id="boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamic-of-matter-in-eqilibrium">
-<h3>Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamic of matter in eqilibrium<a class="headerlink" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamic-of-matter-in-eqilibrium" title="Permalink to this headline">¶</a></h3>
+<section id="boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamic-of-matter-in-eqilibrium">
+<h3>Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamic of matter in eqilibrium<a class="headerlink" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamic-of-matter-in-eqilibrium" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\boxed{S = k_B log \Omega}\]</div>
 <ul class="simple">
@@ -787,23 +903,23 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><span class="math notranslate nohighlight">\(k_B =1.380649\cdot 10^{-23} J/K\)</span>,  Boltzmann’s constant</p></li>
 <li><p><span class="math notranslate nohighlight">\(\Omega\)</span> quantifies number of micro-states <strong>consistent with a macrostate of our system</strong>. For instance number of states that in their totallity still have macroparameters <span class="math notranslate nohighlight">\(N, V, E\)</span></p></li>
 </ul>
-</div>
-<div class="section" id="lessons-we-learned-from-thermodynamics-that-can-now-be-understood-in-new-light">
-<h3>Lessons we learned from thermodynamics that can now be understood in new light<a class="headerlink" href="#lessons-we-learned-from-thermodynamics-that-can-now-be-understood-in-new-light" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="lessons-we-learned-from-thermodynamics-that-can-now-be-understood-in-new-light">
+<h3>Lessons we learned from thermodynamics that can now be understood in new light<a class="headerlink" href="#lessons-we-learned-from-thermodynamics-that-can-now-be-understood-in-new-light" title="Permalink to this headline">#</a></h3>
 <ol class="simple">
 <li><p>Isolated systems eventually come to a terminal state of <strong>equilibrium.</strong>  System stays in equilibrium “forver” untill pertrubed from the outside.</p></li>
 <li><p>A few macrosocpic variables are sufficient for describing equilibirum, e.g <span class="math notranslate nohighlight">\((E,N,V)\)</span></p></li>
 <li><p>An extensive thermodynamic variable called entropy <span class="math notranslate nohighlight">\(S(E, N, V)\)</span> exists which is a globally concave funcion and predicts thermodynamic equilibrium as a state with vanishing entropy variation <span class="math notranslate nohighlight">\(\delta S=0\)</span></p></li>
 <li><p>Thermodynamic space is structured into non-crossing adiabats corresponding to <span class="math notranslate nohighlight">\(S=const\)</span> planes on qhich system can be transformed quasistatically and reversibly (e.g stay in equilibrium). Leaving the adiabatic plane is posisble only through heat exchange (cooling or heating)!</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="how-to-quantify-the-micro-states-omega-for-an-isolated-system">
-<h2>How to quantify the micro states <span class="math notranslate nohighlight">\(\Omega\)</span>  for an isolated system?<a class="headerlink" href="#how-to-quantify-the-micro-states-omega-for-an-isolated-system" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="microstates-in-qm">
-<h3>Microstates in QM<a class="headerlink" href="#microstates-in-qm" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="a-collection-of-up-down-spins">
-<h4>A collection of up/down spins<a class="headerlink" href="#a-collection-of-up-down-spins" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="how-to-quantify-the-micro-states-omega-for-an-isolated-system">
+<h2>How to quantify the micro states <span class="math notranslate nohighlight">\(\Omega\)</span>  for an isolated system?<a class="headerlink" href="#how-to-quantify-the-micro-states-omega-for-an-isolated-system" title="Permalink to this headline">#</a></h2>
+<section id="microstates-in-qm">
+<h3>Microstates in QM<a class="headerlink" href="#microstates-in-qm" title="Permalink to this headline">#</a></h3>
+<section id="a-collection-of-up-down-spins">
+<h4>A collection of up/down spins<a class="headerlink" href="#a-collection-of-up-down-spins" title="Permalink to this headline">#</a></h4>
 <ol class="simple">
 <li><p>Consider a spin-1 particle with spin <span class="math notranslate nohighlight">\(|\uparrow \rangle\)</span> and <span class="math notranslate nohighlight">\(|\downarrow\rangle\)</span>, hence this is a two state system.</p></li>
 </ol>
@@ -821,10 +937,10 @@ const thebe_selector_output = ".output, .cell_output"
 <blockquote>
 <div><p>Compare this expression to an expression for partitioning gas molecules into left and right regions of a container. Or to a porblme of random walk after N states. Notice any patterns :)</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="a-collection-of-harmonic-oscilaltors">
-<h3>A collection of harmonic oscilaltors<a class="headerlink" href="#a-collection-of-harmonic-oscilaltors" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="a-collection-of-harmonic-oscilaltors">
+<h3>A collection of harmonic oscilaltors<a class="headerlink" href="#a-collection-of-harmonic-oscilaltors" title="Permalink to this headline">#</a></h3>
 <ol class="simple">
 <li><p>1D harmonic oscillator <span class="math notranslate nohighlight">\(E_n = \hbar \omega (n+1/2)\)</span> with <span class="math notranslate nohighlight">\(n = 0, 1, 2, ...\)</span> This system has infinitely many but still countable number of states.</p></li>
 <li><p>Now consider  N harmonic oscillators. This can describe N atoms in a crystal, each vibrating around its mechanical equilibrium state independet of each other(“Einstein model”). Although these are infinitely many states in this system they can be counted easily.</p></li>
@@ -838,9 +954,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p>The question is answered by partitioning M quanta of energy among N oscillators.  This is slightly different from previous example. The partitioning is analogus to putting M ideantical balls into N identical boxes.</p>
 <div class="math notranslate nohighlight">
 \[\boxed{\Omega(E,N) = \frac{(N+M-1)!}{M!(N-1)!} = \frac{(E/\hbar\omega+N/2-1)!}{(E/\hbar\omega-N/2)!(N-1)!}}\]</div>
-</div>
-<div class="section" id="a-collection-of-particles-in-a-box">
-<h3>A collection of particles in a box<a class="headerlink" href="#a-collection-of-particles-in-a-box" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="a-collection-of-particles-in-a-box">
+<h3>A collection of particles in a box<a class="headerlink" href="#a-collection-of-particles-in-a-box" title="Permalink to this headline">#</a></h3>
 <ol class="simple">
 <li><p>A 1 particle in a box. <span class="math notranslate nohighlight">\(E_n = \frac{\hbar^2 \pi^2}{2mL^2}(n^2_x+n^2_y+n^2_z)\)</span>.</p></li>
 <li><p>Now consider N particles in a box. How many states can system have?</p></li>
@@ -850,9 +966,9 @@ const thebe_selector_output = ".output, .cell_output"
 </div></blockquote>
 <div class="math notranslate nohighlight">
 \[\sum_{E=const} 1 = \int_{E=const} dn\]</div>
-</div>
-<div class="section" id="microstates-in-quasi-classical-mechanics">
-<h3>Microstates in (Quasi)Classical Mechanics.<a class="headerlink" href="#microstates-in-quasi-classical-mechanics" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="microstates-in-quasi-classical-mechanics">
+<h3>Microstates in (Quasi)Classical Mechanics.<a class="headerlink" href="#microstates-in-quasi-classical-mechanics" title="Permalink to this headline">#</a></h3>
 <p>In Quantum mechanics we simply count the number of states which is natural and easy due to discretness of energy levels.<br />
 The question now is how to deal with the classical systems which have continuous energy functions?
 We clarify this issue using the example of 1D harmonic oscillator with an objective to find an expression coinciding with QM description.</p>
@@ -876,9 +992,9 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <p>Generalizing the epxression for a collection of objects with 3N degrees of freedom we obtain:</p>
 <div class="math notranslate nohighlight">
 \[\boxed{N_E = \frac{1}{h^{3N}}\int_{H(p^N,q^N)\leq E} dp^N dq^N}\]</div>
-</div>
-<div class="section" id="density-of-states-is-more-convenient-to-use-than-number-of-states">
-<h3>Density of States is more convenient to use than number of states<a class="headerlink" href="#density-of-states-is-more-convenient-to-use-than-number-of-states" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="density-of-states-is-more-convenient-to-use-than-number-of-states">
+<h3>Density of States is more convenient to use than number of states<a class="headerlink" href="#density-of-states-is-more-convenient-to-use-than-number-of-states" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\Omega(E) =\frac{d N(E)}{d E}\]</div>
 <p>We will show that for macroscopic system it is convenient to work with denisty of states because number of states in outer thin shell <span class="math notranslate nohighlight">\(\Delta E\)</span> is an excellent approximation to total number of states</p>
@@ -892,27 +1008,27 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <blockquote>
 <div><p>Where <span class="math notranslate nohighlight">\(\theta(x-a)\)</span> is a step function (Heviside function) derivative of which gives rise to delta function <span class="math notranslate nohighlight">\(\delta(x) =\frac{d}{dx}\theta(x-a)\)</span></p>
 </div></blockquote>
-</div>
-<div class="section" id="watch-out-for-n-the-indistingushability-of-the-particles-has-consequences-for-thermodynamics">
-<h3>Watch out for N! The indistingushability of the particles has consequences for thermodynamics<a class="headerlink" href="#watch-out-for-n-the-indistingushability-of-the-particles-has-consequences-for-thermodynamics" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="watch-out-for-n-the-indistingushability-of-the-particles-has-consequences-for-thermodynamics">
+<h3>Watch out for N! The indistingushability of the particles has consequences for thermodynamics<a class="headerlink" href="#watch-out-for-n-the-indistingushability-of-the-particles-has-consequences-for-thermodynamics" title="Permalink to this headline">#</a></h3>
 <p>Since we are using classical mechanics where all particles can be distingushed and labeled, we need to correct for this artifact if we want to study large N collection of identical atoms and molecules:</p>
 <div class="math notranslate nohighlight">
 \[\boxed{\Omega(E) = \frac{1}{N! h^{3N}}\int_{p^N,q^N} dp^N dq^N \delta(H(p,q) -E)}\]</div>
-</div>
-</div>
-<div class="section" id="microcanonical-ensemble-and-equal-a-priori-probabilities-postulate">
-<h2>Microcanonical Ensemble and “equal a priori probabilities” postulate.<a class="headerlink" href="#microcanonical-ensemble-and-equal-a-priori-probabilities-postulate" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="microcanonical-ensemble-and-equal-a-priori-probabilities-postulate">
+<h2>Microcanonical Ensemble and “equal a priori probabilities” postulate.<a class="headerlink" href="#microcanonical-ensemble-and-equal-a-priori-probabilities-postulate" title="Permalink to this headline">#</a></h2>
 <div class="math notranslate nohighlight">
 \[\boxed{P(E) = \frac{1}{\Omega(E)}=const}\]</div>
 <ul class="simple">
 <li><p>Each state in the <span class="math notranslate nohighlight">\(NVE\)</span> ensemble is sampled with equal probabilities. Why? Becasue no microstate has any more priviledged status than the other.</p></li>
 <li><p>The task of quantifying probabilities in the thermodynamic processes under <span class="math notranslate nohighlight">\(NVE\)</span> conditions reduces to quantifying changes in the number(density) of states.</p></li>
 </ul>
-</div>
-<div class="section" id="examples-of-using-nve-ensemble-to-derive-fundmental-equation">
-<h2>Examples of using NVE ensemble to derive fundmental equation<a class="headerlink" href="#examples-of-using-nve-ensemble-to-derive-fundmental-equation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="example-1-a-three-spin-state">
-<h3>Example-1: A three spin state<a class="headerlink" href="#example-1-a-three-spin-state" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="examples-of-using-nve-ensemble-to-derive-fundmental-equation">
+<h2>Examples of using NVE ensemble to derive fundmental equation<a class="headerlink" href="#examples-of-using-nve-ensemble-to-derive-fundmental-equation" title="Permalink to this headline">#</a></h2>
+<section id="example-1-a-three-spin-state">
+<h3>Example-1: A three spin state<a class="headerlink" href="#example-1-a-three-spin-state" title="Permalink to this headline">#</a></h3>
 <p>3 spin state can adopt many different states with different energies.</p>
 <p>If we know the total energy is <span class="math notranslate nohighlight">\(E = -\mu H\)</span> Then we have microcanonican ensemble with three states</p>
 <div class="math notranslate nohighlight">
@@ -924,9 +1040,9 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <blockquote>
 <div><p>Can you write down entropy for other energy values?</p>
 </div></blockquote>
-</div>
-<div class="section" id="example-2-monoatomic-ideal-gas">
-<h3>Example-2: Monoatomic ideal gas<a class="headerlink" href="#example-2-monoatomic-ideal-gas" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-2-monoatomic-ideal-gas">
+<h3>Example-2: Monoatomic ideal gas<a class="headerlink" href="#example-2-monoatomic-ideal-gas" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[H(p,q) =\frac{p^2}{2m} = E\]</div>
 <div class="math notranslate nohighlight">
@@ -941,9 +1057,9 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <br></p>
 <div class="math notranslate nohighlight">
 \[\delta V(R) = V(R) -V(R-\delta R) = C [R^D - (R-\delta R)^D] = CR^D [1-(1- (\delta R/R)^D)] = CR^D = V(R)\]</div>
-</div>
-<div class="section" id="classical-density-of-states-of-an-ideal-gas">
-<h3>Classical density of states of an ideal gas<a class="headerlink" href="#classical-density-of-states-of-an-ideal-gas" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="classical-density-of-states-of-an-ideal-gas">
+<h3>Classical density of states of an ideal gas<a class="headerlink" href="#classical-density-of-states-of-an-ideal-gas" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\boxed{\Omega(E) = \frac{V^N}{h^{3N} N!} \cdot \frac{(2m\pi E)^{3N/2}}{(3N/2)!}}\]</div>
 <div class="math notranslate nohighlight">
@@ -954,9 +1070,9 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <li><p><span class="math notranslate nohighlight">\(\lambda = \Big(\frac{3h^2 N}{4\pi m E}\Big)^{1/2}\)</span> thermal de Broglie wavelength.</p></li>
 <li><p>This result know as “Sackur Tetrode equation” was known long before statistical mechanics.</p></li>
 </ul>
-</div>
-<div class="section" id="quantum-density-of-states-of-an-ideal-gas">
-<h3>Quantum density of states of an ideal gas<a class="headerlink" href="#quantum-density-of-states-of-an-ideal-gas" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="quantum-density-of-states-of-an-ideal-gas">
+<h3>Quantum density of states of an ideal gas<a class="headerlink" href="#quantum-density-of-states-of-an-ideal-gas" title="Permalink to this headline">#</a></h3>
 <p><img alt="" src="../_images/pib-states.png" /></p>
 <div class="math notranslate nohighlight">
 \[E({\bf n}) = \frac{h^2}{8mL^2} {\bf n^2}\]</div>
@@ -965,9 +1081,9 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 </ul>
 <div class="math notranslate nohighlight">
 \[\Omega(N,V, E) = \int_{E(n)=E} dn = \frac{C_{3N-1}}{2^{3N}} \int \delta \Big(\frac{(8mE)^{1/2}L}{h}-{\bf n}  \Big) d {\bf n} \approx \frac{V^N E^{3N/2}}{h^{3N}}\]</div>
-</div>
-<div class="section" id="thermal-mechanical-and-chemical-equilibrium">
-<h3>Thermal, Mechanical and chemical equilibrium<a class="headerlink" href="#thermal-mechanical-and-chemical-equilibrium" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="thermal-mechanical-and-chemical-equilibrium">
+<h3>Thermal, Mechanical and chemical equilibrium<a class="headerlink" href="#thermal-mechanical-and-chemical-equilibrium" title="Permalink to this headline">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\Omega(E) = \sum_{E_1} \Omega_1(E_1) \Omega_2 (E-E_1)\]</div>
 <div class="math notranslate nohighlight">
@@ -975,16 +1091,16 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <p>Now consider a probability <span class="math notranslate nohighlight">\(P(E_1) = \Omega_1(E_1) \Omega_2 (E-E_1)\)</span> for a one particular energy partitioning among systems with <span class="math notranslate nohighlight">\(E_1\)</span> going to first subsystem and <span class="math notranslate nohighlight">\(E-E_1\)</span> to second.</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial logP(E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{\partial log\Omega_1(E_1)}{\partial E_1} - \frac{\partial log\Omega(E_2)}{\partial E_2}=0\]</div>
-<div class="section" id="example-thermal-contact-between-two-ideal-gases">
-<h4>Example: thermal contact between two ideal gases<a class="headerlink" href="#example-thermal-contact-between-two-ideal-gases" title="Permalink to this headline">¶</a></h4>
+<section id="example-thermal-contact-between-two-ideal-gases">
+<h4>Example: thermal contact between two ideal gases<a class="headerlink" href="#example-thermal-contact-between-two-ideal-gases" title="Permalink to this headline">#</a></h4>
 <p>Recall that for ideal gas we have <span class="math notranslate nohighlight">\(\Omega(E) = C V^N E^{3/2 N}\)</span>.  Therefore for an ideal gas we will have:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial logP(E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{3}{2}\frac{N_1}{U_1} - \frac{3}{2}\frac{N_2}{U_2} = 0\]</div>
 <p>Using definition of entropy we get the most probable value of energy <span class="math notranslate nohighlight">\((U_1)\)</span> corresponding to the equilibirum state
 $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac{N_1}{U_1} = \frac{3}{2}\frac{N_2}{U_2}\)</span>$</p>
-</div>
-<div class="section" id="equations-of-state-for-ideal-gas">
-<h4>Equations of state for ideal gas<a class="headerlink" href="#equations-of-state-for-ideal-gas" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="equations-of-state-for-ideal-gas">
+<h4>Equations of state for ideal gas<a class="headerlink" href="#equations-of-state-for-ideal-gas" title="Permalink to this headline">#</a></h4>
 <div class="math notranslate nohighlight">
 \[\frac{1}{T} = \frac{\partial S}{\partial E} = \frac{3}{2}k_B \frac{N}{E}\]</div>
 <br>
@@ -993,22 +1109,22 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
 <br>
 <div class="math notranslate nohighlight">
 \[\frac{\mu}{T} = -\frac{\partial S}{\partial N} = k_B T \cdot log \frac{N}{V} \lambda^3\]</div>
-</div>
-</div>
-<div class="section" id="quasistatic-process-and-irreversibility">
-<h3>Quasistatic process and Irreversibility<a class="headerlink" href="#quasistatic-process-and-irreversibility" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="quasistatic-process-and-irreversibility">
+<h3>Quasistatic process and Irreversibility<a class="headerlink" href="#quasistatic-process-and-irreversibility" title="Permalink to this headline">#</a></h3>
 <p>From the NVE esnsemble reasoning we can now state that quasistatic process corresponds to process which does not change in the number of microstates. That is removal of a constraint keeps the “volume” of microstates intact.</p>
 <div class="math notranslate nohighlight">
 \[\Delta S = k_B log \frac{\Omega_f}{\Omega_i} = 0\]</div>
 <p>On the other hand once the number of microstates grows upon removal of a constraint then re-instating the constraint will not shrink the “volume” of microstate space.</p>
 <div class="math notranslate nohighlight">
 \[\Delta S = k_B log \frac{\Omega_f}{\Omega_i} &gt; 0\]</div>
-</div>
-<div class="section" id="problems">
-<h3>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h3>
-</div>
-<div class="section" id="shottky-defects">
-<h3>Shottky defects<a class="headerlink" href="#shottky-defects" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="problems">
+<h3>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="shottky-defects">
+<h3>Shottky defects<a class="headerlink" href="#shottky-defects" title="Permalink to this headline">#</a></h3>
 <p>Schotky defects are vacancies in a lattice of atoms. Creating a single vacancy costs an energy <span class="math notranslate nohighlight">\(\epsilon\)</span>.  Consider a lattice with <span class="math notranslate nohighlight">\(N\)</span> atoms and <span class="math notranslate nohighlight">\(n\)</span> vacacnies. In this model the total energy is solely a function of defects: <span class="math notranslate nohighlight">\(E=n\epsilon\)</span></p>
 <ul class="simple">
 <li><p>Write down number of states and compute the entropy via Boltzmann formula. Plot number of states as a function of energy. You can use log of number of states for plotting.</p></li>
@@ -1016,8 +1132,8 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
 <li><p>How would the total energy depend on temperature <span class="math notranslate nohighlight">\(T\)</span>. Derive expression for the high temeprature limit (<span class="math notranslate nohighlight">\(\frac{\epsilon}{k_b T} \gg 1\)</span>).</p></li>
 <li><p>Plot total energy as a function of temperature E(T)</p></li>
 </ul>
-<div class="section" id="lattice-gas">
-<h4>Lattice gas<a class="headerlink" href="#lattice-gas" title="Permalink to this headline">¶</a></h4>
+<section id="lattice-gas">
+<h4>Lattice gas<a class="headerlink" href="#lattice-gas" title="Permalink to this headline">#</a></h4>
 <p>Consider a lattice gas of N particles distributed among V cells (with <span class="math notranslate nohighlight">\(N\geq V\)</span>). Suppose that each cell may be either empty or occupied by a single particle. The number of microscopic states of this syste will be given by:</p>
 <div class="math notranslate nohighlight">
 \[\Omega (N, V) = \frac{V!}{N! (V-N)!}\]</div>
@@ -1030,16 +1146,16 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
 </li>
 <li><p>Sketch a graph of <span class="math notranslate nohighlight">\(\mu/T\)</span>, where <span class="math notranslate nohighlight">\(\mu(\rho)\)</span> is a chemical potential as a function of density. Comment on <span class="math notranslate nohighlight">\(\rho\rightarrow 0\)</span> and <span class="math notranslate nohighlight">\(\rho\rightarrow 1\)</span> limits.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="polymer-elasticity">
-<h3>Polymer Elasticity<a class="headerlink" href="#polymer-elasticity" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="polymer-elasticity">
+<h3>Polymer Elasticity<a class="headerlink" href="#polymer-elasticity" title="Permalink to this headline">#</a></h3>
 <blockquote>
 <div><p>Solve the problem 2.7  from the book.</p>
 </div></blockquote>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1063,9 +1179,11 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="phase_space.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1081,24 +1199,28 @@ $<span class="math notranslate nohighlight">\(\frac{1}{k_B T} = \frac{3}{2}\frac
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Davit Potoyan<br/>
+  
+      &copy; Copyright 2021.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Davit Potoyan<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Review of thermodynamics principles &#8212; Statistical Mechanics for Chemistry and Biology</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,20 +20,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -39,12 +37,14 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -55,7 +55,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Legendre transform" href="02_Legendre.html" />
@@ -67,7 +66,21 @@ const thebe_selector_output = ".output, .cell_output"
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -76,9 +89,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -96,14 +110,15 @@ const thebe_selector_output = ".output, .cell_output"
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../index.html">
-   About
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Getting Started
  </span>
@@ -362,99 +377,200 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/2_thermo/01_Thermo.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/2_thermo/01_Thermo.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/2_thermo/01_Thermo.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        <button type="button" class="btn btn-secondary topbarbtn"
-            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
-                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/2_thermo/01_Thermo.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/2_thermo/01_Thermo.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/2_thermo/01_Thermo.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#summary-of-the-key-principles-thermodynamics">
    Summary of the key principles thermodynamics
@@ -583,12 +699,11 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Review of thermodynamics principles</h1>
@@ -733,11 +848,12 @@ const thebe_selector_output = ".output, .cell_output"
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="review-of-thermodynamics-principles">
-<h1>Review of thermodynamics principles<a class="headerlink" href="#review-of-thermodynamics-principles" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="review-of-thermodynamics-principles">
+<h1>Review of thermodynamics principles<a class="headerlink" href="#review-of-thermodynamics-principles" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -752,8 +868,8 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-<div class="section" id="summary-of-the-key-principles-thermodynamics">
-<h2>Summary of the key principles thermodynamics<a class="headerlink" href="#summary-of-the-key-principles-thermodynamics" title="Permalink to this headline">¶</a></h2>
+<section id="summary-of-the-key-principles-thermodynamics">
+<h2>Summary of the key principles thermodynamics<a class="headerlink" href="#summary-of-the-key-principles-thermodynamics" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>Thermodynamics is a <strong>phenomoneological</strong> theory describing transofmrations between macrossytems in equilibrium. Phenomoneological means that the macroscopic phenomena are descibred terms of few quanitites which can be observed and measrued by macroscopic devices without any refernce to microscopic details.</p></li>
 <li><p>The variables one deals in thermodynamics can be classifeid as <strong>extensive</strong> and <strong>intensive</strong>. Former depends on the size of system (volume, number of particles, energy, entropy) the latter is size independent (temperature, pressure, magnetic field, etc). <strong>Extensive variables</strong> are a priviledges set of variables which uniquely define the equilibrium sates. <strong>Intensive variables</strong> are derived from extensive ones and are conjugate pairs to extensive ones. E.g <span class="math notranslate nohighlight">\(V-P\)</span>, <span class="math notranslate nohighlight">\(S-T\)</span>, <span class="math notranslate nohighlight">\(N-\mu\)</span> are conjugate pairs. Conjugate means one can replace extensive variables by intensive variables through legendre transformation.</p></li>
@@ -766,9 +882,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><strong>The Second Law</strong> establishes the directionality of processes.</p></li>
 <li><p><strong>Entropy of adiabatic system can not decrease</strong>. Any change in adiabatic system is accompanied either by entropy increase (non-equilibrium change) or entropy remaining the same (equilibrium-change)</p></li>
 </ol>
-</div>
-<div class="section" id="basic-features-of-macrosystems">
-<h2>Basic features of macrosystems<a class="headerlink" href="#basic-features-of-macrosystems" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="basic-features-of-macrosystems">
+<h2>Basic features of macrosystems<a class="headerlink" href="#basic-features-of-macrosystems" title="Permalink to this headline">#</a></h2>
 <p>Let us list some of the most conspicious features of macroscopic systems consisting of many particles:</p>
 <ul class="simple">
 <li><p><strong>Additivitiy of Energy</strong></p></li>
@@ -781,7 +897,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">U_LJ6_12</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">sig</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Classic 6-12 Lennar Jones Potential</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Classic 6-12 Lennar Jones Potential</span>
 <span class="sd">    r: interatomic distance in units sigma</span>
 <span class="sd">    sigma: atomic/particle size</span>
 <span class="sd">    E: energy in units of epsilon</span>
@@ -790,7 +906,7 @@ const thebe_selector_output = ".output, .cell_output"
     <span class="k">return</span> <span class="mi">4</span><span class="o">*</span><span class="n">eps</span><span class="o">*</span><span class="p">((</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">12</span> <span class="o">-</span> <span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">U_dh</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Debye-Huckel potential modeling screening electorstatic </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Debye-Huckel potential modeling screening electorstatic </span>
 <span class="sd">    interactions between charged particles.</span>
 <span class="sd">    r: interactomic distance</span>
 <span class="sd">    k: screeening constant [1/nm]</span>
@@ -816,14 +932,14 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7feb09907310&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fed33e98710&gt;
 </pre></div>
 </div>
 <img alt="../_images/01_Thermo_7_1.png" src="../_images/01_Thermo_7_1.png" />
 </div>
 </div>
-<div class="section" id="irreversibility">
-<h3>Irreversibility<a class="headerlink" href="#irreversibility" title="Permalink to this headline">¶</a></h3>
+<section id="irreversibility">
+<h3>Irreversibility<a class="headerlink" href="#irreversibility" title="Permalink to this headline">#</a></h3>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Poincar%C3%A9_recurrence_theorem">Poincarre recurrence theorem</a></p>
 <p>If you play bridge long enough you will eventually be dealt any grand-slam hand, not once but several times. A similar thing is true for mechanical systems governed by Newton’s laws, as the French mathematician Henri Poincare (1854-1912) showed with his recurrence theorem in 1890: if the system has a fixed total energy that restricts its dynamics to bounded subsets of its phase space, the system will eventually return as closely as you like to any given initial set of molecular positions and velocities. If the entropy is determined by these variables, then it must also return to its original value, so if it increases during one period of time it must decrease during another.</p>
 <a class="bg-primary reference internal image-reference" href="../_images/recurrence.jpg"><img alt="../_images/recurrence.jpg" class="bg-primary" src="../_images/recurrence.jpg" style="width: 400px;" /></a>
@@ -831,10 +947,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Zermello is right for small systems. A dynamical system will alwasy return to its starting configuration hence irreversibility is not a property of micrsccopic systems.</p></li>
 <li><p>Boltzman is right for large systems becasue a likelihhood of recurrence for macrosystem happening is beyond the lifetime of a universie. Case closed.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="extensive-vs-intensive">
-<h2>Extensive vs Intensive<a class="headerlink" href="#extensive-vs-intensive" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="extensive-vs-intensive">
+<h2>Extensive vs Intensive<a class="headerlink" href="#extensive-vs-intensive" title="Permalink to this headline">#</a></h2>
 <p>The <strong>extensive variables (E,V,N)</strong> are a priviledged set of variables in thermodynamin space becasue:</p>
 <ul class="simple">
 <li><p>Proportional to the size of the system</p></li>
@@ -845,49 +961,49 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="simple">
 <li><p>A glass of water with and without ice cube can both be under 1 atm and 0 C whereas values of energy, entropy volume will be different.</p></li>
 </ul>
-</div>
-<div class="section" id="thermodynamic-coordinates-and-thermodynamic-space">
-<h2>Thermodynamic coordinates and thermodynamic space.<a class="headerlink" href="#thermodynamic-coordinates-and-thermodynamic-space" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="thermodynamic-coordinates-and-thermodynamic-space">
+<h2>Thermodynamic coordinates and thermodynamic space.<a class="headerlink" href="#thermodynamic-coordinates-and-thermodynamic-space" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>State of equilibrium is completely defined as a point in the space of thermodynamic coordinates:  <span class="math notranslate nohighlight">\(E, V, N, S\)</span>. Theese coordinates have a <strong>unique</strong> and well defined values for each equilirbum state irresective to how such state was created.  Weather through violent non-equilibrimu process or calm quasi-static sequence of equilibrou states. This is why the functions of extensive variables <span class="math notranslate nohighlight">\(E(S,V,N)\)</span> or <span class="math notranslate nohighlight">\(S(E,V,N)\)</span> are called <strong>state functions</strong> and their changes are given by differnee between initial or final state only <span class="math notranslate nohighlight">\(\Delta E =E_f -E_i\)</span>, <span class="math notranslate nohighlight">\(\Delta S =S_f -S_i\)</span>. The work <span class="math notranslate nohighlight">\(W\)</span> or heat <span class="math notranslate nohighlight">\(Q\)</span> on the other hand are process dependent characterizing the way  energy is trasnfered to the system and not characterizing equilibrium states itself.</p></li>
 <li><p>Study of thermodynamic processes than boils down to study of transofrmations between equilibium A to equilibrium B in the <strong>thermodynamic space</strong> spanned by thermodynamic coordinates. E.g computing <span class="math notranslate nohighlight">\(\Delta E = E_B - E_A\)</span></p></li>
 <li><p>To compute changes between equilirbum state A and B we construct reversible (read equilirbium) and quasistatic path connecting the two states which allwos writing down exact differntials for state changes.</p></li>
 </ul>
-</div>
-<div class="section" id="reversible-quasistatic-process">
-<h2>Reversible, quasistatic process<a class="headerlink" href="#reversible-quasistatic-process" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="reversible-quasistatic-process">
+<h2>Reversible, quasistatic process<a class="headerlink" href="#reversible-quasistatic-process" title="Permalink to this headline">#</a></h2>
 <a class="bg-primary reference internal image-reference" href="../_images/adiabat.png"><img alt="../_images/adiabat.png" class="bg-primary" src="../_images/adiabat.png" style="width: 400px;" /></a>
-</div>
-<div class="section" id="planks-statment-of-2nd-law">
-<h2>Plank’s statment of 2nd law<a class="headerlink" href="#planks-statment-of-2nd-law" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="planks-statment-of-2nd-law">
+<h2>Plank’s statment of 2nd law<a class="headerlink" href="#planks-statment-of-2nd-law" title="Permalink to this headline">#</a></h2>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/plank.png"><img alt="../_images/plank.png" class="bg-primary mb-1" src="../_images/plank.png" style="width: 400px;" /></a>
 <ul class="simple">
 <li><p><strong>Planck’s formulation of 2nd Law:</strong> For any adiabatic process with all the work coordinates returning to
 their original values <span class="math notranslate nohighlight">\(\Delta E \geq 0\)</span> ” M Plank</p></li>
 <li><p>In other words doing pure mechanical work on insulated(read adiabatic) system with no net change in mechanical variables results in energy either going up or remaining unchanged <span class="math notranslate nohighlight">\(\Delta E \geq 0\)</span>.  Thus we can not through mechanical work “steal” energy away from closed system wihtout any other change in the environment.</p></li>
 </ul>
-</div>
-<div class="section" id="thermodynamic-space-is-made-up-of-non-crossing-adiabats">
-<h2>Thermodynamic space is made up of non-crossing adiabats.<a class="headerlink" href="#thermodynamic-space-is-made-up-of-non-crossing-adiabats" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="thermodynamic-space-is-made-up-of-non-crossing-adiabats">
+<h2>Thermodynamic space is made up of non-crossing adiabats.<a class="headerlink" href="#thermodynamic-space-is-made-up-of-non-crossing-adiabats" title="Permalink to this headline">#</a></h2>
 <a class="bg-primary reference internal image-reference" href="../_images/Adiabats.png"><img alt="../_images/Adiabats.png" class="bg-primary" src="../_images/Adiabats.png" style="width: 400px;" /></a>
 <p><strong>Adiabats never cross becasue that would violate the second law. Also crossing implies existence of different forces for the sam thermodynamic state which is physically implausible</strong></p>
 <a class="bg-primary reference internal image-reference" href="../_images/NO1.png"><img alt="../_images/NO1.png" class="bg-primary" src="../_images/NO1.png" style="width: 400px;" /></a>
 <a class="bg-primary reference internal image-reference" href="../_images/NO2.png"><img alt="../_images/NO2.png" class="bg-primary" src="../_images/NO2.png" style="width: 400px;" /></a>
-</div>
-<div class="section" id="first-law">
-<h2>First Law<a class="headerlink" href="#first-law" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="first-law">
+<h2>First Law<a class="headerlink" href="#first-law" title="Permalink to this headline">#</a></h2>
 <p>Mechanical energy conservation law extended to many-body thermal systems. Energy can change because of heat or work exchange with the surroundings.</p>
 <div class="math notranslate nohighlight">
 \[dE = \delta Q +\delta W\]</div>
-</div>
-<div class="section" id="second-law">
-<h2>Second Law<a class="headerlink" href="#second-law" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="second-law">
+<h2>Second Law<a class="headerlink" href="#second-law" title="Permalink to this headline">#</a></h2>
 <p>For a ssytem whihc undergoes adiabatic (read no heat exchange) and quasisatic (read not deviating from equilibrium) process entropy can not decrease!</p>
 <div class="math notranslate nohighlight">
 \[dS \geq 0\]</div>
-</div>
-<div class="section" id="gibbs-relation">
-<h2>Gibbs relation<a class="headerlink" href="#gibbs-relation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="gibbs-relation">
+<h2>Gibbs relation<a class="headerlink" href="#gibbs-relation" title="Permalink to this headline">#</a></h2>
 <p>Given the energy as a function of extensive variables <span class="math notranslate nohighlight">\(E(S,V,N)\)</span> we can write down its full differntial.</p>
 <div class="math notranslate nohighlight">
 \[dE = \Big(\frac{\partial E}{\partial S} \Big)_{V,N}dS+ \Big(\frac{\partial E}{\partial V} \Big)_{S,N}dV+\Big(\frac{\partial E}{\partial N} \Big)_{S,V}dN\]</div>
@@ -906,9 +1022,9 @@ their original values <span class="math notranslate nohighlight">\(\Delta E \geq
 <p>This is known as <strong>Gibbs relation</strong> in Thermodynamics and is a starting point for thermodynamic calculations</p>
 <div class="math notranslate nohighlight">
 \[\boxed{dE=  TdS - pdV +\mu dN}\]</div>
-</div>
-<div class="section" id="gibbs-duhem-relation">
-<h2>Gibbs Duhem relation<a class="headerlink" href="#gibbs-duhem-relation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="gibbs-duhem-relation">
+<h2>Gibbs Duhem relation<a class="headerlink" href="#gibbs-duhem-relation" title="Permalink to this headline">#</a></h2>
 <p>Extensivity proeprty implies linear scaling with respect to extensive variables. In other words extensive variables are additive quantities</p>
 <div class="math notranslate nohighlight">
 \[E(\lambda S,\lambda V,\lambda N) = \lambda E(S,V,N)\]</div>
@@ -919,9 +1035,9 @@ their original values <span class="math notranslate nohighlight">\(\Delta E \geq
 <p>Now take derivative of E and compare with Gibbs relation</p>
 <div class="math notranslate nohighlight">
 \[\boxed{SdT-VdP+Nd\mu =0}\]</div>
-</div>
-<div class="section" id="second-order-thermodynamic-quantities">
-<h2>Second order thermodynamic quantities<a class="headerlink" href="#second-order-thermodynamic-quantities" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="second-order-thermodynamic-quantities">
+<h2>Second order thermodynamic quantities<a class="headerlink" href="#second-order-thermodynamic-quantities" title="Permalink to this headline">#</a></h2>
 <p><strong>Heat capacities at constnat P and V.</strong></p>
 <div class="math notranslate nohighlight">
 \[C_p = \Big(\frac{d Q}{dT} \Big)_{p,N}\]</div>
@@ -944,9 +1060,9 @@ their original values <span class="math notranslate nohighlight">\(\Delta E \geq
 <blockquote>
 <div><p>Mechanical stability requires <span class="math notranslate nohighlight">\(\kappa_T\geq 0\)</span></p>
 </div></blockquote>
-</div>
-<div class="section" id="ideal-gas-entropy-example">
-<h2>Ideal Gas entropy example<a class="headerlink" href="#ideal-gas-entropy-example" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="ideal-gas-entropy-example">
+<h2>Ideal Gas entropy example<a class="headerlink" href="#ideal-gas-entropy-example" title="Permalink to this headline">#</a></h2>
 <div class="math notranslate nohighlight">
 \[dS = \frac{1}{T}dE + \frac{P}{T}dV\]</div>
 <ul class="simple">
@@ -956,9 +1072,9 @@ their original values <span class="math notranslate nohighlight">\(\Delta E \geq
 \[dS = \frac{3Nk_B}{2E}dE + \frac{Nk_B}{V}dV\]</div>
 <div class="math notranslate nohighlight">
 \[S(E,V,N) = \frac{3}{2}Nk_B log \frac{E}{N} +Nk log \frac{V}{N} + const\]</div>
-</div>
-<div class="section" id="free-energies-and-legendre-transforms">
-<h2>Free Energies and Legendre transforms<a class="headerlink" href="#free-energies-and-legendre-transforms" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="free-energies-and-legendre-transforms">
+<h2>Free Energies and Legendre transforms<a class="headerlink" href="#free-energies-and-legendre-transforms" title="Permalink to this headline">#</a></h2>
 <p><strong>Motivation:</strong> The energy <span class="math notranslate nohighlight">\(E\)</span> is natural a function of all extensive variables <span class="math notranslate nohighlight">\((S, V, N, ...)\)</span> and can be used to find equilibrium by minimizing with respect to independent variables <span class="math notranslate nohighlight">\(min_{[S,V,N]} E\)</span>. But what if the independent variables are not convenient to control and we want to adopt a new ones where we can hold some of them constant.</p>
 <p><strong>Legendre transformation:</strong> is what we call the change of variables in thermodynamics. The Legendre transofrmation turns Energy function into free energy function. Equilibrium state is again found by minimizing Free energy function! That is Legendre transform does not change the shape of the Energy function whcih is convex with respect to independent variables!</p>
 <div class="math notranslate nohighlight">
@@ -1000,11 +1116,11 @@ their original values <span class="math notranslate nohighlight">\(\Delta E \geq
 \[dG = dE -d(TS) + d(pV) = dE - TdS - SdT + pdV + Vdp\]</div>
 <div class="math notranslate nohighlight">
 \[dG = -SdT + Vdp + \mu dN\]</div>
-</div>
-<div class="section" id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="is-it-fundamental-enough">
-<h3>Is it fundamental enough?<a class="headerlink" href="#is-it-fundamental-enough" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<section id="is-it-fundamental-enough">
+<h3>Is it fundamental enough?<a class="headerlink" href="#is-it-fundamental-enough" title="Permalink to this headline">#</a></h3>
 <p>The following ten equations are purported to be fundamental equations for various thermodynamic systems. Five, however, are inconsisent with the basic postulates of a fundamental equation and are thus unphysical.  For each, plot the relationship between <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(U\)</span> and identify the five that are unacceptable. <span class="math notranslate nohighlight">\(v_0\)</span>, <span class="math notranslate nohighlight">\(\theta\)</span>, and <span class="math notranslate nohighlight">\(R\)</span> are all positive constants and, in the case of fractional exponents, the real positive root is to be implied.</p>
 <ol class="simple">
 <li><p><span class="math notranslate nohighlight">\(\ S = \left ( \frac{R^2}{v_0\theta} \right )^{1/3}\left ( NVU \right
@@ -1020,9 +1136,9 @@ their original values <span class="math notranslate nohighlight">\(\Delta E \geq
 <li><p><span class="math notranslate nohighlight">\(U = \left ( \frac{NR\theta V}{v_0} \right ) \left ( 1+\frac{S}{NR} \right ) \exp \left (-S/NR \right)\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(U = \left ( \frac{v_0\theta}{R} \right ) \frac{S^2}{V} \exp\left ( S/NR \right)\)</span></p></li>
 </ol>
-</div>
-<div class="section" id="where-is-my-equilibrium-state">
-<h3>Where is my equilibrium state?<a class="headerlink" href="#where-is-my-equilibrium-state" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="where-is-my-equilibrium-state">
+<h3>Where is my equilibrium state?<a class="headerlink" href="#where-is-my-equilibrium-state" title="Permalink to this headline">#</a></h3>
 <p>The fundamental equations of both systems <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are</p>
 <div class="math notranslate nohighlight">
 \[S = \left (\frac{R^2}{v_0\theta} \right )^{1/3} \left ( N V U \right )^{1/3}\]</div>
@@ -1063,12 +1179,12 @@ $<span class="math notranslate nohighlight">\(X = \frac{U_A}{U_A + U_B}\)</span>
 <img alt="../_images/01_Thermo_29_1.png" src="../_images/01_Thermo_29_1.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="problems">
-<h2>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="basic-notions-of-thermodynamics">
-<h3>Basic notions of thermodynamics<a class="headerlink" href="#basic-notions-of-thermodynamics" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="problems">
+<h2>Problems<a class="headerlink" href="#problems" title="Permalink to this headline">#</a></h2>
+<section id="basic-notions-of-thermodynamics">
+<h3>Basic notions of thermodynamics<a class="headerlink" href="#basic-notions-of-thermodynamics" title="Permalink to this headline">#</a></h3>
 <ol class="simple">
 <li><p>Give an example of a process in which a system is not heated, but its temperature increases. Also give an example of a process in which a system is heated, but its temperature is unchanged.</p></li>
 <li><p>Which states are in an equilibrium state, a time dependent non-equilibrium state, or time independent but still non-equilibrium state (e.g steady stae). Explain your reasoning. In some cases, the state is not a true steady or equilibrium state but close to one. Discuss under what conditions it can be treated as a steady or equilibrium state.</p>
@@ -1090,9 +1206,9 @@ $<span class="math notranslate nohighlight">\(X = \frac{U_A}{U_A + U_B}\)</span>
 <li><p>Does the change of the entropy depend on the path between two equilibrium states?</p></li>
 <li><p>How is adiabatic process different from quasistatic and reversible process?</p></li>
 </ol>
-</div>
-<div class="section" id="expansion-of-a-gas-into-vacuum">
-<h3>Expansion of a gas into vacuum<a class="headerlink" href="#expansion-of-a-gas-into-vacuum" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="expansion-of-a-gas-into-vacuum">
+<h3>Expansion of a gas into vacuum<a class="headerlink" href="#expansion-of-a-gas-into-vacuum" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>Suppose that a gas expands adiabatically into a vacuum. What is the work done by the gas?</p></li>
 <li><p>Suppose that the total energy of the gas is given by</p></li>
@@ -1100,17 +1216,17 @@ $<span class="math notranslate nohighlight">\(X = \frac{U_A}{U_A + U_B}\)</span>
 <div class="math notranslate nohighlight">
 \[E = 3/2NkT −N^2 V/a\]</div>
 <p>Initially the gas occupies a volume <span class="math notranslate nohighlight">\(V_1\)</span> at a temperature <span class="math notranslate nohighlight">\(T_1\)</span>. The gas then expands adiabatically into a vacuum so that it occupies a total volume <span class="math notranslate nohighlight">\(V_2\)</span>. What is the final temperature <span class="math notranslate nohighlight">\(T_2\)</span> of the gas?</p>
-</div>
-<div class="section" id="entropy-changes">
-<h3>Entropy changes<a class="headerlink" href="#entropy-changes" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="entropy-changes">
+<h3>Entropy changes<a class="headerlink" href="#entropy-changes" title="Permalink to this headline">#</a></h3>
 <ol class="simple">
 <li><p>kg of water (specific heat = 4.2 kJ/(kg·K)) at <span class="math notranslate nohighlight">\(0 ^oC\)</span> is in contact with a <span class="math notranslate nohighlight">\(50 ^oC\)</span> heat bath, and eventually reaches <span class="math notranslate nohighlight">\(50 ^oC\)</span>. What is the entropy change of the water? What is the increase of the entropy of this water plus the heat bath?</p></li>
 <li><p>Instead of (1) first the water at <span class="math notranslate nohighlight">\(0 ^oC\)</span> is in contact with a <span class="math notranslate nohighlight">\(25 ^oC\)</span> heat bath. Then, after reaching thermal equilibrium, the water is in contact with a <span class="math notranslate nohighlight">\(50 ^oC\)</span> heat bath to reach the final temperature <span class="math notranslate nohighlight">\(50 ^oC\)</span> as in (1). What is the increase of the entropy of the water plus the two heat baths?</p></li>
 <li><p>Show that in the two-step heating process whatever the first heat bath temperature T is between <span class="math notranslate nohighlight">\(0^oC\)</span> and <span class="math notranslate nohighlight">\(50^oC\)</span>, the total change of entropy of the water plus heat baths is less than the case of (1)</p></li>
 </ol>
-</div>
-<div class="section" id="legendre-transforms">
-<h3>Legendre transforms<a class="headerlink" href="#legendre-transforms" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="legendre-transforms">
+<h3>Legendre transforms<a class="headerlink" href="#legendre-transforms" title="Permalink to this headline">#</a></h3>
 <p>Carry out the following transformations and plot the resulting function with matploltib.</p>
 <ul class="simple">
 <li><p>From <span class="math notranslate nohighlight">\(f(x) = x^2+x^4\)</span> to <span class="math notranslate nohighlight">\(g(a)\)</span></p></li>
@@ -1118,9 +1234,9 @@ $<span class="math notranslate nohighlight">\(X = \frac{U_A}{U_A + U_B}\)</span>
 <li><p>From <span class="math notranslate nohighlight">\(G(T,p,N)\)</span> to <span class="math notranslate nohighlight">\(A(S,p,N)\)</span></p></li>
 <li><p>From <span class="math notranslate nohighlight">\(\Omega(T,p,\mu)\)</span> to <span class="math notranslate nohighlight">\(E(S,V,N)\)</span></p></li>
 </ul>
-</div>
-<div class="section" id="manipulating-derivatives">
-<h3>Manipulating derivatives<a class="headerlink" href="#manipulating-derivatives" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="manipulating-derivatives">
+<h3>Manipulating derivatives<a class="headerlink" href="#manipulating-derivatives" title="Permalink to this headline">#</a></h3>
 <p>Derive the following identities:</p>
 <ul>
 <li><div class="math notranslate nohighlight">
@@ -1130,9 +1246,9 @@ $<span class="math notranslate nohighlight">\(X = \frac{U_A}{U_A + U_B}\)</span>
 \[\Big( \frac{\partial C_v}{\partial V} \Big)_T =  T \Big( \frac{\partial^2 P}{\partial T^2} \Big)_V\]</div>
 </li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1156,9 +1272,11 @@ $<span class="math notranslate nohighlight">\(X = \frac{U_A}{U_A + U_B}\)</span>
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1174,24 +1292,28 @@ $<span class="math notranslate nohighlight">\(X = \frac{U_A}{U_A + U_B}\)</span>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Davit Potoyan<br/>
+  
+      &copy; Copyright 2021.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Davit Potoyan<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
