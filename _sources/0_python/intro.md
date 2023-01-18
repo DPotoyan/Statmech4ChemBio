@@ -20,7 +20,7 @@ For obvious reasons our coverage will not be as comprehensive as in the official
 
    1. [Python for Data Analysis](https://wesmckinney.com/book/)
    2. [Think Python](https://greenteapress.com/wp/think-python/)
-   3. [A Byte of Python](https://python.swaroopch.com/)
+   3. [Learning Scientific Programming with Python](https://scipython.com/book2/)
 
 ### Youtube channels
 
