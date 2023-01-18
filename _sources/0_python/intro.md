@@ -5,16 +5,18 @@ The objective of these first few modules is to learn the basics of python and it
 
 For obvious reasons our coverage will not be as comprehensive as in the official tutorials [python.org](https://docs.python.org/3/tutorial/) reading of which is strongly reccomended for serious study of the language later on. Below you may find a veriety of tutorials with a spefici focus on STEM application.  
  
-### Short lessons for for scientists new to python
+### Short python lessons for scientists new to programming
 
    1. [Programming Python](http://swcarpentry.github.io/python-novice-inflammation/)
    2. [Plotting and programming in Python ](http://swcarpentry.github.io/python-novice-gapminder/)
    3. [Python programming for Scientists](http://wwwstaff.ari.uni-heidelberg.de/mitarbeiter/rschmidt/pycourse/index.html)
    
-### Longer lessons for scientists new to python
+### Longer lessons on scientific and data applications of python
 
-   1. [Python like you mean it](https://www.pythonlikeyoumeanit.com/)
+   1. [Python Programming for Data Science](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html)
+   2. [Scientific Computing for Chemists](https://weisscharlesj.github.io/SciCompforChemists/intro.html)
    3. [SciPy lectures](http://scipy-lectures.org/index.html)
+   4. [Python like you mean it](https://www.pythonlikeyoumeanit.com/)
 
 ### Free Books
 

@@ -851,7 +851,57 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.97 ms ± 819 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1833</span><span class="o">/</span><span class="mf">2272070361.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
+<span class="nn">----&gt; 2 get_ipython().run_line_magic(&#39;timeit&#39;, &#39;for i, item</span> in <span class="ni">enumerate</span><span class="nt">(lst): lst[i] = lst[i]*2&#39;)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.15/x64/lib/python3.7/site-packages/IPython/core/interactiveshell.py</span> in <span class="ni">run_line_magic</span><span class="nt">(self, magic_name, line, _stack_depth)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2416</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;local_ns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_local_scope</span><span class="p">(</span><span class="n">stack_depth</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2417</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2418</span>                 <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2419</span>             <span class="k">return</span> <span class="n">result</span>
+<span class="g g-Whitespace">   </span><span class="mi">2420</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.15/x64/lib/python3.7/site-packages/decorator.py</span> in <span class="ni">fun</span><span class="nt">(*args, **kw)</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">kwsyntax</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span>                 <span class="n">args</span><span class="p">,</span> <span class="n">kw</span> <span class="o">=</span> <span class="n">fix</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kw</span><span class="p">,</span> <span class="n">sig</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">232</span>             <span class="k">return</span> <span class="n">caller</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">extras</span> <span class="o">+</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="n">fun</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__doc__</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.15/x64/lib/python3.7/site-packages/IPython/core/magic.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(f, *a, **k)</span>
+<span class="g g-Whitespace">    </span><span class="mi">185</span>     <span class="c1"># but it&#39;s overkill for just that one bit of state.</span>
+<span class="g g-Whitespace">    </span><span class="mi">186</span>     <span class="k">def</span> <span class="nf">magic_deco</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">187</span>         <span class="n">call</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">188</span> 
+<span class="g g-Whitespace">    </span><span class="mi">189</span>         <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.15/x64/lib/python3.7/site-packages/IPython/core/magics/execution.py</span> in <span class="ni">timeit</span><span class="nt">(self, line, cell, local_ns)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1182</span>                     <span class="k">break</span>
+<span class="g g-Whitespace">   </span><span class="mi">1183</span> 
+<span class="ne">-&gt; </span><span class="mi">1184</span>         <span class="n">all_runs</span> <span class="o">=</span> <span class="n">timer</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">repeat</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1185</span>         <span class="n">best</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_runs</span><span class="p">)</span> <span class="o">/</span> <span class="n">number</span>
+<span class="g g-Whitespace">   </span><span class="mi">1186</span>         <span class="n">worst</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">all_runs</span><span class="p">)</span> <span class="o">/</span> <span class="n">number</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.15/x64/lib/python3.7/timeit.py</span> in <span class="ni">repeat</span><span class="nt">(self, repeat, number)</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span>         <span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">    </span><span class="mi">204</span>         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeat</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">205</span>             <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">206</span>             <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">207</span>         <span class="k">return</span> <span class="n">r</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.15/x64/lib/python3.7/site-packages/IPython/core/magics/execution.py</span> in <span class="ni">timeit</span><span class="nt">(self, number)</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span>         <span class="n">gc</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">169</span>             <span class="n">timing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span>         <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span>             <span class="k">if</span> <span class="n">gcold</span><span class="p">:</span>
+
+<span class="nn">&lt;magic-timeit&gt;</span> in <span class="ni">inner</span><span class="nt">(_it, _timer)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -860,11 +910,6 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nparray</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="o">%</span><span class="k">timeit</span> 2*nparray
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.98 µs ± 5.55 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)
 </pre></div>
 </div>
 </div>
@@ -882,25 +927,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 0. 0. 0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0.]
- [0. 0. 0. 0. 0. 0. 0. 0.]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>   <span class="c1"># Create an array of all ones</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 1. 1. 1. 1.]]
 </pre></div>
 </div>
 </div>
@@ -912,24 +943,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.26964117 0.53511002 0.36989668 0.00382332]
- [0.18962382 0.16841021 0.97013518 0.10089778]
- [0.87647965 0.39833492 0.68205171 0.69148084]
- [0.6389034  0.64189871 0.9026147  0.21641865]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># create an array between 1 and 100 divided by 10 segments</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[  1.  12.  23.  34.  45.  56.  67.  78.  89. 100.]
 </pre></div>
 </div>
 </div>
@@ -941,22 +959,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 1  6 11 16 21 26 31 36 41 46 51 56 61 66 71 76 81 86 91 96]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="mf">7.5</span><span class="p">)</span> <span class="c1"># Create a constant array</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>  
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[7.5 7.5]
- [7.5 7.5]]
 </pre></div>
 </div>
 </div>
@@ -968,29 +975,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0. 0. 0.]
- [0. 1. 0. 0. 0.]
- [0. 0. 1. 0. 0.]
- [0. 0. 0. 1. 0.]
- [0. 0. 0. 0. 1.]]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># repeat the array d 3 times</span>
 <span class="n">k</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1., 0., 0., 0., 0., 1., 0., 0., 0., 0., 1., 0., 0., 0., 0.],
-       [0., 1., 0., 0., 0., 0., 1., 0., 0., 0., 0., 1., 0., 0., 0.],
-       [0., 0., 1., 0., 0., 0., 0., 1., 0., 0., 0., 0., 1., 0., 0.],
-       [0., 0., 0., 1., 0., 0., 0., 0., 1., 0., 0., 0., 0., 1., 0.],
-       [0., 0., 0., 0., 1., 0., 0., 0., 0., 1., 0., 0., 0., 0., 1.]])
 </pre></div>
 </div>
 </div>
@@ -1056,24 +1045,12 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3])
-</pre></div>
-</div>
-</div>
 </div>
 <p><img alt="" src="../_images/numpy_index.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>
 <span class="n">data</span><span class="o">.</span><span class="n">T</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2],
-       [3, 4],
-       [5, 6]])
 </pre></div>
 </div>
 </div>
@@ -1086,20 +1063,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 4)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 4)
 </pre></div>
 </div>
 </div>
@@ -1110,20 +1077,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([5, 6, 7, 8])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
 </pre></div>
 </div>
 </div>
@@ -1134,20 +1091,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  8, 12])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,:]</span> <span class="c1"># last row</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 9, 10, 11, 12])
 </pre></div>
 </div>
 </div>
@@ -1172,21 +1119,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 6  8 10 12]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Elementwise difference; both produce the array</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>  
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-4 -4 -4 -4]
 </pre></div>
 </div>
 </div>
@@ -1198,20 +1135,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 5 12 21 32]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.2        0.33333333 0.42857143 0.5       ]
 </pre></div>
 </div>
 </div>
@@ -1222,11 +1149,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.         1.41421356 1.73205081 2.        ]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1234,20 +1156,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.5, 3. , 4.5, 6. ])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">+</span><span class="mi">3</span>    <span class="c1"># elementwise addition. </span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 8,  9, 10, 11])
 </pre></div>
 </div>
 </div>
@@ -1267,11 +1179,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>219
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1280,22 +1187,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[29 67]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Matrix / matrix product; both produce the rank 2 array</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="nd">@y</span><span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[19 22]
- [43 50]]
 </pre></div>
 </div>
 </div>
@@ -1311,11 +1207,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3, 7])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1325,24 +1216,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
-[4 6]
-[3 7]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
-1
 </pre></div>
 </div>
 </div>
@@ -1364,12 +1242,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  2,  3,  4,  5],
-       [ 6,  7,  8,  9, 10]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1378,25 +1250,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  2],
-       [ 3,  4],
-       [ 5,  6],
-       [ 7,  8],
-       [ 9, 10]])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="c1"># transpose matrix</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1,  3,  5,  7,  9],
-       [ 2,  4,  6,  8, 10]])
 </pre></div>
 </div>
 </div>
@@ -1421,22 +1278,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((3, 2), (2,))
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2],
-       [3, 4],
-       [5, 6]])
 </pre></div>
 </div>
 </div>
@@ -1447,11 +1292,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1])
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1459,22 +1299,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((3, 2), (2,))
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">+</span><span class="n">ones_row</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2, 3],
-       [4, 5],
-       [6, 7]])
 </pre></div>
 </div>
 </div>
@@ -1488,14 +1316,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0]
- [1]
- [2]]
-(3, 1)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1505,24 +1325,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2]
-(3,)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Lets predict a+b sum. By first rule the sum of arrays with shapes <strong>(3,1)+(3,)</strong> are broadcast to <strong>(3,1)+(1,3)</strong> then by second rule dimensions one are padded to match the shape <strong>(3,3)+(3,3)</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">+</span><span class="n">b</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 2],
-       [1, 2, 3],
-       [2, 3, 4]])
 </pre></div>
 </div>
 </div>
@@ -1555,58 +1362,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Time</th>
-      <th>Energy</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3</td>
-      <td>30</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>4</td>
-      <td>40</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>5</td>
-      <td>50</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1621,20 +1376,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Time&#39;, &#39;Energy&#39;, &#39;velocity&#39;], dtype=&#39;object&#39;)
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">index</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RangeIndex(start=0, stop=5, step=1)
 </pre></div>
 </div>
 </div>
@@ -1643,11 +1388,6 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># acess underlying values as numpy arrays</span>
 <span class="n">A</span><span class="p">[</span><span class="s1">&#39;Energy&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([10, 20, 30, 40, 50])
 </pre></div>
 </div>
 </div>
