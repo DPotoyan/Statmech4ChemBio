@@ -10,7 +10,8 @@ For obvious reasons our coverage will not be as comprehensive as in the official
    1. [Programming Python](http://swcarpentry.github.io/python-novice-inflammation/)
    2. [Plotting and programming in Python ](http://swcarpentry.github.io/python-novice-gapminder/)
    3. [Python programming for Scientists](http://wwwstaff.ari.uni-heidelberg.de/mitarbeiter/rschmidt/pycourse/index.html)
-   
+
+
 ### Longer lessons on scientific and data applications of python
 
    1. [Python Programming for Data Science](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html)
@@ -20,9 +21,11 @@ For obvious reasons our coverage will not be as comprehensive as in the official
 
 ### Free Books
 
-   1. [Python for Data Analysis](https://wesmckinney.com/book/)
-   2. [Think Python](https://greenteapress.com/wp/think-python/)
-   3. [Learning Scientific Programming with Python](https://scipython.com/book2/)
+   - [Learn Python the Right Way](https://learnpythontherightway.com/#read)
+   - [Think Python](https://greenteapress.com/wp/think-python/)
+
+   - [Python for Data Analysis](https://wesmckinney.com/book/)
+   - [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
 ### Youtube channels
 
