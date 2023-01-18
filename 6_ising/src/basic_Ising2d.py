@@ -55,6 +55,6 @@ def getE(spins,J,B):
             z = spins[(i+1)%N, j] + spins[(i-1)%N, j] +\
                 spins[i,(j+1)%N] +  spins[i,(j-1)%N]
             
-            E += -J*z*spins[i,j]/4 # Since we overcounted interactions 4 times divide by 4.
+            E += -J*z*spins[i,j]/2 # Since we overcounted interactions 4 times divide by 4.
 
     return E - B*np.sum(spins) #Field contribution added
