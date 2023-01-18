@@ -21,11 +21,10 @@ For obvious reasons our coverage will not be as comprehensive as in the official
 
 ### Free Books
 
-   - [Learn Python the Right Way](https://learnpythontherightway.com/#read)
-   - [Think Python](https://greenteapress.com/wp/think-python/)
-
-   - [Python for Data Analysis](https://wesmckinney.com/book/)
-   - [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+   1. [Learn Python the Right Way](https://learnpythontherightway.com/#read)
+   2. [Think Python](https://greenteapress.com/wp/think-python/)
+   3. [Python for Data Analysis](https://wesmckinney.com/book/)
+   4. [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
 ### Youtube channels
 
