@@ -994,7 +994,7 @@ World
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;/tmp/ipykernel_1854/2014736835.py&quot;</span><span class="gt">, line </span><span class="mi">2</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;/tmp/ipykernel_1960/2014736835.py&quot;</span><span class="gt">, line </span><span class="mi">2</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">)</span> <span class="c1"># Unnecessary indentation, this code will not work</span>
     <span class="o">^</span>
 <span class="ne">IndentationError</span>: unexpected indent
@@ -1500,80 +1500,6 @@ world
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The method <code class="docutils literal notranslate"><span class="pre">get(key,default)</span></code> will provide the value for a given <code class="docutils literal notranslate"><span class="pre">key</span></code> if that key exists, otherwise it will return the <code class="docutils literal notranslate"><span class="pre">default</span></code> object.</p>
-<p>Here is a more complex example:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;today&#39;</span><span class="p">,</span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tomorrow&#39;</span><span class="p">,</span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;today&#39;</span> <span class="ow">in</span> <span class="n">d</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;tomorrow&#39;</span> <span class="ow">in</span> <span class="n">d</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Some more technicalities:</p>
-<ul class="simple">
-<li><p>The keyword can be any (immutable) Python object. This includes:</p>
-<ul>
-<li><p>numbers</p></li>
-<li><p>strings</p></li>
-<li><p>tuples.</p></li>
-</ul>
-</li>
-<li><p>dictionaries are very fast in retrieving values (when given the key)</p></li>
-</ul>
-<p>An other example to demonstrate an advantage of using dictionaries over pairs of lists:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">order</span> <span class="o">=</span> <span class="p">{}</span>        <span class="c1"># create empty dictionary</span>
-
-<span class="c1">#add orders as they come in</span>
-<span class="n">order</span><span class="p">[</span><span class="s1">&#39;Peter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Pint of bitter&#39;</span>
-<span class="n">order</span><span class="p">[</span><span class="s1">&#39;Paul&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Half pint of Hoegarden&#39;</span>
-<span class="n">order</span><span class="p">[</span><span class="s1">&#39;Mary&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Gin Tonic&#39;</span>
-
-<span class="c1">#deliver order at bar</span>
-<span class="k">for</span> <span class="n">person</span> <span class="ow">in</span> <span class="n">order</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">person</span><span class="p">,</span> <span class="s2">&quot;requests&quot;</span><span class="p">,</span> <span class="n">order</span><span class="p">[</span><span class="n">person</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Without dictionary:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hans&quot;</span><span class="p">,</span><span class="s2">&quot;Andy C&quot;</span><span class="p">,</span><span class="s2">&quot;Ken&quot;</span><span class="p">]</span>
-<span class="n">rooms</span>  <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;room 1033&quot;</span><span class="p">,</span><span class="s2">&quot;room 1031&quot;</span><span class="p">,</span><span class="s2">&quot;room 1027&quot;</span><span class="p">]</span>
-
-<span class="c1">#possible inconsistency here since we have two lists</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span> <span class="n">people</span> <span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span> <span class="n">rooms</span> <span class="p">):</span>
-    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;people and rooms differ in length&quot;</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span> <span class="n">rooms</span> <span class="p">)</span> <span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">people</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;works in&quot;</span><span class="p">,</span><span class="n">rooms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
