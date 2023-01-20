@@ -994,7 +994,7 @@ World
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;/tmp/ipykernel_1960/2014736835.py&quot;</span><span class="gt">, line </span><span class="mi">2</span>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;/tmp/ipykernel_1896/2014736835.py&quot;</span><span class="gt">, line </span><span class="mi">2</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">)</span> <span class="c1"># Unnecessary indentation, this code will not work</span>
     <span class="o">^</span>
 <span class="ne">IndentationError</span>: unexpected indent
@@ -1439,25 +1439,44 @@ world
 </section>
 <section id="dictionaries">
 <h3>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">#</a></h3>
-<p>Dictionaries are also called “associative arrays” and “hash tables”. Dictionaries are <em>unordered</em> sets of <em>key-value pairs</em>.</p>
+<p>Dictionaries are <em>unordered</em> sets of <em>key-value pairs</em>.</p>
 <p>An empty dictionary can be created using curly braces:</p>
+<p><code class="docutils literal notranslate"><span class="pre">my_empty_dict</span> <span class="pre">=</span> <span class="pre">{}</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polymer_properties</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;monomer&#39;</span><span class="p">:</span> <span class="s1">&#39;ch2&#39;</span><span class="p">,</span> 
+                      <span class="s1">&#39;mass&#39;</span><span class="p">:</span> <span class="mi">120</span><span class="p">,</span> 
+                      <span class="s1">&#39;melting temperature&#39;</span><span class="p">:</span> <span class="s1">&#39;25 C&#39;</span><span class="p">,</span>
+                      <span class="s1">&#39;degree of polymerization&#39;</span><span class="p">:</span> <span class="mi">24</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;today&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;22 deg C&#39;</span>    <span class="c1"># &#39;today&#39; is the keyword</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span> <span class="o">=</span> <span class="p">{}</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;yesterday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;19 deg C&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;today&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;22 deg C&#39;</span>    <span class="c1"># &#39;today&#39; is the keyword</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;yesterday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;19 deg C&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;todady&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;random day&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1466,20 +1485,12 @@ world
 <p>We can retrieve values by using the keyword as the index:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;today&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weather</span><span class="p">[</span><span class="s1">&#39;today&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>Other ways of populating a dictionary if the data is known at creation time are:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="mi">25</span><span class="p">}</span>
-<span class="n">d2</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d3</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
