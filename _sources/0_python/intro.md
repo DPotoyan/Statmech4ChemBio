@@ -5,8 +5,7 @@ Python
 Due too time constraints our coverage is very superficial.  In addition to the comprehensive official tutorial of python [python.org](https://docs.python.org/3/tutorial/) you may find a veriety of tutorials with a specific focus on STEM applications.  
 
 -  [learnpython.org](https://www.learnpython.org/) This is a great resource with lots of interactive exercises to get started with python.
--  [datacamp course](https://app.datacamp.com/learn/courses/intro-to-python-for-data-science) another interactive course to get started
-- 
+-  [datacamp course](https://app.datacamp.com/learn/courses/intro-to-python-for-data-science) another interactive course to get started.
  
 
 ### python for scientists
