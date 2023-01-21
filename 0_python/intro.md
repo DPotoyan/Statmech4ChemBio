@@ -2,16 +2,12 @@ Python
 =======================
 
 
-Due too time constraints our coverage is very superficial.  In addition to the comprehensive official tutorial of python [python.org](https://docs.python.org/3/tutorial/) you may find a veriety of tutorials with a spefici focus on STEM applications.  
+Due too time constraints our coverage is very superficial.  In addition to the comprehensive official tutorial of python [python.org](https://docs.python.org/3/tutorial/) you may find a veriety of tutorials with a specific focus on STEM applications.  
+
+-  [learnpython.org](https://www.learnpython.org/) THis is a great resource with lots of interactive exercises to get started with python
  
-### Short python lessons for scientists new to programming
 
-   1. [Programming Python](http://swcarpentry.github.io/python-novice-inflammation/)
-   2. [Plotting and programming in Python ](http://swcarpentry.github.io/python-novice-gapminder/)
-   3. [Python programming for Scientists](http://wwwstaff.ari.uni-heidelberg.de/mitarbeiter/rschmidt/pycourse/index.html)
-
-
-### Longer lessons on scientific and data applications of python
+### python for scientists
 
    1. [Python Programming for Data Science](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html)
    2. [Scientific Computing for Chemists](https://weisscharlesj.github.io/SciCompforChemists/intro.html)
