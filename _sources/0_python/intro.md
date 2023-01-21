@@ -1,9 +1,8 @@
 Python
 =======================
 
-The objective of these first few modules is to learn the basics of python and its scientific ecosystem of libraries. With numerical tools of python we will be in a position to easily turn theoretical ideas of statistical mechanics into models and simulations and also be able to leverage the existing computational libraries. 
 
-For obvious reasons our coverage will not be as comprehensive as in the official tutorials [python.org](https://docs.python.org/3/tutorial/) reading of which is strongly reccomended for serious study of the language later on. Below you may find a veriety of tutorials with a spefici focus on STEM application.  
+Due too time constraints our coverage is very superficial.  In addition to the comprehensive official tutorial of python [python.org](https://docs.python.org/3/tutorial/) you may find a veriety of tutorials with a spefici focus on STEM applications.  
  
 ### Short python lessons for scientists new to programming
 
