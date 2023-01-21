@@ -17,18 +17,15 @@ For obvious reasons our coverage will not be as comprehensive as in the official
    1. [Python Programming for Data Science](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html)
    2. [Scientific Computing for Chemists](https://weisscharlesj.github.io/SciCompforChemists/intro.html)
    3. [SciPy lectures](http://scipy-lectures.org/index.html)
-   4. [Python like you mean it](https://www.pythonlikeyoumeanit.com/)
 
 ### Free Books
 
-   1. [Learn Python the Right Way](https://learnpythontherightway.com/#read)
-   2. [Think Python](https://greenteapress.com/wp/think-python/)
-   3. [Python for Data Analysis](https://wesmckinney.com/book/)
-   4. [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+   1. [Think Python](https://greenteapress.com/wp/think-python/)
+   2. [Python for Data Analysis](https://wesmckinney.com/book/)
+   3. [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
 ### Youtube channels
 
   1. [Enthought](https://www.youtube.com/c/enthought/videos)
   2. [Data Camp](https://www.youtube.com/c/Datacamp/videos)
-  3. [Programming with Mosh](https://www.youtube.com/c/programmingwithmosh/videos)
-  4. [Programming with Corey Schafer](https://www.youtube.com/c/Coreyms/videos)
+  3. [Programming with Corey Schafer](https://www.youtube.com/c/Coreyms/videos)
