@@ -20,7 +20,7 @@ Due too time constraints our coverage is very superficial. In addition to the co
 
    1. [Think Python](https://greenteapress.com/wp/think-python/)
    2. [Python for Data Analysis](https://wesmckinney.com/book/)
-   3  [A byte of python](https://python.swaroopch.com/)
+   3. [A byte of python](https://python.swaroopch.com/)
    4. [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
 ### Youtube channels
