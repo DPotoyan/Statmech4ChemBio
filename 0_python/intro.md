@@ -2,11 +2,13 @@ Python
 =======================
 
 
-Due too time constraints our coverage is very superficial.  In addition to the comprehensive official tutorial of python [python.org](https://docs.python.org/3/tutorial/) you may find a veriety of tutorials with a specific focus on STEM applications.  
+Due too time constraints our coverage is very superficial. In addition to the comprehensive official tutorial of python [python.org](https://docs.python.org/3/tutorial/) here i will list some links which are best for self-study.
 
--  [learnpython.org](https://www.learnpython.org/) This is a great resource with lots of interactive exercises to get started with python.
--  [datacamp course](https://app.datacamp.com/learn/courses/intro-to-python-for-data-science) another interactive course to get started.
- 
+### python 101
+
+-  [learnpython.org](https://www.learnpython.org/) This is a great resource which allows interactively running python as you go.
+-  [futurecoder.io](https://futurecoder.io/) another great interactive website to learn python.
+-  [Software carpentry lessons](https://software-carpentry.org/lessons/) learn essentials of unix, git and python in one place.
 
 ### python for scientists
 
@@ -18,7 +20,8 @@ Due too time constraints our coverage is very superficial.  In addition to the c
 
    1. [Think Python](https://greenteapress.com/wp/think-python/)
    2. [Python for Data Analysis](https://wesmckinney.com/book/)
-   3. [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+   3  [A byte of python](https://python.swaroopch.com/)
+   4. [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
 ### Youtube channels
 
