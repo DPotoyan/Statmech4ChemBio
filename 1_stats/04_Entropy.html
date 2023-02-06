@@ -490,8 +490,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#large-deviation-theory">
-   Large deviation Theory
+  <a class="reference internal nav-link" href="#large-deviation-theory-entropy-and-free-energy">
+   Large deviation theory, entropy and free energy.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#entropy-and-information">
+   Entropy and Information
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -584,8 +589,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#large-deviation-theory">
-   Large deviation Theory
+  <a class="reference internal nav-link" href="#large-deviation-theory-entropy-and-free-energy">
+   Large deviation theory, entropy and free energy.
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#entropy-and-information">
+   Entropy and Information
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -673,35 +683,47 @@ title="Print to PDF"
 <img alt="Information" src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Entropy_flip_2_coins.jpg" />
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">widgets</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sci</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">widgets</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="large-deviation-theory">
-<h2>Large deviation Theory<a class="headerlink" href="#large-deviation-theory" title="Permalink to this headline">#</a></h2>
+<section id="large-deviation-theory-entropy-and-free-energy">
+<h2>Large deviation theory, entropy and free energy.<a class="headerlink" href="#large-deviation-theory-entropy-and-free-energy" title="Permalink to this headline">#</a></h2>
 <p>Consider a symmetric 1D random walk again with <span class="math notranslate nohighlight">\(p=1/2\)</span></p>
 <div class="math notranslate nohighlight">
 \[P_N (n) = \frac{N!}{(N-n)! n!} \Big(\frac{1}{2} \Big)^N\]</div>
 <p>Taking log and using Stirlings approximation <span class="math notranslate nohighlight">\(log N! = NlogN-N\)</span> we obtain</p>
 <div class="math notranslate nohighlight">
 \[ log P_N (n) = N \Big[ - \frac{n}{N} log \frac{n}{N} - \frac{N-n}{N} log \frac{N-n}{N} + log2 \Big]\]</div>
-<p>Probability can be cast in exponential form. We know that in the limit of large N the distribution becomes gaussian. But before taking the limit we are going to discover a another feature common to most random variables.</p>
+<ul class="simple">
+<li><p>Probability can be cast in exponential form. That’s great but we already know that in the limit of large N the distribution becomes gaussian.</p></li>
+<li><p>True but before N becomes large is a very interesting regime where fluctuations play important role. We are going to discover a another feature common to most random variables.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[P_N \sim e^{-N I(n)}\]</div>
-<p>We find that probability to deviate from mean values decays exponentially with a decay funciton specific to a system and independent of N. This function in case of symmetric random walk is going to be called <strong>Entropy</strong></p>
+<ul class="simple">
+<li><p>We find that probability to deviate from mean values decays exponentially with a decay funciton specific to a system and independent of N.</p></li>
+<li><p>Later on we will be calling <span class="math notranslate nohighlight">\(I(n)\)</span> <strong>a free energy per particle</strong>. Mathematicians call it large deviation function. For now let us carry on and not think too much about this.</p></li>
+<li><p>Let us now examine one particular expression that going to always pop in in any problem. We are going to this expression <strong>Entropy</strong>.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[s(n) = - \frac{n}{N} log \frac{n}{N} - \frac{N-n}{N} log \frac{N-n}{N} = -[ p_1 log p_1 + p_2 log_p2 ] \]</div>
-<p>IN general for i number of possibilities we have</p>
+\[s(n) = - \frac{n}{N} log \frac{n}{N} - \frac{N-n}{N} log \frac{N-n}{N} = -p_1 log p_1 - p_2 log p_2 \]</div>
+<ul class="simple">
+<li><p>In general for i number of options (random walk in D dimensions, multiple conformations, states etc) we have:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[S= -\sum_i p_i log p_i\]</div>
-<p><strong>Deviation from average <span class="math notranslate nohighlight">\(\langle n \rangle =pN\)</span> are expenentially suppressed with number of steps N:</strong></p>
-<div class="math notranslate nohighlight">
-\[p(n - \langle n \rangle) \sim e^{-N I'(n)}\]</div>
+<ul class="simple">
+<li><p>Looks like to get the most probably value we could maximize <span class="math notranslate nohighlight">\(s(n)\)</span>!</p></li>
+</ul>
+</section>
+<section id="entropy-and-information">
+<h2>Entropy and Information<a class="headerlink" href="#entropy-and-information" title="Permalink to this headline">#</a></h2>
 <p><strong>Which of these two statements conveys the most information?</strong></p>
 <ul class="simple">
 <li><p>I will eat some food tomorrow.</p></li>
@@ -715,7 +737,7 @@ title="Print to PDF"
 <blockquote>
 <div><p>If we quanitfy suprise we will quantify information</p>
 </div></blockquote>
-<p><strong>Playing cards</strong></p>
+<p><strong>Knowledge leads to gaining information</strong></p>
 <p>Which is more surprising (contains more information)?</p>
 <ul class="simple">
 <li><p>E1: The card is heart?</p></li>
@@ -725,19 +747,14 @@ title="Print to PDF"
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(E_1) = \frac{1}{4}\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(P(E_2)  =  \frac{4}{52} = \frac{1}{13}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(E_1 and E_2) = \frac{1}{52}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(E_1 \, and\,  E_2) = \frac{1}{52}\)</span></p></li>
 </ul>
-<p><strong>Gaining information</strong></p>
 <ol class="simple">
 <li><p>We learn the card is heart <span class="math notranslate nohighlight">\(I(E_1)\)</span></p></li>
 <li><p>We learn the card is Queen <span class="math notranslate nohighlight">\(I(E_2)\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(I(E_1 and E_2) = I(E_1) + I(E_2)\)</span></p></li>
+<li><p>Knowledge of event can add to information: <span class="math notranslate nohighlight">\(I(E) \geq 0\)</span></p></li>
 </ol>
-<blockquote>
-<div><ol class="simple">
-<li><p>Knowledge of event can add to information but neer take away from it: <span class="math notranslate nohighlight">\(I(E) \geq 0\)</span></p></li>
-</ol>
-</div></blockquote>
 </section>
 <section id="a-candidate-function-for-information">
 <h2>A candidate function for information!<a class="headerlink" href="#a-candidate-function-for-information" title="Permalink to this headline">#</a></h2>
@@ -783,7 +800,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;p&#39;)
 </pre></div>
 </div>
-<img alt="../_images/04_Entropy_11_2.png" src="../_images/04_Entropy_11_2.png" />
+<img alt="../_images/04_Entropy_12_2.png" src="../_images/04_Entropy_12_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -800,10 +817,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd7f95fe0d0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f6e280f0e10&gt;]
 </pre></div>
 </div>
-<img alt="../_images/04_Entropy_12_1.png" src="../_images/04_Entropy_12_1.png" />
+<img alt="../_images/04_Entropy_13_1.png" src="../_images/04_Entropy_13_1.png" />
 </div>
 </div>
 </section>
