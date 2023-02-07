@@ -873,7 +873,7 @@ MSD(n)= \Big\langle \big ( Z_n - Z_0 \big)^2 \Big \rangle \sim n^{1/2}
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2034</span><span class="o">/</span><span class="mf">2318574477.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2112</span><span class="o">/</span><span class="mf">2318574477.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">traj</span> <span class="o">=</span> <span class="n">rw_2d</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
 
 <span class="ne">TypeError</span>: rw_2d() got an unexpected keyword argument &#39;T&#39;
@@ -2701,41 +2701,39 @@ z/8BE3VwbODCC/EAAAAASUVORK5CYII='
 </div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Appendix. Large N approximations</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>###  Stirling&#39;s approximation  
-
-- This is the crude version of Stirling approximation that works out for $N\gg 1$
-
-$$logN! \approx \sum log N_i = \int log N dN$$
-
-$$\boxed{logN! \approx NlogN-N}$$
-
-$$\boxed{N! \approx N^N e^{-N}}$$
-
-A more accurate version is:
-
-$$\boxed{N! \approx N^N e^{-N} \sqrt{2\pi N}}$$
-
-### Applying Stirling approximation to the Binomial 
-
-$$N = N_1+N_2$$ 
-
-$$\frac{N!}{N_1! \cdot N_2!} \approx \frac{N^N e^{-N}}{N_1^{N_1} e^{-N_1}\cdot N_2^{N_2} e^{-N_2}} =\frac{N^N } {N_1^{N_1} \cdot N_2^{N_2} }$$
-
-$$log\frac{N!}{N_1! \cdot N_2!} \approx NlogN -N_1 log N_1 - N_2log N_2 = \\ = N \Big[ -\frac{N_1}{N} log \frac {N_1}{N} - \frac{N_2}{N} log \frac{N_2}{N} \Big] = N[-p_1 log p_1 -p_2log p_2]$$
-
-&gt; The expression $S =  \sum_i -p_i log p_i$ is significant. We are going to associate it with entropy further   down the road.
-
-#### Gamma function: generalizing the factorial
-
-$$\Gamma (n) = \int^{\infty}_0 x^{n-1} e^{-x}dx$$
-
-- The gamma function $\Gamma(n)$ provides an extension of the factorial function to domain of noninteger and    complex numbers. 
-- The gamma function is defined for all complex numbers except the non-positive integers. 
-- For any positive integer gamma function reduces to factorials
-
-$$\Gamma(n)=(n-1)!$$
-</pre></div>
-</div>
+<p><strong>Stirling’s approximation</strong></p>
+<ul class="simple">
+<li><p>This is the crude version of Stirling approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[logN! \approx \sum log N_i = \int log N dN\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{logN! \approx NlogN-N}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{N! \approx N^N e^{-N}}\]</div>
+<p>A more accurate version is:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{N! \approx N^N e^{-N} \sqrt{2\pi N}}\]</div>
+<p><strong>Applying Stirling approximation to the Binomial</strong></p>
+<div class="math notranslate nohighlight">
+\[N = N_1+N_2\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{N!}{N_1! \cdot N_2!} \approx \frac{N^N e^{-N}}{N_1^{N_1} e^{-N_1}\cdot N_2^{N_2} e^{-N_2}} =\fr{N^N } {N_1^{N_1} \cdot N_2^{N_2} }\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}log\frac{N!}{N_1! \cdot N_2!} \approx NlogN -N_1 log N_1 - N_2log N_2 = \\ = N \Big[ -\frac{N_1}{N} lo\frac {N_1}{N} - \frac{N_2}{N} log \frac{N_2}{N} \Big] = N[-p_1 log p_1 -p_2log p_2]\end{split}\]</div>
+<ul class="simple">
+<li><p>The expression <span class="math notranslate nohighlight">\(S =  \sum_i -p_i log p_i\)</span> will be identified with Entropy in later sections.</p></li>
+</ul>
+<p><strong>Gamma function: generalizing the factorial</strong></p>
+<div class="math notranslate nohighlight">
+\[\Gamma (n) = \int^{\infty}_0 x^{n-1} e^{-x}dx\]</div>
+<ul class="simple">
+<li><p>The gamma function <span class="math notranslate nohighlight">\(\Gamma(n)\)</span> provides an extension of the factorial function to domain of noninteger and    complex numbers.</p></li>
+<li><p>The gamma function is defined for all complex numbers except the non-positive integers.</p></li>
+<li><p>For any positive integer gamma function reduces to factorials</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Gamma(n)=(n-1)!\]</div>
 </div>
 </section>
 <section id="gaussian-approximation-to-the-binomial-distribution-in-the-large-n-limit">
