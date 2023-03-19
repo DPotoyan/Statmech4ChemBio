@@ -1,4 +1,4 @@
-sAbout 
+About 
 ============================
 
 ```{figure} ./index_fig.jpg
