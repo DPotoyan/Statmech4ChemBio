@@ -434,6 +434,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">How to pick the moves for Markov chain?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metropolis-algorithm">Metropolis algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-for-running-2d-ising-mcmc-simulations">Code for running 2D ising MCMC Simulations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-simulations">Visualize simulations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-functions">Autocorrelation functions</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carry-out-explorative-simulations">Carry out explorative simulations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-sweeps-and-calculation-of-second-order-thermodynamic-quantities">Parameter sweeps and calculation of second order thermodynamic quantities</a></li>
 </ul>
@@ -841,6 +845,27 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="visualize-simulations">
+<h3>Visualize simulations<a class="headerlink" href="#visualize-simulations" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">holoviews</span> <span class="k">as</span> <span class="nn">hv</span>
+<span class="n">hv</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="s1">&#39;bokeh&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">ising_plot</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    
+    <span class="k">return</span> <span class="n">hv</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">)</span> <span class="o">+</span> <span class="n">hv</span><span class="o">.</span><span class="n">Curve</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="s1">&#39;steps&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">hv</span><span class="o">.</span><span class="n">Curve</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="s1">&#39;steps&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">)</span>
+
+<span class="c1"># create dynamic map</span>
+<span class="n">dmap</span> <span class="o">=</span> <span class="n">hv</span><span class="o">.</span><span class="n">DynamicMap</span><span class="p">(</span><span class="n">ising_plot</span><span class="p">,</span> <span class="n">kdims</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">])</span>
+
+<span class="c1"># Specify variables and ranges</span>
+<span class="n">dmap</span><span class="o">.</span><span class="n">redim</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
@@ -862,6 +887,8 @@ document.write(`
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "8268cb6b9ea34acbb65cce8cd072466e", "version_major": 2, "version_minor": 0}</script></div>
 </div>
+<section id="autocorrelation-functions">
+<h4>Autocorrelation functions<a class="headerlink" href="#autocorrelation-functions" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">autocorr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -881,6 +908,7 @@ document.write(`
 <img alt="../_images/c2f3921aab87d7775b9cce65bc3dba7bd7a0ad1b500189ded25395428ac17478.png" src="../_images/c2f3921aab87d7775b9cce65bc3dba7bd7a0ad1b500189ded25395428ac17478.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="carry-out-explorative-simulations">
 <h3>Carry out explorative simulations<a class="headerlink" href="#carry-out-explorative-simulations" title="Permalink to this heading">#</a></h3>
@@ -1132,6 +1160,10 @@ configuration as an input to the system to undergo equilibriation again.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">How to pick the moves for Markov chain?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metropolis-algorithm">Metropolis algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-for-running-2d-ising-mcmc-simulations">Code for running 2D ising MCMC Simulations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-simulations">Visualize simulations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-functions">Autocorrelation functions</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carry-out-explorative-simulations">Carry out explorative simulations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-sweeps-and-calculation-of-second-order-thermodynamic-quantities">Parameter sweeps and calculation of second order thermodynamic quantities</a></li>
 </ul>
