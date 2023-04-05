@@ -425,16 +425,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics-of-ising-models">Thermodynamics of Ising models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetization">Magnetization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-capacity-c-v">Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#susceptibility-chi">Susceptibility <span class="math notranslate nohighlight">\(\chi\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-profile">Free energy profile</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-calculation-of-thermodynamic-quantities">Numerical calculation of thermodynamic quantities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-ising-models-and-key-thermodynamic-variables">Summary of Ising models and key thermodynamic variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-spin-lattice">Setting up spin lattice</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">Enforcing periodic boundary conditions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-of-boltzmann-distribution-mc-vs-mcmc">Sampling of Boltzmann distribution: MC vs MCMC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-boltzmann-distribution-mc-vs-mcmc">Sampling Boltzmann distribution: MC vs MCMC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-chains-master-equation-and-detailed-balance">Generating chains! Master Equation and Detailed Balance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-balance-equilibrium">Detailed Balance = Equilibrium</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">How to pick the moves for Markov chain?</a></li>
@@ -477,9 +471,12 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="summary-of-ising-models-and-key-thermodynamic-variables">
+<h2>Summary of Ising models and key thermodynamic variables<a class="headerlink" href="#summary-of-ising-models-and-key-thermodynamic-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Ising models are a class of simple spin lattice models which are widely used for studying the nature of phase transitions.</p></li>
-<li><p>Many aspects of phase transitions are universal and independent of mciroscopic details of interactions. Hence One wants as simple of a model capable of displaying phase transition as possible! Ising models fit the bill perfectly and one could even obtain analytical solutions (1D and 2D).</p></li>
+<li><p>Many aspects of phase transitions are universal and independent of mciroscopic details of interactions. Hence one wants as simple of a model capable of displaying phase transition as possible! Ising models fit the bill perfectly and one could even obtain analytical solutions (1D and 2D).</p></li>
+<li><p>1D ising model is analytically solvable but it does not display phase-tranistion! Phase transitions possible in 2D, 3D. We discuss reaosns for this in a separate notebook. In this notebook we focus on simulating 2D lattice and calculating thermodynamic observables.</p></li>
 <li><p>Ising Models are defined by Hamiltonian encoding the nature of interactions between spins <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> (for nearest enighbours <span class="math notranslate nohighlight">\(|i-j|=1\)</span>) and/or interactions of spins with an external field <span class="math notranslate nohighlight">\(B\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -490,44 +487,36 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\boxed{Z=\sum_{[s]}e^{-H([s])/k_B T}}\]</div>
 <ul class="simple">
-<li><p>Note that the spin lattice in Ising models could be in 1D, 2D, 3D, … ND dimensions. In this notebook we only look at 2D becuase it is the simplest system that can display phase-transition and plus is faster to simulate and visualize</p></li>
-</ul>
-<section id="thermodynamics-of-ising-models">
-<h2>Thermodynamics of Ising models<a class="headerlink" href="#thermodynamics-of-ising-models" title="Permalink to this heading">#</a></h2>
-<section id="magnetization">
-<h3>Magnetization<a class="headerlink" href="#magnetization" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><strong>Total magnetization, <span class="math notranslate nohighlight">\(M\)</span></strong></p></li>
+<li><p><strong>Total magnetization, <span class="math notranslate nohighlight">\(M\)</span></strong>  or <strong>Magnetization per spin <span class="math notranslate nohighlight">\(m\)</span></strong>  are key observables in the model and we defined them below</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[M([s])=\sum_is_i \]</div>
-<ul class="simple">
-<li><p><strong>Magnetization per spin <span class="math notranslate nohighlight">\(m\)</span></strong></p></li>
-</ul>
 <div class="math notranslate nohighlight">
 \[m([s])=\frac{1}{N}\sum_is_i =\frac{M}{N}\]</div>
-</section>
-<section id="heat-capacity-c-v">
-<h3>Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span><a class="headerlink" href="#heat-capacity-c-v" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Partition function can be defined for fixed valyes of Magnetization as a partial sum over those spin configurations <span class="math notranslate nohighlight">\([s]\)</span> for which <span class="math notranslate nohighlight">\(M[s] = M\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z(M) = \sum_{[s]} e^{-\beta H([s])} \delta (M-M([s]))\]</div>
+<ul class="simple">
+<li><p>Similiarly Free energy as a function of M can be obtained allowing us to reason about probabilities of systems with different degree of magnetization.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[F(M)=-\beta^{-1} log Z(M)\]</div>
+<ul class="simple">
+<li><p>The nfinal two thermodynamic observables we would like to compute tel us about nature of fluctuations in energy and magnetization:</p></li>
+<li><p><strong>Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span></strong></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[ C_V(T) = \Big (\frac{\partial E}{\partial T} \Big )_V= \frac{1}{k_B T^2} \big(\langle E^2 \rangle-\langle E \rangle^2 \big) \]</div>
-</section>
-<section id="susceptibility-chi">
-<h3>Susceptibility <span class="math notranslate nohighlight">\(\chi\)</span><a class="headerlink" href="#susceptibility-chi" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Susceptibility <span class="math notranslate nohighlight">\(\chi\)</span></strong></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\chi_T=\Big (\frac{\partial M}{\partial B} \Big )_T= \frac{1}{k_B T} \big(\langle M^2 \rangle-\langle M \rangle^2 \big) \]</div>
 </section>
-</section>
-<section id="free-energy-profile">
-<h2>Free energy profile<a class="headerlink" href="#free-energy-profile" title="Permalink to this heading">#</a></h2>
-<div class="math notranslate nohighlight">
-\[Z(M) = \sum_{[s]} e^{-\beta H([s])} \delta (M-M([s]))\]</div>
-<div class="math notranslate nohighlight">
-\[F(M)=-\beta^{-1} log Z(M)\]</div>
-<p>Note that <span class="math notranslate nohighlight">\(Z(M)\)</span> is a partial sum over states for which magnetization is equal to a particular value <span class="math notranslate nohighlight">\(M\)</span> as opposed to the full partition function <span class="math notranslate nohighlight">\(Z\)</span> where summation is unrestricted.</p>
-</section>
-<section id="numerical-calculation-of-thermodynamic-quantities">
-<h2>Numerical calculation of thermodynamic quantities<a class="headerlink" href="#numerical-calculation-of-thermodynamic-quantities" title="Permalink to this heading">#</a></h2>
+<section id="setting-up-spin-lattice">
+<h2>Setting up spin lattice<a class="headerlink" href="#setting-up-spin-lattice" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
@@ -583,8 +572,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_E</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Compute energy of spin lattice by lopping over each spin </span>
-<span class="sd">    with periodic boundary conditions enforced </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Compute energy of spin lattice by taking product of spin </span>
+<span class="sd">    lattice with itself shifted in four directions using</span>
 <span class="sd">    via numpy roll&#39;&#39;&#39;</span> 
       
     <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> \
@@ -594,8 +583,11 @@ document.write(`
     
     <span class="k">return</span> <span class="n">E</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">get_E2</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>   
-     
+<span class="k">def</span> <span class="nf">get_E2</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">J</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>  
+<span class="w">       </span><span class="sd">&#39;&#39;&#39;Compute energy of spin lattice by iterating over every spin </span>
+<span class="sd">    and using modulo to enforce periodic bondary conditions</span>
+<span class="sd">    e.g (N-2)%N=N-2,  (N-1)%N = N-1 and N%N=0&#39;&#39;&#39;</span> 
+
     <span class="n">N</span> <span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
     <span class="n">E</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
@@ -609,7 +601,7 @@ document.write(`
 
 <span class="k">def</span> <span class="nf">get_dE</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Compute change in energy of 2D spin lattice </span>
-<span class="sd">    after flipping a spin at a location (i,j&#39;&#39;&#39;</span> 
+<span class="sd">    after flipping a spin at a location (i,j)&#39;&#39;&#39;</span> 
     
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
     
@@ -619,7 +611,6 @@ document.write(`
     <span class="n">dE</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">J</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">dE</span>
-        
 </pre></div>
 </div>
 </div>
@@ -633,8 +624,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="sampling-of-boltzmann-distribution-mc-vs-mcmc">
-<h2>Sampling of Boltzmann distribution: MC vs MCMC<a class="headerlink" href="#sampling-of-boltzmann-distribution-mc-vs-mcmc" title="Permalink to this heading">#</a></h2>
+<section id="sampling-boltzmann-distribution-mc-vs-mcmc">
+<h2>Sampling Boltzmann distribution: MC vs MCMC<a class="headerlink" href="#sampling-boltzmann-distribution-mc-vs-mcmc" title="Permalink to this heading">#</a></h2>
 <p><strong>MC sampling</strong></p>
 <ul class="simple">
 <li><p>How to compute the expectation value of a thermodynamic variable <span class="math notranslate nohighlight">\(A\)</span>. In theory everything is simple: we need to sample from the exponential distribution.</p></li>
@@ -706,18 +697,18 @@ document.write(`
 <h2>Detailed Balance = Equilibrium<a class="headerlink" href="#detailed-balance-equilibrium" title="Permalink to this heading">#</a></h2>
 <br>
 <div class="math notranslate nohighlight">
-\[\boxed{\frac{\partial P(X,t)}{\partial t}  = \sum_{X'} P(X', t) w_{X'X} - \sum_{X'} P(X, t) w_{X X'}}=0\]</div>
+\[\boxed{\frac{\partial P(X,t)}{\partial t}  = \sum_{X'} P(X', t) w_{XX'} - \sum_{X'} P(X, t) w_{X' X}}=0\]</div>
 <br>
 <div class="math notranslate nohighlight">
-\[\boxed{ p_i w_{ij} = p_j w_{ji}  }\]</div>
+\[\boxed{  w_{ij}\cdot p_j =  w_{ji} \cdot p_i  }\]</div>
 <p><strong>Master equation for a two state dynamics</strong></p>
 <div class="math notranslate nohighlight">
-\[\frac{dP(x_1,t)}{dt} = p_1 w_{12} - p_2 w_{21}\]</div>
+\[\frac{dP(x_1,t)}{dt} = w_{12} p_2 - w_{21} p_1\]</div>
 <div class="math notranslate nohighlight">
-\[\frac{dP(x_2,t)}{dt} = p_2 w_{21} - p_1 w_{12}\]</div>
+\[\frac{dP(x_2,t)}{dt} = w_{21} p_1  -  w_{12} p_2\]</div>
 <ul class="simple">
-<li><p>In the equilibrium we see that equilibrium is established when probability ratio matches the ratio of tranistions <span class="math notranslate nohighlight">\(\frac{p_1}{p_2} = \frac{w_{21}}{w_{12}}\)</span></p></li>
-<li><p>In the <span class="math notranslate nohighlight">\(NVT\)</span> ensemble we have an explicit requirment for transition rates <span class="math notranslate nohighlight">\(\frac{p_1}{p_2} = e^{-\beta (E_1-E_2)} = \frac{w_{21}}{w_{12}}\)</span></p></li>
+<li><p>In the equilibrium we see that equilibrium is established when probability ratio matches the ratio of tranistions <span class="math notranslate nohighlight">\(\frac{p_1}{p_2} = \frac{w_{12}}{w_{21}}\)</span></p></li>
+<li><p>In the <span class="math notranslate nohighlight">\(NVT\)</span> ensemble we have an explicit requirment for transition rates <span class="math notranslate nohighlight">\(\frac{p_1}{p_2} = e^{-\beta (E_1-E_2)} = \frac{w_{12}}{w_{21}}\)</span></p></li>
 </ul>
 </section>
 <section id="how-to-pick-the-moves-for-markov-chain">
@@ -902,20 +893,15 @@ document.write(`
 <h4>Parameter sweeps and calculation of second order thermodynamic quantities<a class="headerlink" href="#parameter-sweeps-and-calculation-of-second-order-thermodynamic-quantities" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_Cv</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carry out multiple MC runs at differnet Temperatures. </span>
+<span class="c1"># This calculation may take ~5 mins. </span>
+<span class="c1"># Think about equilibration, convergence and statistical errors</span>
+
+<span class="k">def</span> <span class="nf">get_Cv</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">/</span><span class="n">T</span><span class="o">**</span><span class="mi">2</span>
 
 <span class="k">def</span> <span class="nf">get_Xi</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">/</span><span class="n">T</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carry out multiple MC runs at differnet Temperatures. </span>
-<span class="c1"># This calculation may take ~5 mins. </span>
-<span class="c1"># Think about equilibration, convergence and statistical errors</span>
 
 <span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span> 
 <span class="n">n_equil</span>  <span class="o">=</span> <span class="mi">100000</span>
@@ -1137,16 +1123,10 @@ configuration as an input to the system to undergo equilibriation again.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics-of-ising-models">Thermodynamics of Ising models</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#magnetization">Magnetization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-capacity-c-v">Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#susceptibility-chi">Susceptibility <span class="math notranslate nohighlight">\(\chi\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-profile">Free energy profile</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-calculation-of-thermodynamic-quantities">Numerical calculation of thermodynamic quantities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-ising-models-and-key-thermodynamic-variables">Summary of Ising models and key thermodynamic variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-spin-lattice">Setting up spin lattice</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">Enforcing periodic boundary conditions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-of-boltzmann-distribution-mc-vs-mcmc">Sampling of Boltzmann distribution: MC vs MCMC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-boltzmann-distribution-mc-vs-mcmc">Sampling Boltzmann distribution: MC vs MCMC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-chains-master-equation-and-detailed-balance">Generating chains! Master Equation and Detailed Balance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-balance-equilibrium">Detailed Balance = Equilibrium</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">How to pick the moves for Markov chain?</a></li>
