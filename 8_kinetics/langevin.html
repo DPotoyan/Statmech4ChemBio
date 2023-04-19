@@ -429,7 +429,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-dissipation-theorem">Fluctuation-dissipation theorem</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -584,6 +587,8 @@ t-\tau_{mr}\left ( 1-\exp\left (-\frac{t}{\tau_{mr}}\right )\right )\approx \fra
 \langle r^2 \rangle \propto t^2
 \]</div>
 <p>which is the result we expect for ballistic motion. Between both regimes, the MSD could be complicated as the short time motion starts a hydrodynamic flux in the environment which is influencing the particle motion again. These hydrodynamic memory effects cause the so called long time tails in the mean squared displacement.</p>
+<section id="fluctuation-dissipation-theorem">
+<h3>Fluctuation-dissipation theorem<a class="headerlink" href="#fluctuation-dissipation-theorem" title="Permalink to this heading">#</a></h3>
 <p>While we so far only know that <span class="math notranslate nohighlight">\(\langle\vec{\zeta}(t) \rangle =0\)</span>, we also know that there must be a certain magnitude of the random force that is connected to the temperature of the sample. The short time autocorrelation of the noise should be of the type</p>
 <div class="math notranslate nohighlight">
 \[
@@ -651,8 +656,10 @@ A=2\gamma k_B T
     <span class="c1"># dv = -1/tau * v * dt + eta dW</span>
     
     <span class="n">dW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
     <span class="n">z_new</span> <span class="o">=</span> <span class="n">z</span> <span class="o">+</span> <span class="n">v</span><span class="o">*</span><span class="n">dt</span>
     <span class="n">v_new</span> <span class="o">=</span> <span class="n">v</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tau</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">dt</span> <span class="o">+</span> <span class="n">eta</span><span class="o">*</span><span class="n">dW</span>
+    
     <span class="k">return</span> <span class="n">z_new</span><span class="p">,</span> <span class="n">v_new</span>
 </pre></div>
 </div>
@@ -688,12 +695,17 @@ A=2\gamma k_B T
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$&lt;r^2(t)&gt;$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p><img alt="" src="8_kinetics/img/test.pdf" /></p>
+</section>
 </section>
 </section>
 
@@ -755,7 +767,10 @@ A=2\gamma k_B T
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-dissipation-theorem">Fluctuation-dissipation theorem</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
