@@ -430,10 +430,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin Equation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-dissipation-theorem">Fluctuation Dissipation Theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damped-driven-harmonic-oscillator">Damped Driven Harmonic Oscillator</a></li>
-</ul>
-</li>
 </ul>
             </nav>
         </div>
@@ -494,7 +490,7 @@ m\frac{d\langle \vec{v}\rangle}{dt}=-6\pi \eta R \langle \vec{v}\rangle
 \[
 \langle \vec{v}\rangle=\vec{v}(0)\exp\left ( -\frac{t}{\tau_{mr}}\right)
 \]</div>
-<p>with <span class="math notranslate nohighlight">\(\tau_{mr}\)</span> being the momentum relaxation time we discussed already earlier. We can further continue to derive the mean squared position by taking the scalar product of the Langevin equation with <span class="math notranslate nohighlight">\(\vec{r}\)</span> and neglecting the potential. Taking the ensemble average yields</p>
+<p>with <span class="math notranslate nohighlight">\(\tau_{mr}\)</span> is a characteristic relaxation time for velocity of brownian particle. We can further continue to derive the mean squared position by taking the scalar product of the Langevin equation with <span class="math notranslate nohighlight">\(\vec{r}\)</span> and neglecting the potential. Taking the ensemble average yields</p>
 <div class="math notranslate nohighlight">
 \[
 m\frac{d}{dt}\langle \vec{r}\cdot \vec{v}\rangle =-6\pi \eta R \langle \vec{r}\cdot \vec{v}\rangle + m\langle v^2\rangle 
@@ -587,14 +583,7 @@ t-\tau_{mr}\left ( 1-\exp\left (-\frac{t}{\tau_{mr}}\right )\right )\approx \fra
 \[
 \langle r^2 \rangle \propto t^2
 \]</div>
-<p>which is the result we expect for ballistic motion. Between both regimes, the MSD could be complicated as the short time motion starts a hydrodynamic flux in the environment which is influencing the particle motion again. These hydrodynamic memory effects cause the so called long time tails in the mean squared displacement. The Langevin equation in one dimension then reads like</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e76a07cc-1fd2-4ab9-b567-b6a83c92f0dc">
-<span class="eqno">(1)<a class="headerlink" href="#equation-e76a07cc-1fd2-4ab9-b567-b6a83c92f0dc" title="Permalink to this equation">#</a></span>\[\begin{equation}
-M^{\prime} \ddot{x}(t)= 
--6 \pi \eta R \dot{x}(t)-6 R^{2} \sqrt{\pi \rho_{f} \eta} \int_{0}^{t}\left(t-t^{\prime}\right)^{-1 / 2} \ddot{x}\left(t^{\prime}\right) \mathrm{d} t^{\prime} -\nabla U+\zeta(t)
-\end{equation}\]</div>
-<p>and contains the effective mass of the colloidal <span class="math notranslate nohighlight">\(M^{\prime}\)</span>, the fluid density <span class="math notranslate nohighlight">\(\rho_f\)</span>  and the external potential <span class="math notranslate nohighlight">\(U. The full MSD for a colloidal particle is displayed in the figure below as measured for example in an optical tweezer in the Molecular Nanophotonics group. Note that the MSD axis goes down to \)</span>10^{-21}, {\rm m}$, which corresponds to 30 picometer displacement, which is far below the size of a hydrodgen atom.</p>
-<p><img alt="MSD" src="8_kinetics/img/msd_bead.png" /></p>
+<p>which is the result we expect for ballistic motion. Between both regimes, the MSD could be complicated as the short time motion starts a hydrodynamic flux in the environment which is influencing the particle motion again. These hydrodynamic memory effects cause the so called long time tails in the mean squared displacement.</p>
 <p>While we so far only know that <span class="math notranslate nohighlight">\(\langle\vec{\zeta}(t) \rangle =0\)</span>, we also know that there must be a certain magnitude of the random force that is connected to the temperature of the sample. The short time autocorrelation of the noise should be of the type</p>
 <div class="math notranslate nohighlight">
 \[
@@ -652,110 +641,59 @@ A=2\gamma k_B T
 \langle\vec{\zeta}(t_1)\cdot \vec{\zeta}(t_2) \rangle =2\gamma k_B T\delta (t_1-t_2)
 \]</div>
 <p>which is a very fundamental result. It states that the fluctuating force <span class="math notranslate nohighlight">\(\vec{\zeta}(t)\)</span> are related to the viscous forces expressed by the friction coefficient <span class="math notranslate nohighlight">\(\gamma\)</span>. This makes sensse, since the friction forces must dissipate energy into heat. The motion would thus come to a rest if heat and dynamics would be decoupled. The law we obtained is thus stateing the dissipated energy goes back again into kinetic energy. This is the statement of the fluctuation dissipation theorem,</p>
-</section>
-<section id="fluctuation-dissipation-theorem">
-<h2>Fluctuation Dissipation Theorem<a class="headerlink" href="#fluctuation-dissipation-theorem" title="Permalink to this heading">#</a></h2>
-<p>The fluctuation dissipation theorem (FDT) generalizes the previous finding into</p>
-<div class="math notranslate nohighlight">
-\[
-\chi''(\omega)=\frac{\omega}{2k_B T}\langle |x_{\omega}|^2\rangle \tag{Fluctuation dissipation relation}
-\]</div>
-<p>which is now converted into frequency space. On the left side is the imaginary part of a response function or susceptibility <span class="math notranslate nohighlight">\(\chi\)</span>, which is connected to the dissipation. The right side contains the power spectral density of the fluctuation of a variable <span class="math notranslate nohighlight">\(x_{\omega}\)</span> at the frequency <span class="math notranslate nohighlight">\(\omega\)</span>. So the amplitude of a fluctuation at a certain frequency is connected to the dissipation in equilibrium.</p>
-<section id="damped-driven-harmonic-oscillator">
-<h3>Damped Driven Harmonic Oscillator<a class="headerlink" href="#damped-driven-harmonic-oscillator" title="Permalink to this heading">#</a></h3>
-<p>We would like to have a look at the FDT using a 1d damped driven oscillator given by the following equation</p>
-<div class="math notranslate nohighlight">
-\[
-m\ddot{x}+\gamma \dot{x}+kx=F(t)
-\]</div>
-<p>with <span class="math notranslate nohighlight">\(k\)</span> being the spring constant of the harmonic potential and <span class="math notranslate nohighlight">\(\gamma\)</span> the friction coefficient. Solving this differential equation yields for the amplitude of the oscillation at a certain driving frequency of <span class="math notranslate nohighlight">\(F(t)\)</span></p>
-<div class="math notranslate nohighlight">
-\[
-x_{\omega}=\frac{1}{k-m\omega^2-i\gamma \omega}F_{\omega}
-\]</div>
-<p>which is clearly a linear response relation as amplitude and force dependent lineraly on each other. The term converting the force into an amplitude is the response function</p>
-<div class="math notranslate nohighlight">
-\[
-\chi(\omega)=\frac{1}{k-m\omega^2-i\gamma \omega} \tag{response function}
-\]</div>
-<p>which can be split into real and imaginary part, i.e. <span class="math notranslate nohighlight">\(\chi=\chi'(\omega)+i\chi'' (\omega)\)</span>. A quick calculation shows that</p>
-<div class="math notranslate nohighlight">
-\[
-\chi''(\omega)=\frac{\omega \gamma}{(k-m\omega^2)^2+(\omega \gamma)^2}
-\]</div>
-<p>In the overdamped regime (i.e. <span class="math notranslate nohighlight">\(m=0\)</span>) we therefore find for the imaginary part</p>
-<div class="math notranslate nohighlight">
-\[
-\chi''(\omega)=\frac{\omega \gamma}{k^2+(\omega \gamma)^2}
-\]</div>
-<p>If we furthe rswitch off the harmonic potential we just have</p>
-<div class="math notranslate nohighlight">
-\[
-\chi''(\omega)=\frac{\omega \gamma}{\omega^2 \gamma^2}
-\]</div>
-<p>which is the response function for Brownian motion. From this we find</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\chi''(\omega)}{\omega}=\frac{1}{\omega^2 \gamma}\langle |x_{\omega}|^2\rangle=\frac{1}{\gamma \omega^2}
-\]</div>
-<p>or</p>
-<div class="math notranslate nohighlight">
-\[
-\langle |x_{\omega}|^2\rangle=\frac{2k_B T}{\gamma \omega^2}
-\]</div>
-<p>for the amplitude and</p>
-<div class="math notranslate nohighlight">
-\[
-\langle |v_{\omega}|^2\rangle=\frac{2k_B T}{\gamma}
-\]</div>
-<p>for the velocity amplitude. This is the frequency spectrum of the positional and speed fluctuations of a Brownian particle. This is exactly what is found in an optical tweezer for a Brownian particle at high frequencies. At lower frequencies the particle bounces from the harmonic potential and the motion of the colloid is restricted.</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\chi''(\omega)}{\omega}=\frac{\gamma}{k^2+(\omega \gamma)^2}=\frac{1}{2k_B T}\langle |x_{\omega}|^2\rangle
-\]</div>
-<p>From thsi follows the power spectral density of tge positional fluctuations in an optical tweezers</p>
-<div class="math notranslate nohighlight">
-\[
-\langle |x_{\omega}|^2\rangle =\frac{2k_B T \gamma}{k^2}\frac{1}{1+(\omega/\omega_0)^2}
-\]</div>
-<p>Here <span class="math notranslate nohighlight">\(\omega_0=k/\gamma\)</span> is a particular frequency at which the <span class="math notranslate nohighlight">\(1/\omega^2\)</span> dependence of the power spectrum turns into a plateau at small frequencies.  The last equation is heavily used to calibrate optical tweezers, as it can be used to measure the force constant <span class="math notranslate nohighlight">\(k\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omega</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">k_B</span><span class="o">=</span><span class="mf">1.381e-23</span> <span class="c1">#J/K</span>
-<span class="n">T</span><span class="o">=</span><span class="mi">300</span> <span class="c1">#K</span>
-<span class="n">eta</span><span class="o">=</span><span class="mf">1e-3</span> <span class="c1">#mPa s</span>
-<span class="n">R</span><span class="o">=</span><span class="mf">200e-9</span> <span class="c1">#m</span>
-<span class="n">gamma</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">eta</span><span class="o">*</span><span class="n">R</span>
-<span class="n">k</span><span class="o">=</span><span class="mf">1e-9</span> <span class="c1">#N/m</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="k">def</span> <span class="nf">PSD</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
-    <span class="k">return</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">k_B</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="n">gamma</span><span class="o">/</span><span class="p">(</span><span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">omega</span><span class="o">*</span><span class="n">gamma</span><span class="o">/</span><span class="n">k</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">langevin</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="c1"># Implements numerical solution by means of the Euler-Maruyama method of the Langevin which is known as an SDE (Stochastic Differential equation)</span>
+    <span class="c1"># dz = v * dt</span>
+    <span class="c1"># dv = -1/tau * v * dt + eta dW</span>
+    
+    <span class="n">dW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">z_new</span> <span class="o">=</span> <span class="n">z</span> <span class="o">+</span> <span class="n">v</span><span class="o">*</span><span class="n">dt</span>
+    <span class="n">v_new</span> <span class="o">=</span> <span class="n">v</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tau</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">dt</span> <span class="o">+</span> <span class="n">eta</span><span class="o">*</span><span class="n">dW</span>
+    <span class="k">return</span> <span class="n">z_new</span><span class="p">,</span> <span class="n">v_new</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span><span class="n">PSD</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span><span class="n">k</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$k=1\,$ nN&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span><span class="n">PSD</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span><span class="n">k</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$k=0.5\,$ nN&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span><span class="n">PSD</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span><span class="n">k</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$k=0.25\,$ nN&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">k</span><span class="o">/</span><span class="n">gamma</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\omega$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$&lt;|x_{\omega}|^2&gt;$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical parameters and system coefficients</span>
+<span class="n">Np</span>   <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">Tmax</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">tau</span>  <span class="o">=</span> <span class="mi">10</span>
+<span class="n">eta</span>  <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">dt</span>   <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">Nt</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Tmax</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1"># Output interval</span>
+<span class="n">Nskip</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Initial values</span>
+<span class="n">Z</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="p">)</span>
+<span class="n">V</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="p">)</span>
+<span class="n">time</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>
+
+    <span class="n">Z</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">langevin</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="c1"># write time and variance every Nskip timesteps</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">Nskip</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/fbfbb8a224e16a38e00535d928c017cda2e46bf7acf7a3c8a51451143e419133.png" src="../_images/fbfbb8a224e16a38e00535d928c017cda2e46bf7acf7a3c8a51451143e419133.png" />
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 </div>
 <p><img alt="" src="8_kinetics/img/test.pdf" /></p>
-</section>
 </section>
 </section>
 
@@ -818,10 +756,6 @@ x_{\omega}=\frac{1}{k-m\omega^2-i\gamma \omega}F_{\omega}
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin Equation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-dissipation-theorem">Fluctuation Dissipation Theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damped-driven-harmonic-oscillator">Damped Driven Harmonic Oscillator</a></li>
-</ul>
-</li>
 </ul>
   </nav></div>
 
