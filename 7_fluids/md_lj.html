@@ -428,7 +428,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-parameters-of-simulation">Thermodynamic parameters of simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-positions-velocities-and-forces">Initial positions, velocities and forces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-forces">Computation of forces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-stepping">Time stepping</a></li>
@@ -456,49 +455,35 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="thermodynamic-parameters-of-simulation">
-<h2>Thermodynamic parameters of simulation<a class="headerlink" href="#thermodynamic-parameters-of-simulation" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>These are exactly the same parameters that we used for MC simulations.</p></li>
-<li><p>We are going to show that regardless of what sampling stratgy we use (MC or MD) in the end we are always sampling from Boltzmann distribution. Thus we expect thermodynamical predicitons to be the same.</p></li>
-<li><p>Thermodynamical properties should not depend on sampling method!</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span>    <span class="o">=</span> <span class="mf">.88</span> <span class="c1"># density of Argon in natural units</span>
-<span class="n">dt</span>     <span class="o">=</span> <span class="mf">0.004</span> <span class="c1"># time step size</span>
-<span class="n">T</span>    <span class="o">=</span> <span class="mi">1</span> <span class="c1"># temperature</span>
-<span class="n">N_cell</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># number of unitcells in one direction    </span>
-
-
-<span class="n">N</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">N_cell</span> <span class="o">**</span> <span class="mi">3</span> <span class="c1"># the total number of particles in the system</span>
-<span class="n">L_box</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># length of the whole box</span>
-<span class="n">L_cell</span> <span class="o">=</span> <span class="n">L_box</span> <span class="o">/</span> <span class="n">N_cell</span> <span class="c1"># length of a unitcell</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="initial-positions-velocities-and-forces">
 <h2>Initial positions, velocities and forces<a class="headerlink" href="#initial-positions-velocities-and-forces" title="Permalink to this heading">#</a></h2>
 <p>Unlike MC simulation where the initial condition is fully specified by positin arrray in MD simulations we must also specify initial velocities which allows us to determine initial forces!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">IC_pos</span><span class="p">(</span><span class="n">N_cell</span><span class="p">,</span> <span class="n">L_cell</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Generate initial positions of LJ fluid where particles are ordered on a lattice with </span>
-<span class="sd">    number of unitcells N_cell of length L_lcell </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">IC_box</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Function to generate initial positions of LJ fluid. here particles are ordered on a lattice with </span>
+<span class="sd">    number of unitcells N_cell of length L_lcell .</span>
+<span class="sd">    ---</span>
+<span class="sd">    rho: density of the system</span>
+<span class="sd">    N_cell: how many repeats of close packed unit cells</span>
+
+<span class="sd">    returns: position array of shape (N, 3)</span>
 <span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">N</span>      <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">N_cell</span> <span class="o">**</span> <span class="mi">3</span>      <span class="c1"># Total number of particles </span>
+    <span class="n">L_box</span>  <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># length of the whole box</span>
+    <span class="n">L_cell</span> <span class="o">=</span> <span class="n">L_box</span> <span class="o">/</span> <span class="n">N_cell</span>       <span class="c1"># length of a unit cell</span>
 
     <span class="n">pos</span> <span class="o">=</span> <span class="p">[[[</span><span class="n">x</span><span class="p">,</span>  <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">z</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">z</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">]]</span> 
            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">))]</span>
     
     <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">pos</span> <span class="o">*</span> <span class="n">L_cell</span>
+    <span class="k">return</span> <span class="n">pos</span> <span class="o">*</span> <span class="n">L_cell</span><span class="p">,</span> <span class="n">L_box</span>
 
 
 <span class="k">def</span> <span class="nf">IC_vel</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Genreate initial distribution of velocities according to Maxwell-Botlzmann&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Genreate initial distribution of velocities from Maxwell-Botlzmann&#39;&#39;&#39;</span>
 
     <span class="n">vel</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
     <span class="n">vel</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -515,9 +500,9 @@ document.write(`
 <span class="sd">    &#39;&#39;&#39;</span>
     
     <span class="n">F</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>       
-    <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   
+    <span class="n">I</span><span class="p">,</span> <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>   
     
-    <span class="k">return</span> <span class="n">F</span><span class="p">,</span> <span class="n">ind</span>
+    <span class="k">return</span> <span class="n">F</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">J</span>
 </pre></div>
 </div>
 </div>
@@ -545,7 +530,7 @@ document.write(`
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="c1"># Compute all unique ij distances</span>
-    <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">ind</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">ind</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">J</span><span class="p">]</span>
 
     <span class="c1"># Use min image criteria for distances</span>
     <span class="n">r_vec</span> <span class="o">=</span> <span class="n">r_vec</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">r_vec</span> <span class="o">/</span> <span class="n">L_box</span><span class="p">)</span> <span class="o">*</span> <span class="n">L_box</span>
@@ -642,20 +627,10 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#------- Main imulation parameters ----</span>
-<span class="n">rho</span>    <span class="o">=</span> <span class="mf">.88</span> <span class="c1"># Density of Argon in natural units</span>
-<span class="n">T</span>      <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># Temperature</span>
-<span class="n">N_cell</span> <span class="o">=</span> <span class="mi">3</span>   <span class="c1"># Number of unitcells in one direction    </span>
-
-<span class="c1">#------- Auxiliary quantities-------</span>
-<span class="n">N</span>      <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">N_cell</span> <span class="o">**</span> <span class="mi">3</span> <span class="c1"># the total number of particles in the system</span>
-<span class="n">L_box</span>  <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># length of the whole box</span>
-<span class="n">L_cell</span> <span class="o">=</span>  <span class="n">L_box</span> <span class="o">/</span> <span class="n">N_cell</span> <span class="c1"># length of a unitcell</span>
-
-<span class="c1">#------- Initalize positions, velocities and Forces-------</span>
-<span class="n">pos</span>    <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">N_cell</span><span class="p">,</span> <span class="n">L_cell</span><span class="p">)</span>
-<span class="n">vel</span>    <span class="o">=</span> <span class="n">IC_vel</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="n">F</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">IC_F</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#------- Initalize global variables: positions, box length, velocities and Forces-------</span>
+<span class="n">pos</span><span class="p">,</span> <span class="n">L_box</span>     <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">vel</span>            <span class="o">=</span> <span class="n">IC_vel</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">F</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">J</span>        <span class="o">=</span> <span class="n">IC_F</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
 <span class="c1">#Run simulation</span>
 <span class="n">kins</span><span class="p">,</span> <span class="n">pots</span><span class="p">,</span> <span class="n">Ps</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">simulate</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">freq_out</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">nsteps</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
@@ -758,7 +733,6 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-parameters-of-simulation">Thermodynamic parameters of simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-positions-velocities-and-forces">Initial positions, velocities and forces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-forces">Computation of forces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-stepping">Time stepping</a></li>
