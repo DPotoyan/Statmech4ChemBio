@@ -542,18 +542,15 @@ document.write(`
     <span class="n">dUdr</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mi">48</span> <span class="o">/</span> <span class="n">r_sq</span> <span class="o">**</span> <span class="mi">7</span> <span class="o">-</span> <span class="mi">24</span> <span class="o">/</span> <span class="n">r_sq</span> <span class="o">**</span> <span class="mi">4</span><span class="p">)</span>
 
     <span class="c1"># Compute force maxtirx containing all forces between ij particles dU/dr * dr</span>
-    <span class="n">F_vec</span> <span class="o">=</span> <span class="n">dUdr</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">r_vec</span>
-
-    <span class="n">F</span><span class="p">[</span><span class="n">ind</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ind</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">F_vec</span>
+    <span class="n">F</span><span class="p">[</span><span class="n">I</span><span class="p">,</span><span class="n">J</span><span class="p">]</span> <span class="o">=</span> <span class="n">dUdr</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">r_vec</span>
 
     <span class="c1"># Compute total force acting on each particle (i=1,...N) </span>
     <span class="n">forces</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># Compute potential energy, pressure and histogram of r^2 pair distances</span>
-
     <span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="n">r_sq</span> <span class="o">**</span> <span class="mi">6</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">r_sq</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
 
-    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">F_vec</span> <span class="o">*</span> <span class="n">r_vec</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="n">I</span><span class="p">,</span><span class="n">J</span><span class="p">]</span> <span class="o">*</span> <span class="n">r_vec</span><span class="p">)</span>
 
     <span class="n">hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">r_sq</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L_box</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
     
