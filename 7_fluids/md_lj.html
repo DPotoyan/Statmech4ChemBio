@@ -215,6 +215,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../8_kinetics/langevin.html">Langevin equation and Brownian motion</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../9_polymers/intro.html">Polymers</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../9_polymers/openmm_lj_chain.html">Simulating LJ chains using openMM</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -432,6 +436,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-initial-positions-forces-and-velocities">Inspect initial positions, forces and velocities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-forces">Computation of forces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-stepping">Time stepping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#md-simulation-loop">MD simulation loop</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-md-simulation">Running MD simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-md-simulation">Analysis of MD simulation</a></li>
 </ul>
@@ -614,6 +619,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="md-simulation-loop">
+<h2>MD simulation loop<a class="headerlink" href="#md-simulation-loop" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> 
@@ -653,12 +661,13 @@ document.write(`
 <section id="running-md-simulation">
 <h2>Running MD simulation<a class="headerlink" href="#running-md-simulation" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Once again we collect all the relevant parameters of simulation in once cell to make it easy to do various exploratons</p></li>
+<li><p>Note that variables pos, L_box, F, I, J, vel are global variables which are used and updated by simulate function.</p></li>
+<li><p>Therefore we collect all the relevant parameters of simulation in once cell to make it easy to do various exploratons.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#------- Initalize global variables: positions, box length, velocities and Forces-------</span>
-<span class="n">pos</span><span class="p">,</span> <span class="n">L_box</span>     <span class="o">=</span> <span class="n">IC_box</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">pos</span><span class="p">,</span> <span class="n">L_box</span>     <span class="o">=</span> <span class="n">IC_box</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> 
 <span class="n">vel</span>            <span class="o">=</span> <span class="n">IC_vel</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="n">F</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">J</span>        <span class="o">=</span> <span class="n">IC_F</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
@@ -671,6 +680,17 @@ document.write(`
 </section>
 <section id="analysis-of-md-simulation">
 <h2>Analysis of MD simulation<a class="headerlink" href="#analysis-of-md-simulation" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kins</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;KE&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="p">(</span><span class="n">pots</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PE&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L_box</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
@@ -767,6 +787,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-initial-positions-forces-and-velocities">Inspect initial positions, forces and velocities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-forces">Computation of forces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-stepping">Time stepping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#md-simulation-loop">MD simulation loop</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-md-simulation">Running MD simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-md-simulation">Analysis of MD simulation</a></li>
 </ul>
