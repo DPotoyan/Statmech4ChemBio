@@ -437,7 +437,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-structure">Download structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-solvated-system">Prepare solvated system</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-simulation">Run simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimize-and-save-input-structure">Minimize and save input structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-simulation-starting-from-a-minimized-structure">Run a simulation starting from a minimized structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-simulation">Analyzing simulation</a></li>
 </ul>
             </nav>
@@ -465,7 +466,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-!conda install -c conda-forge openmm mdtraj parmed biopython
+!conda install -c conda-forge openmm mdtraj parmed 
 !pip install py3dmol 
 </pre></div>
 </div>
@@ -491,13 +492,17 @@ document.write(`
 <h2>Download structure<a class="headerlink" href="#download-structure" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>First you need to obtain the structure file of 1YRF from PDB database.</p></li>
-<li><p>We will use biopyton library to do this. You could also simply download from PDB website</p></li>
+<li><p>We will use parmed to download the PDB and select the 35 residues of protein chain omitting any other extra molecules that typically come with PDB file.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Bio.PDB</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">pdbl</span> <span class="o">=</span> <span class="n">PDBList</span><span class="p">()</span> 
-<span class="n">pdbl</span><span class="o">.</span><span class="n">retrieve_pdb_file</span><span class="p">(</span><span class="s1">&#39;2FAT&#39;</span><span class="p">,</span> <span class="n">pdir</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">file_format</span> <span class="o">=</span> <span class="s1">&#39;mmCif&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">parmed</span>
+
+<span class="n">pdb</span> <span class="o">=</span> <span class="n">parmed</span><span class="o">.</span><span class="n">download_PDB</span><span class="p">(</span><span class="s1">&#39;1YRF&#39;</span><span class="p">)</span>
+
+<span class="n">pdb</span> <span class="o">=</span> <span class="n">pdb</span><span class="p">[</span><span class="s1">&#39;:1-35&#39;</span><span class="p">]</span>
+
+<span class="n">pdb</span><span class="o">.</span><span class="n">write_pdb</span><span class="p">(</span><span class="s1">&#39;1yrf.pdb&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -507,20 +512,39 @@ document.write(`
 <h2>Prepare solvated system<a class="headerlink" href="#prepare-solvated-system" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">PDBFile</span><span class="p">(</span><span class="s2">&quot;1yrf_a.pdb&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load in the structure and add water molecules folloing a particular forcefield</span>
+<span class="n">pdb</span> <span class="o">=</span> <span class="n">PDBFile</span><span class="p">(</span><span class="s2">&quot;1yrf.pdb&quot;</span><span class="p">)</span>
 <span class="n">modeller</span> <span class="o">=</span> <span class="n">Modeller</span><span class="p">(</span><span class="n">pdb</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">pdb</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 <span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span><span class="s2">&quot;amber14-all.xml&quot;</span><span class="p">,</span> <span class="s2">&quot;amber14/tip3pfb.xml&quot;</span><span class="p">)</span>
 <span class="n">modeller</span><span class="o">.</span><span class="n">addHydrogens</span><span class="p">(</span><span class="n">forcefield</span><span class="p">)</span>
 <span class="n">modeller</span><span class="o">.</span><span class="n">addSolvent</span><span class="p">(</span><span class="n">forcefield</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;tip3p&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span> <span class="o">*</span> <span class="n">nanometer</span><span class="p">)</span>
+
+<span class="c1"># Forcefield together with topology is used to create openmm system containing all the forces acting on atoms. </span>
 <span class="n">system</span> <span class="o">=</span> <span class="n">forcefield</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span><span class="n">modeller</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">nonbondedMethod</span><span class="o">=</span><span class="n">PME</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">HBonds</span><span class="p">)</span>
-<span class="n">temperature</span> <span class="o">=</span> <span class="mi">300</span> <span class="o">*</span> <span class="n">kelvin</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="minimize-and-save-input-structure">
+<h2>Minimize and save input structure<a class="headerlink" href="#minimize-and-save-input-structure" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">300</span> <span class="o">*</span> <span class="n">kelvin</span>
 <span class="n">pressure</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">bar</span>
-<span class="n">integrator</span> <span class="o">=</span> <span class="n">LangevinIntegrator</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">picosecond</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">femtoseconds</span><span class="p">)</span>
-<span class="n">system</span><span class="o">.</span><span class="n">addForce</span><span class="p">(</span><span class="n">MonteCarloBarostat</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">))</span>
+
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">LangevinIntegrator</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> 
+                                <span class="mi">1</span> <span class="o">/</span> <span class="n">picosecond</span><span class="p">,</span> 
+                                <span class="mi">2</span> <span class="o">*</span> <span class="n">femtoseconds</span><span class="p">)</span>
+
+<span class="n">system</span><span class="o">.</span><span class="n">addForce</span><span class="p">(</span><span class="n">MonteCarloBarostat</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> 
+                                   <span class="n">temperature</span><span class="p">))</span>
+
 <span class="n">simulation</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">modeller</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">integrator</span><span class="p">)</span>
 <span class="n">simulation</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">setPositions</span><span class="p">(</span><span class="n">modeller</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 <span class="n">simulation</span><span class="o">.</span><span class="n">minimizeEnergy</span><span class="p">(</span><span class="n">maxIterations</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">positions</span> <span class="o">=</span> <span class="n">simulation</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">getState</span><span class="p">(</span><span class="n">getPositions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">getPositions</span><span class="p">()</span>
+
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;init.pdb&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">PDBFile</span><span class="o">.</span><span class="n">writeFile</span><span class="p">(</span><span class="n">simulation</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
@@ -528,8 +552,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section id="run-simulation">
-<h2>Run simulation<a class="headerlink" href="#run-simulation" title="Permalink to this heading">#</a></h2>
+<section id="run-a-simulation-starting-from-a-minimized-structure">
+<h2>Run a simulation starting from a minimized structure<a class="headerlink" href="#run-a-simulation-starting-from-a-minimized-structure" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">reporters</span> <span class="o">=</span> <span class="p">[]</span>
@@ -639,7 +663,8 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-structure">Download structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-solvated-system">Prepare solvated system</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-simulation">Run simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minimize-and-save-input-structure">Minimize and save input structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-a-simulation-starting-from-a-minimized-structure">Run a simulation starting from a minimized structure</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-simulation">Analyzing simulation</a></li>
 </ul>
   </nav></div>
