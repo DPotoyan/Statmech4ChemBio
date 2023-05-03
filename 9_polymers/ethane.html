@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Structure + topology file &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>Simulating Ethane &#8212; Statistical Mechanics for Chemistry and Biology</title>
   
   
   
@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '9_polymers/ethane';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simulating explicitly solvated small protein" href="villin.html" />
     <link rel="prev" title="Simulating toy polymers using openMM" href="openmm_lj_chain.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -218,11 +219,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Polymers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Structure + topology file</a></li>
-
-
-
-
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simulating Ethane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="villin.html">Simulating explicitly solvated small protein</a></li>
 </ul>
 </li>
 </ul>
@@ -428,7 +426,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Structure + topology file</h1>
+    <h1>Simulating Ethane</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -438,16 +436,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Structure + topology file</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#forcefield-file">Forcefield file</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-system-from-structure-and-forcefield-files">Creating system from structure and forcefield files</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#production-run">Production run</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-of-mean-force-pmf">Potential of Mean Force (PMF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-topology-file">Structure + topology file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forcefield-file">Forcefield file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-system-from-structure-and-forcefield-files">Creating system from structure and forcefield files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#production-run">Production run</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-of-mean-force-pmf">Potential of Mean Force (PMF)</a></li>
 </ul>
 </li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -458,7 +455,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="simulating-ethane">
+<h1>Simulating Ethane<a class="headerlink" href="#simulating-ethane" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install -q condacolab
 import condacolab
@@ -494,7 +493,7 @@ condacolab.install()
 </div>
 </div>
 <section id="structure-topology-file">
-<h1>Structure + topology file<a class="headerlink" href="#structure-topology-file" title="Permalink to this heading">#</a></h1>
+<h2>Structure + topology file<a class="headerlink" href="#structure-topology-file" title="Permalink to this heading">#</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ATOM</span>      <span class="mi">1</span>  <span class="n">C1</span>  <span class="n">ETH</span>     <span class="mi">1</span>      <span class="o">-</span><span class="mf">3.553</span>   <span class="mf">2.382</span>   <span class="mf">0.000</span>  <span class="mf">1.00</span>  <span class="mf">0.00</span>           <span class="n">C</span>  
 <span class="n">ATOM</span>      <span class="mi">2</span>  <span class="n">H11</span> <span class="n">ETH</span>     <span class="mi">1</span>      <span class="o">-</span><span class="mf">3.940</span>   <span class="mf">1.922</span>   <span class="mf">0.912</span>  <span class="mf">1.00</span>  <span class="mf">0.00</span>           <span class="n">H</span>  
 <span class="n">ATOM</span>      <span class="mi">3</span>  <span class="n">H12</span> <span class="n">ETH</span>     <span class="mi">1</span>      <span class="o">-</span><span class="mf">3.941</span>   <span class="mf">1.831</span>  <span class="o">-</span><span class="mf">0.859</span>  <span class="mf">1.00</span>  <span class="mf">0.00</span>           <span class="n">H</span>  
@@ -517,7 +516,7 @@ condacolab.install()
 </div>
 </section>
 <section id="forcefield-file">
-<h1>Forcefield file<a class="headerlink" href="#forcefield-file" title="Permalink to this heading">#</a></h1>
+<h2>Forcefield file<a class="headerlink" href="#forcefield-file" title="Permalink to this heading">#</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">ForceField</span><span class="o">&gt;</span>
  <span class="o">&lt;</span><span class="n">AtomTypes</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="n">Type</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;0&quot;</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;c3&quot;</span> <span class="n">element</span><span class="o">=</span><span class="s2">&quot;C&quot;</span> <span class="n">mass</span><span class="o">=</span><span class="s2">&quot;12.01078&quot;</span><span class="o">/&gt;</span>
@@ -562,7 +561,7 @@ condacolab.install()
 </div>
 </section>
 <section id="creating-system-from-structure-and-forcefield-files">
-<h1>Creating system from structure and forcefield files<a class="headerlink" href="#creating-system-from-structure-and-forcefield-files" title="Permalink to this heading">#</a></h1>
+<h2>Creating system from structure and forcefield files<a class="headerlink" href="#creating-system-from-structure-and-forcefield-files" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pdb</span>        <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">PDBFile</span><span class="p">(</span><span class="s1">&#39;ethane.pdb&#39;</span><span class="p">)</span>
@@ -615,7 +614,7 @@ condacolab.install()
 </div>
 </section>
 <section id="production-run">
-<h1>Production run<a class="headerlink" href="#production-run" title="Permalink to this heading">#</a></h1>
+<h2>Production run<a class="headerlink" href="#production-run" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span> <span class="k">as</span> <span class="nn">time</span>
@@ -656,7 +655,7 @@ condacolab.install()
 </div>
 </section>
 <section id="analysis">
-<h1>Analysis<a class="headerlink" href="#analysis" title="Permalink to this heading">#</a></h1>
+<h2>Analysis<a class="headerlink" href="#analysis" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">traj</span> <span class="o">=</span> <span class="n">md</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;ethane_sim.dcd&#39;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="s1">&#39;ethane.pdb&#39;</span><span class="p">)</span>
@@ -706,7 +705,7 @@ condacolab.install()
 </div>
 </div>
 <section id="potential-of-mean-force-pmf">
-<h2>Potential of Mean Force (PMF)<a class="headerlink" href="#potential-of-mean-force-pmf" title="Permalink to this heading">#</a></h2>
+<h3>Potential of Mean Force (PMF)<a class="headerlink" href="#potential-of-mean-force-pmf" title="Permalink to this heading">#</a></h3>
 <p>So far in our analysis, we have looked at the distribution of bond lengths and torsion angles for ethane. However, we can also use our simulations to calculate thermodynamics properties of our system. For example, we can use our calculated distributions along with Boltzmann’s constant to calculate the potential of mean force (pmf), or energy change associated with changes in the bond length or torsion angle.</p>
 <p>The potential of mean force is defined by the expression</p>
 <div class="math notranslate nohighlight">
@@ -731,6 +730,7 @@ condacolab.install()
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 
@@ -774,6 +774,15 @@ condacolab.install()
         <p class="prev-next-title">Simulating toy polymers using openMM</p>
       </div>
     </a>
+    <a class="right-next"
+       href="villin.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Simulating explicitly solvated small protein</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -792,16 +801,15 @@ condacolab.install()
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Structure + topology file</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#forcefield-file">Forcefield file</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-system-from-structure-and-forcefield-files">Creating system from structure and forcefield files</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#production-run">Production run</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-of-mean-force-pmf">Potential of Mean Force (PMF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-topology-file">Structure + topology file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forcefield-file">Forcefield file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-system-from-structure-and-forcefield-files">Creating system from structure and forcefield files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#production-run">Production run</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-of-mean-force-pmf">Potential of Mean Force (PMF)</a></li>
 </ul>
 </li>
 </ul>
-
   </nav></div>
 
 </div></div>
