@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Simulating explicitly solvated small protein &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>Simulating solvated protein &#8212; Statistical Mechanics for Chemistry and Biology</title>
   
   
   
@@ -219,7 +219,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Polymers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ethane.html">Simulating Ethane</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simulating explicitly solvated small protein</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Simulating solvated protein</a></li>
 </ul>
 </li>
 </ul>
@@ -425,7 +425,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Simulating explicitly solvated small protein</h1>
+    <h1>Simulating solvated protein</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -435,7 +435,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-1yrf-from-pdb">Obtain 1YRF from PDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-structure">Download structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-solvated-system">Prepare solvated system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-simulation">Run simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-simulation">Analyzing simulation</a></li>
 </ul>
             </nav>
         </div>
@@ -447,8 +450,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="simulating-explicitly-solvated-small-protein">
-<h1>Simulating explicitly solvated small protein<a class="headerlink" href="#simulating-explicitly-solvated-small-protein" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="simulating-solvated-protein">
+<h1>Simulating solvated protein<a class="headerlink" href="#simulating-solvated-protein" title="Permalink to this heading">#</a></h1>
 <p>For the simulations in this notebook, we will make use of the crystal structure of the Villin Headpiece subdomain <a class="reference external" href="https://www.rcsb.org/structure/1YRF">1YRF</a>. This is relatively small protein (35 residues) consisting of three alpha helices. This is a prototypical fast folding protein, see <a class="reference external" href="https://doi.org/10.1016/j.jmb.2006.03.034">10.1016/j.jmb.2006.03.034</a> and <a class="reference external" href="https://doi.org/10.1073/pnas.0502495102">10.1073/pnas.0502495102</a>, and it is therefore a popular benchmark for protein folding molecular dynamics simulations, e.g. <a class="reference external" href="https://doi.org/10.1073/pnas.1800690115">10.1073/pnas.1800690115</a> (force field accuracy) and <a class="reference external" href="https://doi.org/10.1109/SC.2014.9">10.1109/SC.2014.9</a> (computational performance)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -462,7 +465,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-!conda install -c conda-forge openmm mdtraj parmed
+!conda install -c conda-forge openmm mdtraj parmed biopython
 !pip install py3dmol 
 </pre></div>
 </div>
@@ -484,8 +487,24 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="obtain-1yrf-from-pdb">
-<h2>Obtain 1YRF from PDB<a class="headerlink" href="#obtain-1yrf-from-pdb" title="Permalink to this heading">#</a></h2>
+<section id="download-structure">
+<h2>Download structure<a class="headerlink" href="#download-structure" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>First you need to obtain the structure file of 1YRF from PDB database.</p></li>
+<li><p>We will use biopyton library to do this. You could also simply download from PDB website</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Bio.PDB</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pdbl</span> <span class="o">=</span> <span class="n">PDBList</span><span class="p">()</span> 
+<span class="n">pdbl</span><span class="o">.</span><span class="n">retrieve_pdb_file</span><span class="p">(</span><span class="s1">&#39;2FAT&#39;</span><span class="p">,</span> <span class="n">pdir</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">file_format</span> <span class="o">=</span> <span class="s1">&#39;mmCif&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prepare-solvated-system">
+<h2>Prepare solvated system<a class="headerlink" href="#prepare-solvated-system" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pdb</span> <span class="o">=</span> <span class="n">PDBFile</span><span class="p">(</span><span class="s2">&quot;1yrf_a.pdb&quot;</span><span class="p">)</span>
@@ -508,6 +527,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="run-simulation">
+<h2>Run simulation<a class="headerlink" href="#run-simulation" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulation</span><span class="o">.</span><span class="n">reporters</span> <span class="o">=</span> <span class="p">[]</span>
@@ -531,19 +553,12 @@ document.write(`
 </div>
 </div>
 </div>
-<p>You will need the output files of this simulation for the following notebook. Copy over the files <code class="docutils literal notranslate"><span class="pre">init.pdb</span></code>, <code class="docutils literal notranslate"><span class="pre">scalars.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">traj.dcd</span></code> to the directory <code class="docutils literal notranslate"><span class="pre">../05_analysis</span></code>. This can be done with the following code, or with any file manager that comes with the operating system.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;init.pdb&quot;</span><span class="p">,</span> <span class="s2">&quot;../05_analysis&quot;</span><span class="p">)</span>
-<span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;scalars.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;../05_analysis&quot;</span><span class="p">)</span>
-<span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;traj.dcd&quot;</span><span class="p">,</span> <span class="s2">&quot;../05_analysis&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <blockquote>
 <div><p>Make an estimate of the computational cost (wall time) on your current hardware to run a sufficiently long simulation to observe spontaneously a protein folding event for this fast folder. The required simulation time is approximately <span class="math notranslate nohighlight">\(4 \mathrm{\mu s}\)</span>. Would such a calculations be feasible?</p>
 </div></blockquote>
+</section>
+<section id="analyzing-simulation">
+<h2>Analyzing simulation<a class="headerlink" href="#analyzing-simulation" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;scalars.csv&quot;</span><span class="p">)</span>
@@ -622,7 +637,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#obtain-1yrf-from-pdb">Obtain 1YRF from PDB</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download-structure">Download structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-solvated-system">Prepare solvated system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-simulation">Run simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-simulation">Analyzing simulation</a></li>
 </ul>
   </nav></div>
 
