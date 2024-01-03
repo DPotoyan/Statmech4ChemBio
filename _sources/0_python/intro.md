@@ -5,27 +5,17 @@ Due too time constraints our coverage will be superficial. In addition to the co
 
 ### Python 101
 
-**Learn essentials of unix, git and python in one place.**
-
-- [Software carpentry lessons](https://software-carpentry.org/lessons/) 
-
-**More interactive courses for self-learning**
-
-  - [DataCamp python course](https://app.datacamp.com/learn/courses/intro-to-python-for-data-science) This is a great set of lessons with interactive examples and exercises.
-  - [futurecoder.io](https://futurecoder.io/) another great interactive website to learn python.
-
-**YouTube tutorials**
-
-  - [Python full course with Mosh](https://www.youtube.com/watch?v=_uQrJ0TkZlc)
-  - [Python in depth lessons with Corey Schafer](https://www.youtube.com/watch?v=YYXdXT2l-Gg&list=PL-osiE80TeTskrapNbzXhwoFUiLCjGgY7)
-
-
 ### Python for scientists
 
    1. [Scientific Computing for Chemists](https://weisscharlesj.github.io/SciCompforChemists/intro.html)
    2. [Python Programming for Data Science](https://www.tomasbeuzen.com/python-programming-for-data-science/README.html)
    3. [Python Like You Mean it](https://www.pythonlikeyoumeanit.com/)
 
+### YouTube tutorials
+
+  1. [Python full course with Mosh](https://www.youtube.com/watch?v=_uQrJ0TkZlc)
+  2. [Python in depth lessons with Corey Schafer](https://www.youtube.com/watch?v=YYXdXT2l-Gg&list=PL-osiE80TeTskrapNbzXhwoFUiLCjGgY7)
+  3. [FreeCode Camp Python for data science](https://www.youtube.com/watch?v=LHBE6Q9XlzI&t=5677s)
 
 ### Free Books
 
