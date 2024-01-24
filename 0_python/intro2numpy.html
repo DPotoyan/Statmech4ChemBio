@@ -457,7 +457,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-array-creation-methods">Common array creation methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-array-creation-methods-involving-random-numbers">Common array creation methods involving random numbers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-slicing-and-shaping-arrays">Indexing, slicing and shaping arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-operations-with-numpy">Vectorized operations with numpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-masks">Boolean masks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-operations-with-numpy">Vectorized operations with numpy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doing-linear-algebra-with-numpy">Doing linear algebra with numpy</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-arrays">Reshaping arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting-rules-of-numpy-arrays">Broadcasting rules of numpy arrays</a></li>
@@ -476,7 +480,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numpy">
 <h1>NumPy<a class="headerlink" href="#numpy" title="Permalink to this heading">#</a></h1>
-<p><strong>What is numpy?</strong></p>
+<div class="note admonition">
+<p class="admonition-title">What you need to know</p>
 <ul class="simple">
 <li><p>NumPy is the core python library for numerical and scientific computing.</p></li>
 <li><p>A numpy array is a grid of values, all of the same type, and is indexed by nonnegative integers.</p></li>
@@ -484,6 +489,7 @@ document.write(`
 <li><p>The shape of an array is a tuple of integers giving the size of the array along each dimension. For example a 1D vector of size 4 is (4,). a matrix of size 2 is (2,2), a matrix with size 2x5 is (2,5)</p></li>
 <li><p>Numpy arrays can be generates either by feeding lists to numpy or on the fly using numpy special methods</p></li>
 </ul>
+</div>
 <p><strong>Additional resources to learn numpy</strong></p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/user/quickstart.html">numpy quickstart</a></p></li>
@@ -494,6 +500,11 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To use numpy you have to first import it</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.26.2
 </pre></div>
 </div>
 </div>
@@ -768,6 +779,105 @@ document.write(`
 <p><strong>Same principles of slicing and shapes applies to the N-dimensional arrays.</strong></p>
 <p><img alt="" src="../_images/numpy_3d.png" /></p>
 </section>
+<section id="boolean-masks">
+<h2>Boolean masks<a class="headerlink" href="#boolean-masks" title="Permalink to this heading">#</a></h2>
+<p>We can also use Boolean masks for indexing – that is, arrays of <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">False</span></code> values. Consider the following example, where we return all values in the array that are greater than 3:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">ary</span> <span class="o">&gt;</span> <span class="mi">2</span>
+<span class="n">mask</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([False, False,  True,  True])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ary</span><span class="p">[</span><span class="n">ary</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+
+<span class="n">greater3_mask</span> <span class="o">=</span> <span class="n">ary</span> <span class="o">&gt;</span> <span class="mi">3</span>
+<span class="n">greater3_mask</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ary</span><span class="p">[</span><span class="n">greater3_mask</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A related, useful function to assign values to specific elements in an array is the <code class="docutils literal notranslate"><span class="pre">np.where</span></code> function. In the example below, we assign a 1 to all values in the array that are greater than 2 – and 0, otherwise:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">ary</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 0, 1, 1])
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are also so-called bit-wise operators that we can use to specify more complex selection criteria:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">ary</span> <span class="o">&gt;</span> <span class="mi">2</span>
+<span class="n">ary</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ary</span><span class="p">[</span><span class="o">~</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">ary</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also chain different selection criteria using the logical <em>and</em> operator ‘&amp;’ or the logical <em>or</em> operator ‘|’. than 3 and divisible by 2:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+
+<span class="p">(</span><span class="n">ary</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">ary</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The example below demonstrates how we can select array elements that are greater</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ary</span><span class="p">[(</span><span class="n">ary</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">ary</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And, for example, to negate the condition, we can use the <code class="docutils literal notranslate"><span class="pre">~</span></code> operator:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">~</span><span class="p">((</span><span class="n">ary</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">ary</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="vectorized-operations-with-numpy">
 <h2>Vectorized operations with numpy<a class="headerlink" href="#vectorized-operations-with-numpy" title="Permalink to this heading">#</a></h2>
 <p>Basic mathematical functions operate <strong>elementwise on arrays</strong>, and are available both as operator overloads and as functions in the numpy module:</p>
@@ -832,7 +942,8 @@ document.write(`
 </div>
 </div>
 <p>As last two examples show can also do operations on arrays with unequal shapes! These are powerful operations which follow set of rules called <strong>broadcasting.</strong> See the end for these rules and examples</p>
-<p><strong>To use vector,matrix dot product between A and B use A&#64;B</strong></p>
+<section id="doing-linear-algebra-with-numpy">
+<h3>Doing linear algebra with numpy<a class="headerlink" href="#doing-linear-algebra-with-numpy" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
@@ -863,6 +974,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="aggregation">
 <h2>Aggregation<a class="headerlink" href="#aggregation" title="Permalink to this heading">#</a></h2>
@@ -1240,7 +1352,11 @@ d. Compute transition energies as a function of quantum number separation and ma
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-array-creation-methods">Common array creation methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-array-creation-methods-involving-random-numbers">Common array creation methods involving random numbers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-slicing-and-shaping-arrays">Indexing, slicing and shaping arrays</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-operations-with-numpy">Vectorized operations with numpy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-masks">Boolean masks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-operations-with-numpy">Vectorized operations with numpy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#doing-linear-algebra-with-numpy">Doing linear algebra with numpy</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-arrays">Reshaping arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting-rules-of-numpy-arrays">Broadcasting rules of numpy arrays</a></li>
