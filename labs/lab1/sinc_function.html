@@ -473,22 +473,13 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numpy-lab-sinc-function">
 <h1>Numpy Lab: Sinc Function<a class="headerlink" href="#numpy-lab-sinc-function" title="Permalink to this heading">#</a></h1>
-<p>Topics: Broadcasting, Fancy Indexing</p>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Sinc_function">sinc function</a> is defined by:</p>
 <div class="math notranslate nohighlight">
 \[ \large sinc(r) = \frac{sin(r)}{r} \]</div>
-<ol class="arabic simple">
-<li><p>Create a Cartesian x,y grid by defining <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> as arrays of evenly spaced numbers over the interval <code class="docutils literal notranslate"><span class="pre">[-15,</span> <span class="pre">15]</span></code>. Each of these arrays should have <code class="docutils literal notranslate"><span class="pre">101</span></code> numbers.</p></li>
-<li><p>Reshape the <code class="docutils literal notranslate"><span class="pre">y</span></code> array into a “column” vector by increasing the dimensionality using array slicing and <code class="docutils literal notranslate"><span class="pre">newaxis</span></code>.</p></li>
-<li><p>Create an array of <code class="docutils literal notranslate"><span class="pre">r</span></code> that corresponds to the following equation:</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[ \large r = \sqrt{x^2 + y^2} \]</div>
-<ol class="arabic simple" start="4">
-<li><p>Calculate the sinc function of <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p></li>
-<li><p>Replace any location in <code class="docutils literal notranslate"><span class="pre">sinc</span></code> where <code class="docutils literal notranslate"><span class="pre">r</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code> with <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
-<li><p>Plot the result of the sinc function using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>’s <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code> function.</p></li>
-</ol>
+<ul class="simple">
+<li><p><strong>Objective:</strong> Create a 2D plot of this function.</p></li>
+<li><p><strong>Topics:</strong> Broadcasting, Fancy Indexing, 2D plotting</p></li>
+</ul>
 <section id="type-your-code-below">
 <h2>Type your code below<a class="headerlink" href="#type-your-code-below" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -553,15 +544,35 @@ document.write(`
 </div>
 </div>
 <ol class="arabic simple" start="6">
-<li><p>Plot the result of the sinc function using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>’s <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code> function.</p></li>
+<li><p>Plot the result of the sinc function:</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code goes here</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span> 
+
+<span class="c1"># Create surface plot</span>
+<span class="n">surface</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> 
+                     <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
+                     <span class="n">z</span><span class="o">=</span><span class="n">sinc</span><span class="p">)</span>
+
+<span class="c1"># Create fig using surface plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">surface</span><span class="p">])</span>  
+  
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">sinc</span><span class="p">)</span> <span class="c1"># for a matplotlib 2D plot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="7">
+<li><p>Bonus question. instead of using newaxis on step 2 use meshgrid to create 2D arrays for x and y. Result should be the same</p></li>
+</ol>
 </section>
 </section>
 
