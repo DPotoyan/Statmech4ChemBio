@@ -461,15 +461,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-creation">Array Creation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-numpy-arrays-from-lists">Generating numpy arrays from lists</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-elements-via-assignment">Changing elements via assignment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-of-lists-create-2d-arrays">Lists of lists create 2D arrays</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-vs-list-which-is-faster">Array vs list: which is faster?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-arrays-using-special-methods">Generating arrays using special methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-array-creation-methods">Common array creation methods</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-arrays-using-special-methods">Generating arrays using special methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#genearting-n-dimensional-arrays">Genearting N-dimensional arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-slicing-and-shaping-arrays">Indexing, slicing and shaping arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-masks">Boolean masks</a></li>
@@ -537,12 +532,12 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
-<section id="changing-elements-via-assignment">
-<h3>Changing elements via assignment<a class="headerlink" href="#changing-elements-via-assignment" title="Permalink to this heading">#</a></h3>
-</section>
-<section id="lists-of-lists-create-2d-arrays">
-<h3>Lists of lists create 2D arrays<a class="headerlink" href="#lists-of-lists-create-2d-arrays" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Just like lists we can change elements via assignment</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Lists of lists create 2D arrays!</strong></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]])</span>   
@@ -595,8 +590,6 @@ document.write(`
 </section>
 <section id="generating-arrays-using-special-methods">
 <h2>Generating arrays using special methods<a class="headerlink" href="#generating-arrays-using-special-methods" title="Permalink to this heading">#</a></h2>
-<section id="common-array-creation-methods">
-<h3>Common array creation methods<a class="headerlink" href="#common-array-creation-methods" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Creating arrays of ones or zeros can also be useful as placeholder arrays, in cases where we do not want to use the initial values for computations but want to fill it with other values right away.</p></li>
 <li><p>For instance <code class="docutils literal notranslate"><span class="pre">np.zeros</span></code>, <code class="docutils literal notranslate"><span class="pre">np.ones</span></code>, <code class="docutils literal notranslate"><span class="pre">np.empty</span></code> create such placeholder arrays.</p></li>
@@ -665,7 +658,6 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
 </section>
 <section id="genearting-n-dimensional-arrays">
 <h2>Genearting N-dimensional arrays<a class="headerlink" href="#genearting-n-dimensional-arrays" title="Permalink to this heading">#</a></h2>
@@ -881,13 +873,6 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">-</span><span class="n">y</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">*</span><span class="n">y</span>
 </pre></div>
 </div>
@@ -988,6 +973,11 @@ document.write(`
 </section>
 <section id="reshaping-arrays">
 <h2>Reshaping arrays<a class="headerlink" href="#reshaping-arrays" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In practice, we often run into situations where existing arrays do not have the <em>right</em> shape to perform certain computations. A</p></li>
+<li><p>Remember once created that the size of NumPy arrays is fixed</p></li>
+<li><p>Fortunately, this does not mean that we have to create new arrays and copy values from the old array to the new one if we want arrays of different shapes – the size is fixed, but the shape is not. NumPy provides a <code class="docutils literal notranslate"><span class="pre">reshape</span></code> methods that allow us to obtain a view of an array with a different shape.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
@@ -1113,8 +1103,10 @@ document.write(`
 </section>
 <section id="pandas">
 <h2>Pandas<a class="headerlink" href="#pandas" title="Permalink to this heading">#</a></h2>
-<p>You may thinkg of numpy as enhancing functionality of lists for numerical computations. In the same vein you can think of pandas as enahcnign dicitonaires to deal with heteogenuous categorical data.</p>
-<p>Pandas is widely used by data analysts from all disciplines to carry out rapid data cleaning, statistical analysis and plotting. The DataFrame is the ore object of pandas whihc stores observables as columns whith rows indicating measurments or samples. Lets create an example</p>
+<ul class="simple">
+<li><p>You may thinkg of numpy as enhancing functionality of lists for numerical computations. In the same vein you can think of pandas as enahcnign dicitonaires to deal with heteogenuous categorical data.</p></li>
+<li><p>Pandas is widely used by data analysts from all disciplines to carry out rapid data cleaning, statistical analysis and plotting. The DataFrame is the ore object of pandas whihc stores observables as columns whith rows indicating measurments or samples. Lets create an example.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -1123,10 +1115,13 @@ document.write(`
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Can creatr pandas dataframe from lists, or arrays</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
-                 <span class="s1">&#39;Energy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">50</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> 
+                 <span class="s1">&#39;Energy&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">50</span><span class="p">])</span>
                  <span class="p">})</span>
 </pre></div>
 </div>
@@ -1322,15 +1317,10 @@ d. Compute transition energies as a function of quantum number separation and ma
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-creation">Array Creation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-numpy-arrays-from-lists">Generating numpy arrays from lists</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-elements-via-assignment">Changing elements via assignment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists-of-lists-create-2d-arrays">Lists of lists create 2D arrays</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#array-vs-list-which-is-faster">Array vs list: which is faster?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-arrays-using-special-methods">Generating arrays using special methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-array-creation-methods">Common array creation methods</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-arrays-using-special-methods">Generating arrays using special methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#genearting-n-dimensional-arrays">Genearting N-dimensional arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-slicing-and-shaping-arrays">Indexing, slicing and shaping arrays</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boolean-masks">Boolean masks</a></li>
