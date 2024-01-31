@@ -459,15 +459,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-with-fig-ax-objects">Plot with fig, ax objects</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-gallery-of-useful-examples">A gallery of useful examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fig-and-ax-objects">fig and ax objects</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-plot">Bar plot</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter">Scatter</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-in-2d">Plotting in 2D</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-plt-for-quick-plots">Using plt for quick plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fig-ax-objects-for-subplots-and-more">Using fig, ax objects for subplots and more</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-plot">Bar plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter">Scatter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-in-2d">Plotting in 2D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-widgets">Matplotlib Widgets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-plots-plotly-and-pandas">Interactive plots, Plotly and pandas</a></li>
 </ul>
@@ -505,6 +502,8 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="using-plt-for-quick-plots">
+<h2>Using plt for quick plots<a class="headerlink" href="#using-plt-for-quick-plots" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Matplotlib is the most widely used plotting library in the ecosystem of python. In the above cel we loaded matplotlib and the relevant libraries.</p></li>
 <li><p>The easiest way to use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> is via pyplot, which allows you to plot 1D and 2D data. Here is a simple example:</p></li>
@@ -527,11 +526,13 @@ document.write(`
 <img alt="../_images/e8a0242ed7dcde6129922112a0664da3bb61f66e10e303df81d8d03314dbd86c.png" src="../_images/e8a0242ed7dcde6129922112a0664da3bb61f66e10e303df81d8d03314dbd86c.png" />
 </div>
 </div>
-<section id="plot-with-fig-ax-objects">
-<h2>Plot with fig, ax objects<a class="headerlink" href="#plot-with-fig-ax-objects" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="using-fig-ax-objects-for-subplots-and-more">
+<h2>Using fig, ax objects for subplots and more<a class="headerlink" href="#using-fig-ax-objects-for-subplots-and-more" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>If we want more flexibility with creating customize plots and ubplots it is better to plot by first defining fig and ax objecs.</p></li>
+<li><p>For customizing plots it is more convenient to define <strong>fig</strong> and <strong>ax</strong> objects.</p></li>
 <li><p>ax and fig can be manipulated using their methods</p></li>
+<li><p>One can then use ax object to make veriety of subplots then use fig to save the entire figure as one pdf.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -561,16 +562,6 @@ document.write(`
 <img alt="../_images/3c7f3e03e3a29284d26ac95c57cb1fc3e661ad682a91bb0117b94d790f35b178.png" src="../_images/3c7f3e03e3a29284d26ac95c57cb1fc3e661ad682a91bb0117b94d790f35b178.png" />
 </div>
 </div>
-</section>
-<section id="a-gallery-of-useful-examples">
-<h2>A gallery of useful examples<a class="headerlink" href="#a-gallery-of-useful-examples" title="Permalink to this heading">#</a></h2>
-<p><strong>For a greater variety of plotting examples check out <a class="reference external" href="https://matplotlib.org/3.1.1/gallery/index.html">Matploltib Gallery!</a></strong></p>
-<section id="fig-and-ax-objects">
-<h3>fig and ax objects<a class="headerlink" href="#fig-and-ax-objects" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>For customizing plots it is more convenient to define <strong>fig</strong> and <strong>ax</strong> objects.</p></li>
-<li><p>One can then use ax object to make veriety of subplots then use fig to save the entire figure as one pdf. Try changing fig size, number of columns and rows.</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span>  <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="c1"># create x values</span>
@@ -611,7 +602,7 @@ document.write(`
 </div>
 </section>
 <section id="histogram">
-<h3>Histogram<a class="headerlink" href="#histogram" title="Permalink to this heading">#</a></h3>
+<h2>Histogram<a class="headerlink" href="#histogram" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make up some random data</span>
@@ -626,7 +617,7 @@ document.write(`
 </div>
 </section>
 <section id="bar-plot">
-<h3>Bar plot<a class="headerlink" href="#bar-plot" title="Permalink to this heading">#</a></h3>
+<h2>Bar plot<a class="headerlink" href="#bar-plot" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># input data</span>
@@ -646,7 +637,7 @@ document.write(`
 </div>
 </section>
 <section id="scatter">
-<h3>Scatter<a class="headerlink" href="#scatter" title="Permalink to this heading">#</a></h3>
+<h2>Scatter<a class="headerlink" href="#scatter" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
@@ -660,7 +651,7 @@ document.write(`
 </div>
 </section>
 <section id="plotting-in-2d">
-<h3>Plotting in 2D<a class="headerlink" href="#plotting-in-2d" title="Permalink to this heading">#</a></h3>
+<h2>Plotting in 2D<a class="headerlink" href="#plotting-in-2d" title="Permalink to this heading">#</a></h2>
 <p>To make 2D plots we need to generate 2D grid <span class="math notranslate nohighlight">\((x,y)\)</span> of points and pass it to our function <span class="math notranslate nohighlight">\(f(x,y)\)</span></p>
 <div class="math notranslate nohighlight">
 \[f(x,y) = sin(x) \cdot cos(x) \,\,\,\]</div>
@@ -687,7 +678,6 @@ document.write(`
 <img alt="../_images/b8903e6508c68b7aab4f3447c6c1e41176676709512e4a031c0872c14a5efac0.png" src="../_images/b8903e6508c68b7aab4f3447c6c1e41176676709512e4a031c0872c14a5efac0.png" />
 </div>
 </div>
-</section>
 </section>
 <section id="matplotlib-widgets">
 <h2>Matplotlib Widgets<a class="headerlink" href="#matplotlib-widgets" title="Permalink to this heading">#</a></h2>
@@ -800,12 +790,10 @@ document.write(`
 </section>
 <section id="additional-resoruces">
 <h2>Additional resoruces.<a class="headerlink" href="#additional-resoruces" title="Permalink to this heading">#</a></h2>
-<p>Matplotlib has a huge scientific user base. This means that you can always find a good working template of any kind of visualization which you want to make. With basic understanding of matplotlib and some solid googling skills you can go very far. Here are some additional resources that you may find helpful</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://matplotlib.org/index.html">Matplotlib</a></p></li>
-<li><p><a class="reference external" href="https://hal.inria.fr/hal-03427242/document">Matplotlib Book</a></p></li>
-<li><p><a class="reference external" href="https://matplotlib.org/matplotblog/">Matplotlib Blog</a></p></li>
-<li><p><a class="reference external" href="https://pyviz.org/index.html">PyViz universe</a></p></li>
+<li><p>Matplotlib has a huge scientific user base. This means that you can always find a good working template of any kind of visualization which you want to make.</p></li>
+<li><p>With basic understanding of matplotlib and some solid googling skills you can go very far. Here are some additional resources that you may find helpful</p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/stable/gallery/index.html">Matplotlib Examples</a></p></li>
 <li><p><a class="reference external" href="https://python-graph-gallery.com/">The Python Graph Gallery</a></p></li>
 </ul>
 </section>
@@ -874,15 +862,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-with-fig-ax-objects">Plot with fig, ax objects</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-gallery-of-useful-examples">A gallery of useful examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fig-and-ax-objects">fig and ax objects</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-plot">Bar plot</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter">Scatter</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-in-2d">Plotting in 2D</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-plt-for-quick-plots">Using plt for quick plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-fig-ax-objects-for-subplots-and-more">Using fig, ax objects for subplots and more</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-plot">Bar plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter">Scatter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-in-2d">Plotting in 2D</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib-widgets">Matplotlib Widgets</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-plots-plotly-and-pandas">Interactive plots, Plotly and pandas</a></li>
 </ul>
