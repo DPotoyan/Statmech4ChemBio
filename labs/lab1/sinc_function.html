@@ -485,8 +485,9 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">newaxis</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span> 
 </pre></div>
 </div>
 </div>
@@ -502,7 +503,7 @@ document.write(`
 </div>
 </div>
 <ol class="arabic simple" start="2">
-<li><p>Reshape the y array into a “column” vector by increasing the dimensionality using array slicing and newaxis.</p></li>
+<li><p>Reshape the y array into a “column” vector by increasing the dimensionality using <code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code></p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -548,9 +549,14 @@ document.write(`
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span> 
-
-<span class="c1"># Create surface plot</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">sinc</span><span class="p">)</span> <span class="c1"># for a matplotlib 2D plot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#3D surface plot using plotly</span>
 <span class="n">surface</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> 
                      <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
                      <span class="n">z</span><span class="o">=</span><span class="n">sinc</span><span class="p">)</span>
@@ -563,16 +569,7 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">sinc</span><span class="p">)</span> <span class="c1"># for a matplotlib 2D plot</span>
-</pre></div>
-</div>
-</div>
-</div>
-<ol class="arabic simple" start="7">
-<li><p>Bonus question. instead of using newaxis on step 2 use meshgrid to create 2D arrays for x and y. Result should be the same</p></li>
-</ol>
+<p><strong>Bonus question.</strong> Go back to cell of step 2. Instead of using <code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code> on step 2 use meshgrid to create 2D arrays for x and y. Resulting r on step 3 should be the same</p>
 </section>
 </section>
 
