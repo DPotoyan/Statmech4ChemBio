@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Numpy Lab: Linear Functions &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>Numpy Lab: Sinc Function &#8212; Statistical Mechanics for Chemistry and Biology</title>
   
   
   
@@ -65,10 +65,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/lab1/linear_functions';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/lab1/sinc_function';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Numpy Lab: Sinc Function" href="sinc_function.html" />
+    <link rel="next" title="Numpy Lab: Linear Functions" href="linear_functions.html" />
+    <link rel="prev" title="Labs" href="../intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -238,8 +239,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro.html">Labs</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="sinc_function.html">Numpy Lab: Sinc Function</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Numpy Lab: Linear Functions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Numpy Lab: Sinc Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_functions.html">Numpy Lab: Linear Functions</a></li>
 </ul>
 </li>
 </ul>
@@ -296,7 +297,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/labs/lab1/linear_functions.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/labs/lab1/sinc_function.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -314,7 +315,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/labs/lab1/linear_functions.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/labs/lab1/sinc_function.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +364,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/labs/lab1/linear_functions.ipynb" target="_blank"
+      <li><a href="../../_sources/labs/lab1/sinc_function.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -447,7 +448,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Numpy Lab: Linear Functions</h1>
+    <h1>Numpy Lab: Sinc Function</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -457,14 +458,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-your-code-below">Type your code below</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-lets-investigate-a-2d-linear-function">Now let’s investigate a 2D linear function</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-numpy-to-write-general-linear-functions-in-compact-form">Using numpy to write general linear functions in compact form</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-that-both-functions-agree">Check that both functions agree</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-your-code-below">Type your code below</a></li>
 </ul>
             </nav>
         </div>
@@ -476,135 +470,97 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="numpy-lab-linear-functions">
-<h1>Numpy Lab: Linear Functions<a class="headerlink" href="#numpy-lab-linear-functions" title="Permalink to this heading">#</a></h1>
-<p>Topics: elementwise operations</p>
-<p><strong>Linear functions</strong><br> We will be using the term <em>linear equation</em> to mean a weighted sum of inputs plus an offset. If there is just one input <span class="math notranslate nohighlight">\(x\)</span>, then this is a straight line:</p>
-<p><strong>Equation-1</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-1ba5d280-272e-42de-9f04-4bb00fedabe7">
-<span class="eqno">(1)<a class="headerlink" href="#equation-1ba5d280-272e-42de-9f04-4bb00fedabe7" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega x,\end{equation}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\beta\)</span> is the y-intercept of the linear and <span class="math notranslate nohighlight">\(\omega\)</span> is the slope of the line. When there are two inputs <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span>, then this becomes:</p>
-<p><strong>Equation-2</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f8a5e1c-8f89-4683-ad87-7e48ddd1507c">
-<span class="eqno">(2)<a class="headerlink" href="#equation-4f8a5e1c-8f89-4683-ad87-7e48ddd1507c" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega_1 x_1 + \omega_2 x_2.\end{equation}\]</div>
-<p>Any other functions are by definition <strong>non-linear</strong>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="numpy-lab-sinc-function">
+<h1>Numpy Lab: Sinc Function<a class="headerlink" href="#numpy-lab-sinc-function" title="Permalink to this heading">#</a></h1>
+<p>Topics: Broadcasting, Fancy Indexing</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Sinc_function">sinc function</a> is defined by:</p>
+<div class="math notranslate nohighlight">
+\[ \large sinc(r) = \frac{sin(r)}{r} \]</div>
+<ol class="arabic simple">
+<li><p>Create a Cartesian x,y grid by defining <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> as arrays of evenly spaced numbers over the interval <code class="docutils literal notranslate"><span class="pre">[-15,</span> <span class="pre">15]</span></code>. Each of these arrays should have <code class="docutils literal notranslate"><span class="pre">101</span></code> numbers.</p></li>
+<li><p>Reshape the <code class="docutils literal notranslate"><span class="pre">y</span></code> array into a “column” vector by increasing the dimensionality using array slicing and <code class="docutils literal notranslate"><span class="pre">newaxis</span></code>.</p></li>
+<li><p>Create an array of <code class="docutils literal notranslate"><span class="pre">r</span></code> that corresponds to the following equation:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ \large r = \sqrt{x^2 + y^2} \]</div>
+<ol class="arabic simple" start="4">
+<li><p>Calculate the sinc function of <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p></li>
+<li><p>Replace any location in <code class="docutils literal notranslate"><span class="pre">sinc</span></code> where <code class="docutils literal notranslate"><span class="pre">r</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code> with <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+<li><p>Plot the result of the sinc function using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>’s <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code> function.</p></li>
+</ol>
 <section id="type-your-code-below">
 <h2>Type your code below<a class="headerlink" href="#type-your-code-below" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a linear function with just one input, x (Eq 1)</span>
-<span class="k">def</span> <span class="nf">linear_function_1D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
-
-  <span class="k">return</span> <span class="n">y</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">newaxis</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
+<ol class="arabic simple">
+<li><p>Create a Cartesian x,y grid by defining <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> as arrays of evenly spaced numbers over the interval <code class="docutils literal notranslate"><span class="pre">[-15,</span> <span class="pre">15]</span></code>. Each of these arrays should have <code class="docutils literal notranslate"><span class="pre">101</span></code> numbers.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute y using the function you filled in above</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
-<span class="n">beta</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span> <span class="n">omega</span> <span class="o">=</span> <span class="mf">1.0</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">linear_function_1D</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">beta</span><span class="p">,</span><span class="n">omega</span><span class="p">)</span>
-
-<span class="c1"># Plot this function</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">]);</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span>
-
-<span class="c1"># TODO -- experiment with changing the values of beta and omega</span>
-<span class="c1"># to understand what they do.  Try to make a line</span>
-<span class="c1"># that crosses the y-axis at y=10 and the x-axis at x=5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code goes here</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="now-lets-investigate-a-2d-linear-function">
-<h3>Now let’s investigate a 2D linear function<a class="headerlink" href="#now-lets-investigate-a-2d-linear-function" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple" start="2">
+<li><p>Reshape the y array into a “column” vector by increasing the dimensionality using array slicing and newaxis.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We will use this function to draw 2D contour plots. Nothing to do here</span>
-<span class="k">def</span> <span class="nf">draw_2D_function</span><span class="p">(</span><span class="n">x1_mesh</span><span class="p">,</span> <span class="n">x2_mesh</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-
-    <span class="n">pos</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x1_mesh</span><span class="p">,</span> <span class="n">x2_mesh</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="mi">256</span> <span class="p">,</span><span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;hot&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-    
-    <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x1_mesh</span><span class="p">,</span> 
-               <span class="n">x2_mesh</span><span class="p">,</span> 
-               <span class="n">y</span><span class="p">,</span> 
-               <span class="n">levels</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">1.0</span><span class="p">),</span> 
-               <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;winter&#39;</span><span class="p">)</span>
-    
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x1&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;x2&#39;</span><span class="p">)</span>
-    
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="c1"># Your code goes here</span>
 </pre></div>
 </div>
 </div>
 </div>
+<ol class="arabic simple" start="3">
+<li><p>Create an array of <code class="docutils literal notranslate"><span class="pre">r</span></code> that corresponds to the following equation:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ \large r = \sqrt{x^2 + y^2} \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a linear function with two inputs, x1 and x2</span>
-<span class="k">def</span> <span class="nf">linear_function_2D</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">beta</span><span class="p">,</span><span class="n">omega1</span><span class="p">,</span><span class="n">omega2</span><span class="p">):</span>
-
-
-  <span class="k">return</span> <span class="n">y</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code goes here</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="using-numpy-to-write-general-linear-functions-in-compact-form">
-<h2>Using numpy to write general linear functions in compact form<a class="headerlink" href="#using-numpy-to-write-general-linear-functions-in-compact-form" title="Permalink to this heading">#</a></h2>
-<p>Often we will want to compute many linear functions at the same time.  For example, we might have three inputs, <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span> and want to compute two linear functions giving <span class="math notranslate nohighlight">\(y_1\)</span> and <span class="math notranslate nohighlight">\(y_2\)</span>. Of course, we could do this by just running each equation separately,<br><br></p>
-<div class="amsmath math notranslate nohighlight" id="equation-87cf95d0-6fc1-40f6-8eb9-3889585083e5">
-<span class="eqno">(3)<a class="headerlink" href="#equation-87cf95d0-6fc1-40f6-8eb9-3889585083e5" title="Permalink to this equation">#</a></span>\[\begin{align}y_1 &amp;=&amp; \beta_1 + \omega_{11} x_1 + \omega_{12} x_2 + \omega_{13} x_3\\
-y_2 &amp;=&amp; \beta_2 + \omega_{21} x_1 + \omega_{22} x_2 + \omega_{23} x_3.
-\end{align}\]</div>
-<p>However, we can write it more compactly with vectors and matrices:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eb122964-c897-416d-b8ba-d6baffaa7a3d">
-<span class="eqno">(4)<a class="headerlink" href="#equation-eb122964-c897-416d-b8ba-d6baffaa7a3d" title="Permalink to this equation">#</a></span>\[\begin{equation}
-\begin{bmatrix} y_1\\ y_2 \end{bmatrix} = \begin{bmatrix}\beta_{1}\\\beta_{2}\end{bmatrix}+ \begin{bmatrix}\omega_{11}&amp;\omega_{12}&amp;\omega_{13}\\\omega_{21}&amp;\omega_{22}&amp;\omega_{23}\end{bmatrix}\begin{bmatrix}x_{1}\\x_{2}\\x_{3}\end{bmatrix},
-\end{equation}\]</div>
-<p>$$\begin{equation}
-\mathbf{y} = \boldsymbol\beta +\boldsymbol\Omega\mathbf{x}.
-\end{equation}</p>
-<p>Here, lowercase bold symbols are used for vectors.  Upper case bold symbols are used for matrices.</p>
+<ol class="arabic simple" start="4">
+<li><p>Calculate the sinc function of <code class="docutils literal notranslate"><span class="pre">r</span></code></p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a linear function with three inputs, x1, x2, and x_3</span>
-<span class="k">def</span> <span class="nf">linear_function_3D</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">x3</span><span class="p">,</span><span class="n">beta</span><span class="p">,</span><span class="n">omega1</span><span class="p">,</span><span class="n">omega2</span><span class="p">,</span><span class="n">omega3</span><span class="p">):</span>
-  <span class="c1"># TODO -- replace the code below with formula for a single 3D linear equation</span>
-  <span class="n">y</span> <span class="o">=</span> <span class="n">x1</span>
-
-  <span class="k">return</span> <span class="n">y</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sinc</span> <span class="o">=</span> <span class="c1"># Your code goes here</span>
 </pre></div>
 </div>
 </div>
 </div>
+<ol class="arabic simple" start="5">
+<li><p>Replace any location in <code class="docutils literal notranslate"><span class="pre">sinc</span></code> where <code class="docutils literal notranslate"><span class="pre">r</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code> with <code class="docutils literal notranslate"><span class="pre">1.0</span></code>.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a linear function using vector input x=[x_1, x_2, x_3], and omega = [omega_1, omega_2, omega_3]</span>
-<span class="k">def</span> <span class="nf">linear_function_3D_la</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
-  <span class="c1"># TODO -- replace the code below with formula for a single 3D linear equation</span>
-  <span class="n">y</span> <span class="o">=</span> <span class="n">x1</span>
-
-  <span class="k">return</span> <span class="n">y</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code goes here</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="check-that-both-functions-agree">
-<h3>Check that both functions agree<a class="headerlink" href="#check-that-both-functions-agree" title="Permalink to this heading">#</a></h3>
-</section>
+<ol class="arabic simple" start="6">
+<li><p>Plot the result of the sinc function using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>’s <code class="docutils literal notranslate"><span class="pre">plt.imshow</span></code> function.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your code goes here</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -639,13 +595,22 @@ y_2 &amp;=&amp; \beta_2 + \omega_{21} x_1 + \omega_{22} x_2 + \omega_{23} x_3.
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="sinc_function.html"
+       href="../intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Numpy Lab: Sinc Function</p>
+        <p class="prev-next-title">Labs</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="linear_functions.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Numpy Lab: Linear Functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -662,14 +627,7 @@ y_2 &amp;=&amp; \beta_2 + \omega_{21} x_1 + \omega_{22} x_2 + \omega_{23} x_3.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-your-code-below">Type your code below</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-lets-investigate-a-2d-linear-function">Now let’s investigate a 2D linear function</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-numpy-to-write-general-linear-functions-in-compact-form">Using numpy to write general linear functions in compact form</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-that-both-functions-agree">Check that both functions agree</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#type-your-code-below">Type your code below</a></li>
 </ul>
   </nav></div>
 
