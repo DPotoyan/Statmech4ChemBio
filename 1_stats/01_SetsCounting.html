@@ -459,7 +459,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
@@ -470,9 +469,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#translate-words-into-probabilities">Translate words into probabilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computations-with-joint-and-codnitional-probability">Computations with joint and codnitional probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-computations">Bayesian computations</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-posterioir-and-likelihood">Prior, posterioir and likelihood</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorics">Combinatorics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
@@ -505,8 +505,8 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="learning-objectives">
-<h2>Learning objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">What you need to know</p>
 <ul class="simple">
 <li><p><strong>Sample space</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> is a set whose elements are called outcomes or events.</p></li>
 <li><p><strong>Events</strong> can be constructed by forming subsets (A, B, C etc) of <span class="math notranslate nohighlight">\(\Omega\)</span></p></li>
@@ -514,21 +514,9 @@ document.write(`
 <li><p><strong>Venn diagrams</strong> visualize P(A) as a “volume fraction” of our confidence in the event expressed on 0-1 scale.</p></li>
 <li><p><strong>Probability axioms</strong> defining a set of logical rules for creating composite events from trivial ones.</p></li>
 <li><p><strong>Probability of mutually exclusive events is additive”</strong> P(A or B)= P(A) +P(B)</p></li>
-<li><p>The sample space can be <strong>discrete:</strong> examples are the possible outcomes for a coin. We call probability function a <strong>probability mass function</strong></p>
-<ul>
-<li><p>An important example is <strong>Binomial distribution</strong></p></li>
-</ul>
-</li>
-<li><p>The sample space can be <strong>continuous:</strong> examples are position of gas molecules in a box. We call probability function a <strong>probability distribution function</strong></p>
-<ul>
-<li><p>An important example is <strong>Gaussian distribution</strong></p></li>
-</ul>
-</li>
-<li><p><strong>The law of large numbers</strong> and <strong>Stringling approximation</strong> explain why repeated experiments converge to robust mean values and why Gaussian distribution is so ubiqutious.</p></li>
-<li><p><strong>Frequencist apporach:</strong> In practice probability is often computed via counting a number of occurences of outcomes</p></li>
 <li><p><strong>Bayesian approach:</strong> In physical scientces and modeling probability one often deals with situations where counting is not posisble. Hence pornbability is interpreted as a degree of belief in each possible event.</p></li>
 </ul>
-</section>
+</div>
 <section id="sample-space">
 <h2>Sample space<a class="headerlink" href="#sample-space" title="Permalink to this heading">#</a></h2>
 <p>The <strong>sample space</strong>, often signified by an <span class="math notranslate nohighlight">\(S\)</span> is a set of <strong>all possible outcomes</strong> of a trial.</p>
@@ -779,11 +767,12 @@ B^c =  5
 <div class="math notranslate nohighlight">
 \[P(A,B)=P(A|B)P(B)=P(B|A)P(A)\]</div>
 </div>
-<div class="admonition-example-problems admonition">
-<p class="admonition-title">Example problems: </p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>We role two dice and record the total sum of numbers <span class="math notranslate nohighlight">\(T\)</span>. Suppose event <span class="math notranslate nohighlight">\(A\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 9\)</span> and event <span class="math notranslate nohighlight">\(B\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 5\)</span>. What is the probability of A or B?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-We role two dice and record the total sum of numbers <span class="math notranslate nohighlight">\(T\)</span>. Suppose event <span class="math notranslate nohighlight">\(A\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 9\)</span> and event <span class="math notranslate nohighlight">\(B\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 5\)</span>. What is the probability of A or B?<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-kebab-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6 12a2 2 0 11-4 0 2 2 0 014 0zm8 0a2 2 0 11-4 0 2 2 0 014 0zm6 2a2 2 0 100-4 2 2 0 000 4z"></path></svg><div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -792,9 +781,13 @@ We role two dice and record the total sum of numbers <span class="math notransla
 (T = 9), and 5 ways to get event B (T = 5), so that there are 4 + 5 = 9 ways to get
 either A or B, and so <span class="math notranslate nohighlight">\(P(A or B) = 9/36 = 1/4\)</span></p>
 </div>
-</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+</details></div>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Now suppose event C is getting a total of <span class="math notranslate nohighlight">\(T = 12\)</span> and event D is getting a double, where both dice are the same. What is the probability of C or D?</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-Now suppose event C is getting a total of <span class="math notranslate nohighlight">\(T = 12\)</span> and event D is getting a double, where both dice are the same. What is the probability of C or D?<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-kebab-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6 12a2 2 0 11-4 0 2 2 0 014 0zm8 0a2 2 0 11-4 0 2 2 0 014 0zm6 2a2 2 0 100-4 2 2 0 000 4z"></path></svg><div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -823,27 +816,37 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 </ul>
 <div class="math notranslate nohighlight">
 \[P(A\,\, given\,\, B)\,\,\,\, or \,\,\,\,P(A | B)\]</div>
-<section id="computations-with-joint-and-codnitional-probability">
-<h3>Computations with joint and codnitional probability<a class="headerlink" href="#computations-with-joint-and-codnitional-probability" title="Permalink to this heading">#</a></h3>
-<p>The joint probability can be calculated using the conditional probability</p>
+<section id="bayesian-computations">
+<h3>Bayesian computations<a class="headerlink" href="#bayesian-computations" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The joint probability can be calculated using the conditional probability</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[P(A, B) = P(B | A) \cdot  P(A)\]</div>
-<blockquote>
-<div><p>Note that joint probability is symmetric <span class="math notranslate nohighlight">\(P(A, B) = P(B, A)\)</span></p>
-</div></blockquote>
+<ul class="simple">
+<li><p>Note that joint probability is symmetric <span class="math notranslate nohighlight">\(P(A, B) = P(B, A)\)</span></p></li>
+</ul>
 <p>The conditional probability can be calculated using the joint probability. Thinking in terms of sets this shows that we are counting the fraction of A and B overlap confined within area of A, an event that has happened!</p>
 <div class="math notranslate nohighlight">
 \[P(B | A) = \frac{P(B, A)}{P(A)}\]</div>
-<blockquote>
-<div><p>Note that conditional probability is not symmetric <span class="math notranslate nohighlight">\(P(A | B) != P(B | A)\)</span></p>
-</div></blockquote>
-<p>There is another way of calculating conditional probability that is widely employed in practice.</p>
+<ul class="simple">
+<li><p>Note that conditional probability is not symmetric <span class="math notranslate nohighlight">\(P(A | B) != P(B | A)\)</span></p></li>
+</ul>
+</section>
+</section>
+<section id="prior-posterioir-and-likelihood">
+<h2>Prior, posterioir and likelihood<a class="headerlink" href="#prior-posterioir-and-likelihood" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Bayes theorem provides a powerful way to test hypotheses and learn parameters of a model from data.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[P(B|A) = \frac{P(A|B) \cdot P(B) }{P(A)} = \frac{P(A|B) \cdot P(B) }{P(A|B) \cdot P(B) + P(A|B^c) \cdot P(B^c)}\]</div>
-<p>Where we have used marginalization of joint probability to express <span class="math notranslate nohighlight">\(P(A)\)</span> in terms od conditional probabilities</p>
-<blockquote>
-<div><p>The last formulate looks abstract but essentially this forumale is used to learn probability of some hypothesis <span class="math notranslate nohighlight">\(B\)</span> given data <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(P(B|A)\)</span>. And for that we make use of likelihood of hypothesis <span class="math notranslate nohighlight">\(P(A |B)\)</span> with a given data.</p>
-</div></blockquote>
+\[P(B|A) = \frac{P(A|B) \cdot P(B) }{P(A)}\]</div>
+<ul class="simple">
+<li><p>Here A is data availible to us. and P(A) is called <strong>prior</strong></p></li>
+<li><p>B is a hpothesis we want to test or parameter we want to learn. P(B|A) is called <strong>posterior</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(A|B)\)</span> is called likelihood of data! The reason it is not called a probability is becasue one is interested in B and how varying B changes this distribution!</p></li>
+<li><p>The last formulate looks abstract but essentially this forumale is used to learn probability of some hypothesis <span class="math notranslate nohighlight">\(B\)</span> given data <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(P(B|A)\)</span>. And for that we make use of likelihood of hypothesis <span class="math notranslate nohighlight">\(P(A |B)\)</span> with a given data.</p></li>
+</ul>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
@@ -891,7 +894,6 @@ the car? (Hint: for intuition consider all the possible permutations of what is 
 </div>
 </details></div>
 <hr class="docutils" />
-</section>
 </section>
 <section id="combinatorics">
 <h2>Combinatorics<a class="headerlink" href="#combinatorics" title="Permalink to this heading">#</a></h2>
@@ -1204,7 +1206,6 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning objectives</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
@@ -1215,9 +1216,10 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#translate-words-into-probabilities">Translate words into probabilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes theorem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computations-with-joint-and-codnitional-probability">Computations with joint and codnitional probability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-computations">Bayesian computations</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-posterioir-and-likelihood">Prior, posterioir and likelihood</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorics">Combinatorics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
