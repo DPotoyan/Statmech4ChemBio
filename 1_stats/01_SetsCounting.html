@@ -459,15 +459,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space-and-microstates">Sample space and microstates</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events-or-macrostates">Events or macrostates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-samples-spaces">Examples of Samples spaces</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-events">Examples of events</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-events-and-venn-diagrams">Composite events and Venn diagrams</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-new-events">Creating new events</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joing-marginal-and-conditional-probability">Joing, marginal and conditional probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-marginal-and-conditional-probability">Joint, marginal and conditional probability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorics">Combinatorics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
@@ -497,14 +503,18 @@ document.write(`
 <li><p><strong>Probability function</strong> P(A) associates a numeric value of probability to each event A.</p></li>
 <li><p><strong>Venn diagrams</strong> visualize P(A) as a “volume fraction” of our confidence in the event expressed on 0-1 scale.</p></li>
 <li><p><strong>Probability axioms</strong> defining a set of logical rules for creating composite events from trivial ones.</p></li>
-<li><p><strong>Bayesian approach:</strong> In physical scientces and modeling probability one often deals with situations where counting is not posisble. Hence pornbability is interpreted as a degree of belief in each possible event.</p></li>
+<li><p><strong>Bayesian approach:</strong> In physical sciences and modeling probability one often deals with situations where counting is not possible. Hence probability is interpreted as a degree of belief in each possible event.</p></li>
 </ul>
 </div>
-<section id="sample-space-and-microstates">
-<h2>Sample space and microstates<a class="headerlink" href="#sample-space-and-microstates" title="Permalink to this heading">#</a></h2>
+<section id="sample-space">
+<h2>Sample space<a class="headerlink" href="#sample-space" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The <strong>sample space</strong>, often signified by an <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of <strong>all possible states</strong> - In the contact of statistical mechanics we are going to call states inside <span class="math notranslate nohighlight">\(\Omega\)</span> <em>microstates</em></p></li>
-<li><p>States of <span class="math notranslate nohighlight">\(\Omega\)</span> are sampled during a trial of a system which could be in an experiment or simualtio.</p></li>
+<li><p>The <strong>sample space</strong>, often signified by an <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of <strong>all possible elementary events</strong>. Elementary means the events can not be further broken down in terms of simpler events. For instance rolling a die can result in any one of six elementary events happening.</p></li>
+<li><p>In the contact of statistical mechanics we are going to call states inside <span class="math notranslate nohighlight">\(\Omega\)</span> <strong>microstates</strong>. States of <span class="math notranslate nohighlight">\(\Omega\)</span> are sampled during a trial of a system which could be done via an experiment or simualtion.</p></li>
+</ul>
+<section id="examples-of-samples-spaces">
+<h3>Examples of Samples spaces<a class="headerlink" href="#examples-of-samples-spaces" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
 <li><p>If our trial is a single roll of a six-sided die, then the sample space will be:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -525,46 +535,52 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\Omega = \{0... L_x\}\]</div>
 </section>
-<section id="events-or-macrostates">
-<h2>Events or macrostates<a class="headerlink" href="#events-or-macrostates" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="events">
+<h2>Events<a class="headerlink" href="#events" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>An <strong>Event</strong> specifies the outcome of a trial. Events can contain either one element from <span class="math notranslate nohighlight">\(\Omega\)</span> or multiple.</p></li>
-<li><p>In the contact of statistical mechanics we will refer to events as <strong>Macrostates</strong> because they will useually correspond to sets containing large number of microstates of atoms and molecules.</p></li>
+<li><p>An <strong>Event</strong> specifies the outcome of a trial. Generally an event can contain one or more elementary events from <span class="math notranslate nohighlight">\(\Omega\)</span>.</p></li>
+<li><p>In the contact of statistical mechanics we will refer to events containing multiple microstates as <strong>Macrostates</strong>.</p></li>
+</ul>
+<section id="examples-of-events">
+<h3>Examples of events<a class="headerlink" href="#examples-of-events" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
 <li><p>If we roll a die we can choose event to be getting a single number</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[E = \{1 \}\]</div>
+\[A= \{1 \}\]</div>
 <ul class="simple">
 <li><p>Or we can choose event to be any even number:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[E = \{2, 4, 6 \}\]</div>
+\[B = \{2, 4, 6 \}\]</div>
 <ul class="simple">
 <li><p>A macrostate of a nitrogen molecule could be all positions of molecule in second half of container</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\Omega  = \{L/2, ..., L \} \]</div>
+\[C  = \{L/2, ..., L \} \]</div>
+</section>
 </section>
 <section id="compute-probabilities-through-counting">
 <h2>Compute probabilities through counting<a class="headerlink" href="#compute-probabilities-through-counting" title="Permalink to this heading">#</a></h2>
 <p>We calculate probabilities of events as fractions in the sample space that events take up.</p>
 <div class="math notranslate nohighlight">
 \[
-\boxed{\Large P(E) = \frac{n(E)}{n(\Omega)}}
+\boxed{\Large P(A) = \frac{n(A)}{n(\Omega)}}
 \]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n(E)\)</span> probability of event, e.g rolling an even number. The size of event space is 3</p></li>
+<li><p><span class="math notranslate nohighlight">\(n(A)\)</span> probability of event, e.g rolling an even number. The size of event space is 3</p></li>
 <li><p><span class="math notranslate nohighlight">\(n(\Omega)\)</span> size of sample space. In the context of single die roll is equal 6</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span> <span class="n">E</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="n">Omega</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span> <span class="n">A</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Simple function to calculate probability of die rolls</span>
 <span class="sd">    Return the probability of an event given the event measure and the sample size measure</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -634,10 +650,6 @@ import matplotlib_venn as venn
 </div>
 <section id="creating-new-events">
 <h3>Creating new events<a class="headerlink" href="#creating-new-events" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>When dealing with sets in python &amp; means intersection and | means union.</p></li>
-<li><p>We apply these operators to create composite sets</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∩𝐵 = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">&amp;</span><span class="n">B</span><span class="p">)</span>
@@ -745,8 +757,8 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 </div>
 </details></div>
 </section>
-<section id="joing-marginal-and-conditional-probability">
-<h2>Joing, marginal and conditional probability<a class="headerlink" href="#joing-marginal-and-conditional-probability" title="Permalink to this heading">#</a></h2>
+<section id="joint-marginal-and-conditional-probability">
+<h2>Joint, marginal and conditional probability<a class="headerlink" href="#joint-marginal-and-conditional-probability" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Joint Probability <span class="math notranslate nohighlight">\(P(A, B)\)</span></strong>  Quantifies the probability of two or more events happening simultaneously.</p></li>
 <li><p><strong>Marginal Probability <span class="math notranslate nohighlight">\(P(A)\)</span></strong>  Quantifies the probability of an event irrespective of the outcomes of other random variables. Is obtained by marginalization, summing over all possibilities of B.</p></li>
@@ -1116,15 +1128,21 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space-and-microstates">Sample space and microstates</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events-or-macrostates">Events or macrostates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-samples-spaces">Examples of Samples spaces</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-events">Examples of events</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-events-and-venn-diagrams">Composite events and Venn diagrams</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-new-events">Creating new events</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joing-marginal-and-conditional-probability">Joing, marginal and conditional probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-marginal-and-conditional-probability">Joint, marginal and conditional probability</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorics">Combinatorics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
