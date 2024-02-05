@@ -467,8 +467,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-posterioir-and-likelihood">Prior, posterioir and likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joing-marginal-and-conditional-probability">Joing, marginal and conditional probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorics">Combinatorics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
@@ -489,18 +489,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-theory">
 <h1>Probability theory<a class="headerlink" href="#probability-theory" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
-<span class="kn">import</span> <span class="nn">scipy</span>   
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
-</div>
 <div class="note admonition">
 <p class="admonition-title">What you need to know</p>
 <ul class="simple">
@@ -757,50 +745,39 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 </div>
 </details></div>
 </section>
-<section id="bayes-theorem">
-<h2>Bayes theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this heading">#</a></h2>
+<section id="joing-marginal-and-conditional-probability">
+<h2>Joing, marginal and conditional probability<a class="headerlink" href="#joing-marginal-and-conditional-probability" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Marginal Probability:</strong> The probability of an event irrespective of the outcomes of other random variables, e.g.</p></li>
+<li><p><strong>Joint Probability <span class="math notranslate nohighlight">\(P(A, B)\)</span></strong>  Quantifies the probability of two or more events happening simultaneously.</p></li>
+<li><p><strong>Marginal Probability <span class="math notranslate nohighlight">\(P(A)\)</span></strong>  Quantifies the probability of an event irrespective of the outcomes of other random variables. Is obtained by marginalization, summing over all possibilities of B.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[P(A)\]</div>
+\[P(A) = P(A, B) + P(A, B^c)\]</div>
 <ul class="simple">
-<li><p><strong>Joint Probability:</strong> Probability of two (or more) simultaneous events, e.g.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[P(A, B)\,\,\,\, or \,\,\,\, P(𝐴∩𝐵) \,\,\,\,or \,\,\,\, P(A\,\, and\,\, B)\]</div>
-<ul class="simple">
-<li><p><strong>Conditional Probability:</strong> Probability of one (or more) event given the occurrence of another event.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[P(A\,\, given\,\, B)\,\,\,\, or \,\,\,\,P(A | B)\]</div>
-<ul class="simple">
-<li><p>The joint probability can be calculated using the conditional probability</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[P(A, B) = P(B | A) \cdot  P(A)\]</div>
-<ul class="simple">
-<li><p>Note that joint probability is symmetric <span class="math notranslate nohighlight">\(P(A, B) = P(B, A)\)</span></p></li>
-<li><p>The conditional probability can be calculated using the joint probability. Thinking in terms of sets this shows that we are counting the fraction of A and B overlap confined within area of A, an event that has happened!</p></li>
+<li><p>**Conditional Probability <span class="math notranslate nohighlight">\(P(A | B)\)</span> **  Quantifies probability of event A given the information that event B happened.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[P(B | A) = \frac{P(B, A)}{P(A)}\]</div>
+<div class="math notranslate nohighlight">
+\[P(A, B) = P(B | A) \cdot  P(A)\]</div>
 <ul class="simple">
-<li><p>Note that conditional probability is not symmetric <span class="math notranslate nohighlight">\(P(A | B) != P(B | A)\)</span></p></li>
+<li><p>We are counting the fraction of A and B overlap confined within the given event A</p></li>
+<li><p>Note that joint probability is symmetric <span class="math notranslate nohighlight">\(P(A, B) = P(B, A)\)</span> while conditional probability is not! <span class="math notranslate nohighlight">\(P(A | B) != P(B | A)\)</span></p></li>
 </ul>
 </section>
-<section id="prior-posterioir-and-likelihood">
-<h2>Prior, posterioir and likelihood<a class="headerlink" href="#prior-posterioir-and-likelihood" title="Permalink to this heading">#</a></h2>
+<section id="bayes-formula">
+<h2>Bayes formula<a class="headerlink" href="#bayes-formula" title="Permalink to this heading">#</a></h2>
+<p><strong>Prior, posterioir and likelihood</strong></p>
 <ul class="simple">
-<li><p>Bayes theorem provides a powerful way to test hypotheses and learn parameters of a model from data.</p></li>
+<li><p>Bayes theorem provides a powerful way to test hypotheses and learn parameters of a model from data. The jargon used when using bayes formula is a little different from the one given above.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[P(B|A) = \frac{P(A|B) \cdot P(B) }{P(A)}\]</div>
+\[P(H|D) = \frac{P(D|H) \cdot P(H) }{P(D)}\]</div>
 <ul class="simple">
-<li><p>Here A is data availible to us. and P(A) is called <strong>prior</strong></p></li>
-<li><p>B is a hpothesis we want to test or parameter we want to learn. P(B|A) is called <strong>posterior</strong></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(A|B)\)</span> is called likelihood of data! The reason it is not called a probability is becasue one is interested in B and how varying B changes this distribution!</p></li>
-<li><p>The last formulate looks abstract but essentially this forumale is used to learn probability of some hypothesis <span class="math notranslate nohighlight">\(B\)</span> given data <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(P(B|A)\)</span>. And for that we make use of likelihood of hypothesis <span class="math notranslate nohighlight">\(P(A |B)\)</span> with a given data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(H)\)</span> is called <strong>prior</strong> and quantifies information we have about our hyothesis.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(D)\)</span> is called <strong>evidence</strong> and is just the probability of having the date we generated.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is called likelihood of data! The reason it is not called a probability is becasue one is interested in how different values of <span class="math notranslate nohighlight">\(H\)</span> change the <span class="math notranslate nohighlight">\(P(D|H)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is the quantity we are after is called called <strong>posterior</strong></p></li>
 </ul>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
@@ -1147,8 +1124,8 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-posterioir-and-likelihood">Prior, posterioir and likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joing-marginal-and-conditional-probability">Joing, marginal and conditional probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorics">Combinatorics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
