@@ -492,6 +492,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform">Uniform</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian">Gaussian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson">Poisson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-exact-probability-distributions">Plotting exact probability distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-random-numbers-to-get-answers-via-simulations">Using random numbers to get answers via simulations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
@@ -518,6 +520,15 @@ document.write(`
 <li><p><strong>Probability axioms</strong> define a set of logical rules for creating composite events from trivial ones.</p></li>
 <li><p><strong>Bayesian approach:</strong> In physical sciences and modeling one often deals with situations where counting is impossible. Hence, probability is interpreted as a degree of belief.</p></li>
 </ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
 </div>
 <section id="sample-space">
 <h2>Sample space<a class="headerlink" href="#sample-space" title="Permalink to this heading">#</a></h2>
@@ -1031,7 +1042,7 @@ Combinations with replacement
 </section>
 <section id="variance-fluctuation">
 <h3>Variance (fluctuation)<a class="headerlink" href="#variance-fluctuation" title="Permalink to this heading">#</a></h3>
-<p>is an expectation of <span class="math notranslate nohighlight">\((x-E(x))^2\)</span> which characterizes spread in values of x.</p>
+<p>Variance is an expectation of squared deviation of x from expectation, which characterizes the spread in values of x.</p>
 <div class="math notranslate nohighlight">
 \[V[x] = E[(x-E[x])^2 ] = E[x^2]-E[x]^2\]</div>
 <ul class="simple">
@@ -1061,12 +1072,15 @@ Combinations with replacement
 </div>
 </div>
 </div>
+</section>
+<section id="probability-distributions">
+<h2>Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Convenience function for making quick two panel plot showing </span>
-<span class="sd">    a line plot for the sequece of random numbers (RN)</span>
-<span class="sd">    a histogram plot of probability density of random numbers </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Convenience function for making quick two-panel plot showing </span>
+<span class="sd">    a line plot for the sequence of random numbers (RN)</span>
+<span class="sd">    a histogram plot of the probability density of random numbers </span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
@@ -1087,9 +1101,6 @@ Combinations with replacement
 </div>
 </div>
 </div>
-</section>
-<section id="probability-distributions">
-<h2>Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="uniform">
 <h2>Uniform<a class="headerlink" href="#uniform" title="Permalink to this heading">#</a></h2>
@@ -1137,6 +1148,54 @@ Combinations with replacement
 <span class="n">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+</section>
+<section id="poisson">
+<h2>Poisson<a class="headerlink" href="#poisson" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[P(n| \lambda) = \frac{\lambda^n e^{-\lambda}}{n!}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For a standard normal with sigma=1, mu=0</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> 
+
+<span class="n">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/520ce32f8755a58ef7789ebdc20dd11c2ed7f748d069116ad7cd477a31985043.png" src="../_images/520ce32f8755a58ef7789ebdc20dd11c2ed7f748d069116ad7cd477a31985043.png" />
+</div>
+</div>
+</section>
+<section id="plotting-exact-probability-distributions">
+<h2>Plotting exact probability distributions<a class="headerlink" href="#plotting-exact-probability-distributions" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">scipy.stats</a> contains a large number of probability distributions. Explores examples there</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">poisson</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="o">*</span><span class="n">r</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">r</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;norm pdf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x17eb8b460&gt;]
+</pre></div>
+</div>
+<img alt="../_images/e4407ad72479df47df435e7e901194dde80c48ed553dfcfeb2042e699caf491b.png" src="../_images/e4407ad72479df47df435e7e901194dde80c48ed553dfcfeb2042e699caf491b.png" />
 </div>
 </div>
 </section>
@@ -1346,6 +1405,8 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform">Uniform</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian">Gaussian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson">Poisson</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-exact-probability-distributions">Plotting exact probability distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-random-numbers-to-get-answers-via-simulations">Using random numbers to get answers via simulations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>

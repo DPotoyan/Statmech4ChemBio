@@ -462,7 +462,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">Simulating a 1D unbiased random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-numerical-random-walk-statistics-to-analytic-probability-distributions">Fitting numerical random walk statistics to analytic probability distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confined-diffusion">Confined diffusion.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return-to-the-origin">Return to the origin!</a></li>
@@ -484,7 +483,15 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="random-walk-and-clt">
 <h1>Random walk and CLT<a class="headerlink" href="#random-walk-and-clt" title="Permalink to this heading">#</a></h1>
-<p><span class="math notranslate nohighlight">\(^*CLT:\)</span>  <strong>Central Limit Theorem</strong></p>
+<div class="admonition-what-you-need-to-know admonition">
+<p class="admonition-title">What you need to know</p>
+<ul class="simple">
+<li><p>Learn why the Central Limit Theorem (CLT) and the law of large numbers apply to virtually every data</p></li>
+<li><p>Be able to invoke CLT to make predictions.</p></li>
+<li><p>Learn to build simple simulations on the example of random walk</p></li>
+<li><p>Learn to use statistical distributions to fit probability distributions computed from simulations.</p></li>
+</ul>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -497,15 +504,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</div>
-<div class="admonition-what-you-need-to-know admonition">
-<p class="admonition-title">What you need to know</p>
-<ul class="simple">
-<li><p>Learn why the Central Limit Theorem (CLT) and the law of large numbers apply to virtually every data</p></li>
-<li><p>Be able to invoke CLT to make predictions.</p></li>
-<li><p>Learn to build simple simulations on the example of random walk</p></li>
-<li><p>Learn to use statistical distributions to fit probability distributions computed from simulations.</p></li>
-</ul>
 </div>
 <section id="sum-of-random-variables">
 <h2>Sum of random variables<a class="headerlink" href="#sum-of-random-variables" title="Permalink to this heading">#</a></h2>
@@ -638,80 +636,6 @@ document.write(`
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "0ea58bfd5b68498b92bb82045308b85c", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 </section>
-<section id="fitting-numerical-random-walk-statistics-to-analytic-probability-distributions">
-<h2>Fitting numerical random walk statistics to analytic probability distributions<a class="headerlink" href="#fitting-numerical-random-walk-statistics-to-analytic-probability-distributions" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>So far we have mostly simulated random walk pretending that we do not know which porbability distributions the walk was governed.</p></li>
-<li><p>Below we illustrate a few example uses of <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> library which contains probability distribution functions.</p></li>
-<li><p>Moreover <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> also has convenience reference to the same numpy random numbers that we have generated above.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">poisson</span>  
-
-<span class="n">s</span> <span class="o">=</span>  <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="c1"># Let us declare s to be a binomial RV</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>          <span class="c1"># 20 random samples form X</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>           <span class="c1"># P(X = 5) pdf in case of continuous variable</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>           <span class="c1"># P(X &lt;= 5)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>           <span class="c1"># E[X], mean</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">var</span><span class="p">())</span>            <span class="c1"># Var(X), variance</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>            <span class="c1"># Std(X), standard deviation</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coin_flip</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    N: flip coint N times taking on values 0 or 1 </span>
-<span class="sd">    p: with p probability</span>
-<span class="sd">    &#39;&#39;&#39;</span> 
-    <span class="c1"># Binomial</span>
-    <span class="n">b</span>       <span class="o">=</span> <span class="n">binom</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> 
-    
-    <span class="c1">#Gaussian       </span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">p</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span> <span class="c1">#loc=mu, scale=sigma</span>
-    
-    <span class="c1">#Poisson</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">poisson</span><span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
-        
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="c1"># Plot values of coin flips and histogram</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">N</span><span class="p">),</span>  <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    
-    <span class="c1"># Possible values of a coin to plot dists</span>
-    <span class="n">vals</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> 
-    
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">vals</span><span class="p">),</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Binom&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">vals</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gauss&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">vals</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Poisson&#39;</span><span class="p">)</span>
-    
-    <span class="c1">#ax[1].set_ylim(0,)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Coin sum&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Coin sum&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability dist&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># try 0.1, 0.5 and 0.9</span>
-<span class="n">coin_flip</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/1d0066a459c7bcce5200c524e7fffdeedf6a368ed9fa015412c6c4359b5cc420.png" src="../_images/1d0066a459c7bcce5200c524e7fffdeedf6a368ed9fa015412c6c4359b5cc420.png" />
-</div>
-</div>
-</section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
 <section id="confined-diffusion">
@@ -837,7 +761,6 @@ Hint: you may want to use random variables from scipy.stats.exp <br></p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">Simulating a 1D unbiased random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-numerical-random-walk-statistics-to-analytic-probability-distributions">Fitting numerical random walk statistics to analytic probability distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confined-diffusion">Confined diffusion.</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return-to-the-origin">Return to the origin!</a></li>
