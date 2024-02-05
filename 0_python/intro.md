@@ -11,4 +11,3 @@ Python
 
 - Due too time constraints our coverage will be superficial. In addition to the comprehensive official tutorial of python [python.org](https://docs.python.org/3/tutorial/) here i will list some links which are best for self-study.
 :::
-
