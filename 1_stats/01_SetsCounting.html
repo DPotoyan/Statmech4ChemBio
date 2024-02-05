@@ -480,6 +480,19 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutations-and-combinations-in-python">Permutations and combinations in python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-random-variable">Probability distribution of random variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">Normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (fluctuation)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers-in-python">Random numbers in python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform">Uniform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian">Gaussian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-random-numbers-to-get-answers-via-simulations">Using random numbers to get answers via simulations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
@@ -498,12 +511,12 @@ document.write(`
 <div class="admonition-what-you-need-to-know admonition">
 <p class="admonition-title">What you need to know</p>
 <ul class="simple">
-<li><p><strong>Sample space</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of elements called outcomes or events.</p></li>
-<li><p><strong>Events</strong> can be constructed by forming subsets (<span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(C\)</span> etc) of <span class="math notranslate nohighlight">\(\Omega\)</span></p></li>
-<li><p><strong>Probability function</strong> P(A) associates a numeric probability value to each event A.</p></li>
+<li><p><strong>Sample space</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of elementary outcomes or events.</p></li>
+<li><p><strong>Events</strong> can contain more than one elementary event and can be constructed by forming subsets (<span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(C\)</span> etc) of <span class="math notranslate nohighlight">\(\Omega\)</span></p></li>
+<li><p><strong>Probability function</strong> P(A) assigns a numeric value to each event, A quantifying certainty of an event happening on a 0-1 scale.</p></li>
 <li><p><strong>Venn diagrams</strong> visualize P(A) as a “volume fraction” of our confidence in the event expressed on 0-1 scale.</p></li>
 <li><p><strong>Probability axioms</strong> define a set of logical rules for creating composite events from trivial ones.</p></li>
-<li><p><strong>Bayesian approach:</strong> In physical sciences and modeling probability, one often deals with situations where counting is impossible. Hence, probability is interpreted as a degree of belief in each possible event.</p></li>
+<li><p><strong>Bayesian approach:</strong> In physical sciences and modeling one often deals with situations where counting is impossible. Hence, probability is interpreted as a degree of belief.</p></li>
 </ul>
 </div>
 <section id="sample-space">
@@ -653,8 +666,18 @@ import matplotlib_venn as venn
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∩𝐵 = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">&amp;</span><span class="n">B</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∪B = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">|</span><span class="n">B</span><span class="p">)</span>     
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴-B = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span>          
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴∪B = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">|</span><span class="n">B</span><span class="p">)</span>    
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴-B = &quot;</span><span class="p">,</span> <span class="n">A</span><span class="o">-</span><span class="n">B</span><span class="p">)</span>     
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="o">-</span><span class="n">A</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="o">-</span><span class="n">B</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(𝐴∪𝐵)^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="o">-</span><span class="p">(</span><span class="n">𝐴</span><span class="o">|</span><span class="n">𝐵</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴^c ∩ B^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">((</span><span class="n">Omega</span><span class="o">-</span><span class="n">A</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">Omega</span><span class="o">-</span><span class="n">B</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -662,25 +685,6 @@ import matplotlib_venn as venn
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>𝐴∩𝐵 =  {2, 5}
 𝐴∪B =  {0, 1, 2, 3, 4, 5, 7, -1}
 𝐴-B =  {1, 3, 4}
-</pre></div>
-</div>
-</div>
-</div>
-<p>Computing complements of sets</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;A^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="o">-</span><span class="n">A</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="o">-</span><span class="n">B</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(𝐴∪𝐵)^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="o">-</span><span class="p">(</span><span class="n">𝐴</span><span class="o">|</span><span class="n">𝐵</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;𝐴^c ∩ B^c = &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">((</span><span class="n">Omega</span><span class="o">-</span><span class="n">A</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">Omega</span><span class="o">-</span><span class="n">B</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A^c =  5
-B^c =  5
-(𝐴∪𝐵)^c =  2
-𝐴^c  ∩ B^c =  2
 </pre></div>
 </div>
 </div>
@@ -766,7 +770,7 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 <div class="math notranslate nohighlight">
 \[P(A) = P(A, B) + P(A, B^c)\]</div>
 <ul class="simple">
-<li><p>**Conditional Probability <span class="math notranslate nohighlight">\(P(A | B)\)</span> **  Quantifies probability of event A given the information that event B happened.</p></li>
+<li><p><strong>Conditional Probability <span class="math notranslate nohighlight">\(P(A | B)\)</span></strong>  Quantifies probability of event A given the information that event B happened.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[P(B | A) = \frac{P(B, A)}{P(A)}\]</div>
@@ -779,16 +783,16 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 </section>
 <section id="bayes-formula">
 <h2>Bayes formula<a class="headerlink" href="#bayes-formula" title="Permalink to this heading">#</a></h2>
-<p><strong>Prior, posterioir and likelihood</strong></p>
+<p><strong>Prior, posterior and likelihood</strong></p>
 <ul class="simple">
-<li><p>Bayes theorem provides a powerful way to test hypotheses and learn parameters of a model from data. The jargon used when using bayes formula is a little different from the one given above.</p></li>
+<li><p>The Bayes theorem provides a powerful way to test hypotheses and learn the parameters of a model from data. The jargon used when using the bayes formula differs slightly from the one given above.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[P(H|D) = \frac{P(D|H) \cdot P(H) }{P(D)}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(H)\)</span> is called <strong>prior</strong> and quantifies information we have about our hyothesis.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(D)\)</span> is called <strong>evidence</strong> and is just the probability of having the date we generated.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is called likelihood of data! The reason it is not called a probability is becasue one is interested in how different values of <span class="math notranslate nohighlight">\(H\)</span> change the <span class="math notranslate nohighlight">\(P(D|H)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is called likelihood of data! It is not called probability because one is interested in how different values of <span class="math notranslate nohighlight">\(H\)</span> change the <span class="math notranslate nohighlight">\(P(D|H)\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is the quantity we are after is called called <strong>posterior</strong></p></li>
 </ul>
 <div class="admonition-example admonition">
@@ -992,6 +996,183 @@ Combinations with replacement
 </div>
 </div>
 </section>
+<section id="random-variables">
+<h2>Random variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>A random variable X</strong> is a quantitative variable whose value depends on the outcomes of a random phenomenon. <span class="math notranslate nohighlight">\(X\)</span> is a function from possible outcomes of a sample space <span class="math notranslate nohighlight">\(\Omega\)</span>. For a coin toss <span class="math notranslate nohighlight">\(\Omega={-1,1}\)</span> and one possible X(H)=+1 and X(T)=-1. Every time the experiment is done, X returns either +1 or -1. We could also make functions of random variables, e.g., every time X=+1, we earn 10$, etc.</p></li>
+<li><p>Random variables are classified into two main types: <strong>discrete and continuous.</strong></p></li>
+</ul>
+<p><strong>Discrete Random Variable:</strong> It assumes a countable number of distinct values. Discrete random variables are used to model scenarios where outcomes can be counted, such as the number of particles emitted by a radioactive source in a given time interval or the number of photons hitting a detector in a certain period.</p>
+<p><strong>Continuous Random Variable:</strong> It can take any value within a continuous range. These variables describe quantities that can vary smoothly, such as the position of a particle in space, the velocity of a molecule in a gas, or the energy levels of an atom.</p>
+</section>
+<section id="probability-distribution-of-random-variable">
+<h2>Probability distribution of random variable<a class="headerlink" href="#probability-distribution-of-random-variable" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>For any random variable X, we are interested in finding probability distribution over possible values x that X takes: <span class="math notranslate nohighlight">\(p(x)\)</span>.</p></li>
+<li><p>Note the very subtle but crucial difference between x (1-6 for a die) and a random variable X, which generates numbers x according to distributions p(x)</p></li>
+</ul>
+<section id="normalization">
+<h3>Normalization<a class="headerlink" href="#normalization" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\int p(x)dx = 1\]</div>
+</section>
+<section id="expectation">
+<h3>Expectation<a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E[x]\)</span> is the theoretical or exact value of the mean instead of the sample mean, which we compute in simulations and hope it is close to expectation.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E[x]  = \int x \cdot p(x)dx\]</div>
+<div class="math notranslate nohighlight">
+\[E[f(x)] = \int f(x) \cdot p(x)dx\]</div>
+<ul class="simple">
+<li><p>We see that expectation is always a linear operator in the sense that <span class="math notranslate nohighlight">\(E[f+g] = E[f]+E[g]\)</span></p></li>
+</ul>
+</section>
+<section id="variance-fluctuation">
+<h3>Variance (fluctuation)<a class="headerlink" href="#variance-fluctuation" title="Permalink to this heading">#</a></h3>
+<p>is an expectation of <span class="math notranslate nohighlight">\((x-E(x))^2\)</span> which characterizes spread in values of x.</p>
+<div class="math notranslate nohighlight">
+\[V[x] = E[(x-E[x])^2 ] = E[x^2]-E[x]^2\]</div>
+<ul class="simple">
+<li><p>We see that Variance, in general, is not a linear operator in the sense that <span class="math notranslate nohighlight">\(V[f+g] \neq V[f]+V[g]\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="random-numbers-in-python">
+<h2>Random numbers in python<a class="headerlink" href="#random-numbers-in-python" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/routines.random.html"><strong>numpy.random</strong></a> has the fastest random number generators based on low-level code written in C.</p></li>
+<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html"><strong>Scipy.stats</strong></a> has an extensive library of statistical distributions and tools for statistical analysis.</p></li>
+<li><p>First, we take a look at the most widely used random numbers of numpy, also called standard random numbers. These are rand (uniform random number on interval 0,1) and randn (stnadard average random number with 0 mean and 1 variance).</p></li>
+<li><p>When running code that uses random numbers results will always differ for every run. If you want code to reproduce the same result, you can fix the seed to get reproducible results: <code class="docutils literal notranslate"> <span class="pre">np.random.seed(8376743)</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Convenience function for making quick two panel plot showing </span>
+<span class="sd">    a line plot for the sequece of random numbers (RN)</span>
+<span class="sd">    a histogram plot of probability density of random numbers </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;trajectory&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>  <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>  <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;histogram&#39;</span><span class="p">)</span>
+    
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Samples of RN&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Values of RN&#39;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Values of RN&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="probability-distributions">
+<h2>Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="uniform">
+<h2>Uniform<a class="headerlink" href="#uniform" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(x| a, b)=\begin{cases}
+{\frac {1}{b-a}}&amp;\mathrm {for} \ a\leq x\leq b,\\[8pt]0&amp;\mathrm {for} \ x&lt;a\ \mathrm {or} \ x&gt;b
+\end{cases}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> 
+
+<span class="n">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="binomial">
+<h2>Binomial<a class="headerlink" href="#binomial" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[P(n |r, N) =  \frac{N!}{(N-n)! n!}r^n (1-r)^{N-n}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> 
+
+<span class="n">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="gaussian">
+<h2>Gaussian<a class="headerlink" href="#gaussian" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[P(x |\mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For a standard normal with sigma=1, mu=0</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># For a more general Gaussian</span>
+<span class="n">rgauss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span> 
+
+<span class="n">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-random-numbers-to-get-answers-via-simulations">
+<h2>Using random numbers to get answers via simulations<a class="headerlink" href="#using-random-numbers-to-get-answers-via-simulations" title="Permalink to this heading">#</a></h2>
+<p>One of the major uses of random numbers is for conducting numerical simulations. What is a simulation? It is a recreation of a process on a computer. And this recreation is done by random numbers. E.g to simulate coint tosses, die throws, diffusion of molecules, conformational change of polymers we use random number to recreate the process on a computer. Let’s start off by asking some simple questions</p>
+<ul class="simple">
+<li><p>How often do we get a run of 5 or more consecutive heads in 100 coin tosses if we repeat the experiment 1000 times?</p></li>
+<li><p>What if the coin is biased to generate heads only 40% of the time?</p></li>
+</ul>
+<p>We will use <code class="docutils literal notranslate"><span class="pre">np.random.choice</span></code> which generates random samples from limited options.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">a:</span></code> an array/list of choices like, <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">1]</span></code> or <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> or <code class="docutils literal notranslate"><span class="pre">['bagel',</span> <span class="pre">'muffin']</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p:</span></code> probabilities of picking choices from a. E.g <code class="docutils literal notranslate"><span class="pre">p=[0.5,</span> <span class="pre">0.5]</span></code>. Default is equal probabilities.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size:</span></code> shape of an array could be <code class="docutils literal notranslate"><span class="pre">N,</span> <span class="pre">(N,M),</span> <span class="pre">(N,M,Q)</span></code> etc</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">replace=True.</span></code> If you choose bagel from a, the caffee will put back a new one on shelf.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>    <span class="c1"># length of each trajectory</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># number of experiments: stochastic trajecotries generated</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span> <span class="c1"># (i) Unbiased coin p=[0.5,0.5] by default</span>
+
+<span class="n">ys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>  <span class="c1"># (ii) biased coin</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">((</span><span class="n">xs</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">ys</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;unbiased&quot;</span><span class="p">,</span> <span class="s2">&quot;biased&quot;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p><strong>Events, sets, probability</strong></p>
@@ -1153,6 +1334,19 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permutations-and-combinations-in-python">Permutations and combinations in python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-random-variable">Probability distribution of random variable</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">Normalization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (fluctuation)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers-in-python">Random numbers in python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform">Uniform</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian">Gaussian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-random-numbers-to-get-answers-via-simulations">Using random numbers to get answers via simulations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
