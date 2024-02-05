@@ -495,22 +495,22 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="probability-theory">
 <h1>Probability theory<a class="headerlink" href="#probability-theory" title="Permalink to this heading">#</a></h1>
-<div class="note admonition">
+<div class="admonition-what-you-need-to-know admonition">
 <p class="admonition-title">What you need to know</p>
 <ul class="simple">
-<li><p><strong>Sample space</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> is a set whose elements are called outcomes or events.</p></li>
-<li><p><strong>Events</strong> can be constructed by forming subsets (A, B, C etc) of <span class="math notranslate nohighlight">\(\Omega\)</span></p></li>
-<li><p><strong>Probability function</strong> P(A) associates a numeric value of probability to each event A.</p></li>
+<li><p><strong>Sample space</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of elements called outcomes or events.</p></li>
+<li><p><strong>Events</strong> can be constructed by forming subsets (<span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(C\)</span> etc) of <span class="math notranslate nohighlight">\(\Omega\)</span></p></li>
+<li><p><strong>Probability function</strong> P(A) associates a numeric probability value to each event A.</p></li>
 <li><p><strong>Venn diagrams</strong> visualize P(A) as a “volume fraction” of our confidence in the event expressed on 0-1 scale.</p></li>
-<li><p><strong>Probability axioms</strong> defining a set of logical rules for creating composite events from trivial ones.</p></li>
-<li><p><strong>Bayesian approach:</strong> In physical sciences and modeling probability one often deals with situations where counting is not possible. Hence probability is interpreted as a degree of belief in each possible event.</p></li>
+<li><p><strong>Probability axioms</strong> define a set of logical rules for creating composite events from trivial ones.</p></li>
+<li><p><strong>Bayesian approach:</strong> In physical sciences and modeling probability, one often deals with situations where counting is impossible. Hence, probability is interpreted as a degree of belief in each possible event.</p></li>
 </ul>
 </div>
 <section id="sample-space">
 <h2>Sample space<a class="headerlink" href="#sample-space" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The <strong>sample space</strong>, often signified by an <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of <strong>all possible elementary events</strong>. Elementary means the events can not be further broken down in terms of simpler events. For instance rolling a die can result in any one of six elementary events happening.</p></li>
-<li><p>In the contact of statistical mechanics we are going to call states inside <span class="math notranslate nohighlight">\(\Omega\)</span> <strong>microstates</strong>. States of <span class="math notranslate nohighlight">\(\Omega\)</span> are sampled during a trial of a system which could be done via an experiment or simualtion.</p></li>
+<li><p>The <strong>sample space</strong>, often signified by an <span class="math notranslate nohighlight">\(\Omega\)</span> is a set of <strong>all possible elementary events</strong>. Elementary means the events can not be further broken down into simpler events. For instance, rolling a die can result in any one of six elementary events.</p></li>
+<li><p>In the context of statistical mechanics, we are going to call states inside <span class="math notranslate nohighlight">\(\Omega\)</span> <strong>microstates</strong>. States of <span class="math notranslate nohighlight">\(\Omega\)</span> are sampled during a system trial, which could be done via an experiment or simulation.</p></li>
 </ul>
 <section id="examples-of-samples-spaces">
 <h3>Examples of Samples spaces<a class="headerlink" href="#examples-of-samples-spaces" title="Permalink to this heading">#</a></h3>
@@ -525,12 +525,12 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\Omega = \{H, T \}\]</div>
 <ul class="simple">
-<li><p>If a fair coin is tossed 3 times in a row we will have sample space of size <span class="math notranslate nohighlight">\(2^3\)</span> (HTT, THT, TTH, THH, HTH, HHT, HHH, TTT)</p></li>
+<li><p>If a fair coin is tossed three times in a row, we will have sample space of size <span class="math notranslate nohighlight">\(2^3\)</span> (HTT, THT, TTH, THH, HTH, HHT, HHH, TTT)</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\Omega = \{H,T\}^{3}\]</div>
 <ul class="simple">
-<li><p>Position of an atom in a container of size <span class="math notranslate nohighlight">\(L_x\)</span> along x. There will be very large number of</p></li>
+<li><p>Position of an atom in a container of size <span class="math notranslate nohighlight">\(L_x\)</span> along x. There will be a huge number of</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\Omega = \{0... L_x\}\]</div>
@@ -569,14 +569,14 @@ document.write(`
 \boxed{\Large P(A) = \frac{n(A)}{n(\Omega)}}
 \]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n(A)\)</span> probability of event, e.g rolling an even number. The size of event space is 3</p></li>
+<li><p><span class="math notranslate nohighlight">\(n(A)\)</span> probability of event, e.g rolling an even number. The size of the event space is 3</p></li>
 <li><p><span class="math notranslate nohighlight">\(n(\Omega)\)</span> size of sample space. In the context of single die roll is equal 6</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="n">Omega</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span> <span class="n">A</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Simple function to calculate probability of die rolls</span>
+<span class="sd">    Simple function to calculate the probability of die rolls</span>
 <span class="sd">    Return the probability of an event given the event measure and the sample size measure</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
@@ -699,11 +699,11 @@ B^c =  5
 <p class="admonition-title">Normalization</p>
 <p>The probability of the entire sample space is equal to 1.</p>
 <div class="math notranslate nohighlight">
-\[P(S)=1\]</div>
+\[P(\Omega)=1\]</div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Addition rule</p>
-<p>For any sequence of <strong>disjoint</strong> events, <span class="math notranslate nohighlight">\(A_i \cap A_j = \emptyset \)</span>, the probability of their union is the sum of their individual probabilities,</p>
+<p>For any sequence of <strong>disjoint</strong> events, <span class="math notranslate nohighlight">\(A_i \cap A_j = \emptyset \)</span>, the probability of their union is the sum of their probabilities,</p>
 <div class="math notranslate nohighlight">
 \[P\left( A_1 \cup A_2 \cup \ldots \right) = P\left(A_1\right) + P\left(A_2\right) + \ldots\]</div>
 </div>
@@ -715,19 +715,19 @@ B^c =  5
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Complement</p>
-<p>Given that <span class="math notranslate nohighlight">\(A \cap \bar A=\emptyset\)</span> and <span class="math notranslate nohighlight">\(A \cup \bar A=S\)</span>.</p>
+<p>Given that <span class="math notranslate nohighlight">\(A \cap \bar A=\emptyset\)</span> and <span class="math notranslate nohighlight">\(A \cup \bar A=\Omega\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[P(\bar A)=1-P(A)\]</div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Conditional probability and Bayes Theorem</p>
-<p>Knoweldge of past events may change the probability of future events</p>
+<p>Knowledge of past events may change the probability of future events</p>
 <div class="math notranslate nohighlight">
 \[P(A,B)=P(A|B)P(B)=P(B|A)P(A)\]</div>
 </div>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
-<p>We role two dice and record the total sum of numbers <span class="math notranslate nohighlight">\(T\)</span>. Suppose event <span class="math notranslate nohighlight">\(A\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 9\)</span> and event <span class="math notranslate nohighlight">\(B\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 5\)</span>. What is the probability of A or B?</p>
+<p>We roll two dice and record the total sum of numbers <span class="math notranslate nohighlight">\(T\)</span>. Suppose event <span class="math notranslate nohighlight">\(A\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 9\)</span> and event <span class="math notranslate nohighlight">\(B\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 5\)</span>. What is the probability of A or B?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-kebab-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6 12a2 2 0 11-4 0 2 2 0 014 0zm8 0a2 2 0 11-4 0 2 2 0 014 0zm6 2a2 2 0 100-4 2 2 0 000 4z"></path></svg><div class="sd-summary-down docutils">
@@ -735,14 +735,14 @@ B^c =  5
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">Clearly A and B cannot both occur the two events are mutually exclusive. There are 4 ways to get event A
+<p class="sd-card-text">A and B cannot both occur. The two events are mutually exclusive. There are four ways to get event A
 (T = 9), and 5 ways to get event B (T = 5), so that there are 4 + 5 = 9 ways to get
 either A or B, and so <span class="math notranslate nohighlight">\(P(A or B) = 9/36 = 1/4\)</span></p>
 </div>
 </details></div>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
-<p>Now suppose event C is getting a total of <span class="math notranslate nohighlight">\(T = 12\)</span> and event D is getting a double, where both dice are the same. What is the probability of C or D?</p>
+<p>Suppose event C is getting a total of <span class="math notranslate nohighlight">\(T = 12\)</span> and event D is getting a double, where both dice are the same. What is the probability of C or D?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-kebab-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6 12a2 2 0 11-4 0 2 2 0 014 0zm8 0a2 2 0 11-4 0 2 2 0 014 0zm6 2a2 2 0 100-4 2 2 0 000 4z"></path></svg><div class="sd-summary-down docutils">
@@ -751,8 +751,8 @@ either A or B, and so <span class="math notranslate nohighlight">\(P(A or B) = 9
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">There is only one way to get 12, so P© = 1/36. There are six ways to get a double,
-so P(D) = 6/36. However C and D are not exclusive—rolling a double six is an
-example of both. The double six is already included in the calculation of P(D). So
+so P(D) = 6/36. However, C and D are not exclusive—rolling a double six is an
+example of both. The double six is already included in the P(D) calculation. So
 P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 </div>
 </details></div>
@@ -819,6 +819,10 @@ with and without Bayes’ theorem.</p>
 </section>
 <section id="combinatorics">
 <h2>Combinatorics<a class="headerlink" href="#combinatorics" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Combinatoric expressions are helpful for computing the size of events and answering questions such as “How many ways can molecules arrange in this or that way?”</p></li>
+<li><p>If you are given <strong>n molecules in a jar</strong>, <strong>you have r ways of sampling them</strong>. You get different answers depending on whether molecules are distinguishable and whether sampling is done with or without replacement.</p></li>
+</ul>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Sampling</p></th>
@@ -830,27 +834,27 @@ with and without Bayes’ theorem.</p>
 <td><p><span class="math notranslate nohighlight">\(\boxed{P^n_r = \frac{n!}{(n-r)!}}\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Unordered</strong> sampling <strong>without</strong> replacement</p></td>
-<td><p><span class="math notranslate nohighlight">\(\boxed{P = \frac{n!}{r!(n-r)!}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\boxed{C^n_r = \frac{n!}{r!(n-r)!}}\)</span></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Ordered</strong> sampling <strong>with</strong> replacement</p></td>
 <td><p><span class="math notranslate nohighlight">\(\boxed{P^n_r = r^n}\)</span></p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Unordered</strong> sampling <strong>with</strong> replacement</p></td>
-<td><p><span class="math notranslate nohighlight">\(\boxed{P = \frac{(n+r-1)!}{r!(n-1)!}}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\boxed{P^n_r = \frac{(n+r-1)!}{r!(n-1)!}}\)</span></p></td>
 </tr>
 </tbody>
 </table>
 <section id="multinomial-combination">
 <h3>Multinomial combination.<a class="headerlink" href="#multinomial-combination" title="Permalink to this heading">#</a></h3>
-<p>Cominatoria forumla can be readily generalized for k&gt;2 partitions. A classic problem we will encounter is partitioning <span class="math notranslate nohighlight">\(N\)</span> indistinguishable molecules among <span class="math notranslate nohighlight">\(n_1\)</span> energy level, <span class="math notranslate nohighlight">\(n_2\)</span>, … <span class="math notranslate nohighlight">\(n_k\)</span>. <span class="math notranslate nohighlight">\(\sum n_i = N\)</span></p>
+<p>The combinatorial formula can be readily generalized for k&gt;2 partitions. A classic problem we will encounter is partitioning <span class="math notranslate nohighlight">\(N\)</span> indistinguishable molecules among <span class="math notranslate nohighlight">\(n_1\)</span> energy level, <span class="math notranslate nohighlight">\(n_2\)</span>, … <span class="math notranslate nohighlight">\(n_k\)</span>. <span class="math notranslate nohighlight">\(\sum n_i = N\)</span></p>
 <div class="math notranslate nohighlight">
 \[\boxed{C^N_{n_1,n_2,...n_k}=\frac{N!}{n_1! \cdot n_2! \cdot ... n_k!} }\]</div>
 <div class="admonition-example-problems admonition">
-<p class="admonition-title">Example problems: </p>
+<p class="admonition-title">Example problems </p>
 <p>Consider a container filled with 1000 atoms of Ar.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-What is a probability that left half has 400 atoms?<div class="sd-summary-down docutils">
+What is the probability that the left half has 400 atoms?<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -859,7 +863,7 @@ What is a probability that left half has 400 atoms?<div class="sd-summary-down d
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-What is a probability that left half has 500 atoms?<div class="sd-summary-down docutils">
+What is the probability that the left half has 500 atoms?<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -877,13 +881,13 @@ What is a probability that 1/3 has 100 next 1/3 has 200 and next 1/3 has 700?<di
 </div>
 </details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-What is the total number of all possible partitionings or staets of gas atoms in container?<div class="sd-summary-down docutils">
+What is the total number of all possible partitionings or states of gas atoms in a container?<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text"><span class="math notranslate nohighlight">\(n(S) = \sum^{n=N}_{n=0}\frac{N!}{n!\cdot (N-n)!} = 2^N\)</span>
-Each N lattice site in the container can be either vacant or filled hene <span class="math notranslate nohighlight">\(2^N\)</span> states.</p>
+Each N lattice site in the container can be vacant or filled with <span class="math notranslate nohighlight">\(2^N\)</span> states.</p>
 </div>
 </details></div>
 <div class="cell docutils container">
@@ -908,7 +912,7 @@ Each N lattice site in the container can be either vacant or filled hene <span c
 </div>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
-<p>Solids metal has 100 atoms. Magnetic measurments shows that there are 10 atoms with spin down.</p>
+<p>Solid metal has 100 atoms. Magnetic measurements show that there are 10 atoms with spin down.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 If ten atoms are chosen at random, what is the probability that they all have spin up? <div class="sd-summary-down docutils">
