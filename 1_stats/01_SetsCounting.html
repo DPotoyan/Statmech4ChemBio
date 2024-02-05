@@ -600,8 +600,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="n">Omega</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span> <span class="n">A</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Simple function to calculate the probability of die rolls</span>
-<span class="sd">    Return the probability of an event given the event measure and the sample size measure</span>
+<span class="sd">    Compute probability of event A given sample set Omega</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="p">)</span>
@@ -808,29 +807,45 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 </ul>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
+<ul class="simple">
+<li><p>A test for cancer is known to be 90% accurate either in detecting cancer if present or in giving an all-clear if cancer is absent.</p></li>
+<li><p>The prevalence of cancer in the population is 1%.
+How worried should you be if you test positive? Try answering this question
+using Bayes’ theorem.</p></li>
+</ul>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-A test for cancer is known to be 90% accurate either in detecting cancer if present or in giving an all-clear if cancer is absent. The prevalence of cancer in the population<div class="sd-summary-down docutils">
+Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">is 1%. How worried should you be if you test positive? Try answering this question
-with and without Bayes’ theorem.</p>
 <ul class="simple">
-<li><p class="sd-card-text">Only 1% population has cancer hence we get probability of an inidivual having (not having) cancer as:</p></li>
+<li><p class="sd-card-text">Accuracy of a test (how often positives show up when cancer is certain)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}P(+|X) = 0.9 \\ P(-|X^c)=0.9\end{split}\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">Only 1% of the population has cancer; hence, we get the probability of an individual having (not having) cancer as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[P(X)=0.01\,\,\,\,hence\,\,\,\,\,\,\, P(X^c)=1-P(X)=0.99\]</div>
 <ul class="simple">
-<li><p class="sd-card-text">Accuracy of a test (how ofte positives show up when cancer is certain)</p></li>
+<li><p class="sd-card-text">Now we have all terms to compute <span class="math notranslate nohighlight">\(p(X|+)\)</span> probability of disease given the positive test.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}P(+|X) = 0.9 \\ P(-|X^c)=0.9\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[P(X|+) = \frac{P(+|X)p(X)}{p(+)} = \frac{P(+|X)p(X)}{p(+|X)p(X)+p(+| X^c)p(X^c)} =  \frac{0.9\cdot 0.01}{0.9\cdot 0.01+0.1\cdot 0.99} = 0.083\]</div>
 </div>
 </details></div>
+<div class="attention admonition">
+<p class="admonition-title"><strong>Exercise</strong></p>
+<p>A second test is done, and you test positive again. Calculate <span class="math notranslate nohighlight">\(P(X|+, ++)\)</span>, which you can do by noting that tests are independent; hence</p>
+<div class="math notranslate nohighlight">
+\[P(+, ++|X)= P(++|X, +)\cdot P(+|X) = P(++|X)\cdot P(+|X)\]</div>
+<ul class="simple">
+<li><p>The Bayes formula allows you to update probabilities with the emergence of new data easily!</p></li>
+</ul>
+</div>
 </section>
 <section id="combinatorics">
 <h2>Combinatorics<a class="headerlink" href="#combinatorics" title="Permalink to this heading">#</a></h2>
@@ -864,8 +879,8 @@ with and without Bayes’ theorem.</p>
 <p>The combinatorial formula can be readily generalized for k&gt;2 partitions. A classic problem we will encounter is partitioning <span class="math notranslate nohighlight">\(N\)</span> indistinguishable molecules among <span class="math notranslate nohighlight">\(n_1\)</span> energy level, <span class="math notranslate nohighlight">\(n_2\)</span>, … <span class="math notranslate nohighlight">\(n_k\)</span>. <span class="math notranslate nohighlight">\(\sum n_i = N\)</span></p>
 <div class="math notranslate nohighlight">
 \[\boxed{C^N_{n_1,n_2,...n_k}=\frac{N!}{n_1! \cdot n_2! \cdot ... n_k!} }\]</div>
-<div class="admonition-example-problems admonition">
-<p class="admonition-title">Example problems </p>
+<div class="admonition-example-gas-atoms admonition">
+<p class="admonition-title">Example: gas atoms</p>
 <p>Consider a container filled with 1000 atoms of Ar.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -905,32 +920,12 @@ What is the total number of all possible partitionings or states of gas atoms in
 Each N lattice site in the container can be vacant or filled with <span class="math notranslate nohighlight">\(2^N\)</span> states.</p>
 </div>
 </details></div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
-
-<span class="k">def</span> <span class="nf">gas_partition</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-
-    <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">N</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k1</span><span class="p">)</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k2</span><span class="p">)</span><span class="o">**</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k3</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">gas_partition</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">gas_partition</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span><span class="mi">45</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.07958923738717874
-0.04847429662643074
-</pre></div>
-</div>
-</div>
-</div>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
-<p>Solid metal has 100 atoms. Magnetic measurements show that there are 10 atoms with spin down.</p>
+<div class="admonition-example-spins admonition">
+<p class="admonition-title"><strong>Example: spins</strong></p>
+<p>Solid metal has 100 atoms. Magnetic measurements show that there are 10 atoms with spin down. If ten atoms are chosen at random, what is the probability that they all have spin up?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-If ten atoms are chosen at random, what is the probability that they all have spin up? <div class="sd-summary-down docutils">
+Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -943,6 +938,34 @@ If ten atoms are chosen at random, what is the probability that they all have sp
 \[p(up) =\frac{n(up)}{n(S)}\]</div>
 </div>
 </details></div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gas_partition</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;partitioning N gas molecules into regions k1, k2 and k3&#39;&#39;&#39;</span>
+
+    <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span>
+
+    <span class="n">N</span> <span class="o">=</span> <span class="n">k1</span><span class="o">+</span><span class="n">k2</span><span class="o">+</span><span class="n">k3</span> 
+
+    <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="n">k1</span><span class="p">)</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k2</span><span class="p">)</span><span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">k3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="n">gas_partition</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="n">gas_partition</span><span class="p">(</span><span class="n">k1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">k2</span><span class="o">=</span><span class="mi">47</span><span class="p">,</span> <span class="n">k3</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0089134454556417e+29
+1.977470353093058e+33
+</pre></div>
+</div>
+</div>
+</div>
+<div class="attention admonition">
+<p class="admonition-title"><strong>Exercise</strong></p>
+<p>Plot how a number of configurations resulting from portioning molecules of gas into two regions depends on the ratio of molecules in compartments</p>
+</div>
 </section>
 </section>
 <section id="permutations-and-combinations-in-python">
