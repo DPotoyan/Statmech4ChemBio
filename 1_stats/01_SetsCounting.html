@@ -600,7 +600,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">probability</span><span class="p">(</span><span class="n">Omega</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">},</span> <span class="n">A</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">}):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Compute probability of event A given sample set Omega</span>
+<span class="sd">    Compute the probability of event A given sample set Omega.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">Omega</span><span class="p">)</span>
@@ -611,13 +611,13 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">}</span>
-<span class="n">E</span><span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">}</span> 
+<span class="n">E</span><span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">}</span> 
 <span class="n">probability</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3
 </pre></div>
 </div>
 </div>
@@ -625,13 +625,13 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">}</span>
-<span class="n">E</span><span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span> 
+<span class="n">E</span><span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">}</span> 
 <span class="n">probability</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4
 </pre></div>
 </div>
 </div>
@@ -647,6 +647,22 @@ import matplotlib_venn as venn
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: matplotlib-venn in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (0.11.6)
+Requirement already satisfied: matplotlib in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-venn) (3.5.1)
+Requirement already satisfied: numpy in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-venn) (1.23.5)
+Requirement already satisfied: scipy in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-venn) (1.10.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (4.28.5)
+Requirement already satisfied: packaging&gt;=20.0 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (23.1)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (2.8.2)
+Requirement already satisfied: pillow&gt;=6.2.0 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (9.2.0)
+Requirement already satisfied: cycler&gt;=0.10 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (0.11.0)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (1.4.4)
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (3.0.9)
+Requirement already satisfied: six&gt;=1.5 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;matplotlib-venn) (1.16.0)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -656,19 +672,19 @@ import matplotlib_venn as venn
 
 <span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">}</span>
 
-<span class="n">C</span> <span class="o">=</span> <span class="p">{</span><span class="mi">20</span><span class="p">,</span><span class="mi">90</span><span class="p">}</span>
+<span class="n">C</span> <span class="o">=</span> <span class="p">{</span><span class="mi">20</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
 
-<span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="mi">100</span><span class="p">}</span>
+<span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="mi">90</span><span class="p">}</span>
 
-<span class="n">venn</span><span class="o">.</span><span class="n">venn3</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="n">venn</span><span class="o">.</span><span class="n">venn3</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x1697caeb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x17c58c3d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/56029dad09b816e3b7d48a887ea2650b918933209c58bca1bfe43b8cbb74ba69.png" src="../_images/56029dad09b816e3b7d48a887ea2650b918933209c58bca1bfe43b8cbb74ba69.png" />
+<img alt="../_images/faba25284c14fd4a004ac57d7632bc788d5fe3a4683a9874c68c42e6c269ff2e.png" src="../_images/faba25284c14fd4a004ac57d7632bc788d5fe3a4683a9874c68c42e6c269ff2e.png" />
 </div>
 </div>
 <section id="creating-new-events">
@@ -750,8 +766,8 @@ import matplotlib_venn as venn
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
 <p class="sd-card-text">A and B cannot both occur. The two events are mutually exclusive. There are four ways to get event A
-(T = 9), and 5 ways to get event B (T = 5), so that there are 4 + 5 = 9 ways to get
-either A or B, and so <span class="math notranslate nohighlight">\(P(A or B) = 9/36 = 1/4\)</span></p>
+(T = 9), and 4 ways to get event B (T = 5), so that there are 4 + 4 = 8 ways to get
+either A or B, and so <span class="math notranslate nohighlight">\(P(A or B) = 8/36\)</span></p>
 </div>
 </details></div>
 <div class="admonition-example admonition">
@@ -790,6 +806,7 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 <li><p>We are counting the fraction of A and B overlap confined within the given event A</p></li>
 <li><p>Note that joint probability is symmetric <span class="math notranslate nohighlight">\(P(A, B) = P(B, A)\)</span> while conditional probability is not! <span class="math notranslate nohighlight">\(P(A | B) != P(B | A)\)</span></p></li>
 </ul>
+<p><img alt="" src="../_images/bayes.png" /></p>
 </section>
 <section id="bayes-formula">
 <h2>Bayes formula<a class="headerlink" href="#bayes-formula" title="Permalink to this heading">#</a></h2>
@@ -803,7 +820,7 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 <li><p><span class="math notranslate nohighlight">\(P(H)\)</span> is called <strong>prior</strong> and quantifies information we have about our hyothesis.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(D)\)</span> is called <strong>evidence</strong> and is just the probability of having the date we generated.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is called likelihood of data! It is not called probability because one is interested in how different values of <span class="math notranslate nohighlight">\(H\)</span> change the <span class="math notranslate nohighlight">\(P(D|H)\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is the quantity we are after is called called <strong>posterior</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(H|D)\)</span> is the quantity we are after is called called <strong>posterior</strong></p></li>
 </ul>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
@@ -841,7 +858,7 @@ Solution<div class="sd-summary-down docutils">
 <p class="admonition-title"><strong>Exercise</strong></p>
 <p>A second test is done, and you test positive again. Calculate <span class="math notranslate nohighlight">\(P(X|+, ++)\)</span>, which you can do by noting that tests are independent; hence</p>
 <div class="math notranslate nohighlight">
-\[P(+, ++|X)= P(++|X, +)\cdot P(+|X) = P(++|X)\cdot P(+|X)\]</div>
+\[P(++, +|X)= P(++|X, +)\cdot P(+|X) = P(++|X)\cdot P(+|X)\]</div>
 <ul class="simple">
 <li><p>The Bayes formula allows you to update probabilities with the emergence of new data easily!</p></li>
 </ul>
