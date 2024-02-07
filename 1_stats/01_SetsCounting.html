@@ -182,7 +182,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Stats</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Probability theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_RandVar.html">Random walk and CLT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_Diffusion.html">Diffusion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_Entropy.html">Entropy</a></li>
 </ul>
 </li>
@@ -674,9 +673,7 @@ Requirement already satisfied: six&gt;=1.5 in /opt/homebrew/anaconda3/envs/llpsm
 
 <span class="n">C</span> <span class="o">=</span> <span class="p">{</span><span class="mi">20</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
 
-<span class="n">D</span> <span class="o">=</span> <span class="p">{</span><span class="mi">90</span><span class="p">}</span>
-
-<span class="n">venn</span><span class="o">.</span><span class="n">venn3</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">))</span>
+<span class="n">venn</span><span class="o">.</span><span class="n">venn3</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -720,54 +717,66 @@ Requirement already satisfied: six&gt;=1.5 in /opt/homebrew/anaconda3/envs/llpsm
 <section id="probability-axioms">
 <h2>Probability Axioms<a class="headerlink" href="#probability-axioms" title="Permalink to this heading">#</a></h2>
 <div class="tip admonition">
-<p class="admonition-title">Nonnegativity</p>
-<p>For every event <em>A</em>,</p>
+<p class="admonition-title">Positivity and Normalization</p>
 <div class="math notranslate nohighlight">
 \[P(A) \ge 0\]</div>
-</div>
-<div class="tip admonition">
-<p class="admonition-title">Normalization</p>
-<p>The probability of the entire sample space is equal to 1.</p>
 <div class="math notranslate nohighlight">
 \[P(\Omega)=1\]</div>
+<blockquote>
+<div><p>Probability of rolling each number is 1/6 and rolling any number is 1.</p>
+</div></blockquote>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Addition rule</p>
-<p>For any sequence of <strong>disjoint</strong> events, <span class="math notranslate nohighlight">\(A_i \cap A_j = \emptyset \)</span>, the probability of their union is the sum of their probabilities,</p>
+<p>For any sequence of <strong>mutually exclusive</strong> events, <span class="math notranslate nohighlight">\(A_i \cap A_j = \emptyset \)</span>, the probability of their union is the sum of their probabilities,</p>
 <div class="math notranslate nohighlight">
 \[P\left( A_1 \cup A_2 \cup \ldots \right) = P\left(A_1\right) + P\left(A_2\right) + \ldots\]</div>
+<blockquote>
+<div><p>Probability of die rolling even number is: <span class="math notranslate nohighlight">\(1/6+1/6+1/6\)</span></p>
+</div></blockquote>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Product rule</p>
-<p>For every event <em>A</em>,</p>
+<p>When independent events  <span class="math notranslate nohighlight">\(A_i \cap A_j = \emptyset\)</span>, the probability of their intersection is a product of their probabilities</p>
 <div class="math notranslate nohighlight">
-\[P(A,B,C)=P(A)P(B)P(C)\]</div>
+\[P\left( A_1 \cap A_2 \cap \ldots \right) = P\left(A_1\right) \cdot P\left(A_2\right) \cdot \ldots\]</div>
+<blockquote>
+<div><p>Probability of rolling twice getting 3 and 5 is: <span class="math notranslate nohighlight">\(\frac{1}{6}\cdot \frac{1}{6}\)</span></p>
+</div></blockquote>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Complement</p>
 <p>Given that <span class="math notranslate nohighlight">\(A \cap \bar A=\emptyset\)</span> and <span class="math notranslate nohighlight">\(A \cup \bar A=\Omega\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[P(\bar A)=1-P(A)\]</div>
+<blockquote>
+<div><p>the probability of not rolling a number: <span class="math notranslate nohighlight">\(1-\frac{1}{6}\)</span></p>
+</div></blockquote>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Conditional probability and Bayes Theorem</p>
 <p>Knowledge of past events may change the probability of future events</p>
 <div class="math notranslate nohighlight">
 \[P(A,B)=P(A|B)P(B)=P(B|A)P(A)\]</div>
+<blockquote>
+<div><p>the probability of getting 4 given that we have rolled an even number: <span class="math notranslate nohighlight">\(p(4|even) = \frac{p(even|4)p(4)}{p(even)}=\frac{1\cdot 1/6}{1/2}=1/3\)</span></p>
+</div></blockquote>
 </div>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
 <p>We roll two dice and record the total sum of numbers <span class="math notranslate nohighlight">\(T\)</span>. Suppose event <span class="math notranslate nohighlight">\(A\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 9\)</span> and event <span class="math notranslate nohighlight">\(B\)</span> is getting a total of <span class="math notranslate nohighlight">\(T = 5\)</span>. What is the probability of A or B?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-kebab-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6 12a2 2 0 11-4 0 2 2 0 014 0zm8 0a2 2 0 11-4 0 2 2 0 014 0zm6 2a2 2 0 100-4 2 2 0 000 4z"></path></svg><div class="sd-summary-down docutils">
+Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">A and B cannot both occur. The two events are mutually exclusive. There are four ways to get event A
-(T = 9), and 4 ways to get event B (T = 5), so that there are 4 + 4 = 8 ways to get
-either A or B, and so <span class="math notranslate nohighlight">\(P(A or B) = 8/36\)</span></p>
+<ul class="simple">
+<li><p class="sd-card-text">A and B cannot both occur. The two events are mutually exclusive, and we can apply the sum rule.</p></li>
+<li><p class="sd-card-text">There are 4 ways to get event A (T = 9), and also 4 ways to get event B (T = 5), so that there are 4 + 4 = 8 ways to get
+either A or B, and so <span class="math notranslate nohighlight">\(P(A or B) = 8/36\)</span></p></li>
+</ul>
 </div>
 </details></div>
 <div class="admonition-example admonition">
@@ -775,15 +784,18 @@ either A or B, and so <span class="math notranslate nohighlight">\(P(A or B) = 8
 <p>Suppose event C is getting a total of <span class="math notranslate nohighlight">\(T = 12\)</span> and event D is getting a double, where both dice are the same. What is the probability of C or D?</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-kebab-horizontal" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6 12a2 2 0 11-4 0 2 2 0 014 0zm8 0a2 2 0 11-4 0 2 2 0 014 0zm6 2a2 2 0 100-4 2 2 0 000 4z"></path></svg><div class="sd-summary-down docutils">
+Solution<div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">There is only one way to get 12, so P© = 1/36. There are six ways to get a double,
-so P(D) = 6/36. However, C and D are not exclusive—rolling a double six is an
-example of both. The double six is already included in the P(D) calculation. So
-P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
+<ul class="simple">
+<li><p class="sd-card-text">There is only one way to get 12, so P© = 1/36.</p></li>
+<li><p class="sd-card-text">There are six ways to get a double, so P(D) = 6/36.</p></li>
+<li><p class="sd-card-text">However, C and D are not exclusive; rolling a double six is an example of both.</p></li>
+<li><p class="sd-card-text">The double six is already included in the P(D) calculation. So we use sum rule but make sure to account for double counting
+P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p></li>
+</ul>
 </div>
 </details></div>
 </section>
@@ -819,7 +831,7 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P(H)\)</span> is called <strong>prior</strong> and quantifies information we have about our hyothesis.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(D)\)</span> is called <strong>evidence</strong> and is just the probability of having the date we generated.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is called likelihood of data! It is not called probability because one is interested in how different values of <span class="math notranslate nohighlight">\(H\)</span> change the <span class="math notranslate nohighlight">\(P(D|H)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is called <strong>likelihood</strong> of data! It is not called probability because one is interested in how different values of <span class="math notranslate nohighlight">\(H\)</span> change the <span class="math notranslate nohighlight">\(P(D|H)\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(P(H|D)\)</span> is the quantity we are after is called called <strong>posterior</strong></p></li>
 </ul>
 <div class="admonition-example admonition">
@@ -854,15 +866,6 @@ Solution<div class="sd-summary-down docutils">
 \[P(X|+) = \frac{P(+|X)p(X)}{p(+)} = \frac{P(+|X)p(X)}{p(+|X)p(X)+p(+| X^c)p(X^c)} =  \frac{0.9\cdot 0.01}{0.9\cdot 0.01+0.1\cdot 0.99} = 0.083\]</div>
 </div>
 </details></div>
-<div class="attention admonition">
-<p class="admonition-title"><strong>Exercise</strong></p>
-<p>A second test is done, and you test positive again. Calculate <span class="math notranslate nohighlight">\(P(X|+, ++)\)</span>, which you can do by noting that tests are independent; hence</p>
-<div class="math notranslate nohighlight">
-\[P(++, +|X)= P(++|X, +)\cdot P(+|X) = P(++|X)\cdot P(+|X)\]</div>
-<ul class="simple">
-<li><p>The Bayes formula allows you to update probabilities with the emergence of new data easily!</p></li>
-</ul>
-</div>
 </section>
 <section id="combinatorics">
 <h2>Combinatorics<a class="headerlink" href="#combinatorics" title="Permalink to this heading">#</a></h2>
@@ -947,12 +950,17 @@ Solution<div class="sd-summary-down docutils">
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
 </summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">The total number of ways to choose any 10 atoms out of 100, regardless of spin is:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[n(S) = \frac{100!}{10!(90)!}\]</div>
-<div class="math notranslate nohighlight">
-\[n(up) = \frac{90!}{10!(80)!}\]</div>
-<div class="math notranslate nohighlight">
-\[p(up) =\frac{n(up)}{n(S)}\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">The number of ways to choose 10 atoms out of 90 with spin up is:
+$<span class="math notranslate nohighlight">\(n(up) = \frac{90!}{10!(80)!}\)</span>$</p></li>
+<li><p class="sd-card-text">Probability of picking 10 up spins is:
+$<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>$</p></li>
+</ul>
 </div>
 </details></div>
 <div class="cell docutils container">
@@ -1050,10 +1058,10 @@ Combinations with replacement
 <section id="random-variables">
 <h2>Random variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>A random variable X</strong> is a quantitative variable whose value depends on the outcomes of a random phenomenon. <span class="math notranslate nohighlight">\(X\)</span> is a function from possible outcomes of a sample space <span class="math notranslate nohighlight">\(\Omega\)</span>. For a coin toss <span class="math notranslate nohighlight">\(\Omega={-1,1}\)</span> and one possible X(H)=+1 and X(T)=-1. Every time the experiment is done, X returns either +1 or -1. We could also make functions of random variables, e.g., every time X=+1, we earn 10$, etc.</p></li>
+<li><p><strong>A random variable X</strong> is a variable whose value depends on the outcomes of a random phenomenon. <span class="math notranslate nohighlight">\(X\)</span> is a function from possible outcomes of a sample space <span class="math notranslate nohighlight">\(\Omega\)</span>. For a coin toss <span class="math notranslate nohighlight">\(\Omega={-1,1}\)</span> and one possible X(H)=+1 and X(T)=-1. Every time the experiment is done, X returns either +1 or -1. We could also make functions of random variables, e.g., every time X=+1, we earn 10$, etc.</p></li>
 <li><p>Random variables are classified into two main types: <strong>discrete and continuous.</strong></p></li>
 </ul>
-<p><strong>Discrete Random Variable:</strong> It assumes a countable number of distinct values. Discrete random variables are used to model scenarios where outcomes can be counted, such as the number of particles emitted by a radioactive source in a given time interval or the number of photons hitting a detector in a certain period.</p>
+<p><strong>Discrete Random Variable:</strong> It assumes a number of distinct values. Discrete random variables are used to model scenarios where outcomes can be counted, such as the number of particles emitted by a radioactive source in a given time interval or the number of photons hitting a detector in a certain period.</p>
 <p><strong>Continuous Random Variable:</strong> It can take any value within a continuous range. These variables describe quantities that can vary smoothly, such as the position of a particle in space, the velocity of a molecule in a gas, or the energy levels of an atom.</p>
 </section>
 <section id="probability-distribution-of-random-variable">
