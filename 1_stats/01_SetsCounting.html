@@ -1058,11 +1058,18 @@ Combinations with replacement
 <section id="random-variables">
 <h2>Random variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>A random variable X</strong> is a variable whose value depends on the outcomes of a random phenomenon. <span class="math notranslate nohighlight">\(X\)</span> is a function from possible outcomes of a sample space <span class="math notranslate nohighlight">\(\Omega\)</span>. For a coin toss <span class="math notranslate nohighlight">\(\Omega={-1,1}\)</span> and one possible X(H)=+1 and X(T)=-1. Every time the experiment is done, X returns either +1 or -1. We could also make functions of random variables, e.g., every time X=+1, we earn 10$, etc.</p></li>
-<li><p>Random variables are classified into two main types: <strong>discrete and continuous.</strong></p></li>
+<li><p><strong>A random variable X</strong> is a variable whose value depends on the outcomes of a random phenomenon. <span class="math notranslate nohighlight">\(X(\omega)\)</span> is a function from possible outcomes of a sample space <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>.</p>
+<ul>
+<li><p>For a coin toss <span class="math notranslate nohighlight">\(\Omega={H,T}\)</span> <span class="math notranslate nohighlight">\(X(H)=+1\)</span> and <span class="math notranslate nohighlight">\(X(T)=-1\)</span>. Every time the experiment is done, X returns either +1 or -1. We could also make functions of random variables, e.g., every time X=+1, we ear 25 cents, etc.</p></li>
 </ul>
-<p><strong>Discrete Random Variable:</strong> It assumes a number of distinct values. Discrete random variables are used to model scenarios where outcomes can be counted, such as the number of particles emitted by a radioactive source in a given time interval or the number of photons hitting a detector in a certain period.</p>
-<p><strong>Continuous Random Variable:</strong> It can take any value within a continuous range. These variables describe quantities that can vary smoothly, such as the position of a particle in space, the velocity of a molecule in a gas, or the energy levels of an atom.</p>
+</li>
+<li><p>Random variables are classified into two main types: <strong>discrete and continuous.</strong></p>
+<ul>
+<li><p><strong>Discrete Random Variable:</strong> It assumes a number of distinct values. Discrete random variables are used to model scenarios where outcomes can be counted, such as the number of particles emitted by a radioactive source in a given time interval or the number of photons hitting a detector in a certain period.</p></li>
+<li><p><strong>Continuous Random Variable:</strong> It can take any value within a continuous range. These variables describe quantities that can vary smoothly, such as the position of a particle in space, the velocity of a molecule in a gas, or the energy levels of an atom.</p></li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="probability-distribution-of-random-variable">
 <h2>Probability distribution of random variable<a class="headerlink" href="#probability-distribution-of-random-variable" title="Permalink to this heading">#</a></h2>
@@ -1109,16 +1116,30 @@ Combinations with replacement
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8818532  0.5414347  0.27362538 0.2064332  0.03797259 0.38246372
+ 0.50189879 0.66241863 0.60058111 0.91032852]
 </pre></div>
 </div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1., 1., 1., 1., 0., 2., 1., 1., 0., 2.]),
+ array([0.03797259, 0.12520818, 0.21244377, 0.29967937, 0.38691496,
+        0.47415055, 0.56138615, 0.64862174, 0.73585733, 0.82309293,
+        0.91032852]),
+ &lt;BarContainer object of 10 artists&gt;)
+</pre></div>
 </div>
+<img alt="../_images/59613632d4fd1e35c0cd0ffeb82ecd3b8ca899718c2f2812e2a24eb9495a7213.png" src="../_images/59613632d4fd1e35c0cd0ffeb82ecd3b8ca899718c2f2812e2a24eb9495a7213.png" />
+</div>
+</div>
+<div class="attention admonition">
+<p class="admonition-title"><strong>Exercise</strong></p>
+<p>Using the uniform random number generator simulate tossing of a coin which generates +1 and -1 values with equal probabilities</p>
 </div>
 </section>
 <section id="probability-distributions">
@@ -1225,6 +1246,8 @@ Combinations with replacement
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">poisson</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -1232,18 +1255,22 @@ Combinations with replacement
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> 
+         <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;mean=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, var=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">);</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.5</span><span class="o">*</span><span class="n">r</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">r</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;norm pdf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean=0, var=1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x17eb8b460&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x17fa6b8b0&gt;
 </pre></div>
 </div>
-<img alt="../_images/e4407ad72479df47df435e7e901194dde80c48ed553dfcfeb2042e699caf491b.png" src="../_images/e4407ad72479df47df435e7e901194dde80c48ed553dfcfeb2042e699caf491b.png" />
+<img alt="../_images/fce6d47a83741f52e5ea925a504f57305d388133fa536678ba6da0b3ff5d9a20.png" src="../_images/fce6d47a83741f52e5ea925a504f57305d388133fa536678ba6da0b3ff5d9a20.png" />
 </div>
 </div>
 </section>
@@ -1277,6 +1304,12 @@ Combinations with replacement
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x17f06f580&gt;
+</pre></div>
+</div>
+<img alt="../_images/5890ea581c7a3eea7f46440f7de70b17eca7b2d4952596106f76a2e348114177.png" src="../_images/5890ea581c7a3eea7f46440f7de70b17eca7b2d4952596106f76a2e348114177.png" />
 </div>
 </div>
 </section>
