@@ -460,7 +460,10 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">Simulating a 1D unbiased random walk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-msd-of-a-random-walker">Mean square displacement (MSD) of a random walker</a></li>
@@ -510,24 +513,39 @@ document.write(`
 <section id="id1">
 <h2>Random walk<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Tossing a coing a few times generates a random sequence of outcomes e.g HTHTTT</p></li>
-<li><p>Probability of H vs T for a fair coin is 1/2. Hence probability of any n long sequence is equal <span class="math notranslate nohighlight">\((1/2)^n\)</span></p></li>
-<li><p>Probability to generate <span class="math notranslate nohighlight">\(n\)</span> heads with a fair coin is:</p></li>
+<li><p>Tossing a coin a few times generates a random sequence of outcomes e.g HTHTTT</p></li>
+<li><p>Probability of landing H vs T for a fair coin is <span class="math notranslate nohighlight">\(\theta=1/2\)</span>. Therefore the probability of any <span class="math notranslate nohighlight">\(n\)</span> long sequence is always equal <span class="math notranslate nohighlight">\(\theta^N=2^{-N}\)</span>. A more interesting question is finding probability of having <span class="math notranslate nohighlight">\(n\)</span> heads out of N tosses. For a fair coin this is same question as finding number of combination of n heads out of N tosses:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p(n\,\, heads) = \frac{N!}{(N-n)! n!} \Big(\frac{1}{2}\Big)^n\]</div>
+\[p(n\,\, heads) = \frac{N!}{(N-n)! n!} \cdot \Big(\frac{1}{2}\Big)^N\]</div>
 <ul class="simple">
-<li><p>More generally probability to generate <span class="math notranslate nohighlight">\(n\)</span> heads after N coin tosses with a coin that has a bias f is:</p></li>
+<li><p>More generally the probability to generate <span class="math notranslate nohighlight">\(n\)</span> heads after N coin tosses with a coin that has a bias <span class="math notranslate nohighlight">\(\theta\)</span> is given by:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p(n|N, f) = C^N_n p^n (1-p)^{N-n}\]</div>
+\[p(n|N, \theta) = \frac{N!}{(N-n)! n!} \theta^n \cdot (1-\theta)^{N-n}\]</div>
 <ul class="simple">
-<li><p>Taking a log and using stirling approximation we get</p></li>
+<li><p>Another popular application of 1D random walk is to understand diffusive phenomena. A molecule which starts at 0 and which moves via consecutive jumps in left vs right direction with probabilities <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(1-\theta\)</span> will make <span class="math notranslate nohighlight">\(n\)</span> jumps to the right out of N jumps with <span class="math notranslate nohighlight">\(p(n|N, \theta)\)</span> probability. An interesting question for diffusion is to compute average displacement of molecule relative to origin. We can rewrite probability in terms of net displacement <span class="math notranslate nohighlight">\(x = n - (N-n)\)</span> or <span class="math notranslate nohighlight">\(n = \frac{x+N}{2}\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\bar{x}_1 = f\cdot 1 + (1-f) \cdot (-1) = 2f-1\]</div>
-<div class="math notranslate nohighlight">
-\[\bar{\sigma^2_1} = \bar{x^2_1} -  \bar{x_1}^2 = f \cdot 1^2+ (1-f) (-1)^2 - (2f-1)^2 = 4 f(f-1)\]</div>
+\[p(x|N, \theta) = \frac{ N!}{ (N-x)! (N+x)!} \cdot 2^{N} \cdot \theta^n \cdot (1-\theta)^{N-n}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rw_probability</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;x: net displacement ranging from -N to N</span>
+<span class="sd">       N: total number of steps</span>
+<span class="sd">       theta: bias of a walker, e.g probability of making step to the right. For unbiased random walk theta=0.5</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1">#TODO: complete the function with code</span>
+    
+    <span class="kn">from</span> <span class="nn">numpy.math</span> <span class="kn">import</span> <span class="n">factorial</span>
+    
+    
+    
+    <span class="k">return</span> 
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="sum-of-random-variables">
 <h2>Sum of random variables<a class="headerlink" href="#sum-of-random-variables" title="Permalink to this heading">#</a></h2>
@@ -568,6 +586,19 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="law-of-large-numbers-and-random-walk">
+<h3>Law of large numbers and random walk<a class="headerlink" href="#law-of-large-numbers-and-random-walk" title="Permalink to this heading">#</a></h3>
+<p>Applying the formulas to random walk model we get mean and variance for single step</p>
+<div class="math notranslate nohighlight">
+\[E[X_1] = \theta \cdot 1 + (1-\theta) \cdot (-1) = 2\theta-1\]</div>
+<div class="math notranslate nohighlight">
+\[V[X_1] = E[X^2_1] -  E[X_1]^2 = \theta \cdot 1^2+ (1-\theta) (-1)^2 - (2\theta-1)^2 = 4 \theta(1-\theta)\]</div>
+<p>Since steps of a random walker are independent we can compute the variance of a total displacement <span class="math notranslate nohighlight">\(X=\sum_i X_i\)</span></p>
+<div class="math notranslate nohighlight">
+\[E[x]=N(2\theta -1)\]</div>
+<div class="math notranslate nohighlight">
+\[V[x]=N\bar{\sigma^2_1} = 4N\theta (1-\theta)\]</div>
+</section>
 </section>
 <section id="the-central-limit-theorem-clt">
 <h2>The Central Limit Theorem  (CLT)<a class="headerlink" href="#the-central-limit-theorem-clt" title="Permalink to this heading">#</a></h2>
@@ -585,6 +616,20 @@ document.write(`
 <ul class="simple">
 <li><p>There is an implicit assumption that the <strong>mean and variance</strong>, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <strong>are finite</strong>. Thus, CLT does not hold for certain power-law distributed RVs.</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_binomial_vs_gaussian</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;This function generates sum of N random numbers then standardizes the sum to compare its distribution to normal&#39;&#39;&#39;</span>
+    
+    <span class="c1">#TODO</span>
+    
+    <span class="c1">#plt.plot()</span>
+    <span class="c1">#plt.plot()</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="simulating-a-1d-unbiased-random-walk">
 <h2>Simulating a 1D unbiased random walk<a class="headerlink" href="#simulating-a-1d-unbiased-random-walk" title="Permalink to this heading">#</a></h2>
@@ -1049,7 +1094,10 @@ Hint: you may want to use random variables from scipy.stats.exp <br></p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">Simulating a 1D unbiased random walk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-msd-of-a-random-walker">Mean square displacement (MSD) of a random walker</a></li>
