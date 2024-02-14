@@ -527,7 +527,7 @@ document.write(`
 <li><p>Another popular application of 1D random walk is to understand diffusive phenomena. A molecule which starts at 0 and which moves via consecutive jumps in left vs right direction with probabilities <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(1-\theta\)</span> will make <span class="math notranslate nohighlight">\(n\)</span> jumps to the right out of N jumps with <span class="math notranslate nohighlight">\(p(n|N, \theta)\)</span> probability. An interesting question for diffusion is to compute average displacement of molecule relative to origin. We can rewrite probability in terms of net displacement <span class="math notranslate nohighlight">\(x = n - (N-n)\)</span> or <span class="math notranslate nohighlight">\(n = \frac{x+N}{2}\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p(x|N, \theta) = \frac{ N!}{ (N-x)! (N+x)!} \cdot 2^{N} \cdot \theta^n \cdot (1-\theta)^{N-n}\]</div>
+\[p(x|N, \theta) = \frac{ N!}{ \Big(\frac{N-x}{2}\Big)! \Big(\frac{N+x}{2}\Big)!} \cdot \theta^{(N+x)/2} \cdot (1-\theta)^{(N-x)/2}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rw_probability</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
@@ -536,12 +536,10 @@ document.write(`
 <span class="sd">       theta: bias of a walker, e.g probability of making step to the right. For unbiased random walk theta=0.5</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="c1">#TODO: complete the function with code</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+    <span class="c1">#from scipy.special import comb</span>
     
-    <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">comb</span>
-    
-    
-    
-    <span class="k">return</span> 
+    <span class="k">return</span> <span class="n">prob</span>
 </pre></div>
 </div>
 </div>
@@ -557,17 +555,32 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[S_n = \sum_{i=1}^n X_i\]</div>
 <ul class="simple">
-<li><p>Because we are dealing with <strong>independent random variables</strong>, the variance and the expectation of sample sum are a linear function of <span class="math notranslate nohighlight">\(n\)</span> number of steps. In other words, no cross-terms survive averaging.</p></li>
+<li><p>Mean of sum is always sum of means. But the same is not true for variance in general.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[E\left(S_n\right) = \sum_{i=1}^n E\left(X_i\right) = n \mu\]</div>
+<ul class="simple">
+<li><p>Because we are dealing with <strong>independent random variables</strong>, the variance is a linear function of <span class="math notranslate nohighlight">\(n\)</span> number of steps. In other words, no cross-terms survive averaging. To see this clearly let us denote deviation from mean <span class="math notranslate nohighlight">\(\delta S_n = \sum_i X_i - E(S_n) = \sum_i Y_i\)</span> where <span class="math notranslate nohighlight">\(Y_i\)</span> is mean subtracted <span class="math notranslate nohighlight">\(X_i\)</span>.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[V\left(S_n\right) =  \sum_i \sum_j E\big[(X_i-E(x))\cdot (X_j-E(x))\big]=  \sum_i E\big[(X_i-E(x))^2\big] =\sum_{i=1}^n V\left(X_i\right) = n \sigma^2\]</div>
+\[V\left(S_n\right) =  E(\delta S^2_n) = \sum_i \sum_j  E[Y_i Y_j] = \sum_i  E[Y^2_i] = \sum_{i=1}^n V\left(X_i\right) = n \sigma^2 \]</div>
 <ul class="simple">
 <li><p>The sample mean converges to the exact mean with variance growing down as <span class="math notranslate nohighlight">\(n^{-1/2}\)</span>. This is known <strong>Law of Large Numbers (LLN)</strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\boxed{\frac{V(S_n)^{1/2}}{E(S_n)} = \frac{1}{n^{1/2}}\frac{\sigma}{\mu }}\]</div>
+<section id="law-of-large-numbers-and-random-walk">
+<h3>Law of large numbers and random walk<a class="headerlink" href="#law-of-large-numbers-and-random-walk" title="Permalink to this heading">#</a></h3>
+<p>Applying the formulas to random walk model we get mean and variance for single step</p>
+<div class="math notranslate nohighlight">
+\[E[X_1] = \theta \cdot 1 + (1-\theta) \cdot (-1) = 2\theta-1\]</div>
+<div class="math notranslate nohighlight">
+\[V[X_1] = E[X^2_1] -  E[X_1]^2 = \theta \cdot 1^2+ (1-\theta) (-1)^2 - (2\theta-1)^2 = 4 \theta(1-\theta)\]</div>
+<p>Since steps of a random walker are independent we can compute the variance of a total displacement <span class="math notranslate nohighlight">\(X=\sum_i X_i\)</span></p>
+<div class="math notranslate nohighlight">
+\[E[x]=N(2\theta -1)\]</div>
+<div class="math notranslate nohighlight">
+\[V[x]=N\bar{\sigma^2_1} = 4N\theta (1-\theta)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_test_lln</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -586,18 +599,6 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="law-of-large-numbers-and-random-walk">
-<h3>Law of large numbers and random walk<a class="headerlink" href="#law-of-large-numbers-and-random-walk" title="Permalink to this heading">#</a></h3>
-<p>Applying the formulas to random walk model we get mean and variance for single step</p>
-<div class="math notranslate nohighlight">
-\[E[X_1] = \theta \cdot 1 + (1-\theta) \cdot (-1) = 2\theta-1\]</div>
-<div class="math notranslate nohighlight">
-\[V[X_1] = E[X^2_1] -  E[X_1]^2 = \theta \cdot 1^2+ (1-\theta) (-1)^2 - (2\theta-1)^2 = 4 \theta(1-\theta)\]</div>
-<p>Since steps of a random walker are independent we can compute the variance of a total displacement <span class="math notranslate nohighlight">\(X=\sum_i X_i\)</span></p>
-<div class="math notranslate nohighlight">
-\[E[x]=N(2\theta -1)\]</div>
-<div class="math notranslate nohighlight">
-\[V[x]=N\bar{\sigma^2_1} = 4N\theta (1-\theta)\]</div>
 </section>
 </section>
 <section id="the-central-limit-theorem-clt">
@@ -756,7 +757,7 @@ document.write(`
 </ul>
 <div class="math notranslate nohighlight">
 \[
-MSD(n)= \Big\langle \big ( R_n - R_0 \big)^2 \Big \rangle \sim n^{1/2}
+MSD(n)= \Big\langle \big ( R_n - R_0 \big)^2 \Big \rangle \sim n
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
