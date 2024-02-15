@@ -459,8 +459,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
 </li>
@@ -500,24 +500,6 @@ document.write(`
 <li><p>Learn to simulate random walk and diffusive processes using python</p></li>
 </ul>
 </div>
-<section id="id1">
-<h2>Random walk<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Tossing a coin a few times generates a random sequence of outcomes e.g HTHTTT</p></li>
-<li><p>Probability of landing H vs T for a fair coin is <span class="math notranslate nohighlight">\(\theta=1/2\)</span>. Therefore the probability of any <span class="math notranslate nohighlight">\(n\)</span> long sequence is always equal <span class="math notranslate nohighlight">\(\theta^N=2^{-N}\)</span>. A more interesting question is finding probability of having <span class="math notranslate nohighlight">\(n\)</span> heads out of N tosses. For a fair coin this is same question as finding number of combination of n heads out of N tosses:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p(n\,\, heads) = \frac{N!}{(N-n)! n!} \cdot \Big(\frac{1}{2}\Big)^N\]</div>
-<ul class="simple">
-<li><p>More generally the probability to generate <span class="math notranslate nohighlight">\(n\)</span> heads after N coin tosses with a coin that has a bias <span class="math notranslate nohighlight">\(\theta\)</span> is given by:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p(n|N, \theta) = \frac{N!}{(N-n)! n!} \theta^n \cdot (1-\theta)^{N-n}\]</div>
-<ul class="simple">
-<li><p>Another popular application of 1D random walk is to understand diffusive phenomena. A molecule which starts at 0 and which moves via consecutive jumps in left vs right direction with probabilities <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(1-\theta\)</span> will make <span class="math notranslate nohighlight">\(n\)</span> jumps to the right out of N jumps with <span class="math notranslate nohighlight">\(p(n|N, \theta)\)</span> probability. An interesting question for diffusion is to compute average displacement of molecule relative to origin. We can rewrite probability in terms of net displacement <span class="math notranslate nohighlight">\(x = n - (N-n)\)</span> or <span class="math notranslate nohighlight">\(n = \frac{x+N}{2}\)</span></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p(x|N, \theta) = \frac{ N!}{ \Big(\frac{N-x}{2}\Big)! \Big(\frac{N+x}{2}\Big)!} \cdot \theta^{(N+x)/2} \cdot (1-\theta)^{(N-x)/2}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -544,12 +526,11 @@ document.write(`
 </div>
 </div>
 </div>
-</section>
 <section id="sum-of-random-variables">
 <h2>Sum of random variables<a class="headerlink" href="#sum-of-random-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Consider a sequence <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span> of <strong>i.i.d. (independent identically distributed)</strong> random variables coming from some well behaved distribution. The random terms <span class="math notranslate nohighlight">\(X_i\)</span> have the same mean <span class="math notranslate nohighlight">\(\mu = E(X_1)\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2 = V(X_1)\)</span>.</p></li>
-<li><p>The sum of n random variables <span class="math notranslate nohighlight">\(S_n\)</span> is called a <strong>sample sum</strong> and <span class="math notranslate nohighlight">\(M_n\)</span> a <strong>sample mean</strong>. These quantities are random variables commonly occurring in simulations and data analysis. We are interested in understanding how they behave as a function of sample size.</p></li>
+<li><p>Consider a sequence <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span> of <strong>independent and identically distributed</strong> random variables (i.i.d). These could be coin tosses or random displacement of a molecule we are going to consider shortly. Each of the terms <span class="math notranslate nohighlight">\(X_i\)</span> has <span class="math notranslate nohighlight">\(\mu = E(X_1)\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2 = V(X_1)\)</span>.</p></li>
+<li><p>The sum of n random variables <span class="math notranslate nohighlight">\(S_n\)</span> is called a <strong>sample sum</strong> and <span class="math notranslate nohighlight">\(M_n\)</span> a <strong>sample mean</strong>. These quantities are themselves random variables commonly occurring in simulations and data analysis. We are often interested in understanding the sums behave as a function of sample size. Later one we will also try and understand what are the probability distribution of these sums.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S_n = \sum_{i=1}^n X_i\,\,\,\,\,\, and \,\,\,\,\, M_n = \frac{1}{n}\sum_{i=1}^n X_i\]</div>
@@ -613,6 +594,25 @@ document.write(`
 <img alt="../_images/c78ad114e571ef1cfc0cb9a78472f8d516370e0358d66039852a40e4f092e3d0.png" src="../_images/c78ad114e571ef1cfc0cb9a78472f8d516370e0358d66039852a40e4f092e3d0.png" />
 </div>
 </div>
+</section>
+<section id="id1">
+<h2>Random walk<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Tossing a coin a few times generates a random sequence of outcomes e.g HTHTTT</p></li>
+<li><p>Probability of landing H vs T for a fair coin is <span class="math notranslate nohighlight">\(\theta=1/2\)</span>. Therefore the probability of any <span class="math notranslate nohighlight">\(n\)</span> long sequence is always equal <span class="math notranslate nohighlight">\(\theta^N=2^{-N}\)</span>. A more interesting question is finding probability of having <span class="math notranslate nohighlight">\(n\)</span> heads out of N tosses. For a fair coin this is same question as finding number of combination of n heads out of N tosses:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(n\,\, heads) = \frac{N!}{(N-n)! n!} \cdot \Big(\frac{1}{2}\Big)^N\]</div>
+<ul class="simple">
+<li><p>More generally the probability to generate <span class="math notranslate nohighlight">\(n\)</span> heads after N coin tosses with a coin that has a bias <span class="math notranslate nohighlight">\(\theta\)</span> is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(n|N, \theta) = \frac{N!}{(N-n)! n!} \theta^n \cdot (1-\theta)^{N-n}\]</div>
+<ul class="simple">
+<li><p>Another popular application of 1D random walk is to understand diffusive phenomena. A molecule which starts at 0 and which moves via consecutive jumps in left vs right direction with probabilities <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(1-\theta\)</span> will make <span class="math notranslate nohighlight">\(n\)</span> jumps to the right out of N jumps with <span class="math notranslate nohighlight">\(p(n|N, \theta)\)</span> probability. An interesting question for diffusion is to compute average displacement of molecule relative to origin. We can rewrite probability in terms of net displacement <span class="math notranslate nohighlight">\(x = n - (N-n)\)</span> or <span class="math notranslate nohighlight">\(n = \frac{x+N}{2}\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(x|N, \theta) = \frac{ N!}{ \Big(\frac{N-x}{2}\Big)! \Big(\frac{N+x}{2}\Big)!} \cdot \theta^{(N+x)/2} \cdot (1-\theta)^{(N-x)/2}\]</div>
 <section id="law-of-large-numbers-and-random-walk">
 <h3>Law of large numbers and random walk<a class="headerlink" href="#law-of-large-numbers-and-random-walk" title="Permalink to this heading">#</a></h3>
 <p>Applying the formulas to random walk model we get mean and variance for single step</p>
@@ -625,6 +625,8 @@ document.write(`
 \[E[x]=N(2\theta -1)\]</div>
 <div class="math notranslate nohighlight">
 \[V[x]=N\bar{\sigma^2_1} = 4N\theta (1-\theta)\]</div>
+<p>The variance of the mean <span class="math notranslate nohighlight">\(\bar{x} = x/N\)</span> would then be:
+$<span class="math notranslate nohighlight">\(V[\bar{x}] = \frac{4\theta (1-\theta)}{N}\)</span>$</p>
 </section>
 </section>
 <section id="the-central-limit-theorem-clt">
@@ -800,7 +802,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[R_n = \sum^{n-1}_{i=0}X_n\]</div>
 <ul class="simple">
-<li><p>We quantify this by computing <strong>Mean Square Displacement (MSD)</strong>. Note that the mean is computed over N number of simulated trajectories (ensemble average). Invoking central limit theorem, or simply realizing that off diagonal terms drop off we end up with expected 1/2 saling with steps.</p></li>
+<li><p>We quantify this by computing <strong>Mean Square Displacement (MSD)</strong>. Note that the mean is computed over N number of simulated trajectories (ensemble average). Invoking central limit theorem, or simply realizing that off diagonal terms drop off we end up with the same result as in LLN.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1153,8 +1155,8 @@ Hint: you may want to use random variables from scipy.stats.exp <br></p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of random variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
 </li>
