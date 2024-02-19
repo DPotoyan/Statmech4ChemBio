@@ -474,14 +474,17 @@ document.write(`
 <h1>Conformations of random polymer chain<a class="headerlink" href="#conformations-of-random-polymer-chain" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Generate polymer chains of 100 monomers in 2D where each monomer can point in any of the four directions with equal probability.</p></li>
-<li><p>Compute average square end-to-end distance of the chain.</p></li>
-<li><p>Study how many conformations one needs to generate to converge to theoretical expectation</p></li>
+<li><p>Compute distribution of end-to-end distances of the polymer.</p></li>
+<li><p>Study how many conformations one needs to generate to converge to theoretical expectation.</p></li>
+<li><p>Study how average root mean square end to end distance depends on number of monomers.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_conf</span><span class="p">(</span><span class="n">n_mon</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_conf</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;This function should generate 2D conformations of random polymer and store the result in conf</span>
 <span class="sd">    conf: array of size (n_mon, n_conf, 2)&#39;&#39;&#39;</span>
+    
+    <span class="c1"># TODO: generate first monomer at origin so we can use the coordinate of the last bead for end-to-end distance calculations</span>
     
     <span class="k">return</span> <span class="n">conf</span>
 </pre></div>
@@ -491,7 +494,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ee</span><span class="o">-</span><span class="n">dist</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;This function calculates mean square end to end distance&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;This function calculates end to end distance&#39;&#39;&#39;</span>
     
     <span class="k">return</span> <span class="n">ee</span><span class="o">-</span><span class="n">dists</span>
 </pre></div>
