@@ -530,28 +530,31 @@ document.write(`
 <section id="sum-of-random-variables">
 <h2>Sum of random variables<a class="headerlink" href="#sum-of-random-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Consider a sequence <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span> of <strong>independent and identically distributed</strong> random variables (i.i.d). These could be coin tosses or random displacement of a molecule we are going to consider shortly. Each of the terms <span class="math notranslate nohighlight">\(X_i\)</span> has <span class="math notranslate nohighlight">\(\mu = E(X_1)\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2 = V(X_1)\)</span>.</p></li>
-<li><p>The sum of n random variables <span class="math notranslate nohighlight">\(S_n\)</span> is called a <strong>sample sum</strong> and <span class="math notranslate nohighlight">\(M_n\)</span> a <strong>sample mean</strong>. These quantities are themselves random variables commonly occurring in simulations and data analysis. We are often interested in understanding the sums behave as a function of sample size. Later one we will also try and understand what are the probability distribution of these sums.</p></li>
+<li><p>Consider a sequence <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span> of <strong>independent and identically distributed</strong> random variables (i.i.d). These could be coin tosses, random displacement of a molecule or random placement of molecule in left vs right corner of a box.</p></li>
+<li><p>Each term is identically distributed meaning there is a well defined <strong>exact mean and variance:</strong> <span class="math notranslate nohighlight">\(\mu = E(X_1)\)</span> and <span class="math notranslate nohighlight">\(\sigma^2 = E\big[ (X_1-E(X_1))^2\big]=V(X_1)\)</span>.</p></li>
+<li><p>The sum of n random variables <span class="math notranslate nohighlight">\(S_n\)</span> is called a <strong>sample sum</strong> and <span class="math notranslate nohighlight">\(M_n\)</span> a <strong>sample mean</strong>. These quantities are themselves random variables commonly occurring in simulations and data analysis. Think of a difference between average height of people computed from a small sample of cities vs entire population of the world. We are interested in understanding how sums behave as a function of sample size.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S_n = \sum_{i=1}^n X_i\,\,\,\,\,\, and \,\,\,\,\, M_n = \frac{1}{n}\sum_{i=1}^n X_i\]</div>
 <ul class="simple">
-<li><p>The expectation of is always a linear operator but in general variance is not. But because we are dealing with <strong>independent random variables</strong>, the variance also becomes a linear operator.</p></li>
+<li><p>The expectation is always a linear operator but in general variance is not but in case of <strong>i.i.d.</strong> random variables variance too becomes a linear operator.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[E\left(S_n\right) = \sum_{i=1}^n E\left(X_i\right) = n \mu\]</div>
 <ul class="simple">
-<li><p>To show why variance becomes linear operator let us denote <span class="math notranslate nohighlight">\(Y_i=X_i-\mu\)</span> as the mean subtracted <span class="math notranslate nohighlight">\(X_i\)</span>.</p></li>
+<li><p>To show why variance becomes linear operator let us subtract means from random variables <span class="math notranslate nohighlight">\(Y_i=X_i-\mu\)</span> so that we have zero expectation <span class="math notranslate nohighlight">\(E[Y_i]=0\)</span> and zero cross correlation (independence) <span class="math notranslate nohighlight">\(E[Y_i Y_j]=0\)</span> between different terms <span class="math notranslate nohighlight">\(i\neq j\)</span>. This simplifies the expression of variance of a sample sum <span class="math notranslate nohighlight">\(S_n\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\delta S_n = \sum_i X_i - n\mu = \sum_i Y_i\]</div>
+\[\delta S_n = \sum_i Y_i\]</div>
 <div class="math notranslate nohighlight">
-\[V\left(S_n\right) =  E(\delta S^2_n) = \sum_i \sum_j  E[Y_i Y_j] = \sum_i  E[Y^2_i] = \sum_{i=1}^n V\left(X_i\right) = n \sigma^2 \]</div>
+\[V\left(S_n\right) = E[\delta S_n^2]= \sum_i \sum_j  E[Y_i Y_j] = \sum_i  E[Y^2_i] = \sum_{i=1}^n V\left(X_i\right) = n \sigma^2 \]</div>
 <ul class="simple">
-<li><p>Thus we see that because of independence of random variables expectation of cross terms is zero. Both mean and variance grow with number of terms as n. This implies that the sample mean converges to the exact mean with a power law of <span class="math notranslate nohighlight">\(n^{-1}\)</span>. This is known <strong>Law of Large Numbers (LLN)</strong></p></li>
+<li><p>Thus we see that because of independence of random variables expectation of cross terms is zero. Both mean and variance grow with number of terms as n. This implies that the sample mean converges to the exact mean with a power law of <span class="math notranslate nohighlight">\(n^{-1/2}\)</span> corresponding to standard deviation <span class="math notranslate nohighlight">\(V^{1/2}\)</span>. This is known <strong>Law of Large Numbers (LLN)</strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{V[M_n] = V\Big[\frac{S_n}{n}\Big] = \frac{1}{n^2}V[S_n]= \frac{\sigma^2}{n}}\]</div>
+\[{V[M_n] = V\Big[\frac{S_n}{n}\Big] = \frac{1}{n^2}V[S_n]= \frac{1}{n^2} n \sigma^2=\frac{\sigma^2}{n}}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{V^{1/2}\sim n^{-1/2}}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]:</span>
