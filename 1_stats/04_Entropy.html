@@ -241,10 +241,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab1/intro.html">Lab 1</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab1/sinc_function.html">Numpy Lab: Sinc Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab1/linear_functions.html">Numpy Lab: Linear Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab2/intro.html">Lab 2</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab2/polymer-conf.html">Conformations of random polymer chain</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/lab2/intro.html">Lab 2</a></li>
 </ul>
 
     </div>
@@ -474,7 +476,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-integer-number-of-yes-no-questions">Non integer number of YES/NO questions??</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-information-physical">Is information physical?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jaynes-maxent-maximum-entropy-principle">Jayne’s MaxEnt (Maximum Entropy principle)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
             </nav>
         </div>
@@ -500,13 +502,13 @@ document.write(`
 <figure class="align-default" id="markdown-fig">
 <img alt="Information" src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Entropy_flip_2_coins.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Introducing entropy</span><a class="headerlink" href="#markdown-fig" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Introducing entropy</span><a class="headerlink" href="#markdown-fig" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="large-deviation-theory-entropy-and-free-energy">
 <h2>Large deviation theory, entropy and free energy.<a class="headerlink" href="#large-deviation-theory-entropy-and-free-energy" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Consider a 1D random walk again. Let us write down probability of a random walk taking <span class="math notranslate nohighlight">\(N_1\)</span> steps to right and <span class="math notranslate nohighlight">\(N_2\)</span> steps to left given that the probabilities are <span class="math notranslate nohighlight">\(\theta_1\)</span> probability to move to right and <span class="math notranslate nohighlight">\(\theta_2\)</span> to move to left respectively. By definition <span class="math notranslate nohighlight">\(N=n_1+n_2\)</span> and <span class="math notranslate nohighlight">\(\theta_1+\theta_2=1\)</span>. Probability of this random walk could represent polymer conformations or diffusing molecules.</p></li>
+<li><p>Consider a 1D random walk again. Let us write down probability of a random walk taking <span class="math notranslate nohighlight">\(n\)</span> steps to right and <span class="math notranslate nohighlight">\(n_2\)</span> steps to left given that the probabilities are <span class="math notranslate nohighlight">\(\theta\)</span> probability to move to right and <span class="math notranslate nohighlight">\(\theta_2\)</span> to move to left respectively. By definition <span class="math notranslate nohighlight">\(N=n_1+n_2\)</span> and <span class="math notranslate nohighlight">\(\theta_1+\theta_2=1\)</span>. Probability of this random walk could represent polymer conformations or diffusing molecules.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[P_N (n_1 | \theta_1) = \frac{N!}{n_1! n_2!} \cdot \theta_1^{n_1} \theta_2^{n_2}\]</div>
@@ -516,17 +518,18 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ log P_N (n) = N \Big[ -\frac{n_1}{N} log \frac{n_1}{N} -\frac{n_2}{N} log \frac{n_2}{N}  + \frac{n_1}{N} log(\theta_1) + \frac{n_2}{N} log \theta_2 \Big]\]</div>
 <div class="math notranslate nohighlight">
+\[ log P_N (n) = N [ s(n)  + \epsilon(n) ]\]</div>
+<div class="math notranslate nohighlight">
 \[P_N \sim e^{-N F(n)}\]</div>
 <ul class="simple">
-<li><p>We find that probability to deviate from mean values decays exponentially with a decay function specific to a system and independent of N. The <span class="math notranslate nohighlight">\(F(n)\)</span> <strong>a free energy per particle</strong>. Mathematicians call it large deviation function. The expression involving fractions of steps to right and left namely <span class="math notranslate nohighlight">\(p_1=n_1/N\)</span> and <span class="math notranslate nohighlight">\(p_2=n_2/N\)</span> is called <strong>Entropy</strong>. The terms involving bias of a random walk <span class="math notranslate nohighlight">\(\theta\)</span> can be identified with <strong>Energy</strong> since it tilts the random walk to be left or right.</p></li>
+<li><p>We find that probability to deviate from mean values decays exponentially with a decay function specific to a system and independent of N. The <span class="math notranslate nohighlight">\(F(n)\)</span> <strong>a free energy per particle</strong>. Mathematicians call it large deviation function.</p></li>
+<li><p>The expression involving fractions or observable probabilities of steps of moving to right and left; <span class="math notranslate nohighlight">\(p_1=n_1/N\)</span> and <span class="math notranslate nohighlight">\(p_2=n_2/N\)</span> is called <strong>Entropy</strong>.</p></li>
+<li><p>The terms involving bias of a random walk <span class="math notranslate nohighlight">\(\theta\)</span> can be identified with <strong>Energy</strong> since it has the effect of tilting the random towards left or right.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[s(n) = -p_1 log p_1 - p_2 log p_2  = -\sum_i p_i log p_i = -\langle log p \rangle\]</div>
 <div class="math notranslate nohighlight">
 \[\epsilon(n) = p_1 log \theta_1 - p_2 log \theta_2  = \sum_i p_i log \theta_i =  \langle log \theta \rangle\]</div>
-<ul class="simple">
-<li><p>In general for <span class="math notranslate nohighlight">\(i\)</span> number of options (random walk in D dimensions, multiple conformations, states etc). Looks like to get the most probably value we could maximize <span class="math notranslate nohighlight">\(s(n)\)</span>!</p></li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">theta</span><span class="o">=</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.99</span><span class="p">),</span> <span class="n">N</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">))</span>
@@ -538,18 +541,18 @@ document.write(`
     
   <span class="n">I</span> <span class="o">=</span> <span class="o">-</span> <span class="n">f</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="n">f</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">f</span><span class="p">)</span>
 
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$I(\theta)$&#39;</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">N</span><span class="o">*</span><span class="n">I</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$e^{-NI(\theta)}$&#39;</span> <span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$I(p, \theta)$&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">N</span><span class="o">*</span><span class="n">I</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$e^{-NI(p, \theta)}$&#39;</span> <span class="p">)</span>
 
-  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$I(\theta)$&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$I(p)$&#39;</span><span class="p">)</span>
   <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
   <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b463413129d14a7c97472d1ba922c767", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "14b9a5dab49848f3a0fd4b42850c2211", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -593,7 +596,7 @@ document.write(`
     <span class="n">plot_large_deviation</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="n">plot_binomial</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$f$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Probability density&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Comparison of binomial coin flip distribution (points) \nand the large deviation approximation (lines)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
@@ -602,7 +605,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a6cfb76cecbe704a0508458bcccf6c68688417976a59be21cb30895b7dd540e2.png" src="../_images/a6cfb76cecbe704a0508458bcccf6c68688417976a59be21cb30895b7dd540e2.png" />
+<img alt="../_images/c84856f8ad86f113ffdaeb970a8da4621e0e8eee1ff21646b3bc80ec547723f1.png" src="../_images/c84856f8ad86f113ffdaeb970a8da4621e0e8eee1ff21646b3bc80ec547723f1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -810,11 +813,11 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 <div class="math notranslate nohighlight">
 \[p_i \sim e^{-B x_i}\]</div>
 </section>
-<section id="exercises">
-<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<section id="problems">
+<h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Compute entropy of gaussian distribution. Plot entropy as a function of variance</p></li>
-<li><p>Using MaxEnt approach find probability distribution with mean and variance gequal to <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+<li><p>Using MaxEnt approach find probability distribution with mean and variance equal to <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span> respectively.</p></li>
 <li><p>Simulate 1D random walk and compute entropy by first computing probability distribution <span class="math notranslate nohighlight">\(p_N(n)\)</span></p></li>
 </ul>
 </section>
@@ -897,7 +900,7 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-integer-number-of-yes-no-questions">Non integer number of YES/NO questions??</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-information-physical">Is information physical?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jaynes-maxent-maximum-entropy-principle">Jayne’s MaxEnt (Maximum Entropy principle)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
   </nav></div>
 
