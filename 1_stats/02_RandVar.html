@@ -464,6 +464,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-tests-of-lln">Simulate tests of LLN</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
@@ -514,50 +515,42 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rw_probability</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;x: net displacement ranging from -N to N</span>
-<span class="sd">       N: total number of steps</span>
-<span class="sd">       theta: bias of a walker, e.g probability of making step to the right. For unbiased random walk theta=0.5</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="c1">#TODO: complete the function with code</span>
-    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
-    <span class="c1">#from scipy.special import comb</span>
-    
-    <span class="k">return</span> <span class="n">prob</span>
-</pre></div>
-</div>
-</div>
-</div>
 <section id="sum-of-random-variables">
 <h2>Sum of Random Variables<a class="headerlink" href="#sum-of-random-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Consider a sequence of <strong>independent and identically distributed (i.i.d.)</strong> random variables, <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span>. Examples include coin tosses, the random displacement of a molecule, or the random placement of a molecule in the left vs. right corner of a box.</p></li>
-<li><p>Being identically distributed means each term has a well-defined <strong>mean and variance</strong>: <span class="math notranslate nohighlight">\(\mu = E(X_1)\)</span> and <span class="math notranslate nohighlight">\(\sigma^2 = V(X_1) = E\left[ (X_1 - E(X_1))^2 \right]\)</span>, respectively.</p></li>
+<li><p>Consider a sequence of <strong>independent and identically distributed (i.i.d.)</strong> random variables, <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span>. Examples include coin tosses, the random displacement of a molecule, or the random placement of a molecule in the left vs. right corner of a box. Being identically distributed means each term has a well-defined <strong>mean</strong> <span class="math notranslate nohighlight">\(\mu\)</span> and <strong>variance</strong> <span class="math notranslate nohighlight">\(\sigma^2\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mu = E(X_1)\]</div>
+<div class="math notranslate nohighlight">
+\[\sigma^2 = V(X_1) = E\left[ (X_1 - E(X_1))^2 \right]\]</div>
+<ul class="simple">
 <li><p>The sum of <span class="math notranslate nohighlight">\(n\)</span> random variables, denoted by <span class="math notranslate nohighlight">\(S_n\)</span>, is termed a <strong>sample sum</strong>, and <span class="math notranslate nohighlight">\(M_n\)</span> represents a <strong>sample mean</strong>. Both quantities are random variables frequently encountered in simulations and data analysis. For instance, consider the difference between the average height of people calculated from a small sample of cities versus that from the entire world population. Our goal is to understand how sums behave as a function of sample size.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[S_n = \sum_{i=1}^n X_i\,\,\,\,\,\, \text{and} \,\,\,\,\, M_n = \frac{1}{n}\sum_{i=1}^n X_i\]</div>
+\[S_n = \sum_{i=1}^n X_i\]</div>
+<div class="math notranslate nohighlight">
+\[M_n = \frac{1}{n}\sum_{i=1}^n X_i = \frac{1}{n}S_n\]</div>
 <ul class="simple">
-<li><p>Expectation operates linearly; however, variance generally does not. Nonetheless, for <strong>i.i.d.</strong> random variables, variance also behaves linearly.</p></li>
+<li><p>Expectation is always a linear operator.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[E(S_n) = \sum_{i=1}^n E(X_i) = n\mu\]</div>
+<div class="math notranslate nohighlight">
+\[E[M_n]=\mu\]</div>
 <ul class="simple">
-<li><p>To demonstrate why variance acts as a linear operator, consider <span class="math notranslate nohighlight">\(Y_i = X_i - \mu\)</span>, yielding zero expectation (<span class="math notranslate nohighlight">\(E[Y_i] = 0\)</span>) and zero cross-correlation (<span class="math notranslate nohighlight">\(E[Y_i Y_j] = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span>), simplifying the variance of a sample sum <span class="math notranslate nohighlight">\(S_n\)</span>:</p></li>
+<li><p>Variance is generally is not a linear operator for  <strong>i.i.d.</strong> random variables, variance also behaves linearly. To show this we denote mean subtracted random variable as <span class="math notranslate nohighlight">\(Y_i = X_i - \mu\)</span> which  has zero expectation (<span class="math notranslate nohighlight">\(E[Y_i] = 0\)</span>). Because of independence of random variables all cross-terms  are zero (<span class="math notranslate nohighlight">\(E[Y_i Y_j] = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span>) and self-terms are equal to variance <span class="math notranslate nohighlight">\(E[Y^2_i] = V[X_1]=\sigma_2\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\delta S_n = \sum_i Y_i\]</div>
+\[V(S_n) = E[(S_n - E[S_n])^2] = E\Big[\Big(\sum^{i=n}_{i=1} X_i-n\mu\Big)^2\Big] = E\Big[\Big(\sum^{i=n}_{i=1} Y_i\Big)^2\Big]=\sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = n\sigma^2\]</div>
 <div class="math notranslate nohighlight">
-\[V(S_n) = E[\delta S_n^2] = \sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = \sum_{i=1}^n V(X_i) = n\sigma^2\]</div>
-<ul class="simple">
-<li><p>This demonstrates that due to the independence of random variables, the expectation of cross terms is zero. As a result, both the mean and variance increase linearly with the number of terms (<span class="math notranslate nohighlight">\(n\)</span>), suggesting that the sample mean converges to the exact mean with a rate proportional to <span class="math notranslate nohighlight">\(n^{-1/2}\)</span>. This is the essence of the <strong>Law of Large Numbers (LLN)</strong>:</p></li>
-</ul>
+\[V[M_n] = V\left[\frac{S_n}{n}\right] = \frac{1}{n^2}V[S_n] = \frac{\sigma^2}{n}\]</div>
+<p><strong>Law of Large Numbers (LLN):</strong> Both mean and variance of sum of random variables grows linearly with n: <span class="math notranslate nohighlight">\(E[S_n]\sim n\)</span> and <span class="math notranslate nohighlight">\(V[S_n]\sim n\)</span>. This has consequence on how we estimate means from samples. Sample mean becomes increasingly more accurate with the error or standard deviation decaying with <span class="math notranslate nohighlight">\(1/2\)</span> exponent</p>
 <div class="math notranslate nohighlight">
-\[V[M_n] = V\left[\frac{S_n}{n}\right] = \frac{1}{n^2}V[S_n] = \frac{1}{n^2} \cdot n\sigma^2 = \frac{\sigma^2}{n}\]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{V^{1/2} \sim n^{-1/2}}\]</div>
+\[V[M_n]^{1/2}\sim n^{-1/2}\]</div>
+</section>
+<section id="simulate-tests-of-lln">
+<h2>Simulate tests of LLN<a class="headerlink" href="#simulate-tests-of-lln" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]:</span>
@@ -1182,6 +1175,7 @@ Hint: you may want to use random variables from scipy.stats.exp <br></p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-tests-of-lln">Simulate tests of LLN</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
