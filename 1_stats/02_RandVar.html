@@ -464,12 +464,13 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-lln">Law of Large Numbers (LLN)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-tests-of-lln">Simulate tests of LLN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">Simulating a 1D unbiased random walk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-msd-of-a-random-walker">Mean square displacement (MSD) of a random walker</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-random-walk">2D random walk</a></li>
@@ -525,29 +526,34 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\sigma^2 = V(X_1) = E\left[ (X_1 - E(X_1))^2 \right]\]</div>
 <ul class="simple">
-<li><p>The sum of <span class="math notranslate nohighlight">\(n\)</span> random variables, denoted by <span class="math notranslate nohighlight">\(S_n\)</span>, is termed a <strong>sample sum</strong>, and <span class="math notranslate nohighlight">\(M_n\)</span> represents a <strong>sample mean</strong>. Both quantities are random variables frequently encountered in simulations and data analysis. For instance, consider the difference between the average height of people calculated from a small sample of cities versus that from the entire world population. Our goal is to understand how sums behave as a function of sample size.</p></li>
+<li><p>The sum of <span class="math notranslate nohighlight">\(n\)</span> random variables, denoted by <span class="math notranslate nohighlight">\(S_n\)</span>, is termed a <strong>sample sum</strong>, and <span class="math notranslate nohighlight">\(M_n=\frac{1}{n}S_n\)</span> represents a <strong>sample mean</strong>. These summation of random variables quantities are random variables frequently encountered in simulations and data analysis. For instance, consider the difference between the average height of people calculated from a small sample of cities versus that from the entire world population. Our goal is to understand how sums behave as a function of sample size.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S_n = \sum_{i=1}^n X_i\]</div>
-<div class="math notranslate nohighlight">
-\[M_n = \frac{1}{n}\sum_{i=1}^n X_i = \frac{1}{n}S_n\]</div>
 <ul class="simple">
-<li><p>Expectation is always a linear operator.</p></li>
+<li><p>Expectation is always a linear operator. Variance is generally is not a linear operator for  <strong>i.i.d.</strong> random variables, variance also behaves linearly. To show this we denote mean subtracted random variable as <span class="math notranslate nohighlight">\(Y_i = X_i - \mu\)</span> which  has zero expectation <span class="math notranslate nohighlight">\(E[Y_i] = 0\)</span>. Because of independence of random variables all cross-terms  are zero (<span class="math notranslate nohighlight">\(E[Y_i Y_j] = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span>) and self-terms are equal to variance <span class="math notranslate nohighlight">\(E[Y^2_i] = V[X_1]=\sigma_2\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[E(S_n) = \sum_{i=1}^n E(X_i) = n\mu\]</div>
 <div class="math notranslate nohighlight">
-\[E[M_n]=\mu\]</div>
+\[V(S_n) = E[(S_n - E[S_n])^2] = E\Big[\Big(\sum^{i=n}_{i=1} X_i-n\mu\Big)^2\Big] = E\Big[\Big(\sum^{i=n}_{i=1} Y_i\Big)^2\Big]=\sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = n\sigma^2\]</div>
+</section>
+<section id="law-of-large-numbers-lln">
+<h2>Law of Large Numbers (LLN)<a class="headerlink" href="#law-of-large-numbers-lln" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Variance is generally is not a linear operator for  <strong>i.i.d.</strong> random variables, variance also behaves linearly. To show this we denote mean subtracted random variable as <span class="math notranslate nohighlight">\(Y_i = X_i - \mu\)</span> which  has zero expectation (<span class="math notranslate nohighlight">\(E[Y_i] = 0\)</span>). Because of independence of random variables all cross-terms  are zero (<span class="math notranslate nohighlight">\(E[Y_i Y_j] = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span>) and self-terms are equal to variance <span class="math notranslate nohighlight">\(E[Y^2_i] = V[X_1]=\sigma_2\)</span></p></li>
+<li><p>Both mean and variance of sum of random variables grows linearly with <span class="math notranslate nohighlight">\(n\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[V(S_n) = E[(S_n - E[S_n])^2] = E\Big[\Big(\sum^{i=n}_{i=1} X_i-n\mu\Big)^2\Big] = E\Big[\Big(\sum^{i=n}_{i=1} Y_i\Big)^2\Big]=\sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = n\sigma^2\]</div>
+\[E[S_n] = n\mu\]</div>
+<div class="math notranslate nohighlight">
+\[V[S_n]= n\sigma^2\]</div>
+<ul class="simple">
+<li><p>This has consequence on how we estimate means from samples. Sample mean becomes increasingly more accurate with the error or standard deviation decaying with <span class="math notranslate nohighlight">\(1/2\)</span> exponent.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E[M_n]=E\left[\frac{S_n}{n}\right] = \frac{1}{n}\sum_{i=1}^n E[X_i] = \mu\]</div>
 <div class="math notranslate nohighlight">
 \[V[M_n] = V\left[\frac{S_n}{n}\right] = \frac{1}{n^2}V[S_n] = \frac{\sigma^2}{n}\]</div>
-<p><strong>Law of Large Numbers (LLN):</strong> Both mean and variance of sum of random variables grows linearly with n: <span class="math notranslate nohighlight">\(E[S_n]\sim n\)</span> and <span class="math notranslate nohighlight">\(V[S_n]\sim n\)</span>. This has consequence on how we estimate means from samples. Sample mean becomes increasingly more accurate with the error or standard deviation decaying with <span class="math notranslate nohighlight">\(1/2\)</span> exponent</p>
-<div class="math notranslate nohighlight">
-\[V[M_n]^{1/2}\sim n^{-1/2}\]</div>
 </section>
 <section id="simulate-tests-of-lln">
 <h2>Simulate tests of LLN<a class="headerlink" href="#simulate-tests-of-lln" title="Permalink to this heading">#</a></h2>
@@ -613,6 +619,60 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="the-central-limit-theorem-clt">
+<h2>The Central Limit Theorem  (CLT)<a class="headerlink" href="#the-central-limit-theorem-clt" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Central Limit Theorem</strong> asserts that the probability distribution function or <strong>PDF</strong> of sum of random variables becomes gaussian distribution with mean <span class="math notranslate nohighlight">\(n\mu\)</span> and <span class="math notranslate nohighlight">\(n\sigma^2\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S_n = X_1 +X_2+...+X_n \rightarrow N(n\mu, n\sigma^2)\]</div>
+<div class="math notranslate nohighlight">
+\[p(s) = \frac{1}{(2\pi  n\sigma^2)^{1/2}}e^{-\frac{(z-n\mu)^2}{2 n\sigma^2}}\]</div>
+<ul class="simple">
+<li><p>If we standardize random variables by first subtracting the mean and scaling by standard deviation</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z_n =  \frac{S_n-E[S_n]}{V[S_n]^{1/2}} = \frac{S_n-n\mu}{n^{1/2}\sigma}\]</div>
+<ul class="simple">
+<li><p>Then one ends up with standard normal distribution which has <span class="math notranslate nohighlight">\(E[Z]=0\)</span> and <span class="math notranslate nohighlight">\(V[Z_n]=1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z_n = Z_1+Z_2+...+Z_n \rightarrow N(0, 1)\]</div>
+<div class="math notranslate nohighlight">
+\[p(s) = \frac{1}{(2\pi  )^{1/2}}e^{-\frac{z^2}{2}}\]</div>
+<ul class="simple">
+<li><p>Note that CLT is based on assumption that the <strong>mean and variance</strong>, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <strong>are finite</strong>. Thus, CLT does not hold for certain power-law distributed RVs.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># Number of coin tosses in each experiment, number of experiments</span>
+<span class="n">N</span><span class="p">,</span> <span class="n">runs</span>    <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span>  
+
+<span class="c1"># Simulate coin tosses: num_experiments rows, num_tosses_per_experiment columns</span>
+<span class="n">tosses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">runs</span><span class="p">))</span>
+
+<span class="c1"># Calculate means of each experiment</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tosses</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="p">(</span> <span class="n">M</span><span class="o">-</span><span class="n">M</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+
+<span class="c1"># Plotting the distribution of sample means</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Sample Means of Coin Tosses&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Sample Mean&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+
+<span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">zs</span><span class="p">),</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean=0, var=1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="id1">
 <h2>Random walk<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -647,58 +707,6 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[V[\bar{x}] = \frac{4\theta (1-\theta)}{N}\]</div>
 </section>
-</section>
-<section id="the-central-limit-theorem-clt">
-<h2>The Central Limit Theorem  (CLT)<a class="headerlink" href="#the-central-limit-theorem-clt" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Let <span class="math notranslate nohighlight">\(X_1, X_2, \ldots \)</span> be a sequence of i.i.d. random variables with common mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
-<li><p>We scale our random variables to make them <strong>de-meaned</strong> and <strong>scaled</strong> sample mean to make <span class="math notranslate nohighlight">\(Z_n\)</span> have 0 mean and 1 variance.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[Z_n = \frac{S_n - n\mu}{\sigma \sqrt{n}}\]</div>
-<ul class="simple">
-<li><p><strong>Central Limit Theorem</strong> asserts that the probability distribution function or <strong>PDF</strong> of <span class="math notranslate nohighlight">\(p_Z(z)\)</span> converges to the standard normal distribution in the limit of large number of n steps:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p_Z\left(z\right) \rightarrow \frac{1}{\sqrt{2\pi}}  e^{-z^2/2}\]</div>
-<ul class="simple">
-<li><p>There is an implicit assumption that the <strong>mean and variance</strong>, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <strong>are finite</strong>. Thus, CLT does not hold for certain power-law distributed RVs.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
-
-<span class="c1"># Number of coin tosses in each experiment, number of experiments</span>
-<span class="n">N</span><span class="p">,</span> <span class="n">runs</span>    <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span>  
-
-<span class="c1"># Simulate coin tosses: num_experiments rows, num_tosses_per_experiment columns</span>
-<span class="n">tosses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">runs</span><span class="p">))</span>
-
-<span class="c1"># Calculate means of each experiment</span>
-<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tosses</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="n">z</span> <span class="o">=</span> <span class="p">(</span> <span class="n">M</span><span class="o">-</span><span class="n">M</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-
-<span class="c1"># Plotting the distribution of sample means</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Sample Means of Coin Tosses&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Sample Mean&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
-
-<span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">zs</span><span class="p">),</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean=0, var=1&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x186cb7160&gt;
-</pre></div>
-</div>
-<img alt="../_images/4c352d4d5cbdd6db7c94e009187b1267b7e068c227df7dad2ec2d59a64fddb05.png" src="../_images/4c352d4d5cbdd6db7c94e009187b1267b7e068c227df7dad2ec2d59a64fddb05.png" />
-</div>
-</div>
 </section>
 <section id="simulating-a-1d-unbiased-random-walk">
 <h2>Simulating a 1D unbiased random walk<a class="headerlink" href="#simulating-a-1d-unbiased-random-walk" title="Permalink to this heading">#</a></h2>
@@ -1175,12 +1183,13 @@ Hint: you may want to use random variables from scipy.stats.exp <br></p>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-random-variables">Sum of Random Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-lln">Law of Large Numbers (LLN)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-tests-of-lln">Simulate tests of LLN</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">Simulating a 1D unbiased random walk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-msd-of-a-random-walker">Mean square displacement (MSD) of a random walker</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-random-walk">2D random walk</a></li>
