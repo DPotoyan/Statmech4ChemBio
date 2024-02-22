@@ -467,6 +467,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-lln">Law of Large Numbers (LLN)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-tests-of-lln">Simulate tests of LLN</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-clt">Simulate CLT</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
@@ -536,7 +537,9 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[E(S_n) = \sum_{i=1}^n E(X_i) = n\mu\]</div>
 <div class="math notranslate nohighlight">
-\[V(S_n) = E[(S_n - E[S_n])^2] = E\Big[\Big(\sum^{i=n}_{i=1} X_i-n\mu\Big)^2\Big] = E\Big[\Big(\sum^{i=n}_{i=1} Y_i\Big)^2\Big]=\sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = n\sigma^2\]</div>
+\[\begin{split}V(S_n) = E[(S_n - E[S_n])^2] = E\Big[\Big(\sum^{i=n}_{i=1} X_i-n\mu\Big)^2\Big] =   E\Big[\Big(\sum^{i=n}_{i=1} Y_i\Big)^2\Big]=
+\\
+\\ =\sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = n\sigma^2\end{split}\]</div>
 </section>
 <section id="law-of-large-numbers-lln">
 <h2>Law of Large Numbers (LLN)<a class="headerlink" href="#law-of-large-numbers-lln" title="Permalink to this heading">#</a></h2>
@@ -548,7 +551,8 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[V[S_n]= n\sigma^2\]</div>
 <ul class="simple">
-<li><p>This has consequence on how we estimate means from samples. Sample mean becomes increasingly more accurate with the error or standard deviation decaying with <span class="math notranslate nohighlight">\(1/2\)</span> exponent.</p></li>
+<li><p>This has consequence on how we estimate means from samples <span class="math notranslate nohighlight">\(M_n = \frac{1}{n} S_n\)</span>.</p></li>
+<li><p>Sample mean becomes increasingly more accurate with the error or standard deviation decaying with <span class="math notranslate nohighlight">\(1/2\)</span> exponent.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[E[M_n]=E\left[\frac{S_n}{n}\right] = \frac{1}{n}\sum_{i=1}^n E[X_i] = \mu\]</div>
@@ -640,6 +644,9 @@ document.write(`
 <ul class="simple">
 <li><p>Note that CLT is based on assumption that the <strong>mean and variance</strong>, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <strong>are finite</strong>. Thus, CLT does not hold for certain power-law distributed RVs.</p></li>
 </ul>
+</section>
+<section id="simulate-clt">
+<h2>Simulate CLT<a class="headerlink" href="#simulate-clt" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
@@ -760,7 +767,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;n, steps&#39;)
 </pre></div>
 </div>
-<img alt="../_images/2b3ae63afc6365755481a07c4d6eb95ff6cf9967e98e3f1819fda5fbd152dbe1.png" src="../_images/2b3ae63afc6365755481a07c4d6eb95ff6cf9967e98e3f1819fda5fbd152dbe1.png" />
+<img alt="../_images/f5457d80921511ac4690fcbc179e6ac974b0a3f828d71735c8d7a335f409e3b3.png" src="../_images/f5457d80921511ac4690fcbc179e6ac974b0a3f828d71735c8d7a335f409e3b3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -800,8 +807,9 @@ document.write(`
     
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$V[X]^{1/2}/t$&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">/</span><span class="n">t</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="se">\n</span><span class="s1"> $\sigma/t$=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rw</span><span class="p">[</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="p">:])</span><span class="o">/</span><span class="n">t</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$\sigma/t$=&#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">rw</span><span class="p">[</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="p">:])</span><span class="o">/</span><span class="n">t</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -813,7 +821,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a44dcea5591f420fa3a4935a6f5a5e2a", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0cd1e5b7d27249498342d8dca52003af", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p><strong>Question</strong></p>
 <p>Would sample mean get more accurate or less as a function of time?</p>
@@ -1183,6 +1191,7 @@ Hint: you may want to use random variables from scipy.stats.exp <br></p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-lln">Law of Large Numbers (LLN)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-tests-of-lln">Simulate tests of LLN</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-clt">Simulate CLT</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Random walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
