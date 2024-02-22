@@ -244,7 +244,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab2/intro.html">Lab 2</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../labs/lab2/polymer-conf.html">Conformations of random polymer chain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab2/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
+
 </ul>
 </li>
 </ul>
@@ -513,14 +514,16 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[P_N (n_1 | \theta_1) = \frac{N!}{n_1! n_2!} \cdot \theta_1^{n_1} \theta_2^{n_2}\]</div>
 <ul class="simple">
-<li><p>We already know that in the limit of large N the distribution of sum of random variables becomes gaussian. But before N becomes too large and probability distribution converges to gaussian there is an intermediate regime where fluctuations are dominant and where a non-gaussian function controls the shape of the distribution. To see this we take the log and using Stirling approximation <span class="math notranslate nohighlight">\(log N! = NlogN-N\)</span>  we obtain</p></li>
+<li><p>We already know that in the limit of large N the distribution of sum of random variables becomes gaussian. But before N becomes too large and probability distribution converges to gaussian there is an intermediate regime where fluctuations are dominant and where a non-gaussian function controls the shape of the distribution. To see this we take the log and using Stirling approximation <span class="math notranslate nohighlight">\(log N! = NlogN-N\)</span>  and using <span class="math notranslate nohighlight">\(n=n_1\)</span> and <span class="math notranslate nohighlight">\(p=p_1\)</span> as independent variables we get:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[ log P_N (n) = N \Big[ -\frac{n_1}{N} log \frac{n_1}{N} -\frac{n_2}{N} log \frac{n_2}{N}  + \frac{n_1}{N} log(\theta_1) + \frac{n_2}{N} log \theta_2 \Big]\]</div>
+\[ log P_N (n|\theta) = N \Big[ -\frac{n_1}{N} log \frac{n_1}{N} -\frac{n_2}{N} log \frac{n_2}{N}  + \frac{n_1}{N} log(\theta_1) + \frac{n_2}{N} log \theta_2 \Big]\]</div>
 <div class="math notranslate nohighlight">
-\[ log P_N (n) = N [ s(n)  + \epsilon(n) ]\]</div>
+\[ log P_N (p|\theta) = N \Big[ -p_1 log p_1 -p_2 log p_2  + p_1 log(\theta_1) + p_2 log \theta_2 \Big]\]</div>
 <div class="math notranslate nohighlight">
-\[P_N \sim e^{-N F(n)}\]</div>
+\[ log P_N (p|\theta) = N [ s  + \epsilon ] = N I(p, \theta)\]</div>
+<div class="math notranslate nohighlight">
+\[P_N \sim e^{-N I(p, \theta)}\]</div>
 <ul class="simple">
 <li><p>We find that probability to deviate from mean values decays exponentially with a decay function specific to a system and independent of N. The <span class="math notranslate nohighlight">\(F(n)\)</span> <strong>a free energy per particle</strong>. Mathematicians call it large deviation function.</p></li>
 <li><p>The expression involving fractions or observable probabilities of steps of moving to right and left; <span class="math notranslate nohighlight">\(p_1=n_1/N\)</span> and <span class="math notranslate nohighlight">\(p_2=n_2/N\)</span> is called <strong>Entropy</strong>.</p></li>

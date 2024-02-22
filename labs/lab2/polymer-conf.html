@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Conformations of random polymer chain &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>Conformations of Random Polymer Chains &#8212; Statistical Mechanics for Chemistry and Biology</title>
   
   
   
@@ -243,7 +243,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Lab 2</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Conformations of random polymer chain</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Conformations of Random Polymer Chains</a></li>
+
 </ul>
 </li>
 </ul>
@@ -438,7 +439,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -449,11 +452,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Conformations of random polymer chain</h1>
+    <h1>Conformations of Random Polymer Chains</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Conformations of Random Polymer Chains</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#in-the-class-we-are-going-to-generalize-this-to-3d-polymer-chains">In the class we are going to generalize this to 3D polymer chains</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -473,22 +486,25 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="conformations-of-random-polymer-chain">
-<h1>Conformations of random polymer chain<a class="headerlink" href="#conformations-of-random-polymer-chain" title="Permalink to this heading">#</a></h1>
-<p><strong>End-to-end sitance</strong></p>
+<section class="tex2jax_ignore mathjax_ignore" id="conformations-of-random-polymer-chains">
+<h1>Conformations of Random Polymer Chains<a class="headerlink" href="#conformations-of-random-polymer-chains" title="Permalink to this heading">#</a></h1>
+<p><strong>End-to-End Distance</strong></p>
 <ul class="simple">
-<li><p>Generate polymer chains of 100 monomers in 2D where each monomer has fixed length <span class="math notranslate nohighlight">\(a\)</span> and can point in any direction with equal probability. You can generate monomer position by using uniform random number <span class="math notranslate nohighlight">\(\theta\sim U(0,1)\)</span> via <code class="docutils literal notranslate"><span class="pre">np.random.rand()</span></code>to compute angles between <span class="math notranslate nohighlight">\([0, 2\pi]\)</span> using which you can get coordinates of monomers via <span class="math notranslate nohighlight">\(x = l\cdot cos\theta\)</span> and <span class="math notranslate nohighlight">\(y = l\cdot sin \theta\)</span>.</p></li>
-<li><p>After generating all monomer positions visualize a few polymer conformations to make sure you got polymer chains in 2D.</p></li>
-<li><p>Compute probability distribution of end-to-end distances of the polymer. Note that you need to determine how many conformations you need to generate to match distribution of end-to-end distances expected by theory.</p></li>
-<li><p>Calculate probability distribution of radius of gyration for a polymer with N monomers which is given as <span class="math notranslate nohighlight">\(R^2_g = \frac{1}{N}\sim (r_k-\langle r \rangle)^2 \)</span> where <span class="math notranslate nohighlight">\(r_k\)</span> denotes positions of monomers and <span class="math notranslate nohighlight">\(\langle r \rangle\)</span> is the average monomer position</p></li>
-<li><p>Study how average root mean square end to end distance and radius of gyration depends on number of monomers.</p></li>
+<li><p>Generate polymer chains consisting of 100 monomers in 2D, where each monomer has a fixed length <span class="math notranslate nohighlight">\(a\)</span> and can point in any direction with equal probability. Use the uniform random number <span class="math notranslate nohighlight">\(\theta \sim U(0,1)\)</span> generated by np.random.rand() to compute angles between <span class="math notranslate nohighlight">\([0, 2\pi]\)</span>. This will allow you to determine the coordinates of monomers using <span class="math notranslate nohighlight">\(x = l\cdot \cos(\theta)\)</span> and <span class="math notranslate nohighlight">\(y = l\cdot \sin(\theta)\)</span>.</p></li>
+<li><p>After generating all monomer positions, visualize several polymer conformations to verify that you have correctly created polymer chains in 2D.</p></li>
+<li><p>Compute the probability distribution of the end-to-end distances of the polymer. It’s essential to assess how many conformations are necessary to generate a distribution that aligns with theoretical expectations.
+Calculate the probability distribution of the radius of gyration for a polymer with <span class="math notranslate nohighlight">\(N\)</span> monomers, given by <span class="math notranslate nohighlight">\(R^2_g = \frac{1}{N}\sum (r_k-\langle r \rangle)^2\)</span>, where <span class="math notranslate nohighlight">\(r_k\)</span> denotes the positions of monomers, and <span class="math notranslate nohighlight">\(\langle r \rangle\)</span> is the average position of the monomers.</p></li>
+<li><p>Investigate how the average root mean square end-to-end distance and the radius of gyration vary with the number of monomers.</p></li>
 </ul>
 <p><strong>Entropy</strong></p>
-<p>Given any probability distribution one can calculate entropy via <span class="math notranslate nohighlight">\(S = -\sum p_i log p_i\)</span></p>
 <ul class="simple">
-<li><p>Calculate entropy of the of the polymer chain by using end to end probability distribution</p></li>
-<li><p>Simulate chain that is twice more likely to have monomers to be along x axis. and calculate entropy again</p></li>
+<li><p>Given any probability distribution, one can calculate entropy via <span class="math notranslate nohighlight">\(S = -\sum p_i \log(p_i)\)</span>.</p></li>
+<li><p>Calculate the entropy of the polymer chain using the end-to-end probability distribution.</p></li>
+<li><p>Simulate a chain where monomers are twice as likely to align along the x-axis, and calculate the entropy again.</p></li>
 </ul>
+<blockquote>
+<div><p>This assignment will help you understand the statistical mechanics of polymer chains by exploring their conformations, distributions, and entropy. Ensure your simulations are accurate and reflect the theoretical models closely.</p>
+</div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_conf</span><span class="p">(</span><span class="n">n_mon</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_conf</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
@@ -520,6 +536,9 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="in-the-class-we-are-going-to-generalize-this-to-3d-polymer-chains">
+<h1>In the class we are going to generalize this to 3D polymer chains<a class="headerlink" href="#in-the-class-we-are-going-to-generalize-this-to-3d-polymer-chains" title="Permalink to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -567,6 +586,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Conformations of Random Polymer Chains</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#in-the-class-we-are-going-to-generalize-this-to-3d-polymer-chains">In the class we are going to generalize this to 3D polymer chains</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
