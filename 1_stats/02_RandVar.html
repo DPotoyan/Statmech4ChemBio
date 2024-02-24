@@ -521,25 +521,17 @@ document.write(`
 <h2>Sum of Random Variables<a class="headerlink" href="#sum-of-random-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Consider a sequence of <strong>independent and identically distributed (i.i.d.)</strong> random variables, <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span>. Examples include coin tosses, the random displacement of a molecule, or the random placement of a molecule in the left vs. right corner of a box. Being identically distributed means each term has a well-defined <strong>mean</strong> <span class="math notranslate nohighlight">\(\mu\)</span> and <strong>variance</strong> <span class="math notranslate nohighlight">\(\sigma^2\)</span>:</p></li>
+<li><p>The sum of <span class="math notranslate nohighlight">\(n\)</span> random variables, denoted by <span class="math notranslate nohighlight">\(S_n\)</span>, is called a <strong>sample sum</strong>, and average of sum is called a <strong>sample mean</strong>.  Our goal is to understand how these summed or aggregated quantities behave as a function of sample size.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\mu = E(X_1)\]</div>
-<div class="math notranslate nohighlight">
-\[\sigma^2 = V(X_1) = E\left[ (X_1 - E(X_1))^2 \right]\]</div>
-<ul class="simple">
-<li><p>The sum of <span class="math notranslate nohighlight">\(n\)</span> random variables, denoted by <span class="math notranslate nohighlight">\(S_n\)</span>, is termed a <strong>sample sum</strong>, and <span class="math notranslate nohighlight">\(M_n=\frac{1}{n}S_n\)</span> represents a <strong>sample mean</strong>. These summation of random variables quantities are random variables frequently encountered in simulations and data analysis. For instance, consider the difference between the average height of people calculated from a small sample of cities versus that from the entire world population. Our goal is to understand how sums behave as a function of sample size.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[S_n = \sum_{i=1}^n X_i\]</div>
+\[S_n = \sum_{i=1}^n X_i\,\,\,\,\,\,\,\, M_n = \frac{1}{n}\sum_{i=1}^n X_i\]</div>
 <ul class="simple">
 <li><p>Expectation is always a linear operator. Variance in general is not. But for  <strong>i.i.d.</strong> random variables, variance becomes linear operator. To show this we denote mean subtracted random variable as <span class="math notranslate nohighlight">\(Y_i = X_i - \mu\)</span> which  has zero expectation <span class="math notranslate nohighlight">\(E[Y_i] = 0\)</span> Because of the independence of random variables all cross-terms are zero <span class="math notranslate nohighlight">\(E[Y_i Y_j] = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span> and all self-terms <span class="math notranslate nohighlight">\(i=j\)</span> are equal to variance <span class="math notranslate nohighlight">\(E[Y^2_i] = V[X_1]=\sigma^2\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[E(S_n) = \sum_{i=1}^n E(X_i) = n\mu\]</div>
 <div class="math notranslate nohighlight">
-\[\begin{split}V(S_n) = E[(S_n - E[S_n])^2] = E\Big[\Big(\sum^{i=n}_{i=1} X_i-n\mu\Big)^2\Big] =   E\Big[\Big(\sum^{i=n}_{i=1} Y_i\Big)^2\Big]=
-\\
-\\ =\sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = n\sigma^2\end{split}\]</div>
+\[V(S_n) = E[(S_n - E[S_n])^2] =  E\Big[\Big(\sum^{i=n}_{i=1} Y_i\Big)^2\Big]=\sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = n\sigma^2\]</div>
 </section>
 <section id="law-of-large-numbers-lln">
 <h2>Law of Large Numbers (LLN)<a class="headerlink" href="#law-of-large-numbers-lln" title="Permalink to this heading">#</a></h2>
