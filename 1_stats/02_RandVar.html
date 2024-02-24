@@ -532,7 +532,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[S_n = \sum_{i=1}^n X_i\]</div>
 <ul class="simple">
-<li><p>Expectation is always a linear operator. Variance is generally is not a linear operator for  <strong>i.i.d.</strong> random variables, variance also behaves linearly. To show this we denote mean subtracted random variable as <span class="math notranslate nohighlight">\(Y_i = X_i - \mu\)</span> which  has zero expectation <span class="math notranslate nohighlight">\(E[Y_i] = 0\)</span>. Because of independence of random variables all cross-terms  are zero <span class="math notranslate nohighlight">\(E[Y_i Y_j] = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span> and self-terms <span class="math notranslate nohighlight">\(i=j\)</span> are equal to variance <span class="math notranslate nohighlight">\(E[Y^2_i] = V[X_1]=\sigma^2\)</span></p></li>
+<li><p>Expectation is always a linear operator. Variance in general is not. But for  <strong>i.i.d.</strong> random variables, variance becomes linear operator. To show this we denote mean subtracted random variable as <span class="math notranslate nohighlight">\(Y_i = X_i - \mu\)</span> which  has zero expectation <span class="math notranslate nohighlight">\(E[Y_i] = 0\)</span> Because of the independence of random variables all cross-terms are zero <span class="math notranslate nohighlight">\(E[Y_i Y_j] = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span> and all self-terms <span class="math notranslate nohighlight">\(i=j\)</span> are equal to variance <span class="math notranslate nohighlight">\(E[Y^2_i] = V[X_1]=\sigma^2\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[E(S_n) = \sum_{i=1}^n E(X_i) = n\mu\]</div>
@@ -626,24 +626,17 @@ document.write(`
 <section id="the-central-limit-theorem-clt">
 <h2>The Central Limit Theorem  (CLT)<a class="headerlink" href="#the-central-limit-theorem-clt" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Central Limit Theorem</strong> asserts that the probability distribution function or <strong>PDF</strong> of sum of random variables becomes gaussian distribution with mean <span class="math notranslate nohighlight">\(n\mu\)</span> and <span class="math notranslate nohighlight">\(n\sigma^2\)</span></p></li>
+<li><p><strong>Central Limit Theorem</strong> asserts that the probability distribution function or <strong>PDF</strong> of sum of random variables becomes gaussian distribution with mean <span class="math notranslate nohighlight">\(n\mu\)</span> and <span class="math notranslate nohighlight">\(n\sigma^2\)</span>. Note that CLT is based on assumption that the <strong>mean and variance</strong>, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <strong>are finite!</strong>. Thus, CLT does not hold for certain power-law distributed RVs.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S_n = X_1 +X_2+...+X_n \rightarrow N(n\mu, n\sigma^2)\]</div>
 <div class="math notranslate nohighlight">
 \[p(s) = \frac{1}{(2\pi  n\sigma^2)^{1/2}}e^{-\frac{(s-n\mu)^2}{2 n\sigma^2}}\]</div>
 <ul class="simple">
-<li><p>If we standardize random variables by first subtracting the mean and scaling by standard deviation we will end up with standard normal distribution which has <span class="math notranslate nohighlight">\(E[Z]=0\)</span> and <span class="math notranslate nohighlight">\(V[Z_n]=1\)</span></p></li>
+<li><p>If we subtract mean and scale the sample sum by its standard deviation we will get a standard normal distribution $.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[Z_n =  \frac{S_n-E[S_n]}{V[S_n]^{1/2}} = \frac{S_n-n\mu}{n^{1/2}\sigma}\]</div>
-<div class="math notranslate nohighlight">
-\[Z_n = Z_1+Z_2+...+Z_n \rightarrow N(0, 1)\]</div>
-<div class="math notranslate nohighlight">
-\[p(s) = \frac{1}{(2\pi  )^{1/2}}e^{-\frac{z^2}{2}}\]</div>
-<ul class="simple">
-<li><p>Note that CLT is based on assumption that the <strong>mean and variance</strong>, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <strong>are finite</strong>. Thus, CLT does not hold for certain power-law distributed RVs.</p></li>
-</ul>
+\[Z_n = \frac{S_n - n\mu}{\sqrt{n}\sigma} \rightarrow N(0, 1)\]</div>
 </section>
 <section id="simulate-clt">
 <h2>Simulate CLT<a class="headerlink" href="#simulate-clt" title="Permalink to this heading">#</a></h2>
