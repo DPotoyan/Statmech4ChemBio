@@ -467,6 +467,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-and-information">Entropy and Information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-logarithm-of-probability-is-a-good-candidate-function-for-information">A logarithm of probability is a good candidate function for information!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-bit-base-two">Why bit (base two)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shannon-measure-of-information-smi">Shannon  Measure of Information (SMI)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alphabets-are-not-random-hghjxcjxcc">Alphabets are not random! hghjxcjxcc</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-information">Quantifying information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-per-letter-of-english">Information per Letter of English</a></li>
@@ -670,7 +671,7 @@ document.write(`
 </div>
 </div>
 <ul class="simple">
-<li><p>If you flip N fair coins which configuration will correspond to maximum entropy?</p></li>
+<li><p>If you flip N fair coins which configuration (number of heads n out of N) will correspond to maximum entropy?</p></li>
 <li><p>How much information is needed to find out how these coins landed?</p></li>
 </ul>
 <div class="cell docutils container">
@@ -760,14 +761,15 @@ document.write(`
 </section>
 <section id="why-bit-base-two">
 <h2>Why bit (base two)<a class="headerlink" href="#why-bit-base-two" title="Permalink to this heading">#</a></h2>
-<p>Consider symmetric a 1D random walk with equal jump probabilities. We can view <strong>Random walk = string of Yes/No questions</strong></p>
 <ul class="simple">
-<li><p>to decode a single step we need one bit</p></li>
+<li><p>Consider symmetric a 1D random walk with equal jump probabilities. We can view <strong>Random walk = string of Yes/No questions</strong>.</p></li>
+<li><p>Imagine driving to a location how many left/right turn informations you need to reach destination?</p></li>
+<li><p>You gain one bit of information when you are told Yes/No answer</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[I(X=0) = I(X=1) = -log_2 \frac{1}{2} = 1\]</div>
 <ul class="simple">
-<li><p>to decode N step trajectory we need N bits.</p></li>
+<li><p>To decode N step random walk trajectory we need N bits.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[(x_0,x_1,...x_N) = 10111101001010100100\]</div>
@@ -791,22 +793,24 @@ document.write(`
 <img alt="../_images/7f4bdf5563c260e664b158e63c9f46b29cec05eb2551d8fff38daf5791b38b03.png" src="../_images/7f4bdf5563c260e664b158e63c9f46b29cec05eb2551d8fff38daf5791b38b03.png" />
 </div>
 </div>
-<p><strong>How many yes or no on average to reconstruct random walk?</strong></p>
+</section>
+<section id="shannon-measure-of-information-smi">
+<h2>Shannon  Measure of Information (SMI)<a class="headerlink" href="#shannon-measure-of-information-smi" title="Permalink to this heading">#</a></h2>
+<p><strong>Surprise</strong></p>
 <div class="math notranslate nohighlight">
-\[H(X) = \langle -log p(X) \rangle\]</div>
-<p><strong>Shannon  Measure of Information (SMI)</strong></p>
+\[I_i = -log p_i\]</div>
 <div class="math notranslate nohighlight">
 \[H = -\sum_i p_i log p_i\]</div>
+<ul class="simple">
+<li><p>Information is an average of surprise.!!! How surprised are you on average?</p></li>
+<li><p>How many yes or no answers we need to reconstruct random walk.</p></li>
+<li><p>How many yes/no answers to pinpoint weather molecules are in the left vs right side of container</p></li>
+<li><p>How many yes/no answers to pinpoint precise conformation of a polymer</p></li>
+</ul>
 <blockquote>
 <div><p>[To Shanon], You should call it Entropy, for two reasons.
 In the first place you uncertainty function has been used in statistical mechanics under that name.
 In the second place, and more importantly, no one knows what entropy really is, so in a debate you will always have the advantage.” J von Neumann</p>
-</div></blockquote>
-<p><strong>Surprise</strong></p>
-<div class="math notranslate nohighlight">
-\[I_i = -log p_i\]</div>
-<blockquote>
-<div><p>Information is an average of surprise.!!! How surprised are you on average?</p>
 </div></blockquote>
 <p>Information per letter <span class="math notranslate nohighlight">\(I(m)\)</span> to decode the message</p>
 <ul class="simple">
@@ -979,6 +983,7 @@ Maximum Entropy Principle , is to choose the probabilities <span class="math not
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-and-information">Entropy and Information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-logarithm-of-probability-is-a-good-candidate-function-for-information">A logarithm of probability is a good candidate function for information!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-bit-base-two">Why bit (base two)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shannon-measure-of-information-smi">Shannon  Measure of Information (SMI)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alphabets-are-not-random-hghjxcjxcc">Alphabets are not random! hghjxcjxcc</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-information">Quantifying information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-per-letter-of-english">Information per Letter of English</a></li>
