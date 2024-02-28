@@ -463,8 +463,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-science-of-thermodynamics-about">What is the science of thermodynamics about?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-quantities-or-observables-of-interest-in-thermodynamics">What are the quantities or observables of interest in thermodynamics?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensive-vs-intensive-variables">Extensive vs Intensive variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-the-observation-time">Equilibrium and the observation time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-laws-of-thermodynamics">What are the laws of thermodynamics?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundemental-equation-of-thermodynamics">Fundemental equation of thermodynamics</a></li>
@@ -503,43 +502,43 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="review-of-thermodynamics-principles">
 <h1>Review of thermodynamics principles<a class="headerlink" href="#review-of-thermodynamics-principles" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sci</span>
-
-<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">widgets</span>
-<span class="kn">import</span> <span class="nn">holoviews</span> <span class="k">as</span> <span class="nn">hv</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
-</div>
-<section id="what-is-the-science-of-thermodynamics-about">
-<h2>What is the science of thermodynamics about?<a class="headerlink" href="#what-is-the-science-of-thermodynamics-about" title="Permalink to this heading">#</a></h2>
+<div class="admonition-what-you-need-to-know admonition">
+<p class="admonition-title">What you need to know</p>
 <ul class="simple">
-<li><p>Thermodynamics is a <strong>phenomoneological</strong> theory describing changes of matter in equilibrium.</p></li>
-<li><p>Phenomoneological means that the macroscopic phenomena are descibred terms of few quanitites which can be observed and measured by macroscopic devices without any refernce to microscopic details.</p></li>
+<li><p>Thermodynamics is an exact <strong>phenomenological theory</strong> describing changes in material systems in <strong>equilibrium</strong>. Phenomenological means that the macroscopic phenomena are defined in terms of a few quantities that can be observed and measured by macroscopic devices without any reference to microscopic details.</p></li>
+<li><p>Changes can be induced by the removal of various constraints, such as removing lids, turning on/off the electric field, poking holes in containers, removing thermal insulation, stretching polymers with an applied force, etc</p></li>
+<li><p>Thermodynamics provides ways of calculating changes of state variables between equilibrium states A and B, which system transitions after removing a constraint.</p></li>
+<li><p>Furthermore, thermodynamics can predict whether state B can be reached spontaneously or one has to perform work to arrive at state B.</p></li>
+<li><p>Transformation of states is seen through the changes of thermodynamic variables in thermodynamics space. For instance, change in energy as a function of volume, number of molecules, and temperature.</p></li>
+<li><p><strong>Extensive variables</strong> (additive quantities like energy, volume, and number of moles) completely define thermodynamic space. <strong>Intensive variables</strong> (temperature, pressure, magnetic field) can be derived from extensive ones, providing a convenient way of describing the system under constant external conditions.</p></li>
+<li><p>Thermodynamics is built upon four fundamental laws. The first and second laws define the principles with which one can characterize equilibrium states and transformations between them.</p></li>
+<li><p>The first law is a statement about the conservation of energy.</p></li>
+<li><p>The second law defines the direction of change of a process, that is, whether the process will proceed spontaneously. The second law implies that the thermodynamic space is foliated into adiabats equal to constant entropy.
+Surfaces.</p></li>
+<li><p><strong>Thermodynamic potentials</strong> (Gibbs free energy, Helmholtz free energy, enthalpy) help analyze systems under different conditions (constant temperature, constant pressure, etc.)</p></li>
 </ul>
-</section>
-<section id="what-are-the-quantities-or-observables-of-interest-in-thermodynamics">
-<h2>What are the quantities or observables of interest in thermodynamics?<a class="headerlink" href="#what-are-the-quantities-or-observables-of-interest-in-thermodynamics" title="Permalink to this heading">#</a></h2>
+</div>
+<section id="extensive-vs-intensive-variables">
+<h2>Extensive vs Intensive variables<a class="headerlink" href="#extensive-vs-intensive-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The variables one deals in thermodynamics can be classifeid as <strong>extensive</strong> and <strong>intensive</strong>.</p></li>
-<li><p>Former depends on the size of system  the latter is size independent.</p></li>
-<li><p><strong>Extensive variables</strong> are a priviledges set of variables which uniquely define the equilibrium sates. Examples are <span class="math notranslate nohighlight">\(V, N, E, S\)</span>.</p></li>
+<li><p>The variables one deals in thermodynamics can be classifeid as <strong>extensive</strong> and <strong>intensive</strong>. The former depends on the size of the system, and the latter is size-independent.</p>
+<ul>
+<li><p><strong>Extensive variables</strong> are privileged variables that uniquely define the equilibrium states. Examples are <span class="math notranslate nohighlight">\(V, N, E, S\)</span>.</p></li>
 <li><p><strong>Intensive variables</strong> are derived from extensive ones and are conjugate pairs to extensive ones. E.g <span class="math notranslate nohighlight">\(V-P\)</span>, <span class="math notranslate nohighlight">\(S-T\)</span>, <span class="math notranslate nohighlight">\(N-\mu\)</span> are conjugate pairs. Examples are temperature, pressure, magnetic field, etc.</p></li>
-<li><p>Intensive variables do not have the same fundemntal status of extenisve variables. Why? Because they do not always uniquely describe the state of matter in equilibrium.</p></li>
-<li><p>Example: A glass of water with and without ice cube can both be under 1 atm and 0 C whereas values of energy, entropy volume will be different.</p></li>
-<li><p>Conjugate means one can replace an extensive variables by its intensive conjugate pair in a thermodynamic function. For instance replace sets of volume vs temperature curves under constant pressure with sets of pressue vs temperature under constant volume.</p></li>
 </ul>
-<p><strong>Extensivity and addititivty of Energy E</strong></p>
+</li>
+</ul>
+<p><strong>Extensivity and additivity of Energy E</strong></p>
 <ul class="simple">
-<li><p>For volume it may be straightforward. But why is Energy an extensive quantity <span class="math notranslate nohighlight">\(E= E_1 + E_2\)</span> for a system with N number of interacting particles?</p></li>
+<li><p>For volume, it may be straightforward. But why is Energy an extensive quantity <span class="math notranslate nohighlight">\(E= E_1 + E_2\)</span> for a system with N interacting particles?</p></li>
 <li><p>The additivity of energy can hold if we assumed pairwise interactions between particles with interacting potential decaying with distance faster than the <span class="math notranslate nohighlight">\(r^{-3}\)</span> in 3D.</p></li>
 <li><p>Make a plot of some classical pair potentials like Lennard Jones potential <span class="math notranslate nohighlight">\(U = 4 \epsilon ((\sigma/r)^{12} - (\sigma/r)^6)\)</span> to compare with <span class="math notranslate nohighlight">\(r^{-3}\)</span>.</p></li>
+</ul>
+<p><strong>Intensive variables are derived from the extensive ones</strong></p>
+<ul class="simple">
+<li><p>Intensive variables do not have the same fundamental status as extensive variables. Why? Because they do not always uniquely describe the state of matter in equilibrium.</p></li>
+<li><p>Example: A glass of water with and without an ice cube can be under 1 atm and 0 C, whereas energy and entropy volume values will be different.</p></li>
+<li><p>Conjugate means one can replace extensive variables by its intensive conjugate pair in a thermodynamic function. For instance replace sets of volume vs temperature curves under constant pressure with sets of pressue vs temperature under constant volume.</p></li>
 </ul>
 </section>
 <section id="equilibrium-and-the-observation-time">
@@ -924,8 +923,7 @@ $<span class="math notranslate nohighlight">\(X = \frac{U_A}{U_A + U_B}\)</span>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-science-of-thermodynamics-about">What is the science of thermodynamics about?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-quantities-or-observables-of-interest-in-thermodynamics">What are the quantities or observables of interest in thermodynamics?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensive-vs-intensive-variables">Extensive vs Intensive variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-the-observation-time">Equilibrium and the observation time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-laws-of-thermodynamics">What are the laws of thermodynamics?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundemental-equation-of-thermodynamics">Fundemental equation of thermodynamics</a></li>
