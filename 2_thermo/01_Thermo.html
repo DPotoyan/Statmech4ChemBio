@@ -466,8 +466,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensive-vs-intensive-variables">Extensive vs Intensive variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-the-observation-time">Equilibrium and the observation time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equation-of-thermodynamics">Fundamental equation of thermodynamics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#irreversibility">Irreversibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-the-second-law-and-entropy">More on the second law and Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#irreversibility-emerges-from-large-n">Irreversibility emerges from large N</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#need-for-an-extensive-variable-called-entropy-s">Need for an extensive variable called entropy S</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-law">First Law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-law">Second Law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs relation</a></li>
@@ -476,11 +476,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms">Free Energies and Legendre transforms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equations">Fundamental equations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-notions-of-thermodynamics">Basic notions of thermodynamics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-a-gas-into-vacuum">Expansion of a gas into vacuum</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-changes">Entropy changes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transforms">Legendre transforms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-derivatives">Manipulating derivatives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-gas-into-the-vacuum">Expansion of gas into the vacuum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-mixing-two-gases">Entropy of mixing two gases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-heating">Entropy of heating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transforms-and-free-energy-calculations">Legendre transforms and free energy calculations</a></li>
 </ul>
 </li>
 </ul>
@@ -515,9 +514,12 @@ Surfaces.</p></li>
 <section id="extensive-vs-intensive-variables">
 <h2>Extensive vs Intensive variables<a class="headerlink" href="#extensive-vs-intensive-variables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>In thermodynamics, there are two kinds of variables: <strong>extensive</strong> and <strong>intensive</strong>. The former depends on the size of the system, and the latter is size-independent.</p></li>
+<li><p>In thermodynamics, there are two kinds of variables: <strong>extensive</strong> and <strong>intensive</strong>. The former depends on the size of the system, and the latter is size-independent.</p>
+<ul>
 <li><p><strong>Extensive variables</strong> are privileged variables that uniquely define the equilibrium states. Examples are <span class="math notranslate nohighlight">\(V, N, E, S\)</span>.</p></li>
 <li><p><strong>Intensive variables</strong> are derived from extensive ones and are considered as conjugate pairs to extensive ones. E.g <span class="math notranslate nohighlight">\(V-P\)</span>, <span class="math notranslate nohighlight">\(N-\mu\)</span> and <span class="math notranslate nohighlight">\(S-T\)</span>, are conjugate pairs.</p></li>
+</ul>
+</li>
 </ul>
 <p><strong>Intensive variables do not have the same fundamental status as extensive variables</strong></p>
 <ul class="simple">
@@ -539,18 +541,15 @@ Surfaces.</p></li>
 <section id="fundamental-equation-of-thermodynamics">
 <h2>Fundamental equation of thermodynamics<a class="headerlink" href="#fundamental-equation-of-thermodynamics" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Fundmanetal equation</strong> in thermodynamics is the equation that binds together all of the extensive variables, e.g., <span class="math notranslate nohighlight">\(E(U,V,S,N_1, N_2, ...)\)</span>.</p></li>
-</ul>
-<p>The state of equilibrium is completely defined by the fundamental equation as a point in the space of thermodynamic coordinates: <span class="math notranslate nohighlight">\(E, V, N, S\)</span>. These coordinates have <strong>unique</strong> and well-defined values for each equilibrium state irrespective to how such state was created.  Whether through the violent non-equilibrium process or calm quasi-static sequence of equilibrium states. This is why the functions of extensive variables <span class="math notranslate nohighlight">\(E(S,V,N)\)</span> or <span class="math notranslate nohighlight">\(S(E,V,N)\)</span> are called <strong>state functions</strong>, and their changes are given by differences between initial or final state only <span class="math notranslate nohighlight">\(\Delta E =E_f -E_i\)</span>, <span class="math notranslate nohighlight">\(\Delta S =S_f -S_i\)</span>. On the other hand, the work <span class="math notranslate nohighlight">\(W\)</span> or heat <span class="math notranslate nohighlight">\(Q\)</span> are process dependent, characterizing the way energy is transferred to the system and not characterizing equilibrium states itself.</p>
-<ul class="simple">
+<li><p><strong>Fundmanetal equation</strong> in thermodynamics is the equation that binds together all of the extensive variables, e.g., <span class="math notranslate nohighlight">\(E(U,V,S,N_1, N_2, ...)\)</span>. The state of equilibrium is completely defined by the fundamental equation as a point in the space of thermodynamic coordinates: <span class="math notranslate nohighlight">\(E, V, N, S\)</span>. These coordinates have <strong>unique</strong> and well-defined values for each equilibrium state irrespective to how such state was created.  Whether through the violent non-equilibrium process or calm quasi-static sequence of equilibrium states. This is why the functions of extensive variables <span class="math notranslate nohighlight">\(E(S,V,N)\)</span> or <span class="math notranslate nohighlight">\(S(E,V,N)\)</span> are called <strong>state functions</strong>, and their changes are given by differences between initial or final state only <span class="math notranslate nohighlight">\(\Delta E =E_f -E_i\)</span>, <span class="math notranslate nohighlight">\(\Delta S =S_f -S_i\)</span>. On the other hand, the work <span class="math notranslate nohighlight">\(W\)</span> or heat <span class="math notranslate nohighlight">\(Q\)</span> are process dependent, characterizing the way energy is transferred to the system and not characterizing equilibrium states itself.</p></li>
 <li><p><strong>Transformations between equilibrium states</strong> is the central task of thermodynamics. Knowing the fundamental equation, one can predict the equilibrium state B, which results from equilibrium state A through spontaneous transformation upon removal of a <strong>constraint.</strong>  E.g computing <span class="math notranslate nohighlight">\(\Delta E = E_B - E_A\)</span> given expansion of a box.</p></li>
 <li><p><strong>Quasi-static path: a dense succession of equilibrium states</strong> that connects A with B in extensive variables is constructed to compute changes in thermodynamic variables between states A and B. This equilibrium path is quasistatic to ensure the system does not deviate from the equilibrium state during transformation. The quasistatic path can also be reversible when the path from B to A can be re-traced with zero change in the universe while the system remains in equilibrium. This necessitates the introduction of Entropy, which differentiates reversible from non-reversible changes.</p></li>
-<li><p><strong>Reversible transformations</strong> Thermodynamic space is folliated into non-corssing <strong>adiabats</strong>. These adiabats are planes on which the system can be transformed reversibly.  The only way to “jump” from one adiabat to another is by heating or cooling the system, e.g., transfer of heat.</p></li>
+<li><p><strong>Reversible transformations can go in either direction without any change in the environment</strong> Quasistatic paths may correspond to irreversible or reversible transformations! Just because the process is infinitely slow and locally in equilibrium does not make it reversible. For instance, poking a small hole in a container and letting one molecule out very slowly does not make the process reversible. This motivates us to introduce a quantity called entropy, the change of which will tell us whether the process is reversible or not.</p></li>
 </ul>
 <a class="bg-primary reference internal image-reference" href="../_images/adiabat.png"><img alt="../_images/adiabat.png" class="bg-primary" src="../_images/adiabat.png" style="width: 400px;" /></a>
 </section>
-<section id="irreversibility">
-<h2>Irreversibility<a class="headerlink" href="#irreversibility" title="Permalink to this heading">#</a></h2>
+<section id="irreversibility-emerges-from-large-n">
+<h2>Irreversibility emerges from large N<a class="headerlink" href="#irreversibility-emerges-from-large-n" title="Permalink to this heading">#</a></h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Poincar%C3%A9_recurrence_theorem">Poincarre recurrence theorem</a></p>
 <ul class="simple">
 <li><p>If you play bridge long enough you will eventually be dealt any grand-slam hand, not once but several times. A similar thing is true for mechanical systems governed by Newton’s laws, as the French mathematician Henri Poincare (1854-1912) showed with his recurrence theorem in 1890: if the system has a fixed total energy that restricts its dynamics to bounded subsets of its phase space, the system will eventually return as closely as you like to any given initial set of molecular positions and velocities. If the entropy is determined by these variables, then it must also return to its original value, so if it increases during one period of time it must decrease during another.</p></li>
@@ -561,19 +560,21 @@ Surfaces.</p></li>
 <li><p>Boltzman is right for large systems becasue a likelihhood of recurrence for macrosystem happening is beyond the lifetime of a universie. Case closed.</p></li>
 </ul>
 </section>
-<section id="more-on-the-second-law-and-entropy">
-<h2>More on the second law and Entropy<a class="headerlink" href="#more-on-the-second-law-and-entropy" title="Permalink to this heading">#</a></h2>
+<section id="need-for-an-extensive-variable-called-entropy-s">
+<h2>Need for an extensive variable called entropy S<a class="headerlink" href="#need-for-an-extensive-variable-called-entropy-s" title="Permalink to this heading">#</a></h2>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/plank.png"><img alt="../_images/plank.png" class="bg-primary mb-1" src="../_images/plank.png" style="width: 400px;" /></a>
 <ul class="simple">
-<li><p><strong>Planck’s formulation of 2nd Law:</strong> For any adiabatic process with all the work coordinates returning to
-their original values <span class="math notranslate nohighlight">\(\Delta E \geq 0\)</span> ” M Plank</p></li>
-<li><p>In other words doing pure mechanical work on insulated(read adiabatic) system with no net change in mechanical variables results in energy either going up or remaining unchanged <span class="math notranslate nohighlight">\(\Delta E \geq 0\)</span>.  Thus we can not through mechanical work “steal” energy away from closed system wihtout any other change in the environment.</p></li>
-<li><p>Thermodynamic space is made up of non-crossing adiabats.</p></li>
+<li><p>Turns out that in thermodynamic space, not all paths are possible; one can not reach from A to B. This implies the existence of some law and perhaps a new variable that can quantify when transitions are permissible and when not.</p></li>
+<li><p><strong>Planck’s formulation of 2nd Law:</strong> For any adiabatic process where all of the work coordinates return to
+the original energy of a thermally isolated system, it can not decrease! Intuitively, this just means that we can only impart some energy to the system when doing pure mechanical work on the system because of friction or dissipation. Put another way by through mechanical work, “steal” energy away from a closed system without any other environmental change.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Delta E \geq 0\]</div>
+<ul class="simple">
+<li><p>This restriction means surfaces (or lines) corresponding to adiabatic changes can not intersect. Because if they do, then one can design a cyclic mechanical process to decrease the energy. It would also be physically nonsensical for the intersection point to have two different forces (energy derivatives) for the same coordinates!</p></li>
+<li><p>Thus, thermodynamic space is made up of non-crossing adiabats. This naturally leads to a quantity that characterizes the adiabats as a function of energy <span class="math notranslate nohighlight">\(S(E)\)</span> and which stays constant on adiabats.</p></li>
 </ul>
 <a class="bg-primary reference internal image-reference" href="../_images/Adiabats.png"><img alt="../_images/Adiabats.png" class="bg-primary" src="../_images/Adiabats.png" style="width: 300px;" /></a>
-<ul class="simple">
-<li><p><strong>Adiabats never cross becasue that would violate the second law. Also crossing implies existence of different forces for the same thermodynamic state which is physically implausible</strong></p></li>
-</ul>
 <a class="bg-primary reference internal image-reference" href="../_images/NO1.png"><img alt="../_images/NO1.png" class="bg-primary" src="../_images/NO1.png" style="width: 200px;" /></a>
 <a class="bg-primary reference internal image-reference" href="../_images/NO2.png"><img alt="../_images/NO2.png" class="bg-primary" src="../_images/NO2.png" style="width: 200px;" /></a>
 </section>
@@ -626,22 +627,17 @@ Solution<div class="sd-summary-down docutils">
 </section>
 <section id="gibbs-relation">
 <h2>Gibbs relation<a class="headerlink" href="#gibbs-relation" title="Permalink to this heading">#</a></h2>
-<p>Given the energy as a function of extensive variables <span class="math notranslate nohighlight">\(E(S,V,N)\)</span> we can write down its full differntial.</p>
+<p>Given the energy as a function of extensive variables <span class="math notranslate nohighlight">\(E(S,V,N)\)</span>, we can write down its full differential.</p>
 <div class="math notranslate nohighlight">
 \[dE = \Big(\frac{\partial E}{\partial S} \Big)_{V,N}dS+ \Big(\frac{\partial E}{\partial V} \Big)_{S,N}dV+\Big(\frac{\partial E}{\partial N} \Big)_{S,V}dN\]</div>
-<p>We identify <strong>intensive variables</strong> conjugate to extenive variables:</p>
-<ul>
-<li><div class="math notranslate nohighlight">
+<p>We identify <strong>intensive variables</strong> conjugate to extensive variables:</p>
+<div class="math notranslate nohighlight">
 \[T = \Big(\frac{\partial E}{\partial S} \Big)_{V,N}\]</div>
-</li>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[P = \Big(\frac{\partial E}{\partial V} \Big)_{S,N}\]</div>
-</li>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[\mu = \Big(\frac{\partial E}{\partial N} \Big)_{S,V}\]</div>
-</li>
-</ul>
-<p>This is known as <strong>Gibbs relation</strong> in Thermodynamics and is a starting point for thermodynamic calculations</p>
+<p>This is known as <strong>Gibbs relation</strong> in Thermodynamics and is a starting point for thermodynamic calculations.</p>
 <div class="math notranslate nohighlight">
 \[\boxed{dE=  TdS - pdV +\mu dN}\]</div>
 <div class="admonition-example admonition">
@@ -692,41 +688,35 @@ Solution<div class="sd-summary-down docutils">
 </section>
 <section id="gibbs-duhem-relation">
 <h2>Gibbs Duhem relation<a class="headerlink" href="#gibbs-duhem-relation" title="Permalink to this heading">#</a></h2>
-<p>Extensivity proeprty implies linear scaling with respect to extensive variables. In other words extensive variables are additive quantities</p>
+<p>The extensivity property implies linear scaling with respect to extensive variables. In other words, extensive variables are additive quantities.</p>
 <div class="math notranslate nohighlight">
 \[E(\lambda S,\lambda V,\lambda N) = \lambda E(S,V,N)\]</div>
 <div class="math notranslate nohighlight">
 \[E = \Big(\frac{\partial E}{\partial \lambda S} \Big)_{V,N}S+ \Big(\frac{\partial E}{\partial  \lambda V} \Big)_{S,N}V+\Big(\frac{\partial E}{\partial  \lambda N} \Big)_{S,V}N\]</div>
 <div class="math notranslate nohighlight">
 \[E = TS -PV +\mu N\]</div>
-<p>Now take derivative of E and compare with Gibbs relation</p>
+<p>Now when we take the derivative of E and compare with Gibbs relation we end up with equation where independent variables are now intensive ones</p>
 <div class="math notranslate nohighlight">
 \[\boxed{SdT-VdP+Nd\mu =0}\]</div>
 </section>
 <section id="second-order-thermodynamic-quantities">
 <h2>Second order thermodynamic quantities<a class="headerlink" href="#second-order-thermodynamic-quantities" title="Permalink to this heading">#</a></h2>
-<p><strong>Heat capacities at constnat P and V.</strong></p>
-<div class="math notranslate nohighlight">
-\[C_p = \Big(\frac{d Q}{dT} \Big)_{p,N}\]</div>
+<p><strong><span class="math notranslate nohighlight">\(C_v\)</span> and <span class="math notranslate nohighlight">\(C_p\)</span>: Heat capacities at constant V and P.</strong></p>
 <div class="math notranslate nohighlight">
 \[C_v = \Big(\frac{d Q}{dT} \Big)_{v,N}\]</div>
-<blockquote>
-<div><p>Thermal stability requires <span class="math notranslate nohighlight">\(c_v,c_p\geq 0\)</span></p>
-</div></blockquote>
-<p><strong>Expansion and compression coefficients.</strong></p>
+<div class="math notranslate nohighlight">
+\[C_p = \Big(\frac{d Q}{dT} \Big)_{p,N}\]</div>
 <ul class="simple">
-<li><p>Thermal expansion coefficient</p></li>
+<li><p>Thermal stability requires <span class="math notranslate nohighlight">\(c_v,c_p\geq 0\)</span></p></li>
 </ul>
+<p><strong><span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\kappa_T\)</span>: Thermal expansion and isothermal compression coefficients.</strong></p>
 <div class="math notranslate nohighlight">
 \[\alpha  = \frac{1}{V}\Big(\frac{d V}{dT} \Big)_{p,N}\]</div>
-<ul class="simple">
-<li><p>Isothermal compressibility coeff:</p></li>
-</ul>
 <div class="math notranslate nohighlight">
 \[\kappa_T  = -\frac{1}{V}\Big(\frac{d V}{dP} \Big)_{T,N}\]</div>
-<blockquote>
-<div><p>Mechanical stability requires <span class="math notranslate nohighlight">\(\kappa_T\geq 0\)</span></p>
-</div></blockquote>
+<ul class="simple">
+<li><p>Mechanical stability requires <span class="math notranslate nohighlight">\(\kappa_T\geq 0\)</span></p></li>
+</ul>
 </section>
 <section id="free-energies-and-legendre-transforms">
 <h2>Free Energies and Legendre transforms<a class="headerlink" href="#free-energies-and-legendre-transforms" title="Permalink to this heading">#</a></h2>
@@ -771,12 +761,41 @@ Solution<div class="sd-summary-down docutils">
 \[dG = dE -d(TS) + d(pV) = dE - TdS - SdT + pdV + Vdp\]</div>
 <div class="math notranslate nohighlight">
 \[dG = -SdT + Vdp + \mu dN\]</div>
-</section>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<strong>Review of thermo concenpts</strong><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ol class="arabic simple">
+<li><p class="sd-card-text">Give an example of a process in which a system is not heated, but its temperature increases. Also give an example of a process in which a system is heated, but its temperature is unchanged.</p></li>
+<li><p class="sd-card-text">Which states are in an equilibrium state, a time-dependent non-equilibrium state, or a time-independent but still non-equilibrium state (e.g., steady state)? Explain your reasoning. Sometimes, the state is not a true steady or equilibrium state but close to one. Discuss how it can be treated as a steady or equilibrium state.</p>
+<ul class="simple">
+<li><p class="sd-card-text">a cup of hot tea, sitting on the table while cooling down</p></li>
+<li><p class="sd-card-text">the wine in a bottle that is stored in a wine cellar</p></li>
+<li><p class="sd-card-text">the sun</p></li>
+<li><p class="sd-card-text">the atmosphere of the earth</p></li>
+<li><p class="sd-card-text">electrons in the wiring of a flashlight switched off</p></li>
+<li><p class="sd-card-text">electrons in the wiring of a flashlight switched on</p></li>
+</ul>
+</li>
+<li><p class="sd-card-text">What is meant by a constraint in thermodynamics, and why must its removal always lead to increased entropy?</p></li>
+<li><p class="sd-card-text">What is a quasi-static process in thermodynamics, and how is this idealization used for computing changes in thermodynamic variables?</p></li>
+<li><p class="sd-card-text">What is the difference between the fundamental equation in thermodynamics <span class="math notranslate nohighlight">\(S(E,V,N)=\)</span> vs. state equation <span class="math notranslate nohighlight">\(P(V,N,T)\)</span> e.g., like <span class="math notranslate nohighlight">\(PV=NRT\)</span> for ideal gas?</p></li>
+<li><p class="sd-card-text">Why during a spontaneous transformation of systems entropy tend to its maximum value? This is why we use entropy maximization as a powerful tool to predict the final equilibrium states.</p></li>
+<li><p class="sd-card-text">Why do we introduce Free energies of various kinds? Explain why free energy minimization is equivalent of total entropy maximization.</p></li>
+<li><p class="sd-card-text">Can part of the entropy of a part of a total system decrease? Give some examples.</p></li>
+<li><p class="sd-card-text">Does the entropy change depend on the path between two equilibrium states?</p></li>
+<li><p class="sd-card-text">How is the adiabatic process different from the quasistatic and reversible process?</p></li>
+</ol>
+</div>
+</details></section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
 <section id="fundamental-equations">
 <h3>Fundamental equations<a class="headerlink" href="#fundamental-equations" title="Permalink to this heading">#</a></h3>
-<p>The following ten equations are purported to be fundamental equations for various thermodynamic systems. Five, however, are inconsisent with the basic postulates of a fundamental equation and are thus unphysical.  For each, plot the relationship between <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(U\)</span> and identify the five that are unacceptable. <span class="math notranslate nohighlight">\(v_0\)</span>, <span class="math notranslate nohighlight">\(\theta\)</span>, and <span class="math notranslate nohighlight">\(R\)</span> are all positive constants and, in the case of fractional exponents, the real positive root is to be implied.</p>
+<p>The following ten equations are purported to be fundamental equations for various thermodynamic systems. Five, however, are inconsistent with the basic postulates of a fundamental equation and are thus unphysical.  For each, plot the relationship between <span class="math notranslate nohighlight">\(S\)</span> and <span class="math notranslate nohighlight">\(U\)</span> and identify the unacceptable five. <span class="math notranslate nohighlight">\(v_0\)</span>, <span class="math notranslate nohighlight">\(\theta\)</span>, and <span class="math notranslate nohighlight">\(R\)</span> are all positive constants and, in the case of fractional exponents, the real positive root is to be implied.</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\ S = \left ( \frac{R^2}{v_0\theta} \right )^{1/3}\left ( NVU \right
 )^{1/3}\)</span></p></li>
@@ -792,68 +811,41 @@ Solution<div class="sd-summary-down docutils">
 <li><p><span class="math notranslate nohighlight">\(U = \left ( \frac{v_0\theta}{R} \right ) \frac{S^2}{V} \exp\left ( S/NR \right)\)</span></p></li>
 </ol>
 </section>
-<section id="basic-notions-of-thermodynamics">
-<h3>Basic notions of thermodynamics<a class="headerlink" href="#basic-notions-of-thermodynamics" title="Permalink to this heading">#</a></h3>
+<section id="expansion-of-gas-into-the-vacuum">
+<h3>Expansion of gas into the vacuum<a class="headerlink" href="#expansion-of-gas-into-the-vacuum" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>Give an example of a process in which a system is not heated, but its temperature increases. Also give an example of a process in which a system is heated, but its temperature is unchanged.</p></li>
-<li><p>Which states are in an equilibrium state, a time dependent non-equilibrium state, or time independent but still non-equilibrium state (e.g steady stae). Explain your reasoning. In some cases, the state is not a true steady or equilibrium state but close to one. Discuss under what conditions it can be treated as a steady or equilibrium state.</p>
+<li><p>As a general case of gas expanding into the vacuum, use the Gibbs relation for <span class="math notranslate nohighlight">\(E\)</span> to show that <span class="math notranslate nohighlight">\(\Big(\frac{\partial S}{\partial V}\Big)_E&gt;0\)</span> this would show that free adiabatic expansion is accompanied by entropy increase and is hence and irreversible process.</p></li>
+<li><p>Now consider a gas in container energy described by the following equation <span class="math notranslate nohighlight">\(E = 3/2NkT −N^2 V/a\)</span></p>
 <ul class="simple">
-<li><p>a cup of hot tea, sitting on the table while cooling down</p></li>
-<li><p>the wine in a bottle that is stored in a wine cellar</p></li>
-<li><p>the sun</p></li>
-<li><p>the atmosphere of the earth</p></li>
-<li><p>electrons in the wiring of a flashlight switched off</p></li>
-<li><p>electrons in the wiring of a flashlight switched on</p></li>
+<li><p>Plot E as a function of V for a few temperatures.</p></li>
+<li><p>Suppose that a gas expands adiabatically into a vacuum. How will the energy and entropy of the system change, and what is the work done by the gas?</p></li>
+<li><p>Initially, the gas occupies a volume <span class="math notranslate nohighlight">\(V_1\)</span> at a temperature <span class="math notranslate nohighlight">\(T_1\)</span>. The gas then expands adiabatically into a vacuum to occupy a total volume <span class="math notranslate nohighlight">\(V_2\)</span>. What is the final temperature <span class="math notranslate nohighlight">\(T_2\)</span> of the gas?</p></li>
 </ul>
 </li>
-<li><p>What is meant by a constraint in thermodynamics and why its removal must always lead to increase of entropy?</p></li>
-<li><p>What is meant by a quasi-static process in thermodynamics and how this idealization is used for computing changes in thermodynamic variables?</p></li>
-<li><p>What is the difference between fundemtnal equation in thermodyamics <span class="math notranslate nohighlight">\(S(E,V,N)=\)</span> vs state equation <span class="math notranslate nohighlight">\(P(V,N,T)\)</span> e.g like <span class="math notranslate nohighlight">\(PV=NRT\)</span> for ideal gas.</p></li>
-<li><p>Why during a spotneous transofrmation of systems  entropy tend to its maximum value. This is the reason why we use entropy maximization as a powerful tool to predict the final equilibrium states.</p></li>
-<li><p>Why do we introduce Free energies of various kinds? Explain why free energy minimization is equivalent of total entropy maximization.</p></li>
-<li><p>Can part of the entropy of a part of a total system decrease? Give some exmaples.</p></li>
-<li><p>Does the change of the entropy depend on the path between two equilibrium states?</p></li>
-<li><p>How is adiabatic process different from quasistatic and reversible process?</p></li>
 </ol>
 </section>
-<section id="expansion-of-a-gas-into-vacuum">
-<h3>Expansion of a gas into vacuum<a class="headerlink" href="#expansion-of-a-gas-into-vacuum" title="Permalink to this heading">#</a></h3>
+<section id="entropy-of-mixing-two-gases">
+<h3>Entropy of mixing two gases<a class="headerlink" href="#entropy-of-mixing-two-gases" title="Permalink to this heading">#</a></h3>
+<p>Using the expression for an ideal gas <span class="math notranslate nohighlight">\(S=Nk_B log \frac{V}{N}\)</span>, calculate the entropy change resulting after removing a divider separating <span class="math notranslate nohighlight">\(N_A\)</span> molecules of gas A occupying Volume <span class="math notranslate nohighlight">\(V_A\)</span> from <span class="math notranslate nohighlight">\(N_B\)</span> molecules of gas B occupying volume <span class="math notranslate nohighlight">\(V_B\)</span>.</p>
+<p><em>Hints</em></p>
 <ul class="simple">
-<li><p>Suppose that a gas expands adiabatically into a vacuum. What is the work done by the gas?</p></li>
-<li><p>Suppose that the total energy of the gas is given by</p></li>
+<li><p>The system overall is thermally insulated and pressure and temperatures are constant; hence, numbers and volumes are proportional <span class="math notranslate nohighlight">\(N_A \sim V_A\)</span> so you can express entropy change entirely in terms of molar numbers or their fractions <span class="math notranslate nohighlight">\(x_A = N_A/(N_A+N_B)\)</span></p></li>
+<li><p>You need to first calculate the entropy change due to gas A expanding from volume <span class="math notranslate nohighlight">\(V_A\)</span> to volume <span class="math notranslate nohighlight">\(V=V_A+V_B\)</span> and the same for gas B. the total entropy change will be the sum of these two changes.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[E = 3/2NkT −N^2 V/a\]</div>
-<p>Initially the gas occupies a volume <span class="math notranslate nohighlight">\(V_1\)</span> at a temperature <span class="math notranslate nohighlight">\(T_1\)</span>. The gas then expands adiabatically into a vacuum so that it occupies a total volume <span class="math notranslate nohighlight">\(V_2\)</span>. What is the final temperature <span class="math notranslate nohighlight">\(T_2\)</span> of the gas?</p>
 </section>
-<section id="entropy-changes">
-<h3>Entropy changes<a class="headerlink" href="#entropy-changes" title="Permalink to this heading">#</a></h3>
+<section id="entropy-of-heating">
+<h3>Entropy of heating<a class="headerlink" href="#entropy-of-heating" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
-<li><p>kg of water (specific heat = 4.2 kJ/(kg·K)) at <span class="math notranslate nohighlight">\(0 ^oC\)</span> is in contact with a <span class="math notranslate nohighlight">\(50 ^oC\)</span> heat bath, and eventually reaches <span class="math notranslate nohighlight">\(50 ^oC\)</span>. What is the entropy change of the water? What is the increase of the entropy of this water plus the heat bath?</p></li>
-<li><p>Instead of (1) first the water at <span class="math notranslate nohighlight">\(0 ^oC\)</span> is in contact with a <span class="math notranslate nohighlight">\(25 ^oC\)</span> heat bath. Then, after reaching thermal equilibrium, the water is in contact with a <span class="math notranslate nohighlight">\(50 ^oC\)</span> heat bath to reach the final temperature <span class="math notranslate nohighlight">\(50 ^oC\)</span> as in (1). What is the increase of the entropy of the water plus the two heat baths?</p></li>
-<li><p>Show that in the two-step heating process whatever the first heat bath temperature T is between <span class="math notranslate nohighlight">\(0^oC\)</span> and <span class="math notranslate nohighlight">\(50^oC\)</span>, the total change of entropy of the water plus heat baths is less than the case of (1)</p></li>
+<li><p>1 kg of water (specific heat = 4.2 kJ/(kg·K)) at <span class="math notranslate nohighlight">\(0 ^oC\)</span> is in contact with a <span class="math notranslate nohighlight">\(50 ^oC\)</span> heat bath, and eventually reaches <span class="math notranslate nohighlight">\(50 ^oC\)</span>. What is the entropy change of the water? What is the increase of the entropy of this water plus the heat bath?</p></li>
+<li><p>Imagine now that the water at <span class="math notranslate nohighlight">\(0 ^oC\)</span> is in contact with a <span class="math notranslate nohighlight">\(25 ^oC\)</span> heat bath. Then, after reaching thermal equilibrium, the water is subsequently put in contact with a <span class="math notranslate nohighlight">\(50 ^oC\)</span> heat bath until it reaches the final temperature <span class="math notranslate nohighlight">\(50 ^oC\)</span>. What is the increase of the entropy of the water after it has been put in contact with two heat baths? Compare the answer to the case of (1)</p></li>
+<li><p>Show that in the two-step heating process, whatever the first heat bath temperature T is between <span class="math notranslate nohighlight">\(0^oC\)</span> and <span class="math notranslate nohighlight">\(50^oC\)</span>, the total change of entropy of the water plus heat baths is less than the case of (1)</p></li>
 </ol>
 </section>
-<section id="legendre-transforms">
-<h3>Legendre transforms<a class="headerlink" href="#legendre-transforms" title="Permalink to this heading">#</a></h3>
-<p>Carry out the following transformations and plot the resulting function with matploltib.</p>
+<section id="legendre-transforms-and-free-energy-calculations">
+<h3>Legendre transforms and free energy calculations<a class="headerlink" href="#legendre-transforms-and-free-energy-calculations" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>From <span class="math notranslate nohighlight">\(f(x) = x^2+x^4\)</span> to <span class="math notranslate nohighlight">\(g(a)\)</span></p></li>
-<li><p>From <span class="math notranslate nohighlight">\(f(x,y,z) = x^2+y^4+logz\)</span> to <span class="math notranslate nohighlight">\(g(a,b,c)\)</span></p></li>
-<li><p>From <span class="math notranslate nohighlight">\(G(T,p,N)\)</span> to <span class="math notranslate nohighlight">\(A(S,p,N)\)</span></p></li>
-<li><p>From <span class="math notranslate nohighlight">\(\Omega(T,p,\mu)\)</span> to <span class="math notranslate nohighlight">\(E(S,V,N)\)</span></p></li>
-</ul>
-</section>
-<section id="manipulating-derivatives">
-<h3>Manipulating derivatives<a class="headerlink" href="#manipulating-derivatives" title="Permalink to this heading">#</a></h3>
-<p>Derive the following identities:</p>
-<ul>
-<li><div class="math notranslate nohighlight">
-\[\Big( \frac{\partial C_p}{\partial P} \Big)_T = - T \Big( \frac{\partial^2 V}{\partial T^2} \Big)_P\]</div>
-</li>
-<li><div class="math notranslate nohighlight">
-\[\Big( \frac{\partial C_v}{\partial V} \Big)_T =  T \Big( \frac{\partial^2 P}{\partial T^2} \Big)_V\]</div>
-</li>
+<li><p>Use Legendre transform to go from <span class="math notranslate nohighlight">\(E(N, V, T)\)</span> to <span class="math notranslate nohighlight">\(F(S,p,N)\)</span> and to <span class="math notranslate nohighlight">\(G(T,p,N)\)</span>.</p></li>
+<li><p>1 mole of an ideal gas at 300 K is quasistatically and isothermally compressed from 5 to 25atm. Find <span class="math notranslate nohighlight">\(\Delta F\)</span> and <span class="math notranslate nohighlight">\(\Delta G\)</span></p></li>
 </ul>
 </section>
 </section>
@@ -925,8 +917,8 @@ Solution<div class="sd-summary-down docutils">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensive-vs-intensive-variables">Extensive vs Intensive variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-the-observation-time">Equilibrium and the observation time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equation-of-thermodynamics">Fundamental equation of thermodynamics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#irreversibility">Irreversibility</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-the-second-law-and-entropy">More on the second law and Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#irreversibility-emerges-from-large-n">Irreversibility emerges from large N</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#need-for-an-extensive-variable-called-entropy-s">Need for an extensive variable called entropy S</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-law">First Law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-law">Second Law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs relation</a></li>
@@ -935,11 +927,10 @@ Solution<div class="sd-summary-down docutils">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms">Free Energies and Legendre transforms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equations">Fundamental equations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-notions-of-thermodynamics">Basic notions of thermodynamics</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-a-gas-into-vacuum">Expansion of a gas into vacuum</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-changes">Entropy changes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transforms">Legendre transforms</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-derivatives">Manipulating derivatives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-gas-into-the-vacuum">Expansion of gas into the vacuum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-mixing-two-gases">Entropy of mixing two gases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-heating">Entropy of heating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transforms-and-free-energy-calculations">Legendre transforms and free energy calculations</a></li>
 </ul>
 </li>
 </ul>

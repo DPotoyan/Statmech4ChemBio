@@ -500,22 +500,12 @@ document.write(`
 <div class="admonition-what-you-need-to-know admonition">
 <p class="admonition-title">What you need to know</p>
 <ul class="simple">
-<li><p>Summing independent random variables creates another random variable that could be used to compute means and variances in the sample.</p></li>
-<li><p>The Law of Large Numbers is a principle that states that as the number of observations increases, the average of the results will get closer to the expected value, meaning that more data leads to more accurate outcomes.</p></li>
-<li><p>The Central Limit Theorem (CLT) tells us that if you take a lot of samples from any kind of population and look at the average of those samples, those averages will tend to form a normal distribution, even if the original population is not shaped that way.</p></li>
-<li><p>In chemistry and physics, a random walk model describes the erratic, unpredictable motion of atoms and molecules, providing a fundamental model for diffusion processes, molecular motion in fluids, and the propagation of light in disordered media.</p></li>
-<li><p>Learn to simulate random walk and diffusive processes using python</p></li>
+<li><p>Summing independent random variables results in another random variable called <strong>sumple sum</strong>. The mean of the sample sum is different from the population mean or expectation which is an exact quantity we want to approximate by sampling.</p></li>
+<li><p>The <strong>Law of Large Numbers</strong> is a principle that states that as the number <span class="math notranslate nohighlight">\(N\)</span>, the sample mean approaches the population mean with a standard deviation falling off as <span class="math notranslate nohighlight">\(N^{-1/2}\)</span></p></li>
+<li><p>The <strong>Central Limit Theorem (CLT)</strong> tells us that summing independent and identically distributed random variables with well-defined means and variances results in Gaussian distribution regardless of the nature of a random variable.</p></li>
+<li><p>A model of <strong>random walk</strong> describes the erratic, unpredictable motion of atoms and molecules, providing a fundamental model for diffusion processes and molecular motion in fluids.
+The number of steps to the right (or left) of a 1D random walker results in a binomial probability distribution. Following CLT binomial distribution in the large N limit can be shown to be well approximated by gaussian with the same mean and variance.</p></li>
 </ul>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
-<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
 </div>
 <section id="sum-of-random-variables">
 <h2>Sum of Random Variables<a class="headerlink" href="#sum-of-random-variables" title="Permalink to this heading">#</a></h2>
@@ -554,6 +544,16 @@ document.write(`
 </section>
 <section id="simulate-tests-of-lln">
 <h2>Simulate tests of LLN<a class="headerlink" href="#simulate-tests-of-lln" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]:</span>
