@@ -463,21 +463,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamic-of-matter-in-eqilibrium">Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamic of matter in eqilibrium</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lessons-we-learned-from-thermodynamics-that-can-now-be-understood-in-new-light">Lessons we learned from thermodynamics that can now be understood in new light</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-micro-states-omega-for-an-isolated-system">Quantifying micro states <span class="math notranslate nohighlight">\(\Omega\)</span>  for an isolated system</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamics">Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-omega-using-quantum-mechanics">Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using quantum mechanics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-collection-of-up-down-spins">A collection of up/down spins</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-collection-of-harmonic-oscilaltors">A collection of harmonic oscilaltors</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-collection-of-particles-in-a-box">A collection of particles in a box</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-microsatates-a-classical-mechanics-approach">Counting microsatates: A classical mechanics approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-omega-using-classical-mechanics">Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using classical mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-of-states-is-more-convenient-to-use-than-number-of-states">Density of States is more convenient to use than number of states</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-and-equal-a-priori-probabilities-postulate">Microcanonical Ensemble and “equal a priori probabilities” postulate.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nve-ensemble-to-derive-fundmental-equation">Examples of using NVE ensemble to derive fundmental equation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-three-spin-state">Example-1: A three spin state</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-monoatomic-ideal-gas">Example-2: Monoatomic ideal gas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-and-equal-a-priori-probabilities-postulate">Microcanonical Ensemble and “equal a priori probabilities” postulate.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-fundamental-equation-for-monoatomic-ideal-gas">Deriving fundamental equation for monoatomic ideal gas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-density-of-states-of-an-ideal-gas">Classical density of states of an ideal gas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-density-of-states-of-an-ideal-gas">Quantum density of states of an ideal gas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-mechanical-and-chemical-equilibrium">Thermal, Mechanical and chemical equilibrium</a><ul class="nav section-nav flex-column">
@@ -507,60 +502,63 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="nve">
 <h1>NVE<a class="headerlink" href="#nve" title="Permalink to this heading">#</a></h1>
-<section id="objectives">
-<h2>Objectives<a class="headerlink" href="#objectives" title="Permalink to this heading">#</a></h2>
+<div class="admonition-what-you-need-to-know admonition">
+<p class="admonition-title">What you need to know</p>
 <ul class="simple">
-<li><p>Understand that essence of equilirbium statistical mechanics is in connecting <strong>thermodynamics</strong> operatig at macroscopic scales with the <strong>microscopic states</strong> of atoms and molecules.</p></li>
-<li><p>The macro to micro connection is established using probability arguments with <strong>Entropy</strong> playing the central role (Boltzmann equation)</p></li>
-<li><p>An isolated system with N particles with fixed volume and Energy is a single macrostates from thermodynamics point of view.</p></li>
-<li><p>Such a system, however, be in vast number of microstates. The number can be quanitfied for some simple systems analytically but is generally intractable even using computers!</p></li>
+<li><p>Understand that the essence of equilirbium statistical mechanics is connecting thermodynamics operating at macroscopic scales with the microscopic states of atoms and molecules.</p></li>
+<li><p>The macro-to-micro connection is established using probability arguments with <strong>Entropy</strong> playing the central role (Boltzmann equation)
+From the thermodynamics point of view, an isolated system with N particles, fixed volume, and Energy is a single macrostate.
+Such a system, however, would consist of a vast number of microstates. The number can be quantified for some simple systems analytically but is generally intractable even using computers!</p></li>
 <li><p>In StatMech we replace the dynamics of N particle system with an ensemble of all possible microstates that the system can be consistent with a macrostate (NVE).</p></li>
-<li><p>Ensemble essentially is giving us a probability distirbution over microstates which allows allows calculattion of Entropy.</p></li>
-<li><p>Through entropy all kinds of substance specific thermodynamic quantities can be computed from the first principles.</p>
-<ul>
-<li><p>E.g heat capcities, magnetic susceptiiilties, free energy differences. These quanties serve as an input for thermodynamics becasue thermodynamics makes no refernce to microscopic world.</p></li>
+<li><p>Ensemble essentially gives us a probability distribution over microstates, which allows the calculation of Entropy.</p></li>
+<li><p>Through entropy, all kinds of substance-specific thermodynamic quantities can be computed from the first principles.</p></li>
+<li><p>E.g., heat capacities, magnetic susceptibilities, free energy differences. These quantities serve as an input for thermodynamics because thermodynamics does not refer to the microscopic world.</p></li>
+<li><p>Thermodynamics while agnostic to atomic details is an exact theory. Predictions of statistical mechanics must obey the rules of thermodynamics.</p></li>
 </ul>
-</li>
-<li><p>Thermodynamics while agnostic to atomic details is an exact theory. Predictions of statistical mechanicss must obey the rules of thermodynamics.</p></li>
+</div>
+<section id="boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamics">
+<h2>Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamics<a class="headerlink" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamics" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Consider an isolated fluid system with <span class="math notranslate nohighlight">\(N=const\)</span>, <span class="math notranslate nohighlight">\(V=const\)</span> and <span class="math notranslate nohighlight">\(E=const\)</span> which we will refer to as NVE system. What should be the probabilities of various states sampled by this system?</p></li>
+<li><p>It is clear that in the absence of any other information, no states should have higher probabilities than others. This is known as “principle of equal a priory probability”</p></li>
+<li><p>Mathematically, this can be expressed by maximizing entropy <span class="math notranslate nohighlight">\(S=-\sum p_i log p_i\)</span> with no constraints other than normalization. We end up with <span class="math notranslate nohighlight">\(p_i = \frac{1}{\Omega}\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> microstates since we have no objective reason to favor any one microstate.</p></li>
 </ul>
-</section>
-<section id="boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamic-of-matter-in-eqilibrium">
-<h2>Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamic of matter in eqilibrium<a class="headerlink" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamic-of-matter-in-eqilibrium" title="Permalink to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[\boxed{S = k_B log \Omega}\]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\Omega\)</span> is the number of micro-states <strong>consistent with a macrostate of our system</strong>. For instance number of states that in their totallity still have macroparameters <span class="math notranslate nohighlight">\(N, V, E\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(S(N, V, E)\)</span> is the entropy of an isolated system (we are in the NVE). Yes, it is the very same entropy that appears in thermdoynamic relations (Carnot engines, irreversibility and all that)!</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Omega\)</span> is the number of micro-states <strong>consistent with a macrostate of our system</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(S(N, V, E)\)</span> is the entropy of an isolated system (we are in the NVE).</p></li>
 <li><p><span class="math notranslate nohighlight">\(k_B =1.380649\cdot 10^{-23} J/K\)</span>,  Boltzmann’s constant</p></li>
-<li><p>Boltzmann equation can be seen as a special case of a more general entropy expression <span class="math notranslate nohighlight">\(S=-\sum p_i log p_i\)</span>. Given an ensemble of microstates for an isolated system (NVE) we simply maximize entropy with no constraints other than probability needing to be normalized. In other words we invoke “principle of equal a priory probability” which gives us <span class="math notranslate nohighlight">\(p_i = \frac{1}{\Omega}\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> microstates since we have no objective reason to favor any one microstate.</p></li>
 </ul>
 </section>
-<section id="lessons-we-learned-from-thermodynamics-that-can-now-be-understood-in-new-light">
-<h2>Lessons we learned from thermodynamics that can now be understood in new light<a class="headerlink" href="#lessons-we-learned-from-thermodynamics-that-can-now-be-understood-in-new-light" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Isolated systems eventually come to a terminal state of <strong>equilibrium.</strong>  System stays in equilibrium “forver” untill pertrubed from the outside.</p></li>
-<li><p>A few macrosocpic variables are sufficient for describing equilibirum, e.g <span class="math notranslate nohighlight">\((E,N,V)\)</span></p></li>
-<li><p>An extensive thermodynamic variable called entropy <span class="math notranslate nohighlight">\(S(E, N, V)\)</span> exists which is a globally concave funcion and predicts thermodynamic equilibrium as a state with vanishing entropy variation <span class="math notranslate nohighlight">\(\delta S=0\)</span></p></li>
-<li><p>Thermodynamic space is structured into non-crossing adiabats corresponding to <span class="math notranslate nohighlight">\(S=const\)</span> planes on qhich system can be transformed quasistatically and reversibly (e.g stay in equilibrium). Leaving the adiabatic plane is posisble only through heat exchange (cooling or heating)!</p></li>
-</ol>
-</section>
-<section id="quantifying-micro-states-omega-for-an-isolated-system">
-<h2>Quantifying micro states <span class="math notranslate nohighlight">\(\Omega\)</span>  for an isolated system<a class="headerlink" href="#quantifying-micro-states-omega-for-an-isolated-system" title="Permalink to this heading">#</a></h2>
+<section id="computing-number-of-microstates-omega-using-quantum-mechanics">
+<h2>Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using quantum mechanics<a class="headerlink" href="#computing-number-of-microstates-omega-using-quantum-mechanics" title="Permalink to this heading">#</a></h2>
 <section id="a-collection-of-up-down-spins">
 <h3>A collection of up/down spins<a class="headerlink" href="#a-collection-of-up-down-spins" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Consider a single spin atom in under an external mangetic field <span class="math notranslate nohighlight">\(B\)</span>. The system can be in two states <span class="math notranslate nohighlight">\(|\uparrow \rangle\)</span> and <span class="math notranslate nohighlight">\(|\downarrow\rangle\)</span> with energy <span class="math notranslate nohighlight">\(\epsilon = −m_z B\)</span> where <span class="math notranslate nohighlight">\(m_z=\pm \mu\)</span> is the spin magnetic number and <span class="math notranslate nohighlight">\(\mu\)</span> magnetic moment of the spin</p></li>
-<li><p>Now consider N non-interacting spin-1 particles. <span class="math notranslate nohighlight">\(N= N_{\uparrow} - N_{\downarrow}\)</span> totan number of spins and <span class="math notranslate nohighlight">\(M =  N_{\uparrow} - N_{\downarrow}\)</span> the overall magnetization of system</p></li>
+<li><p>Consider a single spin atom under an external magnetic field <span class="math notranslate nohighlight">\(B\)</span>. The system can be in two states with energy <span class="math notranslate nohighlight">\(\epsilon = −m_z B\)</span> where <span class="math notranslate nohighlight">\(m_z=\pm \mu\)</span> is the spin magnetic number and <span class="math notranslate nohighlight">\(\mu\)</span> magnetic moment of the spin. Generalizing to N spins is straightforward</p></li>
+<li><p><span class="math notranslate nohighlight">\(N= N_{\uparrow} + N_{\downarrow}\)</span> <strong>total number of spins</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(M =  N_{\uparrow} - N_{\downarrow}\)</span> <strong>overall magnetization</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(m = M/n\)</span> <strong>magnetization per spin</strong> ranging from -1 to +1.</p></li>
 <li><p>The energy is sum of independent spin energies <span class="math notranslate nohighlight">\(E = \sum^N_i  \epsilon_i = -N_{\uparrow}\mu B + N_{\downarrow}\mu B = -\mu B (N_{\uparrow} - N_{\downarrow}) = -\mu M B\)</span>.</p></li>
-<li><p>The system with a given energy E can be in a number of microstates: <span class="math notranslate nohighlight">\(\Omega(N, E)\)</span>.</p></li>
 <li><p>To find number of microstates for a given <span class="math notranslate nohighlight">\(E\)</span> we need to find a number of ways to partition <span class="math notranslate nohighlight">\(N_{\uparrow}\)</span> and <span class="math notranslate nohighlight">\(N_{\downarrow}\)</span> spins.</p></li>
 </ul>
-<p>$$\Omega(N, N_{\uparrow}) = \frac{N!}{N_{\uparrow}! N_{\downarrow}!}  = \frac{N!}{[1/2(N+M)!] [1/2(N-M)!]}</p>
+<div class="math notranslate nohighlight">
+\[\Omega(N, N_{\uparrow}) = \frac{N!}{N_{\uparrow}! N_{\downarrow}!}  = \frac{N!}{[1/2(N+M)!] [1/2(N-M)!]}\]</div>
 <div class="math notranslate nohighlight">
 \[\boxed{\Omega (E,N)= \frac{N!}{\Big[\frac{1}{2}(N-E/B\mu)\Big]! \Big[\frac{1}{2}(N+E/B\mu)\Big]!}}\]</div>
+<div class="math notranslate nohighlight">
+\[S = Nk_B \Big[log 2 - \frac{1}{2}log(1-m^2)-\frac{m}{2} log \frac{1+m}{1-m} \Big]\]</div>
 <ul class="simple">
-<li><p>Compare this expression to an expression obtained when partitioning gas molecules into left and right sides of a container to get <span class="math notranslate nohighlight">\(M\)</span> net molecules on one side. Or to finding number of ways a random walker can generate a displacement of size <span class="math notranslate nohighlight">\(M\)</span>.</p></li>
+<li><p>Find temperature dependence by using <span class="math notranslate nohighlight">\(\frac{1}{T} = \frac{\partial S}{\partial E}|_N\)</span></p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[U = -\mu N B tanh \Big(\frac{\mu B}{k_B T} \Big)\]</div>
+<ul class="simple">
+<li><p>magnetization per spin <span class="math notranslate nohighlight">\(m=-U/\mu NB\)</span> is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[m = tanh \Big(\frac{\mu B}{k_B T} \Big)\]</div>
 </section>
 </section>
 <section id="a-collection-of-harmonic-oscilaltors">
@@ -580,27 +578,16 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\boxed{\Omega(E,N) = \frac{(M+N-1)!}{M!(N-1)!} = \frac{(E/\hbar\omega+N/2-1)!}{(E/\hbar\omega-N/2)!(N-1)!}}\]</div>
 </section>
-<section id="a-collection-of-particles-in-a-box">
-<h2>A collection of particles in a box<a class="headerlink" href="#a-collection-of-particles-in-a-box" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>A 1 particle in a box. <span class="math notranslate nohighlight">\(E_n = \frac{\hbar^2 \pi^2}{2mL^2}(n^2_x+n^2_y+n^2_z)\)</span>.</p></li>
-<li><p>Now consider N particles in a box. How many states can system have?</p></li>
-</ol>
-<blockquote>
-<div><p>The question boils down to determining degeneracy of states with total quanta <span class="math notranslate nohighlight">\(n_1+n_2+...+n_{3N}\)</span>.</p>
-</div></blockquote>
-<div class="math notranslate nohighlight">
-\[\sum_{E=const} 1 = \int_{E=const} dn\]</div>
-</section>
-<section id="counting-microsatates-a-classical-mechanics-approach">
-<h2>Counting microsatates: A classical mechanics approach<a class="headerlink" href="#counting-microsatates-a-classical-mechanics-approach" title="Permalink to this heading">#</a></h2>
-<p>In Quantum mechanics we simply count the number of states which is natural and easy due to discretness of energy levels.<br />
-The question now is how to deal with the classical systems which have continuous energy functions?
-We clarify this issue using the example of 1D harmonic oscillator with an objective to find an expression coinciding with QM description.</p>
+<section id="computing-number-of-microstates-omega-using-classical-mechanics">
+<h2>Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using classical mechanics<a class="headerlink" href="#computing-number-of-microstates-omega-using-classical-mechanics" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In Quantum mechanics, we simply count the number of states, which is natural and easy due to the discreteness of energy levels.  The question now is how to deal with classical systems that have continuous energy functions.
+We clarify this issue using the example of a 1D harmonic oscillator, with the objective of finding an expression coinciding with the QM description.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[E=\Big(N+\frac{1}{2}\Big)\hbar\omega\]</div>
 <ul class="simple">
-<li><p>For a single harmonic oscillator in  the number of states correpsonding to E is obtained simply as:</p></li>
+<li><p>For a harmonic oscillator the number of states correpsonding to E is obtained simply as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[N_E \approx \frac{E}{\hbar \omega} \]</div>
@@ -643,25 +630,8 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 <li><p>Each state in the <span class="math notranslate nohighlight">\(NVE\)</span> ensemble is sampled with equal probabilities. Why? Becasue no microstate has any more priviledged status than the other.</p></li>
 <li><p>The task of quantifying probabilities in the thermodynamic processes under <span class="math notranslate nohighlight">\(NVE\)</span> conditions reduces to quantifying changes in the number(density) of states.</p></li>
 </ul>
-</section>
-<section id="examples-of-using-nve-ensemble-to-derive-fundmental-equation">
-<h2>Examples of using NVE ensemble to derive fundmental equation<a class="headerlink" href="#examples-of-using-nve-ensemble-to-derive-fundmental-equation" title="Permalink to this heading">#</a></h2>
-<section id="example-1-a-three-spin-state">
-<h3>Example-1: A three spin state<a class="headerlink" href="#example-1-a-three-spin-state" title="Permalink to this heading">#</a></h3>
-<p>3 spin state can adopt many different states with different energies.</p>
-<p>If we know the total energy is <span class="math notranslate nohighlight">\(E = -\mu H\)</span> Then we have microcanonican ensemble with three states</p>
-<div class="math notranslate nohighlight">
-\[N(E) = \{++-, +-+, -++, \}\]</div>
-<div class="math notranslate nohighlight">
-\[P(E) = \frac{1}{N(E)} = \frac{1}{3}\]</div>
-<div class="math notranslate nohighlight">
-\[S(E=-3\mu H) = k_B log 3\]</div>
-<blockquote>
-<div><p>Can you write down entropy for other energy values?</p>
-</div></blockquote>
-</section>
-<section id="example-2-monoatomic-ideal-gas">
-<h3>Example-2: Monoatomic ideal gas<a class="headerlink" href="#example-2-monoatomic-ideal-gas" title="Permalink to this heading">#</a></h3>
+<section id="deriving-fundamental-equation-for-monoatomic-ideal-gas">
+<h3>Deriving fundamental equation for monoatomic ideal gas<a class="headerlink" href="#deriving-fundamental-equation-for-monoatomic-ideal-gas" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[H(p,q) =\frac{p^2}{2m} = E\]</div>
 <div class="math notranslate nohighlight">
@@ -736,10 +706,14 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
 </section>
 <section id="quasistatic-process-and-irreversibility">
 <h3>Quasistatic process and Irreversibility<a class="headerlink" href="#quasistatic-process-and-irreversibility" title="Permalink to this heading">#</a></h3>
-<p>From the NVE esnsemble reasoning we can now state that quasistatic process corresponds to process which does not change in the number of microstates. That is removal of a constraint keeps the “volume” of microstates intact.</p>
+<ul class="simple">
+<li><p>From the NVE ensemble reasoning, we can now state that a quasistatic process corresponds to a process that does not change in the number of microstates. That is removal of a constraint keeps the “volume” of microstates intact.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\Delta S = k_B log \frac{\Omega_f}{\Omega_i} = 0\]</div>
-<p>On the other hand once the number of microstates grows upon removal of a constraint then re-instating the constraint will not shrink the “volume” of microstate space.</p>
+<ul class="simple">
+<li><p>On the other hand, once the number of microstates grows upon removal of a constraint, then re-instating the constraint will not shrink the “volume” of microstate space.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\Delta S = k_B log \frac{\Omega_f}{\Omega_i} &gt; 0\]</div>
 </section>
@@ -843,21 +817,16 @@ We clarify this issue using the example of 1D harmonic oscillator with an object
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objectives">Objectives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamic-of-matter-in-eqilibrium">Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamic of matter in eqilibrium</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lessons-we-learned-from-thermodynamics-that-can-now-be-understood-in-new-light">Lessons we learned from thermodynamics that can now be understood in new light</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-micro-states-omega-for-an-isolated-system">Quantifying micro states <span class="math notranslate nohighlight">\(\Omega\)</span>  for an isolated system</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamics">Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-omega-using-quantum-mechanics">Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using quantum mechanics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-collection-of-up-down-spins">A collection of up/down spins</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-collection-of-harmonic-oscilaltors">A collection of harmonic oscilaltors</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-collection-of-particles-in-a-box">A collection of particles in a box</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-microsatates-a-classical-mechanics-approach">Counting microsatates: A classical mechanics approach</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-omega-using-classical-mechanics">Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using classical mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-of-states-is-more-convenient-to-use-than-number-of-states">Density of States is more convenient to use than number of states</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-and-equal-a-priori-probabilities-postulate">Microcanonical Ensemble and “equal a priori probabilities” postulate.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nve-ensemble-to-derive-fundmental-equation">Examples of using NVE ensemble to derive fundmental equation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-three-spin-state">Example-1: A three spin state</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-monoatomic-ideal-gas">Example-2: Monoatomic ideal gas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-and-equal-a-priori-probabilities-postulate">Microcanonical Ensemble and “equal a priori probabilities” postulate.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-fundamental-equation-for-monoatomic-ideal-gas">Deriving fundamental equation for monoatomic ideal gas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-density-of-states-of-an-ideal-gas">Classical density of states of an ideal gas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantum-density-of-states-of-an-ideal-gas">Quantum density of states of an ideal gas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-mechanical-and-chemical-equilibrium">Thermal, Mechanical and chemical equilibrium</a><ul class="nav section-nav flex-column">

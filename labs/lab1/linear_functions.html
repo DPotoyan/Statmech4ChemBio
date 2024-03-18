@@ -487,12 +487,12 @@ document.write(`
 <p>Topics: elementwise operations</p>
 <p><strong>Linear functions</strong><br> We will be using the term <em>linear equation</em> to mean a weighted sum of inputs plus an offset. If there is just one input <span class="math notranslate nohighlight">\(x\)</span>, then this is a straight line:</p>
 <p><strong>Equation-1</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-503559bd-c88e-4d73-b488-2c210afe6758">
-<span class="eqno">(1)<a class="headerlink" href="#equation-503559bd-c88e-4d73-b488-2c210afe6758" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega x,\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-472900bc-cf54-4f63-ba8a-799f57fdae6d">
+<span class="eqno">(1)<a class="headerlink" href="#equation-472900bc-cf54-4f63-ba8a-799f57fdae6d" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega x,\end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta\)</span> is the y-intercept of the linear and <span class="math notranslate nohighlight">\(\omega\)</span> is the slope of the line. When there are two inputs <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span>, then this becomes:</p>
 <p><strong>Equation-2</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-c64b59eb-e6aa-4e3a-b343-22f8447e949d">
-<span class="eqno">(2)<a class="headerlink" href="#equation-c64b59eb-e6aa-4e3a-b343-22f8447e949d" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega_1 x_1 + \omega_2 x_2.\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-bd453879-53a6-49b9-bccd-62b8f6c22119">
+<span class="eqno">(2)<a class="headerlink" href="#equation-bd453879-53a6-49b9-bccd-62b8f6c22119" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega_1 x_1 + \omega_2 x_2.\end{equation}\]</div>
 <p>Any other functions are by definition <strong>non-linear</strong>.</p>
 <section id="type-your-code-below">
 <h2>Type your code below<a class="headerlink" href="#type-your-code-below" title="Permalink to this heading">#</a></h2>
@@ -571,13 +571,13 @@ document.write(`
 <section id="using-numpy-to-write-general-linear-functions-in-compact-form">
 <h2>Using numpy to write general linear functions in compact form<a class="headerlink" href="#using-numpy-to-write-general-linear-functions-in-compact-form" title="Permalink to this heading">#</a></h2>
 <p>Often we will want to compute many linear functions at the same time.  For example, we might have three inputs, <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span> and want to compute two linear functions giving <span class="math notranslate nohighlight">\(y_1\)</span> and <span class="math notranslate nohighlight">\(y_2\)</span>. Of course, we could do this by just running each equation separately,<br><br></p>
-<div class="amsmath math notranslate nohighlight" id="equation-3b1e9373-4f37-4213-87d3-4e9b68592ba3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-3b1e9373-4f37-4213-87d3-4e9b68592ba3" title="Permalink to this equation">#</a></span>\[\begin{align}y_1 &amp;=&amp; \beta_1 + \omega_{11} x_1 + \omega_{12} x_2 + \omega_{13} x_3\\
+<div class="amsmath math notranslate nohighlight" id="equation-f4499a4f-d8a9-40e0-a80a-21e045875339">
+<span class="eqno">(3)<a class="headerlink" href="#equation-f4499a4f-d8a9-40e0-a80a-21e045875339" title="Permalink to this equation">#</a></span>\[\begin{align}y_1 &amp;=&amp; \beta_1 + \omega_{11} x_1 + \omega_{12} x_2 + \omega_{13} x_3\\
 y_2 &amp;=&amp; \beta_2 + \omega_{21} x_1 + \omega_{22} x_2 + \omega_{23} x_3.
 \end{align}\]</div>
 <p>However, we can write it more compactly with vectors and matrices:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0caa6c07-05d6-48aa-a8fd-5f382169e9fb">
-<span class="eqno">(4)<a class="headerlink" href="#equation-0caa6c07-05d6-48aa-a8fd-5f382169e9fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-24adc48c-84c1-4a75-843d-408ffd0f5e6f">
+<span class="eqno">(4)<a class="headerlink" href="#equation-24adc48c-84c1-4a75-843d-408ffd0f5e6f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{bmatrix} y_1\\ y_2 \end{bmatrix} = \begin{bmatrix}\beta_{1}\\\beta_{2}\end{bmatrix}+ \begin{bmatrix}\omega_{11}&amp;\omega_{12}&amp;\omega_{13}\\\omega_{21}&amp;\omega_{22}&amp;\omega_{23}\end{bmatrix}\begin{bmatrix}x_{1}\\x_{2}\\x_{3}\end{bmatrix},
 \end{equation}\]</div>
 <p>$$\begin{equation}
