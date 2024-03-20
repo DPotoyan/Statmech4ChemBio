@@ -11,19 +11,27 @@
 
 
 1. **Entropy Definition**:
+2. 
    $$S = -k \sum_{i} p_i \log p_i$$
 
-2. **Constraints**:
+3. **Constraints**:
    - Normalization of probabilities(all ensembles):
+     
      $$\sum_{i} p_i = 1$$
+     
    - Expected energy (for certain ensembles):
+     
      $$\sum_{i} p_i E_i = \langle E \rangle$$
+     
    - Expected number of particles (for certain ensembles):
+     
      $$\sum_{N} p_N N = \langle N \rangle$$
+     
    - Expected volume (for certain ensembles):
+     
      $$\sum_{i} p_V V = \langle V \rangle$$
 
-3. **Lagrange Multipliers**:
+4. **Lagrange Multipliers**:
    Construct the Lagrangian with Lagrange multipliers} $\alpha$, $\beta$, ...
    
    $$L = -k \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i - \langle E \rangle \right) + \gamma \left(\sum p_N N-\langle N \rangle \right) + \eta \left(\sum_V p_V V-\langle V \rangle\right)$$
