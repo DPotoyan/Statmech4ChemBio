@@ -1,9 +1,76 @@
 
 # Overview of ensembles
 
+- **Microcanonical Ensemble:** Represents an isolated system with fixed energy, volume, and number of particles. It's described by the distribution function that gives equal weight to all accessible microstates with the same energy, leading to the principle of equal a priori probabilities.
+
+- **Canonical Ensemble:** Describes a system in thermal equilibrium with a heat bath at a fixed temperature, volume, and number of particles. The distribution function here is the Boltzmann distribution, which accounts for energy fluctuations in the system while maintaining a constant temperature.
+
+- **Grand Canonical Ensemble:** This ensemble is used for systems in contact with a reservoir that allows exchange of both energy and particles. It is characterized by fixed temperature, volume, and chemical potential. The distribution function combines the Boltzmann factor with a term accounting for particle number fluctuations.
+  
 ![](./figs/ensembl.png)
 
-## NVE 
+
+1. **Entropy Definition**:
+   $$S = -k \sum_{i} p_i \log p_i$$
+
+2. **Constraints**:
+   - Normalization of probabilities(all ensembles):
+     $$\sum_{i} p_i = 1$$
+   - Expected energy (for certain ensembles):
+     $$\sum_{i} p_i E_i = \langle E \rangle$$
+   - Expected number of particles (for certain ensembles):
+     $$\sum_{N} p_N N = \langle N \rangle$$
+   - Expected volume (for certain ensembles):
+     $$\sum_{i} p_V V = \langle V \rangle$$
+
+3. **Lagrange Multipliers**:
+   Construct the Lagrangian with Lagrange multipliers} $\alpha$, $\beta$, ...
+   
+   $$L = -k \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i - \langle E \rangle \right) + \gamma \left(\sum p_N N-\langle N \rangle \right) + \eta \left(\sum_V p_V V-\langle V \rangle\right)$$
+
+
+### Finding maximum entropy solution with constraints (NVE example)
+
+**Seek maximum of entropy**
+    
+   $$\frac{\partial L}{\partial p_j} = -k_B (\log p_j + 1) - \alpha  = 0$$
+
+   $$p_j = e^{-\frac{\alpha}{k_B } - 1}$$
+
+**Determine Lagrange multipliers**
+
+   - Normalize $p_j$ to find $\alpha$:
+     
+     $$\sum_j p_j = \sum_j e^{-\frac{\alpha}{k_B} - 1} =\Omega$$
+     
+   - probabilities are independent of microstate and the sum can be set to be equal to a constant denoted as $\Omega$
+
+**Probability Expression:**
+
+  $$ p_j = \frac{1}{\Omega}$$
+
+
+### Finding maximum entropy solution with constraints (NVT example)
+    
+   $$\frac{\partial L}{\partial p_j} = -k (\log p_j + 1) - \alpha - \beta E_j = 0$$
+
+   $$p_j = e^{-\frac{\alpha}{k} - 1} e^{-\frac{\beta E_j}{k}}$$
+
+**Determine Lagrange multipliers**
+
+   - Normalize $p_j$ to find $\alpha$:
+     
+     $$e^{-\frac{\alpha}{k} - 1} = \frac{1}{Z}$$
+   
+     $$Z = \sum_{j} e^{-\frac{\beta E_j}{k}}$$
+
+   - $\beta$ is typically identified with $\frac{1}{kT}$.
+
+**Probability Expression:**
+
+  $$ p_j = \frac{e^{-\frac{\beta E_j}{k}}}{Z}$$
+
+## NVE Overview
 
 ### Thermodynamics
 
@@ -36,7 +103,7 @@ $$p(E) = \frac{1}{\Omega(N, V, E)}$$
 $$p(E_1, E-E_1) = \frac{\Omega(E_1) \Omega(E-E_1)}{\sum_{E_1} \Omega(E_1) \Omega(E-E_1)} = \frac{e^{S_1(E_1)+S_2(E-E_1)}}{e^{S(E)}}$$
 
 
-## NVT 
+## NVT Overview
 
 ### Thermodynamics
 
@@ -71,7 +138,7 @@ $$p(E') = \frac{\Omega(E^{'}) e^{-E^{'}/k_BT}}{Z} = \frac{e^{-\beta F^{'}}}{Z}$$
 
 
 
-## $\mu$VT 
+## $\mu$VT Overview
 
 
 ### Thermodynamics

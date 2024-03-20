@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '3_ensembles/ensemble_overview';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Gases" href="../4_ideal_systems/intro.html" />
-    <link rel="prev" title="muPT" href="npt.html" />
+    <link rel="next" title="Phase Space" href="phase_space.html" />
+    <link rel="prev" title="Ensembles" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,11 +195,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Ensembles</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Overview of ensembles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="phase_space.html">Phase Space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nve.html">NVE</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nvt.html">NVT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npt.html">muPT</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Overview of ensembles</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../4_ideal_systems/intro.html">Gases</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -396,17 +396,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nve">NVE</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-maximum-entropy-solution-with-constraints-nve-example">Finding maximum entropy solution with constraints (NVE example)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-maximum-entropy-solution-with-constraints-nvt-example">Finding maximum entropy solution with constraints (NVT example)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nve-overview">NVE Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics">Thermodynamics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-mechanics">Statistical mechanics</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt">NVT</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt-overview">NVT Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Thermodynamics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Statistical mechanics</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muvt"><span class="math notranslate nohighlight">\(\mu\)</span>VT</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muvt-overview"><span class="math notranslate nohighlight">\(\mu\)</span>VT Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Thermodynamics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Statistical mechanics</a></li>
 </ul>
@@ -429,9 +431,74 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="overview-of-ensembles">
 <h1>Overview of ensembles<a class="headerlink" href="#overview-of-ensembles" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Microcanonical Ensemble:</strong> Represents an isolated system with fixed energy, volume, and number of particles. It’s described by the distribution function that gives equal weight to all accessible microstates with the same energy, leading to the principle of equal a priori probabilities.</p></li>
+<li><p><strong>Canonical Ensemble:</strong> Describes a system in thermal equilibrium with a heat bath at a fixed temperature, volume, and number of particles. The distribution function here is the Boltzmann distribution, which accounts for energy fluctuations in the system while maintaining a constant temperature.</p></li>
+<li><p><strong>Grand Canonical Ensemble:</strong> This ensemble is used for systems in contact with a reservoir that allows exchange of both energy and particles. It is characterized by fixed temperature, volume, and chemical potential. The distribution function combines the Boltzmann factor with a term accounting for particle number fluctuations.</p></li>
+</ul>
 <p><img alt="" src="../_images/ensembl.png" /></p>
-<section id="nve">
-<h2>NVE<a class="headerlink" href="#nve" title="Permalink to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Entropy Definition</strong>:
+$<span class="math notranslate nohighlight">\(S = -k \sum_{i} p_i \log p_i\)</span>$</p></li>
+<li><p><strong>Constraints</strong>:</p>
+<ul class="simple">
+<li><p>Normalization of probabilities(all ensembles):
+$<span class="math notranslate nohighlight">\(\sum_{i} p_i = 1\)</span>$</p></li>
+<li><p>Expected energy (for certain ensembles):
+$<span class="math notranslate nohighlight">\(\sum_{i} p_i E_i = \langle E \rangle\)</span>$</p></li>
+<li><p>Expected number of particles (for certain ensembles):
+$<span class="math notranslate nohighlight">\(\sum_{N} p_N N = \langle N \rangle\)</span>$</p></li>
+<li><p>Expected volume (for certain ensembles):
+$<span class="math notranslate nohighlight">\(\sum_{i} p_V V = \langle V \rangle\)</span>$</p></li>
+</ul>
+</li>
+<li><p><strong>Lagrange Multipliers</strong>:
+Construct the Lagrangian with Lagrange multipliers} <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span>, …</p>
+<div class="math notranslate nohighlight">
+\[L = -k \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i - \langle E \rangle \right) + \gamma \left(\sum p_N N-\langle N \rangle \right) + \eta \left(\sum_V p_V V-\langle V \rangle\right)\]</div>
+</li>
+</ol>
+<section id="finding-maximum-entropy-solution-with-constraints-nve-example">
+<h2>Finding maximum entropy solution with constraints (NVE example)<a class="headerlink" href="#finding-maximum-entropy-solution-with-constraints-nve-example" title="Permalink to this heading">#</a></h2>
+<p><strong>Seek maximum of entropy</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial L}{\partial p_j} = -k_B (\log p_j + 1) - \alpha  = 0\]</div>
+<div class="math notranslate nohighlight">
+\[p_j = e^{-\frac{\alpha}{k_B } - 1}\]</div>
+<p><strong>Determine Lagrange multipliers</strong></p>
+<ul>
+<li><p>Normalize <span class="math notranslate nohighlight">\(p_j\)</span> to find <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\sum_j p_j = \sum_j e^{-\frac{\alpha}{k_B} - 1} =\Omega\]</div>
+</li>
+<li><p>probabilities are independent of microstate and the sum can be set to be equal to a constant denoted as <span class="math notranslate nohighlight">\(\Omega\)</span></p></li>
+</ul>
+<p><strong>Probability Expression:</strong></p>
+<div class="math notranslate nohighlight">
+\[ p_j = \frac{1}{\Omega}\]</div>
+</section>
+<section id="finding-maximum-entropy-solution-with-constraints-nvt-example">
+<h2>Finding maximum entropy solution with constraints (NVT example)<a class="headerlink" href="#finding-maximum-entropy-solution-with-constraints-nvt-example" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[\frac{\partial L}{\partial p_j} = -k (\log p_j + 1) - \alpha - \beta E_j = 0\]</div>
+<div class="math notranslate nohighlight">
+\[p_j = e^{-\frac{\alpha}{k} - 1} e^{-\frac{\beta E_j}{k}}\]</div>
+<p><strong>Determine Lagrange multipliers</strong></p>
+<ul>
+<li><p>Normalize <span class="math notranslate nohighlight">\(p_j\)</span> to find <span class="math notranslate nohighlight">\(\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[e^{-\frac{\alpha}{k} - 1} = \frac{1}{Z}\]</div>
+<div class="math notranslate nohighlight">
+\[Z = \sum_{j} e^{-\frac{\beta E_j}{k}}\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is typically identified with <span class="math notranslate nohighlight">\(\frac{1}{kT}\)</span>.</p></li>
+</ul>
+<p><strong>Probability Expression:</strong></p>
+<div class="math notranslate nohighlight">
+\[ p_j = \frac{e^{-\frac{\beta E_j}{k}}}{Z}\]</div>
+</section>
+<section id="nve-overview">
+<h2>NVE Overview<a class="headerlink" href="#nve-overview" title="Permalink to this heading">#</a></h2>
 <section id="thermodynamics">
 <h3>Thermodynamics<a class="headerlink" href="#thermodynamics" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -471,8 +538,8 @@ document.write(`
 \[p(E_1, E-E_1) = \frac{\Omega(E_1) \Omega(E-E_1)}{\sum_{E_1} \Omega(E_1) \Omega(E-E_1)} = \frac{e^{S_1(E_1)+S_2(E-E_1)}}{e^{S(E)}}\]</div>
 </section>
 </section>
-<section id="nvt">
-<h2>NVT<a class="headerlink" href="#nvt" title="Permalink to this heading">#</a></h2>
+<section id="nvt-overview">
+<h2>NVT Overview<a class="headerlink" href="#nvt-overview" title="Permalink to this heading">#</a></h2>
 <section id="id1">
 <h3>Thermodynamics<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -512,8 +579,8 @@ document.write(`
 \[p(E') = \frac{\Omega(E^{'}) e^{-E^{'}/k_BT}}{Z} = \frac{e^{-\beta F^{'}}}{Z}\]</div>
 </section>
 </section>
-<section id="muvt">
-<h2><span class="math notranslate nohighlight">\(\mu\)</span>VT<a class="headerlink" href="#muvt" title="Permalink to this heading">#</a></h2>
+<section id="muvt-overview">
+<h2><span class="math notranslate nohighlight">\(\mu\)</span>VT Overview<a class="headerlink" href="#muvt-overview" title="Permalink to this heading">#</a></h2>
 <section id="id3">
 <h3>Thermodynamics<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -629,20 +696,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="npt.html"
+       href="intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">muPT</p>
+        <p class="prev-next-title">Ensembles</p>
       </div>
     </a>
     <a class="right-next"
-       href="../4_ideal_systems/intro.html"
+       href="phase_space.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Gases</p>
+        <p class="prev-next-title">Phase Space</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -661,17 +728,19 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nve">NVE</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-maximum-entropy-solution-with-constraints-nve-example">Finding maximum entropy solution with constraints (NVE example)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-maximum-entropy-solution-with-constraints-nvt-example">Finding maximum entropy solution with constraints (NVT example)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nve-overview">NVE Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics">Thermodynamics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-mechanics">Statistical mechanics</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt">NVT</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt-overview">NVT Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Thermodynamics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Statistical mechanics</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muvt"><span class="math notranslate nohighlight">\(\mu\)</span>VT</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muvt-overview"><span class="math notranslate nohighlight">\(\mu\)</span>VT Overview</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Thermodynamics</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Statistical mechanics</a></li>
 </ul>

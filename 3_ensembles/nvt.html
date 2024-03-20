@@ -195,11 +195,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Ensembles</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ensemble_overview.html">Overview of ensembles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="phase_space.html">Phase Space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nve.html">NVE</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">NVT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npt.html">muPT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ensemble_overview.html">Overview of ensembles</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../4_ideal_systems/intro.html">Gases</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -463,9 +463,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-in-thermal-contact-with-environment">System in thermal contact with environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maxent-perspective">MaxEnt perspective</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-perspective">Ensemble perspective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-and-more-intutitive-derivation-of-boltzman-distribution">Alternative and more intutitive derivation of Boltzman distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-vs-quantum-mechanics">Computing Z via classical vs quantum mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-closer-look-at-the-the-partiation-function-z">A closer look at the the partiation function Z</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-free-energy-is-a-central-quantity-in-the-nvt-ensemble">Why free energy is a central quantity in the NVT ensemble.</a></li>
@@ -508,45 +507,31 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="nvt">
 <h1>NVT<a class="headerlink" href="#nvt" title="Permalink to this heading">#</a></h1>
-<section id="system-in-thermal-contact-with-environment">
-<h2>System in thermal contact with environment<a class="headerlink" href="#system-in-thermal-contact-with-environment" title="Permalink to this heading">#</a></h2>
+<div class="admonition-what-you-need-to-know admonition">
+<p class="admonition-title">What you need to know</p>
 <ul class="simple">
-<li><p>Recall that NVE ensemble is the collection of all possible microscpoic configurations where <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(V\)</span>, <span class="math notranslate nohighlight">\(E\)</span> extensive variables are fixed. E.g system is completely insulated from external world.</p></li>
-<li><p>In the NVT ensemble we lift the energy exchange constraint <span class="math notranslate nohighlight">\(E=const\)</span> by bringing system in contact with a <strong>heat bath or reservoir</strong> which maintains a constant temperature for our system.</p></li>
-<li><p>In thermodynamics exchanging variable <span class="math notranslate nohighlight">\(E\)</span> with <span class="math notranslate nohighlight">\(T\)</span> is accomplished via Legendtre transform <span class="math notranslate nohighlight">\(F = E-TS\)</span> which makes free energy the primary object extremum of which determines the equilibrium macrostate.</p></li>
-<li><p>In the NVT ensemble the system <span class="math notranslate nohighlight">\(E_i\)</span> and resrovir <span class="math notranslate nohighlight">\(E_r\)</span> exchange energy and maintaint constant temperature <span class="math notranslate nohighlight">\(T\)</span>. The total energy of system+reservoir remains conserved: <span class="math notranslate nohighlight">\(E_t=E_r + E_i=const\)</span>.</p></li>
+<li><p>In the NVT ensemble, we lift the energy exchange constraint <span class="math notranslate nohighlight">\(E=const\)</span> by bringing the system in contact with a heat bath or reservoir, which maintains a constant temperature for our system.</p></li>
+<li><p>Probabilities of microstate follow Boltzmann distribution, showing that the system pays the exponentially high penalty for borrowing energy from the environment with which it is in equilibrium at temperature T.</p></li>
+<li><p>In thermodynamics, exchanging variable <span class="math notranslate nohighlight">\(E\)</span> with <span class="math notranslate nohighlight">\(T\)</span> is accomplished via Legendtre transform <span class="math notranslate nohighlight">\(F = E-TS\)</span>, which makes free energy the primary object which determines the equilibrium stats.</p></li>
+<li><p>While in NVE portion function is the sum of microstates. In NVT, the portion function is a Boltzman-weighted sum over microstates. In other words, the partition function shows how states are partitioned or occupied in thermal equilibrium.</p></li>
+<li><p>While in NVE entropy was linked directly with partition function <span class="math notranslate nohighlight">\(S=k_B log \Omega\)</span>, in NVT it is free energy that is directly linked with partition function Z, <span class="math notranslate nohighlight">\(F=-k_BT logZ\)</span></p></li>
 </ul>
-</section>
+</div>
 <section id="maxent-perspective">
 <h2>MaxEnt perspective<a class="headerlink" href="#maxent-perspective" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Maximizinging entropy for the <span class="math notranslate nohighlight">\(NVE\)</span> ensemble results in unifrom probabilidy distribution over microstates <span class="math notranslate nohighlight">\(p_i = \frac{1}{\Omega}\)</span>.</p></li>
-<li><p>For <span class="math notranslate nohighlight">\(NVT\)</span>, in addition to normalization <span class="math notranslate nohighlight">\(\sum_i p_i =1\)</span> we have to add one more condition to probability distirbution over microstates. Namely probability distribution must ensure average energy! <span class="math notranslate nohighlight">\(\sum_i p_i E_i = \langle E \rangle\)</span></p></li>
+<li><p>We discover that when maximizing entropy with average energy conservation, we now get exponential dependence on the energies of microstates! This is one of the most fundamental results of statistical mechanics.</p></li>
+<li><p>The probability distribution of microstates, which is known as “Boltzmann distribution”</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[J[p_1, p_2, ...] = - \sum _i p_i log p_i - \alpha \Big(\sum_i p_i -1 \Big) - \beta  \Big(\sum_i p_i E_i - \langle E \rangle \Big)\]</div>
+\[p_i = \frac{e^{-\beta E_i}}{\sum_i e^{-\beta E_i}} = \frac{e^{-\beta E_i}}{Z}\]</div>
 <ul class="simple">
-<li><p>Next we maximize entropy with all the constraints included:</p></li>
+<li><p>The denominator that ensures normalization is significant as it is an analog of <span class="math notranslate nohighlight">\(\Omega (E)\)</span> for the system in thermal contact with the environment.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\frac{\partial J}{\partial p_i} = 0\]</div>
+\[Z(\beta, N, V) = \sum_i e^{-\beta E_i}\]</div>
 <ul class="simple">
-<li><p>We discover that when maximizing entropy with average energy constratin we now get expenential dependence on energies of microstates! This is one of the most fundamental results of statistical mechanics.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p_i \sim exp(-\beta E_i)\]</div>
-<ul class="simple">
-<li><p>Normalizing probbability distirbutio we obtain probability distribution of microstates which is known as “Boltzmann distribution”</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p_i = \frac{exp(-\beta E_i)}{\sum_i exp(-\beta E_i)} = \frac{exp(-\beta E_i)}{Z(\beta)}\]</div>
-<ul class="simple">
-<li><p>THe denomintaor which ensures normalization is signficiant as it is an analog of <span class="math notranslate nohighlight">\(\Omega (E)\)</span> for system in thermal contact of environment.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[Z = \sum_i e^{-\beta E_i}\]</div>
-<ul class="simple">
-<li><p>As opposed to counting each microstate as 1 the <strong>partition function</strong> weighs each microstate in accordance with energy! That is low energies are exponentially more likely than higher ones.</p></li>
+<li><p>Instead of counting each microstate, the partition function weighs each microstate by energy! That is, low energies are exponentially more likely than higher ones.</p></li>
 </ul>
 <p><strong>Determining <span class="math notranslate nohighlight">\(\beta\)</span> and establishing link with thermodynamics</strong></p>
 <ul class="simple">
@@ -566,8 +551,8 @@ document.write(`
 <li><p>One could also start with <span class="math notranslate nohighlight">\(U = \sum_i p_i E_i\)</span> and obtain expression for entropy, work, heat and free energy by looking at differnetial of thermodynamic energy <span class="math notranslate nohighlight">\(dU\)</span></p></li>
 </ul>
 </section>
-<section id="ensemble-perspective">
-<h2>Ensemble perspective<a class="headerlink" href="#ensemble-perspective" title="Permalink to this heading">#</a></h2>
+<section id="alternative-and-more-intutitive-derivation-of-boltzman-distribution">
+<h2>Alternative and more intutitive derivation of Boltzman distribution<a class="headerlink" href="#alternative-and-more-intutitive-derivation-of-boltzman-distribution" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>In the <span class="math notranslate nohighlight">\(NVT\)</span> ensembe differeng configurations can have different energy. Hence we expect probabiltiy distribution to depent on energy.</p></li>
 <li><p>Energies can be partitioned between system and reervoir in <span class="math notranslate nohighlight">\(\Omega_{t}(E_t)\)</span> number of ways</p></li>
@@ -1078,9 +1063,8 @@ $<span class="math notranslate nohighlight">\(S_i = Nk_B \Bigg[log \Big( \frac{n
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#system-in-thermal-contact-with-environment">System in thermal contact with environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maxent-perspective">MaxEnt perspective</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-perspective">Ensemble perspective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alternative-and-more-intutitive-derivation-of-boltzman-distribution">Alternative and more intutitive derivation of Boltzman distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-vs-quantum-mechanics">Computing Z via classical vs quantum mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-closer-look-at-the-the-partiation-function-z">A closer look at the the partiation function Z</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-free-energy-is-a-central-quantity-in-the-nvt-ensemble">Why free energy is a central quantity in the NVT ensemble.</a></li>

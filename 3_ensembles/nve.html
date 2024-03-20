@@ -195,11 +195,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Ensembles</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="ensemble_overview.html">Overview of ensembles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="phase_space.html">Phase Space</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">NVE</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nvt.html">NVT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npt.html">muPT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ensemble_overview.html">Overview of ensembles</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../4_ideal_systems/intro.html">Gases</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -591,6 +591,46 @@ We clarify this issue using the example of a 1D harmonic oscillator, with the ob
 </ul>
 <div class="math notranslate nohighlight">
 \[N_E \approx \frac{E}{\hbar \omega} \]</div>
+<p><strong>Introducing phase space</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the figure and axes for plotting again with green gradients</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Generate and plot phase space trajectories with a gradient of green colors</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="s1">&#39;mediumseagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;darkgreen&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">E</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">energies</span><span class="p">):</span>
+    <span class="c1"># The maximum position (amplitude) and momentum for a given energy</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">E</span><span class="o">/</span><span class="n">m</span><span class="o">/</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">p_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">E</span><span class="p">)</span>
+    
+    <span class="c1"># Generate position and momentum values</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">E</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="c1"># Plotting the phase space trajectory with a gradient of green colors</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;E=</span><span class="si">{</span><span class="n">E</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Mirror image for negative momentum</span>
+
+<span class="c1"># Labeling the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Phase Space of a 1D Harmonic Oscillator&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Position (x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Momentum (p)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3h/w4n54dz57dvbhgvz68gdv0f0f3hkmm/T/ipykernel_45893/2833129663.py:13: RuntimeWarning: invalid value encountered in sqrt
+  p = np.sqrt(2*m*E - m*omega**2*x**2)
+</pre></div>
+</div>
+<img alt="../_images/f399c9053a4c657e66ae3cdb6b7a13dc5a673c7e36f42f48587f25954a068ab5.png" src="../_images/f399c9053a4c657e66ae3cdb6b7a13dc5a673c7e36f42f48587f25954a068ab5.png" />
+</div>
+</div>
+<p>In CM, microscopic states of the system are defined in terms of phase space <span class="math notranslate nohighlight">\(\Gamma = (p^N, r^N)\)</span>, which enumerates all positions and momenta of particles. FOr a 1D harmonic oscillator wwe can visualize phase-space:</p>
 <div class="math notranslate nohighlight">
 \[H(p,q) = \frac{p^2}{2m}+ \frac{m\omega^2 q^2}{2} = E\]</div>
 <p>In CM, not having discrete count of states we are forced to somehow quantify the “volume” of states occupied by the harmonic oscillator at E as a measure of number of states</p>
