@@ -248,6 +248,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab4/intro.html">Application of ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/nvt_application.html">Applications</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -466,6 +470,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuity-equation-and-liuvilles-theorem">Continuity equation and Liuville’s theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#liuville-theorem-illustrated">Liuville theorem illustrated</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-conservative-dynamics-in-phase-space">Hamiltonian, conservative dynamics in phase space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-of-statss-in-phase-space">Counting of statss in phase-space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-of-states">Density of states</a></li>
 </ul>
             </nav>
         </div>
@@ -516,19 +522,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sci</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bad key text.latex.unicode in file /Users/potoyan/.matplotlib/stylelib/paper.mplstyle, line 2 (&#39;text.latex.unicode   : True&#39;)
-You probably need to get an updated matplotlibrc file from
-https://github.com/matplotlib/matplotlib/blob/v3.3.3/matplotlibrc.template
-or from the matplotlib source distribution
-
-Bad key text.latex.unicode in file /Users/potoyan/.matplotlib/stylelib/paper2.mplstyle, line 2 (&#39;text.latex.unicode   : True&#39;)
-You probably need to get an updated matplotlibrc file from
-https://github.com/matplotlib/matplotlib/blob/v3.3.3/matplotlibrc.template
-or from the matplotlib source distribution
 </pre></div>
 </div>
 </div>
@@ -648,6 +641,100 @@ or from the matplotlib source distribution
 <img alt="../_images/9bbf9590e377b844c43d1e60a037d759b951b57830f0d6284b8e762a018b08fe.svg" src="../_images/9bbf9590e377b844c43d1e60a037d759b951b57830f0d6284b8e762a018b08fe.svg" /></div>
 </div>
 </section>
+<section id="counting-of-statss-in-phase-space">
+<h2>Counting of statss in phase-space<a class="headerlink" href="#counting-of-statss-in-phase-space" title="Permalink to this heading">#</a></h2>
+<p><strong>Quantum Mechanics</strong></p>
+<ul class="simple">
+<li><p>In Quantum mechanics, we simply count the number of states, which is natural and easy due to the discreteness of energy levels.  The question now is how to deal with classical systems that have continuous energy functions.</p></li>
+<li><p>We clarify this issue using the example of a collection of independent 1D harmonic oscillators to find an expression coinciding with the QM description.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E= \sum_j\Big(n_j+\frac{1}{2}\Big)\hbar\omega\]</div>
+<ul class="simple">
+<li><p>For a harmonic oscillator, the number of states corresponding to E is obtained simply as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[N_E \approx \frac{E}{\hbar \omega} \]</div>
+<p><strong>Classical Mechanics</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the figure and axes for plotting again with green gradients</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">m</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">omega</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">energies</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="c1"># Generate and plot phase space trajectories with a gradient of green colors</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lightgreen&#39;</span><span class="p">,</span> <span class="s1">&#39;mediumseagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;darkgreen&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">E</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">energies</span><span class="p">):</span>
+    <span class="c1"># The maximum position (amplitude) and momentum for a given energy</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">E</span><span class="o">/</span><span class="n">m</span><span class="o">/</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">p_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">E</span><span class="p">)</span>
+    
+    <span class="c1"># Generate position and momentum values</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="o">*</span><span class="n">E</span> <span class="o">-</span> <span class="n">m</span><span class="o">*</span><span class="n">omega</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="c1"># Plotting the phase space trajectory with a gradient of green colors</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;E=</span><span class="si">{</span><span class="n">E</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># Mirror image for negative momentum</span>
+
+<span class="c1"># Labeling the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Phase Space of a 1D Harmonic Oscillator&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Position (x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Momentum (p)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3h/w4n54dz57dvbhgvz68gdv0f0f3hkmm/T/ipykernel_48781/2847915048.py:16: RuntimeWarning: invalid value encountered in sqrt
+  p = np.sqrt(2*m*E - m*omega**2*x**2)
+/var/folders/3h/w4n54dz57dvbhgvz68gdv0f0f3hkmm/T/ipykernel_48781/2847915048.py:16: RuntimeWarning: invalid value encountered in sqrt
+  p = np.sqrt(2*m*E - m*omega**2*x**2)
+</pre></div>
+</div>
+<img alt="../_images/eb7c4051d162808a5b55c703c28d99932061fad0073094f66e1cf4d363f67624.png" src="../_images/eb7c4051d162808a5b55c703c28d99932061fad0073094f66e1cf4d363f67624.png" />
+</div>
+</div>
+<p><strong>Planck constant quantifies number of states in a phase-space volume</strong></p>
+<p>In CM, not having discrete count of states we are forced to somehow quantify the “volume” of states occupied by the harmonic oscillator at E as a measure of number of states</p>
+<div class="math notranslate nohighlight">
+\[\Big[\frac{p}{(2mE)^{1/2}}\Big]^2 + \Big[\frac{q}{(2E/m\omega)^{1/2}}\Big]^2 = 1\]</div>
+<div class="math notranslate nohighlight">
+\[V = \pi  \cdot (2mE)^{1/2} \cdot (2E/m\omega)^{1/2} =\frac{2\pi E}{\omega}\]</div>
+<p>We see that we are missing an important factor of <span class="math notranslate nohighlight">\(h\)</span> which does not exist in CM! Otherwise the expression is identical to QM expression. Hence we introduce a rule to divide the number of states in CM by <span class="math notranslate nohighlight">\(h\)</span></p>
+<div class="math notranslate nohighlight">
+\[N_E = \frac{V}{h}\]</div>
+<p><strong>General expression of number of states in classical mechanics</strong></p>
+<p>Generalizing the expression for N number of indistinguishable particles with 3N degrees of freedom we obtain:</p>
+<div class="math notranslate nohighlight">
+\[{N_E = \frac{1}{N! h^{3N}}\int_{H(p^N,q^N)\leq E} dp^N dq^N}\]</div>
+<ul class="simple">
+<li><p>Or we can use heavy side function <span class="math notranslate nohighlight">\(\theta(x)\)</span> to lift the restriction on integration limits:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[N_E = \frac{1}{N! h^{3N}}\int dp^N dq^N \theta(H(p^N,q^N) -E)\]</div>
+</section>
+<section id="density-of-states">
+<h2>Density of states<a class="headerlink" href="#density-of-states" title="Permalink to this heading">#</a></h2>
+<p>We will show that for macroscopic system it is convenient to work with denisty of states because number of states in outer thin shell <span class="math notranslate nohighlight">\(\Delta E\)</span> is an excellent approximation to total number of states</p>
+<div class="math notranslate nohighlight">
+\[\Omega(E) =\frac{d N(E)}{d E}\]</div>
+<div class="math notranslate nohighlight">
+\[N(E)\sim \Omega(E)\Delta E\]</div>
+<ul class="simple">
+<li><p>Taking the derivative with respect to the energy we get the delta function under the integral</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\boxed{\Omega(E) = \frac{1}{N! h^{3N}}\int dp^N dq^N \delta(H(p^N,q^N) -E)}\]</div>
+<ul class="simple">
+<li><p>Where <span class="math notranslate nohighlight">\(\theta(x-a)\)</span> is a step function (Heviside function) derivative of which gives rise to delta function <span class="math notranslate nohighlight">\(\delta(x) =\frac{d}{dx}\theta(x-a)\)</span></p></li>
+<li><p>Watch out for N! The indistinguishability of the particles has consequences for thermodynamics</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -716,6 +803,8 @@ or from the matplotlib source distribution
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuity-equation-and-liuvilles-theorem">Continuity equation and Liuville’s theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#liuville-theorem-illustrated">Liuville theorem illustrated</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-conservative-dynamics-in-phase-space">Hamiltonian, conservative dynamics in phase space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-of-statss-in-phase-space">Counting of statss in phase-space</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#density-of-states">Density of states</a></li>
 </ul>
   </nav></div>
 
