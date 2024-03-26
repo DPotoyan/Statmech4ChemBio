@@ -1,20 +1,14 @@
 
 # Overview of ensembles
-
-- **Microcanonical Ensemble:** Represents an isolated system with fixed energy, volume, and number of particles. It's described by the distribution function that gives equal weight to all accessible microstates with the same energy, leading to the principle of equal a priori probabilities.
-
-- **Canonical Ensemble:** Describes a system in thermal equilibrium with a heat bath at a fixed temperature, volume, and number of particles. The distribution function here is the Boltzmann distribution, which accounts for energy fluctuations in the system while maintaining a constant temperature.
-
-- **Grand Canonical Ensemble:** This ensemble is used for systems in contact with a reservoir that allows exchange of both energy and particles. It is characterized by fixed temperature, volume, and chemical potential. The distribution function combines the Boltzmann factor with a term accounting for particle number fluctuations.
   
 ![](./figs/ensembl.png)
 
 
-1. **Entropy Definition**:
-2. 
+1. **Entropy as a function of microstate probabilities**:
+ 
    $$S = -k \sum_{i} p_i \log p_i$$
 
-3. **Constraints**:
+3. **Constraint imposed on thermodynamic coordinates to maintain constant values**:
    - Normalization of probabilities(all ensembles):
      
      $$\sum_{i} p_i = 1$$
@@ -34,7 +28,7 @@
 4. **Lagrange Multipliers**:
    Construct the Lagrangian with Lagrange multipliers} $\alpha$, $\beta$, ...
    
-   $$L = -k \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i - \langle E \rangle \right) + \gamma \left(\sum p_N N-\langle N \rangle \right) + \eta \left(\sum_V p_V V-\langle V \rangle\right)$$
+   $$L = -k \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i - ...$$
 
 
 ### Finding maximum entropy solution with constraints (NVE example)
@@ -51,7 +45,7 @@
      
      $$\sum_j p_j = \sum_j e^{-\frac{\alpha}{k_B} - 1} =\Omega$$
      
-   - probabilities are independent of microstate and the sum can be set to be equal to a constant denoted as $\Omega$
+   - probabilities are independent of the microstate, and the sum can be set to be equal to a constant denoted as $\Omega$
 
 **Probability Expression:**
 

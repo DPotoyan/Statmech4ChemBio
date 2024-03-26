@@ -467,12 +467,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maxent-predicts-exponential-distribution-of-energies-in-nvt">MaxEnt predicts exponential distribution of energies in NVT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-beta-frac-1-k-b-t">Determining <span class="math notranslate nohighlight">\(\beta= \frac{1}{k_B T}\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-vs-quantum-mechanics">Computing Z via classical vs quantum mechanics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-closer-look-at-the-the-partiation-function-z">A closer look at the the partiation function Z</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-probabilities-of-micro-and-macro-states">Free energies and probabilities of micro and macro states</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-and-fluctuations-of-energy">Mean and fluctuations of Energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#micro-vs-macro-states">Micro vs macro states</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-limit-and-partition-functions">Thermodynamic limit and partition functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-mean-and-fluctuations-of-energy">Computing mean and fluctuations of Energy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-equivalence">Ensemble equivalence</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model">Example-1: A two state model</a></li>
@@ -520,113 +520,149 @@ document.write(`
 <li><p>While in NVE entropy was linked directly with partition function <span class="math notranslate nohighlight">\(S=k_B log \Omega\)</span>, in NVT, it is free energy that is directly linked with partition function Z, <span class="math notranslate nohighlight">\(F=-k_BT logZ\)</span></p></li>
 </ul>
 </div>
-<section id="maxent-predicts-exponential-distribution-of-energies-in-nvt">
-<h2>MaxEnt predicts exponential distribution of energies in NVT<a class="headerlink" href="#maxent-predicts-exponential-distribution-of-energies-in-nvt" title="Permalink to this heading">#</a></h2>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>An intuitive derivation of Boltzmann distribution</strong></p>
+<p><strong>Probability for system to have energy E in terms of microstates</strong></p>
 <ul class="simple">
-<li><p>Maximizing entropy with average energy constraint <span class="math notranslate nohighlight">\(\sum_i p_i E_i = U\)</span>, we end up with exponential dependence on microstate energies <span class="math notranslate nohighlight">\(E_i\)</span> known as <strong>Boltzmann distribution</strong></p></li>
+<li><p>Consider a system in contact with the thermal reservoir. The combined system is isolated which means we can write down NVE partition function as a sum over different ways of partitioning total energy between system and reservoir.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p_i = \frac{e^{-\beta E_i}}{\sum_i e^{-\beta E_i}} = \frac{e^{-\beta E_i}}{Z}\]</div>
+\[\Omega_{t}(E_t) = \sum_E \Omega(E) \Omega_r(E-E) \cdot\]</div>
+<p>The probability of being in any thermodynamic <strong>macrostate</strong>  described by energy <span class="math notranslate nohighlight">\(E\)</span> will be given by the ratio of that term over the sum:</p>
+<div class="math notranslate nohighlight">
+\[p(E) = \frac{\Omega(E) \Omega_r(E_t-E) }{\sum_E \Omega(E) \Omega_r(E_t-E) }\]</div>
+<p><strong>Reservoir is much larger than the system</strong></p>
 <ul class="simple">
-<li><p>The denominator <span class="math notranslate nohighlight">\(Z\)</span> is called <strong>partition function</strong>, it ensures normalization and is related to Helmholz free energy <span class="math notranslate nohighlight">\(F\)</span> to be shown below.</p></li>
+<li><p>We can take advantage of the fact that the reservoir is much larger than the system <span class="math notranslate nohighlight">\(E_t \sim E_r \ll E\)</span> and entropy being a smoothly varying function of energy, we can make Taylor expansion around total energy:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[Z(\beta, N, V) = \sum_i e^{-\beta E_i}=e^{-\beta F}\]</div>
+\[\Omega_r(E_t-E) = exp \Bigg[ \frac{1}{k_B} S_r(E_t-E) \Bigg]  \approx exp \Bigg[ \frac{1}{k_B} S_r(E_t)-\frac{1}{k_B} \Big(\frac{\partial S_r}{\partial E}\Big) E \Bigg]   = e^{S_r(E_t)}e^{-\beta E}\]</div>
 <ul class="simple">
-<li><p>Recall that in NVE, we counted microstates with equal weights <span class="math notranslate nohighlight">\(\Omega\)</span>. In other words, states were equipartitioned. In NVE states are weighted by exponential factors. In other words low energy states contribute more than high energy states. The situation is more sever at low temperatures where only ground states contribute to thermodynamics.</p></li>
+<li><p>The constant reservoir term  ends up canceling out from the ratio!</p></li>
 </ul>
-</section>
-<section id="determining-beta-frac-1-k-b-t">
-<h2>Determining <span class="math notranslate nohighlight">\(\beta= \frac{1}{k_B T}\)</span><a class="headerlink" href="#determining-beta-frac-1-k-b-t" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[p(E) = \frac{ \Omega(E)  e^{\frac{1}{k_B}S(E_t)} e^{-\beta E} }{\sum_E \Omega(E) e^{\frac{1}{k_B}S(E_t)}  e^{-\beta E}} = \frac{ \Omega(E)  e^{-\beta E} }{\sum_E \Omega(E)  e^{-\beta E}}\]</div>
+<ul class="simple">
+<li><p>We can also write down the probability of a single specific microstate <span class="math notranslate nohighlight">\(E=E_i\)</span> for which <span class="math notranslate nohighlight">\(\Omega(E_i)=1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p_i = \frac{ e^{-\beta E_i} }{\sum_i e^{-\beta E_i}}\]</div>
+<p><strong>Connection with Thermodynamics</strong></p>
+<ul class="simple">
+<li><p>Let us now connect the entropy of the whole system to entropy in thermodynamics. Recall that in thermodynamics, entropy is an extensive quantity, meaning that total entropy should be expressed as the sum of entropies of system+reservoir. This is possible only if the sum of the <span class="math notranslate nohighlight">\(\Omega_t(E_t)\)</span> expression is sharply dominated by a single term that is centered on some (average) value of energy <span class="math notranslate nohighlight">\(U\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S = k_B log \Omega_{t}(E_t) = k_B log \sum_E \Omega(E) \Omega_r(E-E) \approx k_B log \Omega(U)+k_B log \Omega_r(E_t-U) = S(U) + S_r(E_t-U)\]</div>
+<div class="math notranslate nohighlight">
+\[Z = \sum_E \Omega(E) e^{-\beta E} \approx \Omega (U) e^{-\beta U} = e^{-\beta(U-TS)} = e^{-\beta F}\]</div>
+<ul class="simple">
+<li><p>We see that the reservoir’s contribution to the distribution of energy in the system is only through temperature!</p></li>
+<li><p>We could also carry our similar derivation by expanding reservoir entropy around the average energy of the system  <span class="math notranslate nohighlight">\(U = \sum_i p_i E_i\)</span> by making use of the central limit theorem, which predicts small fluctuations around averages <span class="math notranslate nohighlight">\(U - E_i = \delta E_i \sim O(N^{1/2})\)</span></p></li>
+</ul>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>MaxEnt derivation of Boltzmann distribution</strong></p>
+<ul class="simple">
+<li><p>Maximizing entropy with a constraint on internal energy, we end up with exponential dependence on <strong>microstate energies</strong> <span class="math notranslate nohighlight">\(E_i\)</span>, known as Boltzmann distribution.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ L = -k_B \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i-U \right)\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial L}{\partial p_j} = -k_B (\log p_j + 1) - \alpha - \beta E_j = 0\]</div>
+<ul class="simple">
+<li><p>The probability of a microstate can be expressed in terms of two Lagrange multipliers that are to be determined. First one is a constant prefactor that can be absorbed into the normalization factor</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p_j = e^{-\frac{\alpha}{k} - 1} e^{-\frac{\beta E_j}{k_B}} \sim e^{-{\beta E_j}}\]</div>
+<ul class="simple">
+<li><p>Requiring <span class="math notranslate nohighlight">\(\sum_p_j=1\)</span> we eliminate lagrange mulitplier <span class="math notranslate nohighlight">\(\alpha getting\)</span> an exponential distribution known as Boltzmann distribution.</p></li>
+</ul>
+<p><strong>Boltzmann distribution</strong></p>
+<div class="math notranslate nohighlight">
+\[ p_j = \frac{e^{-\frac{\beta E_j}{k}}}{Z}\]</div>
+<ul class="simple">
+<li><p>We can also write down the probability distribution of macrostate E, which has degeneracy <span class="math notranslate nohighlight">\(\Omega(E)\)</span> implying that lots of microstates correspond to this one macrostate, and according to probability theory, we must add up all the microstate probabilities:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E) = \frac{\Omega (E) e^{-\beta E}}{\sum_E \Omega (E) e^{-\beta E}}\]</div>
+<p><strong>Determining <span class="math notranslate nohighlight">\(\beta= \frac{1}{k_B T}\)</span></strong></p>
 <ul class="simple">
 <li><p>Plugging Boltzmann distribution back into the formula of entropy, we get</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S = - k_B \sum_i p_i log \frac{e^{-\beta E_i}}{Z} = k_B \beta \sum_i p_i E_i +  k_B \sum_i p_i logZ = k_B \beta U +k_B logZ\]</div>
 <ul class="simple">
-<li><p>To establish a link with thermodynamics, we look at entropy change under constant temperature:</p></li>
+<li><p>To establish a link with thermodynamics, we equate entropy change under constant temperature using stat mech sum over states and Gibbs relation from thermodynamics</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[dS = k_B \beta dU + k_B d logZ = \frac{dU}{T} - \frac{dF}{T}\]</div>
+\[dS = k_B \beta dU + k_B d logZ\]</div>
+<div class="math notranslate nohighlight">
+\[dS = \frac{dU}{T} - \frac{dF}{T}\]</div>
 <ul class="simple">
-<li><p>Equating terms we find that <span class="math notranslate nohighlight">\(\beta = \frac{1}{k_B T}\)</span> and free energy is given by</p></li>
+<li><p>The first term tells us that:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\beta = \frac{1}{k_B T}\]</div>
+<ul class="simple">
+<li><p>The second term tells us that:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[F = -k_B T logZ\]</div>
-<div class="tip dropdown admonition">
-<p class="admonition-title"><strong>An intutitive derivation of Boltzman distribution</strong></p>
-<ul class="simple">
-<li><p>Consider a system in contact with the thermal reservoir. The combined system is isolated which means we can write down NVE partition function as a sum over different ways of partitioning total energy between system and reservoir.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\Omega_{t}(E_t) = \sum_i \Omega_r(E-E_i) \cdot \Omega(E_i)\]</div>
-<ul class="simple">
-<li><p>But we know from thermodynamics that the entropy of the system is additive. Therefore we see that this additivity emerges because the sumation is dominated by term where the system adopts average energy <span class="math notranslate nohighlight">\(U\)</span> which maximizes the entropy.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[S_t (E_t) = k_B log \sum_i \Omega_r(E-E_i) \cdot \Omega(E_i) \approx k_B  log \Omega_r(E-U) \cdot \Omega(U) = S_r(E_t-U) + S(U)\]</div>
-<ul class="simple">
-<li><p>Let us single out one micro-state <span class="math notranslate nohighlight">\(E_i\)</span> of our system <span class="math notranslate nohighlight">\(\Omega(E_i) =1\)</span> and see what would be its probability</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p_i = \frac{\Omega_r(E_{t}-E_i)}{\Omega_{t} (E_{t})} = \frac{e^{\frac{1}{k_B}S_r(E_{t}-E_i)}}{e^{\frac{1}{k_B} S_{t}(E_t)}} = \frac{e^{\frac{1}{k_B}S_r(E_{t}-E_i)}}{e^{\frac{1}{k_B}[S_{r}(E_t-U) + S(U)]}}\]</div>
-<ul class="simple">
-<li><p>Since entropy is a smoothly varying function of energy and the energy of the system is relatively small, we have <span class="math notranslate nohighlight">\(E_t \ll E_i\)</span> and <span class="math notranslate nohighlight">\(E_t \ll U\)</span> inequalities and can carry out Taylor expansion around total energy.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[S_r(E_t-E_i) \approx S_r(E_t) + \Big( \frac{\partial S_r}{\partial E}\Big)  (-E_i) = S_r(E_t) - \frac{1}{T} E_i\]</div>
-<div class="math notranslate nohighlight">
-\[S_{r}(E_t-U)  \approx S_r(E_t) + \Big( \frac{\partial S_r}{\partial U}\Big)  (-U) = S_r(E_t) -\frac{1}{T}U\]</div>
-<ul class="simple">
-<li><p>Plugging the expression back into the probability of an entropy of reservoir <span class="math notranslate nohighlight">\(S_r\)</span> cancels out and we get:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[{ p_i = \frac{e^{-\beta E_i}}{e^{-\beta (U-TS)}} = \frac{e^{-\beta E_i}}{e^{-\beta F}} }\]</div>
-<ul class="simple">
-<li><p>We see that the reservoir’s contribution to the distribution of energy in the system is only through temperature!</p></li>
-<li><p>We could also carry our similar derivation by expanding reservoir entropy around the average energy of the system  <span class="math notranslate nohighlight">\(U = \sum_i p_i E_i\)</span> by making use of the central limit theorem, which predicts small fluctuations around averages <span class="math notranslate nohighlight">\(U - E_i = \delta E_i \sim O(N^{1/2})\)</span></p></li>
-</ul>
 </div>
-</section>
-<section id="computing-z-via-classical-vs-quantum-mechanics">
-<h2>Computing Z via classical vs quantum mechanics<a class="headerlink" href="#computing-z-via-classical-vs-quantum-mechanics" title="Permalink to this heading">#</a></h2>
-<p><strong>Quantum Mechanics</strong></p>
+<section id="micro-vs-macro-states">
+<h2>Micro vs macro states<a class="headerlink" href="#micro-vs-macro-states" title="Permalink to this heading">#</a></h2>
+<p><strong>Microstates</strong></p>
 <ul class="simple">
-<li><p>Counting in quantum emchanics requires knowing the solutions to Schrodinger equation <span class="math notranslate nohighlight">\(H |\psi_i\rangle = E_i | \psi_i\rangle\)</span> whcih are used for constructing parition function:</p></li>
+<li><p>In NVT ensemble microstates follow Boltzmann distribution
+$<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \frac{e^{-\beta E_1}}{e^{-\beta F}}\)</span>$</p></li>
+<li><p>The relative population of microstates is dictated by the ratio of Boltzmann weights which depends on energy difference <span class="math notranslate nohighlight">\(\Delta E\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{Z(\beta) = \sum_i e^{-\beta E_i}}\]</div>
+\[\boxed{\frac{p_2}{p_1} = e^{\beta (E_2-E_1)}}\]</div>
+<p><strong>Macrostates</strong></p>
 <ul class="simple">
-<li><p>Given the huge degenerace for N “particle” thermodynamic systems the partion function can also be written as a sum over the energy values <span class="math notranslate nohighlight">\(E\)</span> instead of eigenvalues:</p></li>
+<li><p>Probability of macrostates with energy <span class="math notranslate nohighlight">\(E_A\)</span> is obtained by summing over all microstates with energy E_A or simply by multiplying by <span class="math notranslate nohighlight">\(\Omega_A\)</span>. The latter is related to entropy, which ends up turning the numerator into the free energy of a macrostate <span class="math notranslate nohighlight">\(A\)</span>: <span class="math notranslate nohighlight">\(F_A = E_A-TS_A\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{Z(\beta) = \int \Omega(E) e^{-\beta E}dE}\]</div>
-<p><strong>Classical Mechanics</strong></p>
+\[p_A =\frac{\Omega (E_A) e^{-\beta E_A}}{Z_A} = \frac{e^{-\beta F_A}}{e^{-\beta F}}\]</div>
 <ul class="simple">
-<li><p>Recall taht counting microstates in classical mechanics is done by discretizing phase space <span class="math notranslate nohighlight">\(\Gamma = (x^{3N}, p^{3N})\)</span> into the smallest possible quantum units <span class="math notranslate nohighlight">\(dxdp\sim h\)</span>. In other words we replace summation over quantum states with integral over phase space <span class="math notranslate nohighlight">\(\sum_i \rightarrow \int \frac{dpdx}{h}\)</span></p></li>
-<li><p>Recall that we need to correct classical mechanics for “double counting” microstates if we have N indinstinguishable “particles” with a factor of <span class="math notranslate nohighlight">\(N!\)</span></p></li>
+<li><p>The relative population of macrostates is dictated by the ratio of entropic term times Boltzmann weights which depends on free energy difference <span class="math notranslate nohighlight">\(\Delta F\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\Omega(E) = \frac{1}{N! h^{3N}} \int_{\Gamma}  \delta \big( H(\Gamma)-E) d \Gamma\]</div>
-<div class="math notranslate nohighlight">
-\[Z(\beta) = \int_{E} \Omega(E) e^{-\beta E} dE  = \frac{1}{N! h^{3N}} \int_{\Gamma} \Bigg[\int_{E} d \Gamma \delta \big( H(\Gamma)-E) e^{-\beta E}dE \Bigg] d\Gamma\]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{Z(\beta) = \frac{1}{N! h^{3N}} \int_{\Gamma} e^{-\beta H(\Gamma)} d\Gamma}\]</div>
-</section>
-<section id="a-closer-look-at-the-the-partiation-function-z">
-<h2>A closer look at the the partiation function Z<a class="headerlink" href="#a-closer-look-at-the-the-partiation-function-z" title="Permalink to this heading">#</a></h2>
-<div class="math notranslate nohighlight">
-\[\boxed{Z(\beta) = \int \Omega(E) e^{-\beta E}dE = \int e^{-\beta (E-T S(E))}dE }\]</div>
+\[\boxed{\frac{p_B}{p_A} = e^{-\beta (F_B-F_A)}}\]</div>
+<section id="thermodynamic-limit-and-partition-functions">
+<h3>Thermodynamic limit and partition functions<a class="headerlink" href="#thermodynamic-limit-and-partition-functions" title="Permalink to this heading">#</a></h3>
+<p><strong>Partition functions</strong></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\Omega(E)\sim e^N\)</span> rapidly increasing function with N eacsue of limit theorems: e.g the large deviation, central limit theorem, law of large numbers.</p></li>
+<li><p>Recall that we counted microstates with equal weights <span class="math notranslate nohighlight">\(\Omega\)</span> in NVE. In other words, states were equipartitioned.</p></li>
+<li><p>In NVT, states are weighted by exponential factors. In other words, low-energy states contribute more than high-energy states. The situation is more severe at low temperatures where only ground states contribute to thermodynamics.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Omega = \sum_i w_i = \sum_i 1\]</div>
+<div class="math notranslate nohighlight">
+\[Z(\beta) = \sum_i w_i = \sum_i e^{-\beta E_i}\]</div>
+<p><strong>Sum over microstates or macrostates</strong></p>
+<ul class="simple">
+<li><p>Partition function Z can be written down as a sum of microstates or macrostates. Since Energies of macrosystems vary smoothly we can also replace the sum as integral over energies</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z(\beta, N, V) = \sum_i e^{-\beta E_i}= \sum_E \Omega (E) e^{-\beta E} = \int \Omega(E) e^{-\beta E}dE\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Omega(E)\sim e^N\)</span> rapidly increasing function with N because of limit theorems: e.g., the large deviation, central limit theorem, law of large numbers.</p></li>
 <li><p><span class="math notranslate nohighlight">\(e^{-\beta E}\sim e^{-N}\)</span> rapidly decreasing function with N</p></li>
-<li><p>Thermodynamic limit <span class="math notranslate nohighlight">\(N, V\rightarrow \infty\)</span> and <span class="math notranslate nohighlight">\(N/V \rightarrow const\)</span> only the region of energy survivies hat guarantees non-negligible contribution</p></li>
+</ul>
+<p><strong>Connection with Free energy</strong></p>
+<ul class="simple">
+<li><p>In the thermodynamic limit of a large number of particles and volumes, only the region of energy survives that guarantees a non-negligible contribution to the partition function</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{Z = \int e^{-\beta (E-TS)}dE \approx e^{min_E [-\beta(E-TS)]} = e^{-\beta(U-TS)} = e^{-\beta F}}\]</div>
+\[{Z(\beta) = \int \Omega(E) e^{-\beta E}dE = \int e^{-\beta (E-T S(E))}dE }\]</div>
+<div class="math notranslate nohighlight">
+\[{Z(\beta) = \int e^{-\beta (E-TS)}dE \approx e^{min_E [-\beta(E-TS)]} = e^{-\beta(U-TS)} = e^{-\beta F}}\]</div>
 <ul class="simple">
-<li><p>Where <span class="math notranslate nohighlight">\(U =\langle E \rangle\)</span> is the thermodynamic average energy, flucutatins around which are on order of <span class="math notranslate nohighlight">\(O(N^{1/2})\)</span></p></li>
-<li><p>It can be seen that <span class="math notranslate nohighlight">\(Z\)</span>, the partition function of NVT is <strong>Laplace Transform</strong> of density of states of NVE. While connection between energy and free energy <span class="math notranslate nohighlight">\(F= E -TS\)</span> is via <strong>Legendre Transform</strong></p></li>
+<li><p>Where <span class="math notranslate nohighlight">\(U =\langle E \rangle\)</span> is the thermodynamic average energy, fluctuations around which are on the order of <span class="math notranslate nohighlight">\(O(N^{1/2})\)</span></p></li>
+<li><p>It can be seen that <span class="math notranslate nohighlight">\(Z\)</span>, the partition function of NVT is <strong>Laplace Transform</strong> of the density of states of NVE.</p></li>
+<li><p>The connection between energy and free energy <span class="math notranslate nohighlight">\(F= E -TS\)</span> is via <strong>Legendre Transform</strong></p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -651,32 +687,30 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;$E$&#39;)
-</pre></div>
-</div>
-<img alt="../_images/7e6e5a5ab8209cb20d04d97ca480b94dadf05a8306e7dd3a12415130b85a6f0b.png" src="../_images/7e6e5a5ab8209cb20d04d97ca480b94dadf05a8306e7dd3a12415130b85a6f0b.png" />
-</div>
 </div>
 </section>
-<section id="free-energies-and-probabilities-of-micro-and-macro-states">
-<h2>Free energies and probabilities of micro and macro states<a class="headerlink" href="#free-energies-and-probabilities-of-micro-and-macro-states" title="Permalink to this heading">#</a></h2>
-<p><strong>Microstates</strong></p>
+</section>
+<section id="computing-z-via-classical-mechanics">
+<h2>Computing Z via classical mechanics<a class="headerlink" href="#computing-z-via-classical-mechanics" title="Permalink to this heading">#</a></h2>
+<p><strong>Integrals over phase space</strong></p>
 <ul class="simple">
-<li><p>Relative population of microstates is dictates by the ration of Boltzmann weights which depends on energy difference <span class="math notranslate nohighlight">\(\Delta E\)</span></p></li>
+<li><p>In quantum mechanics counting microsites is easy, we have discrete energies and  could simply sum over microstates to compute partition functions <span class="math notranslate nohighlight">\(Z=\sum_i e^{-\beta E_i}\)</span></p></li>
+<li><p>Counting microstates in classical mechanics is done by discretizing phase space <span class="math notranslate nohighlight">\(\Gamma = (x^{3N}, p^{3N})\)</span> into small cubes of units <span class="math notranslate nohighlight">\(dx^Ndp^N\sim h^N\)</span>. In other words, we replace summation over quantum states with integral over phase space <span class="math notranslate nohighlight">\(\sum_i \rightarrow \int \frac{dpdx}{h}\)</span></p></li>
+<li><p>Recall that we need to correct classical mechanics for “double counting” microstates if we have N indistinguishable “particles” with a factor of <span class="math notranslate nohighlight">\(N!\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\frac{p_2}{p_1} = e^{\beta (E_2-E_1}\]</div>
-<p><strong>Macrostates</strong></p>
-<p>The relative population of macrostates is dictated by the ratio of entropic term times Boltzmann weights which depends on free energy difference <span class="math notranslate nohighlight">\(\Delta F\)</span></p>
+\[\Omega(E) = \frac{1}{N! h^{3N}} \int_{\Gamma}  \delta \big( H(\Gamma)-E) d \Gamma\]</div>
 <div class="math notranslate nohighlight">
-\[p_A =\frac{\Omega (E_A) e^{-\beta E_A}}{Z_A} = \frac{e^{-\beta F_A}}{e^{-\beta F}}\]</div>
-<p>The relative probabilities of different states, e.g, conformation A vs B of polymer are dictated by free energy differences</p>
+\[Z(\beta) = \int_{E} \Omega(E) e^{-\beta E} dE  = \frac{1}{N! h^{3N}} \int_{\Gamma} \Bigg[\int_{E} d \Gamma \delta \big( H(\Gamma)-E) e^{-\beta E}dE \Bigg] d\Gamma\]</div>
+<ul class="simple">
+<li><p>We thus obtain an expression of partition function expressed as integral over phase-space. This expression will be useful for computing partition functions of atomic and molecular gasses with simple Hamiltonian functions.</p></li>
+<li></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[\frac{p_B}{p_A} = e^{-\beta (F_B-F_A)} \]</div>
+\[\boxed{Z(\beta) = \frac{1}{N! h^{3N}} \int_{\Gamma} e^{-\beta H(\Gamma)} d\Gamma}\]</div>
 </section>
-<section id="mean-and-fluctuations-of-energy">
-<h2>Mean and fluctuations of Energy<a class="headerlink" href="#mean-and-fluctuations-of-energy" title="Permalink to this heading">#</a></h2>
+<section id="computing-mean-and-fluctuations-of-energy">
+<h2>Computing mean and fluctuations of Energy<a class="headerlink" href="#computing-mean-and-fluctuations-of-energy" title="Permalink to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[\langle E \rangle = \frac{\partial log Z}{\partial (-\beta)}\]</div>
 <div class="math notranslate nohighlight">
@@ -1039,12 +1073,12 @@ $<span class="math notranslate nohighlight">\(p = -\frac{\partial F}{\partial V}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maxent-predicts-exponential-distribution-of-energies-in-nvt">MaxEnt predicts exponential distribution of energies in NVT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-beta-frac-1-k-b-t">Determining <span class="math notranslate nohighlight">\(\beta= \frac{1}{k_B T}\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-vs-quantum-mechanics">Computing Z via classical vs quantum mechanics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-closer-look-at-the-the-partiation-function-z">A closer look at the the partiation function Z</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-probabilities-of-micro-and-macro-states">Free energies and probabilities of micro and macro states</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-and-fluctuations-of-energy">Mean and fluctuations of Energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#micro-vs-macro-states">Micro vs macro states</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-limit-and-partition-functions">Thermodynamic limit and partition functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-mean-and-fluctuations-of-energy">Computing mean and fluctuations of Energy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-equivalence">Ensemble equivalence</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model">Example-1: A two state model</a></li>
