@@ -467,6 +467,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-and-kt-energy"><span class="math notranslate nohighlight">\(\beta\)</span> and kT (energy)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#micro-vs-macro-states">Micro vs macro states</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-limit-and-partition-functions">Thermodynamic limit and partition functions</a></li>
 </ul>
@@ -609,6 +610,69 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[F = -k_B T logZ\]</div>
 </div>
+<section id="beta-and-kt-energy">
+<h2><span class="math notranslate nohighlight">\(\beta\)</span> and kT (energy)<a class="headerlink" href="#beta-and-kt-energy" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(kT\)</span> (also written as <span class="math notranslate nohighlight">\(k_BT\)</span>) or its inverse <span class="math notranslate nohighlight">\(\beta =(k_BT)^{-1}\)</span> contain a product of the Boltzmann constant <span class="math notranslate nohighlight">\(k_B\)</span> and the temperature, T.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p_i \sim e^{-E_i/k_BT} = e^{-\beta E_i}\]</div>
+<ul class="simple">
+<li><p>This product is used as a scale factor for energy values in molecular-scale systems (sometimes it is used as a unit of energy), as the rates and frequencies of many processes and phenomena depend not on their energy alone but on the ratio of that energy and kT.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">k</span><span class="p">,</span> <span class="n">N_A</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;kT in J:&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> 
+
+<span class="n">RT</span><span class="o">=</span><span class="n">N_A</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="mi">300</span> <span class="o">*</span><span class="mf">1e-3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RT in kJ/mol:&#39;</span><span class="p">,</span> <span class="n">RT</span><span class="p">)</span> 
+
+<span class="c1">#Compare to the energy of breaking oxygen bond </span>
+<span class="n">E_breakO</span> <span class="o">=</span> <span class="mi">495</span> <span class="c1"># kj/mol</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Multiples of thermal energy to break oxygen molecule:&#39;</span><span class="p">,</span> <span class="n">E_breakO</span><span class="o">/</span><span class="n">RT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>kT in J: 4.141947e-21
+RT in kJ/mol: 2.494338785445972
+Multiples of thermal energy to break oxygen molecule: 198.44938582049795
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="n">RT</span><span class="o">=</span><span class="n">N_A</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">T</span> <span class="o">*</span><span class="mf">1e-3</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">p_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">RT</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">RT</span><span class="p">))</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">p_i</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;RT=</span><span class="si">{</span><span class="n">RT</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p_i$&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">microtate_Es</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Omega(E_i)$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/53a9442a66fc8d60f6cf95c22a5127f86e1b7344f5de86890d350dc2f9839710.png" src="../_images/53a9442a66fc8d60f6cf95c22a5127f86e1b7344f5de86890d350dc2f9839710.png" />
+</div>
+</div>
+</section>
 <section id="micro-vs-macro-states">
 <h2>Micro vs macro states<a class="headerlink" href="#micro-vs-macro-states" title="Permalink to this heading">#</a></h2>
 <p><strong>Microstates</strong></p>
@@ -630,6 +694,26 @@ $<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \
 </ul>
 <div class="math notranslate nohighlight">
 \[\boxed{\frac{p_B}{p_A} = e^{-\beta (F_B-F_A)}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microtate_Es</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span> 
+
+
+<span class="c1"># Compute probability to be in microstate 1 vs 2 at kBT = 1</span>
+
+<span class="c1"># Compute probability to be in state E=2 vs in state E=1 at different temperatures fromm kBT = 0.1 to 10</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1., 4., 3., 2., 2., 1., 1., 1.]),
+ array([1.   , 1.875, 2.75 , 3.625, 4.5  , 5.375, 6.25 , 7.125, 8.   ]),
+ &lt;BarContainer object of 8 artists&gt;)
+</pre></div>
+</div>
+<img alt="../_images/486ae644439bc807c2c9eb6a3f708483a185f460169430e0f6edd5e9ac050365.png" src="../_images/486ae644439bc807c2c9eb6a3f708483a185f460169430e0f6edd5e9ac050365.png" />
+</div>
+</div>
 <section id="thermodynamic-limit-and-partition-functions">
 <h3>Thermodynamic limit and partition functions<a class="headerlink" href="#thermodynamic-limit-and-partition-functions" title="Permalink to this heading">#</a></h3>
 <p><strong>Partition functions</strong></p>
@@ -1073,6 +1157,7 @@ $<span class="math notranslate nohighlight">\(p = -\frac{\partial F}{\partial V}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-and-kt-energy"><span class="math notranslate nohighlight">\(\beta\)</span> and kT (energy)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#micro-vs-macro-states">Micro vs macro states</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-limit-and-partition-functions">Thermodynamic limit and partition functions</a></li>
 </ul>
