@@ -250,6 +250,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab4/intro.html">Application of ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab4/nvt_application.html">Free energy and protein folding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/TwoState.html">Two-state system</a></li>
 </ul>
 </li>
 </ul>
@@ -473,10 +474,9 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-mean-and-fluctuations-of-energy">Computing mean and fluctuations of Energy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-equivalence">Ensemble equivalence</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model">Example-1: A two state model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-theorem-and-ensemble-equivalence">Fluctuation-response theorem and ensemble equivalence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model">Example-1: A two-state model</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parition-function-decouples-non-interacting-terms-in-energy">Parition function decouples non-interacting terms in energy!</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-ideal-gas-classical">Example-2: Ideal gas (classical)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-ideal-paramagnet-of-spin-1-2">Example-3 Ideal paramagnet of spin 1/2</a></li>
@@ -793,13 +793,57 @@ $<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \
 </ul>
 <div class="math notranslate nohighlight">
 \[\boxed{Z(\beta) = \frac{1}{N! h^{3N}} \int_{\Gamma} e^{-\beta H(\Gamma)} d\Gamma}\]</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>Deriving average and fluctuation expression for energy</strong></p>
+<p><strong>Average Energy</strong></p>
+<ul class="simple">
+<li><p>Having determined probability distribution over microstates, we can calculate the mean value of energy, which corresponds to the energy in thermodynamics.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \langle E \rangle = \sum_{i} P_i E_i \]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(P_i = \frac{e^{-\beta E_i}}{Z}\)</span> is the probability of the system being in state <span class="math notranslate nohighlight">\(i\)</span>. Plugging the expression of <span class="math notranslate nohighlight">\(P_i\)</span> we get</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \langle E \rangle = \sum_{i} \frac{e^{-\beta E_i}}{Z} E_i = \frac{1}{Z} \sum_{i} E_i e^{-\beta E_i} = \frac{1}{Z} \frac{\partial}{\partial (-\beta)} \sum_{i} e^{-\beta E_i} =\frac{1}{Z} \frac{\partial}{\partial (-\beta)} Z =   - \frac{\partial log Z}{\partial \beta}\]</div>
+<ul class="simple">
+<li><p>We thus find that <span class="math notranslate nohighlight">\( \langle E \rangle\)</span> can be obtained by taking the derivative of <span class="math notranslate nohighlight">\(-\log Z\)</span> with respect to <span class="math notranslate nohighlight">\(\beta\)</span>:</p></li>
+</ul>
+<p><strong>Heat Capacity</strong></p>
+<ul class="simple">
+<li><p>The heat capacity at constant volume <span class="math notranslate nohighlight">\(C_V\)</span> is defined as the derivative of the average energy with respect to temperature:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ C_V = \left( \frac{\partial \langle E \rangle}{\partial T} \right)_V \]</div>
+<ul class="simple">
+<li><p>Using the chain rule, <span class="math notranslate nohighlight">\(C_V\)</span> can be expressed as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ C_V = \frac{\partial \langle E \rangle}{\partial \beta} \frac{\partial \beta}{\partial T} \]</div>
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(\beta = \frac{1}{k_B T}\)</span>, we have <span class="math notranslate nohighlight">\(\frac{\partial \beta}{\partial T} = -\frac{1}{k_B T^2}\)</span>. taking the derivative of <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> with respect to <span class="math notranslate nohighlight">\(\beta\)</span> gives:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \langle E \rangle}{\partial \beta} = \frac{\partial}{\partial \beta} \left( -\frac{1}{Z} \frac{\partial Z}{\partial \beta} \right) \]</div>
+<ul class="simple">
+<li><p>Simplifying this derivative and substituting <span class="math notranslate nohighlight">\(\frac{\partial \beta}{\partial T}\)</span> yields the heat capacity:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ C_V = -k_B \beta^2 \frac{\partial^2 \ln Z}{\partial \beta^2} \]</div>
+</div>
 </section>
-<section id="computing-mean-and-fluctuations-of-energy">
-<h2>Computing mean and fluctuations of Energy<a class="headerlink" href="#computing-mean-and-fluctuations-of-energy" title="Permalink to this heading">#</a></h2>
+<section id="fluctuation-response-theorem-and-ensemble-equivalence">
+<h2>Fluctuation-response theorem and ensemble equivalence<a class="headerlink" href="#fluctuation-response-theorem-and-ensemble-equivalence" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Mean and fluctuation of energy are computed from partition function as first and second derivatives (see derivation above)</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[\langle E \rangle = \frac{\partial log Z}{\partial (-\beta)}\]</div>
-<div class="math notranslate nohighlight">
-\[\sigma^2_E = \frac{\partial^2 log Z}{\partial \beta^2} = -\frac{\partial \langle E \rangle}{\partial \beta} = k_BT^2 C_v\]</div>
+\[\langle E \rangle = -\frac{\partial log Z}{\partial (\beta)}\]</div>
+<ul class="simple">
+<li><p>The relationship between fluctuations and heat capacity is known as <strong>fluctuation-response theorem</strong> in statistical mechanics
+$<span class="math notranslate nohighlight">\(\sigma^2_E = \frac{\partial^2 log Z}{\partial \beta^2}  = k_BT^2 C_v\)</span>$</p></li>
+<li><p>The fluctuations in energy are small relative to the mean. This shows that thermodynamic quantities computed in NVE and NVT should not differ in the thermodynamic limit of large systems! Thus, we are free to choose any convenient ensemble if we want to calculate, let’s say, temperature dependence on entropy.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\frac{\sigma_E}{\langle E\rangle} = \frac{(k_BT^2 C_v)^{1/2}}{\langle E\rangle}\sim O(N^{-1/2})\]</div>
 </section>
@@ -818,12 +862,11 @@ $<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \
 <li><p>Compute the free energy <span class="math notranslate nohighlight">\(F= - N k_B T log z\)</span></p></li>
 <li><p>Take derivatives of Z and/or free energy to get the thermodynamics.</p></li>
 </ol>
-</section>
-<section id="ensemble-equivalence">
-<h2>Ensemble equivalence<a class="headerlink" href="#ensemble-equivalence" title="Permalink to this heading">#</a></h2>
 <section id="example-1-a-two-state-model">
-<h3>Example-1: A two state model<a class="headerlink" href="#example-1-a-two-state-model" title="Permalink to this heading">#</a></h3>
-<p>Let us consider simple two level system where lower level <span class="math notranslate nohighlight">\(\epsilon_0 = 0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon_1 =\epsilon\)</span>. We will now use <span class="math notranslate nohighlight">\(NVE\)</span> ensemble to obtian thermodynamic quantities <span class="math notranslate nohighlight">\((S, T, C_v)\)</span> and then obtain same quantities with <span class="math notranslate nohighlight">\(NVT\)</span>.</p>
+<h3>Example-1: A two-state model<a class="headerlink" href="#example-1-a-two-state-model" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Let us consider simple two level system where lower level <span class="math notranslate nohighlight">\(\epsilon_0 = 0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon_1 =\epsilon\)</span>. We will now use <span class="math notranslate nohighlight">\(NVE\)</span> ensemble to obtian thermodynamic quantities <span class="math notranslate nohighlight">\((S, T, C_v)\)</span> and then obtain same quantities with <span class="math notranslate nohighlight">\(NVT\)</span>.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[E = n\epsilon\]</div>
 <div class="math notranslate nohighlight">
@@ -839,13 +882,13 @@ $<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \
 </section>
 <section id="parition-function-decouples-non-interacting-terms-in-energy">
 <h3>Parition function decouples non-interacting terms in energy!<a class="headerlink" href="#parition-function-decouples-non-interacting-terms-in-energy" title="Permalink to this heading">#</a></h3>
-<br>
+<ul class="simple">
+<li><p>Solving a two-state system in an NVT ensemble is much easier because the partition function decouples into single particle contributions.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[Z = \sum^{n=N}_{n=0} e^{-\beta E_n} =  \Big (\sum^{i=1}_{i=0} e^{-\beta \epsilon_i} \Big)\Big (\sum^{i=1}_{i=0} e^{-\beta \epsilon_i} \Big)...\Big (\sum^{i=1}_{i=0} e^{-\beta \epsilon_i} \Big) = (1+e^{-\beta \epsilon})^N\]</div>
-<br>
 <div class="math notranslate nohighlight">
 \[F= -k_B T log Z = -k_BT N log(1+e^{-\beta \epsilon})\]</div>
-<br>
 <div class="math notranslate nohighlight">
 \[\langle E \rangle  = \frac{\partial log Z}{\partial (-\beta)} =  \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
 <div class="cell docutils container">
@@ -876,21 +919,22 @@ $<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \
 \[H(p^N, x^N) = K(p^N)  = \sum^{i=N}_{i=1}\frac{p^2_i}{2m}\]</div>
 <div class="math notranslate nohighlight">
 \[\boxed{Z(\beta) = \frac{1}{h^{N} N!} \int dp^N dx^N e^{-\beta H(p^N,x^N)}}\]</div>
+<p><strong>Partition function for a single atom</strong></p>
 <ul class="simple">
-<li><p>Let us evaluate the partion function for a single particle in 3D:</p></li>
+<li><p>Let us evaluate the partition function for a single particle in 3D:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[Z(\beta) =  \Bigg [\frac{1}{h} \int_{L} dx \int^{+\infty}_{-\infty} dp e^{-\beta \frac{p^2}{2m}}  \Bigg ]^3 = V \Big [ \frac{2\pi m}{h \beta} \Big]^{3/2} = V n_Q\]</div>
-<p>We wrote down the partion sum in terms of volume of container and a quantum density <span class="math notranslate nohighlight">\(n_Q\)</span> or De-Broglie thermal wavelength <span class="math notranslate nohighlight">\(\lambda_T\)</span></p>
-<blockquote>
-<div><div class="math notranslate nohighlight">
+<p><strong>On the validity of classical approximation</strong></p>
+<ul class="simple">
+<li><p>We wrote down the partition sum in terms of the volume of the container and a quantum density <span class="math notranslate nohighlight">\(n_Q\)</span></p></li>
+<li><p>As long as interatomic distances are larger than De-Broglie thermal wavelength, classical approximation is good</p></li>
+</ul>
+<div class="math notranslate nohighlight">
 \[n_Q = \Big [ \frac{m k_B T}{2 \hbar^2} \Big]^{3/2} = \frac{1}{\lambda^3_T}\]</div>
 <div class="math notranslate nohighlight">
 \[\lambda_T = \frac{h}{2mk_BT} \sim \frac{h}{m \bar{v}}\]</div>
-</div></blockquote>
-<ul class="simple">
-<li><p>For the N particles we have:</p></li>
-</ul>
+<p><strong>Partition function for N atoms</strong></p>
 <div class="math notranslate nohighlight">
 \[Z = \frac{Z^N}{N!}  = \frac{(V n_Q)^N}{N!}\]</div>
 <ul class="simple">
@@ -900,37 +944,37 @@ $<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \
 \[Z = \Big[ \frac{n_Q}{n}\Big]^N e^N\]</div>
 <div class="math notranslate nohighlight">
 \[F = -k_B T log Z = -N k_B T  log \Big( \frac{n_Q}{n} \Big) - Nk_BT\]</div>
-<p>We can also calculate entropy and compare the expression with the one obtained from the microcanonical ensemble:</p>
+<ul class="simple">
+<li><p>We can also calculate entropy and other thermodynamic quantities and compare with expressions obtained in NVE</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[S = -\Big( \frac{\partial F}{\partial T}\Big)_{N,V} = Nk_B log \Big( \frac{n_Q}{n} \Big) + Nk_B + \frac{3}{2}Nk_B\]</div>
-<p>And unsurprisingly, we get the same expression for entropy in the canonical ensmeble known as <strong>Sackur-Tetrode equation</strong>
+<p><strong>Entropy</strong>
 $<span class="math notranslate nohighlight">\(S = Nk_B \Bigg[log \Big( \frac{n_Q}{n} \Big)+ \frac{5}{2} \Bigg]\)</span>$</p>
-<p>Similarly, other thermodynamic variables can be inferred by taking derivatives of free energy:</p>
+<p><strong>Mean energy</strong></p>
 <div class="math notranslate nohighlight">
 \[U = \frac{\partial log Z}{\partial (-\beta)} = \frac{3}{2}N k_B T\]</div>
-<ul class="simple">
-<li><p>Ideal gas equation of state is obtained by calculating pressure
-$<span class="math notranslate nohighlight">\(p = -\frac{\partial F}{\partial V} =\frac{N k_B T}{V}\)</span>$</p></li>
-</ul>
+<p><strong>Pressure and ideal gas law</strong>
+$<span class="math notranslate nohighlight">\(p = -\frac{\partial F}{\partial V} =\frac{N k_B T}{V}\)</span>$</p>
+<p><strong>Chemical potential</strong></p>
+<div class="math notranslate nohighlight">
+\[\mu = k_B T \cdot log  \Big(\frac{n}{n_Q(T)}\Big)\]</div>
 </section>
 <section id="example-3-ideal-paramagnet-of-spin-1-2">
 <h3>Example-3 Ideal paramagnet of spin 1/2<a class="headerlink" href="#example-3-ideal-paramagnet-of-spin-1-2" title="Permalink to this heading">#</a></h3>
+<p>Consider N independent spins in magnetic field <span class="math notranslate nohighlight">\(B\)</span>. Each <span class="math notranslate nohighlight">\(s_j = \pm 1\)</span> spin variable can assume two values that we refer to as up and down.</p>
 <div class="math notranslate nohighlight">
 \[E  = -\mu B \sum^{N}_j s_j \]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(s_j = \pm 1\)</span> spin variable can assume two values that we refer to as up and down.</p></li>
-</ul>
+<p><strong>Partition function of a single spin</strong></p>
 <div class="math notranslate nohighlight">
-\[Z = \sum_{E} exp(-\beta E) = \sum_{s_1, s_2, ... s_N} exp \Big( \beta \mu B \sum^{N}_j s_j \Big) = \Big [ \sum_{s_1} exp \Big( \beta \mu B  s_1 \Big) \Big ]... \Big [ \sum_{s_N} exp \Big( \beta \mu B s_N \Big) \Big ]\]</div>
-<p>Now it is easy to see that partition function factorizes</p>
+\[Z_1 = \sum_{s_1} e^{\beta \mu B s_1} = e^{\beta \mu B} + e^{-\beta \mu B}  = 2 cosh(\beta \mu B)\]</div>
+<p><strong>Partition function of N spins</strong></p>
 <div class="math notranslate nohighlight">
 \[Z =Z_1^N\]</div>
-<div class="math notranslate nohighlight">
-\[Z_1 = \sum_{s_1} exp(\beta \mu B s_1) = exp(\beta \mu B) + exp(-\beta \mu B)  = 2 cosh(\beta \mu B)\]</div>
 <p><strong>Free energy</strong></p>
 <div class="math notranslate nohighlight">
 \[ F(T, B) = - \beta^{-1} log Z = - N \beta^{-1} log \Big [ 2 cosh (\beta \mu B )  \Big ]\]</div>
-<p>The entropy is obtained by taking the derivative with respect to temperature</p>
+<p><strong>Entropy</strong></p>
 <div class="math notranslate nohighlight">
 \[S = - \Big(\frac{\partial F}{\partial T} \Big)_B = k_B log \Big [ 2 cosh (\beta \mu H )  \Big ] - k_B (\beta \mu B)\cdot tanh (\beta \mu B)\]</div>
 <p><strong>Magnetization</strong></p>
@@ -1019,17 +1063,17 @@ $<span class="math notranslate nohighlight">\(p = -\frac{\partial F}{\partial V}
 </section>
 <section id="equipartion-theorem">
 <h3>Equipartion theorem<a class="headerlink" href="#equipartion-theorem" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We can prove powerful results that, in general, each degree of freedom that appears in Hamiltonian as a quadratic function, e.g., <span class="math notranslate nohighlight">\(kq^2\)</span> contributes on average <span class="math notranslate nohighlight">\(\frac{1}{2}k_BT\)</span> energy. Hence we can count degrees of freedom and write down average energy and then compute heat capacity!</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[U(x) = U(x_0) +U^{'}(x-x_0) +\frac{1}{2}U^{''}(x-x_0)^2 +...\]</div>
+\[U(x) = kx^2 \]</div>
 <div class="math notranslate nohighlight">
-\[U_{harm}(x) = U(x_0) +  \frac{1}{2}U^{''}(x-x_0)^2 = U_0 + \frac{1}{2}\kappa (x-x_0)^2\]</div>
-<div class="math notranslate nohighlight">
-\[\langle U \rangle = \int p(x) U(x) dx = \frac{\int U(x) e^{-\beta U(x)}dx}{\int e^{-\beta U(x)}dx}\]</div>
-<div class="math notranslate nohighlight">
-\[U(x) = U_0 + \frac{k_B T}{2}\]</div>
-<blockquote>
-<div><p>Notice the spring constant does not figure in the average energy expression!</p>
-</div></blockquote>
+\[\langle U \rangle = \int p(x) U(x) dx = \frac{\int kx^2 e^{-\beta kx^2}dx}{\int e^{-\beta kx^2}dx} = \frac{k_B T}{2}\]</div>
+<ul class="simple">
+<li><p>The answer is found quickly by identifying variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> in gaussian function with zero mean <span class="math notranslate nohighlight">\(e^{\frac{-x^2}{2\sigma^2}}\)</span></p></li>
+<li><p>Notice the spring constant does not figure in the average energy expression!</p></li>
+</ul>
 </section>
 </section>
 <section id="problems">
@@ -1164,10 +1208,9 @@ $<span class="math notranslate nohighlight">\(p = -\frac{\partial F}{\partial V}
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-mean-and-fluctuations-of-energy">Computing mean and fluctuations of Energy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-equivalence">Ensemble equivalence</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model">Example-1: A two state model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-theorem-and-ensemble-equivalence">Fluctuation-response theorem and ensemble equivalence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model">Example-1: A two-state model</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parition-function-decouples-non-interacting-terms-in-energy">Parition function decouples non-interacting terms in energy!</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-ideal-gas-classical">Example-2: Ideal gas (classical)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-ideal-paramagnet-of-spin-1-2">Example-3 Ideal paramagnet of spin 1/2</a></li>
