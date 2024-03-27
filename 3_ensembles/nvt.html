@@ -514,22 +514,26 @@ document.write(`
 <div class="admonition-what-you-need-to-know admonition">
 <p class="admonition-title">What you need to know</p>
 <ul class="simple">
-<li><p>In the NVT ensemble, the system is allowed to exchange energy with an environment that maintains <span class="math notranslate nohighlight">\(T=const\)</span> instead of <span class="math notranslate nohighlight">\(E=const\)</span></p></li>
-<li><p>Probability to be in any particular microstate is given by Boltzmann distribution <span class="math notranslate nohighlight">\(p_i \sim e^{-\epsilon_i/k_BT}\)</span>. This shows that the system pays an exponentially high penalty for borrowing energy from the environment to occupy excited states. As temperature increases the price more and more excited states are populated.</p></li>
-<li><p>In thermodynamics, exchanging variable <span class="math notranslate nohighlight">\(E\)</span> with <span class="math notranslate nohighlight">\(T\)</span> is accomplished via Legendre transform <span class="math notranslate nohighlight">\(F = E-TS\)</span>, which makes free energy the central object for determining equilibrium states (minimizing F) and the amount of work that the system can perform in equilibrium <span class="math notranslate nohighlight">\(W=\Delta F\)</span></p></li>
-<li><p>In NVE, the partition function <span class="math notranslate nohighlight">\(\Omega\)</span> is a sum of microstates. In NVT, it the partition function <span class="math notranslate nohighlight">\(Z\)</span> is a Boltzman-weighted sum over microstates. <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(\Omega\)</span> are related via Laplace transform showing that thermodynamics computed in either ensemble is the same!</p></li>
-<li><p>While in NVE entropy was linked directly with partition function <span class="math notranslate nohighlight">\(S=k_B log \Omega\)</span>, in NVT, it is free energy that is directly linked with partition function Z, <span class="math notranslate nohighlight">\(F=-k_BT logZ\)</span></p></li>
+<li><p><strong>In NVT, ensemble</strong> each configuration of a system has different energies because the system can exchange energy with an environment to maintain <span class="math notranslate nohighlight">\(T=const\)</span>.</p></li>
+<li><p><strong>The Boltzmann distribution</strong> gives the probability of being in any particular macro or microstate in the NVT ensemble. Probability depends exponentially on energy, which shows that the system pays an exponentially high penalty for borrowing power from the environment to occupy excited states. As temperature increases, the price of more excited states is populated.</p></li>
+<li><p><strong>Free energy captures</strong> the entropy-energy tradeoff, which shows which macrostates are more likely to occur at any given temperature!</p></li>
+<li><p><strong>Legendre transform</strong> <span class="math notranslate nohighlight">\(F = U-TS\)</span> makes free energy the central object in thermodynamics of systems under <span class="math notranslate nohighlight">\(T=const\)</span>.   <span class="math notranslate nohighlight">\(\Delta F \leq 0\)</span> replaces <span class="math notranslate nohighlight">\(\Delta S \geq 0\)</span> as the condition for spontaneous process of the system.</p></li>
+<li><p><strong>The partition function</strong> <span class="math notranslate nohighlight">\(Z\)</span> in the NVT ensemble is a Boltzman-weighted sum over microstates.</p></li>
+<li><p><strong>Bridge equations in NVE and NVT.</strong> While in NVE entropy was linked directly with partition function <span class="math notranslate nohighlight">\(S=k_B log \Omega\)</span>, in NVT, it is free energy that is directly linked with partition function Z, <span class="math notranslate nohighlight">\(F=-k_BT logZ\)</span></p></li>
+<li><p><strong>The Laplace transform</strong> connections partition functions of NVT and NVE <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(\Omega\)</span>. This shows <strong>ensemble equivalence</strong>, e.g., thermodynamics quantities computed in either ensemble are the same!</p></li>
 </ul>
 </div>
 <div class="tip dropdown admonition">
 <p class="admonition-title"><strong>An intuitive derivation of Boltzmann distribution</strong></p>
-<p><strong>Probability for system to have energy E in terms of microstates</strong></p>
+<p><strong>Probability of macrostates</strong></p>
 <ul class="simple">
-<li><p>Consider a system in contact with the thermal reservoir. The combined system is isolated which means we can write down NVE partition function as a sum over different ways of partitioning total energy between system and reservoir.</p></li>
+<li><p>Consider a system in contact with the thermal reservoir. The combined system is isolated, which means we can write down the NVE partition function as a sum over different ways of partitioning total energy between the system and the reservoir.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\Omega_{t}(E_t) = \sum_E \Omega(E) \Omega_r(E-E) \cdot\]</div>
-<p>The probability of being in any thermodynamic <strong>macrostate</strong>  described by energy <span class="math notranslate nohighlight">\(E\)</span> will be given by the ratio of that term over the sum:</p>
+<ul class="simple">
+<li><p>The probability of being in any thermodynamic <strong>macrostate</strong>  described by energy <span class="math notranslate nohighlight">\(E\)</span> will be given by the ratio of one term over all possible partitionings of energy:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[p(E) = \frac{\Omega(E) \Omega_r(E_t-E) }{\sum_E \Omega(E) \Omega_r(E_t-E) }\]</div>
 <p><strong>Reservoir is much larger than the system</strong></p>
@@ -553,7 +557,7 @@ document.write(`
 <li><p>Let us now connect the entropy of the whole system to entropy in thermodynamics. Recall that in thermodynamics, entropy is an extensive quantity, meaning that total entropy should be expressed as the sum of entropies of system+reservoir. This is possible only if the sum of the <span class="math notranslate nohighlight">\(\Omega_t(E_t)\)</span> expression is sharply dominated by a single term that is centered on some (average) value of energy <span class="math notranslate nohighlight">\(U\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[S = k_B log \Omega_{t}(E_t) = k_B log \sum_E \Omega(E) \Omega_r(E-E) \approx k_B log \Omega(U)+k_B log \Omega_r(E_t-U) = S(U) + S_r(E_t-U)\]</div>
+\[S_t(E_t) = k_B log \sum_E \Omega(E) \Omega_r(E_t-E) \approx k_B log \Omega(U)+k_B log \Omega_r(E_t-U) = S(U) + S_r(E_t-U)\]</div>
 <div class="math notranslate nohighlight">
 \[Z = \sum_E \Omega(E) e^{-\beta E} \approx \Omega (U) e^{-\beta U} = e^{-\beta(U-TS)} = e^{-\beta F}\]</div>
 <ul class="simple">
