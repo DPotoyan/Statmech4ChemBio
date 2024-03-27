@@ -652,24 +652,30 @@ Multiples of thermal energy to break oxygen molecule: 198.44938582049795
 
 <span class="n">RT</span><span class="o">=</span><span class="n">N_A</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">T</span> <span class="o">*</span><span class="mf">1e-3</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="n">p_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">RT</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">RT</span><span class="p">))</span>
 
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">p_i</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;RT=</span><span class="si">{</span><span class="n">RT</span><span class="si">}</span><span class="s1">&#39;</span> <span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p_i$&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;microstate index, i&#39;</span><span class="p">)</span>
 
-<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">microtate_Es</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Omega(E_i)$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">p_i</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;RT=</span><span class="si">{</span><span class="n">RT</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p_i$&#39;</span><span class="p">)</span>
+
+<span class="n">ax3</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">microtate_Es</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Omega(E_i)$&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
+
+
 
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/53a9442a66fc8d60f6cf95c22a5127f86e1b7344f5de86890d350dc2f9839710.png" src="../_images/53a9442a66fc8d60f6cf95c22a5127f86e1b7344f5de86890d350dc2f9839710.png" />
+<img alt="../_images/37944cff4c1f52b932f549bf257432ab4266312edf2b892b76fcefd5cdd34768.png" src="../_images/37944cff4c1f52b932f549bf257432ab4266312edf2b892b76fcefd5cdd34768.png" />
 </div>
 </div>
 </section>
@@ -698,20 +704,11 @@ $<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microtate_Es</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span> 
 
-
 <span class="c1"># Compute probability to be in microstate 1 vs 2 at kBT = 1</span>
 
 <span class="c1"># Compute probability to be in state E=2 vs in state E=1 at different temperatures fromm kBT = 0.1 to 10</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1., 4., 3., 2., 2., 1., 1., 1.]),
- array([1.   , 1.875, 2.75 , 3.625, 4.5  , 5.375, 6.25 , 7.125, 8.   ]),
- &lt;BarContainer object of 8 artists&gt;)
-</pre></div>
-</div>
-<img alt="../_images/486ae644439bc807c2c9eb6a3f708483a185f460169430e0f6edd5e9ac050365.png" src="../_images/486ae644439bc807c2c9eb6a3f708483a185f460169430e0f6edd5e9ac050365.png" />
 </div>
 </div>
 <section id="thermodynamic-limit-and-partition-functions">
