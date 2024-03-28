@@ -565,53 +565,53 @@ document.write(`
 </ul>
 </div>
 <div class="tip dropdown admonition">
-<p class="admonition-title"><strong>MaxEnt derivation of Boltzmann distribution</strong></p>
-<ul class="simple">
-<li><p>Maximizing entropy with a constraint on internal energy, we end up with exponential dependence on <strong>microstate energies</strong> <span class="math notranslate nohighlight">\(E_i\)</span>, known as Boltzmann distribution.</p></li>
-</ul>
+<p class="admonition-title"><strong>MaxEnt Derivation of the Boltzmann Distribution</strong></p>
+<p>Utilizing the principle of maximum entropy (MaxEnt) with an internal energy constraint unveils an exponential relationship with <strong>microstate energies</strong> (E_i), manifesting as the Boltzmann distribution.</p>
+<p>The Lagrangian is defined as:</p>
 <div class="math notranslate nohighlight">
-\[ L = -k_B \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i-U \right)\]</div>
+\[ L = -k_B \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i - U \right)\]</div>
+<p>Taking the derivative of <span class="math notranslate nohighlight">\(L\)</span> with respect to <span class="math notranslate nohighlight">\(p_j\)</span> and setting it to zero yields:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial L}{\partial p_j} = -k_B (\log p_j + 1) - \alpha - \beta E_j = 0\]</div>
 <ul class="simple">
-<li><p>The probability of a microstate can be expressed in terms of two Lagrange multipliers that are to be determined. First one is a constant prefactor that can be absorbed into the normalization factor</p></li>
+<li><p>This equation reveals that the microstate probability can be represented using two Lagrange multipliers. The normalization factor can absorb the first multiplier, leading to:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p_j = e^{-\frac{\alpha}{k} - 1} e^{-\frac{\beta E_j}{k_B}} \sim e^{-{\beta E_j}}\]</div>
+\[p_j = e^{-\frac{\alpha}{k_B} - 1} e^{-\frac{\beta E_j}{k_B}} \sim e^{-\beta E_j}\]</div>
 <ul class="simple">
-<li><p>Requiring <span class="math notranslate nohighlight">\(\sum_p_j=1\)</span> we eliminate lagrange mulitplier <span class="math notranslate nohighlight">\(\alpha getting\)</span> an exponential distribution known as Boltzmann distribution.</p></li>
+<li><p>Normalization (<span class="math notranslate nohighlight">\(\sum_j p_j = 1\)</span>) allows us to eliminate the Lagrange multiplier <span class="math notranslate nohighlight">\(\alpha\)</span>, resulting in the exponential Boltzmann distribution.</p></li>
 </ul>
-<p><strong>Boltzmann distribution</strong></p>
+<p><strong>Boltzmann Distribution:</strong></p>
 <div class="math notranslate nohighlight">
-\[ p_j = \frac{e^{-\frac{\beta E_j}{k}}}{Z}\]</div>
+\[ p_j = \frac{e^{-\frac{\beta E_j}{k_B}}}{Z} \]</div>
 <ul class="simple">
-<li><p>We can also write down the probability distribution of macrostate E, which has degeneracy <span class="math notranslate nohighlight">\(\Omega(E)\)</span> implying that lots of microstates correspond to this one macrostate, and according to probability theory, we must add up all the microstate probabilities:</p></li>
+<li><p>The macrostate probability distribution with energy <span class="math notranslate nohighlight">\(E\)</span> and degeneracy <span class="math notranslate nohighlight">\(\Omega(E)\)</span> sums the probabilities of corresponding microstates:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[p(E) = \frac{\Omega (E) e^{-\beta E}}{\sum_E \Omega (E) e^{-\beta E}}\]</div>
-<p><strong>Determining <span class="math notranslate nohighlight">\(\beta= \frac{1}{k_B T}\)</span></strong></p>
+<p><strong>Determining <span class="math notranslate nohighlight">\(\beta = \frac{1}{k_B T}\)</span>:</strong></p>
 <ul class="simple">
-<li><p>Plugging Boltzmann distribution back into the formula of entropy, we get</p></li>
+<li><p>Inserting the Boltzmann distribution into the entropy equation, we find:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[S = - k_B \sum_i p_i log \frac{e^{-\beta E_i}}{Z} = k_B \beta \sum_i p_i E_i +  k_B \sum_i p_i logZ = k_B \beta U +k_B logZ\]</div>
+\[S = -k_B \sum_i p_i \log \frac{e^{-\beta E_i}}{Z} = k_B \beta \sum_i p_i E_i + k_B \log Z \sum_i p_i = k_B \beta U + k_B \log Z\]</div>
 <ul class="simple">
-<li><p>To establish a link with thermodynamics, we equate entropy change under constant temperature using stat mech sum over states and Gibbs relation from thermodynamics</p></li>
+<li><p>Comparing the statistical mechanics expression for entropy change at constant temperature to the Gibbs relation from thermodynamics:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[dS = k_B \beta dU + k_B d logZ\]</div>
+\[dS = k_B \beta dU + k_B d \log Z\]</div>
 <div class="math notranslate nohighlight">
 \[dS = \frac{dU}{T} - \frac{dF}{T}\]</div>
 <ul class="simple">
-<li><p>The first term tells us that:</p></li>
+<li><p>From these relations, we deduce that:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\beta = \frac{1}{k_B T}\]</div>
 <ul class="simple">
-<li><p>The second term tells us that:</p></li>
+<li><p>And for the Helmholtz free energy <span class="math notranslate nohighlight">\(F\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[F = -k_B T logZ\]</div>
+\[F = -k_B T \log Z\]</div>
 </div>
 <section id="beta-and-kt-energy">
 <h2><span class="math notranslate nohighlight">\(\beta\)</span> and kT (energy)<a class="headerlink" href="#beta-and-kt-energy" title="Permalink to this heading">#</a></h2>
@@ -625,7 +625,9 @@ document.write(`
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">k</span><span class="p">,</span> <span class="n">N_A</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">k</span><span class="p">,</span> <span class="n">N_A</span>
 
 <span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;kT in J:&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">*</span><span class="n">T</span><span class="p">)</span> 
@@ -655,21 +657,22 @@ Multiples of thermal energy to break oxygen molecule: 198.44938582049795
 
 <span class="n">RT</span><span class="o">=</span><span class="n">N_A</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">T</span> <span class="o">*</span><span class="mf">1e-3</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 
-<span class="n">p_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">RT</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">RT</span><span class="p">))</span>
+
 
 <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_i$&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;microstate index, i&#39;</span><span class="p">)</span>
 
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">p_i</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;RT=</span><span class="si">{</span><span class="n">RT</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p_i$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Omega(E_i)$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_i$&#39;</span><span class="p">)</span>
 
-<span class="n">ax3</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">microtate_Es</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Omega(E_i)$&#39;</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;energies of microstates&#39;</span><span class="p">)</span>
+<span class="n">p_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">RT</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">E</span><span class="o">/</span><span class="n">RT</span><span class="p">))</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">p_i</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;RT=</span><span class="si">{</span><span class="n">RT</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_i$&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p_i$&#39;</span><span class="p">)</span>
 
 
 
@@ -678,7 +681,7 @@ Multiples of thermal energy to break oxygen molecule: 198.44938582049795
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/37944cff4c1f52b932f549bf257432ab4266312edf2b892b76fcefd5cdd34768.png" src="../_images/37944cff4c1f52b932f549bf257432ab4266312edf2b892b76fcefd5cdd34768.png" />
+<img alt="../_images/950a1764a9cbc4936625606d28285831d9e15d6b37da1d8c19b307d1984fdca5.png" src="../_images/950a1764a9cbc4936625606d28285831d9e15d6b37da1d8c19b307d1984fdca5.png" />
 </div>
 </div>
 </section>
@@ -686,12 +689,16 @@ Multiples of thermal energy to break oxygen molecule: 198.44938582049795
 <h2>Micro vs macro states<a class="headerlink" href="#micro-vs-macro-states" title="Permalink to this heading">#</a></h2>
 <p><strong>Microstates</strong></p>
 <ul class="simple">
-<li><p>In NVT ensemble microstates follow Boltzmann distribution
-$<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \frac{e^{-\beta E_1}}{e^{-\beta F}}\)</span>$</p></li>
+<li><p>In NVT ensemble microstates follow Boltzmann distribution</p></li>
+<li></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p_1 = \frac{e^{-\beta E_1}}{Z} = \frac{e^{-\beta E_1}}{e^{-\beta F}}\]</div>
+<ul class="simple">
 <li><p>The relative population of microstates is dictated by the ratio of Boltzmann weights which depends on energy difference <span class="math notranslate nohighlight">\(\Delta E\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{\frac{p_2}{p_1} = e^{\beta (E_2-E_1)}}\]</div>
+\[\boxed{\frac{p_2}{p_1} = e^{-\beta (E_2-E_1)}}\]</div>
 <p><strong>Macrostates</strong></p>
 <ul class="simple">
 <li><p>Probability of macrostates with energy <span class="math notranslate nohighlight">\(E_A\)</span> is obtained by summing over all microstates with energy E_A or simply by multiplying by <span class="math notranslate nohighlight">\(\Omega_A\)</span>. The latter is related to entropy, which ends up turning the numerator into the free energy of a macrostate <span class="math notranslate nohighlight">\(A\)</span>: <span class="math notranslate nohighlight">\(F_A = E_A-TS_A\)</span></p></li>
@@ -705,11 +712,11 @@ $<span class="math notranslate nohighlight">\(p_1 = \frac{e^{-\beta E_1}}{Z} = \
 \[\boxed{\frac{p_B}{p_A} = e^{-\beta (F_B-F_A)}}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">microtate_Es</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span> 
 
-<span class="c1"># Compute probability to be in microstate 1 vs 2 at kBT = 1</span>
+<span class="c1"># Compute probability to be in microstate 1 vs 2 at temperatures from kBT = 0.1 to 10</span>
 
-<span class="c1"># Compute probability to be in state E=2 vs in state E=1 at different temperatures fromm kBT = 0.1 to 10</span>
+<span class="c1"># Compute probability to be in state E=2 vs in state E=1 at different temperatures from kBT = 0.1 to 10</span>
 </pre></div>
 </div>
 </div>
