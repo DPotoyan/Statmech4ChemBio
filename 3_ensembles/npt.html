@@ -468,8 +468,6 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-systems">Open systems</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-probability-distribution-complete-analogy-with-nvt">Deriving probability distribution (complete analogy with NVT).</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-with-nve-and-nvt">Connections with <span class="math notranslate nohighlight">\(NVE\)</span> and <span class="math notranslate nohighlight">\(NVT\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grand-canonical-potential">Grand-canonical potential</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuations">Fluctuations</a></li>
@@ -482,6 +480,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-stide-binding-of-molecular-gas-with-internal-states">Multi-stide binding of molecular gas with internal states</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-action-law">Mass action law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt-nve-mu-v-t"><span class="math notranslate nohighlight">\(NVT-NVE-\mu V T\)</span></a></li>
 </ul>
@@ -499,90 +498,99 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mupt">
 <h1>muPT<a class="headerlink" href="#mupt" title="Permalink to this heading">#</a></h1>
-<section id="open-systems">
-<h2>Open systems<a class="headerlink" href="#open-systems" title="Permalink to this heading">#</a></h2>
-<p><img alt="" src="../_images/bottleocean.jpg" /></p>
-<p>In the <span class="math notranslate nohighlight">\(\mu VT\)</span> ensemble, the system samples different number of particles <span class="math notranslate nohighlight">\(N\)</span> consistent with <span class="math notranslate nohighlight">\(\mu =const\)</span> constraint imposed by putting system in contact with infinitely large chemostat.</p>
+<p><img alt="" src="../_images/3_ensembles" /></p>
+<figure class="align-default" id="markdown-fig">
+<img alt="Information" src="../_images/bottleocean.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Open systems are characterized by variable number of particles and energy</span><a class="headerlink" href="#markdown-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>An intuitive derivation of Grand-Canonical Distribution</strong></p>
+<ul class="simple">
+<li><p>The derivation for grand canonical ensemble proceeds along the same lines as that for canonical. We will write the entropy of the combined system as a sum of the entropies of the system and reservoir, which are allowed to exchange energy and several particles. Then using the fact that reservoir is much larger than the system its entropy will be Taylor expanded around average number of particles and average energy-yielding exponential distribution for probability</p></li>
+<li><p>In the <span class="math notranslate nohighlight">\(\mu VT\)</span> ensemble, the system samples different numbers of particles <span class="math notranslate nohighlight">\(N\)</span> consistent with <span class="math notranslate nohighlight">\(\mu =const\)</span> constraint imposed by putting a system in contact with an infinitely large chemostat.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[E_{tot} = E_r + E_i\]</div>
 <div class="math notranslate nohighlight">
 \[N_{tot} = N_r + N\]</div>
 <div class="math notranslate nohighlight">
 \[\Omega_{tot}(E_{tot}, N_{tot}) = \sum_N \sum_i \Omega_r(E_{tot}-E_i, N_{tot}-N) \cdot \Omega(E_i, N)\]</div>
-<p>Let us single out one micro-state <span class="math notranslate nohighlight">\(E_i, N\)</span> of our system <span class="math notranslate nohighlight">\(\Omega(E_i, N) =1\)</span> and see what would be its probability in <span class="math notranslate nohighlight">\(\mu VT\)</span> ensemble.</p>
+<ul class="simple">
+<li><p>The probability of a single microstate <span class="math notranslate nohighlight">\(\Omega(E_i, N) =1\)</span> can now be written down.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[p(E_i, N) = \frac{\Omega_r(E_{tot}-E_i, N_{tot}-N)}{\Omega_{tot} (E_{tot}, N_{tot})} = \frac{e^{S_r(E_{tot}-E_i, N_{tot}-N)/k_B}}{e^{S_{tot}(E_{tot}, N_{tot})/k_B}}\]</div>
-<p>Where we have used use the microcanonical ensemble of <strong>system+reservoir</strong> to cast the problem in terms of probabilities of <strong>the system</strong>.</p>
-</section>
-<section id="deriving-probability-distribution-complete-analogy-with-nvt">
-<h2>Deriving probability distribution (complete analogy with NVT).<a class="headerlink" href="#deriving-probability-distribution-complete-analogy-with-nvt" title="Permalink to this heading">#</a></h2>
-<p>A more revealing is the expansion around system’s average energy <span class="math notranslate nohighlight">\(\delta E = E-U \sim O(N^{1/2})\)</span>  and average particle number  fluctuations  <span class="math notranslate nohighlight">\(\delta N = N-\bar{N} \sim O(N^{1/2})\)</span> around which are small:</p>
+\[p(E_i, N) = \frac{\Omega_r(E_{tot}-E_i, N_{tot}-N)}{\Omega_{tot} (E_{tot}, N_{tot})} = e^{\frac{1}{k_B}\big(S_r- S_{tot}\big)} \]</div>
 <p><strong>Entropy of reservoir</strong></p>
+<ul class="simple">
+<li><p>We already know that averages dominate the partition functions of macroscopic systems, which ensures the extensivity of entropy.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S_{tot} = k_Blog \Omega_{tot}(E_{tot}, N_{tot}) = S_r(E_{tot}-U, N_{tot}-\bar{N})+S(U, \bar{N})\]</div>
+<ul class="simple">
+<li><p>Therefore, this time, we will be more explicit and expand the entropy of the reservoir around the system’s average energy and particles respectively:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[S_r(E_{tot}-E_i, N_{tot}-N) = S_r(E_{tot}-U + {\color{blue}[U-E_i]}, N_{tot}-\bar{N} + \color{green}{[\bar{N}-N_i]})\]</div>
 <div class="math notranslate nohighlight">
-\[S_r(E_{tot}-U + { \color{blue}\delta E}, N_{tot}-\bar{N} + {\color{green}\delta N}) \approx S_r(E_{tot}-U, N_{tot}-\bar{N}) +\frac{\partial S_r(E, N)}{\partial E} {\color{blue} \delta E} + \frac{\partial S_r(E, N)}{\partial N} \color{green}{\delta N}\]</div>
+\[ S_r =  S_r(E_{tot}-U, N_{tot}-\bar{N}) + \frac{1}{T}{\color{blue} [U-E_i]} - \frac{\mu}{T} { \color{green} [\bar{N}-N_i]}\]</div>
+<p><strong>Grand canonical probability distribution</strong></p>
+<p>By combining the expressions of total and reservoir entropies, we get the probability distribution of the system’s energy and particle numbers.</p>
 <div class="math notranslate nohighlight">
-\[ S_r =  S_r(E_{tot}-U, N_{tot}-\bar{N}) + \frac{1}{T}{\color{blue} \delta E} - \frac{\mu}{T} { \color{green} \delta N}\]</div>
-<p><strong>Entropy of total system</strong></p>
-<p>Let us now use additivity of entropy of the combined syste+resoervioir in equilibrium:</p>
+\[p(E_i, N) = e^{\frac{1}{k_BT}\big([U-e_i]\big)+\mu[\bar{N}-N_i]\big) } \]</div>
 <div class="math notranslate nohighlight">
-\[S_{tot}(E_{tot}, N_{tot}) = S_r(E_{tot}-U, N_{tot}-\bar{N})+S(U, \bar{N})\]</div>
-<p>Combining the expressions of total and reservoir entropies we get the probability distirbution of system’s energy and particle numbers</p>
-<div class="math notranslate nohighlight">
-\[p(E_i, N) =\frac{e^{S_r(E_{tot}-E_i, N_{tot}-N)/k_B}}{e^{S_{tot}(E_{tot}, N_{tot})/k_B}} = \frac{e^{-\beta E_i} e^{\beta \mu N}}{e^{-\beta \Psi}}\]</div>
+\[\Psi = U-TS-\mu N\]</div>
+</div>
 <p><strong>Grand-Canonical distribution</strong></p>
 <div class="math notranslate nohighlight">
 \[\boxed{p(E_i, N) = \frac{e^{-\beta(E_i -\mu N)}}{Z_G}}\]</div>
-<p><strong>Grand-Canonical Partiation Function</strong></p>
+<p>Where partition function is summed over microstates with different energies and particle numbers!</p>
 <div class="math notranslate nohighlight">
-\[\boxed{Z_G = \sum_i E^{-\beta (E_i-\mu N)}}\]</div>
-<p><strong>Free Energy</strong></p>
-<div class="math notranslate nohighlight">
-\[\boxed{Z_G = e^{-{\beta \Psi}}}\]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{\Psi = -\beta^{-1} log Z_G}\]</div>
-</section>
+\[Z_G(\mu, \beta, V) = \sum_i \sum_N e^{-\beta (E_i-\mu N)} \]</div>
 <section id="connections-with-nve-and-nvt">
 <h2>Connections with <span class="math notranslate nohighlight">\(NVE\)</span> and <span class="math notranslate nohighlight">\(NVT\)</span><a class="headerlink" href="#connections-with-nve-and-nvt" title="Permalink to this heading">#</a></h2>
-<p><strong>Grand canonical partition function</strong></p>
+<p><strong>Statistical dominance of average energy and numbers of particles</strong></p>
+<ul class="simple">
+<li><p>Recall that canonical ensemble was an exponentially weighted sum of microcanonical ensemble over energies</p></li>
+<li><p>Likewise, we can show that <strong>Grand canonical</strong> can be expressed as exponentially weighted (by <span class="math notranslate nohighlight">\(e^{\beta \mu N}\)</span>) summation of canonical partition functions overall particle numbers <span class="math notranslate nohighlight">\(N\)</span></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[Z_G = \sum^{N=\infty}_{N=0} \Big [ \sum_i e^{-\beta E_i}  \Big ]e^{\beta \mu N} = \sum^{N=\infty}_{N=0} Z(N,V,T)e^{\beta \mu N}\]</div>
-<p>Hence why we call partition function <strong>Grand canononical</strong> as it is expresed as exponentially  weighted (by <span class="math notranslate nohighlight">\(e^{\beta \mu N}\)</span>) summation of canonical parition functions over all values of N.</p>
-<p><strong>Laplace and Legendre transform connection with NVE and NVT</strong></p>
+<ul class="simple">
+<li><p>The connection between partition functions and the domination of averages is seen clearly:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[\boxed{p(E,N) = \frac{1}{Z_G} \Omega(E,N) e^{-\beta(E-\mu N)} = \frac{1}{Z_G} e^{-\beta \Psi(T,V,\mu))}}\]</div>
+\[Z_G \approx e^{-\beta (F-\mu \bar{N})} = e^{-\beta (\bar{E}- TS -\mu \bar{N})} = e^{-\beta \Psi(T,V,\mu)} \]</div>
+<ul class="simple">
+<li><p>We also identify a new free energy for grand canonical ensemble as a function of thermodynamic variables</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\boxed{\Psi(T,V, \mu) = E- TS -\mu N}\]</div>
-<p>The free energy in grand canonical parition function is obtained by legendre transforming microcanonical ensemble over conjugate variables: <span class="math notranslate nohighlight">\((S, T)\)</span> and <span class="math notranslate nohighlight">\((N, \mu)\)</span>.</p>
-<p><strong>Using Euler’s relation</strong></p>
+<p><strong>Legendre Transform</strong></p>
+<p>The grand-canonical free energy can also be seen as a Legendre transform of Energy concerning Energy and several particles, e.g., swapping the following pairs of conjugate variables <span class="math notranslate nohighlight">\((S\rightarrow T)\)</span> <span class="math notranslate nohighlight">\((N \rightarrow \mu)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[E(S,V,N) \rightarrow E- \Big(\frac{\partial E}{\partial S}\Big) S- \Big(\frac{\partial E}{\partial N} \Big)N = E-TS-\mu N\]</div>
+<p><strong>Grand potential</strong></p>
+<p>Using Euler’s relation <span class="math notranslate nohighlight">\(E = TS+PV+\mu N\)</span> for extensive thermodynamic variables we obtain an explicit expression for Grand potential in terms of volume and pressure:</p>
 <div class="math notranslate nohighlight">
 \[\boxed{\Psi(T,V, \mu) = -PV}\]</div>
 </section>
 <section id="grand-canonical-potential">
 <h2>Grand-canonical potential<a class="headerlink" href="#grand-canonical-potential" title="Permalink to this heading">#</a></h2>
-<p><strong>Recall Gibbs equation of thermodynamics</strong></p>
+<ul class="simple">
+<li><p>Using the Gibbs relation, one can show that the independent variables of grand potential are (<span class="math notranslate nohighlight">\(T\)</span>, <span class="math notranslate nohighlight">\(V\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span>)</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[dE = TdS -pdV +\mu dN\]</div>
-<p><strong>Free energy minimization with <span class="math notranslate nohighlight">\((T,V, \mu)\)</span></strong></p>
-<p>Using Gibbs-Duhem we get the connection with the rest of the intensive variable changes</p>
+\[d(E-TS+\mu N) = dE-TdS+Nd\mu+\mu dN\]</div>
 <div class="math notranslate nohighlight">
 \[\boxed{d\Psi(\mu, V, T) = -SdT -p dV -Nd \mu}\]</div>
-<p>For constant temperature and chemical potential we have a simple connection with pressure and volume</p>
 <div class="math notranslate nohighlight">
-\[\boxed{d\Psi_{\mu, T} = d (E-TS-\mu N) = -pdV}\]</div>
-<p><strong>Equations of state</strong></p>
-<ul>
-<li><div class="math notranslate nohighlight">
 \[S = -\frac{\partial \Psi}{\partial T}\]</div>
-</li>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[p = -\frac{\partial \Psi}{\partial V}\]</div>
-</li>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[N = -\frac{\partial \Psi}{\partial \mu}\]</div>
-</li>
-</ul>
 </section>
 <section id="fluctuations">
 <h2>Fluctuations<a class="headerlink" href="#fluctuations" title="Permalink to this heading">#</a></h2>
@@ -653,6 +661,23 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[z_G = 1 + 2 e^{-\beta(\epsilon_A - \mu_A)}+ e^{-\beta(\epsilon_B - \mu_B)} +5 e^{-2\beta(\epsilon_B - \mu_B)}\]</div>
 </section>
+</section>
+<section id="mass-action-law">
+<h2>Mass action law<a class="headerlink" href="#mass-action-law" title="Permalink to this heading">#</a></h2>
+<p>Recall that for equilibrium conditions under any ensemble; there is equality of intensive variables across the entire system. E.g., temperature, pressure, and chemical potential throughout the system must be equal. In Case of (N,P,T) ensemble commonly used by chemists this is consequence of Gibbs free energy minimization.</p>
+<div class="math notranslate nohighlight">
+\[dG(N, P, T) =0\]</div>
+<p>Consider chemical equilibrium in solutions expressed as logarithm of activities</p>
+<div class="math notranslate nohighlight">
+\[\sum_i \nu_i \mu_i = \sum_i \nu_i [\mu^o_i(T,P)+RT log a_i]\]</div>
+<p>Or expressed in terms of standard free energy change:</p>
+<div class="math notranslate nohighlight">
+\[-\Delta G^o = - \sum \nu_i \mu_i = RT log \Bigg(\Pi_i a^{\nu_i}_i\Bigg)\]</div>
+<ul class="simple">
+<li><p>The side of the left-hand does not depend on chemical composition but only on thermodynamic variables, <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(P\)</span>. We can write this constant as K(T,P) chemical equilibrium constant</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[K(T,P)= e^{-\Delta G^o/RT}  = \frac{...a^{\nu_p}_p...}{...a^{\nu_r}_r...}\]</div>
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
@@ -738,8 +763,6 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#open-systems">Open systems</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deriving-probability-distribution-complete-analogy-with-nvt">Deriving probability distribution (complete analogy with NVT).</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connections-with-nve-and-nvt">Connections with <span class="math notranslate nohighlight">\(NVE\)</span> and <span class="math notranslate nohighlight">\(NVT\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grand-canonical-potential">Grand-canonical potential</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuations">Fluctuations</a></li>
@@ -752,6 +775,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-stide-binding-of-molecular-gas-with-internal-states">Multi-stide binding of molecular gas with internal states</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mass-action-law">Mass action law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt-nve-mu-v-t"><span class="math notranslate nohighlight">\(NVT-NVE-\mu V T\)</span></a></li>
 </ul>
