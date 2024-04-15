@@ -471,15 +471,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shapes-more-complex-than-a-circle">Shapes more complex than a circle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-dimensions">More dimensions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-monte-carlo-to-generate-distributed-random-numbers">Using monte carlo to generate distributed random numbers</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-essence-of-monte-carlo">The Essence of Monte Carlo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-monte-carlo-outperform-brute-force-integration">Why Does Monte Carlo Outperform Brute-Force Integration?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-variance-in-monte-carlo-sampled-means">Reducing Variance in Monte Carlo Sampled Means</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-of-using-monte-carlo-monitoring-the-convergence-decresase-of-variance">Example-3 of using Monte Carlo: monitoring the convergence (decresase of variance)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-sampling">Importance sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-importance-sampling">Example of importance sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-monte-carlo-to-sample-probability-distributions">Using Monte Carlo to sample probability distributions</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chain-monte-carlo">Markov Chain Monte Carlo</a></li>
@@ -704,61 +703,11 @@ MC result: 2.3397
 </div>
 </div>
 </div>
-<section id="using-monte-carlo-to-generate-distributed-random-numbers">
-<h3>Using monte carlo to generate distributed random numbers<a class="headerlink" href="#using-monte-carlo-to-generate-distributed-random-numbers" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Another application of a simple MC technique is to turn unifrmaly distributed random numbers into random numbers sampled according to different probability distributions</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mc_randnum_sample</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">Lx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Ly</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Sample random variables according to a distribution.</span>
-<span class="sd">    func: given prob dist</span>
-<span class="sd">    N:    random numbers used for sampling and rejection</span>
-<span class="sd">    Lx, Ly range and domain size of distribution</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="c1"># uniform random samples</span>
-    <span class="n">ux</span> <span class="o">=</span>     <span class="n">Lx</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-    <span class="n">uy</span> <span class="o">=</span>     <span class="n">Ly</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>  
-
-    <span class="c1">#rejection criteria</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">uy</span><span class="o">&lt;=</span><span class="n">func</span><span class="p">(</span><span class="n">ux</span><span class="p">)</span>          
-    
-    <span class="n">sampled_ux</span> <span class="o">=</span> <span class="n">ux</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-
-    <span class="c1">### Plotting    </span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sampled_ux</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">2.</span><span class="o">/</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">12</span>
-
-<span class="n">mc_randnum_sample</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">Lx</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">Ly</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3h/w4n54dz57dvbhgvz68gdv0f0f3hkmm/T/ipykernel_49918/3589528851.py:2: RuntimeWarning: divide by zero encountered in divide
-  return np.exp(-(x-1)**2/2./x)*(x+1)/12
-</pre></div>
-</div>
-<img alt="../_images/61381d0a4b4302c0def15a27ad9f5a1269659a7040ca0d9646b03627ef9ccf21.png" src="../_images/61381d0a4b4302c0def15a27ad9f5a1269659a7040ca0d9646b03627ef9ccf21.png" />
-</div>
-</div>
-</section>
 <section id="the-essence-of-monte-carlo">
 <h3>The Essence of Monte Carlo<a class="headerlink" href="#the-essence-of-monte-carlo" title="Permalink to this heading">#</a></h3>
 <p><strong>Transforming Integrals into Expectations!</strong></p>
 <ul class="simple">
-<li><p>Consider the integral <span class="math notranslate nohighlight">\(I = \int f(x) \, dx\)</span>. We can reinterpret this integral as the expectation of a function <span class="math notranslate nohighlight">\(g(x)\)</span> under a probability distribution <span class="math notranslate nohighlight">\(p(x)\)</span>:</p></li>
+<li><p>Consider the problem of evaluating an integral I. We can reinterpret this integral as the expectation of a function <span class="math notranslate nohighlight">\(g(x)\)</span> under some probability distribution <span class="math notranslate nohighlight">\(p(x)\)</span>.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -773,7 +722,7 @@ E_p[g] \approx \frac{1}{n} \sum_{i=1}^n g(x_i)\,\,\,where\,\,\,\,\,\, x_i \sim p
 \]</div>
 <p><strong>Ordinary MC and uniform random numbers</strong></p>
 <ul class="simple">
-<li><p>By selecting uniform random numbers in the range [a, b], we adopt <span class="math notranslate nohighlight">\(p(x) = \frac{1}{b-a}\)</span> for our samples <span class="math notranslate nohighlight">\(x_i\)</span>. This provides a straightforward method to calculate integrals:</p></li>
+<li><p>By selecting uniform random numbers in the range [a, b], we adopt <span class="math notranslate nohighlight">\(p(x) = \frac{1}{b-a}\)</span> for our samples <span class="math notranslate nohighlight">\(x_i\)</span>. This justifies our intuitive explanation of “the pebbles on the beach” numerical experiment.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -814,28 +763,10 @@ Exact result: 2.2898343018663505
 <section id="why-does-monte-carlo-outperform-brute-force-integration">
 <h3>Why Does Monte Carlo Outperform Brute-Force Integration?<a class="headerlink" href="#why-does-monte-carlo-outperform-brute-force-integration" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The use of i.i.d. random variables in Monte Carlo (MC) allows us to apply the Central Limit Theorem, which suggests that the scaled mean’s expectation will approach a normal distribution as the number of steps increases:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\frac{\bar{g}_n - E[g(X)]}{\sigma_n} \sim \mathcal{N}(0, 1)
-\]</div>
-<ul class="simple">
-<li><p>Consequently, the convergence rate of Monte Carlo integration is <span class="math notranslate nohighlight">\(\mathcal{O}(n^{-1/2})\)</span>, which is notable because it is independent of the number of dimensions. This property gives Monte Carlo an edge over numerical integration methods, which have a convergence rate of <span class="math notranslate nohighlight">\(\mathcal{O}(n^{-d})\)</span>, especially in moderate- to high-dimensional contexts. Even in low-dimensional scenarios, Monte Carlo can be advantageous, particularly when the region of interest within the integration space is small, allowing for targeted sampling in critical areas.</p></li>
-</ul>
-</section>
-<section id="reducing-variance-in-monte-carlo-sampled-means">
-<h3>Reducing Variance in Monte Carlo Sampled Means<a class="headerlink" href="#reducing-variance-in-monte-carlo-sampled-means" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>The variance of Monte Carlo estimates, with independent samples <span class="math notranslate nohighlight">\(y_i = f(x_i)/p(x_i)\)</span>, is calculated as:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\text{Var}[\bar{g}_n] = \text{Var} \left[ \frac{1}{n} \sum_i y_i \right] = \frac{1}{n^2} \sum_{i=1}^{n} \text{Var}[y_i] = \frac{1}{n} \text{Var}[y_i]
-\]</div>
-<ul class="simple">
-<li><p>The goal is to minimize <span class="math notranslate nohighlight">\(\text{Var}[\bar{g}_n] \sim n^{-1}\)</span>, enhancing accuracy per sample count <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
-<li><p>Various variance reduction techniques exist. One effective method we’ll mention is importance sampling, which strategically focuses sampling efforts where they’re most impactful.</p></li>
+<li><p>Using i.i.d. random variables in Monte Carlo (MC) allows us to apply the Central Limit Theorem and infer that the mean we are calculating <span class="math notranslate nohighlight">\(\bar{g}\)</span> will have variance proportional to N number of samples <span class="math notranslate nohighlight">\(\sigma_N^2 = N\sigma^2_1\)</span> where <span class="math notranslate nohighlight">\(\sigma_1\)</span> is variance in single steps.</p></li>
+<li><p>Consequently, the convergence rate of Monte Carlo integration is <span class="math notranslate nohighlight">\(\mathcal{O}(n^{-1/2})\)</span>, which is notable because it is independent of the number of dimensions of the integral.</p></li>
+<li><p>This property gives Monte Carlo an edge over numerical integration methods, which have a convergence rate of <span class="math notranslate nohighlight">\(\mathcal{O}(n^{-d})\)</span>, especially in moderate- to high-dimensional contexts.
+Even in low-dimensional scenarios, Monte Carlo can be advantageous, particularly when the region of interest within the integration space is small. This allows for targeted sampling in critical areas.</p></li>
 </ul>
 </section>
 <section id="example-3-of-using-monte-carlo-monitoring-the-convergence-decresase-of-variance">
@@ -909,22 +840,27 @@ f(x) = x \cos 71 x + \sin 13x, \ \  0 \le x \le 1
 </section>
 <section id="importance-sampling">
 <h2>Importance sampling<a class="headerlink" href="#importance-sampling" title="Permalink to this heading">#</a></h2>
-<p>Suppose we want to evaluate</p>
+<ul class="simple">
+<li><p>Suppose we want to evaluate the following expectation integral with probability distribution <span class="math notranslate nohighlight">\(p(x)\)</span></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 I = \int{h(x)\,p(x) \, dx}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(h(x)\)</span> is some function and <span class="math notranslate nohighlight">\(p(x)\)</span> is the PDF of <span class="math notranslate nohighlight">\(x\)</span>. If it is hard to sample directly from <span class="math notranslate nohighlight">\(p\)</span>, we can introduce a new density function  <span class="math notranslate nohighlight">\(q(x)\)</span> that is easy to sample from, and write</p>
+<ul class="simple">
+<li><p>If it is hard to sample directly from <span class="math notranslate nohighlight">\(p\)</span>, we can introduce a new density function  <span class="math notranslate nohighlight">\(q(x)\)</span> that is easy to sample from, and write</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 I = \int{h(x)\, p(x)\, dx} = \int{h(x)\, \frac{p(x)}{q(x)} \, q(x) \, dx}
 \]</div>
-<p>In other words, we sample from <span class="math notranslate nohighlight">\(h(y)\)</span> where <span class="math notranslate nohighlight">\(y \sim q\)</span> and weight it by the likelihood ratio <span class="math notranslate nohighlight">\(\frac{p(y)}{q(y)}\)</span>, estimating the integral as</p>
+<ul class="simple">
+<li><p>In other words, we sample from <span class="math notranslate nohighlight">\(h(y)\)</span> where <span class="math notranslate nohighlight">\(y \sim q\)</span> and weight it by the likelihood ratio <span class="math notranslate nohighlight">\(\frac{p(y)}{q(y)}\)</span>, estimating the integral as</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 I \approx \frac{1}{n}\sum_{i=1}^n \frac{p(y_i)}{q(y_i)} h(y_i)
 \]</div>
-<p>Sometimes, even if we can sample from <span class="math notranslate nohighlight">\(p\)</span> directly, it is more efficient to use another distribution.</p>
 <section id="example-of-importance-sampling">
 <h3>Example of importance sampling<a class="headerlink" href="#example-of-importance-sampling" title="Permalink to this heading">#</a></h3>
 <p>Suppose we want to estimate the tail probability of <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span> for <span class="math notranslate nohighlight">\(P(X \gt 5)\)</span>. Regular MC integration using samples from <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span> is hopeless since nearly all samples will be rejected. However, we can use the exponential density truncated at 5 as the importance function and use importance sampling. Note that <span class="math notranslate nohighlight">\(h\)</span> here is simply the identify function.</p>
@@ -986,12 +922,46 @@ Direct IS MC &amp; error: 2.870785329809864e-07 0.0014894774676662806
 </div>
 </div>
 </section>
+<section id="using-monte-carlo-to-sample-probability-distributions">
+<h3>Using Monte Carlo to sample probability distributions<a class="headerlink" href="#using-monte-carlo-to-sample-probability-distributions" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Another application of a simple MC technique is to turn uniformly distributed random numbers into random numbers sampled according to different probability distributions.</p></li>
+<li><p>The key is to employ <strong>rejection criteria</strong>; if points go under the curve, they are accepted, hence generating a probability distribution</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mc_randnum_sample</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">Lx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Ly</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Sample random variables according to a distribution.</span>
+<span class="sd">    func: given prob dist</span>
+<span class="sd">    N:    random numbers used for sampling and rejection</span>
+<span class="sd">    Lx, Ly range and domain size of distribution</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># uniform random samples</span>
+    <span class="n">ux</span> <span class="o">=</span>     <span class="n">Lx</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">uy</span> <span class="o">=</span>     <span class="n">Ly</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>  
+
+    <span class="c1">#rejection criteria</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">uy</span><span class="o">&lt;=</span><span class="n">func</span><span class="p">(</span><span class="n">ux</span><span class="p">)</span>          
+    
+    <span class="n">sampled_ux</span> <span class="o">=</span> <span class="n">ux</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="c1">### Plotting    </span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sampled_ux</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="markov-chain-monte-carlo">
 <h2>Markov Chain Monte Carlo<a class="headerlink" href="#markov-chain-monte-carlo" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mcmc_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mcmc_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mf">1e5</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span> 
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Using MCMC algorithm to estimate the value of pi&#39;&#39;&#39;</span>
     
     <span class="n">pts</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># array for points in square</span>
@@ -1004,7 +974,7 @@ Direct IS MC &amp; error: 2.870785329809864e-07 0.0014894774676662806
         
         <span class="n">r_new</span> <span class="o">=</span> <span class="n">r_old</span> <span class="o">+</span> <span class="n">dr</span>
         
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mf">1.0</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">:</span> <span class="c1"># reject moves outside</span>
             
             <span class="n">pts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r_new</span><span class="p">)</span>
             
@@ -1020,7 +990,7 @@ Direct IS MC &amp; error: 2.870785329809864e-07 0.0014894774676662806
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_value</span> <span class="o">=</span>  <span class="n">mcmc_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_value</span> <span class="o">=</span>  <span class="n">mcmc_pi</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># vary delta to get better estimates </span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estimated Pi value is: &quot;</span><span class="p">,</span> <span class="n">pi_value</span><span class="p">)</span>
 </pre></div>
@@ -1146,15 +1116,14 @@ Direct IS MC &amp; error: 2.870785329809864e-07 0.0014894774676662806
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shapes-more-complex-than-a-circle">Shapes more complex than a circle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-dimensions">More dimensions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-monte-carlo-to-generate-distributed-random-numbers">Using monte carlo to generate distributed random numbers</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-essence-of-monte-carlo">The Essence of Monte Carlo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-monte-carlo-outperform-brute-force-integration">Why Does Monte Carlo Outperform Brute-Force Integration?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-variance-in-monte-carlo-sampled-means">Reducing Variance in Monte Carlo Sampled Means</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-of-using-monte-carlo-monitoring-the-convergence-decresase-of-variance">Example-3 of using Monte Carlo: monitoring the convergence (decresase of variance)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-sampling">Importance sampling</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-importance-sampling">Example of importance sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-monte-carlo-to-sample-probability-distributions">Using Monte Carlo to sample probability distributions</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-chain-monte-carlo">Markov Chain Monte Carlo</a></li>
