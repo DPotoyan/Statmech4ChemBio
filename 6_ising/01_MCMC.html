@@ -475,6 +475,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-boltzmann-distribution-mc-vs-mcmc">Sampling Boltzmann distribution: MC vs MCMC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-chains-master-equation-and-detailed-balance">Generating chains! Master Equation and Detailed Balance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-balance-equilibrium">Detailed Balance = Equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-detailed-balance-isomerisation-reaction">Example of detailed balance: Isomerisation reaction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">How to pick the moves for Markov chain?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metropolis-algorithm">Metropolis algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-for-running-2d-ising-mcmc-simulations">Code for running 2D ising MCMC Simulations</a></li>
@@ -552,7 +553,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[F(M)=-\beta^{-1} log Z(M)\]</div>
 <ul class="simple">
-<li><p>The nfinal two thermodynamic observables we would like to compute tel us about nature of fluctuations in energy and magnetization:</p></li>
+<li><p>To inform us about fluctuations in energy and magnetization we compute the following response functions</p></li>
 <li><p><strong>Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span></strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -758,6 +759,86 @@ document.write(`
 <li><p>In the equilibrium we see that equilibrium is established when probability ratio matches the ratio of tranistions <span class="math notranslate nohighlight">\(\frac{p_1}{p_2} = \frac{w_{12}}{w_{21}}\)</span></p></li>
 <li><p>In the <span class="math notranslate nohighlight">\(NVT\)</span> ensemble we have an explicit requirment for transition rates <span class="math notranslate nohighlight">\(\frac{p_1}{p_2} = e^{-\beta (E_1-E_2)} = \frac{w_{12}}{w_{21}}\)</span></p></li>
 </ul>
+</section>
+<section id="example-of-detailed-balance-isomerisation-reaction">
+<h2>Example of detailed balance: Isomerisation reaction<a class="headerlink" href="#example-of-detailed-balance-isomerisation-reaction" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>To illustrate the approach to equilibrium in a reversible A ↔ B reaction using a Markov chain model, let’s consider the following scenario and Python simulation:</p></li>
+</ul>
+<p><strong>Scenario Setup</strong>
+In this chemical interconversion reaction:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A \rightarrow B\)</span> with probability <span class="math notranslate nohighlight">\(p\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(B \rightarrow A\)</span> with probability <span class="math notranslate nohighlight">\(q\)</span></p></li>
+</ul>
+<p><strong>Markov Chain Model</strong></p>
+<ul class="simple">
+<li><p>The system has two states (A, B), with transitions defined by a transition matrix.</p></li>
+<li><p>Simulate Transitions: The simulation determines the system’s state after each step by following the transition probabilities.</p></li>
+<li><p>Calculate Equilibrium: We observe how the system’s state probabilities evolve over <span class="math notranslate nohighlight">\(N\)</span> steps to reach equilibrium.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Transition probabilities</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># Probability of going from A to B</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">0.7</span>  <span class="c1"># Probability of going from B to A</span>
+
+<span class="c1"># Transition matrix</span>
+<span class="n">transition_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span><span class="p">],</span>  <span class="c1"># From A to A, B</span>
+    <span class="p">[</span><span class="n">q</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">q</span><span class="p">]</span>   <span class="c1"># From B to A, B</span>
+<span class="p">])</span>
+
+<span class="c1"># Initial state (0 for A, 1 for B)</span>
+<span class="n">current_state</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Number of steps to simulate</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="c1"># Record the state at each step to visualize the approach to equilibrium</span>
+<span class="n">state_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_steps</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># Create a history record for both states A and B</span>
+<span class="n">state_history</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">current_state</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Simulate the Markov chain</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">):</span>
+    <span class="n">current_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="o">=</span><span class="n">transition_matrix</span><span class="p">[</span><span class="n">current_state</span><span class="p">])</span>
+    <span class="n">state_history</span><span class="p">[</span><span class="n">step</span><span class="p">,</span> <span class="n">current_state</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Calculate cumulative probabilities over time to show how probabilities stabilize</span>
+<span class="n">cumulative_probabilities</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">state_history</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_steps</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>As the number of steps increases, the fraction of time the system spends in each state <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> should converge to the theoretical equilibrium probabilities. These are derived from the detailed balance conditions <span class="math notranslate nohighlight">\(p \cdot \pi_A = q \cdot \pi_B\)</span> and the normalization condition <span class="math notranslate nohighlight">\(\pi_A + \pi_B = 1\)</span>.</p></li>
+<li><p>This simulation visually demonstrates the concept of reaching equilibrium in a reversible reaction through a Markov process, which is essential in understanding statistical thermodynamics.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting the results</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cumulative_probabilities</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Probability of A&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cumulative_probabilities</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Probability of B&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Steps&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Approach to Equilibrium Probabilities of States A and B&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># Plotting the results</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="p">[</span><span class="n">state_record</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">n_steps</span><span class="p">,</span> <span class="n">state_record</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">n_steps</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Equilibrium probabilities of states A and B&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a0406edb8736912355aba8768153387b078e3f5beb069c8e10cc1217e77f5844.png" src="../_images/a0406edb8736912355aba8768153387b078e3f5beb069c8e10cc1217e77f5844.png" />
+</div>
+</div>
 </section>
 <section id="how-to-pick-the-moves-for-markov-chain">
 <h2>How to pick the moves for Markov chain?<a class="headerlink" href="#how-to-pick-the-moves-for-markov-chain" title="Permalink to this heading">#</a></h2>
@@ -1197,6 +1278,7 @@ configuration as an input to the system to undergo equilibriation again.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-boltzmann-distribution-mc-vs-mcmc">Sampling Boltzmann distribution: MC vs MCMC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-chains-master-equation-and-detailed-balance">Generating chains! Master Equation and Detailed Balance</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-balance-equilibrium">Detailed Balance = Equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-detailed-balance-isomerisation-reaction">Example of detailed balance: Isomerisation reaction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">How to pick the moves for Markov chain?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metropolis-algorithm">Metropolis algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-for-running-2d-ising-mcmc-simulations">Code for running 2D ising MCMC Simulations</a></li>
