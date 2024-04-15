@@ -469,7 +469,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-ising-models-and-key-thermodynamic-variables">Summary of Ising models and key thermodynamic variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ising-model-the-h-atom-of-phase-transitions">Ising model: The H atom of phase transitions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-spin-lattice">Setting up spin lattice</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">Enforcing periodic boundary conditions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-boltzmann-distribution-mc-vs-mcmc">Sampling Boltzmann distribution: MC vs MCMC</a></li>
@@ -520,23 +520,23 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="summary-of-ising-models-and-key-thermodynamic-variables">
-<h2>Summary of Ising models and key thermodynamic variables<a class="headerlink" href="#summary-of-ising-models-and-key-thermodynamic-variables" title="Permalink to this heading">#</a></h2>
+<section id="ising-model-the-h-atom-of-phase-transitions">
+<h2>Ising model: The H atom of phase transitions<a class="headerlink" href="#ising-model-the-h-atom-of-phase-transitions" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Ising models are a class of simple spin lattice models which are widely used for studying the nature of phase transitions.</p></li>
-<li><p>Many aspects of phase transitions are universal and independent of mciroscopic details of interactions. Hence one wants as simple of a model capable of displaying phase transition as possible! Ising models fit the bill perfectly and one could even obtain analytical solutions (1D and 2D).</p></li>
-<li><p>1D ising model is analytically solvable but it does not display phase-tranistion! Phase transitions possible in 2D, 3D. We discuss reaosns for this in a separate notebook. In this notebook we focus on simulating 2D lattice and calculating thermodynamic observables.</p></li>
-<li><p>Ising Models are defined by Hamiltonian encoding the nature of interactions between spins <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> (for nearest enighbours <span class="math notranslate nohighlight">\(|i-j|=1\)</span>) and/or interactions of spins with an external field <span class="math notranslate nohighlight">\(B\)</span></p></li>
+<li><p>Ising models are simple spin lattice models widely used to study phase transitions. Many aspects of phase transitions are universal and independent of microscopic details of interactions. Hence, one wants as simple a model capable of displaying phase transitions as possible! Ising models fit the bill perfectly, and one could even obtain analytical solutions (1D and 2D).</p></li>
+<li><p>We are going to learn that phase transitions are possible in 2D and 3D. This notebook focuses on simulating 2D lattice and calculating thermodynamic observables.</p></li>
+<li><p>Ising Models are defined by Hamiltonian encoding the nature of interactions between spins <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> (for nearest neighbors <span class="math notranslate nohighlight">\(|i-j|=1\)</span>) and interactions of spins with an external field <span class="math notranslate nohighlight">\(B\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\boxed{H([s])= \sum_{\langle ij \rangle} J_{ij}s_i s_j - \mu B \sum_i s_i}\]</div>
 <ul class="simple">
-<li><p>Partition function is sum over all posisble microstates or in the case of Ising models over all possible spin configurations!</p></li>
+<li><p>The partition function is the sum of all possible microstates or, in the case of Ising models, all possible spin configurations!</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\boxed{Z=\sum_{[s]}e^{-H([s])/k_B T}}\]</div>
+<p><strong>Extracting thermodynamics from Ising models</strong></p>
 <ul class="simple">
-<li><p><strong>Total magnetization, <span class="math notranslate nohighlight">\(M\)</span></strong>  or <strong>Magnetization per spin <span class="math notranslate nohighlight">\(m\)</span></strong>  are key observables in the model and we defined them below</p></li>
+<li><p>Total magnetization, <span class="math notranslate nohighlight">\(M\)</span>  or Magnetization per spin <span class="math notranslate nohighlight">\(m\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[M([s])=\sum_is_i \]</div>
@@ -548,12 +548,13 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[Z(M) = \sum_{[s]} e^{-\beta H([s])} \delta (M-M([s]))\]</div>
 <ul class="simple">
-<li><p>Similiarly Free energy as a function of M can be obtained allowing us to reason about probabilities of systems with different degree of magnetization.</p></li>
+<li><p>Similarly, Free energy as a function of M can be obtained, allowing us to reason about the probabilities of systems with different degrees of magnetization.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[F(M)=-\beta^{-1} log Z(M)\]</div>
+<p><strong>Response functions</strong></p>
+<p>To inform us about fluctuations in energy and magnetization, we compute the following response functions</p>
 <ul class="simple">
-<li><p>To inform us about fluctuations in energy and magnetization we compute the following response functions</p></li>
 <li><p><strong>Heat capacity <span class="math notranslate nohighlight">\(C_v\)</span></strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -1272,7 +1273,7 @@ configuration as an input to the system to undergo equilibriation again.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-ising-models-and-key-thermodynamic-variables">Summary of Ising models and key thermodynamic variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ising-model-the-h-atom-of-phase-transitions">Ising model: The H atom of phase transitions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-spin-lattice">Setting up spin lattice</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">Enforcing periodic boundary conditions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-boltzmann-distribution-mc-vs-mcmc">Sampling Boltzmann distribution: MC vs MCMC</a></li>
