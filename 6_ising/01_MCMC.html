@@ -254,6 +254,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab4/mass_action.html">Mass action law</a></li>
 </ul>
 </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab5/intro.html">Simulating Ising models</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/torch_ising.html">Pytorch implementaiton of Ising-2D simulation</a></li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -621,16 +625,14 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_E</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Compute energy of spin lattice by taking product of spin </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Compute energy of spin-lattice by taking the product of spin </span>
 <span class="sd">    lattice with itself shifted in four directions using</span>
 <span class="sd">    via numpy roll&#39;&#39;&#39;</span> 
       
-    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> \
-        <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="o">-</span><span class="n">J</span><span class="o">*</span><span class="n">spins</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="mi">2</span> <span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="o">-</span><span class="n">J</span><span class="o">*</span><span class="n">spins</span><span class="o">*</span><span class="n">z</span><span class="p">)</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
     
-    <span class="k">return</span> <span class="n">E</span> <span class="o">-</span> <span class="n">B</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">E</span> 
 
 <span class="k">def</span> <span class="nf">get_E2</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span><span class="n">J</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>  
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Compute energy of spin lattice by iterating over every spin </span>
@@ -641,7 +643,7 @@ document.write(`
     <span class="n">E</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>   
-            <span class="n">z</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] +\
+            <span class="n">z</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] + \
                 <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>]  +  spins[i,(j-1)%N]
             <span class="n">E</span> <span class="o">+=</span> <span class="o">-</span><span class="n">J</span><span class="o">*</span><span class="n">z</span><span class="o">*</span><span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span> 
             
@@ -896,7 +898,7 @@ In this chemical interconversion reaction:</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="nd">@njit</span>
-<span class="k">def</span> <span class="nf">run_ising2d</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">out_freq</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">run_ising2d</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">out_freq</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;Basic Metropolis Monte Carlo simulator of 2D Ising model</span>
 <span class="sd">    ---</span>
 <span class="sd">    spins:    (int, int) 2D numpy array</span>
@@ -911,10 +913,12 @@ In this chemical interconversion reaction:</p>
 <span class="sd">    &#39;&#39;&#39;</span>
     
     <span class="c1">#### Initialize simulation</span>
-    <span class="n">N</span>   <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
-    <span class="n">M_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
+    <span class="n">spins</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     
-    <span class="n">E_t</span> <span class="o">=</span> <span class="n">B</span><span class="o">*</span><span class="n">M_t</span>
+    <span class="n">M_t</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
+
+    <span class="c1"># We use explicit looping required by njit accelearation</span>
+    <span class="n">E_t</span>   <span class="o">=</span> <span class="o">-</span><span class="n">B</span><span class="o">*</span><span class="n">M_t</span> 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span> 
             <span class="n">z</span>    <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] + spins[i,(j+1)%N] + spins[i,(j-1)%N]
@@ -951,16 +955,16 @@ In this chemical interconversion reaction:</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Initialization and Parameters</span>
-<span class="n">spins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;J&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Simulation Parameters</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span>
+          <span class="s1">&#39;J&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
           <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> 
           <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-          <span class="s1">&#39;n_steps&#39;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span> 
+          <span class="s1">&#39;n_steps&#39;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">,</span> 
           <span class="s1">&#39;out_freq&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
 
 <span class="c1"># Simulation</span>
-<span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">run_ising2d</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">run_ising2d</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
