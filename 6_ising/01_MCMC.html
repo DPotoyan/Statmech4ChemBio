@@ -238,12 +238,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Labs</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab1/intro.html">Lab 1</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab1/intro.html">Numpy lab</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab1/sinc_function.html">Numpy Lab: Sinc Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab1/linear_functions.html">Numpy Lab: Linear Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab2/intro.html">Lab 2</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab2/intro.html">Random variable lab</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab2/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
 
 </ul>
@@ -483,14 +483,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">How to pick the moves for Markov chain?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metropolis-algorithm">Metropolis algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-for-running-2d-ising-mcmc-simulations">Code for running 2D ising MCMC Simulations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-simulations">Visualize simulations</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-functions">Autocorrelation functions</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-simulations">Visualize simulations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carry-out-explorative-simulations">Carry out explorative simulations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-sweeps">Parameter sweeps</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-functions">Autocorrelation functions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem-1</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2">Problem-2</a></li>
@@ -1006,35 +1004,6 @@ In this chemical interconversion reaction:</p>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">{"model_id": "8268cb6b9ea34acbb65cce8cd072466e", "version_major": 2, "version_minor": 0}</script></div>
 </div>
-<section id="autocorrelation-functions">
-<h4>Autocorrelation functions<a class="headerlink" href="#autocorrelation-functions" title="Permalink to this heading">#</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">autocorr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">variance</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)[</span><span class="o">-</span><span class="n">n</span><span class="p">:]</span>
-    <span class="n">result</span> <span class="o">/=</span> <span class="n">variance</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Example data; replace with your magnetization array</span>
-<span class="n">acorr</span> <span class="o">=</span> <span class="n">autocorr</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">acorr</span><span class="o">/</span><span class="n">acorr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Steps, $n$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\langle M(t)M(t+n) \rangle$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$\\langle M(t)M(t+n) \\rangle$&#39;)
-</pre></div>
-</div>
-<img alt="../_images/c2f3921aab87d7775b9cce65bc3dba7bd7a0ad1b500189ded25395428ac17478.png" src="../_images/c2f3921aab87d7775b9cce65bc3dba7bd7a0ad1b500189ded25395428ac17478.png" />
-</div>
-</div>
-</section>
 </section>
 <section id="carry-out-explorative-simulations">
 <h3>Carry out explorative simulations<a class="headerlink" href="#carry-out-explorative-simulations" title="Permalink to this heading">#</a></h3>
@@ -1049,35 +1018,34 @@ In this chemical interconversion reaction:</p>
 <h4>Parameter sweeps<a class="headerlink" href="#parameter-sweeps" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_Cv</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">/</span><span class="n">T</span><span class="o">**</span><span class="mi">2</span>
-
-<span class="k">def</span> <span class="nf">get_Xi</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">/</span><span class="n">T</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Simulation Parameters</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span>
+          <span class="s1">&#39;J&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+          <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> 
+          <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s1">&#39;n_steps&#39;</span><span class="p">:</span> <span class="mi">1000000</span><span class="p">,</span> 
+          <span class="s1">&#39;out_freq&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
 
 <span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span> 
-<span class="n">n_equil</span>  <span class="o">=</span> <span class="mi">100000</span>
-<span class="n">out</span> <span class="o">=</span> <span class="mi">10</span>
-
 <span class="n">Es</span><span class="p">,</span> <span class="n">Ms</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span> <span class="n">Xs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>  
 
 <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">Ts</span><span class="p">:</span>
     
-    <span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">run_ising2d</span><span class="p">(</span><span class="n">spins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span> 
-                          <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> 
-                          <span class="n">J</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
-                          <span class="n">B</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
-                          <span class="n">n_steps</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n_equil</span><span class="p">),</span> 
-                          <span class="n">out_freq</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+    <span class="n">params</span><span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">T</span>
     
-    <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">n_equil</span><span class="o">//</span><span class="n">out</span><span class="p">:]</span>
-    <span class="n">M</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">n_equil</span><span class="o">//</span><span class="n">out</span><span class="p">:]</span>
+    <span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">run_ising2d</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># Save last 80% percent of data</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">)</span> 
+    
+    <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
     
     <span class="n">Es</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">E</span><span class="p">))</span>
     <span class="n">Ms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">M</span><span class="p">))</span>
     
-    <span class="n">Cs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_Cv</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span> 
-    <span class="n">Xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_Xi</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+    <span class="n">Cs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">E</span><span class="p">)</span><span class="o">/</span><span class="n">T</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> 
+    <span class="n">Xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">/</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1106,6 +1074,29 @@ In this chemical interconversion reaction:</p>
 </div>
 </div>
 </section>
+</section>
+<section id="autocorrelation-functions">
+<h3>Autocorrelation functions<a class="headerlink" href="#autocorrelation-functions" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">autocorr</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)[</span><span class="o">-</span><span class="n">n</span><span class="p">:]</span>
+    <span class="n">result</span> <span class="o">/=</span> <span class="n">variance</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Example data; replace with your magnetization array</span>
+<span class="n">acorr</span> <span class="o">=</span> <span class="n">autocorr</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">acorr</span><span class="o">/</span><span class="n">acorr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Steps, $n$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\langle M(t)M(t+n) \rangle$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="problems">
 <h3>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h3>
@@ -1214,14 +1205,12 @@ configuration as an input to the system to undergo equilibriation again.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-pick-the-moves-for-markov-chain">How to pick the moves for Markov chain?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metropolis-algorithm">Metropolis algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-for-running-2d-ising-mcmc-simulations">Code for running 2D ising MCMC Simulations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-simulations">Visualize simulations</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-functions">Autocorrelation functions</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-simulations">Visualize simulations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#carry-out-explorative-simulations">Carry out explorative simulations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-sweeps">Parameter sweeps</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autocorrelation-functions">Autocorrelation functions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem-1</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2">Problem-2</a></li>
