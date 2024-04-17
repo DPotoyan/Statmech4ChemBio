@@ -487,16 +487,15 @@ document.write(`
 <span class="sd">    Metropolis Monte Carlo simulator for the 2D Ising model using PyTorch.</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">    spins (torch.Tensor): Initial spin configuration.</span>
+<span class="sd">    N (int): dimension of spin lattice, returning N*N spins</span>
 <span class="sd">    T (float): Temperature.</span>
 <span class="sd">    J (float): Interaction strength between spins.</span>
 <span class="sd">    B (float): External magnetic field.</span>
 <span class="sd">    n_steps (int): Number of Monte Carlo steps.</span>
 <span class="sd">    out_freq (int): Output frequency for saving spin configurations, energy, and magnetization.</span>
-<span class="sd">    device (str): Device to run the simulation (&#39;cpu&#39; or &#39;cuda&#39;).</span>
-
+<span class="sd">  </span>
 <span class="sd">    Returns:</span>
-<span class="sd">    tuple: Arrays of spin configurations, energies, and magnetizations.</span>
+<span class="sd">    tuple: Numpy arrays of spin configurations, energies, and magnetizations.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     
     <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cpu&quot;</span><span class="p">)</span> <span class="c1"># For small lattices that we simulate CPU is more efficient</span>
@@ -529,7 +528,7 @@ document.write(`
             <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E_t</span> <span class="o">/</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
             <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">M_t</span> <span class="o">/</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">E</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">E</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -544,7 +543,6 @@ document.write(`
           <span class="s1">&#39;n_steps&#39;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span> 
           <span class="s1">&#39;out_freq&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
 
-
 <span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">ising2d_torch</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -557,10 +555,10 @@ document.write(`
           <span class="s1">&#39;J&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
           <span class="s1">&#39;B&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> 
           <span class="s1">&#39;T&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-          <span class="s1">&#39;n_steps&#39;</span><span class="p">:</span> <span class="mi">1000000</span><span class="p">,</span> 
+          <span class="s1">&#39;n_steps&#39;</span><span class="p">:</span> <span class="mi">2000000</span><span class="p">,</span> 
           <span class="s1">&#39;out_freq&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
 
-<span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span> 
+<span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span> 
 <span class="n">Es</span><span class="p">,</span> <span class="n">Ms</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span> <span class="n">Xs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>  
 
 <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">Ts</span><span class="p">:</span>
@@ -569,8 +567,8 @@ document.write(`
     
     <span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">run_ising2d</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
-    <span class="c1"># Save last 80% percent of data</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">)</span> 
+    <span class="c1"># Save last 90% percent of data</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">E</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span> 
     
     <span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
     <span class="n">M</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">idx</span><span class="p">:]</span>
