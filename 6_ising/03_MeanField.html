@@ -476,9 +476,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-of-mean-field-ising-models">Free energy of mean field ising models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-various-limits">Investigating various limits</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#critical-exponents">Critical exponents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-field-exponents">Mean field exponents</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helmholtz-free-energy">Helmholtz Free energy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
             </nav>
@@ -493,42 +494,144 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mean-field-theory">
 <h1>Mean Field Theory<a class="headerlink" href="#mean-field-theory" title="Permalink to this heading">#</a></h1>
-<p><strong>Mean Field Approximation (MFA): replacing fluctuating terms by averages</strong></p>
 <ul class="simple">
-<li><p>When sufficiently away from critical points equilibrium averages of functions of spins can be approximated by field averages of individual spins. This approximation ignores fluctuations of spin states hence it is likely to break down at critical points where fluctuations reach macroscopic scales.</p></li>
+<li><p>Mean Field Approximation replaces fluctuating terms with their averages. For a function dependent on multiple variables, the approximation removes all correlations between variables:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\big\langle f(s_1, s_2, s_3,...) \big\rangle = f(\langle s_1\rangle, \langle s_2\rangle, \langle s_3\rangle,...) \]</div>
-<p>Let look at the 2D ising model again and regroup hamiltonian where spin <span class="math notranslate nohighlight">\(i\)</span> is interacting with instantaneous and fluctuating fields generating by its nearest neightbours (summation over <span class="math notranslate nohighlight">\(\delta\)</span>) .</p>
-<div class="math notranslate nohighlight">
-\[H_i = -J\sum_{\delta} s_i s_{i+\delta} - h s_i = -\Big(J\sum_{\delta}s_{\delta} +h \Big) s_i\]</div>
-<div class="math notranslate nohighlight">
-\[H_i = J\sum_{\delta}s_{\delta}+h\]</div>
-<div class="math notranslate nohighlight">
-\[H^{eff}=\sum H_i s_i\]</div>
+\[\big\langle f(x_1, x_2, x_3, \ldots) \big\rangle = f(\langle x_1\rangle, \langle x_2\rangle, \langle x_3\rangle, \ldots)\]</div>
 <ul class="simple">
-<li><p>So far no approximation has been made and instead we re-wrote haitlonian in terms of effective field hamiltonians for each spin.</p></li>
+<li><p>Mean field approximation is widely used in electronic-structure theory (Hartree-Fock), theory of liquids (Van der Waals) and condensed matter physics.</p></li>
 </ul>
-<p>Now we are ready to make a dramatic approximation: replace the effective field by its mean field approximation where each spin is experiencing a field independent of others. The average magnetization per spin due to translational invariance is same for every spin (in periodic boundary conditions that is)</p>
-<div class="math notranslate nohighlight">
-\[H^{MFA}_i = \langle H_i \rangle = J\sum_{\delta} \langle s_{\delta} \rangle+h = Jzm+h\]</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Application of MFA to the Ising Model</strong></p>
 <ul class="simple">
-<li><p>z=4 for 2D lattice</p></li>
-<li><p>z=6 for 3D lattice</p></li>
+<li><p>In the Ising model, this approximation allows us to decouple spins, simplifying the system to a single parameter: the average magnetization per spin, <span class="math notranslate nohighlight">\(m\)</span>.</p></li>
 </ul>
-<p><strong>In MFA hamitlonian factors out into additive components</strong></p>
-<p>Just like the exact case we had with <span class="math notranslate nohighlight">\(J=0\)</span> we find the solution whihc does not admit simple functional form.</p>
 <div class="math notranslate nohighlight">
-\[\boxed{m = tanh(\beta(Jzm+h))}\]</div>
+\[\langle s_i s_j \rangle \approx \langle s_i \rangle \langle s_j \rangle = m^2\]</div>
+<div class="math notranslate nohighlight">
+\[\langle H \rangle  \approx -J\sum_{ij\in neighb} \langle s_{i} \rangle  \langle s_{j} \rangle - h \langle s_{i} \rangle =-\frac{1}{2}Jq m^2 -hm \]</div>
+<ul class="simple">
+<li><p>The 1/2 avoids double counting, and (<span class="math notranslate nohighlight">\(q\)</span>) denotes the number of nearest neighbors, 4 for a 2D lattice and 6 for a 3D lattice.</p></li>
+</ul>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title"><strong>Detailed derivation of Mean Field Approximation of Hamiltonian</strong></p>
+<ul class="simple">
+<li><p>Consider the 2D Ising model where each spin <span class="math notranslate nohighlight">\(( s_i \)</span>) interacts with an effective field generated by its nearest neighbors (summed over <span class="math notranslate nohighlight">\(\delta\)</span> ):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H_i = -J\sum_{\delta} s_i s_{i+\delta} - h s_i = -\left(J\sum_{\delta}s_{\delta} + h \right) s_i = -\sum_i H_i s_i\]</div>
+<ul class="simple">
+<li><p>Where the Hamiltonian field of spin <span class="math notranslate nohighlight">\(i\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H_i = J\sum_{\delta}s_{\delta} + h\]</div>
+<ul class="simple">
+<li><p>Now, we make a critical approximation by assuming each spin experiences an average field independent of others:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[H_i \approx \langle H_i \rangle = J\sum_{\delta} \langle s_{\delta} \rangle + h = Jqm + h\]</div>
+<div class="math notranslate nohighlight">
+\[H \approx -(Jqm + h) \sum_i  s_i\]</div>
+<ul class="simple">
+<li><p>Taking average and taking care not to double count we arrive at the expression for average energy obtained before.</p></li>
+</ul>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title"><strong>Self-Consistent Equation</strong></p>
+<ul class="simple">
+<li><p><strong>Partition function</strong> Since we decoupled each spin partition function is a product of the partition function of individual spins <span class="math notranslate nohighlight">\(Z=z^N\)</span>, and we only have to microstates for each spin <span class="math notranslate nohighlight">\(s_i=\pm1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E(s_i=\pm 1) = \mp (Jqm+h)\]</div>
+<div class="math notranslate nohighlight">
+\[z = e^{\beta(Jqm+h)}+ e^{-\beta(Jqm+h)}\]</div>
+<div class="math notranslate nohighlight">
+\[p(s_i) = \frac{e^{\beta s_i (Jqm + h)}}{z}\]</div>
+<ul class="simple">
+<li><p><strong>Average Spin Orientation:</strong> The mean spin orientation, given the probabilities, is then:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[m = \langle s_i \rangle = \sum_{s_i} s_i p(s_i) = \frac{e^{\beta (Jqm + h)} - e^{-\beta (Jqm + h)}}{e^{\beta (Jqm + h)} + e^{-\beta (Jqm + h)}} \]</div>
+<div class="math notranslate nohighlight">
+\[m= \tanh(\beta (Jqm + h))\]</div>
+<ul class="simple">
+<li><p>We see that the hyperbolic tangent arises from the balance of probabilities for spin orientations under the influence of the mean field.</p></li>
+</ul>
+</div>
+<section id="free-energy-of-mean-field-ising-models">
+<h2>Free energy of mean field ising models<a class="headerlink" href="#free-energy-of-mean-field-ising-models" title="Permalink to this heading">#</a></h2>
+<p><strong>Defining macrostate M</strong></p>
+<ul class="simple">
+<li><p>Consider <span class="math notranslate nohighlight">\(N\)</span> spin-lattice macrostates with magnetization value <span class="math notranslate nohighlight">\(M\)</span> resulting from a net number of spins pointing up (down).</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[N = N_{+} +N_{-}\]</div>
+<div class="math notranslate nohighlight">
+\[M = N_{+} -N_{-}\]</div>
+<ul class="simple">
+<li><p>Dividing by N we can express probabilities of spin up and down <span class="math notranslate nohighlight">\(N_{\pm}/N\)</span> in terms of magnetization per spin <span class="math notranslate nohighlight">\(m=M/N\)</span>
+$<span class="math notranslate nohighlight">\(p_{\pm} = \frac{1\pm m}{2}\)</span>$</p></li>
+</ul>
+<p><strong>Entropy, Energy, and Free energy</strong></p>
+<ul class="simple">
+<li><p><strong>Entropy</strong> is the familiar <span class="math notranslate nohighlight">\(S = -\sum_i p_i\log p_i\)</span> expression where <span class="math notranslate nohighlight">\(p_i\)</span> is spin up and down probabilities.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S(m)  -N k_B \Bigg[\Big(\frac{1+m}{2}\Big) log\Big(\frac{1+m}{2}\Big) + \Big(\frac{1-m}{2}\Big) \Big(\frac{1-m}{2}\Big) \Bigg]
+\]</div>
+<ul class="simple">
+<li><p><strong>Energy</strong> for total spin magnetization <span class="math notranslate nohighlight">\(M\)</span> is the N times the average energy of each spin in the mean-field approximation</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ E(m) = -N \Big[\frac{Jq}{2} m^2 -hm \Big]\]</div>
+<ul class="simple">
+<li><p><strong>Free energy</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[F(m) = E(m) - TS(m)\]</div>
+<ul class="simple">
+<li><p><strong>Dimensionless free energy per particle</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[f = \frac{F}{Nk_B T} = - \Bigg[\frac{Jq }{2k_B T} m^2 - \frac{h}{k_B T} m \Bigg] + \Bigg[\Big(\frac{1+m}{2}\Big) log\Big(\frac{1+m}{2}\Big) + \Big(\frac{1-m}{2}\Big) \Big(\frac{1-m}{2}\Big) \Bigg]\]</div>
+<p><strong>Finding critical point <span class="math notranslate nohighlight">\(Tc\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial f^2}{\partial m^2} = 1-\frac{Jq}{k_BT} = 0 \]</div>
+<div class="math notranslate nohighlight">
+\[T_c = \frac{Jq}{k_B}\]</div>
+<p><strong>Magnetization as a function of temperature</strong></p>
+<p>The equilibrium value of magnetization is found by minimizing free energy. By taking the first derivative of free energy, we end up with an equation that can only be solved in a self-consistent manner by starting with a guess and iterating until both sides of the equation are equal.</p>
+<div class="math notranslate nohighlight">
+\[-\Big(\frac{Jq }{k_B T}\Big)m - \frac{h}{k_B T}+tanh^{-1}(m) = 0\]</div>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(h=0\)</span> we have the following simple equation to be solved in self consistent manner:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[-\Big(\frac{T_c}{T}\Big)m = tanh^{-1}(m)\]</div>
+<ul class="simple">
+<li><p>For small values of <span class="math notranslate nohighlight">\(m\)</span>, we can make an approximation by taylor expanding <span class="math notranslate nohighlight">\(tanh^{-1}(x) = x+1/3x^3\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ -\frac{T_c}{T}m - \frac{h}{k_B T} + (m+1/3m^3)=0\]</div>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(h = 0\)</span> case the solution is either trivial <span class="math notranslate nohighlight">\(m=0\)</span> or we get:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[m = \pm \sqrt{\frac{3(T_c-T)}{T_c}}\]</div>
+</section>
+<section id="investigating-various-limits">
+<h2>Investigating various limits<a class="headerlink" href="#investigating-various-limits" title="Permalink to this heading">#</a></h2>
 <p><strong>The <span class="math notranslate nohighlight">\(h=0\)</span> MFA case</strong></p>
 <p>The equation can be solved in a self-consistent manner or graphically by finding intersection between:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(m =tanh(x)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(x = \beta Jzm\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x = \frac{Jqm}{k_BT}\)</span></p></li>
 </ul>
 <p>When the slope is equal to one it provides a dividing line between two behaviours.</p>
 <div class="math notranslate nohighlight">
-\[k_B T_c =zJ\]</div>
+\[k_B T_c =qJ\]</div>
 <div class="math notranslate nohighlight">
 \[m = tanh \Big(\frac{Tc}{T} m \Big)\]</div>
 <blockquote>
@@ -546,8 +649,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">Tc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> 
-<span class="k">def</span> <span class="nf">mfa_ising1d_plot</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mfa_ising1d_plot</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Tc</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 
     <span class="n">x</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
     
@@ -569,8 +671,18 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interact</span><span class="p">(</span><span class="n">mfa_ising1d_plot</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">Tc</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "86c0b78275fa44db9a0d6bf4abe2c959", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a737e2e8ec254ac3bd01f7ed51e06dea", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.mfa_ising1d_plot(T=1, Tc=1)&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -744,6 +856,7 @@ if (outputEl) {{
 </div>
 </div>
 </div>
+</section>
 <section id="critical-exponents">
 <h2>Critical exponents<a class="headerlink" href="#critical-exponents" title="Permalink to this heading">#</a></h2>
 <p><strong>A signature of phase transitions of second kind or critical phenomena is the universal power law behaviour near critical point</strong></p>
@@ -765,20 +878,18 @@ if (outputEl) {{
 <div class="math notranslate nohighlight">
 \[tanh(x) \approx x-\frac{1}{3}x^3+...\]</div>
 <div class="math notranslate nohighlight">
-\[m = tanh(\beta J z m) \approx \beta J z m - \frac{1}{3} (\beta Jzm)^3\]</div>
+\[m = tanh(\beta J q m) \approx \beta J q m - \frac{1}{3} (\beta Jqm)^3\]</div>
 <ul class="simple">
 <li><p>One solution is obviously m = 0 which is the only solution above <span class="math notranslate nohighlight">\(T_c\)</span></p></li>
 <li><p>Below <span class="math notranslate nohighlight">\(T_c\)</span> the non-zero solution is found <span class="math notranslate nohighlight">\(m=\sqrt{3}\frac{T}{T_c} \Big(1-\frac{T}{T_c} \Big)^{1/2}+...\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\beta_{MFA}=1/2\)</span></p></li>
 </ul>
-</section>
-<section id="helmholtz-free-energy">
-<h2>Helmholtz Free energy<a class="headerlink" href="#helmholtz-free-energy" title="Permalink to this heading">#</a></h2>
+<p><strong>Approximation for Free energy near Tc</strong></p>
 <div class="math notranslate nohighlight">
 \[dF = -SdT + BdM \]</div>
 <div class="math notranslate nohighlight">
 \[F_T = \int dF  = F_0 + \int^{M}_0 B(M) dM\]</div>
-<p>We will now make use of Mean field theory to approximate dependence of field on magnetization: <span class="math notranslate nohighlight">\(h(m) \approx m(1-T_c/T)+ 1/3 m^3\)</span> which enables us to evaluate the integral above.</p>
+<p>We will now make use of Mean field theory to approximate the dependence of field on magnetization: <span class="math notranslate nohighlight">\(h(m) \approx m(1-T_c/T)+ 1/3 m^3\)</span>, which enables us to evaluate the integral above.</p>
 <div class="math notranslate nohighlight">
 \[B(M) = aM +bM^3\]</div>
 <div class="math notranslate nohighlight">
@@ -880,9 +991,10 @@ if (outputEl) {{
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-of-mean-field-ising-models">Free energy of mean field ising models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#investigating-various-limits">Investigating various limits</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#critical-exponents">Critical exponents</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-field-exponents">Mean field exponents</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#helmholtz-free-energy">Helmholtz Free energy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
   </nav></div>
