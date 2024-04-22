@@ -537,6 +537,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">interact</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
@@ -703,6 +704,46 @@ if (outputEl) {{
 
                         })                };                });            </script>        </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Constants</span>
+<span class="n">J</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Interaction strength</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Boltzmann constant (set to 1 for simplicity)</span>
+
+<span class="k">def</span> <span class="nf">entropy</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="c1"># Handle log of zero by adding a small number to the argument</span>
+    <span class="n">small_number</span> <span class="o">=</span> <span class="mf">1e-10</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">m</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">m</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">small_number</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">small_number</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">free_energy</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="c1"># Calculate the free energy for given m and T</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">J</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">T</span> <span class="o">*</span> <span class="n">entropy</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_free_energy</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="c1"># Magnetization range</span>
+    <span class="n">m_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">F_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">free_energy</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">m_values</span><span class="p">]</span>
+    
+    <span class="c1"># Plotting</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">m_values</span><span class="p">,</span> <span class="n">F_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;T = </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Magnetization (m)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Free Energy per Spin (F)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Mean-field Free Energy vs. Magnetization&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">interactive</span><span class="p">(</span><span class="n">plot_free_energy</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span> <span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "e3d13bb390284fce808fd81d5ca02726", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_free_energy(T)&gt;
+</pre></div>
+</div>
+</div>
+</div>
 <section id="critical-exponents">
 <h2>Critical exponents<a class="headerlink" href="#critical-exponents" title="Permalink to this heading">#</a></h2>
 <p><strong>A signature of phase transitions of second kind or critical phenomena is the universal power law behaviour near critical point</strong></p>
@@ -747,27 +788,6 @@ if (outputEl) {{
 <li><p><span class="math notranslate nohighlight">\(T &lt; T_c\)</span> case we get  <span class="math notranslate nohighlight">\(a&lt;0\)</span> and <span class="math notranslate nohighlight">\(M=\pm (-|a|/b)^{1/2} = \pm M_S\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(T &gt; T_c\)</span> case we get  <span class="math notranslate nohighlight">\(a&gt;0\)</span> and <span class="math notranslate nohighlight">\(M=0\)</span></p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">800</span><span class="p">))</span> 
-<span class="k">def</span> <span class="nf">HelmF</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">400</span><span class="p">):</span>
-
-  <span class="n">Tc</span><span class="o">=</span><span class="mi">631</span> <span class="c1"># constnt for Ni</span>
-
-  <span class="n">a</span> <span class="o">=</span> <span class="mi">882</span><span class="o">*</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">Tc</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-  <span class="n">b</span> <span class="o">=</span> <span class="mf">0.4734</span><span class="o">*</span><span class="n">T</span>
-  <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">M</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;brown&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T/Tc = </span><span class="si">{</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">Tc</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">140</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$F(M)$&#39;</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$M$&#39;</span><span class="p">)</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
