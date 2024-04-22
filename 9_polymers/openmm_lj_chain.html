@@ -492,16 +492,16 @@ document.write(`
 <h1>Simulating toy polymers using openMM<a class="headerlink" href="#simulating-toy-polymers-using-openmm" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install -q condacolab
-import condacolab
-condacolab.install()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-q<span class="w"> </span>condacolab
+<span class="kn">import</span> <span class="nn">condacolab</span>
+<span class="n">condacolab</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%capture
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
 !conda install -c conda-forge openmm mdtraj parmed
 !pip install py3dmol 
 </pre></div>
@@ -510,7 +510,7 @@ condacolab.install()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openmm</span> <span class="k">as</span> <span class="nn">mm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openmm</span> <span class="k">as</span> <span class="nn">mm</span>
 <span class="kn">from</span>   <span class="nn">openmm</span> <span class="kn">import</span> <span class="n">app</span>
 <span class="kn">from</span>   <span class="nn">openmm.unit</span> <span class="kn">import</span> <span class="o">*</span> 
 
@@ -526,7 +526,7 @@ condacolab.install()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation parameters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Simulation parameters</span>
 <span class="n">temperature</span> <span class="o">=</span> <span class="mf">293.15</span> <span class="o">*</span> <span class="n">kelvin</span>
 <span class="n">pressure</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">bar</span>
 <span class="n">mass</span> <span class="o">=</span> <span class="mf">39.948</span> <span class="o">*</span> <span class="n">amu</span>
@@ -547,7 +547,7 @@ condacolab.install()
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">parmed</span> <span class="kn">import</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">Atom</span><span class="p">,</span> <span class="n">Bond</span><span class="p">,</span> <span class="n">Angle</span><span class="p">,</span> <span class="n">Dihedral</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">parmed</span> <span class="kn">import</span> <span class="n">Structure</span><span class="p">,</span> <span class="n">Atom</span><span class="p">,</span> <span class="n">Bond</span><span class="p">,</span> <span class="n">Angle</span><span class="p">,</span> <span class="n">Dihedral</span>
 
 <span class="n">s</span>  <span class="o">=</span> <span class="n">Structure</span><span class="p">()</span>
 
@@ -576,7 +576,7 @@ condacolab.install()
 <h2>Create openmm systema and add particles<a class="headerlink" href="#create-openmm-systema-and-add-particles" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add particles to the system</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add particles to the system</span>
 <span class="n">system</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">System</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">natom</span><span class="p">):</span>
@@ -590,7 +590,7 @@ condacolab.install()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">### Create LJ force</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Create LJ force</span>
 <span class="n">E_lj</span>  <span class="o">=</span> <span class="s1">&#39;4*eps*((sig/r)^12-(sig/r)^6); sig=0.5*(sig1+sig2); eps=sqrt(eps1*eps2)&#39;</span>
 <span class="n">force</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">CustomNonbondedForce</span><span class="p">(</span><span class="n">E_lj</span><span class="p">)</span>
 <span class="n">force</span><span class="o">.</span><span class="n">addPerParticleParameter</span><span class="p">(</span><span class="s1">&#39;sig&#39;</span><span class="p">)</span> 
@@ -624,7 +624,7 @@ condacolab.install()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Check if force uses PBC: &#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">.</span><span class="n">usesPeriodicBoundaryConditions</span><span class="p">()</span> <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Check if force uses PBC: &#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">.</span><span class="n">usesPeriodicBoundaryConditions</span><span class="p">()</span> <span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No particles: &#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">.</span><span class="n">getNumParticles</span><span class="p">()</span> <span class="p">)</span>
 
@@ -640,7 +640,7 @@ condacolab.install()
 <h2>Create OpenMM simulation object<a class="headerlink" href="#create-openmm-simulation-object" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">integrator</span> <span class="o">=</span>  <span class="n">mm</span><span class="o">.</span><span class="n">LangevinIntegrator</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">picosecond</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">femtoseconds</span><span class="p">)</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">integrator</span> <span class="o">=</span>  <span class="n">mm</span><span class="o">.</span><span class="n">LangevinIntegrator</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">picosecond</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">femtoseconds</span><span class="p">)</span> 
 
 <span class="n">simulation</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> 
                             <span class="n">system</span><span class="p">,</span> 
@@ -673,7 +673,7 @@ condacolab.install()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Animation</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Animation</span>
 <span class="n">view</span> <span class="o">=</span> <span class="n">py3Dmol</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 
 <span class="n">view</span><span class="o">.</span><span class="n">addModelsAsFrames</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ljtraj.pdb&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span><span class="s1">&#39;pdb&#39;</span><span class="p">)</span>
@@ -700,16 +700,16 @@ condacolab.install()
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "conda-env-llpsmd3-py"
         },
         kernelOptions: {
-            name: "python3",
+            name: "conda-env-llpsmd3-py",
             path: "./9_polymers"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'conda-env-llpsmd3-py'</script>
 
                 </article>
               
