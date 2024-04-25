@@ -214,6 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="03_MeanField.html">Mean Field Theory</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Mean Field theory of interacting fluids</a></li>
 
+
 <li class="toctree-l2"><a class="reference internal" href="04_analytic.html">Analytic solutions to 1D Ising model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_EnhanceSampl.html">Non-boltzman (enhanced) sampling ideas</a></li>
 </ul>
@@ -480,6 +481,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mean Field theory of interacting fluids</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-construction">Maxwell Construction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
 
             </nav>
@@ -495,34 +497,39 @@ document.write(`
   <section id="mean-field-theory-of-interacting-fluids">
 <h1>Mean Field theory of interacting fluids<a class="headerlink" href="#mean-field-theory-of-interacting-fluids" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>For a homogenous fluid particles</p></li>
+<li><p>For a pure fluid the partition function reads</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[Z(\beta, N, V) = \frac{1}{N!h^{3N}}\int e^{-\beta\frac{p^2}{2m}}dp^N  \int e^{-\beta U(r)} dr^N\]</div>
+\[Z(\beta, N, V) = \frac{1}{N!h^{3N}}\int e^{-\beta\frac{p^2}{2m}}dp^N \cdot  \int e^{-\beta U(r)} dr^N\]</div>
 <ul class="simple">
-<li><p>Assume that each molecule moves in some effective potential <span class="math notranslate nohighlight">\(U(r) = \sum_i U^i_{eff}(r)\)</span> then we can use <span class="math notranslate nohighlight">\(Z=z^N\)</span></p></li>
+<li><p>When making mean field approximation we assume that each particle moves in some effective potential <span class="math notranslate nohighlight">\(U(r) = \sum_i U^i_{eff}(r)\)</span> created by the rest of the particles. This allows us to use <span class="math notranslate nohighlight">\(Z=z^N\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[Z(\beta, N, V) = \frac{1}{N!} \Bigg[\frac{(2\pi mk_B T)}{h^3} \Bigg]^N \cdot  \Bigg[ \int e^{-\beta U(r)} dr \Bigg]^N\]</div>
 <p><strong>Van der Waals gas</strong></p>
 <ul class="simple">
-<li><p>In the idea gas the last term is simply equal to volume. For real gas we make to modifications:</p></li>
-<li><p>First, each gas atome can occupby finite volume b hence the free volume with N particle in the container is <span class="math notranslate nohighlight">\((V-bN)\)</span></p></li>
+<li><p>In the ideal gas the last term is simply equal to volume. For real gas we make to modifications:</p></li>
+<li><p>First, each gas atoms can occupy finite volume b hence the free volume with N particle in the container is <span class="math notranslate nohighlight">\((V-bN)\)</span></p></li>
 <li><p>Second we write effective potential to be proportional to density, this is the essence of mean field approximation <span class="math notranslate nohighlight">\(U_{eff} = -a\frac{N}{V}\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[Z(\beta, N, V) = \frac{1}{N!} \Bigg[\frac{(2\pi mk_B T)^{3/2}}{h^3} \Bigg]^N \cdot  \Bigg[(V-bn) e^{\frac{aN}{Vk_B T}} \Bigg]^N\]</div>
 <ul class="simple">
-<li><p><strong>Free energy at fixed volumes</strong>
-$<span class="math notranslate nohighlight">\(F = -k_BT logZ = -Nk_BT log \Bigg[\frac{(2\pi mk_B T)^{3/2}e}{h^3}\Big(\frac{V}{N}-b \Big) \Bigg] -\frac{aN^2}{V}\)</span>$</p></li>
+<li><p><strong>Free energy at fixed volumes</strong></p></li>
+<li></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[F = -k_BT logZ = -Nk_BT log \Bigg[\frac{(2\pi mk_B T)^{3/2}e}{h^3}\Big(\frac{V}{N}-b \Big) \Bigg] -\frac{aN^2}{V}\]</div>
+<ul class="simple">
 <li><p><strong>Free energy at fixed pressures</strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[G = F+pV\]</div>
 <div class="math notranslate nohighlight">
 \[G = -Nk_BT log \Bigg[\frac{(2\pi mk_B T)^{3/2}e}{h^3}\Big(\frac{V}{N}-b \Big) \Bigg] -\frac{aN^2}{V} +pV\]</div>
-<p><strong>Equation of state</strong>
-$<span class="math notranslate nohighlight">\(\frac{\partial G}{\partial V}=0\)</span>$</p>
+<p><strong>Equation of state</strong></p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial G}{\partial V}=0\]</div>
 <div class="math notranslate nohighlight">
 \[ \Big( p+\frac{aN^2}{V^2}\Big)(V-bN) = Nk_B T \]</div>
 </section>
@@ -649,6 +656,15 @@ $<span class="math notranslate nohighlight">\(\frac{\partial G}{\partial V}=0\)<
 </div>
 </div>
 </section>
+<section id="problems">
+<h1>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Using van der Waals gas with a=1, b=1, m=1, and N=1 and adopting simplified units where <span class="math notranslate nohighlight">\(k_B=1\)</span>, <span class="math notranslate nohighlight">\(h=1\)</span> plot dimensionless free energy per particle <span class="math notranslate nohighlight">\(G/Nk_BT\)</span> vs. molar volume <span class="math notranslate nohighlight">\(V/N\)</span> for temperatures 0.2, 0.22, 0.24, 0.26 and 0.28.</p></li>
+<li><p>Minima on free energy corresponding to equilibrium molar fractions of gas and liquid <span class="math notranslate nohighlight">\(v_{gas}\)</span> and <span class="math notranslate nohighlight">\(v_{liq}\)</span>. For each of the temperatures extract these molar volumes and then plot them on the same graph as a function of temperature <span class="math notranslate nohighlight">\(v_gas(T)\)</span> and <span class="math notranslate nohighlight">\(v_liq(T)\)</span></p></li>
+<li><p>Using van der Waals equation of state, make a 3D plot of volume vs pressure vs temperature.</p></li>
+<li><p>Find the critical volume, temperature, and pressure of Van der Waals gas <span class="math notranslate nohighlight">\(V_c, P_c, T_c\)</span>  by taking first three derivatives of Gibbs free energy and setting it to zero, e.g  <span class="math notranslate nohighlight">\(\frac{\partial^n G}{\partial v^n}=\)</span> (n=1,2,3)</p></li>
+</ol>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -715,6 +731,7 @@ $<span class="math notranslate nohighlight">\(\frac{\partial G}{\partial V}=0\)<
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mean Field theory of interacting fluids</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-construction">Maxwell Construction</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
 
   </nav></div>
