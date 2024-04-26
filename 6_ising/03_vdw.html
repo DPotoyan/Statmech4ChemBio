@@ -215,6 +215,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Mean Field theory of interacting fluids</a></li>
 
 
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="04_analytic.html">Analytic solutions to 1D Ising model</a></li>
 </ul>
 </li>
@@ -481,6 +484,9 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mean Field theory of interacting fluids</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-field-approximation-for-a-gas-with-interacting-particles">Mean field approximation for a gas with interacting particles</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#van-der-waals-gas">Van der Waals gas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reduced-equation-and-correspondence-state-principle">Reduced equation and correspondence state principle</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-construction">Maxwell Construction</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
@@ -507,27 +513,31 @@ first-order phase transition with a critical end point.</p></li>
 free energy by its convex envelope.</p></li>
 </ul>
 </div>
+</section>
+<section id="mean-field-approximation-for-a-gas-with-interacting-particles">
+<h1>Mean field approximation for a gas with interacting particles<a class="headerlink" href="#mean-field-approximation-for-a-gas-with-interacting-particles" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>For a pure fluid the partition function reads</p></li>
+<li><p>The canonical partition function splits into kinetic and potential energy contributions for a pure fluid. The kinetic energy part is the same as that of ideal gas. In the ideal gas, the last term is simply equal to volume. For nonideal gas, the last term can’t be evaluated exactly in general, hence the need to make approximations.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[Z(\beta, N, V) = \frac{1}{N!h^{3N}}\int e^{-\beta\frac{p^2}{2m}}dp^N \cdot  \int e^{-\beta U(r)} dr^N\]</div>
 <ul class="simple">
-<li><p>When making mean field approximation we assume that each particle moves in some effective potential <span class="math notranslate nohighlight">\(U(r) = \sum_i U^i_{eff}(r)\)</span> created by the rest of the particles. This allows us to use <span class="math notranslate nohighlight">\(Z=z^N\)</span></p></li>
+<li><p>When making mean-field approximation, we assume that each particle moves in some effective potential <span class="math notranslate nohighlight">\(U(r) = \sum_i U^i_{eff}(r)\)</span> created by the rest of the particles. This allows us to use <span class="math notranslate nohighlight">\(Z=z^N\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[Z(\beta, N, V) = \frac{1}{N!} \Bigg[\frac{(2\pi mk_B T)}{h^3} \Bigg]^N \cdot  \Bigg[ \int e^{-\beta U(r)} dr \Bigg]^N\]</div>
-<p><strong>Van der Waals gas</strong></p>
+</section>
+<section id="van-der-waals-gas">
+<h1>Van der Waals gas<a class="headerlink" href="#van-der-waals-gas" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>In the ideal gas the last term is simply equal to volume. For real gas we make to modifications:</p></li>
-<li><p>First, each gas atoms can occupy finite volume b hence the free volume with N particle in the container is <span class="math notranslate nohighlight">\((V-bN)\)</span></p></li>
-<li><p>Second we write effective potential to be proportional to density, this is the essence of mean field approximation <span class="math notranslate nohighlight">\(U_{eff} = -a\frac{N}{V}\)</span></p></li>
+<li><p>Van der Waals is a mean-field model for non-ideal gases. The essence of the model is in its two additions or modifications to the partition function:</p></li>
+<li><p>First, each gas atom can occupy finite volume b; hence, the free volume with N particle in the container is <span class="math notranslate nohighlight">\((V-bN)\)</span></p></li>
+<li><p>Second, we write effective potential to be proportional to density; this is the essence of mean field approximation <span class="math notranslate nohighlight">\(U_{eff} = -a\frac{N}{V}\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[Z(\beta, N, V) = \frac{1}{N!} \Bigg[\frac{(2\pi mk_B T)^{3/2}}{h^3} \Bigg]^N \cdot  \Bigg[(V-bn) e^{\frac{aN}{Vk_B T}} \Bigg]^N\]</div>
 <ul class="simple">
 <li><p><strong>Free energy at fixed volumes</strong></p></li>
-<li></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[F = -k_BT logZ = -Nk_BT log \Bigg[\frac{(2\pi mk_B T)^{3/2}e}{h^3}\Big(\frac{V}{N}-b \Big) \Bigg] -\frac{aN^2}{V}\]</div>
@@ -543,7 +553,9 @@ free energy by its convex envelope.</p></li>
 \[\frac{\partial G}{\partial V}=0\]</div>
 <div class="math notranslate nohighlight">
 \[ \Big( p+\frac{aN^2}{V^2}\Big)(V-bN) = Nk_B T \]</div>
-<p><strong>Reduced equation and correspondence state principle</strong></p>
+</section>
+<section id="reduced-equation-and-correspondence-state-principle">
+<h1>Reduced equation and correspondence state principle<a class="headerlink" href="#reduced-equation-and-correspondence-state-principle" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p>The critical point is the unique point where both derivatives of pressure vanish <span class="math notranslate nohighlight">\(dP/dV = d^2P/dV^2=0\)</span>. solving for the critical values of P, V and T we get:</p></li>
 </ul>
@@ -767,6 +779,9 @@ discontinuous across the transition</p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Mean Field theory of interacting fluids</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-field-approximation-for-a-gas-with-interacting-particles">Mean field approximation for a gas with interacting particles</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#van-der-waals-gas">Van der Waals gas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reduced-equation-and-correspondence-state-principle">Reduced equation and correspondence state principle</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-construction">Maxwell Construction</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
