@@ -485,11 +485,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-parition-function-of-fluids">Classical parition function of fluids</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-exprssion-of-probability-distribution-of-fluids-in-phase-space">General exprssion of probability distribution of fluids in phase space</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hamitlonian-breaks-into-functions-of-momenta-and-positions-respectively">Classical hamitlonian breaks into functions of momenta and positions respectively</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-boltzman-distirbution-for-single-particles">Maxwell-Boltzman distirbution for single particles</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configurational-partion-function">Configurational partion function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-boltzmann-distribution-for-single-particles">Maxwell-Boltzmann distribution for single particles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configurational-partition-function">Configurational partition function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-wavelength-and-broad-validity-of-classical-picture-of-fluids">Thermal wavelength and broad validity of classical picture of fluids</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#h-2o-vs-d-2o-melting-and-freezing-points"><span class="math notranslate nohighlight">\(H_2O\)</span> vs <span class="math notranslate nohighlight">\(D_2O\)</span> melting and freezing points</a></li>
 </ul>
@@ -518,8 +515,10 @@ document.write(`
 <h1>Statistical mechanics of fluids<a class="headerlink" href="#statistical-mechanics-of-fluids" title="Permalink to this heading">#</a></h1>
 <section id="classical-parition-function-of-fluids">
 <h2>Classical parition function of fluids<a class="headerlink" href="#classical-parition-function-of-fluids" title="Permalink to this heading">#</a></h2>
+<p>For a homogenous fluid particles partition function using classical Hamiltonian expression is an integral over phase space volume with two key quantum corrections:</p>
 <ul class="simple">
-<li><p>For a homogenous fluid particles</p></li>
+<li><p><span class="math notranslate nohighlight">\(N!\)</span> accounting for indistinguishability</p></li>
+<li><p><span class="math notranslate nohighlight">\(h^N\)</span> setting the elementary unit of phase space volume</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[Z(\beta, N, V) = \frac{1}{N! h^N}\int e^{-\beta H(p,x)}dp^N dx^N\]</div>
@@ -532,73 +531,46 @@ document.write(`
 </section>
 <section id="general-exprssion-of-probability-distribution-of-fluids-in-phase-space">
 <h2>General exprssion of probability distribution of fluids in phase space<a class="headerlink" href="#general-exprssion-of-probability-distribution-of-fluids-in-phase-space" title="Permalink to this heading">#</a></h2>
+<p>The probability of a state in a classical fluid system is <span class="math notranslate nohighlight">\(f(x^N, p^N)\)</span></p>
+<div class="math notranslate nohighlight">
+\[{f(x^N, p^N) = \frac{e^{-\beta H(x^N p^N)}}{Z}}\]</div>
 <ul class="simple">
-<li><p>The probability of a state in a classical fluid system is <span class="math notranslate nohighlight">\(f(x^N, p^N)\)</span></p></li>
+<li><p>Momentum and position coordinates are separated thanks to the form of kinetic and potential energy terms</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{f(x^N, p^N) = \frac{e^{-\beta H(x^N p^N)}}{Z}}\]</div>
-<section id="classical-hamitlonian-breaks-into-functions-of-momenta-and-positions-respectively">
-<h3>Classical hamitlonian breaks into functions of momenta and positions respectively<a class="headerlink" href="#classical-hamitlonian-breaks-into-functions-of-momenta-and-positions-respectively" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><div class="math notranslate nohighlight">
 \[H(x^N, p^N) = K(p^N) + U(x^N)\]</div>
-</li>
-</ul>
-<p><br><br></p>
-<ul>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[f(x^N, p^N) = \Phi(p^N) P(r^N)\]</div>
-</li>
-</ul>
-<p><br><br></p>
-<ul>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[\boxed{\Phi(p^N) = \frac{e^{-\beta K(p^N)}}{\int dp^N e^{-\beta K(p^N)}}}\]</div>
-</li>
-</ul>
-<p><br><br></p>
-<ul>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[\boxed{P(x^N) = \frac{e^{-\beta U(x^N)}}{\int dp^N e^{-\beta U(x^N)}}}\]</div>
-</li>
-</ul>
-<p><br><br></p>
-<section id="maxwell-boltzman-distirbution-for-single-particles">
-<h4>Maxwell-Boltzman distirbution for single particles<a class="headerlink" href="#maxwell-boltzman-distirbution-for-single-particles" title="Permalink to this heading">#</a></h4>
+<section id="maxwell-boltzmann-distribution-for-single-particles">
+<h3>Maxwell-Boltzmann distribution for single particles<a class="headerlink" href="#maxwell-boltzmann-distribution-for-single-particles" title="Permalink to this heading">#</a></h3>
 <p>Momentum distribution further factorizes into sum of single particle kinetic energies:</p>
-<ul>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[K(p^N) = \sum^N_{i=1} \frac{p^2_i}{2m_i}\]</div>
-</li>
-</ul>
-<p><br><br></p>
-<ul>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[\Phi(p^N) = \prod^N_{i=1} \phi(p_i)\]</div>
-</li>
-</ul>
-<p><br><br></p>
-<ul>
-<li><div class="math notranslate nohighlight">
+<div class="math notranslate nohighlight">
 \[\boxed{\phi(p_i) = \frac{e^{-\beta \frac{p^2_i}{2m}}}{\int dp e^{-\beta \frac{p^2}{2m}}}}\]</div>
-</li>
+<ul class="simple">
+<li><p>Note that <span class="math notranslate nohighlight">\(p^2_i = p^2_x+p^2_y+p^2_z\)</span> and <span class="math notranslate nohighlight">\(\phi(p_i)\)</span>. The momentum or velocity distribution is known as <strong>Maxwell-Boltzmann distribution</strong>.</p></li>
+<li><p>For both ideal gas and real fluids Maxwell-Boltzmann distribution of velocities holds true. The difference between the systems boils down to a difference in potential energy</p></li>
 </ul>
-<p>Note that <span class="math notranslate nohighlight">\(p^2_i = p^2_x+p^2_y+p^2_z\)</span> and <span class="math notranslate nohighlight">\(\phi(p_i)\)</span> is what is known as <strong>Maxwell-Boltzmann distribution</strong>. The classical system obyes the same distribution reglardles of whivh phase it is (solid, liquid, gas).</p>
 </section>
-</section>
-<section id="configurational-partion-function">
-<h3>Configurational partion function<a class="headerlink" href="#configurational-partion-function" title="Permalink to this heading">#</a></h3>
+<section id="configurational-partition-function">
+<h3>Configurational partition function<a class="headerlink" href="#configurational-partition-function" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[Z(\beta, V, N) = Z_{p} \cdot Z_x  = \frac{1}{\lambda^3 N!} Q(\beta, V, N) \]</div>
 <div class="math notranslate nohighlight">
 \[Q = \int dx^N e^{-\beta U(x^N)}\]</div>
-<p>Pressue is related to Free energy as</p>
-<ul>
-<li><div class="math notranslate nohighlight">
+<p>Pressure is related to Free energy as</p>
+<div class="math notranslate nohighlight">
 \[p= - \frac{\partial F}{\partial V} = \frac{\partial }{\partial V} log \int dx^N e^{-\beta U(x^N)}\]</div>
-</li>
+<ul class="simple">
+<li><p><strong>Volume dependence of partition function is in the integration limits!</strong> As volume grows, so does partition function. Therefore p is always positive. We can thus conclude that <strong>in equilibrium pressure is always a positive quantity</strong></p></li>
 </ul>
-<p><strong>Volume dependence of partition function is in the integration limits!</strong> As volume grows so does partition function. Therefore p is always positive. We can thus conclude that <strong>in equilibirum pressure is always a positive quantity</strong></p>
 </section>
 <section id="thermal-wavelength-and-broad-validity-of-classical-picture-of-fluids">
 <h3>Thermal wavelength and broad validity of classical picture of fluids<a class="headerlink" href="#thermal-wavelength-and-broad-validity-of-classical-picture-of-fluids" title="Permalink to this heading">#</a></h3>
@@ -641,39 +613,41 @@ document.write(`
 </ul>
 <div class="math notranslate nohighlight">
 \[\boxed{\rho^{2/N} (r_1, r_2) =  N(N-1)\int dr_3... dr_N P(r_1, r_2,...r_N)}\]</div>
-<ul class="simple">
-<li><p><strong>Marginal(ized) probability for any particle 1 and 2…n</strong></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\boxed{\rho^{n/N} (r_1, r_2,... r_n) =  \frac{N!}{(N-n)!}\int dr^{N-n} P(r_1, r_2,...r_N)}\]</div>
 </section>
 <section id="radial-distribution-function-rdf">
 <h3>Radial distribution function (RDF)<a class="headerlink" href="#radial-distribution-function-rdf" title="Permalink to this heading">#</a></h3>
-<p>For an isotropic liquid:</p>
+<p>For an isotropic fluid, we have one point probability density:</p>
 <div class="math notranslate nohighlight">
-\[\rho = \rho = \frac{N}{V}\]</div>
-<p>For an ideal gas:</p>
+\[\rho^{1/N} = N\frac{\int dr_2 ... dr_N}{\int dr_1...dr_N}  = N\frac{V^{N-2}}{V^N} =  \frac{N}{V}=\rho\]</div>
+<p>The joint distribution for an ideal gas:</p>
 <div class="math notranslate nohighlight">
-\[\rho^{2/N} = \frac{N(N-1)}{V^2} = \rho^2 (1-N^{-1}) \approx \rho^2\]</div>
+\[\rho^{2/N} = N(N-1)\frac{\int dr_3 ... dr_N}{\int dr_1...dr_N}  = N(N-1)\frac{V^{N-2}}{V^N} =  \approx \rho^2\]</div>
 <ul class="simple">
-<li><p>To measure degree of spatial correlations we introduce Radial Distribution function (RDF):</p></li>
+<li><p>To measure the degree of spatial correlations, we introduce the Radial Distribution function (RDF):</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\boxed{g(r_1, r_2)  = \frac{\rho^{2/N}(r_1, r_2)}{\rho^2}}\]</div>
 <ul class="simple">
-<li><p>RDF for isotropic fluids is <span class="math notranslate nohighlight">\(\boxed{g(r) =  g(|r_2-r_1|)}\)</span>
-<br><br></p></li>
-<li><p>Conditional probabilioty density of <strong>finding a particle at r distance away from a tagged particle</strong> placed at origin:</p></li>
+<li><p>RDF for isotropic fluids is due to translational invariance depends only on distance between particles:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\rho^{2/N}(0,r) = \rho g(r)\]</div>
+\[\boxed{g(r) =  g(|r_2-r_1|)}\]</div>
+<p><strong>Meaning of RDF</strong></p>
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(\rho = \rho^{1/N}\)</span>, the <strong>conditional probability density of finding a particle at r distance away from a tagged particle at the origin</strong> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\rho^{2/N}(0,r)}{\rho} = \rho g(r)\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\rho g(r)\)</span> is then average density of particles at distance r given that a tagged particle is at the origin</p></li>
+</ul>
 </section>
 <section id="coordination-shells-and-structure-in-fluids">
 <h3>Coordination shells and structure in fluids<a class="headerlink" href="#coordination-shells-and-structure-in-fluids" title="Permalink to this heading">#</a></h3>
-<p><img alt="" src="7_fluids/figs/gr1_1.png" /></p>
+<p><img alt="" src="../_images/gr1_1.png" /></p>
 <p><img alt="" src="7_fluids/figs/gr2_2.png" /></p>
-<p><img alt="" src="7_fluids/figs/gr3_3.png" /></p>
-<p><img alt="" src="7_fluids/figs/gr4_4.png" /></p>
+<p><img alt="" src="../_images/gr3_3.png" /></p>
+<p><img alt="" src="../_images/gr4_4.png" /></p>
 </section>
 <section id="reversible-work-theorem-and-potential-of-mean-force">
 <h3>Reversible work theorem and potential of mean force<a class="headerlink" href="#reversible-work-theorem-and-potential-of-mean-force" title="Permalink to this heading">#</a></h3>
@@ -779,11 +753,8 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-parition-function-of-fluids">Classical parition function of fluids</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-exprssion-of-probability-distribution-of-fluids-in-phase-space">General exprssion of probability distribution of fluids in phase space</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-hamitlonian-breaks-into-functions-of-momenta-and-positions-respectively">Classical hamitlonian breaks into functions of momenta and positions respectively</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-boltzman-distirbution-for-single-particles">Maxwell-Boltzman distirbution for single particles</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configurational-partion-function">Configurational partion function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-boltzmann-distribution-for-single-particles">Maxwell-Boltzmann distribution for single particles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configurational-partition-function">Configurational partition function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-wavelength-and-broad-validity-of-classical-picture-of-fluids">Thermal wavelength and broad validity of classical picture of fluids</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#h-2o-vs-d-2o-melting-and-freezing-points"><span class="math notranslate nohighlight">\(H_2O\)</span> vs <span class="math notranslate nohighlight">\(D_2O\)</span> melting and freezing points</a></li>
 </ul>
