@@ -483,7 +483,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">MC simulations of fluids</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lj-model-of-a-simple-fluids-noble-gases">LJ model of a simple fluids, noble gases</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-system-watch-out-for-clashes">Initializing the system, watch out for clashes!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-the-system-and-watch-out-for-clashes">Initialize the system, and watch out for clashes!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-boundary-conditions-and-minimum-image-criterion">Periodic Boundary conditions and minimum image criterion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-pairwise-distances-and-energies">Computing pairwise distances and energies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-engine-for-lj-fluid-in-3d-nvt-ensemble">MC engine for LJ fluid in 3D (NVT ensemble)</a></li>
@@ -512,9 +512,25 @@ document.write(`
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
 
-<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span>
 <span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
 <span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">njit</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">output</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">enable_custom_widget_manager</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All good to go&#39;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Okay we are not in Colab just proceed as if nothing happened&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Okay we are not in Colab just proceed as if nothing happened
 </pre></div>
 </div>
 </div>
@@ -523,10 +539,10 @@ document.write(`
 <section id="lj-model-of-a-simple-fluids-noble-gases">
 <h1>LJ model of a simple fluids, noble gases<a class="headerlink" href="#lj-model-of-a-simple-fluids-noble-gases" title="Permalink to this heading">#</a></h1>
 <p><strong>Check out reference values of <a class="reference external" href="https://www.nist.gov/mml/csd/chemical-informatics-research-group/lennard-jones-fluid-properties">LJ fluid properties tabulated by NIST</a></strong></p>
-<section id="initializing-the-system-watch-out-for-clashes">
-<h2>Initializing the system, watch out for clashes!<a class="headerlink" href="#initializing-the-system-watch-out-for-clashes" title="Permalink to this heading">#</a></h2>
+<section id="initialize-the-system-and-watch-out-for-clashes">
+<h2>Initialize the system, and watch out for clashes!<a class="headerlink" href="#initialize-the-system-and-watch-out-for-clashes" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Density, temperature and unitcell number can be used to fully speify a lattice packed with LJ particles</p></li>
+<li><p>Density and unit cell number can be used to fully specify a lattice packed with LJ particles</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -546,8 +562,8 @@ document.write(`
     <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
     
     <span class="n">N</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">N_cell</span> <span class="o">**</span> <span class="mi">3</span>  <span class="c1"># Total number of particles in the system</span>
-    <span class="n">L_box</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Length of the simulation box</span>
-    <span class="n">L_cell</span> <span class="o">=</span> <span class="n">L_box</span> <span class="o">/</span> <span class="n">N_cell</span>  <span class="c1"># Length of a unit cell</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Length of the simulation box</span>
+    <span class="n">L_cell</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N_cell</span>  <span class="c1"># Length of a unit cell</span>
 
     <span class="c1"># Generate positions within the unit cell</span>
     <span class="n">base_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
@@ -562,45 +578,61 @@ document.write(`
     <span class="c1"># Scale positions to the size of the unit cell</span>
     <span class="n">pos</span> <span class="o">*=</span> <span class="n">L_cell</span>
 
-    <span class="k">return</span> <span class="n">pos</span><span class="p">,</span> <span class="n">L_box</span><span class="p">,</span> <span class="n">N</span>
+    <span class="k">return</span> <span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">L_cell</span><span class="p">,</span> <span class="n">N_cell</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cell_plotter</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate and plot a 3D scatter plot of particles in a simulation box.</span>
 
-<span class="n">px</span><span class="o">.</span><span class="n">scatter_3d</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    rho (float): Density of particles.</span>
+<span class="sd">    N_cell (int): Number of cells along one dimension.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="n">N_cell</span><span class="p">)</span>  <span class="c1"># Get initial conditions</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">z</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># Adjust size of markers</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span>  <span class="c1"># Adjust opacity of markers</span>
+        <span class="p">)</span>
+    <span class="p">)])</span>
+
+    <span class="c1"># Update plot layout</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;3D Plot of Particles in a Box with Density </span><span class="si">{</span><span class="n">rho</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2"> Particles&quot;</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span>
+        <span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">xaxis_title</span><span class="o">=</span><span class="s1">&#39;X Coordinate&#39;</span><span class="p">,</span>
+            <span class="n">yaxis_title</span><span class="o">=</span><span class="s1">&#39;Y Coordinate&#39;</span><span class="p">,</span>
+            <span class="n">zaxis_title</span><span class="o">=</span><span class="s1">&#39;Z Coordinate&#39;</span><span class="p">,</span>
+            <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">]),</span>
+            <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">]),</span>
+            <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">])</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interactive</span><span class="p">(</span><span class="n">cell_plotter</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">N_cell</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>                            <div id="0d558fa4-e3f2-4aae-b429-914e1ddbbf3e" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("0d558fa4-e3f2-4aae-b429-914e1ddbbf3e")) {                    Plotly.newPlot(                        "0d558fa4-e3f2-4aae-b429-914e1ddbbf3e",                        [{"hovertemplate":"x=%{x}<br>y=%{y}<br>z=%{z}<extra></extra>","legendgroup":"","marker":{"color":"#636efa","opacity":0.5,"symbol":"circle"},"mode":"markers","name":"","scene":"scene","showlegend":false,"type":"scatter3d","x":[0.0,0.0,0.6707991776733532,0.6707991776733532,0.0,0.0,0.6707991776733532,0.6707991776733532,0.0,0.0,0.6707991776733532,0.6707991776733532,0.0,0.0,0.6707991776733532,0.6707991776733532,0.0,0.0,0.6707991776733532,0.6707991776733532,0.0,0.0,0.6707991776733532,0.6707991776733532,0.0,0.0,0.6707991776733532,0.6707991776733532,0.0,0.0,0.6707991776733532,0.6707991776733532,0.0,0.0,0.6707991776733532,0.6707991776733532,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,1.3415983553467064,2.0123975330200596,2.0123975330200596,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,2.6831967106934127,3.3539958883667658,3.3539958883667658],"y":[0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,0.0,0.6707991776733532,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,1.3415983553467064,2.0123975330200596,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658,2.6831967106934127,3.3539958883667658],"z":[0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127,0.0,0.6707991776733532,0.6707991776733532,0.0,1.3415983553467064,2.0123975330200596,2.0123975330200596,1.3415983553467064,2.6831967106934127,3.3539958883667658,3.3539958883667658,2.6831967106934127]}],                        {"legend":{"tracegroupgap":0},"margin":{"t":60},"scene":{"domain":{"x":[0.0,1.0],"y":[0.0,1.0]},"xaxis":{"title":{"text":"x"}},"yaxis":{"title":{"text":"y"}},"zaxis":{"title":{"text":"z"}}},"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}}},                        {"responsive": true}                    ).then(function(){
-                            
-var gd = document.getElementById('0d558fa4-e3f2-4aae-b429-914e1ddbbf3e');
-var x = new MutationObserver(function (mutations, observer) {{
-        var display = window.getComputedStyle(gd).display;
-        if (!display || display === 'none') {{
-            console.log([gd, 'removed!']);
-            Plotly.purge(gd);
-            observer.disconnect();
-        }}
-}});
-
-// Listen for the removal of the full notebook cells
-var notebookContainer = gd.closest('#notebook-container');
-if (notebookContainer) {{
-    x.observe(notebookContainer, {childList: true});
-}}
-
-// Listen for the clearing of the current output cell
-var outputEl = gd.closest('.output');
-if (outputEl) {{
-    x.observe(outputEl, {childList: true});
-}}
-
-                        })                };                });            </script>        </div></div></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "df7a61f95ba6463788ada874e7e8c190", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 </section>
 <section id="periodic-boundary-conditions-and-minimum-image-criterion">
@@ -630,24 +662,47 @@ if (outputEl) {{
 
 
 <span class="nd">@njit</span>
-<span class="k">def</span> <span class="nf">pbc_wrap</span><span class="p">(</span><span class="n">r_vec</span><span class="p">,</span> <span class="n">L_box</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">pbc_wrap</span><span class="p">(</span><span class="n">r_vec</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Apply periodic boundary conditions to wrap a position vector back into the simulation box.</span>
+<span class="sd">    Apply periodic boundary conditions using a vectorized approach to wrap a position vector back into a simulation box.</span>
+<span class="sd">    It is assumed that box is centered at the origin with coordinate bound by -L/2, L/2</span>
 <span class="sd">    </span>
 <span class="sd">    Parameters:</span>
 <span class="sd">    r_vec (np.array): A numpy array representing the displacement vector [x, y, z].</span>
-<span class="sd">    L_box (float): The length of one side of the cubic simulation box.</span>
+<span class="sd">    L_box (float): The length of one side of the cubic simulation box centered at the origin.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    np.array: The wrapped position vector within the simulation box.</span>
+<span class="sd">    np.array: The wrapped position vector within the simulation box centered at the origin.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># Use np.floor_divide for accurate integer division to handle edge cases.</span>
-    <span class="n">r_vec</span> <span class="o">=</span> <span class="n">r_vec</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">floor_divide</span><span class="p">(</span><span class="n">r_vec</span><span class="p">,</span> <span class="n">L_box</span><span class="p">)</span> <span class="o">*</span> <span class="n">L_box</span>
-    
+   
+    <span class="c1"># Vectorized operation to wrap the vector into the box centered at the origin</span>
+    <span class="n">r_vec</span> <span class="o">=</span> <span class="p">(</span><span class="n">r_vec</span> <span class="o">+</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span> <span class="o">-</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span>
+
     <span class="k">return</span> <span class="n">r_vec</span>
 </pre></div>
 </div>
 </div>
+</div>
+<p><strong>Visualize coordinate wrapping</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@interact</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">L</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">viz_wrap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    
+    <span class="n">x_wrap</span> <span class="o">=</span> <span class="n">pbc_wrap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span> <span class="c1">#pbc_basic(x, L)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_wrap</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;original x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;wrapped x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b589653ec7f64e04911916b85f740244", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 </section>
 <section id="computing-pairwise-distances-and-energies">
@@ -727,7 +782,7 @@ if (outputEl) {{
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span>
-<span class="k">def</span> <span class="nf">run_MC_LJ</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">trunc</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">run_MC_LJ</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">trunc</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run a Monte Carlo simulation for a Lennard-Jones fluid.</span>
 
@@ -745,9 +800,10 @@ if (outputEl) {{
 <span class="sd">    list: List of total energies at each recorded step.</span>
 <span class="sd">    list: List of histograms of squared distances at each recorded step.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">E_tot</span><span class="p">,</span> <span class="n">r_sq_list</span> <span class="o">=</span> <span class="n">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">)</span>
+    
     <span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">E_tot</span><span class="p">]</span>
     <span class="n">hists</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">confs</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
@@ -787,9 +843,12 @@ if (outputEl) {{
 <h2>Running MCMC simulation on LJ system<a class="headerlink" href="#running-mcmc-simulation-on-lj-system" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">rho</span>  <span class="o">=</span> <span class="mf">.88</span><span class="p">,</span> 
-              <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
-              <span class="n">steps</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span>
+<span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span>
+              <span class="n">T</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> 
+              <span class="n">steps</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> 
               <span class="n">trunc</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
               <span class="n">disp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
               <span class="n">freq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -799,17 +858,8 @@ if (outputEl) {{
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">time</span> 
-
-<span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">L_cell</span><span class="p">,</span> <span class="n">N_cell</span><span class="p">)</span> 
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%time </span>
 <span class="n">confs</span><span class="p">,</span> <span class="n">es</span><span class="p">,</span> <span class="n">hists</span> <span class="o">=</span> <span class="n">run_MC_LJ</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7 µs, sys: 3 µs, total: 10 µs
-Wall time: 43.9 µs
 </pre></div>
 </div>
 </div>
@@ -821,29 +871,38 @@ Wall time: 43.9 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x18e7c7490&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x18cfcf2e0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/cad1d159d092b6c4f9bebceffba474628217c4765629ea580f067cc15532fd70.png" src="../_images/cad1d159d092b6c4f9bebceffba474628217c4765629ea580f067cc15532fd70.png" />
+<img alt="../_images/b9a7ee71880e89f34bf68d15a33ce234b0bdcadfa87f3002cf0d8bdc231ffcfe.png" src="../_images/b9a7ee71880e89f34bf68d15a33ce234b0bdcadfa87f3002cf0d8bdc231ffcfe.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@interact</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">]</span><span class="o">//</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span>
+
+<span class="nd">@interact</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="k">def</span> <span class="nf">viz_sim_lj</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 
-  <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_3d</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="n">i</span><span class="p">][:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="n">i</span><span class="p">][:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="n">i</span><span class="p">][:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+  <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+        <span class="n">z</span><span class="o">=</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># Adjust size of markers</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span>  <span class="c1"># Adjust opacity of markers</span>
+        <span class="p">)</span>
+    <span class="p">)])</span>
 
   <span class="k">return</span> <span class="n">fig</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "3a9c9f3bc6384379b47b102f6d140b2d", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L_box</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">L</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 
 <span class="n">pair_correlation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">hists</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
 
@@ -854,15 +913,10 @@ Wall time: 43.9 µs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/3h/w4n54dz57dvbhgvz68gdv0f0f3hkmm/T/ipykernel_14277/2060904021.py:3: RuntimeWarning:
-
-invalid value encountered in divide
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$g(r)$&#39;)
 </pre></div>
 </div>
-<img alt="../_images/6871db28aae1d34a2bae05f5729449217846fa016c51798bde88ab12130b5d5d.png" src="../_images/6871db28aae1d34a2bae05f5729449217846fa016c51798bde88ab12130b5d5d.png" />
+<img alt="../_images/087979fe23844105d4e899faefab4469b0d6c13caba1f822ece3f2b6e4e5dc1a.png" src="../_images/087979fe23844105d4e899faefab4469b0d6c13caba1f822ece3f2b6e4e5dc1a.png" />
 </div>
 </div>
 </section>
@@ -966,7 +1020,7 @@ Try implementing your functions using numpy methods instead of having multiple f
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">MC simulations of fluids</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lj-model-of-a-simple-fluids-noble-gases">LJ model of a simple fluids, noble gases</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-system-watch-out-for-clashes">Initializing the system, watch out for clashes!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-the-system-and-watch-out-for-clashes">Initialize the system, and watch out for clashes!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-boundary-conditions-and-minimum-image-criterion">Periodic Boundary conditions and minimum image criterion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-pairwise-distances-and-energies">Computing pairwise distances and energies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-engine-for-lj-fluid-in-3d-nvt-ensemble">MC engine for LJ fluid in 3D (NVT ensemble)</a></li>
