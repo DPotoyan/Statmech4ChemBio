@@ -620,7 +620,7 @@ document.write(`
     <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">I</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">J</span><span class="p">]</span>
 
     <span class="c1"># Use min image criteria for distances</span>
-    <span class="n">r_vec</span> <span class="o">=</span> <span class="n">r_vec</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">rint</span><span class="p">(</span><span class="n">r_vec</span> <span class="o">/</span> <span class="n">L_box</span><span class="p">)</span> <span class="o">*</span> <span class="n">L_box</span>
+    <span class="n">r_vec</span> <span class="o">=</span> <span class="p">(</span><span class="n">r_vec</span> <span class="o">+</span> <span class="n">L_box</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">L_box</span> <span class="o">-</span> <span class="n">L_box</span><span class="o">/</span><span class="mi">2</span>
 
     <span class="c1"># Compute r^2</span>
     <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
