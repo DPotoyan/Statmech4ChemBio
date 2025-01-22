@@ -587,11 +587,11 @@ discontinuous across the transition</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">newton</span>
-<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">argrelextrema</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">newton</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">argrelextrema</span>
 
 <span class="n">palette</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">([</span><span class="s1">&#39;#9b59b6&#39;</span><span class="p">,</span> <span class="s1">&#39;#4c72b0&#39;</span><span class="p">,</span> <span class="s1">&#39;#55a868&#39;</span><span class="p">,</span> <span class="s1">&#39;#c44e52&#39;</span><span class="p">,</span> <span class="s1">&#39;#dbc256&#39;</span><span class="p">])</span>
 
@@ -602,7 +602,7 @@ discontinuous across the transition</p></li>
 <span class="n">Vc</span> <span class="o">=</span> <span class="mf">1.28e-4</span>
 <span class="n">Tc</span> <span class="o">=</span> <span class="mi">304</span>
 
-<span class="k">def</span> <span class="nf">vdw</span><span class="p">(</span><span class="n">Tr</span><span class="p">,</span> <span class="n">Vr</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">vdw</span><span class="p">(</span><span class="n">Tr</span><span class="p">,</span> <span class="n">Vr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Van der Waals equation of state.</span>
 
 <span class="sd">    Return the reduced pressure from the reduced temperature and volume.</span>
@@ -613,7 +613,7 @@ discontinuous across the transition</p></li>
     <span class="k">return</span> <span class="n">pr</span>
 
 
-<span class="k">def</span> <span class="nf">vdw_maxwell</span><span class="p">(</span><span class="n">Tr</span><span class="p">,</span> <span class="n">Vr</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">vdw_maxwell</span><span class="p">(</span><span class="n">Tr</span><span class="p">,</span> <span class="n">Vr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Van der Waals equation of state with Maxwell construction.</span>
 
 <span class="sd">    Return the reduced pressure from the reduced temperature and volume,</span>
@@ -638,7 +638,7 @@ discontinuous across the transition</p></li>
     <span class="n">iprmax</span> <span class="o">=</span> <span class="n">argrelextrema</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">greater</span><span class="p">)</span>
     <span class="n">Vr0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">Vr</span><span class="p">[</span><span class="n">iprmin</span><span class="p">],</span> <span class="n">Vr</span><span class="p">[</span><span class="n">iprmax</span><span class="p">]])</span>
 
-    <span class="k">def</span> <span class="nf">get_Vlims</span><span class="p">(</span><span class="n">pr0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_Vlims</span><span class="p">(</span><span class="n">pr0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve the inverted van der Waals equation for reduced volume.</span>
 
 <span class="sd">        Return the lowest and highest reduced volumes such that the reduced</span>
@@ -653,7 +653,7 @@ discontinuous across the transition</p></li>
         <span class="n">Vrmin</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">Vrmax</span> <span class="o">=</span> <span class="n">roots</span>
         <span class="k">return</span> <span class="n">Vrmin</span><span class="p">,</span> <span class="n">Vrmax</span>
 
-    <span class="k">def</span> <span class="nf">get_area_difference</span><span class="p">(</span><span class="n">Vr0</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_area_difference</span><span class="p">(</span><span class="n">Vr0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the difference in areas of the van der Waals loops.</span>
 
 <span class="sd">        Return the difference between the areas of the loops from Vr0 to Vrmax</span>
@@ -680,7 +680,7 @@ discontinuous across the transition</p></li>
 
 <span class="n">Vr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">plot_pV</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pV</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
     <span class="n">Tr</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">Tc</span>
     <span class="n">c</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Vr</span><span class="p">,</span> <span class="n">vdw</span><span class="p">(</span><span class="n">Tr</span><span class="p">,</span> <span class="n">Vr</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
