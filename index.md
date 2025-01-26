@@ -3,7 +3,7 @@ About
 
 ```{figure} ./index_fig.jpg
 ---
-height: 150px
+height: 200px
 name: directive-fig
 ---
 ```
