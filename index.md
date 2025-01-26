@@ -8,8 +8,6 @@ name: directive-fig
 ---
 ```
 
-### Statistical Mechanics for Chemistry and Biology  
-
 #### Description
 
 - This website holds content for the course **"Chem 563 Statistical Mechanics for Chemistry and Biology"**  taught during spring semesters at the Deparment of Chemistry at Iowa State University.
