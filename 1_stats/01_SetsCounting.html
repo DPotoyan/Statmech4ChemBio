@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '1_stats/01_SetsCounting';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Random walk" href="02_RandVar.html" />
+    <link rel="next" title="Random variables" href="01A_pdfs.html" />
     <link rel="prev" title="Stats" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -175,9 +175,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Stats</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Probability theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_RandVar.html">Random walk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_Diffusion.html">Diffusion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_Entropy.html">Entropy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01A_pdfs.html">Random variables</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_RandWalk.html">Random walk</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -239,7 +247,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab1/linear_functions.html">Numpy Lab: Linear Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab2/intro.html">Random variable lab</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab2/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_Diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Entropy.html">Entropy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab2/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
 
 </ul>
@@ -501,23 +511,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-random-variable">Probability distribution of random variable</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (fluctuation)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-two-random-variables">Sum of two random variables</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers-in-python">Random numbers in python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform">Uniform</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function">Probability Mass Function</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian">Gaussian</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-random-variables">Transforming random variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-vs-sampled-probability-distributions">Exact vs sampled probability distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
             </nav>
@@ -1013,360 +1006,6 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 </div>
 </section>
 </section>
-<section id="random-variables">
-<h2>Random variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>A random variable X</strong> is a variable whose value depends on the outcomes of a random phenomenon. <span class="math notranslate nohighlight">\(X(\omega)\)</span> is a function from possible outcomes of a sample space <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>.</p>
-<ul>
-<li><p>For a coin toss <span class="math notranslate nohighlight">\(\Omega={H,T}\)</span> <span class="math notranslate nohighlight">\(X(H)=+1\)</span> and <span class="math notranslate nohighlight">\(X(T)=-1\)</span>. Every time the experiment is done, X returns either +1 or -1. We could also make functions of random variables, e.g., every time X=+1, we ear 25 cents, etc.</p></li>
-</ul>
-</li>
-<li><p>Random variables are classified into two main types: <strong>discrete and continuous.</strong></p>
-<ul>
-<li><p><strong>Discrete Random Variable:</strong> It assumes a number of distinct values. Discrete random variables are used to model scenarios where outcomes can be counted, such as the number of particles emitted by a radioactive source in a given time interval or the number of photons hitting a detector in a certain period.</p></li>
-<li><p><strong>Continuous Random Variable:</strong> It can take any value within a continuous range. These variables describe quantities that can vary smoothly, such as the position of a particle in space, the velocity of a molecule in a gas, or the energy levels of an atom.</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="probability-distribution-of-random-variable">
-<h2>Probability distribution of random variable<a class="headerlink" href="#probability-distribution-of-random-variable" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>For any random variable X, we are interested in finding probability distribution over possible values <span class="math notranslate nohighlight">\(x\)</span> that <span class="math notranslate nohighlight">\(X\)</span> takes: <span class="math notranslate nohighlight">\(p_X(x)\)</span>.</p></li>
-<li><p>Note the very subtle but crucial difference between <span class="math notranslate nohighlight">\(x\)</span> (1-6 for a die) and a random variable <span class="math notranslate nohighlight">\(X\)</span>, which generates numbers <span class="math notranslate nohighlight">\(x\)</span> according to distributions <span class="math notranslate nohighlight">\(p(x)\)</span></p></li>
-</ul>
-<section id="expectation">
-<h3>Expectation<a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(E[x]\)</span> is the theoretical value of the mean as opposed to the sample mean which we compute in simulations. For instance, consider the difference between the average height of people calculated from a small sample of cities versus that from the entire world population.  Will see that with enough sampling the sample mean approaches its expectation. expectation can apply to 1 (normalization) to variable (mean) or any function of variable, e.g mean subtracted square (variance).</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[E[1] = \int p(x)dx = 1\]</div>
-<div class="math notranslate nohighlight">
-\[E[x]  = \int x \cdot p(x)dx\]</div>
-<div class="math notranslate nohighlight">
-\[E[f(x)] = \int f(x) \cdot p(x)dx\]</div>
-</section>
-<section id="variance-fluctuation">
-<h3>Variance (fluctuation)<a class="headerlink" href="#variance-fluctuation" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Variance is an expectation of squared deviation of x from expectation, which characterizes the spread in values of x.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[V[x] = E[(x-E[x])^2 ] = E[x^2]-E[x]^2\]</div>
-</section>
-<section id="sum-of-two-random-variables">
-<h3>Sum of two random variables<a class="headerlink" href="#sum-of-two-random-variables" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Consider sum of two random variables, suppose these are sum of numbers from two dies or sum of two coin flips. Obviously sums of random variables are random variables themselves.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[X=X_1 +X_2\]</div>
-<ul class="simple">
-<li><p>Expectation is always a linear operator as you can verify by plugging in definition and using linear property of definite integrals.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[E[X_1+X_2] = E[X_1]+E[X_2]\]</div>
-<ul class="simple">
-<li><p>We see that Variance, in general, is not a linear operator.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[V[X_1+X_2] = E[(X_1+X_2-E[X_1+X_2])^2 ] = E[(X_1+X_2-E[X_1]-[X_2])^2 ]\]</div>
-<ul class="simple">
-<li><p>Denoting mean subtracting variables <span class="math notranslate nohighlight">\(Y_i=X_i-E[X_i]\)</span> we can show this by expanding square in the expectation expression.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[E[(Y_1+Y_2)^2] = E[Y^2_1] + E[Y^2_2] + 2E[Y_1 Y_2] = V[X_1]+V[X_2]+2E[Y_1 Y_2]\]</div>
-<ul class="simple">
-<li><p>We will see in the next section that for independent random variables the last cross terms is zero. This property has huge significance for statistical mechanics, statistics and sciences in general</p></li>
-</ul>
-</section>
-</section>
-<section id="random-numbers-in-python">
-<h2>Random numbers in python<a class="headerlink" href="#random-numbers-in-python" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/routines.random.html"><strong>numpy.random</strong></a> has the fastest random number generators based on low-level code written in C.</p></li>
-<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html"><strong>Scipy.stats</strong></a> has an extensive library of statistical distributions and tools for statistical analysis.</p></li>
-<li><p>First, we take a look at the most widely used random numbers of numpy, also called standard random numbers. These are rand (uniform random number on interval 0,1) and randn (stnadard average random number with 0 mean and 1 variance).</p></li>
-<li><p>When running code that uses random numbers results will always differ for every run. If you want code to reproduce the same result, you can fix the seed to get reproducible results: <code class="docutils literal notranslate"> <span class="pre">np.random.seed(8376743)</span></code></p></li>
-<li><p>To convert random variables to probability distributions we need to generate large enough sample then perform histogramming via <code class="docutils literal notranslate"><span class="pre">np.hist</span></code> or directly histogram and visualize by one shot via <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.20919642 0.08168559 0.25923677 0.16511284 0.28205107 0.1217224
- 0.72801387 0.99748365 0.99916696 0.0561063  0.61468294 0.44494732
- 0.5645931  0.98582454 0.43754022 0.95597291 0.98847772 0.05729081
- 0.98535835 0.93270706 0.541579   0.72490446 0.47404761 0.16810326
- 0.77048336 0.58755584 0.47122295 0.01522511 0.48206132 0.94743642]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x1828fadf0&gt;]
-</pre></div>
-</div>
-<img alt="../_images/bcaf061e4155040c16a0397411c66e6953a9f1bc79e2a2bdc487d88c89667264.png" src="../_images/bcaf061e4155040c16a0397411c66e6953a9f1bc79e2a2bdc487d88c89667264.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-
-<span class="n">counts</span><span class="p">,</span> <span class="n">edges</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1, 3, 1, 2, 1, 2, 0, 0, 2, 3, 1, 2, 1, 0, 2, 1, 0, 0, 2, 6]),
- array([0.  , 0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 , 0.35, 0.4 , 0.45, 0.5 ,
-        0.55, 0.6 , 0.65, 0.7 , 0.75, 0.8 , 0.85, 0.9 , 0.95, 1.  ]))
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1.35509362, 1.35509362, 0.67754681, 0.        , 1.69386703,
-        1.01632022, 0.33877341, 1.01632022, 0.        , 2.71018724]),
- array([0.01522511, 0.11361929, 0.21201348, 0.31040766, 0.40880185,
-        0.50719604, 0.60559022, 0.70398441, 0.80237859, 0.90077278,
-        0.99916696]),
- &lt;BarContainer object of 10 artists&gt;)
-</pre></div>
-</div>
-<img alt="../_images/6bfeb52ca2819f3ad0beefebe7797422692fccdbf808c6060ca80fc9d2393432.png" src="../_images/6bfeb52ca2819f3ad0beefebe7797422692fccdbf808c6060ca80fc9d2393432.png" />
-</div>
-</div>
-<div class="attention admonition">
-<p class="admonition-title"><strong>Exercise</strong></p>
-<p>Using the uniform random number generator simulate tossing of a coin which generates +1 and -1 values with equal probabilities</p>
-</div>
-</section>
-<section id="probability-distributions">
-<h2>Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Convenience function for making quick two-panel plot showing </span>
-<span class="sd">    a line plot for the sequence of random numbers (RN)</span>
-<span class="sd">    a histogram plot of the probability density of random numbers </span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    
-    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> 
-
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;trajectory&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>  <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>  <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;histogram&#39;</span><span class="p">)</span>
-    
-    
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Samples of RN&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Values of RN&#39;</span><span class="p">)</span>
-    
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Values of RN&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">)</span>
-
-    <span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="uniform">
-<h2>Uniform<a class="headerlink" href="#uniform" title="Permalink to this heading">#</a></h2>
-<p><strong>Probability distribution</strong></p>
-<div class="math notranslate nohighlight">
-\[\begin{split}p(x| a, b)=\begin{cases}
-{\frac {1}{b-a}}&amp;\mathrm {for} \ a\leq x\leq b,\\[8pt]0&amp;\mathrm {for} \ x&lt;a\ \mathrm {or} \ x&gt;b
-\end{cases}
-\end{split}\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(E[x] = \frac{1}{2}(a+b)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(V[x] = \frac{1}{12}(a-b)^2\)</span></p></li>
-</ul>
-<p><strong>Random Variable</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(U(a, b)\)</span> modeled by <code class="docutils literal notranslate"><span class="pre">np.random.uniform(a,b,</span> <span class="pre">size=(N,</span> <span class="pre">M))</span></code></p></li>
-<li><p><span class="math notranslate nohighlight">\(U(0, 1)\)</span> modeled by <code class="docutils literal notranslate"><span class="pre">np.random.rand(N,</span> <span class="pre">M,</span> <span class="pre">P,</span> <span class="pre">...)</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.32733942, 0.73543281, 0.73465775, 0.40099407, 0.6723935 ])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> 
-
-<span class="n">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/6cd08e8850c7d3dd8ffa4c42e83cf977d339105e8fc434d3b7bb59c257280a1c.png" src="../_images/6cd08e8850c7d3dd8ffa4c42e83cf977d339105e8fc434d3b7bb59c257280a1c.png" />
-</div>
-</div>
-</section>
-<section id="binomial">
-<h2>Binomial<a class="headerlink" href="#binomial" title="Permalink to this heading">#</a></h2>
-<section id="probability-mass-function">
-<h3>Probability Mass Function<a class="headerlink" href="#probability-mass-function" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[P(n |p, N) =  \frac{N!}{(N-n)! n!}p^n (1-p)^{N-n}\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(E[n] = Np\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(V[n] = 4Np(1-p)\)</span></p></li>
-</ul>
-<p><strong>Random Variable</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(B(n, p)\)</span> modeled by <code class="docutils literal notranslate"><span class="pre">np.random.binomial(n,</span> <span class="pre">p,</span> <span class="pre">size)</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 7,  4,  8,  7,  5,  4,  4,  8,  5,  5,  7,  5,  5,  5, 10,  8,  7,
-        6,  4,  9])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> 
-
-<span class="n">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/22a299e2a473caddec1eaba676f9964a2431dbf0cf9f832dd02150786d16f9e9.png" src="../_images/22a299e2a473caddec1eaba676f9964a2431dbf0cf9f832dd02150786d16f9e9.png" />
-</div>
-</div>
-</section>
-</section>
-<section id="gaussian">
-<h2>Gaussian<a class="headerlink" href="#gaussian" title="Permalink to this heading">#</a></h2>
-<div class="math notranslate nohighlight">
-\[P(x |\mu, \sigma) = \frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(E[x] = \mu\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(V[x] = \sigma^2\)</span></p></li>
-</ul>
-<p><strong>Random Variable</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(N(a, b)\)</span> modeled by <code class="docutils literal notranslate"><span class="pre">np.random.normal(loc,scale,</span> <span class="pre">size=(N,</span> <span class="pre">M))</span></code></p></li>
-<li><p><span class="math notranslate nohighlight">\(N(0, 1)\)</span> modeled by <code class="docutils literal notranslate"><span class="pre">np.random.randn(N,</span> <span class="pre">M,</span> <span class="pre">P,</span> <span class="pre">...)</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For a standard normal with sigma=1, mu=0</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-
-<span class="c1"># For a more general Gaussian</span>
-<span class="n">rgauss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span> 
-
-<span class="n">rnplot</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/ec76b496f0b417ac378c4c970ee771df0c64d6023bee125ab6f0eeaec2dfd76f.png" src="../_images/ec76b496f0b417ac378c4c970ee771df0c64d6023bee125ab6f0eeaec2dfd76f.png" />
-</div>
-</div>
-</section>
-<section id="transforming-random-variables">
-<h2>Transforming random variables<a class="headerlink" href="#transforming-random-variables" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Changing from random variable X to a new variable <span class="math notranslate nohighlight">\(Y=f(X)\)</span> leads to a relation between two probability functions where the multiplying factor is jacobian. E.g think of a factor accounting for changing the spacing between points (or volumes) <span class="math notranslate nohighlight">\(p(x)dx=p(y)dy\)</span></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p(y) = p(x)\cdot \Big|\frac{dx}{dy}\Big|\]</div>
-<ul class="simple">
-<li><p>Let us consider addition <span class="math notranslate nohighlight">\(Y=X+a\)</span> where we have <span class="math notranslate nohighlight">\(p(y)=p(x+a) \cdot 1\)</span> and multiplication <span class="math notranslate nohighlight">\(Y=aX\)</span> where we have <span class="math notranslate nohighlight">\(p(y) = p(x)\cdot \frac{1}{a}\)</span></p></li>
-<li><p>These transformations mean we can shift average by a constant factor <span class="math notranslate nohighlight">\(E[X+a]=E[X]+a\)</span>. And when the original variable is multiplied by a constant factor <span class="math notranslate nohighlight">\(a\)</span> the variance become <span class="math notranslate nohighlight">\(a^2\)</span> times more: <span class="math notranslate nohighlight">\(V[ax] = a^2V[x]\)</span>.</p></li>
-<li><p>As an example we can use standard uniform and standard normal to carry out the following transformations:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[N(\mu, \sigma^2) = \mu+\sigma\cdot N(0,1)\]</div>
-<div class="math notranslate nohighlight">
-\[U(a, b) = (b-a)*U(0,1)\]</div>
-</section>
-<section id="exact-vs-sampled-probability-distributions">
-<h2>Exact vs sampled probability distributions<a class="headerlink" href="#exact-vs-sampled-probability-distributions" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html">scipy.stats</a> contains a large number of probability distributions. Explores examples there</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">poisson</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span>
-
-<span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">step</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-
-<span class="n">px</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;normalization&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">px</span><span class="o">*</span><span class="n">dx</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>normalization 0.998999442013342
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>  <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Sampled mean=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, var=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">);</span>
-
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">px</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact mean=0, var=1&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;$x$&#39;)
-</pre></div>
-</div>
-<img alt="../_images/6aa726fe7e1668eb8b0ce25c44a6732e39b274fd48aab5139ffffc9b07181482.png" src="../_images/6aa726fe7e1668eb8b0ce25c44a6732e39b274fd48aab5139ffffc9b07181482.png" />
-</div>
-</div>
-</section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
 <p><strong>Smart gambler.</strong></p>
@@ -1390,23 +1029,6 @@ of head/tails or 1s and 0s</p>
 <li><p>What is the average number of molecules in each part?</p></li>
 <li><p>What are the relative fluctuations of the number of particles in each part?</p></li>
 </ul>
-<p><strong>Binomial, Gaussian and Poisson: The 3 distributions to know before heading to Las Vegas.</strong></p>
-<ul class="simple">
-<li><p>Show that in large number limit binomial distribution tends to gaussian. Show is by expanding binomial distirbution <span class="math notranslate nohighlight">\(logp(n)\)</span> in power series showing that terms beyond quadratic can be ignored.</p></li>
-<li><p>In the limit <span class="math notranslate nohighlight">\(N\rightarrow \infty\)</span> but for very small values of <span class="math notranslate nohighlight">\(p \rightarrow 0\)</span> such that <span class="math notranslate nohighlight">\(\lambda =pN=const\)</span> there is another distribution that better approximates Binomial distribution: <span class="math notranslate nohighlight">\(p(x)=\frac{\lambda^k}{k!}e^{-\lambda} \)</span> It is known as Poisson distribution. <br>
-Poisson distribution is an excellent approximation for probabilities of rare events. Such as, infrequently firing neurons in the brain, radioactive decay events of Plutonium or rains in the desert. <br>  Derive Poisson distribution by taking the limit of <span class="math notranslate nohighlight">\(p\rightarrow 0\)</span> in binomial distribution.</p></li>
-<li><p>Using numpy and matplotlib plot binomial probability distribution
-against Gaussian and Poisson distributions for different values of N=(10,100,1000,10000). <br></p></li>
-<li><p>For a value N=10000 do four plots with the following values
-p=0.0001, 0.001, 0.01, 0.1. You can use  subplot functionality to make a pretty 4 column plot. (See plotting module)</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span>  <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-</pre></div>
-</div>
 <p><strong>Optional Project:</strong> <a class="reference external" href="https://en.wikipedia.org/wiki/Porosity">Porosity of materials</a></p>
 <p>A simple model of a porous rock can be imagined by placing a series of overlap- ping spheres at random into a container of fixed volume <span class="math notranslate nohighlight">\(V\)</span> . The spheres represent the rock and the space between the spheres represents the pores. If we write the volume of the sphere as v, it can be shown the fraction of the space between the spheres or the porosity <span class="math notranslate nohighlight">\(\phi\)</span> is <span class="math notranslate nohighlight">\(\phi =e^{-Nv/V}\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is the number of spheres.</p>
 <p>For simplicity, consider a 2D system, (e.g <span class="math notranslate nohighlight">\(v=\frac{1}{4}\pi d^2\)</span>, see <a class="reference external" href="https://en.wikipedia.org/wiki/Area_of_a_circle">wiki</a> if you forgot the formula).
@@ -1458,11 +1080,11 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
       </div>
     </a>
     <a class="right-next"
-       href="02_RandVar.html"
+       href="01A_pdfs.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Random walk</p>
+        <p class="prev-next-title">Random variables</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1501,23 +1123,6 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-random-variable">Probability distribution of random variable</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (fluctuation)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-two-random-variables">Sum of two random variables</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers-in-python">Random numbers in python</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uniform">Uniform</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function">Probability Mass Function</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian">Gaussian</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transforming-random-variables">Transforming random variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exact-vs-sampled-probability-distributions">Exact vs sampled probability distributions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
   </nav></div>
