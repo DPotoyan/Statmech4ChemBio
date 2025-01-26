@@ -506,6 +506,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-and-optional-arguments">Positional and optional arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-and-explain-the-following-statements">1. Predict and explain the following statements</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slice-the-string-s-seehemewe-to-produce-the-following-substrings">2. Slice the string s = ‘seehemewe’ to produce the following substrings:</a></li>
@@ -1245,6 +1246,105 @@ doing. To make a comment in Python, precede the comment with a #.</p>
 </div>
 </div>
 </section>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Atom</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">atomic_number</span><span class="p">,</span> <span class="n">atomic_mass</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize an atom with its chemical symbol, atomic number, and atomic mass.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="n">symbol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atomic_number</span> <span class="o">=</span> <span class="n">atomic_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atomic_mass</span> <span class="o">=</span> <span class="n">atomic_mass</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Representation of the atom.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> (Atomic Number: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">atomic_number</span><span class="si">}</span><span class="s2">, Atomic Mass: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">atomic_mass</span><span class="si">}</span><span class="s2"> u)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hydrogen</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.008</span><span class="p">)</span>
+<span class="n">oxygen</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">15.999</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Molecule</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a molecule with a name and an empty list of atoms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_atom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add an atom to the molecule with a specific count.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">atom</span><span class="p">]</span> <span class="o">*</span> <span class="n">count</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">molecular_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the molecular weight of the molecule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">atomic_mass</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate the chemical formula of the molecule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">formula_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
+            <span class="n">formula_dict</span><span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">formula_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symbol</span><span class="si">}{</span><span class="n">count</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">formula_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Representation of the molecule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Molecule: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Formula: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">()</span><span class="si">}</span><span class="s2">, Molecular Weight: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> u&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create a water molecule</span>
+    <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="s2">&quot;Water&quot;</span><span class="p">)</span>
+    <span class="n">water</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">hydrogen</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">water</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">oxygen</span><span class="p">)</span>
+
+    <span class="c1"># Display the molecule</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">water</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>   <span class="c1"># Create a carbon dioxide molecule</span>
+    <span class="n">carbon</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">12.011</span><span class="p">)</span>
+    <span class="n">carbon_dioxide</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="s2">&quot;Carbon Dioxide&quot;</span><span class="p">)</span>
+    <span class="n">carbon_dioxide</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">carbon</span><span class="p">)</span>
+    <span class="n">carbon_dioxide</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">oxygen</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Display the molecule</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">carbon_dioxide</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 <section id="problems">
 <h3>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h3>
 <section id="predict-and-explain-the-following-statements">
@@ -1490,6 +1590,7 @@ p = \frac{nRT}{V-nb}-\frac{n^2 a}{V^2}
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-and-optional-arguments">Positional and optional arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-and-explain-the-following-statements">1. Predict and explain the following statements</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slice-the-string-s-seehemewe-to-produce-the-following-substrings">2. Slice the string s = ‘seehemewe’ to produce the following substrings:</a></li>
