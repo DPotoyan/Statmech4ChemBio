@@ -555,6 +555,12 @@ document.write(`
 <li><p>What makes python special for STEM fields is its vast ecosystem of scientific libraries (numpy,  pandas, scipy, matplotlib).</p></li>
 <li><p>This section will serve as a quick crash course of python programming language and some of its most essential scientific libraries. This module will cover everything we will need for this course.</p></li>
 </ul>
+<p><strong>There are many great external resources out there. Check these:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html#">Python For Chemists</a></p></li>
+<li><p><a class="reference external" href="https://allendowney.github.io/ThinkPython/">Think Python Book</a></p></li>
+<li><p><a class="reference external" href="https://youtu.be/PNSIWjWAA7o?si=xp0JCactf9uYo4Ss">FreeCodeCamp Youtube</a></p></li>
+</ul>
 </div>
 <figure class="align-default" id="markdown-fig">
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/py-popular2.png"><img alt="compton" class="bg-primary mb-1" src="../_images/py-popular2.png" style="width: 300px;" /></a>
@@ -1274,6 +1280,10 @@ doing. To make a comment in Python, precede the comment with a #.</p>
 <span class="sd">        Representation of the atom.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> (Atomic Number: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">atomic_number</span><span class="si">}</span><span class="s2">, Atomic Mass: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">atomic_mass</span><span class="si">}</span><span class="s2"> u)&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_isotope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_mass</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">atomic_mass</span> <span class="o">=</span> <span class="n">new_mass</span>
 </pre></div>
 </div>
 </div>
@@ -1282,74 +1292,6 @@ doing. To make a comment in Python, precede the comment with a #.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hydrogen</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.008</span><span class="p">)</span>
 <span class="n">oxygen</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">15.999</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Molecule</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialize a molecule with a name and an empty list of atoms.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">add_atom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Add an atom to the molecule with a specific count.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">atom</span><span class="p">]</span> <span class="o">*</span> <span class="n">count</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">molecular_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculate the molecular weight of the molecule.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">atomic_mass</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">formula</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Generate the chemical formula of the molecule.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">formula_dict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">atoms</span><span class="p">:</span>
-            <span class="n">formula_dict</span><span class="p">[</span><span class="n">atom</span><span class="o">.</span><span class="n">symbol</span><span class="p">]</span> <span class="o">=</span> <span class="n">formula_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">symbol</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-
-        <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">symbol</span><span class="si">}{</span><span class="n">count</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">formula_dict</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Representation of the molecule.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Molecule: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Formula: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">()</span><span class="si">}</span><span class="s2">, Molecular Weight: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">molecular_weight</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> u&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create a water molecule</span>
-    <span class="n">water</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="s2">&quot;Water&quot;</span><span class="p">)</span>
-    <span class="n">water</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">hydrogen</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">water</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">oxygen</span><span class="p">)</span>
-
-    <span class="c1"># Display the molecule</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">water</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>   <span class="c1"># Create a carbon dioxide molecule</span>
-    <span class="n">carbon</span> <span class="o">=</span> <span class="n">Atom</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">12.011</span><span class="p">)</span>
-    <span class="n">carbon_dioxide</span> <span class="o">=</span> <span class="n">Molecule</span><span class="p">(</span><span class="s2">&quot;Carbon Dioxide&quot;</span><span class="p">)</span>
-    <span class="n">carbon_dioxide</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">carbon</span><span class="p">)</span>
-    <span class="n">carbon_dioxide</span><span class="o">.</span><span class="n">add_atom</span><span class="p">(</span><span class="n">oxygen</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-
-    <span class="c1"># Display the molecule</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">carbon_dioxide</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1476,14 +1418,15 @@ groups, separated by spaces) and establish if it is valid or not. For example, t
 <h4>11. The while loop and radioactive decay<a class="headerlink" href="#the-while-loop-and-radioactive-decay" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>The isotope of <span class="math notranslate nohighlight">\(^13C\)</span> has a half-life about 30.2 years.</p></li>
-<li><p>Using a while loop, determine how many half-lives until a 500.0 g sample would have to decay until there is less that 10.00 grams left. To accomplish this, create a counter (counter = 0) and add 1 to it each cycle of a while loop to keep count.</p></li>
+<li><p>Using a while loop, determine how many half-lives until a <span class="math notranslate nohighlight">\(500.0\, g\)</span> sample would have to decay until there is less that <span class="math notranslate nohighlight">\(10.00\)</span> grams left.</p></li>
+<li><p>To accomplish this, create a counter (counter = 0) and add 1 to it each cycle of a while loop to keep count.</p></li>
 </ul>
 </section>
 <section id="interatomic-distances">
 <h4>12. interatomic distances<a class="headerlink" href="#interatomic-distances" title="Permalink to this heading">#</a></h4>
 <p>The following code generates five atoms at random coordinates in 3D space. Write a Python script that calculates the distance between each pair of atoms and returns the shortest distance.</p>
 <blockquote>
-<div><p>The combinations tool from <a class="reference external" href="https://docs.python.org/3/library/itertools.html">itertools</a>might be helpful here but you can do without it.</p>
+<div><p>The combinations tool from <a class="reference external" href="https://docs.python.org/3/library/itertools.html">itertools</a> might be helpful here but you can do without it.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randint</span>
 <span class="n">atoms</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1496,8 +1439,8 @@ groups, separated by spaces) and establish if it is valid or not. For example, t
 <section id="calcualte-sets-of-pressures-and-volumes-using-ideal-gas-and-van-der-waals-equations">
 <h4>13. Calcualte sets of pressures and volumes using ideal gas and Van der Waals equations.<a class="headerlink" href="#calcualte-sets-of-pressures-and-volumes-using-ideal-gas-and-van-der-waals-equations" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
-<li><p>Take <span class="math notranslate nohighlight">\(a=5 L^2 \cdot atm/mol^2\)</span>  and <span class="math notranslate nohighlight">\(b=0.05 L/mol\)</span></p></li>
-<li><p>Compare pressures at n=0.01 mol and n=1 mol values. for fixed volume.</p></li>
+<li><p>Take gas constants to be <span class="math notranslate nohighlight">\(a=5 L^2 \cdot atm/mol^2\)</span>  and <span class="math notranslate nohighlight">\(b=0.05 L/mol\)</span>, <span class="math notranslate nohighlight">\(R= 0.08206 L \cdot atm \cdot mol^{-1} \cdot K^{-1}\)</span></p></li>
+<li><p>Compare pressures at <span class="math notranslate nohighlight">\(n=0.01\, mol\)</span> and <span class="math notranslate nohighlight">\(n=1\, mol\)</span> values for fixed volumes.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
