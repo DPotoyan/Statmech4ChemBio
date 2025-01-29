@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/lab1/linear_functions';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Numpy simultions of 2D gas" href="2d_gas_sim.html" />
+    <link rel="next" title="Tutorial: Numpy simultions of 2D gas" href="2d_gas_sim.html" />
     <link rel="prev" title="Numpy Lab: Sinc Function" href="sinc_function.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -240,14 +240,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../../0_python/intro2py.html">Python3</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../0_python/intro2numpy.html">NumPy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../0_python/intro2viz.html">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../0_python/python_OOP_challenge.html">Tutorial: Building Python Classes</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Numpy lab</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="sinc_function.html">Numpy Lab: Sinc Function</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Numpy Lab: Linear Functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="2d_gas_sim.html">Numpy simultions of 2D gas</a></li>
-
-
+<li class="toctree-l2"><a class="reference internal" href="2d_gas_sim.html">Tutorial: Numpy simultions of 2D gas</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../lab2/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -518,12 +517,12 @@ document.write(`
 <p>Topics: elementwise operations</p>
 <p><strong>Linear functions</strong><br> We will be using the term <em>linear equation</em> to mean a weighted sum of inputs plus an offset. If there is just one input <span class="math notranslate nohighlight">\(x\)</span>, then this is a straight line:</p>
 <p><strong>Equation-1</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-7025ddfd-e6a7-4302-a226-77a87c5c5184">
-<span class="eqno">(1)<a class="headerlink" href="#equation-7025ddfd-e6a7-4302-a226-77a87c5c5184" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega x,\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-22792b21-84e1-475f-b49c-ac125bcd7d9f">
+<span class="eqno">(1)<a class="headerlink" href="#equation-22792b21-84e1-475f-b49c-ac125bcd7d9f" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega x,\end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta\)</span> is the y-intercept of the linear and <span class="math notranslate nohighlight">\(\omega\)</span> is the slope of the line. When there are two inputs <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span>, then this becomes:</p>
 <p><strong>Equation-2</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-469339d5-bb34-4cf9-aa38-7bd87f55e759">
-<span class="eqno">(2)<a class="headerlink" href="#equation-469339d5-bb34-4cf9-aa38-7bd87f55e759" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega_1 x_1 + \omega_2 x_2.\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-7494cec0-cf44-4f19-bc53-9aac71cdef87">
+<span class="eqno">(2)<a class="headerlink" href="#equation-7494cec0-cf44-4f19-bc53-9aac71cdef87" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega_1 x_1 + \omega_2 x_2.\end{equation}\]</div>
 <p>Any other functions are by definition <strong>non-linear</strong>.</p>
 <section id="type-your-code-below">
 <h2>Type your code below<a class="headerlink" href="#type-your-code-below" title="Permalink to this heading">#</a></h2>
@@ -602,13 +601,13 @@ document.write(`
 <section id="using-numpy-to-write-general-linear-functions-in-compact-form">
 <h2>Using numpy to write general linear functions in compact form<a class="headerlink" href="#using-numpy-to-write-general-linear-functions-in-compact-form" title="Permalink to this heading">#</a></h2>
 <p>Often we will want to compute many linear functions at the same time.  For example, we might have three inputs, <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span> and want to compute two linear functions giving <span class="math notranslate nohighlight">\(y_1\)</span> and <span class="math notranslate nohighlight">\(y_2\)</span>. Of course, we could do this by just running each equation separately,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-493b5872-3896-471f-9850-00dbbc5de989">
-<span class="eqno">(3)<a class="headerlink" href="#equation-493b5872-3896-471f-9850-00dbbc5de989" title="Permalink to this equation">#</a></span>\[\begin{align}y_1 &amp;=&amp; \beta_1 + \omega_{11} x_1 + \omega_{12} x_2 + \omega_{13} x_3\\
+<div class="amsmath math notranslate nohighlight" id="equation-b42aef8b-3362-40e3-9f44-5ae379073cb0">
+<span class="eqno">(3)<a class="headerlink" href="#equation-b42aef8b-3362-40e3-9f44-5ae379073cb0" title="Permalink to this equation">#</a></span>\[\begin{align}y_1 &amp;=&amp; \beta_1 + \omega_{11} x_1 + \omega_{12} x_2 + \omega_{13} x_3\\
 y_2 &amp;=&amp; \beta_2 + \omega_{21} x_1 + \omega_{22} x_2 + \omega_{23} x_3.
 \end{align}\]</div>
 <p>However, we can write it more compactly with vectors and matrices:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-550e92cd-2760-4ced-bb7f-5195339b3d2c">
-<span class="eqno">(4)<a class="headerlink" href="#equation-550e92cd-2760-4ced-bb7f-5195339b3d2c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3e33540c-e7ad-4672-8247-20b325237db1">
+<span class="eqno">(4)<a class="headerlink" href="#equation-3e33540c-e7ad-4672-8247-20b325237db1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{bmatrix} y_1\\ y_2 \end{bmatrix} = \begin{bmatrix}\beta_{1}\\\beta_{2}\end{bmatrix}+ \begin{bmatrix}\omega_{11}&amp;\omega_{12}&amp;\omega_{13}\\\omega_{21}&amp;\omega_{22}&amp;\omega_{23}\end{bmatrix}\begin{bmatrix}x_{1}\\x_{2}\\x_{3}\end{bmatrix},
 \end{equation}\]</div>
 <p>$$\begin{equation}
@@ -689,7 +688,7 @@ y_2 &amp;=&amp; \beta_2 + \omega_{21} x_1 + \omega_{22} x_2 + \omega_{23} x_3.
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Numpy simultions of 2D gas</p>
+        <p class="prev-next-title">Tutorial: Numpy simultions of 2D gas</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
