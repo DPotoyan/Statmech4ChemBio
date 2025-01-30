@@ -69,7 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Random Walks" href="../lab2/intro.html" />
-    <link rel="prev" title="Numpy Lab: Linear Functions" href="linear_functions.html" />
+    <link rel="prev" title="Tutorial: Random Walk Simulations" href="rw_lab.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -246,6 +246,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Numpy lab</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="sinc_function.html">Numpy Lab: Sinc Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_functions.html">Numpy Lab: Linear Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rw_lab.html">Tutorial: Random Walk Simulations</a></li>
+
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Tutorial: Numpy simultions of 2D gas</a></li>
 </ul>
 </li>
@@ -520,7 +522,7 @@ document.write(`
 <h1>Tutorial: Numpy simultions of 2D gas<a class="headerlink" href="#tutorial-numpy-simultions-of-2d-gas" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">widgets</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interactive</span>
@@ -533,7 +535,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">GasSimulation</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">GasSimulation</span><span class="p">:</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">L</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">mass</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize gas particle simulation.&quot;&quot;&quot;</span>
@@ -579,7 +581,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and run simulation</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and run simulation</span>
 <span class="n">sim</span> <span class="o">=</span> <span class="n">GasSimulation</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 <span class="n">sim</span><span class="o">.</span><span class="n">run_simulation</span><span class="p">()</span>
 </pre></div>
@@ -588,7 +590,14 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Animate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Animate</span>
 <span class="n">L</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">L</span><span class="p">,</span> <span class="n">sim</span><span class="o">.</span><span class="n">positions_history</span><span class="p">,</span> <span class="n">sim</span><span class="o">.</span><span class="n">steps</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
@@ -610,7 +619,7 @@ document.write(`
 <h2>Project 1: Plot velocity and particle distributions<a class="headerlink" href="#project-1-plot-velocity-and-particle-distributions" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#plot_speed_distribution(sim.velocities_history)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#plot_speed_distribution(sim.velocities_history)</span>
 <span class="c1">#plot_position_heatmap(sim.positions_history)</span>
 </pre></div>
 </div>
@@ -732,12 +741,12 @@ m_1 v_{1,\text{init}} + m_2 v_{2,\text{init}} = m_1 v_{1,\text{final}} + m_2 v_{
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="linear_functions.html"
+       href="rw_lab.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Numpy Lab: Linear Functions</p>
+        <p class="prev-next-title">Tutorial: Random Walk Simulations</p>
       </div>
     </a>
     <a class="right-next"
