@@ -15,23 +15,40 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import matplotlib.pyplot as plt
-from ipywidgets import interactive
+def visualize(sim):
+        
+  def scatter_plot(frame=0):    
+    plt.figure(figsize=(5, 5))
+    plt.xlim(0, sim.L), plt.ylim(0, sim.L)
+    plt.title(f"Frame {frame + 1} / {len(sim.positions_history)}")
+    plt.scatter(*sim.positions_history[frame].T, s=20, c='blue', alpha=0.6)
+    plt.show()
+            
+  return interactive(scatter_plot, frame=(0, sim.steps - 1, 1))
 
-import matplotlib.animation as animation
-from IPython.display import HTML
+
+  def animate(sim):
+
+  L, pos, steps = sim.L, sim.positions_history, sim.steps
+
+  fig, ax = plt.subplots(figsize=(5, 5))
+
+  ax.set_xlim(0, L), ax.set_ylim(0, L)
+  scatter = ax.scatter([], [], s=20, c='blue', alpha=0.6)
+
+  def update(frame):
+    scatter.set_offsets(pos[frame])
+    return scatter,
+
+  ani = animation.FuncAnimation(fig, update, frames=steps, interval=20, blit=True)
+  plt.close()
+  return HTML(ani.to_jshtml())
 ------------------
 
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 3[0m
-[1;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
-[0;32m----> 3[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mipywidgets[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m interactive
-[1;32m      5[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01manimation[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01manimation[39;00m
-[1;32m      6[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mIPython[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdisplay[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m HTML
+[0;36m  Cell [0;32mIn[5], line 15[0;36m[0m
+[0;31m    L, pos, steps = sim.L, sim.positions_history, sim.steps[0m
+[0m    ^[0m
+[0;31mIndentationError[0m[0;31m:[0m expected an indented block
 
-[0;31mModuleNotFoundError[0m: No module named 'ipywidgets'
 
