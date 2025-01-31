@@ -15,40 +15,14 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-def visualize(sim):
-        
-  def scatter_plot(frame=0):    
-    plt.figure(figsize=(5, 5))
-    plt.xlim(0, sim.L), plt.ylim(0, sim.L)
-    plt.title(f"Frame {frame + 1} / {len(sim.positions_history)}")
-    plt.scatter(*sim.positions_history[frame].T, s=20, c='blue', alpha=0.6)
-    plt.show()
-            
-  return interactive(scatter_plot, frame=(0, sim.steps - 1, 1))
-
-
-  def animate(sim):
-
-  L, pos, steps = sim.L, sim.positions_history, sim.steps
-
-  fig, ax = plt.subplots(figsize=(5, 5))
-
-  ax.set_xlim(0, L), ax.set_ylim(0, L)
-  scatter = ax.scatter([], [], s=20, c='blue', alpha=0.6)
-
-  def update(frame):
-    scatter.set_offsets(pos[frame])
-    return scatter,
-
-  ani = animation.FuncAnimation(fig, update, frames=steps, interval=20, blit=True)
-  plt.close()
-  return HTML(ani.to_jshtml())
+animate(sim)
 ------------------
 
 
-[0;36m  Cell [0;32mIn[5], line 15[0;36m[0m
-[0;31m    L, pos, steps = sim.L, sim.positions_history, sim.steps[0m
-[0m    ^[0m
-[0;31mIndentationError[0m[0;31m:[0m expected an indented block
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[8], line 1[0m
+[0;32m----> 1[0m [43manimate[49m(sim)
 
+[0;31mNameError[0m: name 'animate' is not defined
 
