@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+
+X = np.random.rand(30)
+
+print(X)
+plt.plot(X)
+------------------
+
+----- stdout -----
+[0.40464271 0.98945396 0.14713445 0.48581858 0.98131736 0.0583642
+ 0.91256048 0.99832106 0.80381045 0.5685527  0.40815375 0.11990703
+ 0.58839451 0.10332209 0.41374507 0.20087623 0.4149178  0.62778403
+ 0.3042857  0.97164001 0.52002826 0.94273525 0.11034772 0.33683805
+ 0.96908639 0.80613649 0.12164614 0.82197632 0.02460304 0.84083723]
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[1], line 6[0m
+[1;32m      3[0m X [38;5;241m=[39m np[38;5;241m.[39mrandom[38;5;241m.[39mrand([38;5;241m30[39m)
+[1;32m      5[0m [38;5;28mprint[39m(X)
+[0;32m----> 6[0m [43mplt[49m[38;5;241m.[39mplot(X)
+
+[0;31mNameError[0m: name 'plt' is not defined
+
