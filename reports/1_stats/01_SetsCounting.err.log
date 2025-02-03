@@ -15,37 +15,38 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Create a single figure for normalized x/N plots
-fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
+# Compute entropy component s(f_+)
+s_values = -(f_plus_values * np.log(f_plus_values) + f_minus_values * np.log(f_minus_values))
 
-# Define more N values for smoother visualization
-N_values = [10, 50, 100, 200]
+# Compute energy component ε(f_+)
+epsilon_values = - (f_plus_values * np.log(p_plus) + f_minus_values * np.log(p_minus))
 
-# Colors for different N values
-colors = ["blue", "green", "red", "purple"]
+# Compute probability P_N(x) using large deviation approximation
+N = 50  # Arbitrary large N
+P_x_values = np.exp(-N * I_values)  # Exponential suppression
 
-# Plot for unbiased and biased coins in two separate subplots
-for i, N in enumerate(N_values):
-    x_vals = x_values(N)
-    x_norm = x_vals / N  # Normalize x by N
+# Create subplots
+fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 
-    # Compute probabilities
-    P_unbiased = [P_x(N, x, p_plus_unbiased) for x in x_vals]
-    P_biased = [P_x(N, x, p_plus_biased) for x in x_vals]
-
-    # Plot lines
-    axes[0].plot(x_norm, P_unbiased, marker="o", linestyle="-", label=f"N={N}", color=colors[i])
-    axes[1].plot(x_norm, P_biased, marker="o", linestyle="-", label=f"N={N}", color=colors[i])
-
-# Titles and labels
-axes[0].set_title(f"Unbiased Coin ($p_+$ = {p_plus_unbiased})")
-axes[0].set_xlabel("$x/N$")
-axes[0].set_ylabel("$P(x)$")
+# First subplot: Entropy and Energy Components
+axes[0].plot(f_plus_values, s_values, label=r"$s(f_+)$ (Entropy)", color="blue")
+axes[0].plot(f_plus_values, epsilon_values, label=r"$\epsilon(f_+)$ (Energy)", color="green")
+axes[0].plot(f_plus_values, I_values, label=r"$I(f_+)$ (Rate Function)", color="red")
+axes[0].axvline(p_plus, linestyle="--", color="black", label=r"$f_+ = p_+$")
+axes[0].set_xlabel(r"$f_+$")
+axes[0].set_ylabel("Value")
+axes[0].set_title("Entropy, Energy, and Rate Function")
 axes[0].legend()
+axes[0].grid()
 
-axes[1].set_title(f"Biased Coin ($p_+$ = {p_plus_biased})")
-axes[1].set_xlabel("$x/N$")
+# Second subplot: Probability Distribution P_N(x)
+axes[1].plot(f_plus_values, P_x_values, label=r"$P_N(f_+)$", color="purple")
+axes[1].axvline(p_plus, linestyle="--", color="black", label=r"$f_+ = p_+$")
+axes[1].set_xlabel(r"$f_+$")
+axes[1].set_ylabel(r"$P_N(f_+)$")
+axes[1].set_title("Probability Distribution")
 axes[1].legend()
+axes[1].grid()
 
 plt.tight_layout()
 plt.show()
@@ -55,12 +56,11 @@ plt.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[5], line 12[0m
-[1;32m     10[0m [38;5;66;03m# Plot for unbiased and biased coins in two separate subplots[39;00m
-[1;32m     11[0m [38;5;28;01mfor[39;00m i, N [38;5;129;01min[39;00m [38;5;28menumerate[39m(N_values):
-[0;32m---> 12[0m     x_vals [38;5;241m=[39m [43mx_values[49m(N)
-[1;32m     13[0m     x_norm [38;5;241m=[39m x_vals [38;5;241m/[39m N  [38;5;66;03m# Normalize x by N[39;00m
-[1;32m     15[0m     [38;5;66;03m# Compute probabilities[39;00m
+Cell [0;32mIn[7], line 2[0m
+[1;32m      1[0m [38;5;66;03m# Compute entropy component s(f_+)[39;00m
+[0;32m----> 2[0m s_values [38;5;241m=[39m [38;5;241m-[39m([43mf_plus_values[49m [38;5;241m*[39m np[38;5;241m.[39mlog(f_plus_values) [38;5;241m+[39m f_minus_values [38;5;241m*[39m np[38;5;241m.[39mlog(f_minus_values))
+[1;32m      4[0m [38;5;66;03m# Compute energy component ε(f_+)[39;00m
+[1;32m      5[0m epsilon_values [38;5;241m=[39m [38;5;241m-[39m (f_plus_values [38;5;241m*[39m np[38;5;241m.[39mlog(p_plus) [38;5;241m+[39m f_minus_values [38;5;241m*[39m np[38;5;241m.[39mlog(p_minus))
 
-[0;31mNameError[0m: name 'x_values' is not defined
+[0;31mNameError[0m: name 'f_plus_values' is not defined
 
