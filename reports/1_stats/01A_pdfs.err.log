@@ -15,36 +15,38 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from scipy.stats import binom, norm, poisson
+# Discrete Random Variable Example: Coin Toss
+fig, (ax,ax2) = plt.subplots(ncols=2)
+x_discrete = [-1, 1]  # Possible values for the coin toss
+p_discrete = [0.5, 0.5]  # Probabilities
 
-dx = (xmax-xmin)/step
-
-x = np.linspace(xmin, xmax, step)
-
-px = norm.pdf(x)
-
-print('normalization', np.sum(px*dx))
-
-r = np.random.randn(100)
-
-plt.hist(r,  density=True, label=f'Sampled mean={r.mean():.2f}, var={r.var():.2f}');
+ax.bar(x_discrete, p_discrete, width=0.4, color=['blue', 'red'], alpha=0.7, edgecolor='black')
+ax.set_xticks(x_discrete)
+ax.set_xticklabels(['Tails (-1)', 'Heads (+1)'])
+ax.set_xlabel("Outcome (X)")
+ax.set_ylabel("Probability")
+ax.set_title("Discrete Random Variable: Coin Toss")
 
 
-plt.plot(x, px,'k', label='Exact mean=0, var=1')
+# Continuous Random Variable Example: Gaussian Distribution
+x_continuous = np.linspace(-3, 3, 1000)
+p_continuous = (1 / np.sqrt(2 * np.pi)) * np.exp(-0.5 * x_continuous**2)
 
-plt.legend(loc=2)
-plt.ylabel('$p(x)$')
-plt.xlabel('$x$')
+ax2.plot(x_continuous, p_continuous, color='green', lw=2)
+ax2.fill_between(x_continuous, p_continuous, alpha=0.3, color='green')
+ax2.set_xlabel("X (Continuous Variable)")
+ax2.set_ylabel("Probability Density")
+ax2.set_title("Continuous Random Variable: Gaussian Distribution")
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[5], line 3[0m
-[1;32m      1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mstats[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m binom, norm, poisson
-[0;32m----> 3[0m dx [38;5;241m=[39m ([43mxmax[49m[38;5;241m-[39mxmin)[38;5;241m/[39mstep
-[1;32m      5[0m x [38;5;241m=[39m np[38;5;241m.[39mlinspace(xmin, xmax, step)
-[1;32m      7[0m px [38;5;241m=[39m norm[38;5;241m.[39mpdf(x)
+Cell [0;32mIn[1], line 2[0m
+[1;32m      1[0m [38;5;66;03m# Discrete Random Variable Example: Coin Toss[39;00m
+[0;32m----> 2[0m fig, (ax,ax2) [38;5;241m=[39m [43mplt[49m[38;5;241m.[39msubplots(ncols[38;5;241m=[39m[38;5;241m2[39m)
+[1;32m      3[0m x_discrete [38;5;241m=[39m [[38;5;241m-[39m[38;5;241m1[39m, [38;5;241m1[39m]  [38;5;66;03m# Possible values for the coin toss[39;00m
+[1;32m      4[0m p_discrete [38;5;241m=[39m [[38;5;241m0.5[39m, [38;5;241m0.5[39m]  [38;5;66;03m# Probabilities[39;00m
 
-[0;31mNameError[0m: name 'xmax' is not defined
+[0;31mNameError[0m: name 'plt' is not defined
 

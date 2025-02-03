@@ -501,6 +501,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-world-of-many-particle-complex-systems">Probabilistic world of many particle complex systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
@@ -543,6 +544,20 @@ document.write(`
 <li><p><strong>Bayesian approach:</strong> In physical sciences and modeling one often deals with situations where counting is impossible. Hence, probability is interpreted as a degree of belief.</p></li>
 </ul>
 </div>
+<section id="probabilistic-world-of-many-particle-complex-systems">
+<h2>Probabilistic world of many particle complex systems<a class="headerlink" href="#probabilistic-world-of-many-particle-complex-systems" title="Permalink to this heading">#</a></h2>
+<figure class="align-default" id="markdown-fig">
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/2d_gas_simulation.gif"><img alt="compton" class="bg-primary mb-1" src="../_images/2d_gas_simulation.gif" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Characterizing many particle complex systems is best done via probabilistic approach.</span><a class="headerlink" href="#markdown-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>What is the probability to find a gas in upper right corner cell?</p></li>
+<li><p>What is the probability that all gas atoms will be in left side of the box?</p></li>
+<li><p>What is the probability distribution of velocities of the gas?</p></li>
+</ul>
+</section>
 <section id="sample-space">
 <h2>Sample space<a class="headerlink" href="#sample-space" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -612,48 +627,59 @@ document.write(`
 <h2>Macrostates and  Venn diagrams<a class="headerlink" href="#macrostates-and-venn-diagrams" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%capture
-!pip install matplotlib-venn #install if running locally
-import matplotlib_venn as venn
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># COllab has this but in local notebook you may want to install it</span>
+<span class="c1">#!pip install matplotlib-venn #install if running locally</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib_venn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">venn</span>
+
+<span class="n">Omega</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+
+<span class="n">venn</span><span class="o">.</span><span class="n">venn2</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: matplotlib-venn in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (0.11.6)
-Requirement already satisfied: matplotlib in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-venn) (3.5.1)
-Requirement already satisfied: numpy in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-venn) (1.23.5)
-Requirement already satisfied: scipy in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-venn) (1.10.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (4.28.5)
-Requirement already satisfied: packaging&gt;=20.0 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (23.1)
-Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (2.8.2)
-Requirement already satisfied: pillow&gt;=6.2.0 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (9.2.0)
-Requirement already satisfied: cycler&gt;=0.10 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (0.11.0)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (1.4.4)
-Requirement already satisfied: pyparsing&gt;=2.2.1 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from matplotlib-&gt;matplotlib-venn) (3.0.9)
-Requirement already satisfied: six&gt;=1.5 in /opt/homebrew/anaconda3/envs/llpsmd3/lib/python3.9/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;matplotlib-venn) (1.16.0)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># COllab has this but in local notebook you may want to install it</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#!pip install matplotlib-venn #install if running locally</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib_venn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">venn</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">Omega</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib_venn&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Omega</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">90</span><span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Omega</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
 
-<span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
 
-<span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">}</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span>
 
-<span class="n">C</span> <span class="o">=</span> <span class="p">{</span><span class="mi">20</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
-
-<span class="n">venn</span><span class="o">.</span><span class="n">venn3</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">))</span>
+<span class="n">venn</span><span class="o">.</span><span class="n">venn2</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x17c58c3d0&gt;
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Omega</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">}</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+
+<span class="n">venn</span><span class="o">.</span><span class="n">venn2</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="n">set_labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<img alt="../_images/faba25284c14fd4a004ac57d7632bc788d5fe3a4683a9874c68c42e6c269ff2e.png" src="../_images/faba25284c14fd4a004ac57d7632bc788d5fe3a4683a9874c68c42e6c269ff2e.png" />
 </div>
 </div>
 </section>
@@ -1149,6 +1175,7 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-world-of-many-particle-complex-systems">Probabilistic world of many particle complex systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
