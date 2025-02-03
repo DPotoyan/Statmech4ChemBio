@@ -508,7 +508,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macrostates-and-venn-diagrams">Macrostates and  Venn diagrams</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-posterior-and-likelihood">Prior, posterior and likelihood</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-and-combinatorics">Counting and Combinatorics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
@@ -654,7 +657,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f3d0c6a9ac0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa9ec0e1b20&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -673,7 +676,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f3d2def9370&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa9e3f929d0&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -692,7 +695,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f3d2dee4640&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa9ec0a93d0&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -780,16 +783,17 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p></li>
 <div><p>the probability of getting 4 given that we have rolled an even number: <span class="math notranslate nohighlight">\(p(4|even) = \frac{p(even|4)p(4)}{p(even)}=\frac{1\cdot 1/6}{1/2}=1/3\)</span></p>
 </div></blockquote>
 </div>
+</section>
+<section id="bayes-formula">
+<h2>Bayes formula<a class="headerlink" href="#bayes-formula" title="Permalink to this heading">#</a></h2>
 <figure class="align-default" id="id2">
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/bayes.png"><img alt="compton" class="bg-primary mb-1" src="../_images/bayes.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>Joint Probability <span class="math notranslate nohighlight">\(P(A,B)\)</span>:</strong> Quantifies the probability of two or more events happening simultaneously. <strong>Marginal Probability <span class="math notranslate nohighlight">\(P(A)\)</span>:</strong> Quantifies the probability of an event irrespective of the outcomes of other random variables. Is obtained by marginalization, summing over all possibilities of B. <strong>Conditional Probability <span class="math notranslate nohighlight">\(P(A|B)\)</span>:</strong> Quantifies probability of event A given the information that event B happened.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-</section>
-<section id="bayes-formula">
-<h2>Bayes formula<a class="headerlink" href="#bayes-formula" title="Permalink to this heading">#</a></h2>
-<p><strong>Prior, posterior and likelihood</strong></p>
+<section id="prior-posterior-and-likelihood">
+<h3>Prior, posterior and likelihood<a class="headerlink" href="#prior-posterior-and-likelihood" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The Bayes theorem provides a powerful way to test hypotheses and learn the parameters of a model from data. The jargon used when using the bayes formula differs slightly from the one given above.</p></li>
 </ul>
@@ -834,6 +838,7 @@ Solution<div class="sd-summary-down docutils">
 \[P(X|+) = \frac{P(+|X)p(X)}{p(+)} = \frac{P(+|X)p(X)}{p(+|X)p(X)+p(+| X^c)p(X^c)} =  \frac{0.9\cdot 0.01}{0.9\cdot 0.01+0.1\cdot 0.99} = 0.083\]</div>
 </div>
 </details></section>
+</section>
 <section id="counting-and-combinatorics">
 <h2>Counting and Combinatorics<a class="headerlink" href="#counting-and-combinatorics" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -1451,7 +1456,10 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macrostates-and-venn-diagrams">Macrostates and  Venn diagrams</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-posterior-and-likelihood">Prior, posterior and likelihood</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-and-combinatorics">Counting and Combinatorics</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
