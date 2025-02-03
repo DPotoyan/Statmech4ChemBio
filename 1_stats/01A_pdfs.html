@@ -190,7 +190,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -505,8 +504,10 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Random variables</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-random-variables">Introducing random variables</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers-in-python">Random numbers in python</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-a-random-variable"><strong>Probability Distribution of a Random Variable</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#histogramming">Histogramming</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-a-random-variable"><strong>Probability Distribution of a Random Variable</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogramming">Histogramming</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation"><strong>Expectation</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (Fluctuation)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a></li>
@@ -568,7 +569,69 @@ The number of steps to the right (or left) of a 1D random walker results in a bi
 </ul>
 </li>
 </ul>
+</section>
+<section id="random-numbers-in-python">
+<h1>Random numbers in python<a class="headerlink" href="#random-numbers-in-python" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/routines.random.html"><strong>numpy.random</strong></a> has the fastest random number generators based on low-level code written in C.</p></li>
+<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html"><strong>Scipy.stats</strong></a> has an extensive library of statistical distributions and tools for statistical analysis.</p></li>
+<li><p>First, we take a look at the most widely used random numbers of numpy, also called standard random numbers. These are rand (uniform random number on interval 0,1) and randn (stnadard average random number with 0 mean and 1 variance).</p></li>
+<li><p>When running code that uses random numbers results will always differ for every run. If you want code to reproduce the same result, you can fix the seed to get reproducible results: <code class="docutils literal notranslate"> <span class="pre">np.random.seed(8376743)</span></code></p></li>
+<li><p>To convert random variables to probability distributions we need to generate large enough sample then perform histogramming via <code class="docutils literal notranslate"><span class="pre">np.hist</span></code> or directly histogram and visualize by one shot via <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code></p></li>
+</ul>
 <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="probability-distribution-of-a-random-variable">
+<h1><strong>Probability Distribution of a Random Variable</strong><a class="headerlink" href="#probability-distribution-of-a-random-variable" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>For any random variable <span class="math notranslate nohighlight">\( X \)</span>, we are interested in finding the probability distribution over its possible values <span class="math notranslate nohighlight">\( x \)</span>, denoted as <span class="math notranslate nohighlight">\( p_X(x) \)</span>.</p></li>
+<li><p>It is important to distinguish between:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\( x \)</span>, which represents a specific value the variable can take (e.g., <span class="math notranslate nohighlight">\( 1,2, \dots, 6 \)</span> for a die).</p></li>
+<li><p><span class="math notranslate nohighlight">\( X \)</span>, which is the random variable itself, generating values <span class="math notranslate nohighlight">\( x \)</span> according to the probability distribution <span class="math notranslate nohighlight">\( p(x) \)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<section id="histogramming">
+<h2>Histogramming<a class="headerlink" href="#histogramming" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Discrete Random Variable Example: Coin Toss</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -600,92 +663,9 @@ The number of steps to the right (or left) of a 1D random walker results in a bi
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/52d58f916e5bb9dea32483917402c55a545da8870a6afb85644bbea212216de9.png" src="../_images/52d58f916e5bb9dea32483917402c55a545da8870a6afb85644bbea212216de9.png" />
-</div>
+</details>
 </div>
 </section>
-<section id="random-numbers-in-python">
-<h1>Random numbers in python<a class="headerlink" href="#random-numbers-in-python" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/routines.random.html"><strong>numpy.random</strong></a> has the fastest random number generators based on low-level code written in C.</p></li>
-<li><p>The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html"><strong>Scipy.stats</strong></a> has an extensive library of statistical distributions and tools for statistical analysis.</p></li>
-<li><p>First, we take a look at the most widely used random numbers of numpy, also called standard random numbers. These are rand (uniform random number on interval 0,1) and randn (stnadard average random number with 0 mean and 1 variance).</p></li>
-<li><p>When running code that uses random numbers results will always differ for every run. If you want code to reproduce the same result, you can fix the seed to get reproducible results: <code class="docutils literal notranslate"> <span class="pre">np.random.seed(8376743)</span></code></p></li>
-<li><p>To convert random variables to probability distributions we need to generate large enough sample then perform histogramming via <code class="docutils literal notranslate"><span class="pre">np.hist</span></code> or directly histogram and visualize by one shot via <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[8.48468899e-01 5.18174260e-01 1.14413036e-01 1.54348554e-01
- 1.66515512e-01 5.79799396e-01 1.17592277e-01 2.04411460e-01
- 8.19108423e-01 1.03703234e-02 5.47144860e-01 8.50883889e-01
- 2.27067733e-01 4.45786809e-01 5.35951959e-01 7.35409807e-01
- 5.61255657e-01 7.37006488e-01 2.11257500e-01 3.23435293e-02
- 7.53482207e-01 5.86832499e-01 1.66865222e-01 9.30557402e-01
- 3.77947597e-01 2.53961358e-01 7.93171908e-01 2.59806253e-01
- 5.20674272e-01 8.06768026e-01 2.12506245e-01 3.34788070e-02
- 4.98320035e-01 2.38046618e-01 1.51698862e-01 7.38175320e-01
- 1.39009974e-01 3.73906881e-01 1.23376345e-01 6.10782934e-01
- 2.64235534e-01 8.58435074e-01 3.66939141e-04 8.65644564e-02
- 6.54954234e-02 5.86370354e-01 6.64143758e-01 7.80393461e-01
- 4.27951569e-01 6.73071498e-01]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb2a87fe130&gt;]
-</pre></div>
-</div>
-<img alt="../_images/7d8cbee8b956131ab889254e93c939978646c8820399118b578861e1ea97e833.png" src="../_images/7d8cbee8b956131ab889254e93c939978646c8820399118b578861e1ea97e833.png" />
-</div>
-</div>
-</section>
-<section id="probability-distribution-of-a-random-variable">
-<h1><strong>Probability Distribution of a Random Variable</strong><a class="headerlink" href="#probability-distribution-of-a-random-variable" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p>For any random variable <span class="math notranslate nohighlight">\( X \)</span>, we are interested in finding the probability distribution over its possible values <span class="math notranslate nohighlight">\( x \)</span>, denoted as <span class="math notranslate nohighlight">\( p_X(x) \)</span>.</p></li>
-<li><p>It is important to distinguish between:</p>
-<ul>
-<li><p><span class="math notranslate nohighlight">\( x \)</span>, which represents a specific value the variable can take (e.g., <span class="math notranslate nohighlight">\( 1,2, \dots, 6 \)</span> for a die).</p></li>
-<li><p><span class="math notranslate nohighlight">\( X \)</span>, which is the random variable itself, generating values <span class="math notranslate nohighlight">\( x \)</span> according to the probability distribution <span class="math notranslate nohighlight">\( p(x) \)</span>.</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="histogramming">
-<h1>Histogramming<a class="headerlink" href="#histogramming" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">counts</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4 2 4 4 5 3 0 2 2 1 4 4 1 2 3 3 3 2 1 0] [0.   0.05 0.1  0.15 0.2  0.25 0.3  0.35 0.4  0.45 0.5  0.55 0.6  0.65
- 0.7  0.75 0.8  0.85 0.9  0.95 1.  ]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1.29005838, 1.72007784, 1.72007784, 0.        , 0.86003892,
-        1.07504865, 1.07504865, 1.07504865, 1.07504865, 0.86003892]),
- array([3.66939141e-04, 9.33859854e-02, 1.86405032e-01, 2.79424078e-01,
-        3.72443124e-01, 4.65462170e-01, 5.58481217e-01, 6.51500263e-01,
-        7.44519309e-01, 8.37538355e-01, 9.30557402e-01]),
- &lt;BarContainer object of 10 artists&gt;)
-</pre></div>
-</div>
-<img alt="../_images/0a46bf390aabb85a7c37b63fe44d13d27cbcd673f6391d7147bb8f1c0702a07a.png" src="../_images/0a46bf390aabb85a7c37b63fe44d13d27cbcd673f6391d7147bb8f1c0702a07a.png" />
-</div>
-</div>
 </section>
 <section id="expectation">
 <h1><strong>Expectation</strong><a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h1>
@@ -770,9 +750,6 @@ V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<img alt="../_images/ac68040436cc8d7c543803d8c51e92eaea03adc508e0338828d1c557217fbfbd.png" src="../_images/ac68040436cc8d7c543803d8c51e92eaea03adc508e0338828d1c557217fbfbd.png" />
-</div>
 </div>
 </section>
 <section id="gaussian">
@@ -817,9 +794,6 @@ V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<img alt="../_images/4a316d589a8344c56ce628d3392bae25f29b62b96ecc6c4175d0538ba8787cc9.png" src="../_images/4a316d589a8344c56ce628d3392bae25f29b62b96ecc6c4175d0538ba8787cc9.png" />
-</div>
 </div>
 <section id="exact-vs-sampled-probability-distributions">
 <h2>Exact vs sampled probability distributions<a class="headerlink" href="#exact-vs-sampled-probability-distributions" title="Permalink to this heading">#</a></h2>
@@ -830,43 +804,47 @@ V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">poisson</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
 
-<span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">step</span>
+<span class="c1"># Define range and step size</span>
+<span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span>
+<span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">step</span>
 
+<span class="c1"># Generate x values and compute normal distribution</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="n">px</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Standard normal PDF</span>
 
-<span class="n">px</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="c1"># Check normalization</span>
+<span class="n">normalization</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">px</span> <span class="o">*</span> <span class="n">dx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Normalization:&#39;</span><span class="p">,</span> <span class="n">normalization</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;normalization&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">px</span><span class="o">*</span><span class="n">dx</span><span class="p">))</span>
+<span class="c1"># Generate random samples</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Increased sample size for better histogram resolution</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># Create the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>  <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Sampled mean=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, var=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">);</span>
+<span class="c1"># Histogram of sampled data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Sampled: mean=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">, var=</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
+<span class="c1"># Plot theoretical normal distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">px</span><span class="p">,</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact: mean=0, var=1&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">px</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Exact mean=0, var=1&#39;</span><span class="p">)</span>
+<span class="c1"># Formatting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Comparison of Sampled Data with Normal Distribution&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$p(x)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">poisson</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmax</span><span class="o">-</span><span class="n">xmin</span><span class="p">)</span><span class="o">/</span><span class="n">step</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">px</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;xmax&#39; is not defined
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 </section>
@@ -1195,8 +1173,10 @@ p=0.0001, 0.001, 0.01, 0.1. You can use  subplot functionality to make a pretty 
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Random variables</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-random-variables">Introducing random variables</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers-in-python">Random numbers in python</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-a-random-variable"><strong>Probability Distribution of a Random Variable</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#histogramming">Histogramming</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-a-random-variable"><strong>Probability Distribution of a Random Variable</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histogramming">Histogramming</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation"><strong>Expectation</strong></a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (Fluctuation)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial">Binomial</a></li>

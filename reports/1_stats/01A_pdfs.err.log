@@ -15,36 +15,20 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-from scipy.stats import binom, norm, poisson
 
-dx = (xmax-xmin)/step
+X = np.random.rand(50)
 
-x = np.linspace(xmin, xmax, step)
-
-px = norm.pdf(x)
-
-print('normalization', np.sum(px*dx))
-
-r = np.random.randn(100)
-
-plt.hist(r,  density=True, label=f'Sampled mean={r.mean():.2f}, var={r.var():.2f}');
-
-
-plt.plot(x, px,'k', label='Exact mean=0, var=1')
-
-plt.legend(loc=2)
-plt.ylabel('$p(x)$')
-plt.xlabel('$x$')
+print(X)
+plt.plot(X, '-o')
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[6], line 3[0m
-[1;32m      1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01mstats[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m binom, norm, poisson
-[0;32m----> 3[0m dx [38;5;241m=[39m ([43mxmax[49m[38;5;241m-[39mxmin)[38;5;241m/[39mstep
-[1;32m      5[0m x [38;5;241m=[39m np[38;5;241m.[39mlinspace(xmin, xmax, step)
-[1;32m      7[0m px [38;5;241m=[39m norm[38;5;241m.[39mpdf(x)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m X [38;5;241m=[39m [43mnp[49m[38;5;241m.[39mrandom[38;5;241m.[39mrand([38;5;241m50[39m)
+[1;32m      3[0m [38;5;28mprint[39m(X)
+[1;32m      4[0m plt[38;5;241m.[39mplot(X, [38;5;124m'[39m[38;5;124m-o[39m[38;5;124m'[39m)
 
-[0;31mNameError[0m: name 'xmax' is not defined
+[0;31mNameError[0m: name 'np' is not defined
 
