@@ -1,0 +1,65 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Create a single figure for normalized x/N plots
+fig, axes = plt.subplots(1, 2, figsize=(12, 5), sharey=True)
+
+# Define more N values for smoother visualization
+N_values = [10, 50, 100, 200]
+
+# Colors for different N values
+colors = ["blue", "green", "red", "purple"]
+
+# Plot for unbiased and biased coins in two separate subplots
+for i, N in enumerate(N_values):
+    x_vals = x_values(N)
+    x_norm = x_vals / N  # Normalize x by N
+
+    # Compute probabilities
+    P_unbiased = [P_x(N, x, p_plus_unbiased) for x in x_vals]
+    P_biased = [P_x(N, x, p_plus_biased) for x in x_vals]
+
+    # Plot lines
+    axes[0].plot(x_norm, P_unbiased, marker="o", linestyle="-", label=f"N={N}", color=colors[i])
+    axes[1].plot(x_norm, P_biased, marker="o", linestyle="-", label=f"N={N}", color=colors[i])
+
+# Titles and labels
+axes[0].set_title(f"Unbiased Coin ($p_+$ = {p_plus_unbiased})")
+axes[0].set_xlabel("$x/N$")
+axes[0].set_ylabel("$P(x)$")
+axes[0].legend()
+
+axes[1].set_title(f"Biased Coin ($p_+$ = {p_plus_biased})")
+axes[1].set_xlabel("$x/N$")
+axes[1].legend()
+
+plt.tight_layout()
+plt.show()
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[5], line 2[0m
+[1;32m      1[0m [38;5;66;03m# Create a single figure for normalized x/N plots[39;00m
+[0;32m----> 2[0m fig, axes [38;5;241m=[39m [43mplt[49m[38;5;241m.[39msubplots([38;5;241m1[39m, [38;5;241m2[39m, figsize[38;5;241m=[39m([38;5;241m12[39m, [38;5;241m5[39m), sharey[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m      4[0m [38;5;66;03m# Define more N values for smoother visualization[39;00m
+[1;32m      5[0m N_values [38;5;241m=[39m [[38;5;241m10[39m, [38;5;241m50[39m, [38;5;241m100[39m, [38;5;241m200[39m]
+
+[0;31mNameError[0m: name 'plt' is not defined
+
