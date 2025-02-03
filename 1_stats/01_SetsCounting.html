@@ -654,7 +654,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f7d48709df0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f965855ddf0&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -673,7 +673,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f7d483901f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f96584a21f0&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -692,7 +692,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f7d4837fd00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f9658491e20&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -960,24 +960,22 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 <h2>Random walk<a class="headerlink" href="#random-walk" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Tossing a coin a few times generates a random sequence of outcomes e.g HTHTTT.</p></li>
-<li><p>Probability of landing H vs T for a fair coin or unbiased diffusing molecule jumping right vs left is <span class="math notranslate nohighlight">\(p_{+} = p_{-1} = 1/2\)</span>. Therefore, the probability of any <span class="math notranslate nohighlight">\(N\)</span>-long sequence is always equal to <span class="math notranslate nohighlight">\(\theta^N=2^{-N}\)</span>.</p></li>
-<li><p>A more interesting question is finding the probability of having <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right out of <span class="math notranslate nohighlight">\(N\)</span> tosses. For a fair coin, this is the same question as finding the number of combinations of <span class="math notranslate nohighlight">\(N_{+}\)</span> right steps out of <span class="math notranslate nohighlight">\(N\)</span> tosses:</p></li>
+<li><p>Probability of landing H vs T for a fair coin or unbiased diffusing molecule jumping right vs left is <span class="math notranslate nohighlight">\(p_{+} = p_{-1} = 1/2\)</span>. Therefore, the probability of any <span class="math notranslate nohighlight">\(N\)</span>-long sequence is always equal to <span class="math notranslate nohighlight">\(2^{-N}\)</span>.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[P(N_{+}) = \frac{N!}{N_{-}! N_{+}!} \cdot \Big(\frac{1}{2}\Big)^N\]</div>
+<p><strong>Probability of <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the righ</strong></p>
 <ul class="simple">
-<li><p>More generally, the probability of taking <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right after <span class="math notranslate nohighlight">\(N\)</span> coin tosses with a biased coin that lands right with probability <span class="math notranslate nohighlight">\(p_{+}\)</span> is given by:</p></li>
+<li><p>More generally, the probability of taking <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right after <span class="math notranslate nohighlight">\(N\)</span> coin tosses with a biased coin that lands right with probability <span class="math notranslate nohighlight">\(p_{+}\)</span> on heads is given by:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[P(N_{+}) = \frac{N!}{N_{-}! N_{+}!} \cdot p_{-}^{N_{+}}  p_{+}^{N_{-}}\]</div>
-<p><strong>Probability of displacement from origin</strong></p>
+\[P(N_{+}| N, p_{+}) = \frac{N!}{N_{-}! N_{+}!} \cdot p_{-}^{N_{+}}  p_{+}^{N_{-}}\]</div>
+<p><strong>Probability of x step net displacement from the origin</strong></p>
 <ul class="simple">
 <li><p>A molecule that starts at 0 and moves via consecutive jumps in the left vs right direction with probabilities <span class="math notranslate nohighlight">\(p_{+}\)</span> and <span class="math notranslate nohighlight">\(p_{-}=1-p_{+}\)</span>.</p></li>
 <li><p>An interesting question for diffusion is to compute the average displacement of the molecule relative to the origin <span class="math notranslate nohighlight">\(x = N_{+}-N_{-}\)</span></p></li>
 <li><p>We can rewrite probability in terms of net displacement <span class="math notranslate nohighlight">\(x = N_{+} - (N-N_{+})\)</span> or <span class="math notranslate nohighlight">\(N_{+} = \frac{x+N}{2}\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[P(x|N, f_{+}) = \frac{ N!}{ \Big(\frac{N-x}{2}\Big)! \Big(\frac{N+x}{2}\Big)!} \cdot p_{+}^{(N+x)/2} \cdot (1-p_{+})^{(N-x)/2}\]</div>
+\[P(x|N, p_{+}) = \frac{ N!}{ \Big(\frac{N-x}{2}\Big)! \Big(\frac{N+x}{2}\Big)!} \cdot p_{+}^{(N+x)/2} \cdot (1-p_{+})^{(N-x)/2}\]</div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1057,19 +1055,15 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 \[\boxed{N! \approx N^N e^{-N} \sqrt{2\pi N}}\]</div>
 </div>
 <p><strong>Applying Stirling Approximation to the Binomial</strong></p>
-<p>Given that: <span class="math notranslate nohighlight">\(N = N_{+} + N_{-}\)</span></p>
-<p>Applying Stirling’s approximation:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{N!}{N_{+}! \cdot N_{-}!} \approx \frac{N^N e^{-N}}{N_{+}^{N_{+}} e^{-N_{+}} \cdot N_{-}^{N_{-}} e^{-N_{-}}} =\frac{N^N } {N_{+}^{N_{+}} \cdot N_{-}^{N_{-}} }
-\]</div>
-<p>Taking the logarithm:</p>
+<ul class="simple">
+<li><p>Given that: <span class="math notranslate nohighlight">\(N = N_{+} + N_{-}\)</span> and applying Stirling’s approximation to combinatorial factors we get</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 \log\frac{N!}{N_{+}! \cdot N_{-}!} \approx N \log N -N_{+} \log N_{+} - N_{-} \log N_{-} 
 \]</div>
 <p><strong>Discovering Entropy</strong></p>
-<p>Rewriting in terms of fractions the log of Binomial leads us to a very interesting quantity</p>
+<p>Rewriting in terms of fractions of steps the log of Binomial leads us to a very interesting quantity</p>
 <div class="math notranslate nohighlight">
 \[
 = N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f) 
@@ -1109,14 +1103,23 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 </details>
 </div>
 <p><strong>Discovering Eenergy</strong></p>
-<p>Now, taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on <span class="math notranslate nohighlight">\(f_{\pm}\)</span></p>
+<ul class="simple">
+<li><p>Taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on <span class="math notranslate nohighlight">\(f_{\pm}\)</span></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
-\log \Big[ p_{+}^{(N+x)/2} \cdot p_{-}^{(N-x)/2} \Big] = - \frac{N}{2}\Big [ \log ( p_{+} p_{-}) + \bar{x} \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon
+\log \Big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \Big] = - N [ f_{+}log p_{+}+f_{-}log p_{-}] = -N \epsilon
 \]</div>
 <ul class="simple">
-<li><p>Where <span class="math notranslate nohighlight">\(\bar{x}=\frac{x}{N}\)</span> is the displacement to right normalized by <span class="math notranslate nohighlight">\(N\)</span></p></li>
-<li><p>Notice that deviations from the expected fraction of right/left steps contribute exponentially to the probability. In statistical mechanics, such terms often appear in Boltzmann-like distributions, indicating that rare deviations (large <span class="math notranslate nohighlight">\(x\)</span>) are exponentially suppressed.</p></li>
+<li><p>Let us also write in terms of <span class="math notranslate nohighlight">\(\bar{x}=\frac{x}{N}\)</span> which the displacement of molecule to the right normalized by <span class="math notranslate nohighlight">\(N\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\log \Big[ p_{+}^{(N+x)/2} \cdot p_{-}^{(N-x)/2} \Big] = - N\Big [ \frac{1}{2}\log ( p_{+} p_{-}) + \frac{1}{2} \bar{x} \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon
+\]</div>
+<ul class="simple">
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} (\log p_{+} + \log p_{-})\)</span> is a <strong>baseline</strong> energy-like term.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{x}{2N} (\log p_{+} - \log p_{-})\)</span> represents the <strong>bias</strong> introduced by the displacement $x<span class="math notranslate nohighlight">\(, tilting the distribution towards \)</span> p_+<span class="math notranslate nohighlight">\( or \)</span>p_- $.</p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Large Deviation Theorem (LDT)</strong></p>
