@@ -257,6 +257,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/rw-lab/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random walk simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/InverseTransform.html">The Inverse Transform of RVs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/03_Diffusion.html">Diffusion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/04_Entropy.html">Entropy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
@@ -579,6 +580,7 @@ The number of steps to the right (or left) of a 1D random walker results in a bi
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 
@@ -588,23 +590,17 @@ The number of steps to the right (or left) of a 1D random walker results in a bi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.02159147 0.11604309 0.58802574 0.02722702 0.63678629 0.79617268
- 0.62060582 0.93830646 0.49007641 0.0747278  0.10895396 0.68645493
- 0.27401868 0.99543584 0.26048178 0.4367365  0.22321026 0.80104417
- 0.65589765 0.27242703 0.24507207 0.69931002 0.68296461 0.55935657
- 0.55263152 0.09512347 0.48416709 0.853838   0.81848824 0.75065319]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.43042832 0.36451208 0.61007018 0.45701064 0.0116301  0.04008234
+ 0.38992676 0.60884437 0.76528221 0.59016326 0.43077669 0.19797315
+ 0.8549991  0.535953   0.33412223 0.20078657 0.31561231 0.35515639
+ 0.82338079 0.9710521  0.10844608 0.72267301 0.97085271 0.53412656
+ 0.31660854 0.96453198 0.81714542 0.36562304 0.88503822 0.23674155]
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fba81bd9a60&gt;]
 </pre></div>
 </div>
+<img alt="../_images/16a7079400da84a2abd50e5691c5ddec148ce0e3fb356ee558f98c34b776fd52.png" src="../_images/16a7079400da84a2abd50e5691c5ddec148ce0e3fb356ee558f98c34b776fd52.png" />
 </div>
 </div>
 </section>
@@ -631,6 +627,20 @@ The number of steps to the right (or left) of a 1D random walker results in a bi
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2 0 1 1 2 0 3 4 2 1 2 1 2 0 1 1 2 2 0 3] [0.   0.05 0.1  0.15 0.2  0.25 0.3  0.35 0.4  0.45 0.5  0.55 0.6  0.65
+ 0.7  0.75 0.8  0.85 0.9  0.95 1.  ]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.69486281, 1.04229421, 0.3474314 , 2.43201982, 1.04229421,
+        0.69486281, 1.04229421, 0.69486281, 1.04229421, 1.38972561]),
+ array([0.0116301, 0.1075723, 0.2035145, 0.2994567, 0.3953989, 0.4913411,
+        0.5872833, 0.6832255, 0.7791677, 0.8751099, 0.9710521]),
+ &lt;BarContainer object of 10 artists&gt;)
+</pre></div>
+</div>
+<img alt="../_images/159e6d6f53cb59f973caa7a1e0500d12081f28f23842afc7082962a714df4918.png" src="../_images/159e6d6f53cb59f973caa7a1e0500d12081f28f23842afc7082962a714df4918.png" />
 </div>
 </div>
 </section>
@@ -716,6 +726,9 @@ V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2 = \sigma^2
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<img alt="../_images/6a126b5d39ddabb76c79739b13dbc98ae36202a506c0b026af697abb3933d768.png" src="../_images/6a126b5d39ddabb76c79739b13dbc98ae36202a506c0b026af697abb3933d768.png" />
+</div>
 </div>
 </section>
 </section>
@@ -758,6 +771,9 @@ V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2 = \sigma^2
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<img alt="../_images/d274b77a7562cd7901e55223c7eecc4445b4c3297373ef6eb259859198cb97e0.png" src="../_images/d274b77a7562cd7901e55223c7eecc4445b4c3297373ef6eb259859198cb97e0.png" />
+</div>
 </div>
 </section>
 <section id="sum-of-two-random-variables">
@@ -906,6 +922,12 @@ M_n \to \mu
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fba81994730&gt;
+</pre></div>
+</div>
+<img alt="../_images/0e317d0d1d268389f25e9162338ba8129ff4980f26b7a3da6236005e18e3a2c4.png" src="../_images/0e317d0d1d268389f25e9162338ba8129ff4980f26b7a3da6236005e18e3a2c4.png" />
+</div>
 </div>
 </section>
 <section id="the-central-limit-theorem-clt">
@@ -956,6 +978,12 @@ M_n \to \mu
 </div>
 </div>
 </details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fba6470e850&gt;
+</pre></div>
+</div>
+<img alt="../_images/708d18be7c1b1353cbaab880fc01e0654d1e33832ab59d77ffce023f9bbe962d.png" src="../_images/708d18be7c1b1353cbaab880fc01e0654d1e33832ab59d77ffce023f9bbe962d.png" />
+</div>
 </div>
 <section id="law-of-large-numbers-and-random-walk">
 <h2>Law of large numbers and random walk<a class="headerlink" href="#law-of-large-numbers-and-random-walk" title="Permalink to this heading">#</a></h2>
@@ -1017,6 +1045,11 @@ M_n \to \mu
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>normalization 0.998999442013342
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1032,6 +1065,12 @@ M_n \to \mu
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;$x$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/6dec4f8923e4e525d41e0d00f6883b8c3e85985f64702701f1f9b8c5fa1f69c9.png" src="../_images/6dec4f8923e4e525d41e0d00f6883b8c3e85985f64702701f1f9b8c5fa1f69c9.png" />
 </div>
 </div>
 </section>
