@@ -185,6 +185,13 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
+
+
+
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="02_RandWalk.html">Random walk</a></li>
 </ul>
 </li>
@@ -497,10 +504,15 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Random variables</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-random-variable">Probability distribution of random variable</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (fluctuation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-two-random-variables">Sum of two random variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-random-variables">Introducing random variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-a-random-variable"><strong>Probability Distribution of a Random Variable</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation"><strong>Expectation</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (Fluctuation)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-two-random-variables">Sum of Two Random Variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-n-random-variables">Sumս of N Random Variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-lln">Law of Large Numbers (LLN)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers-in-python">Random numbers in python</a></li>
@@ -531,6 +543,19 @@ document.write(`
                   
   <section id="random-variables">
 <h1>Random variables<a class="headerlink" href="#random-variables" title="Permalink to this heading">#</a></h1>
+<div class="admonition-what-you-need-to-know admonition">
+<p class="admonition-title">What you need to know</p>
+<ul class="simple">
+<li><p>Summing independent random variables results in another random variable called <strong>sumple sum</strong>. The mean of the sample sum is different from the population mean or expectation which is an exact quantity we want to approximate by sampling.</p></li>
+<li><p>The <strong>Law of Large Numbers</strong> is a principle that states that as the number <span class="math notranslate nohighlight">\(N\)</span>, the sample mean approaches the population mean with a standard deviation falling off as <span class="math notranslate nohighlight">\(N^{-1/2}\)</span></p></li>
+<li><p>The <strong>Central Limit Theorem (CLT)</strong> tells us that summing independent and identically distributed random variables with well-defined means and variances results in Gaussian distribution regardless of the nature of a random variable.</p></li>
+<li><p>A model of <strong>random walk</strong> describes the erratic, unpredictable motion of atoms and molecules, providing a fundamental model for diffusion processes and molecular motion in fluids.
+The number of steps to the right (or left) of a 1D random walker results in a binomial probability distribution. Following CLT binomial distribution in the large N limit can be shown to be well approximated by gaussian with the same mean and variance.</p></li>
+</ul>
+</div>
+</section>
+<section id="introducing-random-variables">
+<h1>Introducing random variables<a class="headerlink" href="#introducing-random-variables" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p><strong>A random variable X</strong> is a variable whose value depends on the outcomes of a random phenomenon. <span class="math notranslate nohighlight">\(X(\omega)\)</span> is a function from possible outcomes of a sample space <span class="math notranslate nohighlight">\(\omega \in \Omega\)</span>.</p>
 <ul>
@@ -545,57 +570,193 @@ document.write(`
 </li>
 </ul>
 </section>
-<section id="probability-distribution-of-random-variable">
-<h1>Probability distribution of random variable<a class="headerlink" href="#probability-distribution-of-random-variable" title="Permalink to this heading">#</a></h1>
+<section id="probability-distribution-of-a-random-variable">
+<h1><strong>Probability Distribution of a Random Variable</strong><a class="headerlink" href="#probability-distribution-of-a-random-variable" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>For any random variable X, we are interested in finding probability distribution over possible values <span class="math notranslate nohighlight">\(x\)</span> that <span class="math notranslate nohighlight">\(X\)</span> takes: <span class="math notranslate nohighlight">\(p_X(x)\)</span>.</p></li>
-<li><p>Note the very subtle but crucial difference between <span class="math notranslate nohighlight">\(x\)</span> (1-6 for a die) and a random variable <span class="math notranslate nohighlight">\(X\)</span>, which generates numbers <span class="math notranslate nohighlight">\(x\)</span> according to distributions <span class="math notranslate nohighlight">\(p(x)\)</span></p></li>
+<li><p>For any random variable <span class="math notranslate nohighlight">\( X \)</span>, we are interested in finding the probability distribution over its possible values <span class="math notranslate nohighlight">\( x \)</span>, denoted as <span class="math notranslate nohighlight">\( p_X(x) \)</span>.</p></li>
+<li><p>It is important to distinguish between:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\( x \)</span>, which represents a specific value the variable can take (e.g., <span class="math notranslate nohighlight">\( 1,2, \dots, 6 \)</span> for a die).</p></li>
+<li><p><span class="math notranslate nohighlight">\( X \)</span>, which is the random variable itself, generating values <span class="math notranslate nohighlight">\( x \)</span> according to the probability distribution <span class="math notranslate nohighlight">\( p(x) \)</span>.</p></li>
 </ul>
+</li>
+<li></li>
+</ul>
+</section>
 <section id="expectation">
-<h2>Expectation<a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h2>
+<h1><strong>Expectation</strong><a class="headerlink" href="#expectation" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(E[x]\)</span> is the theoretical value of the mean as opposed to the sample mean which we compute in simulations. For instance, consider the difference between the average height of people calculated from a small sample of cities versus that from the entire world population.  Will see that with enough sampling the sample mean approaches its expectation. expectation can apply to 1 (normalization) to variable (mean) or any function of variable, e.g mean subtracted square (variance).</p></li>
+<li><p>The expectation <span class="math notranslate nohighlight">\( E[x] \)</span> represents the theoretical mean, distinguishing it from the sample mean computed in simulations.</p></li>
+<li><p>For instance, consider the difference between:</p>
+<ul>
+<li><p>The average height of people computed from a small sample of cities.</p></li>
+<li><p>The true mean height of the entire world population.</p></li>
+</ul>
+</li>
+<li><p>As the sample size increases, the sample mean converges to the expectation.</p></li>
+<li><p>Expectation can apply to:</p>
+<ul>
+<li><p>The variable itself (mean).</p></li>
+<li><p>Any function of the variable (e.g., squared deviation for variance).</p></li>
+</ul>
+</li>
 </ul>
 <div class="math notranslate nohighlight">
-\[E[1] = \int p(x)dx = 1\]</div>
+\[
+E[x] = \int x \cdot p(x)dx = \mu
+\]</div>
 <div class="math notranslate nohighlight">
-\[E[x]  = \int x \cdot p(x)dx\]</div>
-<div class="math notranslate nohighlight">
-\[E[f(x)] = \int f(x) \cdot p(x)dx\]</div>
+\[
+E[f(x)] = \int f(x) \cdot p(x)dx
+\]</div>
+<ul class="simple">
+<li><p>We often use shorthand notation for mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+</ul>
 </section>
 <section id="variance-fluctuation">
-<h2>Variance (fluctuation)<a class="headerlink" href="#variance-fluctuation" title="Permalink to this heading">#</a></h2>
+<h1>Variance (Fluctuation)<a class="headerlink" href="#variance-fluctuation" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>Variance is an expectation of squared deviation of x from expectation, which characterizes the spread in values of x.</p></li>
+<li><p>Variance measures the expected squared deviation from the mean, quantifying the spread in values of <span class="math notranslate nohighlight">\( x \)</span>.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[V[x] = E[(x-E[x])^2 ] = E[x^2]-E[x]^2\]</div>
+\[
+V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2 = \sigma^2
+\]</div>
+<ul class="simple">
+<li><p>We often use shorthand notation for variance <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+</ul>
 </section>
 <section id="sum-of-two-random-variables">
-<h2>Sum of two random variables<a class="headerlink" href="#sum-of-two-random-variables" title="Permalink to this heading">#</a></h2>
+<h1>Sum of Two Random Variables<a class="headerlink" href="#sum-of-two-random-variables" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p>Consider sum of two random variables, suppose these are sum of numbers from two dies or sum of two coin flips. Obviously sums of random variables are random variables themselves.</p></li>
+<li><p>Consider the sum of two random variables, such as:</p>
+<ul>
+<li><p>The sum of numbers obtained from rolling two dice.</p></li>
+<li><p>The sum of two coin flips (e.g., heads = 1, tails = 0).</p></li>
+</ul>
+</li>
+<li><p>The sum of random variables is itself a random variable:
+Your equations are mostly correct but need minor corrections for clarity and accuracy. Here’s the cleaned-up and properly formatted version in LaTeX:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[X=X_1 +X_2\]</div>
+\[
+X = X_1 + X_2
+\]</div>
 <ul class="simple">
-<li><p>Expectation is always a linear operator as you can verify by plugging in definition and using linear property of definite integrals.</p></li>
+<li><p>Expectation is always a <strong>linear operator</strong>, which follows from the definition of expectation and the linearity of integration:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[E[X_1+X_2] = E[X_1]+E[X_2]\]</div>
+\[
+E[X_1 + X_2] = E[X_1] + E[X_2]
+\]</div>
 <ul class="simple">
-<li><p>We see that Variance, in general, is not a linear operator.</p></li>
+<li><p>However, variance is <strong>not</strong> generally a linear operator:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[V[X_1+X_2] = E[(X_1+X_2-E[X_1+X_2])^2 ] = E[(X_1+X_2-E[X_1]-[X_2])^2 ]\]</div>
+\[
+V[X_1 + X_2] = E\left[(X_1 + X_2 - E[X_1 + X_2])^2\right] 
+\]</div>
+<p>Expanding the expectation term:</p>
+<div class="math notranslate nohighlight">
+\[
+V[X_1 + X_2] = E\left[(X_1 - E[X_1] + X_2 - E[X_2])^2\right]
+\]</div>
 <ul class="simple">
-<li><p>Denoting mean subtracting variables <span class="math notranslate nohighlight">\(Y_i=X_i-E[X_i]\)</span> we can show this by expanding square in the expectation expression.</p></li>
+<li><p>Defining the <strong>mean-subtracted variables</strong>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[E[(Y_1+Y_2)^2] = E[Y^2_1] + E[Y^2_2] + 2E[Y_1 Y_2] = V[X_1]+V[X_2]+2E[Y_1 Y_2]\]</div>
+\[
+Y_i = X_i - E[X_i]
+\]</div>
+<p>we rewrite the variance expression in terms of <span class="math notranslate nohighlight">\(Y_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+E[(Y_1 + Y_2)^2] = E[Y_1^2] + E[Y_2^2] + 2E[Y_1 Y_2]
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\( V[X_i] = E[Y_i^2] \)</span>, this simplifies to:</p>
+<div class="math notranslate nohighlight">
+\[
+V[X_1 + X_2] = V[X_1] + V[X_2] + 2E[Y_1 Y_2]
+\]</div>
 <ul class="simple">
-<li><p>We will see in the next section that for independent random variables the last cross terms is zero. This property has huge significance for statistical mechanics, statistics and sciences in general</p></li>
+<li><p>In the special case where <span class="math notranslate nohighlight">\(X_1 \)</span> and <span class="math notranslate nohighlight">\(X_2 \)</span> are <strong>independent</strong>, the cross-term vanishes:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+E[Y_1 Y_2] = E[(X_1 - E[X_1])(X_2 - E[X_2])] = 0
+\]</div>
+<p>Thus, for independent variables:</p>
+<div class="math notranslate nohighlight">
+\[
+V[X_1 + X_2] = V[X_1] + V[X_2]
+\]</div>
+<p>This result is <strong>fundamental</strong> in statistical mechanics, probability theory, and the sciences, as it explains why variances add for independent random variables.</p>
+</section>
+<section id="sum-of-n-random-variables">
+<h1>Sumս of N Random Variables<a class="headerlink" href="#sum-of-n-random-variables" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Consider a sequence of <strong>independent and identically distributed (i.i.d.)</strong> random variables, <span class="math notranslate nohighlight">\(X_1, X_2, \ldots\)</span>. Examples include coin tosses, the random displacement of a molecule, or the random placement of a molecule in the left vs. right corner of a box. Being identically distributed means each term has a well-defined <strong>mean</strong> <span class="math notranslate nohighlight">\(\mu\)</span> and <strong>variance</strong> <span class="math notranslate nohighlight">\(\sigma^2\)</span>:</p></li>
+<li><p>The sum of <span class="math notranslate nohighlight">\(n\)</span> random variables, denoted by <span class="math notranslate nohighlight">\(S_n\)</span>, is called a <strong>sample sum</strong>, and average of sum <span class="math notranslate nohighlight">\(M_n = \frac{1}{n}S_n\)</span> is called a <strong>sample mean</strong>.</p></li>
+<li><p>Our goal is to understand how these summed or aggregated quantities behave as a function of sample size.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S_n = \sum_{i=1}^n X_i\]</div>
+<ul class="simple">
+<li><p>Expectation is always a linear operator. Variance in general is not. But for  <strong>i.i.d.</strong> random variables, variance becomes linear operator. To show this we denote mean subtracted random variable as <span class="math notranslate nohighlight">\(Y_i = X_i - \mu\)</span> which  has zero expectation <span class="math notranslate nohighlight">\(E[Y_i] = 0\)</span></p></li>
+<li><p>Because of the independence of random variables all cross-terms are zero <span class="math notranslate nohighlight">\(E[Y_i Y_j] = 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span> and all the self-terms <span class="math notranslate nohighlight">\(i=j\)</span> are equal to variance <span class="math notranslate nohighlight">\(E[Y^2_i] = V[X_1]=\sigma^2\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E(S_n) = \sum_{i=1}^n E(X_i) = n\mu\]</div>
+<div class="math notranslate nohighlight">
+\[V(S_n) = E[(S_n - n\mu)^2] =\sum_i \sum_j E[Y_i Y_j] = \sum_i E[Y^2_i] = n\sigma^2\]</div>
+</section>
+<section id="law-of-large-numbers-lln">
+<h1>Law of Large Numbers (LLN)<a class="headerlink" href="#law-of-large-numbers-lln" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Applying previous result to sample mean <span class="math notranslate nohighlight">\(M_n=\frac{1}{n}S_n\)</span> we arrive at the <strong>Law of Large Numbers (LLN)</strong> which states that as the number of independent and identically distributed (i.i.d.) random variables increases, their sample mean converges to the true expected value.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+M_n \to \mu
+\]</div>
+<div class="math notranslate nohighlight">
+\[V[M_n] \to \sigma^2 / n\]</div>
+<p><strong>Implication:</strong></p>
+<ul class="simple">
+<li><p>The sample mean provides a reliable estimate of <span class="math notranslate nohighlight">\(\mu\)</span> for large <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>The variance of <span class="math notranslate nohighlight">\(M_n\)</span> decreases as , meaning fluctuations shrink as <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>.</p></li>
+<li><p>This justifies ensemble averaging in statistical mechanics, ensuring macroscopic observables (e.g., temperature, pressure) are stable and predictable.</p></li>
+</ul>
+</section>
+<section id="the-central-limit-theorem-clt">
+<h1>The Central Limit Theorem  (CLT)<a class="headerlink" href="#the-central-limit-theorem-clt" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Central Limit Theorem</strong> asserts that the probability distribution function or <strong>PDF</strong> of sum of random variables becomes gaussian distribution with mean <span class="math notranslate nohighlight">\(n\mu\)</span> and <span class="math notranslate nohighlight">\(n\sigma^2\)</span>. Note that CLT is based on assumption that the <strong>mean and variance</strong>, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <strong>are finite!</strong>. Thus, CLT does not hold for certain power-law distributed RVs.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S_n = X_1 +X_2+...+X_n \rightarrow N(n\mu, n\sigma^2)\]</div>
+<div class="math notranslate nohighlight">
+\[p(s) = \frac{1}{(2\pi  n\sigma^2)^{1/2}}e^{-\frac{(s-n\mu)^2}{2 n\sigma^2}}\]</div>
+<ul class="simple">
+<li><p>If we subtract mean and scale the sample sum by its standard deviation we will get a standard normal distribution $.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z_n = \frac{S_n - n\mu}{\sqrt{n}\sigma} \rightarrow N(0, 1)\]</div>
+<section id="law-of-large-numbers-and-random-walk">
+<h2>Law of large numbers and random walk<a class="headerlink" href="#law-of-large-numbers-and-random-walk" title="Permalink to this heading">#</a></h2>
+<p>Applying the formulas to random walk model we get mean and variance for single step</p>
+<div class="math notranslate nohighlight">
+\[E[X_1] = \theta \cdot 1 + (1-\theta) \cdot (-1) = 2\theta-1\]</div>
+<div class="math notranslate nohighlight">
+\[V[X_1] = E[X^2_1] -  E[X_1]^2 = \theta \cdot 1^2+ (1-\theta) (-1)^2 - (2\theta-1)^2 = 4 \theta(1-\theta)\]</div>
+<p>Since steps of a random walker are independent we can compute the variance of a total displacement by multiplying mean and varaince of a single step by N</p>
+<div class="math notranslate nohighlight">
+\[E[x]=N(2\theta -1)\]</div>
+<div class="math notranslate nohighlight">
+\[V[x]=N\bar{\sigma^2_1} = 4N\theta (1-\theta)\]</div>
+<p>The variance of the mean <span class="math notranslate nohighlight">\(\bar{x} = x/N\)</span> would then be:</p>
+<div class="math notranslate nohighlight">
+\[V[\bar{x}] = \frac{4\theta (1-\theta)}{N}\]</div>
 </section>
 </section>
 <section id="random-numbers-in-python">
@@ -619,11 +780,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.81672188 0.47088378 0.72993571 0.49900219 0.92407749 0.84886617
- 0.53074268 0.55592136 0.85973521 0.56518374 0.53599077 0.68280738
- 0.71575516 0.07835724 0.99929509 0.16988359 0.02732291 0.83343128
- 0.71200941 0.13022123 0.2951552  0.48109878 0.57679434 0.47421253
- 0.03135365 0.07933527 0.36096661 0.25796643 0.93654283 0.5817882 ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.20242028 0.66284989 0.21574164 0.57878804 0.60828734 0.85856653
+ 0.89464313 0.79924644 0.4353531  0.01258875 0.26932669 0.72906003
+ 0.9525659  0.43328723 0.28118968 0.0082216  0.62420925 0.2554504
+ 0.16954486 0.98847452 0.32052629 0.04194065 0.74531855 0.44198749
+ 0.6118547  0.74537813 0.04680094 0.47235732 0.42492622 0.67125416]
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
@@ -688,10 +849,10 @@ document.write(`
 <h1>Uniform<a class="headerlink" href="#uniform" title="Permalink to this heading">#</a></h1>
 <p><strong>Probability distribution</strong></p>
 <div class="math notranslate nohighlight">
-\[\begin{split}p(x| a, b)=\begin{cases}
-{\frac {1}{b-a}}&amp;\mathrm {for} \ a\leq x\leq b,\\[8pt]0&amp;\mathrm {for} \ x&lt;a\ \mathrm {or} \ x&gt;b
+\[p(x| a, b)=\begin{cases}
+{\frac {1}{b-a}}&amp;\mathrm {for} \ a\leq x\leq b,\$$8pt]0&amp;\mathrm {for} \ x&lt;a\ \mathrm {or} \ x&gt;b
 \end{cases}
-\end{split}\]</div>
+\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(E[x] = \frac{1}{2}(a+b)\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(V[x] = \frac{1}{12}(a-b)^2\)</span></p></li>
@@ -925,10 +1086,15 @@ p=0.0001, 0.001, 0.01, 0.1. You can use  subplot functionality to make a pretty 
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Random variables</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-random-variable">Probability distribution of random variable</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation">Expectation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (fluctuation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-two-random-variables">Sum of two random variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introducing-random-variables">Introducing random variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distribution-of-a-random-variable"><strong>Probability Distribution of a Random Variable</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#expectation"><strong>Expectation</strong></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-fluctuation">Variance (Fluctuation)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-two-random-variables">Sum of Two Random Variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sum-of-n-random-variables">Sumս of N Random Variables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-lln">Law of Large Numbers (LLN)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-and-random-walk">Law of large numbers and random walk</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-numbers-in-python">Random numbers in python</a></li>
