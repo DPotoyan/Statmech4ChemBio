@@ -653,7 +653,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f98cc636d00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fef3c149d00&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -672,7 +672,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f98cc34f1f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fef3c08f1f0&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -691,7 +691,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f98cc33fca0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fef3c07ed00&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -1037,8 +1037,7 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 </div>
 </div>
 <div class="important admonition">
-<p class="admonition-title">Stitrling’s approximation of N!</p>
-<p><strong>Stirling’s approximation</strong></p>
+<p class="admonition-title"><strong>Stitrling approximation of N!</strong></p>
 <ul class="simple">
 <li><p>This is the crude version of Stirling approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span></p></li>
 </ul>
@@ -1070,37 +1069,14 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 <p>Rewriting in terms of fractions the log of Binomial leads us to a very interesting quantity</p>
 <div class="math notranslate nohighlight">
 \[
-= N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s 
+= N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f) 
 \]</div>
 <p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(f_{+} = \frac{N_{+}}{N}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = \frac{N_{-}}{N}\)</span> are the fractions of steps going to the right and left, respectively. For large <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(f_{+} \approx p_{\pm}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f_{+} = \frac{N_{+}}{N}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = \frac{N_{-}}{N}\)</span> are the fractions of steps going to the right and left, respectively.</p></li>
+<li><p>For large <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(f_{+} \rightarrow p_{\pm}\)</span>. But for finate systems there will be fluctuations and the fractions are not equal to expected probabilities.</p></li>
 <li><p>A general expression will later be identified with entropy <span class="math notranslate nohighlight">\(s =  -\sum_i p_i \log p_i\)</span> where <span class="math notranslate nohighlight">\(p_i\)</span> would be probabiliteis of various microstates.</p></li>
 </ul>
-<p><strong>Discovering Eenergy</strong></p>
-<p>Now, taking the logarithm of the probability factor we get a term resembles an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on <span class="math notranslate nohighlight">\(f_{\pm}\)</span></p>
-<div class="math notranslate nohighlight">
-\[
-\log \Big[ p_{+}^{(N+x)/2} \cdot p_{-}^{(N-x)/2} \Big] = - \frac{N}{2}\Big [ \log ( p_{+} p_{-}) + \bar{x} \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon
-\]</div>
-<ul class="simple">
-<li><p>Where <span class="math notranslate nohighlight">\(\bar{x}=\frac{x}{N}\)</span> is the displacement to right normalized by <span class="math notranslate nohighlight">\(N\)</span></p></li>
-<li><p>Notice that deviations from the expected fraction of right/left steps contribute exponentially to the probability. In statistical mechanics, such terms often appear in Boltzmann-like distributions, indicating that rare deviations (large <span class="math notranslate nohighlight">\(x\)</span>) are exponentially suppressed.</p></li>
-</ul>
-<div class="important admonition">
-<p class="admonition-title"><strong>Large Deviation Theorem (LDT)</strong></p>
-<div class="math notranslate nohighlight">
-\[log P_{N} = N[s - \epsilon ]\]</div>
-<ul class="simple">
-<li><p>When there are <span class="math notranslate nohighlight">\(N\)</span> steps, molecules, or components, the probability distribution tends to concentrate in regions defined by the <strong>large deviation function</strong> <span class="math notranslate nohighlight">\(S(f)\)</span>.</p></li>
-<li><p>Fluctuations away from the minima of <span class="math notranslate nohighlight">\(S(f)\)</span> are exponentially suppressed, particularly for large <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[P_N (x) \sim e^{N I(p)}\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(I(p) = s(p)-\epsilon(p)\)</span> does not depend on the system size <span class="math notranslate nohighlight">\(N\)</span> and depends on microstate probabilities reflects competition between entropy (push towards greatest number of microstates) and energy (bias among microstates)</p></li>
-</ul>
-</div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1128,6 +1104,37 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 </div>
 </div>
 </details>
+</div>
+<p><strong>Discovering Eenergy</strong></p>
+<p>Now, taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on <span class="math notranslate nohighlight">\(f_{\pm}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\log \Big[ p_{+}^{(N+x)/2} \cdot p_{-}^{(N-x)/2} \Big] = - \frac{N}{2}\Big [ \log ( p_{+} p_{-}) + \bar{x} \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon
+\]</div>
+<ul class="simple">
+<li><p>Where <span class="math notranslate nohighlight">\(\bar{x}=\frac{x}{N}\)</span> is the displacement to right normalized by <span class="math notranslate nohighlight">\(N\)</span></p></li>
+<li><p>Notice that deviations from the expected fraction of right/left steps contribute exponentially to the probability. In statistical mechanics, such terms often appear in Boltzmann-like distributions, indicating that rare deviations (large <span class="math notranslate nohighlight">\(x\)</span>) are exponentially suppressed.</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title"><strong>Large Deviation Theorem (LDT)</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\log P_{N}(\bar{x}) \approx -N I(\bar{x}) 
+\]</div>
+<ul class="simple">
+<li><p>When there are <span class="math notranslate nohighlight">\( N \)</span> steps, molecules, or components, the probability distribution tends to concentrate in regions defined by the <strong>large deviation function</strong> <span class="math notranslate nohighlight">\( I(\bar{x}) \)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P_N (\bar{x}) \sim e^{-N I(\bar{x})}.
+\]</div>
+<ul class="simple">
+<li><p>The <strong>large deviation function</strong> combines both <strong>entropic</strong> and <strong>energetic</strong> components and determines how deviations of <span class="math notranslate nohighlight">\( f_+ \)</span> from <span class="math notranslate nohighlight">\( p_+ \)</span> are exponentially suppressed as <span class="math notranslate nohighlight">\( N \)</span> increases.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+I(f_+) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}.
+\]</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
