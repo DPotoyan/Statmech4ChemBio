@@ -192,7 +192,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="02_RandWalk.html">Random walk</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -258,8 +257,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/rw-lab/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random Walk Simulations</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random walk simulations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/03_Diffusion.html">Diffusion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/04_Entropy.html">Entropy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
@@ -962,6 +960,100 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 <div class="attention admonition">
 <p class="admonition-title"><strong>Exercise</strong></p>
 <p>Plot how a number of configurations resulting from portioning molecules of gas into two regions depends on the ratio of molecules in compartments</p>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Appendix A: Stitrling’s approximation of N!</p>
+<p><strong>Stirling’s approximation</strong></p>
+<ul class="simple">
+<li><p>This is the crude version of Stirling approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[logN! \approx \sum log N_i = \int log N dN\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{logN! \approx NlogN-N}\]</div>
+<div class="math notranslate nohighlight">
+\[\boxed{N! \approx N^N e^{-N}}\]</div>
+<ul class="simple">
+<li><p>A more accurate version is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\boxed{N! \approx N^N e^{-N} \sqrt{2\pi N}}\]</div>
+<p><strong>Applying Stirling approximation to the Binomial</strong></p>
+<div class="math notranslate nohighlight">
+\[N = N_1+N_2\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{N!}{N_1! \cdot N_2!} \approx \frac{N^N e^{-N}}{N_1^{N_1} e^{-N_1}\cdot N_2^{N_2} e^{-N_2}} =\frac{N^N } {N_1^{N_1} \cdot N_2^{N_2} }\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}log\frac{N!}{N_1! \cdot N_2!} \approx NlogN -N_1 log N_1 - N_2log N_2 = \\ = N \Big[ -\frac{N_1}{N} lo\frac {N_1}{N} - \frac{N_2}{N} log \frac{N_2}{N} \Big] = N[-p_1 log p_1 -p_2log p_2]\end{split}\]</div>
+<ul class="simple">
+<li><p>The expression <span class="math notranslate nohighlight">\(S =  \sum_i -p_i log p_i\)</span> will be identified with Entropy in later sections.</p></li>
+</ul>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Appendix B. Gaussian approximation to the Binomial Distribution in the large <span class="math notranslate nohighlight">\(N\)</span> limit.</p>
+<p>Binomial distribution for large values of <span class="math notranslate nohighlight">\(N\)</span> has a sharply peaked distribution around its maximum (most likely) value <span class="math notranslate nohighlight">\(\bar{n}\)</span>. This motivates us to seek a continuous approximation by Taylor expanding probability distribution around its max value <span class="math notranslate nohighlight">\(\Delta n = n-\bar{n}\)</span> and keeping up to quadratic terms.</p>
+<div class="math notranslate nohighlight">
+\[P_N(n) = \frac{N!}{n! (N-n)!} p^n (1-p)^{(N-n)}\]</div>
+<p>Thus from the onset we are aiming for a Gaussian distribution. The task then is to find coefficients and to then justify that third term of Taylor expansion is negligible compared to the second!</p>
+<div class="math notranslate nohighlight">
+\[logP(n) = logP(\bar{n}) + \frac{1}{2}B_2\Delta n^2 + O(\delta n^3)\]</div>
+<div class="math notranslate nohighlight">
+\[log P(n) = log N! - log n! - log(N-n)! + nlog(p) + (N-n)log(1-p)\]</div>
+<p>We evaluate derivative of <span class="math notranslate nohighlight">\(logn!\)</span> in the limit of <span class="math notranslate nohighlight">\(n\gg1\)</span> as:</p>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dn} log n! = \frac{log(n+1)! - log n!}{n+1-n} \approx log(n+1) \approx log(n)\]</div>
+<ul class="simple">
+<li><p>We could also arrive at the same result by using Stirling approximation <span class="math notranslate nohighlight">\(logN! \approx  NlogN -n\)</span></p></li>
+<li><p>Taking first derivative of Taylor expansion to Binomial we find the peak of the distribution around which we are making expansion:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dn}log P(n) \Big |_{n=\bar{n}} = - log n + log(n-n) + log(p)  -log(1-p)=0\]</div>
+<div class="math notranslate nohighlight">
+\[log \Big( \frac{N-n}{n} \frac{p}{1-p}\Big)=0\,\, \rightarrow \,\, \bar{n} = Np\]</div>
+<ul class="simple">
+<li><p>We recall that <span class="math notranslate nohighlight">\(\bar{n} = Np\)</span> is also mean of the binomial!</p></li>
+<li><p>Having found the peak of distribution and knowing first derivative we now proceed to compute the second derivative:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}B_2 = \frac{d^2}{d n^2} logP(n) \Big |_{n = \bar{n}} = \frac{d}{dn} log \Big( \frac{N-n}{n} \frac{p}{1-p}\Big) \\ = \Big( - \frac{1}{N-n}-\frac{1}{n} \Big) \Big |_{n = \bar{n}} = - \frac{1}{Npq}\end{split}\]</div>
+<ul class="simple">
+<li><p>While first derivative gave us the mean of binomial we notice that second derivative produces the variance <span class="math notranslate nohighlight">\(\sigma^2 = Npq\)</span></p></li>
+<li><p>Now all that remains to do is to plug  the coefficients into our approximated probability distribution and then normalize it. Why normalize? After all Binomial was already properly normalized.  But since we made approximation by leaving our some terms we have to re-normalize again!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(n) \approx P(\bar{n}) e^{-(n-\bar{n})^2/ 2Npq}\]</div>
+<ul class="simple">
+<li><p>Normalizing gaussian distribution is done via the following table integral</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\int^{+\infty}_{-\infty} e^{-ax^2} = \Big(\frac{\pi}{a} \Big)^{1/2}\]</div>
+<div class="math notranslate nohighlight">
+\[\int P(\bar{n}) e^{-(n-\bar{n})^2/ 2Npq} dn  = P(\bar{n}) (2\pi Npq)^{1/2}=1\]</div>
+<ul class="simple">
+<li><p>At last we have the normalized approximation to Binomial which is a guassian distribution arond mean!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(n) \approx \frac{1}{(2\pi Npq)^{1/2}} e^{-(n-\bar{n})^2/ 2Npq} = \frac{1}{(2\pi \sigma^2)^{1/2}}e^{(n-\mu)^2/2\sigma^2}\]</div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Appendix C. Deriving Poisson distribution from Binomial </p>
+<p><strong>Consider the limit of large <span class="math notranslate nohighlight">\(N\)</span> and small <span class="math notranslate nohighlight">\(p\)</span> such that <span class="math notranslate nohighlight">\(Np=const\)</span></strong></p>
+<ul class="simple">
+<li><p>This is a situation of rare events like rains in forest or radioactive decay of uranium where each individual event has small chance of happening <span class="math notranslate nohighlight">\(p \rightarrow 0\)</span>  yet there are large number of samples <span class="math notranslate nohighlight">\(N\rightarrow \infty\)</span> such that one has a constant average rate of events <span class="math notranslate nohighlight">\(\lambda = pN = const\)</span></p></li>
+<li><p>In this limit distirbution is no longer well described by the gaussian as the shape of distribution is heavily skewed due to tiny values of p.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P_N(n) = \frac{N!}{n! (N-n)!} p^n (1-p)^{(N-n)}\]</div>
+<ul class="simple">
+<li><p>Writing factorial <span class="math notranslate nohighlight">\(N!/(N-n)!\)</span> explicitely we realize that it is dominated <span class="math notranslate nohighlight">\(N^n\)</span> and also <span class="math notranslate nohighlight">\(N-n \approx N\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P_N(n) = \frac{N(N-1)...(N-1+1))}{n!} p^n (1-p)^{(N-n)} \approx \frac{N^n}{n!} p^n (1-p)^{N}\]</div>
+<ul class="simple">
+<li><p>Next let us plug in <span class="math notranslate nohighlight">\(\lambda = pN = const\)</span> and recall the definition of exponential <span class="math notranslate nohighlight">\(lim_{x\rightarrow \infty }(1-1/x)^x = e^{-x}\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(n) = \frac{N^n}{n!} \Big( \frac{\lambda}{N} \Big)^n \Big( 1-\frac{\lambda}{N} \Big)^{N} = \frac{\lambda^n}{n!} \Big( 1-\frac{\lambda}{N} \Big)^{N} \approx \frac{\lambda^n}{n!} e^{-\lambda}\]</div>
 </div>
 </section>
 <section id="problems">

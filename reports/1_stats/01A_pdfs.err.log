@@ -15,28 +15,49 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
+# Number of trials and runs
+N, runs = int(1e5), 30
 
-X = np.random.rand(30)
+# Store fractions of heads for each trial in each run
+fractions = np.zeros((runs, N))
 
-print(X)
-plt.plot(X)
+# Simulate coin tosses
+for run in range(runs):
+    # Generate coin tosses (0 for tails, 1 for heads)
+    tosses = np.random.randint(2, size=N)
+    # Calculate cumulative sum to get the number of heads up to each trial
+    cum_heads = np.cumsum(tosses)
+    # Calculate fraction of heads up to each trial
+    fractions[run, :] = cum_heads / np.arange(1, N+1)
+
+# Plotting
+plt.figure(figsize=(14, 8))
+
+# Plot all runs with low opacity
+for run in range(runs):
+    plt.plot(fractions[run, :], color='grey', alpha=0.3)
+
+# Highlight first run
+plt.semilogx(fractions[0, :], color='blue', linewidth=2, label='Highlighted Run')
+
+# Expected value line
+plt.axhline(y=0.5, color='red', linestyle='--', label='Expected Value (0.5)')
+plt.xlabel('Number of Trials')
+plt.ylabel('Fraction of Heads')
+plt.title('Law of Large Numbers: Fraction of Heads in Coin Tossing')
+plt.legend()
 ------------------
 
------ stdout -----
-[0.20242028 0.66284989 0.21574164 0.57878804 0.60828734 0.85856653
- 0.89464313 0.79924644 0.4353531  0.01258875 0.26932669 0.72906003
- 0.9525659  0.43328723 0.28118968 0.0082216  0.62420925 0.2554504
- 0.16954486 0.98847452 0.32052629 0.04194065 0.74531855 0.44198749
- 0.6118547  0.74537813 0.04680094 0.47235732 0.42492622 0.67125416]
-------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[1], line 6[0m
-[1;32m      3[0m X [38;5;241m=[39m np[38;5;241m.[39mrandom[38;5;241m.[39mrand([38;5;241m30[39m)
-[1;32m      5[0m [38;5;28mprint[39m(X)
-[0;32m----> 6[0m [43mplt[49m[38;5;241m.[39mplot(X)
+Cell [0;32mIn[1], line 5[0m
+[1;32m      2[0m N, runs [38;5;241m=[39m [38;5;28mint[39m([38;5;241m1e5[39m), [38;5;241m30[39m
+[1;32m      4[0m [38;5;66;03m# Store fractions of heads for each trial in each run[39;00m
+[0;32m----> 5[0m fractions [38;5;241m=[39m [43mnp[49m[38;5;241m.[39mzeros((runs, N))
+[1;32m      7[0m [38;5;66;03m# Simulate coin tosses[39;00m
+[1;32m      8[0m [38;5;28;01mfor[39;00m run [38;5;129;01min[39;00m [38;5;28mrange[39m(runs):
+[1;32m      9[0m     [38;5;66;03m# Generate coin tosses (0 for tails, 1 for heads)[39;00m
 
-[0;31mNameError[0m: name 'plt' is not defined
+[0;31mNameError[0m: name 'np' is not defined
 

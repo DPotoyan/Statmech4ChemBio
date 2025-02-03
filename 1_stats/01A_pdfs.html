@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '1_stats/01A_pdfs';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Random walk" href="02_RandWalk.html" />
+    <link rel="next" title="Thermodynamics" href="../2_thermo/intro.html" />
     <link rel="prev" title="Probability theory" href="01_SetsCounting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -192,7 +192,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="02_RandWalk.html">Random walk</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -258,8 +257,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/rw-lab/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random Walk Simulations</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random walk simulations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/03_Diffusion.html">Diffusion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/04_Entropy.html">Entropy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
@@ -727,6 +725,64 @@ M_n \to \mu
 <li><p>The variance of <span class="math notranslate nohighlight">\(M_n\)</span> decreases as , meaning fluctuations shrink as <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>.</p></li>
 <li><p>This justifies ensemble averaging in statistical mechanics, ensuring macroscopic observables (e.g., temperature, pressure) are stable and predictable.</p></li>
 </ul>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Number of trials and runs</span>
+<span class="n">N</span><span class="p">,</span> <span class="n">runs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span><span class="p">),</span> <span class="mi">30</span>
+
+<span class="c1"># Store fractions of heads for each trial in each run</span>
+<span class="n">fractions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">runs</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+
+<span class="c1"># Simulate coin tosses</span>
+<span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runs</span><span class="p">):</span>
+    <span class="c1"># Generate coin tosses (0 for tails, 1 for heads)</span>
+    <span class="n">tosses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+    <span class="c1"># Calculate cumulative sum to get the number of heads up to each trial</span>
+    <span class="n">cum_heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">tosses</span><span class="p">)</span>
+    <span class="c1"># Calculate fraction of heads up to each trial</span>
+    <span class="n">fractions</span><span class="p">[</span><span class="n">run</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">cum_heads</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot all runs with low opacity</span>
+<span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runs</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fractions</span><span class="p">[</span><span class="n">run</span><span class="p">,</span> <span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Highlight first run</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">fractions</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Highlighted Run&#39;</span><span class="p">)</span>
+
+<span class="c1"># Expected value line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected Value (0.5)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Trials&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fraction of Heads&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Law of Large Numbers: Fraction of Heads in Coin Tossing&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">N</span><span class="p">,</span> <span class="n">runs</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span><span class="p">),</span> <span class="mi">30</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Store fractions of heads for each trial in each run</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">fractions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">runs</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Simulate coin tosses</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">runs</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="c1"># Generate coin tosses (0 for tails, 1 for heads)</span>
+
+<span class="ne">NameError</span>: name &#39;np&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="the-central-limit-theorem-clt">
 <h1>The Central Limit Theorem  (CLT)<a class="headerlink" href="#the-central-limit-theorem-clt" title="Permalink to this heading">#</a></h1>
@@ -742,6 +798,41 @@ M_n \to \mu
 </ul>
 <div class="math notranslate nohighlight">
 \[Z_n = \frac{S_n - n\mu}{\sqrt{n}\sigma} \rightarrow N(0, 1)\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># Number of coin tosses in each experiment, number of experiments</span>
+<span class="n">N</span><span class="p">,</span> <span class="n">runs</span>    <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span>  
+
+<span class="c1"># Simulate coin tosses: num_experiments rows, num_tosses_per_experiment columns</span>
+<span class="n">tosses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">runs</span><span class="p">))</span>
+
+<span class="c1"># Calculate means of each experiment</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tosses</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="p">(</span> <span class="n">M</span><span class="o">-</span><span class="n">M</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+
+<span class="c1"># Plotting the distribution of sample means</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Sample Means of Coin Tosses&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Sample Mean&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+
+<span class="n">zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">zs</span><span class="p">),</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean=0, var=1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 <section id="law-of-large-numbers-and-random-walk">
 <h2>Law of large numbers and random walk<a class="headerlink" href="#law-of-large-numbers-and-random-walk" title="Permalink to this heading">#</a></h2>
 <p>Applying the formulas to random walk model we get mean and variance for single step</p>
@@ -776,25 +867,6 @@ M_n \to \mu
 
 <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.20242028 0.66284989 0.21574164 0.57878804 0.60828734 0.85856653
- 0.89464313 0.79924644 0.4353531  0.01258875 0.26932669 0.72906003
- 0.9525659  0.43328723 0.28118968 0.0082216  0.62420925 0.2554504
- 0.16954486 0.98847452 0.32052629 0.04194065 0.74531855 0.44198749
- 0.6118547  0.74537813 0.04680094 0.47235732 0.42492622 0.67125416]
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -1062,11 +1134,11 @@ p=0.0001, 0.001, 0.01, 0.1. You can use  subplot functionality to make a pretty 
       </div>
     </a>
     <a class="right-next"
-       href="02_RandWalk.html"
+       href="../2_thermo/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Random walk</p>
+        <p class="prev-next-title">Thermodynamics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
