@@ -517,29 +517,23 @@ document.write(`
 <h1>Numpy and Probabilities<a class="headerlink" href="#numpy-and-probabilities" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-
-
-<span class="c1"># Create a 4x4x4 3D numpy array representing p(x, y, z) as a joint probability distribution</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># For reproducibility</span>
-<span class="n">p_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># Random values</span>
-
-<span class="c1"># Normalize so that the total probability sums to 1</span>
-<span class="n">p_xy</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p_xy</span><span class="p">)</span>
-
-<span class="c1"># Summing over the third axis to get p(x,y)</span>
-<span class="n">p_xy_2d</span> <span class="o">=</span> <span class="n">p_xy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-<span class="n">p_xy_2d</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pxy</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.0888395</span> <span class="p">,</span> <span class="mf">0.04135306</span><span class="p">,</span> <span class="mf">0.07692385</span><span class="p">,</span> <span class="mf">0.04716456</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.05191984</span><span class="p">,</span> <span class="mf">0.04715928</span><span class="p">,</span> <span class="mf">0.06539948</span><span class="p">,</span> <span class="mf">0.04739613</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.09325686</span><span class="p">,</span> <span class="mf">0.05106682</span><span class="p">,</span> <span class="mf">0.05221257</span><span class="p">,</span> <span class="mf">0.05864018</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">0.08283109</span><span class="p">,</span> <span class="mf">0.11219392</span><span class="p">,</span> <span class="mf">0.02191071</span><span class="p">,</span> <span class="mf">0.06173214</span><span class="p">]])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0888395 , 0.04135306, 0.07692385, 0.04716456],
-       [0.05191984, 0.04715928, 0.06539948, 0.04739613],
-       [0.09325686, 0.05106682, 0.05221257, 0.05864018],
-       [0.08283109, 0.11219392, 0.02191071, 0.06173214]])
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pxy</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.0888395</span> <span class="p">,</span> <span class="mf">0.04135306</span><span class="p">,</span> <span class="mf">0.07692385</span><span class="p">,</span> <span class="mf">0.04716456</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>        <span class="p">[</span><span class="mf">0.05191984</span><span class="p">,</span> <span class="mf">0.04715928</span><span class="p">,</span> <span class="mf">0.06539948</span><span class="p">,</span> <span class="mf">0.04739613</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>        <span class="p">[</span><span class="mf">0.09325686</span><span class="p">,</span> <span class="mf">0.05106682</span><span class="p">,</span> <span class="mf">0.05221257</span><span class="p">,</span> <span class="mf">0.05864018</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>        <span class="p">[</span><span class="mf">0.08283109</span><span class="p">,</span> <span class="mf">0.11219392</span><span class="p">,</span> <span class="mf">0.02191071</span><span class="p">,</span> <span class="mf">0.06173214</span><span class="p">]])</span>
+
+<span class="ne">NameError</span>: name &#39;array&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -547,6 +541,7 @@ document.write(`
 <section id="compute-the-following-full-marginal-and-conditional-probabilities">
 <h2>Compute the following full marginal and conditional probabilities<a class="headerlink" href="#compute-the-following-full-marginal-and-conditional-probabilities" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
+<li><p>Check for normalization</p></li>
 <li><p>Compute <span class="math notranslate nohighlight">\(p(x)\)</span></p></li>
 <li><p>Compute <span class="math notranslate nohighlight">\(p(x=1, y=2)\)</span></p></li>
 <li><p>Compute <span class="math notranslate nohighlight">\(p(x|y=3)\)</span></p></li>
