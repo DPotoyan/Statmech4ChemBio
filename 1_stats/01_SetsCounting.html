@@ -501,7 +501,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-world-of-many-particle-complex-systems">Probabilistic world of many particle complex systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-world-of-complex-many-particle-systems">Probabilistic world of complex many particle systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
@@ -544,8 +544,8 @@ document.write(`
 <li><p><strong>Bayesian approach:</strong> In physical sciences and modeling one often deals with situations where counting is impossible. Hence, probability is interpreted as a degree of belief.</p></li>
 </ul>
 </div>
-<section id="probabilistic-world-of-many-particle-complex-systems">
-<h2>Probabilistic world of many particle complex systems<a class="headerlink" href="#probabilistic-world-of-many-particle-complex-systems" title="Permalink to this heading">#</a></h2>
+<section id="probabilistic-world-of-complex-many-particle-systems">
+<h2>Probabilistic world of complex many particle systems<a class="headerlink" href="#probabilistic-world-of-complex-many-particle-systems" title="Permalink to this heading">#</a></h2>
 <figure class="align-default" id="markdown-fig">
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/2d_gas_simulation.gif"><img alt="compton" class="bg-primary mb-1" src="../_images/2d_gas_simulation.gif" style="width: 300px;" /></a>
 <figcaption>
@@ -556,6 +556,17 @@ document.write(`
 <li><p>What is the probability to find a gas in upper right corner cell?</p></li>
 <li><p>What is the probability that all gas atoms will be in left side of the box?</p></li>
 <li><p>What is the probability distribution of velocities of the gas?</p></li>
+</ul>
+<figure class="align-default" id="id1">
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/1d_random_walk.gif"><img alt="compton" class="bg-primary mb-1" src="../_images/1d_random_walk.gif" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Simulations of a Random Walk in 1D</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>What is the probability of finding molecule away from center by n steps out of N?</p></li>
+<li><p>How do we obtain probability distribution after N steps given probability for 1 step?</p></li>
+<li><p>Why is there tendency for probability distributions to evolve towards Gaussian?</p></li>
 </ul>
 </section>
 <section id="sample-space">
@@ -576,10 +587,10 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\Omega = \{H, T \}\]</div>
 <ul class="simple">
-<li><p>If a fair coin is tossed three times in a row, we will have sample space of size <span class="math notranslate nohighlight">\(2^3\)</span> (HTT, THT, TTH, THH, HTH, HHT, HHH, TTT)</p></li>
+<li><p>If a fair coin is tossed three times in a row, we will have sample space of size <span class="math notranslate nohighlight">\(2^3\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\Omega = \{H,T\}^{3}\]</div>
+\[\Omega = \{H,T\}^{3}= {HTT, THT, TTH, THH, HTH, HHT, HHH, TTT}\]</div>
 <ul class="simple">
 <li><p>Position of an atom in a container of size <span class="math notranslate nohighlight">\(L_x\)</span> along x. There will be a huge number of</p></li>
 </ul>
@@ -808,6 +819,7 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p></li>
 How worried should you be if you test positive? Try answering this question
 using Bayes’ theorem.</p></li>
 </ul>
+</div>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Solution<div class="sd-summary-down docutils">
@@ -831,8 +843,7 @@ Solution<div class="sd-summary-down docutils">
 <div class="math notranslate nohighlight">
 \[P(X|+) = \frac{P(+|X)p(X)}{p(+)} = \frac{P(+|X)p(X)}{p(+|X)p(X)+p(+| X^c)p(X^c)} =  \frac{0.9\cdot 0.01}{0.9\cdot 0.01+0.1\cdot 0.99} = 0.083\]</div>
 </div>
-</details></div>
-</section>
+</details></section>
 <section id="counting-and-combinatorics">
 <h2>Counting and Combinatorics<a class="headerlink" href="#counting-and-combinatorics" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -958,27 +969,29 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 <section id="random-walk">
 <h2>Random walk<a class="headerlink" href="#random-walk" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Tossing a coin a few times generates a random sequence of outcomes e.g HTHTTT</p></li>
-<li><p>Probability of landing H vs T for a fair coin is <span class="math notranslate nohighlight">\(\theta=1/2\)</span>. Therefore the probability of any <span class="math notranslate nohighlight">\(n\)</span> long sequence is always equal <span class="math notranslate nohighlight">\(\theta^N=2^{-N}\)</span>. A more interesting question is finding probability of having <span class="math notranslate nohighlight">\(n\)</span> heads out of N tosses. For a fair coin this is same question as finding number of combination of n heads out of N tosses:</p></li>
+<li><p>Tossing a coin a few times generates a random sequence of outcomes e.g HTHTTT.</p></li>
+<li><p>Probability of landing H vs T for a fair coin is <span class="math notranslate nohighlight">\(\theta=1/2\)</span>. Therefore, the probability of any <span class="math notranslate nohighlight">\(N\)</span>-long sequence is always equal to <span class="math notranslate nohighlight">\(\theta^N=2^{-N}\)</span>.</p></li>
+<li><p>A more interesting question is finding the probability of having <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right out of <span class="math notranslate nohighlight">\(N\)</span> tosses. For a fair coin, this is the same question as finding the number of combinations of <span class="math notranslate nohighlight">\(N_{+}\)</span> right steps out of <span class="math notranslate nohighlight">\(N\)</span> tosses:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p(n\,\, heads) = \frac{N!}{(N-n)! n!} \cdot \Big(\frac{1}{2}\Big)^N\]</div>
+\[P(N_{+}) = \frac{N!}{N_{-}! N_{+}!} \cdot \Big(\frac{1}{2}\Big)^N\]</div>
 <ul class="simple">
-<li><p>More generally the probability to generate <span class="math notranslate nohighlight">\(n\)</span> heads after N coin tosses with a coin that has a bias <span class="math notranslate nohighlight">\(\theta\)</span> is given by:</p></li>
+<li><p>More generally, the probability of taking <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right after <span class="math notranslate nohighlight">\(N\)</span> coin tosses with a biased coin that lands right with probability <span class="math notranslate nohighlight">\(f_{+}\)</span> is given by:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p(n|N, \theta) = \frac{N!}{(N-n)! n!} \theta^n \cdot (1-\theta)^{N-n}\]</div>
+\[P(N_{+}) = \frac{N!}{N_{-}! N_{+}!} f_{+}^{N_{+}} \cdot f_{-}^{N_{-}}\]</div>
 <ul class="simple">
-<li><p>Another popular application of 1D random walk is to understand diffusive phenomena. A molecule which starts at 0 and which moves via consecutive jumps in left vs right direction with probabilities <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(1-\theta\)</span> will make <span class="math notranslate nohighlight">\(n\)</span> jumps to the right out of N jumps with <span class="math notranslate nohighlight">\(p(n|N, \theta)\)</span> probability. An interesting question for diffusion is to compute average displacement of molecule relative to origin. We can rewrite probability in terms of net displacement <span class="math notranslate nohighlight">\(x = n - (N-n)\)</span> or <span class="math notranslate nohighlight">\(n = \frac{x+N}{2}\)</span></p></li>
+<li><p>Another popular application of the 1D random walk is to understand diffusive phenomena. A molecule that starts at 0 and moves via consecutive jumps in the left vs right direction with probabilities <span class="math notranslate nohighlight">\(p_{+}\)</span> and <span class="math notranslate nohighlight">\(p_{-}=1-p_{+}\)</span> will make <span class="math notranslate nohighlight">\(N_{+}\)</span> jumps to the right out of <span class="math notranslate nohighlight">\(N\)</span> jumps with <span class="math notranslate nohighlight">\(p(N_{+}|N, p_{+})\)</span> probability. An interesting question for diffusion is to compute the average displacement of the molecule relative to the origin.</p></li>
+<li><p>We can rewrite probability in terms of net displacement <span class="math notranslate nohighlight">\(x = N_{+} - (N-N_{+})\)</span> or <span class="math notranslate nohighlight">\(N_{+} = \frac{x+N}{2}\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[p(x|N, \theta) = \frac{ N!}{ \Big(\frac{N-x}{2}\Big)! \Big(\frac{N+x}{2}\Big)!} \cdot \theta^{(N+x)/2} \cdot (1-\theta)^{(N-x)/2}\]</div>
+\[P(x|N, f_{+}) = \frac{ N!}{ \Big(\frac{N-x}{2}\Big)! \Big(\frac{N+x}{2}\Big)!} \cdot f_{+}^{(N+x)/2} \cdot (1-f_{+})^{(N-x)/2}\]</div>
 <div class="attention admonition">
 <p class="admonition-title"><strong>Exercise</strong></p>
 <p>Plot how a number of configurations resulting from portioning molecules of gas into two regions depends on the ratio of molecules in compartments</p>
 </div>
-<div class="tip dropdown admonition">
-<p class="admonition-title">Appendix A: Stitrling’s approximation of N!</p>
+<div class="important admonition">
+<p class="admonition-title">Stitrling’s approximation of N!</p>
 <p><strong>Stirling’s approximation</strong></p>
 <ul class="simple">
 <li><p>This is the crude version of Stirling approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span></p></li>
@@ -994,16 +1007,104 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 </ul>
 <div class="math notranslate nohighlight">
 \[\boxed{N! \approx N^N e^{-N} \sqrt{2\pi N}}\]</div>
-<p><strong>Applying Stirling approximation to the Binomial</strong></p>
+</div>
+<p><strong>Applying Stirling Approximation to the Binomial</strong></p>
+<p>Given that:
+<span class="math notranslate nohighlight">\(N = N_{+} + N_{-}\)</span></p>
+<p>Applying Stirling’s approximation:
+$<span class="math notranslate nohighlight">\(
+\frac{N!}{N_{+}! \cdot N_{-}!} \approx \frac{N^N e^{-N}}{N_{+}^{N_{+}} e^{-N_{+}} \cdot N_{-}^{N_{-}} e^{-N_{-}}} =\frac{N^N } {N_{+}^{N_{+}} \cdot N_{-}^{N_{-}} }
+\)</span>$</p>
+<p>Taking the logarithm:
+$<span class="math notranslate nohighlight">\(
+\log\frac{N!}{N_{+}! \cdot N_{-}!} \approx N \log N -N_{+} \log N_{+} - N_{-} \log N_{-} 
+\)</span>$</p>
+<p>Rewriting in terms of fractions:</p>
 <div class="math notranslate nohighlight">
-\[N = N_1+N_2\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{N!}{N_1! \cdot N_2!} \approx \frac{N^N e^{-N}}{N_1^{N_1} e^{-N_1}\cdot N_2^{N_2} e^{-N_2}} =\frac{N^N } {N_1^{N_1} \cdot N_2^{N_2} }\]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split}log\frac{N!}{N_1! \cdot N_2!} \approx NlogN -N_1 log N_1 - N_2log N_2 = \\ = N \Big[ -\frac{N_1}{N} lo\frac {N_1}{N} - \frac{N_2}{N} log \frac{N_2}{N} \Big] = N[-p_1 log p_1 -p_2log p_2]\end{split}\]</div>
+\[
+= N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f) 
+\]</div>
+<p>where:</p>
 <ul class="simple">
-<li><p>The expression <span class="math notranslate nohighlight">\(S =  \sum_i -p_i log p_i\)</span> will be identified with Entropy in later sections.</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_{+} = \frac{N_{+}}{N}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = \frac{N_{-}}{N}\)</span> are the fractions of steps going to the right and left, respectively.</p></li>
+<li><p>The expression will later be identified with entropy.</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[s =  -\sum_i p_i \log p_i\]</div>
+<p>Now, t aking the logarithm of the probability factor we get a term resembles an <strong>energy-like function</strong> that tilts distribution to left or right depending on <span class="math notranslate nohighlight">\(f_{\pm}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+-\epsilon = \log \Big[ f_{+}^{(N+x)/2} \cdot (1-f_{+})^{(N-x)/2} \Big] = \frac{N+x}{2} \log f_{+} + \frac{N-x}{2} \log (1 - f_{+})
+\]</div>
+<ul class="simple">
+<li><p>Notice that deviations from the expected fraction of right/left steps contribute exponentially to the probability. In statistical mechanics, such terms often appear in Boltzmann-like distributions, indicating that rare deviations (large <span class="math notranslate nohighlight">\(x\)</span>) are exponentially suppressed.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[log P_{N} = N[s(f) - \epsilon (f)]\]</div>
+<div class="important admonition">
+<p class="admonition-title"><strong>Large Deviation Theorem (LDT)</strong></p>
+<ul class="simple">
+<li><p>When there are <span class="math notranslate nohighlight">\(N\)</span> steps, molecules, or components, the probability distribution tends to concentrate in regions defined by the <strong>large deviation function</strong> <span class="math notranslate nohighlight">\(S(f)\)</span>.</p></li>
+<li><p>Fluctuations away from the minima of <span class="math notranslate nohighlight">\(S(f)\)</span> are exponentially suppressed, particularly for large <span class="math notranslate nohighlight">\(N\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P_N \sim e^{N I(f)}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(I(f) = s(f)-\epsilon(f)\)</span> does not depend on the system size <span class="math notranslate nohighlight">\(N\)</span> and reflects competition between entropy and energy.</p></li>
+</ul>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define the function s(x)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">s</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Create an array of x values from -1 to 1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># Avoid division by zero and log of zero by slightly adjusting the range</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.999999</span><span class="p">,</span> <span class="mf">0.999999</span><span class="p">)</span>
+
+<span class="c1"># Compute s(x) for these x values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="c1"># Define the function e(x) with p = 0.7 and q = 0.3</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">e</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span> <span class="o">/</span> <span class="n">q</span><span class="p">))</span>
+
+<span class="c1"># Compute e(x) for the same x values</span>
+<span class="n">y_e</span> <span class="o">=</span> <span class="n">e</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Compute the sum of s(x) and e(x)</span>
+<span class="n">y_sum</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_e</span>
+
+<span class="c1"># Create the plot with s(x), e(x), and their difference</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$s(x)=-\left(\frac{1+x}</span><span class="si">{2}</span><span class="s1"> \ln \left(\frac{1+x}</span><span class="si">{2}</span><span class="s1">\right)+\frac{1-x}</span><span class="si">{2}</span><span class="s1"> \ln \left(\frac{1-x}</span><span class="si">{2}</span><span class="s1">\right)\right)$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_e</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$e(x)=-\frac</span><span class="si">{1}{2}</span><span class="s1">\left[\ln (pq)+x \ln \frac</span><span class="si">{p}{q}</span><span class="s1">\right]$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_sum</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Difference of $s(x)$ and $e(x)$, which is $\ln P(x)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot of s(x), e(x), and their difference; f_{+}=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; f_{-}=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</details>
 </div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Appendix B. Gaussian approximation to the Binomial Distribution in the large <span class="math notranslate nohighlight">\(N\)</span> limit.</p>
@@ -1175,7 +1276,7 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-world-of-many-particle-complex-systems">Probabilistic world of many particle complex systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-world-of-complex-many-particle-systems">Probabilistic world of complex many particle systems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events">Events</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
