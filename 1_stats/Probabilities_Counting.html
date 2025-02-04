@@ -667,7 +667,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f24e0740df0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f634c7cad30&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -686,7 +686,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f24e0686220&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f634c710160&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -705,7 +705,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f24e03c0af0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f634c680c40&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -1346,7 +1346,7 @@ P(X) \approx e^{-N I(X)} \approx e^{-N \frac{1}{2} I''(X^*) (X - X^*)^2} = e^{-\
 \]</div>
 <ul class="simple">
 <li><p>Where we define the variance as <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{N I''(X^*)}\)</span>. This is precisely a <strong>Gaussian distribution</strong> centered at <span class="math notranslate nohighlight">\(X^*\)</span>, with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
-<li><p>Thus, the Taylor expansion of the large deviation function around its minimum shows that, in the limit of small fluctuations (large <span class="math notranslate nohighlight">\(N\)</span>, the probability distribution approximates a Gaussian. This result underpins why <strong>equilibrium fluctuations in statistical physics and thermodynamics are often Gaussian</strong>.</p></li>
+<li><p>Thus, the Taylor expansion of the large deviation function around its minimum shows that, in the limit of small fluctuations (large <span class="math notranslate nohighlight">\(N\)</span>, the probability distribution approximates a Gaussian. This result underpins why <strong>equilibrium fluctuations in statistical physics and thermodynamics are often Gaussian.</strong></p></li>
 </ul>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Appendix B. Gaussian Approximation to the Binomial Distribution in the Large <span class="math notranslate nohighlight">\(N\)</span> Limit</p>
@@ -1439,6 +1439,44 @@ P(n) \approx \frac{1}{(2\pi N p (1 - p))^{1/2}} e^{-(n - \tilde{n})^2 / 2N p (1 
 </ul>
 <div class="math notranslate nohighlight">
 \[P(n) = \frac{N^n}{n!} \Big( \frac{\lambda}{N} \Big)^n \Big( 1-\frac{\lambda}{N} \Big)^{N} = \frac{\lambda^n}{n!} \Big( 1-\frac{\lambda}{N} \Big)^{N} \approx \frac{\lambda^n}{n!} e^{-\lambda}\]</div>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title"><strong>Example of Gaussian limit of Large Deviation function for random walk</strong></p>
+<p>The large deviation rate function for a simple random walk is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+I(f) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_+\)</span> and <span class="math notranslate nohighlight">\(f_-\)</span> are empirical step probabilities, and <span class="math notranslate nohighlight">\(p_+\)</span>, <span class="math notranslate nohighlight">\(p_-\)</span> are their expected values with <span class="math notranslate nohighlight">\(p_+ + p_- = 1\)</span>.</p>
+<p><strong>Expansion Around the Minimum</strong></p>
+<p>The function <span class="math notranslate nohighlight">\(I(f)\)</span> is minimized at <span class="math notranslate nohighlight">\(f_+ = p_+\)</span>, <span class="math notranslate nohighlight">\(f_- = p_-\)</span>. Introducing small deviations <span class="math notranslate nohighlight">\(\delta f\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f_+ = p_+ + \delta f, \quad f_- = p_- - \delta f.
+\]</div>
+<p>Expanding the logarithms:</p>
+<div class="math notranslate nohighlight">
+\[
+\log \frac{p_+ + \delta f}{p_+} \approx \frac{\delta f}{p_+} - \frac{(\delta f)^2}{2 p_+^2}, \quad
+\log \frac{p_- - \delta f}{p_-} \approx -\frac{\delta f}{p_-} - \frac{(\delta f)^2}{2 p_-^2}.
+\]</div>
+<p>Substituting into <span class="math notranslate nohighlight">\(I(f)\)</span>, the linear terms cancel, and we obtain:</p>
+<div class="math notranslate nohighlight">
+\[
+I(f) \approx \frac{(\delta f)^2}{2} \left( \frac{1}{p_+} + \frac{1}{p_-} \right).
+\]</div>
+<p><strong>Gaussian Limit</strong></p>
+<p>By the large deviation principle:</p>
+<div class="math notranslate nohighlight">
+\[
+P(f) \approx e^{-N I(f)} = e^{-N \frac{(\delta f)^2}{2} \left( \frac{1}{p_+} + \frac{1}{p_-} \right)} = e^{- \frac{(\delta f)^2}{2 p_{+}p_{-}/N} }
+\]</div>
+<p>This is a Gaussian with variance:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2 = \frac{p_+ p_-}{N}.
+\]</div>
+<p>Thus, the empirical frequency <span class="math notranslate nohighlight">\(f_+\)</span> follows a Gaussian distribution in the large <span class="math notranslate nohighlight">\(N\)</span> limit.</p>
 </div>
 </section>
 <section id="problems">
