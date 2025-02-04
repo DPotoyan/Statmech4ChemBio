@@ -495,12 +495,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-sequence-of-steps-microstates">Probability of sequence of steps (microstates)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-net-number-of-steps-macrostates">Probability of net number of steps (macrostates)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-nature-of-fluctuations">Gaussian nature of fluctuations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-explicit-derivations">Appendix: Explicit derivations</a></li>
@@ -650,7 +651,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fb4a0831df0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f1fed9cbdf0&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -669,7 +670,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fb4a07771f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f1fed590220&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -688,7 +689,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fb4a06e6df0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f1fed500c10&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -933,6 +934,24 @@ $<span class="math notranslate nohighlight">\(n(up) = \frac{90!}{10!(80)!}\)</sp
 </div>
 </div>
 </section>
+<section id="strinling-approximation-of-factorial-and-binomials">
+<h2>Strinling approximation of factorial and binomials<a class="headerlink" href="#strinling-approximation-of-factorial-and-binomials" title="Permalink to this heading">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title"><strong>Stitrling approximation of N!</strong></p>
+<ul class="simple">
+<li><p>This is the crude version of Stirling approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[logN! \approx \sum log N_i = \int log N dN \approx NlogN-N \]</div>
+<div class="math notranslate nohighlight">
+\[{N! \approx N^N e^{-N}}\]</div>
+<ul class="simple">
+<li><p>A more accurate version is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[{N! \approx N^N e^{-N} \sqrt{2\pi N}}\]</div>
+</div>
+</section>
 <section id="random-walk">
 <h2>Random Walk<a class="headerlink" href="#random-walk" title="Permalink to this heading">#</a></h2>
 <section id="probability-of-sequence-of-steps-microstates">
@@ -1046,29 +1065,15 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 </div>
 </section>
 </section>
-<section id="strinling-approximation-of-factorial-and-binomials">
-<h2>Strinling approximation of factorial and binomials<a class="headerlink" href="#strinling-approximation-of-factorial-and-binomials" title="Permalink to this heading">#</a></h2>
-<div class="important admonition">
-<p class="admonition-title"><strong>Stitrling approximation of N!</strong></p>
-<ul class="simple">
-<li><p>This is the crude version of Stirling approximation that works out for <span class="math notranslate nohighlight">\(N\gg 1\)</span></p></li>
-</ul>
+<section id="log-of-probability-leads-us-to-entropy-and-energy">
+<h2>Log of probability leads us to Entropy and Energy<a class="headerlink" href="#log-of-probability-leads-us-to-entropy-and-energy" title="Permalink to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
-\[logN! \approx \sum log N_i = \int log N dN \approx NlogN-N \]</div>
-<div class="math notranslate nohighlight">
-\[{N! \approx N^N e^{-N}}\]</div>
-<ul class="simple">
-<li><p>A more accurate version is:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[{N! \approx N^N e^{-N} \sqrt{2\pi N}}\]</div>
-</div>
-<p><strong>Applying Stirling Approximation to the Binomial</strong></p>
+\[log\, p(N_{+}|N, p_{+}) = log \bigg[ \frac{N!}{N_{+}! N_{-}!}\bigg] + log \bigg[p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}\bigg] = entropy + energy \]</div>
+<p><strong>Entropy as log of number of microstates in a macrostate</strong></p>
 <div class="math notranslate nohighlight">
 \[
 \log\frac{N!}{N_{+}! \cdot N_{-}!} \approx N \log N -N_{+} \log N_{+} - N_{-} \log N_{-}  = N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big]
 \]</div>
-<p><strong>Discovering Entropy</strong></p>
 <ul class="simple">
 <li><p>Rewriting in terms of <span class="math notranslate nohighlight">\(f_{+} = \frac{N_{+}}{N}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = \frac{N_{-}}{N}\)</span> which are the fractions of steps going to the right and left, respectively.</p></li>
 </ul>
@@ -1116,7 +1121,7 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 <img alt="../_images/de00789759105d9cfa9fe958ce166ca471ca5b631b7e23391c8827f3599c69d6.png" src="../_images/de00789759105d9cfa9fe958ce166ca471ca5b631b7e23391c8827f3599c69d6.png" />
 </div>
 </div>
-<p><strong>Discovering Energy</strong></p>
+<p><strong>Energy as the degree of bias or tilt</strong></p>
 <ul class="simple">
 <li><p>Taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on fraction of steps <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span></p></li>
 </ul>
@@ -1567,12 +1572,13 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-sequence-of-steps-microstates">Probability of sequence of steps (microstates)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-net-number-of-steps-macrostates">Probability of net number of steps (macrostates)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-nature-of-fluctuations">Gaussian nature of fluctuations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-explicit-derivations">Appendix: Explicit derivations</a></li>
