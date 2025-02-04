@@ -507,9 +507,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-lln">Law of Large Numbers (LLN)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">Simulating a 1D unbiased random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-msd-of-a-random-walker">Mean square displacement (MSD) of a random walker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-msd-of-a-random-walker">Mean square displacement (MSD) of a random walker</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-binomial-as-generator-of-gaussian-and-poisson-distributions">Problem 1 Binomial as generator of Gaussian and Poisson distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-confined-diffusion">Problem-2 Confined diffusion.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-return-to-the-origin">Problem-3 Return to the origin!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d">Problem-4 Breaking the CLT; Cauchy vs Normal random walk in 2D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-continuous-time-random-walk-ctrw">Problem-5 Continuous time random walk (CTRW)</a></li>
 </ul>
 </li>
 </ul>
@@ -574,21 +581,21 @@ The number of steps to the right (or left) of a 1D random walker results in a bi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.46091806 0.95703257 0.34970454 0.57691149 0.13517977 0.18239781
- 0.597952   0.5577687  0.18354386 0.80945137 0.59558327 0.92873751
- 0.33834221 0.2094535  0.83888831 0.49989596 0.4962521  0.49668909
- 0.27695562 0.26695679 0.04299262 0.30574969 0.83106805 0.94904301
- 0.28786067 0.41596909 0.12877361 0.69586461 0.22578727 0.15633598
- 0.23582018 0.41144692 0.93592205 0.50251219 0.98971885 0.14240922
- 0.26469031 0.5018635  0.41385142 0.87166376 0.61495433 0.17243296
- 0.7444403  0.25131873 0.87884663 0.40228055 0.21403474 0.98171794
- 0.87821006 0.32027186]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.94971354 0.77493365 0.12056902 0.55976214 0.65892512 0.44414411
+ 0.52238897 0.86620915 0.72907799 0.37266923 0.91067204 0.23026914
+ 0.1313582  0.4535887  0.07046948 0.7147228  0.95278187 0.19876433
+ 0.32061059 0.63138807 0.31552054 0.78052041 0.44216655 0.57613736
+ 0.41429761 0.63231292 0.76990211 0.67546605 0.606815   0.73386955
+ 0.1410872  0.43398679 0.98514607 0.20662128 0.16520413 0.804419
+ 0.86226124 0.75611431 0.03956024 0.26503081 0.8597254  0.82405883
+ 0.06144697 0.98111126 0.82348772 0.68933047 0.31187844 0.22394645
+ 0.42035484 0.49729967]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f0b17eef070&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb8a5372040&gt;]
 </pre></div>
 </div>
-<img alt="../_images/3289921f6f7b276380bf9d7bbfd6e20e51dea1c96f781ebcbbd7dfb3f17bbefa.png" src="../_images/3289921f6f7b276380bf9d7bbfd6e20e51dea1c96f781ebcbbd7dfb3f17bbefa.png" />
+<img alt="../_images/169e88eaf6c987628713710a61da7ad9e9187f231ad83a39d4ca737d53fceabf.png" src="../_images/169e88eaf6c987628713710a61da7ad9e9187f231ad83a39d4ca737d53fceabf.png" />
 </div>
 </div>
 </section>
@@ -616,19 +623,19 @@ The number of steps to the right (or left) of a 1D random walker results in a bi
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 0 3 4 4 5 4 0 4 4 2 4 1 1 1 0 3 3 3 3] [0.   0.05 0.1  0.15 0.2  0.25 0.3  0.35 0.4  0.45 0.5  0.55 0.6  0.65
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 2 3 1 3 1 5 2 1 2 3 3 3 4 3 3 2 3] [0.   0.05 0.1  0.15 0.2  0.25 0.3  0.35 0.4  0.45 0.5  0.55 0.6  0.65
  0.7  0.75 0.8  0.85 0.9  0.95 1.  ]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.63376294, 1.6900345 , 1.6900345 , 1.26752587, 1.26752587,
-        0.84501725, 0.42250862, 0.21125431, 1.26752587, 1.26752587]),
- array([0.04299262, 0.13766524, 0.23233786, 0.32701049, 0.42168311,
-        0.51635574, 0.61102836, 0.70570098, 0.80037361, 0.89504623,
-        0.98971885]),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1.05754546, 1.05754546, 1.05754546, 0.42301818, 1.26905455,
+        0.84603637, 1.05754546, 1.48056364, 1.26905455, 1.05754546]),
+ array([0.03956024, 0.13411882, 0.2286774 , 0.32323599, 0.41779457,
+        0.51235315, 0.60691173, 0.70147032, 0.7960289 , 0.89058748,
+        0.98514607]),
  &lt;BarContainer object of 10 artists&gt;)
 </pre></div>
 </div>
-<img alt="../_images/62427079d5e05cea9366a998e1e3548ab4b589233612507b82d478cc50a812c8.png" src="../_images/62427079d5e05cea9366a998e1e3548ab4b589233612507b82d478cc50a812c8.png" />
+<img alt="../_images/2d2caa96866ce07518afb1b72d19c0bd4fe18d2ad4e519c815a4f2d8a59edb90.png" src="../_images/2d2caa96866ce07518afb1b72d19c0bd4fe18d2ad4e519c815a4f2d8a59edb90.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -759,7 +766,7 @@ V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/d31342dbe1f0aa7c5f28a94a7cc7b43f3d790299d59abeb741f33aa1c92c2858.png" src="../_images/d31342dbe1f0aa7c5f28a94a7cc7b43f3d790299d59abeb741f33aa1c92c2858.png" />
+<img alt="../_images/a0040981122ae94c19c87034ef2b8107db7fa38e4ff938527bb7d11343f66854.png" src="../_images/a0040981122ae94c19c87034ef2b8107db7fa38e4ff938527bb7d11343f66854.png" />
 </div>
 </div>
 </section>
@@ -806,7 +813,7 @@ V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/2b61e0a1ab42d50577e8aa85fa7613d2cac07d6d7c0ddf3d37b9881f27960022.png" src="../_images/2b61e0a1ab42d50577e8aa85fa7613d2cac07d6d7c0ddf3d37b9881f27960022.png" />
+<img alt="../_images/8022c3e950559b434b2c600074827944167a8da8f291de15cf727dd561c86236.png" src="../_images/8022c3e950559b434b2c600074827944167a8da8f291de15cf727dd561c86236.png" />
 </div>
 </div>
 <section id="exact-vs-sampled-probability-distributions">
@@ -863,7 +870,7 @@ V[x] = E[(x-E[x])^2] = E[x^2] - E[x]^2
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Normalization: 0.9949421840184148
 </pre></div>
 </div>
-<img alt="../_images/005d20974a10d1b7ec76981e785b3aa8dc74f07d1d69722ecd4a5f066434ccd4.png" src="../_images/005d20974a10d1b7ec76981e785b3aa8dc74f07d1d69722ecd4a5f066434ccd4.png" />
+<img alt="../_images/f54dc974da1c4beb570703013cc11aadefe7025701b033e8a365ec83ea1acb72.png" src="../_images/f54dc974da1c4beb570703013cc11aadefe7025701b033e8a365ec83ea1acb72.png" />
 </div>
 </div>
 </section>
@@ -1037,10 +1044,10 @@ E[M_n] \to \mu
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f0b34069c10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb8a50620a0&gt;
 </pre></div>
 </div>
-<img alt="../_images/ea2d993bf4ac998d6188a7239acc6669328636c7ddef107675d186c08c51a281.png" src="../_images/ea2d993bf4ac998d6188a7239acc6669328636c7ddef107675d186c08c51a281.png" />
+<img alt="../_images/08d012954a057c654ddca6fdcac979a4b1125684ca0c8e8911ba9eeffb9de92e.png" src="../_images/08d012954a057c654ddca6fdcac979a4b1125684ca0c8e8911ba9eeffb9de92e.png" />
 </div>
 </div>
 </section>
@@ -1093,10 +1100,10 @@ E[M_n] \to \mu
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f0afc53f250&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb882c9b640&gt;
 </pre></div>
 </div>
-<img alt="../_images/b817cf1d041ee42bb703f197e5fe1ee92dcbb7ff765ad709b40febb983b4160d.png" src="../_images/b817cf1d041ee42bb703f197e5fe1ee92dcbb7ff765ad709b40febb983b4160d.png" />
+<img alt="../_images/213a310251137ad059bf6f8c069e912f4a95fc4a9be2623f818ebd5523373198.png" src="../_images/213a310251137ad059bf6f8c069e912f4a95fc4a9be2623f818ebd5523373198.png" />
 </div>
 </div>
 <div class="note dropdown admonition">
@@ -1171,7 +1178,7 @@ E[M_n] \to \mu
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/7bedfbf070fe95fe705b6f04d75b54e393acfa115dd05130f4eedf0079edce16.png" src="../_images/7bedfbf070fe95fe705b6f04d75b54e393acfa115dd05130f4eedf0079edce16.png" />
+<img alt="../_images/c5948df9d0cb82845a0ca8554045b07a2628522f8ca7e94d587a6e9f6c2e56a2.png" src="../_images/c5948df9d0cb82845a0ca8554045b07a2628522f8ca7e94d587a6e9f6c2e56a2.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1230,7 +1237,7 @@ E[M_n] \to \mu
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/b3d8c34b0c5f6d4610e660eaccfc1f02da14a8e53437403204b1b0a8513da890.png" src="../_images/b3d8c34b0c5f6d4610e660eaccfc1f02da14a8e53437403204b1b0a8513da890.png" />
+<img alt="../_images/4b43adedabcb21e73d83fdd08761dfc20fe2c5dc79a0e30ef8c73891754a5b3c.png" src="../_images/4b43adedabcb21e73d83fdd08761dfc20fe2c5dc79a0e30ef8c73891754a5b3c.png" />
 </div>
 </div>
 </section>
@@ -1276,9 +1283,78 @@ MSD(n)= \Big\langle \big ( R_n - R_0 \big)^2 \Big \rangle \sim n
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/658380066dad8942da95e14d53dd53a679d38eca53ced1d2a2d4ecfda0388195.png" src="../_images/658380066dad8942da95e14d53dd53a679d38eca53ced1d2a2d4ecfda0388195.png" />
+<img alt="../_images/c46ad0ac676c0be9e989f9ac14edc6363e26e7871203b872931fb12406d59bba.png" src="../_images/c46ad0ac676c0be9e989f9ac14edc6363e26e7871203b872931fb12406d59bba.png" />
 </div>
 </div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rw_2d</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulates a 2D symmetric random walk.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    n (int): Number of steps.</span>
+<span class="sd">    N (int): Number of trajectories.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    np.ndarray: A (n+1, N, 2) array where each trajectory is stored in the last dimension.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c1"># Define possible step directions (right, up, left, down)</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+    
+    <span class="c1"># Generate random step indices and map to step directions</span>
+    <span class="n">random_steps</span> <span class="o">=</span> <span class="n">steps</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">))]</span>
+    
+    <span class="c1"># Prepend an initial position at (0,0) for all walkers</span>
+    <span class="n">rw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">rw</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">random_steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Compute displacement over time</span>
+
+    <span class="k">return</span> <span class="n">rw</span>
+
+<span class="c1"># Example usage: Simulate and plot first three random walkers</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">n_walkers</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">traj</span> <span class="o">=</span> <span class="n">rw_2d</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span> <span class="n">n_walkers</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">traj</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">traj</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># Plot first three random walkers</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X (displacement)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y (displacement)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2D Random Walk&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/0115dab439ac250095e21b20f1a2734e2a7cb25a92d908a8fed14702e312b794.png" src="../_images/0115dab439ac250095e21b20f1a2734e2a7cb25a92d908a8fed14702e312b794.png" />
+</div>
+</div>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
+<p><strong>The mighty little books</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/Random-Walks-Biology-Howard-Berg/dp/0691000646">“Random Walks in Biology”,  H Berg (1993)</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/gp/product/1464140294/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&amp;psc=1">“Physical models of Living systems”,  P Nelson (2015)</a></p></li>
+</ul>
+<p><strong>More in depth</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/Simple-Brownian-Diffusion-Introduction-Theoretical/dp/0199664501/ref=sr_1_1?keywords=diffusion+brownian&amp;qid=1579882520&amp;sr=8-1">“Simple Brownian Diffusion: An Introduction to the Standard Theoretical Models”, D Gillespie</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/Stochastic-Processes-Physicists-Understanding-Systems/dp/0521765420/ref=sr_1_1?keywords=kurt+jacobs+stochastic&amp;qid=1579882738&amp;sr=8-1">“Stochastic Processes for Physicists” K Jacobs</a></p></li>
+</ul>
+<p><strong>On the applied side</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/Brownian-Motion-Elements-Dynamics-Undergraduate/dp/3319980521/ref=sr_1_7?keywords=einstein+brownian&amp;qid=1579882356&amp;sr=8-7">Brownian Motion: Elements of Colloid Dynamics A P Philipse (2018)</a></p></li>
+</ul>
+</section>
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
@@ -1300,6 +1376,42 @@ p=0.0001, 0.001, 0.01, 0.1. You can use  subplot functionality to make a pretty 
 <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 </div>
+</section>
+<section id="problem-2-confined-diffusion">
+<h3>Problem-2 Confined diffusion.<a class="headerlink" href="#problem-2-confined-diffusion" title="Permalink to this heading">#</a></h3>
+<p>Simulate 2D random walk in a circular confinement. Re-write 2D random walk  code to simulate diffusion of a particle which is stuck inside a sphere.
+Study how root mean square deviation of position scales with time.</p>
+<ul class="simple">
+<li><p>Carry out simulations for different confinement sizes.</p></li>
+<li><p>Make plots of simulated trajectories.</p></li>
+</ul>
+</section>
+<section id="problem-3-return-to-the-origin">
+<h3>Problem-3 Return to the origin!<a class="headerlink" href="#problem-3-return-to-the-origin" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Simulate random walk in 1D and 2D for a different number of steps <span class="math notranslate nohighlight">\(N=10, 10^2,10^3, 10^4, 10^5\)</span></p></li>
+<li><p>Compute average number of returns to the origin <span class="math notranslate nohighlight">\(\langle n_{orig} \rangle\)</span>. That is number of times a random walker returns to the origin <span class="math notranslate nohighlight">\(0\)</span> for 1D  or (0,0)$ for 2D . You may want to use some 1000 trajectories to obtain average.</p></li>
+<li><p>Plot how <span class="math notranslate nohighlight">\(\langle n_{orig} \rangle\)</span> depends on number of steps N for 1D and 2D walker.</p></li>
+</ul>
+</section>
+<section id="problem-4-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d">
+<h3>Problem-4 Breaking the CLT; Cauchy vs Normal random walk in 2D<a class="headerlink" href="#problem-4-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d" title="Permalink to this heading">#</a></h3>
+<p>For this problem we are going to simulate two kinds of random walks in continuum space (not lattice): Levy flights and Normal distributd random walk.</p>
+<p>To simulate a 2D continuum space random walk we need to generate random step sizes <span class="math notranslate nohighlight">\(r_x\)</span>, <span class="math notranslate nohighlight">\(r_y\)</span>.
+Also you will need unifrom random namber to sample angles in 2D giving you a conitnuum random walk in 2D space: <span class="math notranslate nohighlight">\(x = r_x sin\theta\)</span> and <span class="math notranslate nohighlight">\(y=r_ycos\theta\)</span></p>
+<ul class="simple">
+<li><p>Normally: <span class="math notranslate nohighlight">\(r\sim N(0,1)\)</span></p></li>
+<li><p>Cauchy distribution (long tails, infinite variance) <span class="math notranslate nohighlight">\(r\sim Cauchy(0,1)\)</span></p></li>
+<li><p>Unform angles <span class="math notranslate nohighlight">\(\theta \sim U(0,1)\)</span></p></li>
+</ul>
+<p>Visualize random walk using matplotlib and study statistics of random walkers the way that is done for normal random walk/brownian motion examples!</p>
+</section>
+<section id="problem-5-continuous-time-random-walk-ctrw">
+<h3>Problem-5 Continuous time random walk (CTRW)<a class="headerlink" href="#problem-5-continuous-time-random-walk-ctrw" title="Permalink to this heading">#</a></h3>
+<p>Simulate 1D random walk but instead of picking times at regular intervals pick them from  exponential distribution. <br>
+Hint: you may want to use random variables from scipy.stats.exp <br></p>
+<p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.expon.html">scipy.stats.expon</a> <br></p>
+<p>Study the root mean square deviation as a function of exponential decay parameter <span class="math notranslate nohighlight">\(\lambda\)</span> of exponential distribution <span class="math notranslate nohighlight">\(e^{-\lambda x}\)</span>.</p>
 </section>
 </section>
 </section>
@@ -1387,9 +1499,16 @@ p=0.0001, 0.001, 0.01, 0.1. You can use  subplot functionality to make a pretty 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#law-of-large-numbers-lln">Law of Large Numbers (LLN)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-central-limit-theorem-clt">The Central Limit Theorem  (CLT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-1d-unbiased-random-walk">Simulating a 1D unbiased random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-msd-of-a-random-walker">Mean square displacement (MSD) of a random walker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-msd-of-a-random-walker">Mean square displacement (MSD) of a random walker</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-binomial-as-generator-of-gaussian-and-poisson-distributions">Problem 1 Binomial as generator of Gaussian and Poisson distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-confined-diffusion">Problem-2 Confined diffusion.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-return-to-the-origin">Problem-3 Return to the origin!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d">Problem-4 Breaking the CLT; Cauchy vs Normal random walk in 2D</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-continuous-time-random-walk-ctrw">Problem-5 Continuous time random walk (CTRW)</a></li>
 </ul>
 </li>
 </ul>

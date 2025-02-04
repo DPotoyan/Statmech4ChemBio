@@ -63,8 +63,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/rw-lab/rw_lab';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -487,19 +485,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-random-walk">2D random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-rsd-for-2d-random-walker">Compute RSD for 2D random walker</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oop">Oop</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-confined-diffusion">Problem-1 Confined diffusion.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-return-to-the-origin">Problem-2 Return to the origin!</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d">Problem-3 Breaking the CLT; Cauchy vs Normal random walk in 2D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-continuous-time-random-walk-ctrw">Problem-4 Continuous time random walk (CTRW)</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challange-project">Challange Project</a></li>
 </ul>
             </nav>
         </div>
@@ -523,114 +509,6 @@ document.write(`
 </div>
 </div>
 </div>
-<section id="d-random-walk">
-<h2>2D random walk<a class="headerlink" href="#d-random-walk" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rw_2d</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;2d random walk function:</span>
-<span class="sd">    n: Number of steps</span>
-<span class="sd">    N: Number of trajecotry</span>
-<span class="sd">    returns np.array with shape (T, N)</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">verteces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">),</span>
-                         <span class="p">(</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">),</span>
-                         <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-                         <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
-    
-    <span class="n">rw</span>       <span class="o">=</span> <span class="n">verteces</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">))]</span>
-    
-    <span class="n">rw</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
-    
-    <span class="k">return</span> <span class="n">rw</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traj</span> <span class="o">=</span> <span class="n">rw_2d</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">traj</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000, 1000, 2)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">traj</span><span class="p">[:,:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">traj</span><span class="p">[:,:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="c1"># plot first three random walkers</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f1f758c0f70&gt;,
- &lt;matplotlib.lines.Line2D at 0x7f1f758c0fd0&gt;,
- &lt;matplotlib.lines.Line2D at 0x7f1f758d6040&gt;]
-</pre></div>
-</div>
-<img alt="../../_images/6e606166f039df768b7ed0d758b7b10f825d4b55b5e6f3fc1d41ceb77ba66f6d.png" src="../../_images/6e606166f039df768b7ed0d758b7b10f825d4b55b5e6f3fc1d41ceb77ba66f6d.png" />
-</div>
-</div>
-</section>
-<section id="compute-rsd-for-2d-random-walker">
-<h2>Compute RSD for 2D random walker<a class="headerlink" href="#compute-rsd-for-2d-random-walker" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Simulate 2D random walk</span>
-<span class="n">n</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">1000</span>
-<span class="n">traj</span> <span class="o">=</span> <span class="n">rw_2d</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-
-<span class="c1">#Compute RSD </span>
-<span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">traj</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">-</span> <span class="n">traj</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span> 
-<span class="n">dy</span> <span class="o">=</span> <span class="p">(</span><span class="n">traj</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span> <span class="n">traj</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">])</span> 
-
-<span class="n">R2</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>   <span class="c1"># notice that we are averaging over N walkers </span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R2</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000,)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-
-<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># time axis</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">R2</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">);</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="s1">&#39;--&#39;</span><span class="p">);</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of steps, n&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$MSD(n)$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/bb9549179d2abbc3395928e2ddf7aee42a9d1c53f17af67c3a1232073e54a7f7.png" src="../../_images/bb9549179d2abbc3395928e2ddf7aee42a9d1c53f17af67c3a1232073e54a7f7.png" />
-</div>
-</div>
-</section>
-<section id="oop">
-<h2>Oop<a class="headerlink" href="#oop" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">RandomWalker1D</span><span class="p">:</span>
@@ -668,7 +546,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/03f76c5078f1ca4c0a5528af7bfad186567d99b810258bef1d81cb8f71e9654f.png" src="../../_images/03f76c5078f1ca4c0a5528af7bfad186567d99b810258bef1d81cb8f71e9654f.png" />
+<img alt="../../_images/38bb57f3edd4ee9f1ba964c5e829dd4e8173b96e8963636b178d83eee954cb01.png" src="../../_images/38bb57f3edd4ee9f1ba964c5e829dd4e8173b96e8963636b178d83eee954cb01.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -709,65 +587,16 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/dec75a83badcb6ad2f54427158c1f669fe1cb1a17b2454916d22461e07d70df6.png" src="../../_images/dec75a83badcb6ad2f54427158c1f669fe1cb1a17b2454916d22461e07d70df6.png" />
+<img alt="../../_images/5547d5fb8e3066442761ea7e9178c5f67b558bbd91734f7311a7fa7517017425.png" src="../../_images/5547d5fb8e3066442761ea7e9178c5f67b558bbd91734f7311a7fa7517017425.png" />
 </div>
 </div>
-<section id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
-<p><strong>The mighty little books</strong></p>
+<section id="challange-project">
+<h2>Challange Project<a class="headerlink" href="#challange-project" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference external" href="https://www.amazon.com/Random-Walks-Biology-Howard-Berg/dp/0691000646">“Random Walks in Biology”,  H Berg (1993)</a></p></li>
-<li><p><a class="reference external" href="https://www.amazon.com/gp/product/1464140294/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&amp;psc=1">“Physical models of Living systems”,  P Nelson (2015)</a></p></li>
+<li><p>Extend the previous code to do 3D random walk simulator</p></li>
+<li><p>Can you write general code that can do nD random walk simulations?</p></li>
+<li><p>Add function for computing mean square displacement from the origin</p></li>
 </ul>
-<p><strong>More in depth</strong></p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.amazon.com/Simple-Brownian-Diffusion-Introduction-Theoretical/dp/0199664501/ref=sr_1_1?keywords=diffusion+brownian&amp;qid=1579882520&amp;sr=8-1">“Simple Brownian Diffusion: An Introduction to the Standard Theoretical Models”, D Gillespie</a></p></li>
-<li><p><a class="reference external" href="https://www.amazon.com/Stochastic-Processes-Physicists-Understanding-Systems/dp/0521765420/ref=sr_1_1?keywords=kurt+jacobs+stochastic&amp;qid=1579882738&amp;sr=8-1">“Stochastic Processes for Physicists” K Jacobs</a></p></li>
-</ul>
-<p><strong>On the applied side</strong></p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.amazon.com/Brownian-Motion-Elements-Dynamics-Undergraduate/dp/3319980521/ref=sr_1_7?keywords=einstein+brownian&amp;qid=1579882356&amp;sr=8-7">Brownian Motion: Elements of Colloid Dynamics A P Philipse (2018)</a></p></li>
-</ul>
-</section>
-</section>
-<section id="problems">
-<h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
-<section id="problem-1-confined-diffusion">
-<h3>Problem-1 Confined diffusion.<a class="headerlink" href="#problem-1-confined-diffusion" title="Permalink to this heading">#</a></h3>
-<p>Simulate 2D random walk in a circular confinement. Re-write 2D random walk  code to simulate diffusion of a particle which is stuck inside a sphere.
-Study how root mean square deviation of position scales with time.</p>
-<ul class="simple">
-<li><p>Carry out simulations for different confinement sizes.</p></li>
-<li><p>Make plots of simulated trajectories.</p></li>
-</ul>
-</section>
-<section id="problem-2-return-to-the-origin">
-<h3>Problem-2 Return to the origin!<a class="headerlink" href="#problem-2-return-to-the-origin" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Simulate random walk in 1D and 2D for a different number of steps <span class="math notranslate nohighlight">\(N=10, 10^2,10^3, 10^4, 10^5\)</span></p></li>
-<li><p>Compute average number of returns to the origin <span class="math notranslate nohighlight">\(\langle n_{orig} \rangle\)</span>. That is number of times a random walker returns to the origin <span class="math notranslate nohighlight">\(0\)</span> for 1D  or (0,0)$ for 2D . You may want to use some 1000 trajectories to obtain average.</p></li>
-<li><p>Plot how <span class="math notranslate nohighlight">\(\langle n_{orig} \rangle\)</span> depends on number of steps N for 1D and 2D walker.</p></li>
-</ul>
-</section>
-<section id="problem-3-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d">
-<h3>Problem-3 Breaking the CLT; Cauchy vs Normal random walk in 2D<a class="headerlink" href="#problem-3-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d" title="Permalink to this heading">#</a></h3>
-<p>For this problem we are going to simulate two kinds of random walks in continuum space (not lattice): Levy flights and Normal distributd random walk.</p>
-<p>To simulate a 2D continuum space random walk we need to generate random step sizes <span class="math notranslate nohighlight">\(r_x\)</span>, <span class="math notranslate nohighlight">\(r_y\)</span>.
-Also you will need unifrom random namber to sample angles in 2D giving you a conitnuum random walk in 2D space: <span class="math notranslate nohighlight">\(x = r_x sin\theta\)</span> and <span class="math notranslate nohighlight">\(y=r_ycos\theta\)</span></p>
-<ul class="simple">
-<li><p>Normally: <span class="math notranslate nohighlight">\(r\sim N(0,1)\)</span></p></li>
-<li><p>Cauchy distribution (long tails, infinite variance) <span class="math notranslate nohighlight">\(r\sim Cauchy(0,1)\)</span></p></li>
-<li><p>Unform angles <span class="math notranslate nohighlight">\(\theta \sim U(0,1)\)</span></p></li>
-</ul>
-<p>Visualize random walk using matplotlib and study statistics of random walkers the way that is done for normal random walk/brownian motion examples!</p>
-</section>
-<section id="problem-4-continuous-time-random-walk-ctrw">
-<h3>Problem-4 Continuous time random walk (CTRW)<a class="headerlink" href="#problem-4-continuous-time-random-walk-ctrw" title="Permalink to this heading">#</a></h3>
-<p>Simulate 1D random walk but instead of picking times at regular intervals pick them from  exponential distribution. <br>
-Hint: you may want to use random variables from scipy.stats.exp <br></p>
-<p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.expon.html">scipy.stats.expon</a> <br></p>
-<p>Study the root mean square deviation as a function of exponential decay parameter <span class="math notranslate nohighlight">\(\lambda\)</span> of exponential distribution <span class="math notranslate nohighlight">\(e^{-\lambda x}\)</span>.</p>
-</section>
 </section>
 </section>
 
@@ -834,19 +663,7 @@ Hint: you may want to use random variables from scipy.stats.exp <br></p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#d-random-walk">2D random walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-rsd-for-2d-random-walker">Compute RSD for 2D random walker</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#oop">Oop</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-confined-diffusion">Problem-1 Confined diffusion.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-return-to-the-origin">Problem-2 Return to the origin!</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-breaking-the-clt-cauchy-vs-normal-random-walk-in-2d">Problem-3 Breaking the CLT; Cauchy vs Normal random walk in 2D</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-continuous-time-random-walk-ctrw">Problem-4 Continuous time random walk (CTRW)</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challange-project">Challange Project</a></li>
 </ul>
   </nav></div>
 
