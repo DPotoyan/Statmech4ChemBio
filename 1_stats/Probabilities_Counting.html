@@ -651,7 +651,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f9245c57df0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa5f474bdf0&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -670,7 +670,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f92455cf430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa61587a280&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -689,7 +689,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f92455bfbe0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa5f43bfeb0&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -1117,14 +1117,12 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 \[
 \log\frac{N!}{N_{+}! \cdot N_{-}!} \approx N \log N -N_{+} \log N_{+} - N_{-} \log N_{-}  = N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big]
 \]</div>
-<ul class="simple">
-<li><p>Rewriting in terms of <span class="math notranslate nohighlight">\(f_{+} = \frac{N_{+}}{N}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = \frac{N_{-}}{N}\)</span> which are the fractions of steps going to the right and left, respectively.</p></li>
-</ul>
 <div class="math notranslate nohighlight">
 \[
 \log\frac{N!}{N_{+}! \cdot N_{-}!} = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f) 
 \]</div>
 <ul class="simple">
+<li><p>Where we introduced fractions of steps going to the right/left, <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span> which range from 0 to 1 and hence are <strong>intensive quantities</strong></p></li>
 <li><p>Note that <span class="math notranslate nohighlight">\(p_{+}\)</span> is fixed while <span class="math notranslate nohighlight">\(f_{+}\)</span> is variable. For large  <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(f_{+} \rightarrow p_{\pm}\)</span>. But for finate <span class="math notranslate nohighlight">\(N\)</span> there will be fluctuations <span class="math notranslate nohighlight">\(f_{+}\)</span> deviate from expected probability <span class="math notranslate nohighlight">\(p_{+}\)</span>.</p></li>
 <li><p>A general expression will later be identified with entropy <span class="math notranslate nohighlight">\(s =  -\sum_i p_i \log p_i\)</span> where <span class="math notranslate nohighlight">\(p_i\)</span> would be probabiliteis of various microstates.</p></li>
 </ul>
@@ -1132,37 +1130,6 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 <p class="admonition-title">Entropy expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong></p>
 <div class="math notranslate nohighlight">
 \[log \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{N-\Delta N}{2}\Big)!} = N \Bigg [\frac{1+x}{2} \log \frac{1+x}{2} - \frac{1-x}{2} \log \frac{1-x}{2}\Bigg ] = N s(x)\]</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dp</span> <span class="o">=</span> <span class="mf">1e-6</span> <span class="c1"># to avoid taking log of zero</span>
-
-<span class="n">p_heads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">dp</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-
-<span class="c1"># Calculate entropy for each probability</span>
-<span class="n">entropy_coin</span> <span class="o">=</span> <span class="o">-</span><span class="n">p_heads</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">p_heads</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p_heads</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p_heads</span><span class="p">)</span>
-
-<span class="c1"># Plot entropy as a function of the bias of the coin</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_heads</span><span class="p">,</span> <span class="n">entropy_coin</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Entropy&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Probability of Heads (Bias)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Entropy (bits)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Entropy as a Function of Coin Bias&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="../_images/de00789759105d9cfa9fe958ce166ca471ca5b631b7e23391c8827f3599c69d6.png" src="../_images/de00789759105d9cfa9fe958ce166ca471ca5b631b7e23391c8827f3599c69d6.png" />
-</div>
 </div>
 <p><strong>Energy as the degree of bias or tilt</strong></p>
 <ul class="simple">
@@ -1187,13 +1154,13 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 <section id="large-deviation-theory">
 <h2>Large Deviation Theory<a class="headerlink" href="#large-deviation-theory" title="Permalink to this heading">#</a></h2>
 <ul>
-<li><p>Applying Stirling’s approximation to the binomial distribution, we find that the logarithm of the probability of observing a fraction <span class="math notranslate nohighlight">\(f\)</span> of steps is governed by a rate function <span class="math notranslate nohighlight">\(I(f)\)</span>, with <span class="math notranslate nohighlight">\(N\)</span> appearing as a linear factor:</p>
+<li><p>Putting everything together we find that probability of observing fraction of steps <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span> is governed by a rate function <span class="math notranslate nohighlight">\(I(f)\)</span>, with <span class="math notranslate nohighlight">\(N\)</span> appearing as a linear factor:</p>
 <div class="math notranslate nohighlight">
 \[
   \log P_{N}(f) \approx -N \big(\epsilon(f) - s(f) \big) = -N I(f).
   \]</div>
 </li>
-<li><p>When there are <span class="math notranslate nohighlight">\(N\)</span> steps, molecules, or components, the probability distribution over the fraction of steps, defined as <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span>, tends to concentrate near the minima of <span class="math notranslate nohighlight">\(I(f)\)</span>. This follows from a general mathematical property of probability distributions known as the <strong>large deviation theorem</strong>.</p></li>
+<li><p>When there are <span class="math notranslate nohighlight">\(N\)</span> steps, molecules, or components, the probability distribution over the fraction of steps <span class="math notranslate nohighlight">\(f\)</span> tends to concentrate near the minima of <span class="math notranslate nohighlight">\(I(f)\)</span>. This follows from a general mathematical property of probability distributions known as the <strong>large deviation theorem</strong>.</p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Large Deviation Theorem (LDT)</strong></p>
