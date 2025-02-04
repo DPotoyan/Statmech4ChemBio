@@ -501,7 +501,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-net-number-of-steps-macrostates">Probability of net number of steps (macrostates)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-the-degree-of-bias-or-tilt">Energy as the degree of bias or tilt</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-nature-of-fluctuations">Gaussian nature of fluctuations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-explicit-derivations">Appendix: Explicit derivations</a></li>
@@ -651,7 +655,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fba3c9cbd90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f373c90bd90&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -670,7 +674,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fba3c9101f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f373c850190&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -689,7 +693,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fba3c881be0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f373c90bdf0&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -1112,26 +1116,28 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 <h2>Log of probability leads us to Entropy and Energy<a class="headerlink" href="#log-of-probability-leads-us-to-entropy-and-energy" title="Permalink to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[log\, p(N_{+}|N, p_{+}) = log \bigg[ \frac{N!}{N_{+}! N_{-}!}\bigg] + log \bigg[p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}\bigg] = entropy + energy \]</div>
-<p><strong>Entropy as log of number of microstates in a macrostate</strong></p>
+<section id="entropy-as-log-of-number-of-microstates-in-a-macrostate">
+<h3>Entropy as log of number of microstates in a macrostate<a class="headerlink" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 \log\frac{N!}{N_{+}! \cdot N_{-}!} \approx N \log N -N_{+} \log N_{+} - N_{-} \log N_{-}  = N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big]
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-\log\frac{N!}{N_{+}! \cdot N_{-}!} = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f) 
+\log\frac{N!}{N_{+}! \cdot N_{-}!} = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s(f) =  -f_{+} log f_{+} -f_{-} log f_{-} = -flog f + (1-f)log(1-f)
 \]</div>
 <ul class="simple">
-<li><p>Where we introduced fractions of steps going to the right/left, <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span> which range from 0 to 1 and hence are <strong>intensive quantities</strong></p></li>
+<li><p>Where we introduced fractions of steps going to the right/left, <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span>. Since these fractions are dependent we only have one variable to keep track of <span class="math notranslate nohighlight">\(f=f_{+}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = 1-f\)</span></p></li>
 <li><p>Note that <span class="math notranslate nohighlight">\(p_{+}\)</span> is fixed while <span class="math notranslate nohighlight">\(f_{+}\)</span> is variable. For large  <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(f_{\pm} \rightarrow p_{\pm}\)</span>. But for finate <span class="math notranslate nohighlight">\(N\)</span> there will be fluctuations <span class="math notranslate nohighlight">\(f_{+}\)</span> deviate from expected probability <span class="math notranslate nohighlight">\(p_{+}\)</span>.</p></li>
 <li><p>A general expression will later be identified with entropy <span class="math notranslate nohighlight">\(s =  -\sum_i p_i \log p_i\)</span> where <span class="math notranslate nohighlight">\(p_i\)</span> would be probabiliteis of various microstates.</p></li>
 </ul>
-<div class="tip dropdown admonition">
-<p class="admonition-title">Entropy expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong></p>
-<div class="math notranslate nohighlight">
-\[log \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{N-\Delta N}{2}\Big)!} = N \Bigg [\frac{1+x}{2} \log \frac{1+x}{2} - \frac{1-x}{2} \log \frac{1-x}{2}\Bigg ] = N s(x)\]</div>
-</div>
-<p><strong>Energy as the degree of bias or tilt</strong></p>
+</section>
+<section id="energy-as-the-degree-of-bias-or-tilt">
+<h3>Energy as the degree of bias or tilt<a class="headerlink" href="#energy-as-the-degree-of-bias-or-tilt" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on fraction of steps <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span></p></li>
 </ul>
@@ -1139,6 +1145,11 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 \[
 \log \Big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \Big] = - N [ f_{+}log p_{+}+f_{-}log p_{-}] = -N \epsilon
 \]</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Entropy expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[log \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{N-\Delta N}{2}\Big)!} = N \Bigg [\frac{1+x}{2} \log \frac{1+x}{2} - \frac{1-x}{2} \log \frac{1-x}{2}\Bigg ] = N s(x)\]</div>
+</div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Energy term expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong></p>
 <div class="math notranslate nohighlight">
@@ -1150,6 +1161,7 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 <li><p>The term <span class="math notranslate nohighlight">\(\frac{x}{2} (\log p_{+} - \log p_{-})\)</span> represents the <strong>bias</strong> introduced by the displacement <span class="math notranslate nohighlight">\(l\)</span>, tilting the distribution towards <span class="math notranslate nohighlight">\(p_+\)</span> or <span class="math notranslate nohighlight">\(p_-\)</span>.</p></li>
 </ul>
 </div>
+</section>
 </section>
 <section id="large-deviation-theory">
 <h2>Large Deviation Theory<a class="headerlink" href="#large-deviation-theory" title="Permalink to this heading">#</a></h2>
@@ -1587,7 +1599,11 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-net-number-of-steps-macrostates">Probability of net number of steps (macrostates)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-the-degree-of-bias-or-tilt">Energy as the degree of bias or tilt</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-nature-of-fluctuations">Gaussian nature of fluctuations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-explicit-derivations">Appendix: Explicit derivations</a></li>
