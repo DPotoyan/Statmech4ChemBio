@@ -515,7 +515,11 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random walk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-sequence-or-trajecotry-of-jumps-microstates">Probability of sequence or trajecotry of jumps (microstates)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilities-of-number-of-steps-macrostates">Probabilities of number of steps (macrostates)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-counting-dies-and-coins">Problem 1: Counting Dies and coins</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-counting-gas-molecules">Problem 2: Counting gas molecules</a></li>
@@ -626,15 +630,17 @@ document.write(`
 </section>
 <section id="compute-probabilities-through-counting">
 <h2>Compute probabilities through counting<a class="headerlink" href="#compute-probabilities-through-counting" title="Permalink to this heading">#</a></h2>
-<p>We calculate probabilities of events as fractions in the sample space that events take up.</p>
+<div class="important admonition">
+<p class="admonition-title"><strong>probabilities of events as fractions in the sample space</strong></p>
 <div class="math notranslate nohighlight">
 \[
-\boxed{\Large P(A) = \frac{n(A)}{n(\Omega)}}
+\boxed{ P(A) = \frac{n(A)}{n(\Omega)}}
 \]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(n(A)\)</span> probability of event, e.g rolling an even number. The size of the event space is 3</p></li>
 <li><p><span class="math notranslate nohighlight">\(n(\Omega)\)</span> size of sample space. In the context of single die roll is equal 6</p></li>
 </ul>
+</div>
 </section>
 <section id="macrostates-and-venn-diagrams">
 <h2>Macrostates and  Venn diagrams<a class="headerlink" href="#macrostates-and-venn-diagrams" title="Permalink to this heading">#</a></h2>
@@ -656,7 +662,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f48a86cbdf0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa94c5e6d90&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -675,7 +681,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f48a86102b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa94c52b4f0&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -694,7 +700,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f48a8580d30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fa94c49adc0&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -961,25 +967,53 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 </section>
 </section>
 <section id="random-walk">
-<h2>Random walk<a class="headerlink" href="#random-walk" title="Permalink to this heading">#</a></h2>
+<h2>Random Walk<a class="headerlink" href="#random-walk" title="Permalink to this heading">#</a></h2>
+<section id="probability-of-sequence-or-trajecotry-of-jumps-microstates">
+<h3>Probability of sequence or trajecotry of jumps (microstates)<a class="headerlink" href="#probability-of-sequence-or-trajecotry-of-jumps-microstates" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Tossing a coin a few times generates a random sequence of outcomes e.g HTHTTT.</p></li>
-<li><p>Probability of landing H vs T for a fair coin or unbiased diffusing molecule jumping right vs left is <span class="math notranslate nohighlight">\(p_{+} = p_{-1} = 1/2\)</span>. Therefore, the probability of any <span class="math notranslate nohighlight">\(N\)</span>-long sequence is always equal to <span class="math notranslate nohighlight">\(2^{-N}\)</span>.</p></li>
-</ul>
-<p><strong>Probability of <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the righ</strong></p>
-<ul class="simple">
-<li><p>More generally, the probability of taking <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right after <span class="math notranslate nohighlight">\(N\)</span> coin tosses with a biased coin that lands right with probability <span class="math notranslate nohighlight">\(p_{+}\)</span> on heads is given by:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[P(N_{+}| N, p_{+}) = \frac{N!}{N_{-}! N_{+}!} \cdot p_{-}^{N_{+}}  p_{+}^{N_{-}}\]</div>
-<p><strong>Probability of x step net displacement from the origin</strong></p>
-<ul class="simple">
-<li><p>A molecule that starts at 0 and moves via consecutive jumps in the left vs right direction with probabilities <span class="math notranslate nohighlight">\(p_{+}\)</span> and <span class="math notranslate nohighlight">\(p_{-}=1-p_{+}\)</span>.</p></li>
-<li><p>An interesting question for diffusion is to compute the average displacement of the molecule relative to the origin <span class="math notranslate nohighlight">\(x = N_{+}-N_{-}\)</span></p></li>
-<li><p>We can rewrite probability in terms of net displacement <span class="math notranslate nohighlight">\(x = N_{+} - (N-N_{+})\)</span> or <span class="math notranslate nohighlight">\(N_{+} = \frac{x+N}{2}\)</span>:</p></li>
+<li><p>Tossing a coin a few times generates a random sequence of events, e.g., HTHTH or TTTTT.</p></li>
+<li><p>The probability of landing heads vs. tails for a fair coin or an unbiased diffusing molecule jumping right vs. left is <span class="math notranslate nohighlight">\(p_{+} = p_{-} = \frac{1}{2}\)</span>. Therefore, the probability of any <span class="math notranslate nohighlight">\(N\)</span>-long sequence is always equal <span class="math notranslate nohighlight">\(\frac{1}{2^N}\)</span></p></li>
+<li><p>For a biased coin or diffusing molecule the probability fo sequence of <span class="math notranslate nohighlight">\(N_{+}\)</span> jumps with probability <span class="math notranslate nohighlight">\(p_{+}\)</span> and  <span class="math notranslate nohighlight">\(N_{-}\)</span> jumps with probability <span class="math notranslate nohighlight">\(p_{-}\)</span> will be</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[P(x|N, p_{+}) = \frac{ N!}{ \Big(\frac{N-x}{2}\Big)! \Big(\frac{N+x}{2}\Big)!} \cdot p_{+}^{(N+x)/2} \cdot (1-p_{+})^{(N-x)/2}\]</div>
+\[p(biased\,\,\, sequence) = p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}\]</div>
+</section>
+<section id="probabilities-of-number-of-steps-macrostates">
+<h3>Probabilities of number of steps (macrostates)<a class="headerlink" href="#probabilities-of-number-of-steps-macrostates" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A more interesting question is the probability of taking <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right, or equivalently, having a net displacement of <span class="math notranslate nohighlight">\(\Delta N = N_{+} - N_{-}\)</span>, regardless of the sequence of events.</p></li>
+<li><p>To quantify this, we first write down the main variables and constraints on probabilites and Numbers of steps:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p_{+} + p_{-} = 1
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+N_{+} + N_{-} = N
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\Delta N = N_{+} - N_{-}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+N_{\pm} = \frac{N \pm \Delta N}{2}
+\]</div>
+<ul class="simple">
+<li><p><strong>Probability of <span class="math notranslate nohighlight">\(N_{+}\)</span> Steps to the Right</strong> is obtained by computing number of ways to generate sequences that have <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to right out of <span class="math notranslate nohighlight">\(N\)</span>. This is given by factorial!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(N_{+} | N, p_{+}) = \frac{N!}{N_{+}! N_{-}!} \cdot p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}
+\]</div>
+<ul class="simple">
+<li><p><strong>Probability of <span class="math notranslate nohighlight">\(\Delta N\)</span> Net Displacement from the Origin</strong> is given by changing variables of steps to right/left with variables of net displacement and total number of steps</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{N-\Delta N}{2}\Big)!} \cdot p_{+}^{(N+\Delta N)/2} \cdot p_{-}^{(N-\Delta N)/2}
+\]</div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1065,18 +1099,18 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\log\frac{N!}{N_{+}! \cdot N_{-}!} \approx N \log N -N_{+} \log N_{+} - N_{-} \log N_{-} 
+\log\frac{N!}{N_{+}! \cdot N_{-}!} \approx N \log N -N_{+} \log N_{+} - N_{-} \log N_{-}  = N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big]
 \]</div>
 <p><strong>Discovering Entropy</strong></p>
-<p>Rewriting in terms of fractions of steps the log of Binomial leads us to a very interesting quantity</p>
+<ul class="simple">
+<li><p>Rewriting in terms of <span class="math notranslate nohighlight">\(f_{+} = \frac{N_{+}}{N}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = \frac{N_{-}}{N}\)</span> which are seen as the fractions of steps going to the right and left, respectively</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
-= N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f) 
+\log\frac{N!}{N_{+}! \cdot N_{-}!} = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f) 
 \]</div>
-<p>where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(f_{+} = \frac{N_{+}}{N}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = \frac{N_{-}}{N}\)</span> are the fractions of steps going to the right and left, respectively.</p></li>
-<li><p>For large <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(f_{+} \rightarrow p_{\pm}\)</span>. But for finate systems there will be fluctuations and the fractions are not equal to expected probabilities.</p></li>
+<li><p>For large fractions coverge to expected probabiltieis <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(f_{+} \rightarrow p_{\pm}\)</span>. But for finate <span class="math notranslate nohighlight">\(N\)</span> there will be fluctuations and the fractions will deviate from expected probabilities.</p></li>
 <li><p>A general expression will later be identified with entropy <span class="math notranslate nohighlight">\(s =  -\sum_i p_i \log p_i\)</span> where <span class="math notranslate nohighlight">\(p_i\)</span> would be probabiliteis of various microstates.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
@@ -1112,42 +1146,42 @@ $<span class="math notranslate nohighlight">\(p(up) =\frac{n(up)}{n(S)}\)</span>
 </div>
 <p><strong>Discovering Energy</strong></p>
 <ul class="simple">
-<li><p>Taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on <span class="math notranslate nohighlight">\(f_{\pm}\)</span></p></li>
+<li><p>Taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on fraction of steps <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \log \Big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \Big] = - N [ f_{+}log p_{+}+f_{-}log p_{-}] = -N \epsilon
 \]</div>
 <ul class="simple">
-<li><p>Let us also write in terms of <span class="math notranslate nohighlight">\(\bar{x}=\frac{x}{N}\)</span> which the displacement of molecule to the right normalized by <span class="math notranslate nohighlight">\(N\)</span></p></li>
+<li><p>Let us also write in terms of <strong>fractional displacement <span class="math notranslate nohighlight">\(l=\frac{\Delta N}{N}\)</span></strong> which is normalized by steps and hence never exceeds 1.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\log \Big[ p_{+}^{(N+x)/2} \cdot p_{-}^{(N-x)/2} \Big] = - N\Big [ \frac{1}{2}\log ( p_{+} p_{-}) + \frac{1}{2} \bar{x} \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon
+\log \Big[ p_{+}^{(N+\Delta N)/2} \cdot p_{-}^{(N-\Delta N)/2} \Big] = - N\Big [ \frac{1}{2}\log ( p_{+} p_{-}) + \frac{l}{2}  \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon
 \]</div>
 <ul class="simple">
 <li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} (\log p_{+} + \log p_{-})\)</span> is a <strong>baseline</strong> energy-like term.</p></li>
-<li><p>The term <span class="math notranslate nohighlight">\(\frac{x}{2N} (\log p_{+} - \log p_{-})\)</span> represents the <strong>bias</strong> introduced by the displacement <span class="math notranslate nohighlight">\(x\)</span>, tilting the distribution towards <span class="math notranslate nohighlight">\(p_+\)</span> or <span class="math notranslate nohighlight">\(p_-\)</span>.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{l}{2} (\log p_{+} - \log p_{-})\)</span> represents the <strong>bias</strong> introduced by the displacement <span class="math notranslate nohighlight">\(l\)</span>, tilting the distribution towards <span class="math notranslate nohighlight">\(p_+\)</span> or <span class="math notranslate nohighlight">\(p_-\)</span>.</p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Large Deviation Theorem (LDT)</strong></p>
 <ul class="simple">
-<li><p>When there are <span class="math notranslate nohighlight">\( N \)</span> steps, molecules, or components, the probability distribution tends to concentrate in regions defined by the <strong>large deviation function</strong> <span class="math notranslate nohighlight">\( I(\bar{x})= [\epsilon-s] \)</span>.</p></li>
+<li><p>When there are <span class="math notranslate nohighlight">\(N\)</span> steps, molecules, or components, the probability distribution defined over fraction of steps  <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span> or displacements <span class="math notranslate nohighlight">\(l=\frac{\Delta N}{N}\)</span> tends to concentrate in regions defined by the <strong>large deviation function</strong> <span class="math notranslate nohighlight">\( I(f)= [\epsilon-s] \)</span>.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\log P_{N}(\bar{x}) \approx -N I(\bar{x}) 
+\log P_{N}(f) \approx -N I(f) 
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-P_N (\bar{x}) \sim e^{-N I(\bar{x})}.
+P_N (f) \sim e^{-N I(f)}.
 \]</div>
 <ul class="simple">
 <li><p>The <strong>large deviation function</strong> combines both <strong>entropic</strong> and <strong>energetic</strong> components and determines how deviations of <span class="math notranslate nohighlight">\( f_+ \)</span> from <span class="math notranslate nohighlight">\( p_+ \)</span> are exponentially suppressed as <span class="math notranslate nohighlight">\( N \)</span> increases.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-I(f_+) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}.
+I(f) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}.
 \]</div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1187,9 +1221,9 @@ I(f_+) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}.
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="c1"># First subplot: Entropy and Energy Components</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_plus_values</span><span class="p">,</span> <span class="n">s_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$s(f_+)$ (Entropy)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_plus_values</span><span class="p">,</span> <span class="n">s_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$s(f)$ (Entropy)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_plus_values</span><span class="p">,</span> <span class="n">epsilon_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\epsilon(f_+)$ (Energy)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_plus_values</span><span class="p">,</span> <span class="n">I_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$I(f_+)$ (Rate Function)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">f_plus_values</span><span class="p">,</span> <span class="n">I_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$I(f)$ (Rate Function)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">p_plus</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$f_+ = p_+$&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$f_+$&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
@@ -1213,7 +1247,7 @@ I(f_+) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}.
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/6d429d62ab78d1b5c69a36e0c84eddf9b57238aa980c94f9f90eba3e9596c73b.png" src="../_images/6d429d62ab78d1b5c69a36e0c84eddf9b57238aa980c94f9f90eba3e9596c73b.png" />
+<img alt="../_images/1b070db7d2c2db090e6e87f152af35add1baf61c9b4a97fce4a84f57a3a5578f.png" src="../_images/1b070db7d2c2db090e6e87f152af35add1baf61c9b4a97fce4a84f57a3a5578f.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1280,50 +1314,76 @@ I(f_+) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}.
 </div>
 </div>
 <div class="tip dropdown admonition">
-<p class="admonition-title">Appendix B. Gaussian approximation to the Binomial Distribution in the large <span class="math notranslate nohighlight">\(N\)</span> limit.</p>
-<p>Binomial distribution for large values of <span class="math notranslate nohighlight">\(N\)</span> has a sharply peaked distribution around its maximum (most likely) value <span class="math notranslate nohighlight">\(\bar{n}\)</span>. This motivates us to seek a continuous approximation by Taylor expanding probability distribution around its max value <span class="math notranslate nohighlight">\(\Delta n = n-\bar{n}\)</span> and keeping up to quadratic terms.</p>
+<p class="admonition-title">Appendix B. Gaussian Approximation to the Binomial Distribution in the Large <span class="math notranslate nohighlight">\(N\)</span> Limit</p>
+<p>The binomial distribution for large values of <span class="math notranslate nohighlight">\(N\)</span> has a sharply peaked distribution around its maximum (most likely) value <span class="math notranslate nohighlight">\(\tilde{n}\)</span>. This motivates us to seek a continuous approximation by Taylor expanding the probability distribution around its maximum value <span class="math notranslate nohighlight">\(\Delta n = n - \tilde{n}\)</span> and keeping terms up to quadratic order.</p>
 <div class="math notranslate nohighlight">
-\[P_N(n) = \frac{N!}{n! (N-n)!} p^n (1-p)^{(N-n)}\]</div>
-<p>Thus from the onset we are aiming for a Gaussian distribution. The task then is to find coefficients and to then justify that third term of Taylor expansion is negligible compared to the second!</p>
+\[
+P_N(n) = \frac{N!}{n! (N - n)!} p^{n} (1-p)^{N-n}
+\]</div>
+<p>Thus, from the onset, we aim for a Gaussian distribution. The task is to find the coefficients and justify that the third term in the Taylor expansion is negligible compared to the second.</p>
 <div class="math notranslate nohighlight">
-\[logP(n) = logP(\bar{n}) + \frac{1}{2}B_2\Delta n^2 + O(\delta n^3)\]</div>
+\[
+\log P(n) = \log P(\tilde{n}) + \frac{1}{2} B_2 \Delta n^2 + O(\Delta n^3)
+\]</div>
 <div class="math notranslate nohighlight">
-\[log P(n) = log N! - log n! - log(N-n)! + nlog(p) + (N-n)log(1-p)\]</div>
-<p>We evaluate derivative of <span class="math notranslate nohighlight">\(logn!\)</span> in the limit of <span class="math notranslate nohighlight">\(n\gg1\)</span> as:</p>
+\[
+\log P(n) = \log N! - \log n! - \log( N - n)! + n \log(p) + N_{-} \log(1-p)
+\]</div>
+<p>We evaluate the derivative of <span class="math notranslate nohighlight">\(\log n!\)</span> in the limit of <span class="math notranslate nohighlight">\(n \gg 1\)</span> as:</p>
 <div class="math notranslate nohighlight">
-\[\frac{d}{dn} log n! = \frac{log(n+1)! - log n!}{n+1-n} \approx log(n+1) \approx log(n)\]</div>
+\[
+\frac{d}{dn} \log n! = \frac{\log(n+1)! - \log n!}{n+1 - n} \approx \log(n+1) \approx \log(n)
+\]</div>
 <ul class="simple">
-<li><p>We could also arrive at the same result by using Stirling approximation <span class="math notranslate nohighlight">\(logN! \approx  NlogN -n\)</span></p></li>
-<li><p>Taking first derivative of Taylor expansion to Binomial we find the peak of the distribution around which we are making expansion:</p></li>
+<li><p>We could also arrive at the same result by using Stirling’s approximation <span class="math notranslate nohighlight">\(\log N! \approx N \log N - N\)</span>.</p></li>
+<li><p>Taking the first derivative of the Taylor expansion for the binomial distribution, we find the peak of the distribution around which we expand:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\frac{d}{dn}log P(n) \Big |_{n=\bar{n}} = - log n + log(n-n) + log(p)  -log(1-p)=0\]</div>
+\[
+\frac{d}{dn} \log P(n) \Big|_{n = \tilde{n}} = - \log n + \log(N - n) + \log(p) - \log(1-p) = 0
+\]</div>
 <div class="math notranslate nohighlight">
-\[log \Big( \frac{N-n}{n} \frac{p}{1-p}\Big)=0\,\, \rightarrow \,\, \bar{n} = Np\]</div>
+\[
+\log \left( \frac{N - n}{n} \cdot \frac{p}{1 - p} \right) = 0 \quad \Rightarrow \quad \tilde{n} = N p
+\]</div>
 <ul class="simple">
-<li><p>We recall that <span class="math notranslate nohighlight">\(\bar{n} = Np\)</span> is also mean of the binomial!</p></li>
-<li><p>Having found the peak of distribution and knowing first derivative we now proceed to compute the second derivative:</p></li>
+<li><p>We recall that <span class="math notranslate nohighlight">\(\tilde{n} = N p\)</span> is also the mean of the binomial distribution!</p></li>
+<li><p>Having found the peak of the distribution and knowing the first derivative, we now proceed to compute the second derivative:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}B_2 = \frac{d^2}{d n^2} logP(n) \Big |_{n = \bar{n}} = \frac{d}{dn} log \Big( \frac{N-n}{n} \frac{p}{1-p}\Big) \\ = \Big( - \frac{1}{N-n}-\frac{1}{n} \Big) \Big |_{n = \bar{n}} = - \frac{1}{Npq}\end{split}\]</div>
+\[
+B_2 = \frac{d^2}{d n^2} \log P(n) \Big|_{n = \tilde{n}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+= \frac{d}{dn} \log \left( \frac{N - n}{n} \cdot \frac{p}{1 - p} \right) = \left( -\frac{1}{N - n} - \frac{1}{n} \right) \Bigg|_{n = \tilde{n}} = -\frac{1}{N p(1 - p)}
+\]</div>
 <ul class="simple">
-<li><p>While first derivative gave us the mean of binomial we notice that second derivative produces the variance <span class="math notranslate nohighlight">\(\sigma^2 = Npq\)</span></p></li>
-<li><p>Now all that remains to do is to plug  the coefficients into our approximated probability distribution and then normalize it. Why normalize? After all Binomial was already properly normalized.  But since we made approximation by leaving our some terms we have to re-normalize again!</p></li>
+<li><p>While the first derivative gave us the mean of the binomial distribution, we notice that the second derivative produces the variance <span class="math notranslate nohighlight">\(\sigma^2 = N p (1 - p)\)</span>.</p></li>
+<li><p>Now, all that remains is to plug the coefficients into our approximated probability distribution and normalize it. Why normalize? The binomial was already properly normalized, but since we made an approximation by neglecting higher-order terms, we must re-normalize.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[P(n) \approx P(\bar{n}) e^{-(n-\bar{n})^2/ 2Npq}\]</div>
+\[
+P(n) \approx P(\tilde{n}) e^{-(n - \tilde{n})^2 / 2N p (1 - p)}
+\]</div>
 <ul class="simple">
-<li><p>Normalizing gaussian distribution is done via the following table integral</p></li>
+<li><p>Normalizing the Gaussian distribution is done via the following integral:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\int^{+\infty}_{-\infty} e^{-ax^2} = \Big(\frac{\pi}{a} \Big)^{1/2}\]</div>
+\[
+\int_{-\infty}^{+\infty} e^{-a x^2} dx = \left(\frac{\pi}{a}\right)^{1/2}
+\]</div>
 <div class="math notranslate nohighlight">
-\[\int P(\bar{n}) e^{-(n-\bar{n})^2/ 2Npq} dn  = P(\bar{n}) (2\pi Npq)^{1/2}=1\]</div>
+\[
+\int P(\tilde{n}) e^{-(n - \tilde{n})^2 / 2N p (1 - p)} dn = P(\tilde{n}) (2\pi N p (1 - p))^{1/2} = 1
+\]</div>
 <ul class="simple">
-<li><p>At last we have the normalized approximation to Binomial which is a guassian distribution arond mean!</p></li>
+<li><p>Finally, we obtain the normalized Gaussian approximation to the binomial distribution:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[P(n) \approx \frac{1}{(2\pi Npq)^{1/2}} e^{-(n-\bar{n})^2/ 2Npq} = \frac{1}{(2\pi \sigma^2)^{1/2}}e^{(n-\mu)^2/2\sigma^2}\]</div>
+\[
+P(n) \approx \frac{1}{(2\pi N p (1 - p))^{1/2}} e^{-(n - \tilde{n})^2 / 2N p (1 - p)} = \frac{1}{(2\pi \sigma^2)^{1/2}} e^{-(n - \mu)^2 / 2\sigma^2}
+\]</div>
 </div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Appendix C. Deriving Poisson distribution from Binomial </p>
@@ -1345,6 +1405,7 @@ I(f_+) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}.
 <div class="math notranslate nohighlight">
 \[P(n) = \frac{N^n}{n!} \Big( \frac{\lambda}{N} \Big)^n \Big( 1-\frac{\lambda}{N} \Big)^{N} = \frac{\lambda^n}{n!} \Big( 1-\frac{\lambda}{N} \Big)^{N} \approx \frac{\lambda^n}{n!} e^{-\lambda}\]</div>
 </div>
+</section>
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
@@ -1463,7 +1524,11 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random walk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-sequence-or-trajecotry-of-jumps-microstates">Probability of sequence or trajecotry of jumps (microstates)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilities-of-number-of-steps-macrostates">Probabilities of number of steps (macrostates)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-counting-dies-and-coins">Problem 1: Counting Dies and coins</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-counting-gas-molecules">Problem 2: Counting gas molecules</a></li>
