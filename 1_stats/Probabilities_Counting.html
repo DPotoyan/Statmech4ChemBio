@@ -493,12 +493,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macrostates-and-venn-diagrams">Macrostates and  Venn diagrams</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-posterior-and-likelihood">Prior, posterior and likelihood</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-and-combinatorics">Counting and Combinatorics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution-two-state-systems"><strong>Binomial Distribution (Two-State Systems)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-distribution-multiple-states"><strong>Multinomial Distribution (Multiple States)</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a><ul class="nav section-nav flex-column">
@@ -654,7 +652,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f5c59ddbdf0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fd9b8dcbdf0&gt;
 </pre></div>
 </div>
 <img alt="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" src="../_images/add9e7dce330173df816b143145198cbe89a8c9807e20b0b83645a8db6cef64a.png" />
@@ -673,7 +671,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f5c59d181f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fd9b89d01f0&gt;
 </pre></div>
 </div>
 <img alt="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" src="../_images/d3c16134436fd6c7b0c47707ae43afad3941be6e2466bca359dbc9a32565617c.png" />
@@ -692,7 +690,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7f5c59c87cd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib_venn._common.VennDiagram at 0x7fd9d4b3adc0&gt;
 </pre></div>
 </div>
 <img alt="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" src="../_images/1d4494670b0bff66643a8b10eebc5f7039ef6823c06110dcb2fa8d0faf3ab85b.png" />
@@ -781,39 +779,22 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p></li>
 </div></blockquote>
 </div>
 </section>
-<section id="bayes-formula">
-<h2>Bayes formula<a class="headerlink" href="#bayes-formula" title="Permalink to this heading">#</a></h2>
+<section id="bayes-theorem">
+<h2>Bayes Theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this heading">#</a></h2>
 <figure class="align-default" id="id2">
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/bayes.png"><img alt="compton" class="bg-primary mb-1" src="../_images/bayes.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3 </span><span class="caption-text"><strong>Joint Probability <span class="math notranslate nohighlight">\(P(A,B)\)</span>:</strong> Quantifies the probability of two or more events happening simultaneously. <strong>Marginal Probability <span class="math notranslate nohighlight">\(P(A)\)</span>:</strong> Quantifies the probability of an event irrespective of the outcomes of other random variables. Is obtained by marginalization, summing over all possibilities of B. <strong>Conditional Probability <span class="math notranslate nohighlight">\(P(A|B)\)</span>:</strong> Quantifies probability of event A given the information that event B happened.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="prior-posterior-and-likelihood">
-<h3>Prior, posterior and likelihood<a class="headerlink" href="#prior-posterior-and-likelihood" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>The Bayes theorem provides a powerful way to test hypotheses and learn the parameters of a model from data. The jargon used when using the bayes formula differs slightly from the one given above.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[P(H|D) = \frac{P(D|H) \cdot P(H) }{P(D)}\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(H)\)</span> is called <strong>prior</strong> and quantifies information we have about our hyothesis.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(D)\)</span> is called <strong>evidence</strong> and is just the probability of having the date we generated.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(D|H)\)</span> is called <strong>likelihood</strong> of data! It is not called probability because one is interested in how different values of <span class="math notranslate nohighlight">\(H\)</span> change the <span class="math notranslate nohighlight">\(P(D|H)\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(P(H|D)\)</span> is the quantity we are after is called called <strong>posterior</strong></p></li>
-</ul>
-<div class="admonition-example admonition">
-<p class="admonition-title">Example</p>
+<p><strong>Example of Using Bayes Formula to Test Hypothesis</strong></p>
 <ul class="simple">
 <li><p>A test for cancer is known to be 90% accurate either in detecting cancer if present or in giving an all-clear if cancer is absent.</p></li>
-<li><p>The prevalence of cancer in the population is 1%.
-How worried should you be if you test positive? Try answering this question
-using Bayes’ theorem.</p></li>
+<li><p>The prevalence of cancer in the population is 1%. How worried should you be if you test positive? Try answering this question using Bayes’ theorem.</p></li>
 </ul>
-</div>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-Solution<div class="sd-summary-down docutils">
+<strong>Solution</strong><div class="sd-summary-down docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
 <div class="sd-summary-up docutils">
 <svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
@@ -835,39 +816,26 @@ Solution<div class="sd-summary-down docutils">
 \[P(X|+) = \frac{P(+|X)p(X)}{p(+)} = \frac{P(+|X)p(X)}{p(+|X)p(X)+p(+| X^c)p(X^c)} =  \frac{0.9\cdot 0.01}{0.9\cdot 0.01+0.1\cdot 0.99} = 0.083\]</div>
 </div>
 </details></section>
-</section>
-<section id="counting-and-combinatorics">
-<h2>Counting and Combinatorics<a class="headerlink" href="#counting-and-combinatorics" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Combinatoric expressions are helpful for computing the size of events and answering questions such as “How many ways can molecules arrange in this or that way?”</p></li>
-<li><p>If you are given <strong>n molecules in a jar</strong>, <strong>you have r ways of sampling them</strong>. You get different answers depending on whether molecules are distinguishable and whether sampling is done with or without replacement.</p></li>
-</ul>
-<table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Sampling</p></th>
-<th class="head"><p>Combinatorics</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Ordered</strong> sampling <strong>without</strong> replacement</p></td>
-<td><p><span class="math notranslate nohighlight">\(\boxed{P^n_r = \frac{n!}{(n-r)!}}\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Unordered</strong> sampling <strong>without</strong> replacement</p></td>
-<td><p><span class="math notranslate nohighlight">\(\boxed{C^n_r = \frac{n!}{r!(n-r)!}}\)</span></p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Ordered</strong> sampling <strong>with</strong> replacement</p></td>
-<td><p><span class="math notranslate nohighlight">\(\boxed{P^n_r = r^n}\)</span></p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Unordered</strong> sampling <strong>with</strong> replacement</p></td>
-<td><p><span class="math notranslate nohighlight">\(\boxed{P^n_r = \frac{(n+r-1)!}{r!(n-1)!}}\)</span></p></td>
-</tr>
-</tbody>
-</table>
-<section id="multinomial-combination">
-<h3>Multinomial combination.<a class="headerlink" href="#multinomial-combination" title="Permalink to this heading">#</a></h3>
-<p>The combinatorial formula can be readily generalized for k&gt;2 partitions. A classic problem we will encounter is partitioning <span class="math notranslate nohighlight">\(N\)</span> indistinguishable molecules among <span class="math notranslate nohighlight">\(n_1\)</span> energy level, <span class="math notranslate nohighlight">\(n_2\)</span>, … <span class="math notranslate nohighlight">\(n_k\)</span>. <span class="math notranslate nohighlight">\(\sum n_i = N\)</span></p>
+<section id="computing-number-of-microstates-via-combinatorics">
+<h2>Computing number of microstates via combinatorics<a class="headerlink" href="#computing-number-of-microstates-via-combinatorics" title="Permalink to this heading">#</a></h2>
+<section id="binomial-distribution-two-state-systems">
+<h3><strong>Binomial Distribution (Two-State Systems)</strong><a class="headerlink" href="#binomial-distribution-two-state-systems" title="Permalink to this heading">#</a></h3>
+<p>When molecules can be in <strong>two states</strong> (e.g., adsorbed vs. free, spin-up vs. spin-down), the number of ways to arrange <span class="math notranslate nohighlight">\(N\)</span> molecules into <strong>state A</strong> <span class="math notranslate nohighlight">\(k\)</span> and <strong>state B</strong> <span class="math notranslate nohighlight">\(N-k\)</span> follows:</p>
 <div class="math notranslate nohighlight">
-\[\boxed{C^N_{n_1,n_2,...n_k}=\frac{N!}{n_1! \cdot n_2! \cdot ... n_k!} }\]</div>
+\[
+W(N, n) = \binom{N}{n} = \frac{N!}{N!(N-n)!}
+\]</div>
+<ul class="simple">
+<li><p>For example, if <span class="math notranslate nohighlight">\(N\)</span> gas molecules distribute between two parts of the box or spins occupying two energy levels, this formula gives the number of microstates for a given occupation <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ul>
+</section>
+<section id="multinomial-distribution-multiple-states">
+<h3><strong>Multinomial Distribution (Multiple States)</strong><a class="headerlink" href="#multinomial-distribution-multiple-states" title="Permalink to this heading">#</a></h3>
+<p>For systems with <strong>more than two states</strong>, such as molecules distributed among <strong><span class="math notranslate nohighlight">\(m\)</span> energy levels</strong>, the number of ways to assign <span class="math notranslate nohighlight">\(N\)</span> molecules into states <span class="math notranslate nohighlight">\(n_1, n_2, ..., n_m\)</span> with  <span class="math notranslate nohighlight">\(\sum n_i = N\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+W(n_1, n_2, ..., n_m) = \frac{N!}{n_1! n_2! \cdots n_m!}.
+\]</div>
 <div class="admonition-example-gas-atoms admonition">
 <p class="admonition-title">Example: gas atoms</p>
 <p>Consider a container filled with 1000 atoms of Ar.</p>
@@ -1577,12 +1545,10 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macrostates-and-venn-diagrams">Macrostates and  Venn diagrams</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-formula">Bayes formula</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-posterior-and-likelihood">Prior, posterior and likelihood</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#counting-and-combinatorics">Counting and Combinatorics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-combination">Multinomial combination.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binomial-distribution-two-state-systems"><strong>Binomial Distribution (Two-State Systems)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multinomial-distribution-multiple-states"><strong>Multinomial Distribution (Multiple States)</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a><ul class="nav section-nav flex-column">
