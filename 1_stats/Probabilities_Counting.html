@@ -491,7 +491,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events-micro-and-macro-states">Events, micro and macro states</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macrostates-and-venn-diagrams">Macrostates and  Venn diagrams</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-events-as-venn-diagrams">Visualizing events as Venn diagrams</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
@@ -635,8 +635,8 @@ document.write(`
 </ul>
 </div>
 </section>
-<section id="macrostates-and-venn-diagrams">
-<h2>Macrostates and  Venn diagrams<a class="headerlink" href="#macrostates-and-venn-diagrams" title="Permalink to this heading">#</a></h2>
+<section id="visualizing-events-as-venn-diagrams">
+<h2>Visualizing events as Venn diagrams<a class="headerlink" href="#visualizing-events-as-venn-diagrams" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># COllab has this but in local notebook you may want to install it</span>
@@ -790,6 +790,21 @@ P(C or D) = 6/36 + 1/36 − 1/36 = 6/36</p></li>
 \[P(X|+) = \frac{P(+|X)p(X)}{p(+)} = \frac{P(+|X)p(X)}{p(+|X)p(X)+p(+| X^c)p(X^c)} =  \frac{0.9\cdot 0.01}{0.9\cdot 0.01+0.1\cdot 0.99} = 0.083\]</div>
 </div>
 </details></div>
+<div class="dropwdown info admonition">
+<p class="admonition-title"><strong>Prior, Posterior, and Likelihood</strong>  </p>
+<p>Bayes’ theorem provides a powerful framework for testing hypotheses or learning model parameters from data. While the mathematical formulation remains the same, the terminology used in Bayesian inference differs from the standard probability notation:</p>
+<div class="math notranslate nohighlight">
+\[
+P(\theta | D) = \frac{P(D | \theta) \cdot P(\theta)}{P(D)}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><strong>Prior</strong>: <span class="math notranslate nohighlight">\(P(\theta)\)</span> represents our initial belief about the hypothesis or parameter before observing the data. For example, if we are tossing a coin, a reasonable prior might be a gaussian centered at <span class="math notranslate nohighlight">\(1/2\)</span> or take unifrom distribution in absence of information.</p></li>
+<li><p><strong>Evidence</strong>: <span class="math notranslate nohighlight">\(P(D)\)</span> is the probability of the observed data, also known as the <strong>marginal likelihood</strong>. It accounts for all possible parameter values and normalizes the posterior. For example, it is the probability of obtaining a specific sequence, such as <span class="math notranslate nohighlight">\(HTHH\)</span>, given all possible biases of the coin.</p></li>
+<li><p><strong>Likelihood</strong>: <span class="math notranslate nohighlight">\(P(D | \theta)\)</span> describes how probable the observed data is for a given parameter <span class="math notranslate nohighlight">\(\theta\)</span>. E.g for sequence of <span class="math notranslate nohighlight">\(HTHH\)</span> it will be <span class="math notranslate nohighlight">\(L(\theta)=\theta^3(1-\theta)\)</span> giving probability of landing three H and 1 T.</p></li>
+<li><p><strong>Posterior</strong>: <span class="math notranslate nohighlight">\(P(\theta | D)\)</span> is the updated probability of the hypothesis after incorporating the observed data. This is the key quantity in Bayesian inference, as it represents our revised belief about <span class="math notranslate nohighlight">\(\theta\)</span> given the data.  We can take value of <span class="math notranslate nohighlight">\(\theta\)</span> corresponding to maximum of posterior to be most likely value of our parameter. For our case of uniform prior and likelhood the maxima will be <span class="math notranslate nohighlight">\(\theta = 3/4\)</span> as we may expect.</p></li>
+</ul>
+</div>
 </section>
 <section id="computing-number-of-microstates-via-combinatorics">
 <h2>Computing number of microstates via combinatorics<a class="headerlink" href="#computing-number-of-microstates-via-combinatorics" title="Permalink to this heading">#</a></h2>
@@ -1561,7 +1576,7 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-space">Sample space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#events-micro-and-macro-states">Events, micro and macro states</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-probabilities-through-counting">Compute probabilities through counting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macrostates-and-venn-diagrams">Macrostates and  Venn diagrams</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-events-as-venn-diagrams">Visualizing events as Venn diagrams</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-axioms">Probability Axioms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
