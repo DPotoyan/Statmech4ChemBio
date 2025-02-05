@@ -487,7 +487,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-the-following-full-marginal-and-conditional-probabilities">Compute the following full marginal and conditional probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-compute-full-marginal-and-conditional-probabilities-given-p-x-y"><strong>Problem: Compute Full, Marginal, and Conditional Probabilities Given <span class="math notranslate nohighlight">\( p(x, y) \)</span></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-understanding-covariance-and-correlation-using-numpy"><strong>Problem: Understanding Covariance and Correlation Using NumPy</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hints"><strong>Hints:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-understanding-histograms-normalization-and-bin-size-in-statistical-mechanics"><strong>Problem: Understanding Histograms, Normalization, and Bin Size in Statistical Mechanics</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-energy-distribution-of-particles-in-a-system"><strong>Scenario: Energy Distribution of Particles in a System</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks"><strong>Tasks:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Hints:</strong></a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -501,37 +511,143 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="numpy-and-probabilities">
 <h1>Numpy and Probabilities<a class="headerlink" href="#numpy-and-probabilities" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pxy</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.0888395</span> <span class="p">,</span> <span class="mf">0.04135306</span><span class="p">,</span> <span class="mf">0.07692385</span><span class="p">,</span> <span class="mf">0.04716456</span><span class="p">],</span>
-       <span class="p">[</span><span class="mf">0.05191984</span><span class="p">,</span> <span class="mf">0.04715928</span><span class="p">,</span> <span class="mf">0.06539948</span><span class="p">,</span> <span class="mf">0.04739613</span><span class="p">],</span>
-       <span class="p">[</span><span class="mf">0.09325686</span><span class="p">,</span> <span class="mf">0.05106682</span><span class="p">,</span> <span class="mf">0.05221257</span><span class="p">,</span> <span class="mf">0.05864018</span><span class="p">],</span>
-       <span class="p">[</span><span class="mf">0.08283109</span><span class="p">,</span> <span class="mf">0.11219392</span><span class="p">,</span> <span class="mf">0.02191071</span><span class="p">,</span> <span class="mf">0.06173214</span><span class="p">]])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">pxy</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.0888395</span> <span class="p">,</span> <span class="mf">0.04135306</span><span class="p">,</span> <span class="mf">0.07692385</span><span class="p">,</span> <span class="mf">0.04716456</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span>        <span class="p">[</span><span class="mf">0.05191984</span><span class="p">,</span> <span class="mf">0.04715928</span><span class="p">,</span> <span class="mf">0.06539948</span><span class="p">,</span> <span class="mf">0.04739613</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>        <span class="p">[</span><span class="mf">0.09325686</span><span class="p">,</span> <span class="mf">0.05106682</span><span class="p">,</span> <span class="mf">0.05221257</span><span class="p">,</span> <span class="mf">0.05864018</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>        <span class="p">[</span><span class="mf">0.08283109</span><span class="p">,</span> <span class="mf">0.11219392</span><span class="p">,</span> <span class="mf">0.02191071</span><span class="p">,</span> <span class="mf">0.06173214</span><span class="p">]])</span>
-
-<span class="ne">NameError</span>: name &#39;array&#39; is not defined
-</pre></div>
-</div>
-</div>
-</div>
-<section id="compute-the-following-full-marginal-and-conditional-probabilities">
-<h2>Compute the following full marginal and conditional probabilities<a class="headerlink" href="#compute-the-following-full-marginal-and-conditional-probabilities" title="Permalink to this heading">#</a></h2>
+<section id="problem-compute-full-marginal-and-conditional-probabilities-given-p-x-y">
+<h2><strong>Problem: Compute Full, Marginal, and Conditional Probabilities Given <span class="math notranslate nohighlight">\( p(x, y) \)</span></strong><a class="headerlink" href="#problem-compute-full-marginal-and-conditional-probabilities-given-p-x-y" title="Permalink to this heading">#</a></h2>
+<p>Given the joint probability distribution <span class="math notranslate nohighlight">\( p(x, y) \)</span>, perform the following tasks:</p>
+<ol class="arabic">
+<li><p><strong>Check for Normalization:</strong></p>
 <ul class="simple">
-<li><p>Check for normalization</p></li>
-<li><p>Compute <span class="math notranslate nohighlight">\(p(x)\)</span></p></li>
-<li><p>Compute <span class="math notranslate nohighlight">\(p(x=1, y=2)\)</span></p></li>
-<li><p>Compute <span class="math notranslate nohighlight">\(p(x|y=3)\)</span></p></li>
+<li><p>Verify that the sum of all elements in <span class="math notranslate nohighlight">\( p(x, y) \)</span> equals <strong>1</strong> (i.e., <span class="math notranslate nohighlight">\( \sum_{x,y} p(x, y) = 1 \)</span>).</p></li>
 </ul>
+</li>
+<li><p><strong>Compute the Marginal Probability <span class="math notranslate nohighlight">\( p(x) \)</span>:</strong></p>
+<ul>
+<li><p>Compute <span class="math notranslate nohighlight">\( p(x) \)</span> by summing over all values of <span class="math notranslate nohighlight">\( y \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+     p(x) = \sum_{y} p(x, y)
+     \]</div>
+</li>
+</ul>
+</li>
+<li><p><strong>Compute a Specific Joint Probability:</strong></p>
+<ul class="simple">
+<li><p>Find the probability of <span class="math notranslate nohighlight">\( x = 1 \)</span> and <span class="math notranslate nohighlight">\( y = 2 \)</span>, i.e., <span class="math notranslate nohighlight">\( p(x=1, y=2) \)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Compute the Conditional Probability <span class="math notranslate nohighlight">\( p(x | y=3) \)</span>:</strong></p>
+<ul class="simple">
+<li><p>Use the definition of conditional probability:
+$<span class="math notranslate nohighlight">\(
+p(x | y=3) = \frac{p(x, y=3)}{p(y=3)}
+\)</span>$</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\( p(y=3) \)</span> by summing over <span class="math notranslate nohighlight">\( x \)</span>, then use it to compute <span class="math notranslate nohighlight">\( p(x | y=3) \)</span>.</p></li>
+</ul>
+</li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Given joint probability matrix p(x, y)</span>
+<span class="n">pxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0888395</span> <span class="p">,</span> <span class="mf">0.04135306</span><span class="p">,</span> <span class="mf">0.07692385</span><span class="p">,</span> <span class="mf">0.04716456</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.05191984</span><span class="p">,</span> <span class="mf">0.04715928</span><span class="p">,</span> <span class="mf">0.06539948</span><span class="p">,</span> <span class="mf">0.04739613</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.09325686</span><span class="p">,</span> <span class="mf">0.05106682</span><span class="p">,</span> <span class="mf">0.05221257</span><span class="p">,</span> <span class="mf">0.05864018</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.08283109</span><span class="p">,</span> <span class="mf">0.11219392</span><span class="p">,</span> <span class="mf">0.02191071</span><span class="p">,</span> <span class="mf">0.06173214</span><span class="p">]])</span>
+</pre></div>
+</div>
+</section>
+<section id="problem-understanding-covariance-and-correlation-using-numpy">
+<h2><strong>Problem: Understanding Covariance and Correlation Using NumPy</strong><a class="headerlink" href="#problem-understanding-covariance-and-correlation-using-numpy" title="Permalink to this heading">#</a></h2>
+<p>Consider two random variables, <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, representing the heights (in cm) and weights (in kg) of a group of individuals. The relationship between these variables is often analyzed using <strong>covariance</strong> and <strong>correlation</strong>.</p>
+<ol class="arabic">
+<li><p><strong>Generate synthetic data</strong>:</p>
+<ul>
+<li><p>Let <span class="math notranslate nohighlight">\(X\)</span> (heights) be normally distributed with mean <strong>170 cm</strong> and standard deviation <strong>10 cm</strong>.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(Y\)</span> (weights) be generated as a <strong>linear function</strong> of <span class="math notranslate nohighlight">\(X\)</span> with some added random noise:</p>
+<div class="math notranslate nohighlight">
+\[
+     Y = 0.5X + 10 + \text{random noise}
+     \]</div>
+<p>where the random noise follows a normal distribution with mean <strong>0</strong> and standard deviation <strong>5</strong>.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Compute the sample covariance</strong> between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> using NumPy.</p></li>
+<li><p><strong>Compute the Pearson correlation coefficient</strong> using NumPy.</p></li>
+<li><p><strong>Interpretation</strong>:</p>
+<ul class="simple">
+<li><p>If the covariance is positive, what does it imply?</p></li>
+<li><p>How does the correlation coefficient relate to the strength of the relationship?</p></li>
+</ul>
+</li>
+</ol>
+<section id="hints">
+<h3><strong>Hints:</strong><a class="headerlink" href="#hints" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">np.random.normal</span></code> to generate data.</p></li>
+<li><p>Compute covariance using <code class="docutils literal notranslate"><span class="pre">np.cov(X,</span> <span class="pre">Y)</span></code>.</p></li>
+<li><p>Compute correlation using <code class="docutils literal notranslate"><span class="pre">np.corrcoef(X,</span> <span class="pre">Y)</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="problem-understanding-histograms-normalization-and-bin-size-in-statistical-mechanics">
+<h2><strong>Problem: Understanding Histograms, Normalization, and Bin Size in Statistical Mechanics</strong><a class="headerlink" href="#problem-understanding-histograms-normalization-and-bin-size-in-statistical-mechanics" title="Permalink to this heading">#</a></h2>
+<section id="scenario-energy-distribution-of-particles-in-a-system">
+<h3><strong>Scenario: Energy Distribution of Particles in a System</strong><a class="headerlink" href="#scenario-energy-distribution-of-particles-in-a-system" title="Permalink to this heading">#</a></h3>
+<p>In statistical mechanics, the distribution of particle energies in a system at thermal equilibrium follows the <strong>Boltzmann distribution</strong>. To analyze this, we simulate a system of particles with energies distributed according to:</p>
+<div class="math notranslate nohighlight">
+\[
+P(E) \propto e^{-E / k_B T}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( E \)</span> is the energy of a particle,</p></li>
+<li><p><span class="math notranslate nohighlight">\( k_B \)</span> is the Boltzmann constant (set to <strong>1</strong> for simplicity),</p></li>
+<li><p><span class="math notranslate nohighlight">\( T \)</span> is the temperature (choose a reasonable value, e.g., <span class="math notranslate nohighlight">\( T = 300 \)</span>).</p></li>
+</ul>
+</section>
+<section id="tasks">
+<h3><strong>Tasks:</strong><a class="headerlink" href="#tasks" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Generate Energy Data:</strong></p>
+<ul class="simple">
+<li><p>Simulate <strong>10,000</strong> particle energies following the <strong>Boltzmann distribution</strong> using an <strong>exponential distribution</strong>.</p></li>
+<li><p>Use NumPy’s <code class="docutils literal notranslate"><span class="pre">np.random.exponential(scale=kB*T,</span> <span class="pre">size=N)</span></code> to generate energy values.</p></li>
+</ul>
+</li>
+<li><p><strong>Plot Histograms with Different Bin Sizes:</strong></p>
+<ul class="simple">
+<li><p>Create histograms with <strong>20, 50, and 100</strong> bins.</p></li>
+<li><p>Compare how bin size affects the appearance of the histogram.</p></li>
+</ul>
+</li>
+<li><p><strong>Normalize the Histogram:</strong></p>
+<ul class="simple">
+<li><p>Convert the histogram into a <strong>probability density function (PDF)</strong> by ensuring the total area under the histogram sums to <strong>1</strong>.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">density=True</span></code> option in <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Overlay the Theoretical Boltzmann Distribution:</strong></p>
+<ul class="simple">
+<li><p>Plot the theoretical function <span class="math notranslate nohighlight">\( P(E) = (1/k_B T) e^{-E / k_B T} \)</span> on top of the histogram.</p></li>
+</ul>
+</li>
+<li><p><strong>Analyze the Results:</strong></p>
+<ul class="simple">
+<li><p>How does the choice of bin size affect the smoothness of the energy distribution?</p></li>
+<li><p>Why is normalization important in probability distributions?</p></li>
+<li><p>How does increasing the number of particles affect the histogram shape?</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id1">
+<h3><strong>Hints:</strong><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">np.random.exponential(scale=kB*T,</span> <span class="pre">size=N)</span></code> to generate data.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">plt.hist(energies,</span> <span class="pre">bins=n,</span> <span class="pre">density=True,</span> <span class="pre">alpha=0.5)</span></code> to plot normalized histograms.</p></li>
+<li><p>Overlay the theoretical Boltzmann distribution using <code class="docutils literal notranslate"><span class="pre">plt.plot(E,</span> <span class="pre">P(E))</span></code>.</p></li>
+</ul>
+</section>
 </section>
 </section>
 
@@ -598,7 +714,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-the-following-full-marginal-and-conditional-probabilities">Compute the following full marginal and conditional probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-compute-full-marginal-and-conditional-probabilities-given-p-x-y"><strong>Problem: Compute Full, Marginal, and Conditional Probabilities Given <span class="math notranslate nohighlight">\( p(x, y) \)</span></strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-understanding-covariance-and-correlation-using-numpy"><strong>Problem: Understanding Covariance and Correlation Using NumPy</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hints"><strong>Hints:</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-understanding-histograms-normalization-and-bin-size-in-statistical-mechanics"><strong>Problem: Understanding Histograms, Normalization, and Bin Size in Statistical Mechanics</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scenario-energy-distribution-of-particles-in-a-system"><strong>Scenario: Energy Distribution of Particles in a System</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks"><strong>Tasks:</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Hints:</strong></a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
