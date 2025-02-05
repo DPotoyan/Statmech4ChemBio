@@ -498,11 +498,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-sequence-of-steps-microstates">Probability of sequence of steps (microstates)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-net-number-of-steps-macrostates">Probability of net number of steps (macrostates)</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-the-degree-of-bias-or-tilt">Energy as the degree of bias or tilt</a></li>
@@ -957,28 +953,25 @@ $<span class="math notranslate nohighlight">\(n(up) = \frac{90!}{10!(80)!}\)</sp
 </section>
 <section id="random-walk">
 <h2>Random Walk<a class="headerlink" href="#random-walk" title="Permalink to this heading">#</a></h2>
-<section id="probability-of-sequence-of-steps-microstates">
-<h3>Probability of sequence of steps (microstates)<a class="headerlink" href="#probability-of-sequence-of-steps-microstates" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Tossing a coin a few times generates a random sequence of events, e.g., HTHTH or TTTTT.</p></li>
-<li><p>The probability of landing heads vs. tails for a fair coin or an unbiased diffusing molecule jumping right vs. left is <span class="math notranslate nohighlight">\(p_{+} = p_{-} = \frac{1}{2}\)</span>. Therefore, the probability of any <span class="math notranslate nohighlight">\(N\)</span>-long sequence is always equal <span class="math notranslate nohighlight">\(\frac{1}{2^N}\)</span></p></li>
-<li><p>For a biased coin or diffusing molecule the probability fo sequence of <span class="math notranslate nohighlight">\(N_{+}\)</span> jumps with probability <span class="math notranslate nohighlight">\(p_{+}\)</span> and  <span class="math notranslate nohighlight">\(N_{-}\)</span> jumps with probability <span class="math notranslate nohighlight">\(p_{-}\)</span> will be</p></li>
+<li><p>Consider a problem with a <strong>binary outcome</strong>, where two probabilities satisfy <span class="math notranslate nohighlight">\(p_{+} + p_{-} = 1\)</span>.</p></li>
+<li><p>Examples include tossing <span class="math notranslate nohighlight">\(N\)</span> coins, <span class="math notranslate nohighlight">\(N\)</span> non-interacting molecules occupying the left or right side of a container, or a <strong>random walk</strong> where a molecule jumps right (<span class="math notranslate nohighlight">\(+1\)</span>) or left (<span class="math notranslate nohighlight">\(-1\)</span>)  with fixed probabilities.</p></li>
+<li><p>Each experiment generates a sequence—e.g., HTHTTT for coin flips or <span class="math notranslate nohighlight">\(+1, -1, -1, -1, +1\)</span> for a random walk.</p></li>
+<li><p>Such a sequence represents a <strong>single microstate</strong> in the sample space of all possible sequences, which has a total of <span class="math notranslate nohighlight">\(\Omega=2^N\)</span> microstates.</p>
+<ul>
+<li><p>For  <strong>unbiased random walk</strong> <span class="math notranslate nohighlight">\(p_{+} = p_{-} = 1/2\)</span>, <strong>all microstates are equally probable</strong> and equal to <span class="math notranslate nohighlight">\(\frac{1}{2^N}\)</span>.</p></li>
+<li><p>For <strong>biased random walk</strong> <span class="math notranslate nohighlight">\(p_{+} \neq p_{-}\)</span> the probability of microstates (sequence) is determined by the <strong>product of step probabilities</strong>.</p></li>
+</ul>
+</li>
 </ul>
 <div class="important admonition">
-<p class="admonition-title"><strong>Probability of a sequence</strong></p>
+<p class="admonition-title"><strong>Probability of a sequence (microstate)</strong></p>
 <div class="math notranslate nohighlight">
 \[p(sequence) = p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}\]</div>
 </div>
-</section>
-<section id="probability-of-net-number-of-steps-macrostates">
-<h3>Probability of net number of steps (macrostates)<a class="headerlink" href="#probability-of-net-number-of-steps-macrostates" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>A more interesting question is the probability of taking <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right, or having a net displacement of <span class="math notranslate nohighlight">\(\Delta N \)</span>, regardless of the sequence of events.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[
-p_{+} + p_{-} = 1
-\]</div>
 <div class="math notranslate nohighlight">
 \[
 N_{+} + N_{-} = N
@@ -988,7 +981,7 @@ N_{+} + N_{-} = N
 N_{+} - N_{-} = \Delta N
 \]</div>
 <div class="important admonition">
-<p class="admonition-title"><strong>Probability of net number of steps or displacements</strong></p>
+<p class="admonition-title"><strong>Probability of net number of steps or displacements (macrostate)</strong></p>
 <ul class="simple">
 <li><p><strong>Probability of <span class="math notranslate nohighlight">\(N_{+}\)</span> Steps to the Right</strong></p></li>
 </ul>
@@ -1067,7 +1060,6 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 </div>
 </div>
 </section>
-</section>
 <section id="log-of-probability-leads-us-to-entropy-and-energy">
 <h2>Log of probability leads us to Entropy and Energy<a class="headerlink" href="#log-of-probability-leads-us-to-entropy-and-energy" title="Permalink to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
@@ -1080,16 +1072,12 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-\log\frac{N!}{N_{+}! \cdot N_{-}!} = N[-f_{+} \log f_{+} - f_{-} \log f_{-}] = N s(f)
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-s(f) =  -f_{+} log f_{+} -f_{-} log f_{-} = -flog f + (1-f)log(1-f)
+= N\Big[-f_{+} \log f_{+} - f_{-} \log f_{-}\Big] = N\Big[-flog f + (1-f)log(1-f)\Big] = N s(f)
 \]</div>
 <ul class="simple">
-<li><p>Where we introduced fractions of steps going to the right/left, <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span>. Since these fractions are dependent we only have one variable to keep track of <span class="math notranslate nohighlight">\(f=f_{+}\)</span> and <span class="math notranslate nohighlight">\(f_{-} = 1-f\)</span></p></li>
-<li><p>Note that <span class="math notranslate nohighlight">\(p_{+}\)</span> is fixed while <span class="math notranslate nohighlight">\(f_{+}\)</span> is variable. For large  <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(f_{\pm} \rightarrow p_{\pm}\)</span>. But for finate <span class="math notranslate nohighlight">\(N\)</span> there will be fluctuations <span class="math notranslate nohighlight">\(f_{+}\)</span> deviate from expected probability <span class="math notranslate nohighlight">\(p_{+}\)</span>.</p></li>
-<li><p>A general expression will later be identified with entropy <span class="math notranslate nohighlight">\(s =  -\sum_i p_i \log p_i\)</span> where <span class="math notranslate nohighlight">\(p_i\)</span> would be probabiliteis of various microstates.</p></li>
+<li><p>Where we introduced fractions of steps going to the right/left, <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span>. Since these fractions are dependent we only have one variable to keep track of <span class="math notranslate nohighlight">\(f_{+}=f\)</span> and <span class="math notranslate nohighlight">\(f_{-} = 1-f\)</span></p></li>
+<li><p>Note that <strong><span class="math notranslate nohighlight">\(p_{+}\)</span> is fixed</strong> while <strong><span class="math notranslate nohighlight">\(f_{+}\)</span> is variable</strong> becasue as we observe more steps fractions will fluctuate. For large  <span class="math notranslate nohighlight">\(N\)</span>, however, we exepct to get <span class="math notranslate nohighlight">\(f_{\pm} \rightarrow p_{\pm}\)</span>.</p></li>
+<li><p>A general expression will later be identified with **entropy <span class="math notranslate nohighlight">\(s =  -\sum_i p_i \log p_i\)</span>**where <span class="math notranslate nohighlight">\(p_i\)</span> would be identified with microstate probabilities.</p></li>
 </ul>
 </section>
 <section id="energy-as-the-degree-of-bias-or-tilt">
@@ -1099,7 +1087,7 @@ s(f) =  -f_{+} log f_{+} -f_{-} log f_{-} = -flog f + (1-f)log(1-f)
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\log \Big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \Big] = - N [ f_{+}log p_{+}+f_{-}log p_{-}] = -N \epsilon
+\log \Big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \Big] = - N [ f_{+}log p_{+}+f_{-}log p_{-}] = -N \epsilon(f)
 \]</div>
 <div class="tip dropdown admonition">
 <p class="admonition-title">Entropy expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong></p>
@@ -1110,7 +1098,7 @@ s(f) =  -f_{+} log f_{+} -f_{-} log f_{-} = -flog f + (1-f)log(1-f)
 <p class="admonition-title">Energy term expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong></p>
 <div class="math notranslate nohighlight">
 \[
-\log \Big[ p_{+}^{(N+\Delta N)/2} \cdot p_{-}^{(N-\Delta N)/2} \Big] = - N\Big [ \frac{1}{2}\log ( p_{+} p_{-}) + \frac{x}{2}  \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon
+\log \Big[ p_{+}^{(N+\Delta N)/2} \cdot p_{-}^{(N-\Delta N)/2} \Big] = - N\Big [ \frac{1}{2}\log ( p_{+} p_{-}) + \frac{x}{2}  \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon(x)
 \]</div>
 <ul class="simple">
 <li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} (\log p_{+} + \log p_{-})\)</span> is a <strong>baseline</strong> energy-like term.</p></li>
@@ -1552,11 +1540,7 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-theorem">Bayes Theorem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-sequence-of-steps-microstates">Probability of sequence of steps (microstates)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-net-number-of-steps-macrostates">Probability of net number of steps (macrostates)</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-the-degree-of-bias-or-tilt">Energy as the degree of bias or tilt</a></li>
