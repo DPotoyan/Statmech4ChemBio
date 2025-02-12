@@ -500,6 +500,21 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monty-hall-problem">Monty Hall problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-integer-number-of-yes-no-questions">Non integer number of YES/NO questions??</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-information-physical">Is information physical?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jaynes-maximum-entropy-principle">Jaynes’ Maximum Entropy Principle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-shannon-entropy">Definition: Shannon Entropy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-maxent">Examples of MaxEnt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fair-die-example">1. Fair Die Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biased-die-example">2. Biased Die Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-canonical-and-grand-canonical-distributions">Microcanonical, Canonical, and Grand Canonical Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-fixed-energy-volume-and-particle-number">1. Microcanonical Ensemble (Fixed Energy, Volume, and Particle Number)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canonical-ensemble-fixed-temperature-volume-and-particle-number">2. Canonical Ensemble (Fixed Temperature, Volume, and Particle Number)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grand-canonical-ensemble-fixed-temperature-volume-and-chemical-potential">3. Grand Canonical Ensemble (Fixed Temperature, Volume, and Chemical Potential)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
             </nav>
@@ -703,6 +718,92 @@ In the second place, and more importantly, no one knows what entropy really is, 
 <div><p>Every it — every particle, every field of force, even the space-time continuum itself — derives its function, its meaning, its very existence entirely — even if in some contexts indirectly — from the apparatus-elicited answers to yes-or-no questions, binary choices, bits. It from bit symbolizes the idea that every item of the physical world has at bottom — a very deep bottom, in most instances — an immaterial source and explanation; that which we call reality arises in the last analysis from the posing of yes-no questions and the registering of equipment-evoked responses; in short, that <strong>all things physical are information-theoretic in origin</strong>” John Weeler</p>
 </div></blockquote>
 </section>
+<section id="jaynes-maximum-entropy-principle">
+<h2>Jaynes’ Maximum Entropy Principle<a class="headerlink" href="#jaynes-maximum-entropy-principle" title="Permalink to this heading">#</a></h2>
+<p>Probability is an expression of incomplete information. Given that we have some information, how should we construct a probability distribution that reflects that knowledge, but is otherwise unbiased? The best general procedure, known as Jaynes’ Maximum Entropy (MaxEnt) Principle, is to choose the probabilities <span class="math notranslate nohighlight">\( p_k \)</span> to maximize the Shannon entropy of the distribution, subject to constraints that express what we do know.</p>
+<section id="definition-shannon-entropy">
+<h3>Definition: Shannon Entropy<a class="headerlink" href="#definition-shannon-entropy" title="Permalink to this heading">#</a></h3>
+<p>Shannon’s measure of information for a discrete probability distribution <span class="math notranslate nohighlight">\( \{p_k\} \)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[ S = - \sum_k p_k \log p_k \]</div>
+<p>Maximizing entropy ensures that we select the least biased distribution that still satisfies the given constraints.</p>
+</section>
+</section>
+<section id="examples-of-maxent">
+<h2>Examples of MaxEnt<a class="headerlink" href="#examples-of-maxent" title="Permalink to this heading">#</a></h2>
+<section id="fair-die-example">
+<h3>1. Fair Die Example<a class="headerlink" href="#fair-die-example" title="Permalink to this heading">#</a></h3>
+<p>For a fair <span class="math notranslate nohighlight">\( N \)</span>-sided die, we have no prior information favoring one outcome over another. The only constraint is the normalization condition:</p>
+<div class="math notranslate nohighlight">
+\[ \sum_{i=1}^{N} p_i = 1. \]</div>
+<p>We maximize:</p>
+<div class="math notranslate nohighlight">
+\[ J[p_1, p_2, ..] = - \sum p_i \log p_i - \lambda \left( \sum_i p_i - 1 \right). \]</div>
+<p>Taking the derivative and solving for <span class="math notranslate nohighlight">\( p_i \)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[ p_1 = p_2 = ... = p_N = \frac{1}{N}. \]</div>
+<p>This confirms our intuition that all outcomes are equally probable.</p>
+</section>
+<section id="biased-die-example">
+<h3>2. Biased Die Example<a class="headerlink" href="#biased-die-example" title="Permalink to this heading">#</a></h3>
+<p>Suppose we have additional information: the average outcome of rolling a die is <span class="math notranslate nohighlight">\( \langle x \rangle = 5.5 \)</span>. The entropy function to maximize becomes:</p>
+<div class="math notranslate nohighlight">
+\[ J[p_1, p_2, ..] = - \sum p_i \log p_i - \lambda \left( \sum_i p_i - 1 \right) - B \left( \sum_i p_i x_i - 5.5 \right). \]</div>
+<p>Solving the variational equation, we find that the optimal probability distribution follows an exponential form:</p>
+<div class="math notranslate nohighlight">
+\[ p_i = \frac{e^{- B x_i}}{Z}, \]</div>
+<p>where <span class="math notranslate nohighlight">\( Z \)</span> is the partition function ensuring normalization:</p>
+<div class="math notranslate nohighlight">
+\[ Z = \sum_{i=1}^{6} e^{- B x_i}. \]</div>
+<p>To determine <span class="math notranslate nohighlight">\( B \)</span>, we use the constraint <span class="math notranslate nohighlight">\( \langle x \rangle = 5.5 \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \sum_{i=1}^{6} x_i \frac{e^{- B x_i}}{Z} = 5.5. \]</div>
+<p>This equation can be solved numerically for <span class="math notranslate nohighlight">\( B \)</span>. In many cases, Newton’s method or other root-finding techniques can be employed to find the exact value of <span class="math notranslate nohighlight">\( B \)</span>. This distribution resembles the Boltzmann factor in statistical mechanics, where higher outcomes are exponentially less probable.</p>
+</section>
+</section>
+<section id="microcanonical-canonical-and-grand-canonical-distributions">
+<h2>Microcanonical, Canonical, and Grand Canonical Distributions<a class="headerlink" href="#microcanonical-canonical-and-grand-canonical-distributions" title="Permalink to this heading">#</a></h2>
+<p>The Maximum Entropy Principle also underlies the derivation of fundamental ensembles in statistical mechanics.</p>
+<section id="microcanonical-ensemble-fixed-energy-volume-and-particle-number">
+<h3>1. Microcanonical Ensemble (Fixed Energy, Volume, and Particle Number)<a class="headerlink" href="#microcanonical-ensemble-fixed-energy-volume-and-particle-number" title="Permalink to this heading">#</a></h3>
+<p>For an isolated system with a fixed energy <span class="math notranslate nohighlight">\( E \)</span>, volume <span class="math notranslate nohighlight">\( V \)</span>, and particle number <span class="math notranslate nohighlight">\( N \)</span>, we maximize entropy subject to the constraint that only microstates with energy <span class="math notranslate nohighlight">\( E \)</span> are accessible:</p>
+<div class="math notranslate nohighlight">
+\[ J = -\sum_k p_k \log p_k - \lambda \left( \sum_k p_k - 1 \right). \]</div>
+<p>Solving for <span class="math notranslate nohighlight">\( p_k \)</span>, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[ p_k = \frac{1}{\Omega(E)}, \]</div>
+<p>where <span class="math notranslate nohighlight">\( \Omega(E) \)</span> is the number of microstates with energy <span class="math notranslate nohighlight">\( E \)</span>. This is the basis of classical thermodynamics, where entropy is defined as <span class="math notranslate nohighlight">\( S = k_B \log \Omega \)</span>.</p>
+</section>
+<section id="canonical-ensemble-fixed-temperature-volume-and-particle-number">
+<h3>2. Canonical Ensemble (Fixed Temperature, Volume, and Particle Number)<a class="headerlink" href="#canonical-ensemble-fixed-temperature-volume-and-particle-number" title="Permalink to this heading">#</a></h3>
+<p>If the system is in thermal contact with a heat bath at temperature <span class="math notranslate nohighlight">\( T \)</span>, energy is allowed to fluctuate. The constraint now involves the mean energy <span class="math notranslate nohighlight">\( \langle E \rangle = U \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ J = -\sum_k p_k \log p_k - \lambda \left( \sum_k p_k - 1 \right) - \beta \left( \sum_k p_k E_k - U \right). \]</div>
+<p>Solving, we obtain the Boltzmann distribution:</p>
+<div class="math notranslate nohighlight">
+\[ p_k = \frac{e^{-\beta E_k}}{Z}, \]</div>
+<p>where <span class="math notranslate nohighlight">\( \beta = 1 / k_B T \)</span> and <span class="math notranslate nohighlight">\( Z = \sum_k e^{-\beta E_k} \)</span> is the partition function. This distribution governs systems in thermal equilibrium.</p>
+</section>
+<section id="grand-canonical-ensemble-fixed-temperature-volume-and-chemical-potential">
+<h3>3. Grand Canonical Ensemble (Fixed Temperature, Volume, and Chemical Potential)<a class="headerlink" href="#grand-canonical-ensemble-fixed-temperature-volume-and-chemical-potential" title="Permalink to this heading">#</a></h3>
+<p>When the particle number <span class="math notranslate nohighlight">\( N \)</span> can also fluctuate (e.g., in open systems exchanging particles with a reservoir), we introduce a chemical potential <span class="math notranslate nohighlight">\( \mu \)</span> and enforce <span class="math notranslate nohighlight">\( \langle N \rangle \)</span> as a constraint:</p>
+<div class="math notranslate nohighlight">
+\[ J = -\sum_{k,N} p_{k,N} \log p_{k,N} - \lambda \left( \sum_{k,N} p_{k,N} - 1 \right) - \beta \left( \sum_{k,N} p_{k,N} E_{k,N} - U \right) - \gamma \left( \sum_{k,N} p_{k,N} N - \langle N \rangle \right). \]</div>
+<p>Solving, we obtain the grand canonical distribution:</p>
+<div class="math notranslate nohighlight">
+\[ p_{k,N} = \frac{e^{-\beta (E_{k,N} - \mu N)}}{\Xi}, \]</div>
+<p>where <span class="math notranslate nohighlight">\( \Xi = \sum_{k,N} e^{-\beta (E_{k,N} - \mu N)} \)</span> is the grand partition function.</p>
+<ul class="simple">
+<li><p>MaxEnt provides a powerful framework for deriving probability distributions when limited information is available. It unifies statistical mechanics, Bayesian inference, and diverse fields from physics to finance. The microcanonical, canonical, and grand canonical ensembles all emerge naturally from entropy maximization under different constraints, illustrating its foundational role in statistical thermodynamics.</p></li>
+<li><p><strong>Numerical Applications of MaxEnt</strong></p>
+<ul>
+<li><p><strong>Image Reconstruction</strong>: Used in signal processing and medical imaging (e.g., MRI) to infer missing data while maintaining maximum entropy.</p></li>
+<li><p><strong>Bayesian Inference</strong>: Applied in machine learning for estimating probability distributions from incomplete data.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -787,6 +888,21 @@ In the second place, and more importantly, no one knows what entropy really is, 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monty-hall-problem">Monty Hall problem</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-integer-number-of-yes-no-questions">Non integer number of YES/NO questions??</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-information-physical">Is information physical?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jaynes-maximum-entropy-principle">Jaynes’ Maximum Entropy Principle</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition-shannon-entropy">Definition: Shannon Entropy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-maxent">Examples of MaxEnt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fair-die-example">1. Fair Die Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biased-die-example">2. Biased Die Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-canonical-and-grand-canonical-distributions">Microcanonical, Canonical, and Grand Canonical Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-fixed-energy-volume-and-particle-number">1. Microcanonical Ensemble (Fixed Energy, Volume, and Particle Number)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#canonical-ensemble-fixed-temperature-volume-and-particle-number">2. Canonical Ensemble (Fixed Temperature, Volume, and Particle Number)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grand-canonical-ensemble-fixed-temperature-volume-and-chemical-potential">3. Grand Canonical Ensemble (Fixed Temperature, Volume, and Chemical Potential)</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
   </nav></div>
