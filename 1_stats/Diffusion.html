@@ -492,14 +492,17 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-and-diffusion-coefficient">Mean Square Displacement and Diffusion Coefficient</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macroscopic-aspects-of-diffusion-equation">Macroscopic aspects of Diffusion Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesoscopic-aspects-of-diffusion-equation">Mesoscopic aspects of Diffusion Equation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-displacement">Probability of Displacement</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-the-master-equation">Expansion of the Master Equation</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-key-results"><strong>Summary of Key Results</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion"><strong>Brownian Motion</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solution-to-diffusion-equations"><strong>Numerical Solution to Diffusion Equations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-brownian-motion">Simulating Brownian Motion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macroscopic-aspects-of-diffusion">Macroscopic aspects of Diffusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solution-to-diffusion-equations"><strong>Numerical Solution to Diffusion Equations</strong></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
             </nav>
@@ -697,8 +700,8 @@ D = \frac{\langle \delta x^2 \rangle}{2\delta t}
 </div>
 </section>
 </section>
-<section id="macroscopic-aspects-of-diffusion-equation">
-<h2>Macroscopic aspects of Diffusion Equation<a class="headerlink" href="#macroscopic-aspects-of-diffusion-equation" title="Permalink to this heading">#</a></h2>
+<section id="mesoscopic-aspects-of-diffusion-equation">
+<h2>Mesoscopic aspects of Diffusion Equation<a class="headerlink" href="#mesoscopic-aspects-of-diffusion-equation" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Einstein’s 1905 derivation of the diffusion equation provides a fundamental description of Brownian motion. This derivation bridges statistical mechanics and macroscopic diffusion laws.</p></li>
 </ul>
@@ -973,8 +976,8 @@ To find <span class="math notranslate nohighlight">\( \rho(x,t) \)</span>, we ta
 </li>
 </ol>
 </section>
-<section id="brownian-motion">
-<h2><strong>Brownian Motion</strong><a class="headerlink" href="#brownian-motion" title="Permalink to this heading">#</a></h2>
+<section id="simulating-brownian-motion">
+<h2>Simulating Brownian Motion<a class="headerlink" href="#simulating-brownian-motion" title="Permalink to this heading">#</a></h2>
 <figure class="align-default" id="markdown-fig">
 <img alt="Brownian Motion Animation" src="https://upload.wikimedia.org/wikipedia/commons/c/c2/Brownian_motion_large.gif" />
 <figcaption>
@@ -995,20 +998,24 @@ x(t+dt) - x(t) \sim \mathcal{N}(0, \sqrt{2D dt})
 \[
 \sigma^2 = 2Dt
 \]</div>
-<p>where <span class="math notranslate nohighlight">\( D \)</span> is the <strong>diffusion coefficient</strong>, which is related to the step size and time increments of the <strong>discrete random walk model</strong>, as derived in the lecture.</p>
 <ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\( D \)</span> is the <strong>diffusion coefficient</strong>, which is related to the step size and time increments of the <strong>discrete random walk model</strong>, as derived in the lecture.</p></li>
 <li><p>We can express Brownian motion in an iterative form:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 x(t+dt) = x(t) + \sqrt{2D dt} \cdot N(0,1)
 \]</div>
-<p>This formulation highlights the connection between Brownian motion and Gaussian distributions. Specifically, we rewrite the update step using the general form of a normally distributed random variable:</p>
+<ul class="simple">
+<li><p>This formulation highlights the connection between Brownian motion and Gaussian distributions. Specifically, we rewrite the update step using the general form of a normally distributed random variable:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 N(\mu, \sigma^2) = \mu + \sigma N(0,1)
 \]</div>
-<p>where the mean <span class="math notranslate nohighlight">\( \mu = x(t) \)</span> and the standard deviation <span class="math notranslate nohighlight">\( \sigma = \sqrt{2D dt} \)</span>, showing how each step is <strong>normally distributed and accumulates over time</strong>, leading to diffusion-like behavior.</p>
+<ul class="simple">
+<li><p>where the mean <span class="math notranslate nohighlight">\( \mu = x(t) \)</span> and the standard deviation <span class="math notranslate nohighlight">\( \sigma = \sqrt{2D dt} \)</span>, showing how each step is <strong>normally distributed and accumulates over time</strong>, leading to diffusion-like behavior.</p></li>
+</ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1058,8 +1065,27 @@ N(\mu, \sigma^2) = \mu + \sigma N(0,1)
 </details>
 </div>
 </section>
+<section id="macroscopic-aspects-of-diffusion">
+<h2>Macroscopic aspects of Diffusion<a class="headerlink" href="#macroscopic-aspects-of-diffusion" title="Permalink to this heading">#</a></h2>
+<p><strong>Derivation of Fick’s Law from the Continuity Equation</strong></p>
+<p>The continuity equation expresses the conservation of particle number in a system:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \rho}{\partial t} + \nabla \cdot \mathbf{J} = 0 \]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\rho(\mathbf{r}, t)\)</span> is the local particle density,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{J}(\mathbf{r}, t)\)</span> is the particle flux.</p></li>
+</ul>
+<p>To establish Fick’s law, we assume a diffusive system where the flux is proportional to the negative gradient of the density:</p>
+<div class="math notranslate nohighlight">
+\[ \mathbf{J} = - D \nabla \rho \]</div>
+<p>where <span class="math notranslate nohighlight">\(D\)</span> is the diffusion coefficient. Substituting this into the continuity equation gives:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \rho}{\partial t} = D \nabla^2 \rho \]</div>
+<p>This is the diffusion equation, which describes how density evolves over time due to diffusion. The assumption of a linear flux-density relation is justified in systems where particle motion is driven by concentration gradients and follows a random walk behavior.</p>
+<p>Thus, Fick’s first law (<span class="math notranslate nohighlight">\(\mathbf{J} = - D \nabla \rho\)</span>) emerges naturally from the continuity condition and the assumption of diffusive transport.</p>
 <section id="numerical-solution-to-diffusion-equations">
-<h2><strong>Numerical Solution to Diffusion Equations</strong><a class="headerlink" href="#numerical-solution-to-diffusion-equations" title="Permalink to this heading">#</a></h2>
+<h3><strong>Numerical Solution to Diffusion Equations</strong><a class="headerlink" href="#numerical-solution-to-diffusion-equations" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Below, we numerically compute and plot the spreading Gaussian solution</p></li>
 <li><p>The plot illustrates the <strong>evolution of the 1D diffusion equation</strong> solution, showing how an initially <strong>localized delta function</strong> spreads into a <strong>Gaussian distribution</strong> over time.</p></li>
@@ -1308,6 +1334,7 @@ N(\mu, \sigma^2) = \mu + \sigma N(0,1)
 </details>
 </div>
 </section>
+</section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <p><strong>The mighty little books</strong></p>
@@ -1394,14 +1421,17 @@ N(\mu, \sigma^2) = \mu + \sigma N(0,1)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-square-displacement-and-diffusion-coefficient">Mean Square Displacement and Diffusion Coefficient</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macroscopic-aspects-of-diffusion-equation">Macroscopic aspects of Diffusion Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesoscopic-aspects-of-diffusion-equation">Mesoscopic aspects of Diffusion Equation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-displacement">Probability of Displacement</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-the-master-equation">Expansion of the Master Equation</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-key-results"><strong>Summary of Key Results</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brownian-motion"><strong>Brownian Motion</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solution-to-diffusion-equations"><strong>Numerical Solution to Diffusion Equations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-brownian-motion">Simulating Brownian Motion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#macroscopic-aspects-of-diffusion">Macroscopic aspects of Diffusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-solution-to-diffusion-equations"><strong>Numerical Solution to Diffusion Equations</strong></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
 </ul>
   </nav></div>
