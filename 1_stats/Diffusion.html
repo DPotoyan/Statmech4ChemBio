@@ -523,6 +523,73 @@ document.write(`
 \[
 R_n = \sum^{n}_{i=0} r_i
 \]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">animation</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">random_walk</span><span class="p">(</span><span class="n">num_steps</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a 3D random walk as (num_steps, 3) array.&quot;&quot;&quot;</span>
+    <span class="n">start_pos</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_step</span><span class="p">,</span> <span class="n">max_step</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_steps</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">walk</span> <span class="o">=</span> <span class="n">start_pos</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">walk</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">update_lines</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">walks</span><span class="p">,</span> <span class="n">lines</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">line</span><span class="p">,</span> <span class="n">walk</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">walks</span><span class="p">):</span>
+        <span class="n">line</span><span class="o">.</span><span class="n">set_data_3d</span><span class="p">(</span><span class="n">walk</span><span class="p">[:</span><span class="n">num</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lines</span>
+
+
+<span class="c1"># Data: 40 random walks as (num_steps, 3) arrays</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">walks</span> <span class="o">=</span> <span class="p">[</span><span class="n">random_walk</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">)]</span>
+
+<span class="c1"># Attaching 3D axis to the figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create lines initially without data</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="p">[])[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">walks</span><span class="p">]</span>
+
+<span class="c1"># Setting the Axes properties</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim3d</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylim3d</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">zlim3d</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">zlabel</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">)</span>
+
+<span class="c1"># Creating the Animation object</span>
+<span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">update_lines</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="n">walks</span><span class="p">,</span> <span class="n">lines</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_jshtml</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">42</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>     <span class="n">fig</span><span class="p">,</span> <span class="n">update_lines</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">,</span> <span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="n">walks</span><span class="p">,</span> <span class="n">lines</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span> <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">42</span> <span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_jshtml</span><span class="p">())</span>
+
+<span class="ne">NameError</span>: name &#39;HTML&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
 <section id="mean-square-displacement-and-diffusion-coefficient">
 <h3>Mean Square Displacement and Diffusion Coefficient<a class="headerlink" href="#mean-square-displacement-and-diffusion-coefficient" title="Permalink to this heading">#</a></h3>
 <p>Expressing the number of steps in terms of time increments <span class="math notranslate nohighlight">\( n = \frac{t}{\delta t} \)</span>, we compute the <strong>ensemble average</strong> over <span class="math notranslate nohighlight">\( N \)</span> random walkers in <span class="math notranslate nohighlight">\( d = 1,2,3 \)</span> dimensions:</p>
@@ -544,12 +611,64 @@ R_n = \sum^{n}_{i=0} r_i
 \[
 D = \frac{\langle \delta x^2 \rangle}{2\delta t}
 \]</div>
-<p>This leads to the <strong>general expression</strong> for the <strong>mean square displacement (MSD)</strong> as a function of time:</p>
+<div class="important admonition">
+<p class="admonition-title"><strong>Mean Square Displacement (MSD)</strong></p>
 <div class="math notranslate nohighlight">
 \[
 \langle R^2 (t) \rangle = 2d D t
 \]</div>
-<p>Any motion that follows this <strong>linear scaling with time</strong> is called <strong>diffusive</strong>.</p>
+<ul class="simple">
+<li><p>Rimension <span class="math notranslate nohighlight">\(d=1, 2, 3 ...\)</span></p></li>
+<li><p>Time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>Displacement from the origin <span class="math notranslate nohighlight">\(R\)</span></p></li>
+</ul>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">random_walk</span><span class="p">(</span><span class="n">num_steps</span><span class="p">,</span> <span class="n">max_step</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a 3D random walk as (num_steps, 3) array.&quot;&quot;&quot;</span>
+    <span class="n">start_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">max_step</span><span class="p">,</span> <span class="n">max_step</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_steps</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">walk</span> <span class="o">=</span> <span class="n">start_pos</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">steps</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">walk</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mean_square_displacement</span><span class="p">(</span><span class="n">walks</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute MSD over all walks.&quot;&quot;&quot;</span>
+    <span class="n">squared_displacements</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">walk</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">walk</span> <span class="ow">in</span> <span class="n">walks</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">squared_displacements</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">num_steps</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">num_walks</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">walks</span> <span class="o">=</span> <span class="p">[</span><span class="n">random_walk</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_walks</span><span class="p">)]</span>
+
+<span class="c1"># Compute MSD</span>
+<span class="n">msd</span> <span class="o">=</span> <span class="n">mean_square_displacement</span><span class="p">(</span><span class="n">walks</span><span class="p">)</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_steps</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">msd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MSD&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Mean Square Displacement&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;MSD in 3D Random Walk&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><strong>Diffusive Motion</strong></p>
+<ul class="simple">
+<li><p>Any motion for which MSD follows  <strong>linear scaling with time</strong> is called <strong>diffusive</strong>.</p></li>
+</ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -575,12 +694,6 @@ D = \frac{\langle \delta x^2 \rangle}{2\delta t}
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;$t$&#39;)
-</pre></div>
-</div>
-<img alt="../_images/cf0bd284863b186ba005c251bee061d04f7c8e2f14803bf2fe037b9a5a5a199f.png" src="../_images/cf0bd284863b186ba005c251bee061d04f7c8e2f14803bf2fe037b9a5a5a199f.png" />
-</div>
 </div>
 </section>
 </section>
@@ -834,9 +947,6 @@ To find <span class="math notranslate nohighlight">\( \rho(x,t) \)</span>, we ta
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<img alt="../_images/007f63c740a8a66bd68637eac7adf81a5e74ade4b7d8bbbebbad0993d51a032c.png" src="../_images/007f63c740a8a66bd68637eac7adf81a5e74ade4b7d8bbbebbad0993d51a032c.png" />
-</div>
 </div>
 </section>
 </section>
@@ -855,10 +965,12 @@ To find <span class="math notranslate nohighlight">\( \rho(x,t) \)</span>, we ta
    D = \frac{\langle \delta x^2 \rangle}{2\delta t}
    \]</div>
 </li>
-<li><p><strong>Probability Density Function for a Random Walker</strong>:<br />
-$<span class="math notranslate nohighlight">\(
-P(R, t) = \frac{1}{\sqrt{4\pi D t}} e^{-R^2 / (4Dt)}
-\)</span>$</p></li>
+<li><p><strong>Probability Density Function for a Random Walker</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+   P(R, t) = \frac{1}{\sqrt{4\pi D t}} e^{-R^2 / (4Dt)}
+   \]</div>
+</li>
 </ol>
 </section>
 <section id="brownian-motion">
@@ -944,10 +1056,6 @@ N(\mu, \sigma^2) = \mu + \sigma N(0,1)
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<img alt="../_images/e0b7a86f921bc39851420b1eb01b5959972c1e7dbb25b7a26194c95d369eb631.png" src="../_images/e0b7a86f921bc39851420b1eb01b5959972c1e7dbb25b7a26194c95d369eb631.png" />
-<img alt="../_images/a59e7d67b3542541df101a36a73737c56a3bb5fa04663615ee75ee1734eb5bfc.png" src="../_images/a59e7d67b3542541df101a36a73737c56a3bb5fa04663615ee75ee1734eb5bfc.png" />
-</div>
 </div>
 </section>
 <section id="numerical-solution-to-diffusion-equations">
@@ -1126,9 +1234,6 @@ N(\mu, \sigma^2) = \mu + \sigma N(0,1)
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<img alt="../_images/9be00bd1683a7b328e968746f66f1d287b1760cad75f2d8dc8817012252ced1b.png" src="../_images/9be00bd1683a7b328e968746f66f1d287b1760cad75f2d8dc8817012252ced1b.png" />
-</div>
 </div>
 <div class="dropdown tip admonition">
 <p class="admonition-title"><strong>Numerical Solution of 2D diffusion equation using the finite difference method</strong></p>
@@ -1201,9 +1306,6 @@ N(\mu, \sigma^2) = \mu + \sigma N(0,1)
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<img alt="../_images/b3ecbf0463a3db59f49f64141199cc70e64de8495d51c0d7b35f48595bdb2e0a.png" src="../_images/b3ecbf0463a3db59f49f64141199cc70e64de8495d51c0d7b35f48595bdb2e0a.png" />
-</div>
 </div>
 </section>
 <section id="references">
