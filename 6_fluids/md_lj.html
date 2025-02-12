@@ -175,6 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../1_stats/Probabilities_Counting.html">Probability theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_stats/Random_Variables.html">Random variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_stats/Diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Entropy.html">Entropy and Information</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -244,9 +245,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random walk simulations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/InverseTransform.html">The Inverse Transform of RVs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/change_rv_jax.html">Change of variables with automatic differentiation (autodiff)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/04_Entropy.html">Entropy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/langevin.html">Langevin Equation for Brownian Motion and Mean Square Displacement (MSD)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab4/intro.html">Application of ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -592,7 +593,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f134aced400&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f2afdaac430&gt;
 </pre></div>
 </div>
 <img alt="../_images/f0bcd52fcbf4778d8d12f84e7d3e3e706a92bd041f4392e6c80d54c5017c3858.png" src="../_images/f0bcd52fcbf4778d8d12f84e7d3e3e706a92bd041f4392e6c80d54c5017c3858.png" />
@@ -625,7 +626,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f8ebe9e20960152e4d41d10a43da056f4b2c1f06e5fb71f241c087509e7154cc.png" src="../_images/f8ebe9e20960152e4d41d10a43da056f4b2c1f06e5fb71f241c087509e7154cc.png" />
+<img alt="../_images/c7cabd0820a8840a231a2931ff30e9d8bc3b139c6f811934a2842b7c6a8e81a8.png" src="../_images/c7cabd0820a8840a231a2931ff30e9d8bc3b139c6f811934a2842b7c6a8e81a8.png" />
 </div>
 </div>
 </section>
@@ -774,10 +775,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f1349aca580&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f2afc8f8e80&gt;
 </pre></div>
 </div>
-<img alt="../_images/4d9da22a95c4aac1d175b1f20617b6ea183ae1dc42e37d6901d7b59d72509629.png" src="../_images/4d9da22a95c4aac1d175b1f20617b6ea183ae1dc42e37d6901d7b59d72509629.png" />
+<img alt="../_images/9d17145f3a3118008310d189eef980326019acfdf498bf145332b216fb91daea.png" src="../_images/9d17145f3a3118008310d189eef980326019acfdf498bf145332b216fb91daea.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -793,14 +794,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2391/971943631.py:3: RuntimeWarning: invalid value encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2376/971943631.py:3: RuntimeWarning: invalid value encountered in divide
   pair_correlation = hist / (4 * np.pi * rho * r)
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$g(r)$&#39;)
 </pre></div>
 </div>
-<img alt="../_images/6ec1bf277b6bd56a861544e82594645bace1980142c33200705a70d6fbfdca5a.png" src="../_images/6ec1bf277b6bd56a861544e82594645bace1980142c33200705a70d6fbfdca5a.png" />
+<img alt="../_images/5efc17c8a4dcbb062596fe6626e7f23d4303e0b9fd5f2d995f94c7c9a12249fc.png" src="../_images/5efc17c8a4dcbb062596fe6626e7f23d4303e0b9fd5f2d995f94c7c9a12249fc.png" />
 </div>
 </div>
 </section>

@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/rw-lab/change_rv_jax';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Entropy" href="04_Entropy.html" />
+    <link rel="next" title="Conformations of Random Polymer Chains" href="polymer-conf.html" />
     <link rel="prev" title="The Inverse Transform of RVs" href="InverseTransform.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -177,6 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../../1_stats/Probabilities_Counting.html">Probability theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1_stats/Random_Variables.html">Random variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../1_stats/Diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_stats/Entropy.html">Entropy and Information</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -246,9 +247,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="rw_lab.html">Random walk simulations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InverseTransform.html">The Inverse Transform of RVs</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Change of variables with automatic differentiation (autodiff)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_Entropy.html">Entropy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="polymer-conf.html">Conformations of Random Polymer Chains</a></li>
 
+<li class="toctree-l2"><a class="reference internal" href="langevin.html">Langevin Equation for Brownian Motion and Mean Square Displacement (MSD)</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../lab4/intro.html">Application of ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -553,7 +554,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" src="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" />
+<img alt="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" src="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -593,7 +594,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" src="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" />
+<img alt="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" src="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -617,7 +618,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" src="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" />
+<img alt="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" src="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" />
 </div>
 </div>
 <section id="do-it-by-hand">
@@ -646,7 +647,7 @@ which requires knowing the deriviative and how to invert from <span class="math 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" src="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" />
+<img alt="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" src="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" />
 </div>
 </div>
 <p>Alternatively, we don’t need to know how to invert <span class="math notranslate nohighlight">\(x(q)\)</span>. Instead, we can start with <code class="docutils literal notranslate"><span class="pre">x_plot</span></code> and use the evaluated pairs <code class="docutils literal notranslate"><span class="pre">(x_plot,</span> <span class="pre">q_plot=q(x_plot))</span></code>. Then we can just use <code class="docutils literal notranslate"><span class="pre">x_plot</span></code> when we want <span class="math notranslate nohighlight">\(x(q)\)</span>.</p>
@@ -662,7 +663,7 @@ which requires knowing the deriviative and how to invert from <span class="math 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f90fee684f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f14776e94c0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/67e47fc04eaadbfc3f6833361940fa5d6da4232d7093358da8a5b762549283cd.png" src="../../_images/67e47fc04eaadbfc3f6833361940fa5d6da4232d7093358da8a5b762549283cd.png" />
@@ -690,7 +691,7 @@ which requires knowing the deriviative and how to invert from <span class="math 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" src="../../_images/6c19fed8e181cf1bd1142a0adbc8b0f547522d1033088f78701318e602addeb8.png" />
+<img alt="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" src="../../_images/68acf29cfb779c60bca7f6cb13952a02b917e019bfd1f9da939e2bb75b864f59.png" />
 </div>
 </div>
 </section>
@@ -886,11 +887,11 @@ which requires knowing how to invert from <span class="math notranslate nohighli
       </div>
     </a>
     <a class="right-next"
-       href="04_Entropy.html"
+       href="polymer-conf.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Entropy</p>
+        <p class="prev-next-title">Conformations of Random Polymer Chains</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
