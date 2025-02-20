@@ -503,8 +503,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-the-degree-of-bias-or-tilt">Energy as the degree of bias or tilt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
@@ -1071,6 +1071,29 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 <h2>Log of probability leads us to Entropy and Energy<a class="headerlink" href="#log-of-probability-leads-us-to-entropy-and-energy" title="Permalink to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[log\, p(N_{+}|N, p_{+}) =  {\bigg[ log  \frac{N!}{N_{+}! N_{-}!}\bigg ]} + {log \bigg[p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}\bigg]} = {entropy} + {energy}\]</div>
+<section id="energy-as-the-degree-of-bias-or-tilt">
+<h3>Energy as the degree of bias or tilt<a class="headerlink" href="#energy-as-the-degree-of-bias-or-tilt" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on fraction of steps <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span></p></li>
+<li><p>Since these fractions are dependent we only have one variable to keep track of <span class="math notranslate nohighlight">\(f_{+}=f\)</span> and <span class="math notranslate nohighlight">\(f_{-} = 1-f\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\log \Big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \Big] = - N [ f_{+}log p_{+}+f_{-}log p_{-}] = -N \epsilon(f)
+\]</div>
+<ul class="simple">
+<li><p>When <span class="math notranslate nohighlight">\(p_{-}=p_{+}=1/2\)</span> there is no bias and we have a constant baseline energy <span class="math notranslate nohighlight">\(\epsilon = Nlog2\)</span></p></li>
+<li><p>Energy term expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong> is also informative</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\log \Big[ p_{+}^{(N+\Delta N)/2} \cdot p_{-}^{(N-\Delta N)/2} \Big] = - N\Big [ \frac{1}{2}\log ( p_{+} p_{-}) + \frac{x}{2}  \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon(x)
+\]</div>
+<ul class="simple">
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} (\log p_{+} + \log p_{-})\)</span> is a <strong>baseline</strong> energy-like term.</p></li>
+<li><p>The term <span class="math notranslate nohighlight">\(\frac{x}{2} (\log p_{+} - \log p_{-})\)</span> represents the <strong>bias</strong> introduced by the displacement <span class="math notranslate nohighlight">\(l\)</span>, tilting the distribution towards <span class="math notranslate nohighlight">\(p_+\)</span> or <span class="math notranslate nohighlight">\(p_-\)</span>.</p></li>
+</ul>
+</section>
 <section id="entropy-as-log-of-number-of-microstates-in-a-macrostate">
 <h3>Entropy as log of number of microstates in a macrostate<a class="headerlink" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
@@ -1082,35 +1105,22 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 = N\Big[-f_{+} \log f_{+} - f_{-} \log f_{-}\Big] = N\Big[-flog f + (1-f)log(1-f)\Big] = N s(f)
 \]</div>
 <ul class="simple">
-<li><p>Where we introduced fractions of steps going to the right/left, <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span>. Since these fractions are dependent we only have one variable to keep track of <span class="math notranslate nohighlight">\(f_{+}=f\)</span> and <span class="math notranslate nohighlight">\(f_{-} = 1-f\)</span></p></li>
 <li><p>Note that <strong><span class="math notranslate nohighlight">\(p_{+}\)</span> is fixed</strong> while <strong><span class="math notranslate nohighlight">\(f_{+}\)</span> is variable</strong> becasue as we observe more steps fractions will fluctuate. For large  <span class="math notranslate nohighlight">\(N\)</span>, however, we exepct to get <span class="math notranslate nohighlight">\(f_{\pm} \rightarrow p_{\pm}\)</span>.</p></li>
-<li><p>A general expression will later be identified with **entropy <span class="math notranslate nohighlight">\(s =  -\sum_i p_i \log p_i\)</span>**where <span class="math notranslate nohighlight">\(p_i\)</span> would be identified with microstate probabilities.</p></li>
 </ul>
-</section>
-<section id="energy-as-the-degree-of-bias-or-tilt">
-<h3>Energy as the degree of bias or tilt<a class="headerlink" href="#energy-as-the-degree-of-bias-or-tilt" title="Permalink to this heading">#</a></h3>
+<p>::{admonition} <strong>Total Entropy of an <span class="math notranslate nohighlight">\(N\)</span>-Step Random Walk</strong>
+:class: important</p>
 <ul class="simple">
-<li><p>Taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on fraction of steps <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span></p></li>
+<li><p>The total entropy can be expressed in terms of the fraction <span class="math notranslate nohighlight">\(f\)</span> of steps in one direction:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[
-\log \Big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \Big] = - N [ f_{+}log p_{+}+f_{-}log p_{-}] = -N \epsilon(f)
-\]</div>
-<div class="tip dropdown admonition">
-<p class="admonition-title">Entropy expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong></p>
-<div class="math notranslate nohighlight">
-\[log \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{N-\Delta N}{2}\Big)!} = N \Bigg [\frac{1+x}{2} \log \frac{1+x}{2} - \frac{1-x}{2} \log \frac{1-x}{2}\Bigg ] = N s(x)\]</div>
-</div>
-<div class="tip dropdown admonition">
-<p class="admonition-title">Energy term expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong></p>
-<div class="math notranslate nohighlight">
-\[
-\log \Big[ p_{+}^{(N+\Delta N)/2} \cdot p_{-}^{(N-\Delta N)/2} \Big] = - N\Big [ \frac{1}{2}\log ( p_{+} p_{-}) + \frac{x}{2}  \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon(x)
-\]</div>
+\[S(f) = N \Big[-f \log f - (1-f) \log (1-f)\Big]\]</div>
 <ul class="simple">
-<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} (\log p_{+} + \log p_{-})\)</span> is a <strong>baseline</strong> energy-like term.</p></li>
-<li><p>The term <span class="math notranslate nohighlight">\(\frac{x}{2} (\log p_{+} - \log p_{-})\)</span> represents the <strong>bias</strong> introduced by the displacement <span class="math notranslate nohighlight">\(l\)</span>, tilting the distribution towards <span class="math notranslate nohighlight">\(p_+\)</span> or <span class="math notranslate nohighlight">\(p_-\)</span>.</p></li>
+<li><p>Alternatively, in terms of the net displacement fraction <span class="math notranslate nohighlight">\(x = 2f - 1\)</span>:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[S(x) = N \Bigg[\frac{1+x}{2} \log \frac{1+x}{2} + \frac{1-x}{2} \log \frac{1-x}{2}\Bigg]\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 </section>
 </section>
@@ -1549,8 +1559,8 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-probability-leads-us-to-entropy-and-energy">Log of probability leads us to Entropy and Energy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-the-degree-of-bias-or-tilt">Energy as the degree of bias or tilt</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
