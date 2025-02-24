@@ -872,6 +872,81 @@ J[p] = S(p) - \lambda_0 \left( \sum_k p_k - 1 \right) - \lambda_1 \left( \sum_k 
 <div class="math notranslate nohighlight">
 \[ \sum_{i=1}^{6} x_i \frac{e^{- B x_i}}{Z} = 5.5. \]</div>
 <p>This equation can be solved numerically for <span class="math notranslate nohighlight">\( B \)</span>. In many cases, Newton’s method or other root-finding techniques can be employed to find the exact value of <span class="math notranslate nohighlight">\( B \)</span>. This distribution resembles the Boltzmann factor in statistical mechanics, where higher outcomes are exponentially less probable.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1"># Define die outcomes</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>  <span class="c1"># Possible outcomes {1,2,3,4,5,6}</span>
+
+<span class="c1"># Define the target mean constraint</span>
+<span class="n">target_mean</span> <span class="o">=</span> <span class="mf">5.5</span>  <span class="c1"># Expected value constraint</span>
+
+<span class="c1"># Define the entropy function to maximize (negative because we minimize in optimization)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">entropy</span><span class="p">(</span><span class="n">logp</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the negative entropy (since we minimize in optimization).</span>
+<span class="sd">    logp contains log-probabilities to ensure numerical stability.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logp</span><span class="p">)</span>  <span class="c1"># Convert log-probabilities back to probabilities</span>
+    <span class="n">p</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>  <span class="c1"># Ensure proper normalization</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>  <span class="c1"># Negative entropy for maximization</span>
+
+<span class="c1"># Define the constraint function to enforce the expected value condition</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">constraint</span><span class="p">(</span><span class="n">logp</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constraint function to enforce the mean constraint ⟨x⟩ = 5.5.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logp</span><span class="p">)</span>  <span class="c1"># Convert log-probabilities back to probabilities</span>
+    <span class="n">p</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>  <span class="c1"># Ensure proper normalization</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="n">target_mean</span>  <span class="c1"># Difference from the desired mean</span>
+
+<span class="c1"># Initial guess: uniform log-probabilities (log of 1/6 for each face)</span>
+<span class="n">logp0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="c1"># Define optimization constraints</span>
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;eq&quot;</span><span class="p">,</span> <span class="s2">&quot;fun&quot;</span><span class="p">:</span> <span class="n">constraint</span><span class="p">}</span>
+
+<span class="c1"># Perform numerical optimization using Sequential Least Squares Programming (SLSQP)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">entropy</span><span class="p">,</span> <span class="n">logp0</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;SLSQP&quot;</span><span class="p">)</span>
+
+<span class="c1"># Extract the optimized probability distribution</span>
+<span class="n">optimal_p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<span class="n">optimal_p</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">optimal_p</span><span class="p">)</span>  <span class="c1"># Ensure normalization</span>
+
+<span class="c1"># Plot the resulting probability distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">optimal_p</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;royalblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Die Outcome&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Optimized MaxEnt Probability Distribution for a Biased Die&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="c1"># Display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Print the optimized probabilities</span>
+<span class="n">optimal_p</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/a9c3e669853cb0e9aa1944c6775e77efb2d39b63549ea6934a4e6180933a6700.png" src="../_images/a9c3e669853cb0e9aa1944c6775e77efb2d39b63549ea6934a4e6180933a6700.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.28705973e-16, 2.52533784e-11, 1.66666638e-01, 7.65915583e-08,
+       1.64515691e-29, 8.33333285e-01])
+</pre></div>
+</div>
+</div>
+</div>
 <div class="tip admonition">
 <p class="admonition-title"><strong>Physical constriants on energy, particle number, volume</strong></p>
 <p><strong>1. Microcanonical Ensemble (Fixed Energy, Volume, and Particle Number)</strong></p>
