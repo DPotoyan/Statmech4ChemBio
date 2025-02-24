@@ -15,81 +15,48 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import matplotlib.pyplot as plt
-import scipy.stats as stats
+# Define two Gaussian distributions with different means and variances
+mu1, sigma1 = 0, 1  # Mean and standard deviation for P
+mu2, sigma2 = 1, 2  # Mean and standard deviation for Q
 
-# Define parameters
-D = 1.0  # Diffusion coefficient
-t1 = 1.0  # Time for first Gaussian
-t2 = 2.0  # Time for second Gaussian
-sigma1 = np.sqrt(2 * D * t1)  # Standard deviation at t1
-sigma2 = np.sqrt(2 * D * t2)  # Standard deviation at t2
+x_values = np.linspace(-5, 5, 1000)  # Define spatial grid
+P = norm.pdf(x_values, loc=mu1, scale=sigma1)  # First Gaussian
+Q = norm.pdf(x_values, loc=mu2, scale=sigma2)  # Second Gaussian
 
-# Define grid for discretization
-x_min, x_max = -5, 5  # Range of x values
-num_bins_list = [10, 50, 100, 500]  # Different resolutions
+# Compute KL divergences
+D_KL_PQ = np.trapz(P * np.log(P / Q), x_values)  # D_KL(P || Q)
+D_KL_QP = np.trapz(Q * np.log(Q / P), x_values)  # D_KL(Q || P)
 
-# Compute Shannon entropy for discretized Gaussian
-shannon_entropies = []
+# Plot the distributions
+plt.figure(figsize=(8, 6))
+plt.plot(x_values, P, label=r'$P(x) \sim \mathcal{N}(0,1)$', linewidth=2)
+plt.plot(x_values, Q, label=r'$Q(x) \sim \mathcal{N}(1,2)$', linewidth=2, linestyle='dashed')
+plt.fill_between(x_values, P, Q, color='gray', alpha=0.3, label=r'Difference between $P$ and $Q$')
 
-for num_bins in num_bins_list:
-    x_bins = np.linspace(x_min, x_max, num_bins + 1)  # Bin edges
-    x_centers = (x_bins[:-1] + x_bins[1:]) / 2  # Bin centers
-    dx = x_bins[1] - x_bins[0]  # Bin width
-    
-    # Compute probability mass function for discretized Gaussian
-    p_i = stats.norm.pdf(x_centers, 0, sigma1) * dx
-    p_i = p_i / np.sum(p_i)  # Normalize
+# Annotate KL divergences
+plt.text(-4, 0.15, rf'$D_{{KL}}(P || Q) = {D_KL_PQ:.3f}$', fontsize=12, color='blue')
+plt.text(-4, 0.12, rf'$D_{{KL}}(Q || P) = {D_KL_QP:.3f}$', fontsize=12, color='red')
 
-    # Compute Shannon entropy
-    S_shannon = -np.sum(p_i * np.log(p_i + 1e-10))  # Avoid log(0)
-    shannon_entropies.append(S_shannon)
+# Labels and legend
+plt.xlabel('$x$', fontsize=14)
+plt.ylabel('Probability Density', fontsize=14)
+plt.title('Illustration of KL Asymmetry Between Two Gaussians', fontsize=14)
+plt.legend(fontsize=12)
+plt.grid(True)
 
-# Compute differential entropy for continuous Gaussian
-S_diff = 0.5 * np.log(4 * np.pi * np.e * D * t1)
-
-# Compute KL divergence between Gaussians at t1 and t2
-KL_div = 0.5 * ((t1 / t2) - 1 + np.log(t2 / t1))
-
-# Plot Shannon entropy vs. grid resolution
-plt.figure(figsize=(6,4))
-plt.plot(num_bins_list, shannon_entropies, 'o-', label='Shannon Entropy')
-plt.axhline(y=S_diff, color='r', linestyle='--', label='Differential Entropy')
-plt.xlabel('Number of Bins')
-plt.ylabel('Entropy')
-plt.title('Shannon Entropy vs. Grid Resolution')
-plt.legend()
-plt.xscale('log')
-plt.grid()
 plt.show()
-
-# Display results
-import pandas as pd
-df = pd.DataFrame({
-    "Grid Size (Bins)": num_bins_list,
-    "Shannon Entropy": shannon_entropies
-})
-import ace_tools as tools
-tools.display_dataframe_to_user(name="Shannon Entropy Computation", dataframe=df)
-
-# Display final computed entropies
-{"Differential Entropy": S_diff, "KL Divergence (t1 vs. t2)": KL_div}
 
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[3], line 56[0m
-[1;32m     51[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mpd[39;00m
-[1;32m     52[0m df [38;5;241m=[39m pd[38;5;241m.[39mDataFrame({
-[1;32m     53[0m     [38;5;124m"[39m[38;5;124mGrid Size (Bins)[39m[38;5;124m"[39m: num_bins_list,
-[1;32m     54[0m     [38;5;124m"[39m[38;5;124mShannon Entropy[39m[38;5;124m"[39m: shannon_entropies
-[1;32m     55[0m })
-[0;32m---> 56[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mace_tools[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mtools[39;00m
-[1;32m     57[0m tools[38;5;241m.[39mdisplay_dataframe_to_user(name[38;5;241m=[39m[38;5;124m"[39m[38;5;124mShannon Entropy Computation[39m[38;5;124m"[39m, dataframe[38;5;241m=[39mdf)
-[1;32m     59[0m [38;5;66;03m# Display final computed entropies[39;00m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[4], line 6[0m
+[1;32m      3[0m mu2, sigma2 [38;5;241m=[39m [38;5;241m1[39m, [38;5;241m2[39m  [38;5;66;03m# Mean and standard deviation for Q[39;00m
+[1;32m      5[0m x_values [38;5;241m=[39m np[38;5;241m.[39mlinspace([38;5;241m-[39m[38;5;241m5[39m, [38;5;241m5[39m, [38;5;241m1000[39m)  [38;5;66;03m# Define spatial grid[39;00m
+[0;32m----> 6[0m P [38;5;241m=[39m [43mnorm[49m[38;5;241m.[39mpdf(x_values, loc[38;5;241m=[39mmu1, scale[38;5;241m=[39msigma1)  [38;5;66;03m# First Gaussian[39;00m
+[1;32m      7[0m Q [38;5;241m=[39m norm[38;5;241m.[39mpdf(x_values, loc[38;5;241m=[39mmu2, scale[38;5;241m=[39msigma2)  [38;5;66;03m# Second Gaussian[39;00m
+[1;32m      9[0m [38;5;66;03m# Compute KL divergences[39;00m
 
-[0;31mModuleNotFoundError[0m: No module named 'ace_tools'
+[0;31mNameError[0m: name 'norm' is not defined
 
