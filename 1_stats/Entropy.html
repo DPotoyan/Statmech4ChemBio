@@ -490,11 +490,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise">Surprise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-logarithm-of-probability-is-a-good-candidate-function-for-information">A logarithm of probability is a good candidate function for information!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-bit-base-two">Why bit (base two)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shannon-measure-of-information-smi">Shannon  Measure of Information (SMI)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alphabets-are-not-random-hghjxcjxcc">Alphabets are not random! hghjxcjxcc</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-information">Quantifying information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-per-letter-of-english">Information per Letter of English</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-kittens">Two kittens</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#game-of-message-decoding">Game of message decoding:</a></li>
@@ -538,6 +537,8 @@ document.write(`
 <li><p>Maximum Entropy principle: as the most unbiased way to infer distributions given empricial constraints.</p></li>
 </ul>
 </div>
+<section id="surprise">
+<h2>Surprise<a class="headerlink" href="#surprise" title="Permalink to this heading">#</a></h2>
 <p><strong>Which of these two statements conveys the most information?</strong></p>
 <ul class="simple">
 <li><p>I will eat some food tomorrow.</p></li>
@@ -569,6 +570,7 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(I(E_1 and E_2) = I(E_1) + I(E_2)\)</span></p></li>
 <li><p>Knowledge of event can add to information: <span class="math notranslate nohighlight">\(I(E) \geq 0\)</span></p></li>
 </ol>
+</section>
 <section id="a-logarithm-of-probability-is-a-good-candidate-function-for-information">
 <h2>A logarithm of probability is a good candidate function for information!<a class="headerlink" href="#a-logarithm-of-probability-is-a-good-candidate-function-for-information" title="Permalink to this heading">#</a></h2>
 <p>Because information should be additive!</p>
@@ -591,63 +593,59 @@ document.write(`
 \[(x_0,x_1,...x_N) = 10111101001010100100\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">binom</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">binom</span>
 
-<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1">#trials</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># probability of step to right</span>
+<span class="c1"># Parameters</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>        <span class="c1"># number of trials</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>         <span class="c1"># probability of success (e.g., step to right)</span>
 
-<span class="n">W_bin</span> <span class="o">=</span> <span class="p">[</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span> 
+<span class="c1"># Generate outcome values from 0 to N (inclusive)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">W_bin</span><span class="p">)</span> <span class="p">)</span>
+<span class="c1"># Calculate the binomial probability mass function for each outcome</span>
+<span class="n">W_bin</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Create a figure and plot the natural logarithm of the PMF</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">W_bin</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;log(PMF)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1"># Adding labels and title for clarity</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Successes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Log Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Logarithm of the Binomial Distribution PMF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># probability of step to right</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">W_bin</span> <span class="o">=</span> <span class="p">[</span><span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span> 
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">W_bin</span><span class="p">)</span> <span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;plt&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x180a27c10&gt;]
 </pre></div>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">comp_entropy</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    
-    <span class="n">p</span> <span class="o">=</span> <span class="n">px</span><span class="o">*</span><span class="n">dx</span> <span class="c1"># np.sum(p)=1</span>
-    
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
-
-
-<span class="n">fair_die</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
-<span class="n">unfair_die</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
-
-<span class="n">comp_entropy</span><span class="p">(</span><span class="n">fair_die</span><span class="p">),</span> <span class="n">comp_entropy</span><span class="p">(</span><span class="n">unfair_die</span><span class="p">)</span>
-</pre></div>
-</div>
+<img alt="../_images/7f4bdf5563c260e664b158e63c9f46b29cec05eb2551d8fff38daf5791b38b03.png" src="../_images/7f4bdf5563c260e664b158e63c9f46b29cec05eb2551d8fff38daf5791b38b03.png" />
 </div>
 </div>
 </section>
 <section id="shannon-measure-of-information-smi">
 <h2>Shannon  Measure of Information (SMI)<a class="headerlink" href="#shannon-measure-of-information-smi" title="Permalink to this heading">#</a></h2>
-<p><strong>Surprise</strong></p>
+<div class="important admonition">
+<p class="admonition-title"><strong>Shanon Entropy</strong></p>
 <div class="math notranslate nohighlight">
-\[I_i = -log p_i\]</div>
-<div class="math notranslate nohighlight">
-\[H = -\sum_i p_i log p_i\]</div>
+\[H = -\sum_i p_i log_2 p_i\]</div>
+</div>
 <ul class="simple">
-<li><p>Information is an average of surprise.!!! How surprised are you on average?</p></li>
+<li><p>Information is wirrten as an average of surprise <span class="math notranslate nohighlight">\(I_i = -log p_i\)</span>! How surprised are you on average?</p></li>
 <li><p>How many yes or no answers we need to reconstruct random walk.</p></li>
 <li><p>How many yes/no answers to pinpoint weather molecules are in the left vs right side of container</p></li>
 <li><p>How many yes/no answers to pinpoint precise conformation of a polymer</p></li>
 </ul>
 <blockquote>
-<div><p>[To Shanon], You should call it Entropy, for two reasons.
+<div><p>John von Neumann advice to [To Calude Shanon], You should call it Entropy, for two reasons.
 In the first place you uncertainty function has been used in statistical mechanics under that name.
 In the second place, and more importantly, no one knows what entropy really is, so in a debate you will always have the advantage.” J von Neumann</p>
 </div></blockquote>
@@ -656,30 +654,27 @@ In the second place, and more importantly, no one knows what entropy really is, 
 <li><p><span class="math notranslate nohighlight">\(m:\)</span> Letters in the alphabet (Russian: 33,Enlgish: 26,  Korean: 24)</p></li>
 <li><p><span class="math notranslate nohighlight">\(I(Russian) &gt; I(English) &gt; I(Korean)\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(I(m_1, m_2) = I(m_1) + I(m_2)\)</span> reagrdless of the order letters are sent!</p></li>
+<li><p>Why is entropy less thatn <span class="math notranslate nohighlight">\(logm\)</span>?</p></li>
 </ul>
-<blockquote>
-<div><p>One bit is an amount of information one can obtain from the answer to a single yes–no question. The number of bits to decode a message grows with the length of an alphabet and length of the word.</p>
-</div></blockquote>
-</section>
-<section id="alphabets-are-not-random-hghjxcjxcc">
-<h2>Alphabets are not random! hghjxcjxcc<a class="headerlink" href="#alphabets-are-not-random-hghjxcjxcc" title="Permalink to this heading">#</a></h2>
-<p>Some letters happen more often than the others! Probability of each letter in an independent sequence is <span class="math notranslate nohighlight">\(p_m = \frac{1}{m}\)</span></p>
-<div class="math notranslate nohighlight">
-\[\boxed{H(p) = - \sum_m p_m log_m p_m}\]</div>
-<blockquote>
-<div><p>We must send a message explaining how to combine the transferred symbols as a part of the message, but the length of the needed message is finite and independent of the length of the actual message we wish to send, so in the long message limit we may ignore this overhead.</p>
-</div></blockquote>
-</section>
-<section id="quantifying-information">
-<h2>Quantifying information<a class="headerlink" href="#quantifying-information" title="Permalink to this heading">#</a></h2>
+<div class="note dropdown admonition">
+<p class="admonition-title">**Exercise: entropy of die rolls ** </p>
 <ul class="simple">
 <li><p>How much knowledge we need to find out outcome of fair dice?</p></li>
 <li><p>We are told die shows a digit higher than 2 (3, 4, 5 or 6). How much knowledge does this information carry?</p></li>
 </ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<strong>Solution</strong><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(H(E_1) = log_2 6\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(H(E_1) - H(E_2) = log_2 6 - log_2 4\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(H(E_1) = log_2 6\)</span></p></li>
+<li><p class="sd-card-text"><span class="math notranslate nohighlight">\(H(E_1) - H(E_2) = log_2 6 - log_2 4\)</span></p></li>
 </ul>
+</div>
+</details></div>
 </section>
 <section id="information-per-letter-of-english">
 <h2>Information per Letter of English<a class="headerlink" href="#information-per-letter-of-english" title="Permalink to this heading">#</a></h2>
@@ -886,11 +881,10 @@ In the second place, and more importantly, no one knows what entropy really is, 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surprise">Surprise</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-logarithm-of-probability-is-a-good-candidate-function-for-information">A logarithm of probability is a good candidate function for information!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-bit-base-two">Why bit (base two)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shannon-measure-of-information-smi">Shannon  Measure of Information (SMI)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#alphabets-are-not-random-hghjxcjxcc">Alphabets are not random! hghjxcjxcc</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-information">Quantifying information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-per-letter-of-english">Information per Letter of English</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-kittens">Two kittens</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#game-of-message-decoding">Game of message decoding:</a></li>
