@@ -585,6 +585,39 @@ document.write(`
 </ul>
 <div class="math notranslate nohighlight">
 \[(x_0,x_1,...x_N) = 10111101001010100100\]</div>
+</section>
+<section id="shannon-measure-of-information">
+<h2>Shannon  Measure of Information<a class="headerlink" href="#shannon-measure-of-information" title="Permalink to this heading">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title"><strong>Shanon Entropy</strong></p>
+<div class="math notranslate nohighlight">
+\[H = -\sum_i p_i log_2 p_i\]</div>
+</div>
+<blockquote>
+<div><p>John von Neumann advice to [To Calude Shanon], You should call it Entropy, for two reasons.
+In the first place you uncertainty function has been used in statistical mechanics under that name.
+In the second place, and more importantly, no one knows what entropy really is, so in a debate you will always have the advantage.” J von Neumann</p>
+</div></blockquote>
+<p><strong>Descriptions of Entropy</strong></p>
+<ul class="simple">
+<li><p><strong>Measure of Required Information:</strong></p>
+<ul>
+<li><p>Entropy quantifies the number of yes/no questions needed to precisely identify the microstate of a system. For example, determining the exact trajectory of an N-step random walk or the detailed molecular distribution in a container both require specifying a particular microstate.</p></li>
+</ul>
+</li>
+<li><p><strong>Indicator of Diversity and Uncertainty:</strong></p>
+<ul>
+<li><p>Entropy reflects the diversity of microstates available to a system. A higher entropy implies a larger number of possible microstates, leading to greater uncertainty about the system’s actual state.</p></li>
+</ul>
+</li>
+<li><p><strong>Implications:</strong></p>
+<ul>
+<li><p>In systems with high entropy, the vast diversity of microstates means that more “work” is needed—in an informational sense—to pinpoint a specific microstate.</p></li>
+<li><p>If we want to reduce the entropy we see that one must carry out physical work! E.g we want to ask less yes/no questions about gas atoms we can compress it.</p></li>
+<li><p>Hence we expect the systems that evolve sponteanueously and irreversibly to increase entropy!</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -594,68 +627,105 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">binom</span>
 
-<span class="c1"># Parameters</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>        <span class="c1"># number of trials</span>
-<span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>         <span class="c1"># probability of success (e.g., step to right)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">binary_entropy</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the binary Shannon entropy for a given probability p.</span>
+<span class="sd">    Avoid issues with log(0) by ensuring p is never 0 or 1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">p</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
 
-<span class="c1"># Generate outcome values from 0 to N (inclusive)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Generate probability values, avoiding the endpoints to prevent log(0)</span>
+<span class="n">p_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">H_vals</span> <span class="o">=</span> <span class="n">binary_entropy</span><span class="p">(</span><span class="n">p_vals</span><span class="p">)</span>
 
-<span class="c1"># Calculate the binomial probability mass function for each outcome</span>
-<span class="n">W_bin</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="c1"># Create a figure with two subplots side-by-side</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-<span class="c1"># Create a figure and plot the natural logarithm of the PMF</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">W_bin</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;log(PMF)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="c1"># Plot 1: Binary Shannon Entropy Function</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p_vals</span><span class="p">,</span> <span class="n">H_vals</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;midnightblue&#39;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$H(p)=-p\log_2(p)-(1-p)\log_2(1-p)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Probability $p$)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Entropy (bits)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Binary Shannon Entropy&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># Adding labels and title for clarity</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Number of Successes&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Log Probability&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Logarithm of the Binomial Distribution PMF&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="c1"># Plot 2: Example Distributions and Their Entropy</span>
+<span class="c1"># Define a few example two-outcome distributions:</span>
+<span class="n">distributions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Uniform (0.5, 0.5)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="s2">&quot;Skewed (0.8, 0.2)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+    <span class="s2">&quot;Extreme (0.99, 0.01)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]</span>
+<span class="p">}</span>
 
-<span class="c1"># Display the plot</span>
+<span class="c1"># Colors for each distribution</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="s2">&quot;salmon&quot;</span><span class="p">,</span> <span class="s2">&quot;lightgreen&quot;</span><span class="p">]</span>
+
+<span class="c1"># For visual separation, use offsets for the bars</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">x_ticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># positions for the two outcomes</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">probs</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">distributions</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="c1"># Compute the Shannon entropy for the distribution</span>
+    <span class="n">entropy_val</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">probs</span><span class="p">))</span>
+    <span class="c1"># Offset x positions for clarity</span>
+    <span class="n">x_positions</span> <span class="o">=</span> <span class="n">x_ticks</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="n">width</span> <span class="o">-</span> <span class="n">width</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x_positions</span><span class="p">,</span> <span class="n">probs</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+              <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="se">\n</span><span class="s2">Entropy = </span><span class="si">{</span><span class="n">entropy_val</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> bits&quot;</span><span class="p">)</span>
+    
+<span class="c1"># Set labels and title for the bar plot</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x_ticks</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s2">&quot;Outcome 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Outcome 2&quot;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Example Distributions&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x180a27c10&gt;]
-</pre></div>
-</div>
-<img alt="../_images/7f4bdf5563c260e664b158e63c9f46b29cec05eb2551d8fff38daf5791b38b03.png" src="../_images/7f4bdf5563c260e664b158e63c9f46b29cec05eb2551d8fff38daf5791b38b03.png" />
+<img alt="../_images/9f9d87d5134598a6ad3ed7510bf99227a95c46c4c13511b3b3a4fe6d8361104d.png" src="../_images/9f9d87d5134598a6ad3ed7510bf99227a95c46c4c13511b3b3a4fe6d8361104d.png" />
 </div>
 </div>
-</section>
-<section id="shannon-measure-of-information">
-<h2>Shannon  Measure of Information<a class="headerlink" href="#shannon-measure-of-information" title="Permalink to this heading">#</a></h2>
-<div class="important admonition">
-<p class="admonition-title"><strong>Shanon Entropy</strong></p>
+<div class="note dropdown admonition">
+<p class="admonition-title"><strong>Exercise: Information per letter <span class="math notranslate nohighlight">\(I(m)\)</span> to decode the message</strong>** </p>
+<ul>
+<li><p>Let <span class="math notranslate nohighlight">\(m\)</span>  represent the letters in an alphabet. For example:</p>
+<ul class="simple">
+<li><p><strong>Korean:</strong> 24 letters</p></li>
+<li><p><strong>English:</strong> 26 letters</p></li>
+<li><p><strong>Russian:</strong> 33 letters</p></li>
+</ul>
+</li>
+<li><p>The information content associated with these alphabets satisfies:</p>
 <div class="math notranslate nohighlight">
-\[H = -\sum_i p_i log_2 p_i\]</div>
+\[
+  I(\text{Russian}) &gt; I(\text{English}) &gt; I(\text{Korean})
+  \]</div>
+</li>
+<li><p>The information of a sequence of letters is additive, regardless of the order in which they are transmitted:
+$<span class="math notranslate nohighlight">\(
+I(m_1, m_2) = I(m_1) + I(m_2)
+\)</span>$</p></li>
+<li><p><strong>Question</strong> If the symbols of English alphabet (+ blank) appear equally probably, what is the information carried by a single symbol? This must be <span class="math notranslate nohighlight">\(log_2(26 + 1) = 4.755\)</span> bits, but for actual English sentences, it is known to be about <strong><span class="math notranslate nohighlight">\(1.3\)</span> bits. Why?</strong></p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<strong>Solution</strong><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">Not every letter has equal probability or frequency of appearing in a sentence!</p></li>
+</ul>
 </div>
-<ul class="simple">
-<li><p>Information is wirrten as an average of surprise <span class="math notranslate nohighlight">\(I_i = -log p_i\)</span>! How surprised are you on average?</p></li>
-<li><p>How many yes or no answers we need to reconstruct random walk.</p></li>
-<li><p>How many yes/no answers to pinpoint weather molecules are in the left vs right side of container</p></li>
-<li><p>How many yes/no answers to pinpoint precise conformation of a polymer</p></li>
-</ul>
-<blockquote>
-<div><p>John von Neumann advice to [To Calude Shanon], You should call it Entropy, for two reasons.
-In the first place you uncertainty function has been used in statistical mechanics under that name.
-In the second place, and more importantly, no one knows what entropy really is, so in a debate you will always have the advantage.” J von Neumann</p>
-</div></blockquote>
-<p><strong>Information per letter <span class="math notranslate nohighlight">\(I(m)\)</span> to decode the message</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(m:\)</span> Letters in the alphabet (Russian: 33,Enlgish: 26,  Korean: 24)</p></li>
-<li><p><span class="math notranslate nohighlight">\(I(Russian) &gt; I(English) &gt; I(Korean)\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(I(m_1, m_2) = I(m_1) + I(m_2)\)</span> reagrdless of the order letters are sent!</p></li>
-<li><p>If the symbols of English alphabet (+ blank) appear equally probably, what is the information carried by a single symbol? This must be <span class="math notranslate nohighlight">\(log_2(26 + 1) = 4.755\)</span> bits, but for actual English sentences, it is known to be about <strong><span class="math notranslate nohighlight">\(1.3\)</span> bits. Why?</strong></p></li>
-</ul>
+</details></div>
 <div class="note dropdown admonition">
 <p class="admonition-title"><strong>Exercise: entropy of die rolls</strong> </p>
 <ul class="simple">
