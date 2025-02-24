@@ -1103,6 +1103,31 @@ D_{\text{KL}}(P || Q) = \int P(x) \ln \frac{P(x)}{Q(x)} \, dx.
 <li><p><strong>KL is non-negative and equals zero if and only if <span class="math notranslate nohighlight">\(P = Q \)</span> everywhere.</strong></p></li>
 <li><p>KL divergence is widely used in statistical mechanics, information theory, machine learning and thermodynamics as a measure of information loss when approximating one distribution with another.</p></li>
 </ul>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>Flashback to random walk and LDT</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://dpotoyan.github.io/Statmech4ChemBio/1_stats/Probabilities_Counting.html#large-deviation-theory">We have already seen relative entropy in random walk problem!</a></p></li>
+<li><p>There we derived what is known as Large Deviation Theory expression showing that fluctuations are concentrated around minima of <span class="math notranslate nohighlight">\(I(f)\)</span> which seemed to us some mysterious but important function</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P_N (f) \sim e^{-N I(f)}.
+\]</div>
+<ul class="simple">
+<li><p>Now we see that this is Relativ entropy between empirical and true probability distribution!  <span class="math notranslate nohighlight">\(N\)</span> increases.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+I(f) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-} = D(f||p)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P_N (f) \sim e^{-N D(f||p)}
+\]</div>
+<ul class="simple">
+<li><p>Thus we see that relative entropy tells us how unlikely it is to observe empricial fraction f deviating from p! The bigger the relative entropy <span class="math notranslate nohighlight">\(D(f||p)\)</span> the less liekly we to see f!</p></li>
+</ul>
+</div>
 </section>
 <section id="assymetry-of-relative-entropy-is-important">
 <h2>Assymetry of relative entropy is important<a class="headerlink" href="#assymetry-of-relative-entropy-is-important" title="Permalink to this heading">#</a></h2>
@@ -1207,6 +1232,10 @@ D_{\text{KL}}(P_{\text{forward}} || P_{\text{backward}}) &gt; 0.
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define two Gaussian distributions with different means and variances</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
 <span class="n">mu1</span><span class="p">,</span> <span class="n">sigma1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1"># Mean and standard deviation for P</span>
 <span class="n">mu2</span><span class="p">,</span> <span class="n">sigma2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>  <span class="c1"># Mean and standard deviation for Q</span>
 
@@ -1241,18 +1270,7 @@ D_{\text{KL}}(P_{\text{forward}} || P_{\text{backward}}) &gt; 0.
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">mu2</span><span class="p">,</span> <span class="n">sigma2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>  <span class="c1"># Mean and standard deviation for Q</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Define spatial grid</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">P</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma1</span><span class="p">)</span>  <span class="c1"># First Gaussian</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">Q</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma2</span><span class="p">)</span>  <span class="c1"># Second Gaussian</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># Compute KL divergences</span>
-
-<span class="ne">NameError</span>: name &#39;norm&#39; is not defined
-</pre></div>
-</div>
+<img alt="../_images/2ae51e0ed16681f28d91c380c3fc6a74ba3b4646b733bb3838fbf09462b3cc1a.png" src="../_images/2ae51e0ed16681f28d91c380c3fc6a74ba3b4646b733bb3838fbf09462b3cc1a.png" />
 </div>
 </div>
 </section>
