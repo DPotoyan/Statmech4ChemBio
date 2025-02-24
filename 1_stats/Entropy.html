@@ -810,17 +810,18 @@ document.write(`
 </ul>
 <div class="math notranslate nohighlight">
 \[
-S = \log \frac{N!}{n! (N-n)!} = N \Big[-f \log f - (1-f) \log (1-f)\Big]
+S(n) = \log \Omega(n) = \log \frac{N!}{n! (N-n)!} = N \Big[-\frac{n}{N} \log \frac{n}{N}  -\Big(1-\frac{n}{N} \Big)\log \Big(1-\frac{n}{N}\Big)\Big]  = N\sum_i f_i log f_i
 \]</div>
 <ul>
-<li><p>Here, <span class="math notranslate nohighlight">\(f = n/N\)</span> represents the <strong>fraction (empirical probability) of steps to the right</strong> in a random walk.</p></li>
-<li><p><strong>Different macrostates have different entropy values!</strong> This highlights that entropy , since:</p>
+<li><p>Here, <span class="math notranslate nohighlight">\(f_i = n/N\)</span> represents the <strong>fraction (empirical probability) of steps to the right</strong> in a random walk.</p></li>
+<li><p><strong>Different macrostates will have different entropy based on how many microstats they contain!</strong></p>
 <div class="math notranslate nohighlight">
 \[
-  P = \frac{\Omega}{\Omega_{\text{total}}} =  \frac{N!}{n! (N-n)!} \frac{1}{2^N}
+  P(n) = \frac{\Omega(n)}{\Omega_{\text{total}}} =  \frac{N!}{n! (N-n)!} \frac{1}{2^N}
   \]</div>
-<p>where <span class="math notranslate nohighlight">\(\Omega_{\text{total}} = 2^N\)</span> is the total number of possible macrostates. For example, in an <strong>N-step random walk</strong>, different sequences of steps correspond to different macrostates, each with its own entropy.</p>
 </li>
+<li><p>where <span class="math notranslate nohighlight">\(\Omega_{\text{total}} = 2^N\)</span> is the total number of microstates.</p></li>
+<li><p>Once again we can think of entropy of a macrostate as a porbability of that macrostate! <span class="math notranslate nohighlight">\(S(n) \sim log P(n)\)</span></p></li>
 </ul>
 </div>
 <section id="descriptions-of-entropy">
