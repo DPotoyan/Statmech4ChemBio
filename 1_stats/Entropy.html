@@ -506,8 +506,11 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy">Relative Entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kl-and-information">KL and information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility">Assymetry of KL and irreversibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-in-machine-learning">Assymetry of KL in Machine learning</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
             </nav>
@@ -587,9 +590,6 @@ document.write(`
 </section>
 <section id="shannon-measure-of-information">
 <h2>Shannon  Measure of Information<a class="headerlink" href="#shannon-measure-of-information" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>John von Neumann advice to [To Calude Shanon], “You should call it Entropy, for two reasons. In the first place you uncertainty function has been used in statistical mechanics under that name. In the second place, and more importantly, no one knows what entropy really is, so in a debate you will always have the advantage.”</p></li>
-</ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Shanon Entropy</strong></p>
 <div class="math notranslate nohighlight">
@@ -600,8 +600,9 @@ document.write(`
 </ul>
 </div>
 <ul class="simple">
+<li><p>John von Neumann advice to [To Calude Shanon], “You should call it Entropy, for two reasons. In the first place you uncertainty function has been used in statistical mechanics under that name. In the second place, and more importantly, no one knows what entropy really is, so in a debate you will always have the advantage.”</p></li>
 <li><p>Entropy that appears here and in thermodyanmics are one and same quantity but expressed in differetn units! We reserve letter <span class="math notranslate nohighlight">\(S\)</span> for entropy in units of Boltzman constant that sets the units of thermal energy <span class="math notranslate nohighlight">\(k_B\)</span>. For now lets just roll with <span class="math notranslate nohighlight">\(k_B=1\)</span> we wont be doing any thermodynamics in here.</p></li>
-<li><p>When all <span class="math notranslate nohighlight">\(\Omega\)</span> number of microstates of a macrostate are equally likely, e.g fair coin <span class="math notranslate nohighlight">\(\Omega=2\)</span> or die <span class="math notranslate nohighlight">\(\Omega =6\)</span> we have entropy given simply as log of number of micostates in a macrostate!</p></li>
+<li><p>Note that when all <span class="math notranslate nohighlight">\(\Omega\)</span> number of microstates of a macrostate are equally likely, e.g fair coin <span class="math notranslate nohighlight">\(\Omega=2\)</span> or die <span class="math notranslate nohighlight">\(\Omega =6\)</span> entropy is maximimized and becomes log of number of micostates in a macrostate!</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -787,45 +788,56 @@ document.write(`
 </section>
 <section id="entropy-micro-and-macro-states-probability">
 <h2>Entropy, micro and macro states probability<a class="headerlink" href="#entropy-micro-and-macro-states-probability" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Here we illuminate meaning of entropy and its connection to micro and macro states that we introduced earlier. We will consider unifrm probability distirbutions where all microstates are equally likely. E.g a fair die or coin.</p></li>
-</ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Entropy for equally probably microstates</strong></p>
 <ul class="simple">
-<li><p>Entropy when all microstates in sample space <span class="math notranslate nohighlight">\(\Omega\)</span> are equally <span class="math notranslate nohighlight">\(p_i=\frac{1}{\Omega}\)</span> leads to a simple relationship originally found by Boltzmann</p></li>
+<li><p>When all microstates in sample space <span class="math notranslate nohighlight">\(\Omega\)</span> are equally <span class="math notranslate nohighlight">\(p_i=\frac{1}{\Omega}\)</span> leads to a simple expression of Entropy first obtained by Boltzmann</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S(\Omega) = -\sum_i \frac{1}{\Omega} log \frac{1}{\Omega} = log \Omega\]</div>
 <ul class="simple">
-<li><p>Entropy for a macrostate <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(\Omega(A)\)</span> number of microstates has probability <span class="math notranslate nohighlight">\(P(A) = \frac{\Omega(A)}{\Omega}\)</span> and entropy is therefore given:</p></li>
+<li><p><strong>Entropy for a macrostate</strong> with <span class="math notranslate nohighlight">\(\Omega(A)\)</span> number of microstates has probability <span class="math notranslate nohighlight">\(P(A) = \frac{\Omega(A)}{\Omega}\)</span> and is given:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S(A) = log \Omega(A) = log P(A) + const\]</div>
-</div>
 <ul class="simple">
-<li><p>Thus we find that entropy of a macrostates <strong>quantifies how probable that macrostate is!</strong>. We would often be interested in comparing which macrostate the system will settle in so this is incredibly useful relationship.</p></li>
+<li><p>Entropy of a macrostate <strong>quantifies how probable that macrostate is!</strong></p></li>
 </ul>
+</div>
 <div class="tip dropdown admonition">
-<p class="admonition-title"><strong>Flashback to Random Walk, Binomial, and Entropy</strong></p>
+<p class="admonition-title"><strong>Flashback to Random Walk, Binomial, and Large Deviation Theorem</strong>  </p>
 <ul class="simple">
-<li><p>Where have we seen the entropy expression before? When we took the <strong>log of the binomial distribution</strong>! But why did we call it entropy?</p></li>
+<li><p><a class="reference external" href="https://dpotoyan.github.io/Statmech4ChemBio/1_stats/Probabilities_Counting.html#large-deviation-theory">Where have we seen the entropy expression before?</a></p></li>
+<li><p>When we took the <strong>log of the binomial distribution</strong>! But why did we call it entropy?</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-S(n) = \log \Omega(n) = \log \frac{N!}{n! (N-n)!} = N \Big[-\frac{n}{N} \log \frac{n}{N}  -\Big(1-\frac{n}{N} \Big)\log \Big(1-\frac{n}{N}\Big)\Big]  = N\sum_i f_i log f_i
+S(n) = \log \frac{N!}{n! (N-n)!} = N \left[ - f \log f - (1-f) \log (1-f) \right] = N s(f)
 \]</div>
 <ul>
-<li><p>Here, <span class="math notranslate nohighlight">\(f_i = n/N\)</span> represents the <strong>fraction (empirical probability) of steps to the right</strong> in a random walk.</p></li>
-<li><p><strong>Different macrostates will have different entropy based on how many microstats they contain!</strong></p>
+<li><p>Here, <span class="math notranslate nohighlight">\( f = n/N \)</span> represents the <strong>fraction (empirical probability) of steps to the right</strong> in a random walk.</p></li>
+<li><p><span class="math notranslate nohighlight">\( s(f) = S/N \)</span> is the <strong>entropy per particle (or per step)</strong>, while <span class="math notranslate nohighlight">\( S \)</span> is the <strong>total entropy</strong>.</p></li>
+<li><p><strong>Different macrostates have different entropy, depending on the number of microstates they contain!</strong></p>
 <div class="math notranslate nohighlight">
 \[
-  P(n) = \frac{\Omega(n)}{\Omega_{\text{total}}} =  \frac{N!}{n! (N-n)!} \frac{1}{2^N}
+  P(n) = \frac{\Omega(n)}{\Omega_{\text{total}}} =  \frac{N!}{n! (N-n)!} \cdot \frac{1}{2^N}
   \]</div>
 </li>
-<li><p>where <span class="math notranslate nohighlight">\(\Omega_{\text{total}} = 2^N\)</span> is the total number of microstates.</p></li>
-<li><p>Once again we can think of entropy of a macrostate as a porbability of that macrostate! <span class="math notranslate nohighlight">\(S(n) \sim log P(n)\)</span></p></li>
+<li><p>where <span class="math notranslate nohighlight">\( \Omega_{\text{total}} = 2^N \)</span> is the <strong>total number of microstates</strong>.</p></li>
+<li><p>Once again, we can think of <strong>the entropy of a macrostate as being related to its probability:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  S(n) \sim \log P(n)
+  \]</div>
+</li>
 </ul>
+<p><strong>Connection to the Large Deviation Theorem</strong><br />
+When we express probability in terms of entropy, we recover the <strong>Large Deviation Theorem</strong>, which states that <strong>fluctuations from the most likely macrostates are exponentially suppressed</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+P(f) \sim e^{N s(f)}
+\]</div>
+<p>This result highlights how entropy naturally governs the likelihood of macrostates in statistical mechanics.</p>
 </div>
 <section id="descriptions-of-entropy">
 <h3>Descriptions of Entropy<a class="headerlink" href="#descriptions-of-entropy" title="Permalink to this heading">#</a></h3>
@@ -1073,10 +1085,6 @@ S(t) = \frac{1}{2} \log (4\pi e Dt).
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Relative Entropy</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(Q\)</span> some reference probability distributions</p></li>
-<li><p><span class="math notranslate nohighlight">\(P\)</span> true probability distribution or the one we are observing.</p></li>
-</ul>
 <div class="math notranslate nohighlight">
 \[
 D_{\text{KL}}(P || Q) = \sum_x P(x) \ln \frac{P(x)}{Q(x)}
@@ -1086,16 +1094,20 @@ D_{\text{KL}}(P || Q) = \sum_x P(x) \ln \frac{P(x)}{Q(x)}
 D_{\text{KL}}(P || Q) = \int P(x) \ln \frac{P(x)}{Q(x)} \, dx.
 \]</div>
 <ul class="simple">
-<li><p>The Kullback-Leibler (KL) divergence, or relative entropy, measures <strong>how much information is lost when using a reference distribution Q</strong></p></li>
-<li><p><strong>KL is non-negative and equals zero if and only if <span class="math notranslate nohighlight">\(P = Q \)</span> everywhere.</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(Q\)</span> <strong>reference probability</strong> distribution</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span> <strong>true probability</strong> distribution or the one we are using/observing.</p></li>
 </ul>
 </div>
 <ul class="simple">
-<li><p>KL is widely used in statistical mechanics, information theory, and thermodynamics as a measure of information loss when approximating one distribution with another.</p></li>
+<li><p>The Kullback-Leibler (KL) divergence, or relative entropy, measures <strong>how much information is lost when using a reference distribution Q</strong></p></li>
+<li><p><strong>KL is non-negative and equals zero if and only if <span class="math notranslate nohighlight">\(P = Q \)</span> everywhere.</strong></p></li>
+<li><p>KL divergence is widely used in statistical mechanics, information theory, machine learning and thermodynamics as a measure of information loss when approximating one distribution with another.</p></li>
 </ul>
 </section>
 <section id="assymetry-of-relative-entropy-is-important">
 <h2>Assymetry of relative entropy is important<a class="headerlink" href="#assymetry-of-relative-entropy-is-important" title="Permalink to this heading">#</a></h2>
+<section id="assymetry-of-kl-and-irreversibility">
+<h3>Assymetry of KL and irreversibility<a class="headerlink" href="#assymetry-of-kl-and-irreversibility" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Instead of using entropy alone, let’s compare <strong>KL divergence</strong> between two diffusion processes at times <span class="math notranslate nohighlight">\( t_1 \)</span> and <span class="math notranslate nohighlight">\( t_2 \)</span>, where their variances are <span class="math notranslate nohighlight">\( \sigma_1^2 = 2D t_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2D t_2 \)</span>.</p></li>
 </ul>
@@ -1178,26 +1190,14 @@ D_{\text{KL}}(P_{\text{forward}} || P_{\text{backward}}) &gt; 0.
 </div>
 </div>
 </section>
-<section id="kl-and-information">
-<h2>KL and information<a class="headerlink" href="#kl-and-information" title="Permalink to this heading">#</a></h2>
-<div class="math notranslate nohighlight">
-\[
-D_{\text{KL}}(P || Q) = \int P(x) \log \frac{P(x)}{Q(x)} \,dx,
-\]</div>
-<p>The <strong>nominator</strong> <span class="math notranslate nohighlight">\( P(x) \)</span> is treated as the “true” distribution, and the <strong>denominator</strong> <span class="math notranslate nohighlight">\( Q(x) \)</span> is the approximation.</p>
-<p><strong>Intuition</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(x)\)</span> represents the actual distribution of data or the “ground truth.”</p></li>
-<li><p><span class="math notranslate nohighlight">\(Q(x)\)</span> represents a model or approximation of <span class="math notranslate nohighlight">\(P(x)\)</span>.</p></li>
-<li><p>KL divergence quantifies how much information is lost when using <span class="math notranslate nohighlight">\(Q(x)\)</span> instead of <span class="math notranslate nohighlight">\(P(x)\)</span>.</p></li>
-</ul>
-<p><strong>Key Consequences</strong></p>
+<section id="assymetry-of-kl-in-machine-learning">
+<h3>Assymetry of KL in Machine learning<a class="headerlink" href="#assymetry-of-kl-in-machine-learning" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>If <span class="math notranslate nohighlight">\( Q(x) \)</span> <strong>assigns very low probability</strong> to a region where <span class="math notranslate nohighlight">\( P(x) \)</span> is high, the term <span class="math notranslate nohighlight">\( \log \frac{P(x)}{Q(x)} \)</span> becomes large, <strong>strongly penalizing <span class="math notranslate nohighlight">\( Q \)</span> for underestimating <span class="math notranslate nohighlight">\( P \)</span></strong>.</p></li>
-<li><p>If <span class="math notranslate nohighlight">\( Q(x) \)</span> <strong>is broader than <span class="math notranslate nohighlight">\( P(x) \)</span>, assigning extra probability mass to unlikely regions</strong>, this does not contribute as significantly to <span class="math notranslate nohighlight">\( D_{\text{KL}}(P || Q) \)</span>, because <span class="math notranslate nohighlight">\( P(x) \)</span> is small in those regions.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\( Q(x) \)</span> <strong>is broader than <span class="math notranslate nohighlight">\( P(x) \)</span>, assigning extra probability mass to unlikely regions</strong>, this does not significantly affect <span class="math notranslate nohighlight">\( D_{\text{KL}}(P || Q) \)</span>, because <span class="math notranslate nohighlight">\( P(x) \)</span> is small in those regions.</p></li>
 </ol>
 <ul class="simple">
-<li><p>Thus, <strong>KL divergence is asymmetric</strong> because underestimating true probability mass is penalized more than overestimating it.</p></li>
+<li><p>This asymmetry explains why <strong>KL divergence is not a true distance metric</strong>. It penalizes <strong>underestimation</strong> of true probability mass much more than <strong>overestimation</strong>, making it particularly useful in <strong>machine learning</strong> where models are trained to avoid assigning near-zero probabilities to observed data.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -1255,6 +1255,7 @@ D_{\text{KL}}(P || Q) = \int P(x) \log \frac{P(x)}{Q(x)} \,dx,
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
@@ -1345,8 +1346,11 @@ D_{\text{KL}}(P || Q) = \int P(x) \log \frac{P(x)}{Q(x)} \,dx,
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy">Relative Entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kl-and-information">KL and information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility">Assymetry of KL and irreversibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-in-machine-learning">Assymetry of KL in Machine learning</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
   </nav></div>
