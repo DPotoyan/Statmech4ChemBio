@@ -1042,17 +1042,23 @@ J[p] = S(p) - \lambda_0 \left( \sum_k p_k - 1 \right) - \lambda_1 \left( \sum_k 
 <section id="relative-entropy">
 <h2>Relative Entropy<a class="headerlink" href="#relative-entropy" title="Permalink to this heading">#</a></h2>
 <p><strong>Entropy change due to Diffusion</strong></p>
-<p>In one-dimensional diffusion (Brownian motion), if a particle starts at <span class="math notranslate nohighlight">\(x_0 = 0\)</span> and diffuses freely, its probability distribution after time <span class="math notranslate nohighlight">\(t\)</span> follows a Gaussian:</p>
+<ul class="simple">
+<li><p>In one-dimensional diffusion (Brownian motion), if a particle starts at <span class="math notranslate nohighlight">\(x_0 = 0\)</span> and diffuses freely, its probability distribution after time <span class="math notranslate nohighlight">\(t\)</span> follows a Gaussian:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 p(x, t) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{x^2}{4Dt}}
 \]</div>
-<p>The <strong>Shannon entropy</strong> of this distribution is given by:</p>
+<ul class="simple">
+<li><p>The <strong>Shannon entropy</strong> of this distribution is given by:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 S(t) = -\int p(x, t) \log p(x, t) \, dx.
 \]</div>
-<p>Evaluating the integral yields.</p>
+<ul class="simple">
+<li><p>Evaluating the integral yields nice compact formulla showing that entropy grows with time as molecule diffuse and sparead all over the container.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 S(t) = \frac{1}{2} \log (4\pi e Dt).
@@ -1067,6 +1073,10 @@ S(t) = \frac{1}{2} \log (4\pi e Dt).
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Relative Entropy</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Q\)</span> some reference probability distributions</p></li>
+<li><p><span class="math notranslate nohighlight">\(P\)</span> true probability distribution or the one we are observing.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
 D_{\text{KL}}(P || Q) = \sum_x P(x) \ln \frac{P(x)}{Q(x)}
@@ -1075,31 +1085,26 @@ D_{\text{KL}}(P || Q) = \sum_x P(x) \ln \frac{P(x)}{Q(x)}
 \[
 D_{\text{KL}}(P || Q) = \int P(x) \ln \frac{P(x)}{Q(x)} \, dx.
 \]</div>
+<ul class="simple">
+<li><p>The Kullback-Leibler (KL) divergence, or relative entropy, measures <strong>how much information is lost when using a reference distribution Q</strong></p></li>
+<li><p><strong>KL is non-negative and equals zero if and only if <span class="math notranslate nohighlight">\(P = Q \)</span> everywhere.</strong></p></li>
+</ul>
 </div>
 <ul class="simple">
-<li><p><strong>Relative entropy is always non-negative and equals zero if and only if <span class="math notranslate nohighlight">\(P = Q \)</span> everywhere.</strong></p></li>
-<li><p>It is widely used in statistical mechanics, information theory, and thermodynamics as a measure of information loss when approximating one distribution with another.</p></li>
+<li><p>KL is widely used in statistical mechanics, information theory, and thermodynamics as a measure of information loss when approximating one distribution with another.</p></li>
 </ul>
-<p>Instead of using entropy alone, let’s compare two diffusion processes at times <span class="math notranslate nohighlight">\( t_1 \)</span> and <span class="math notranslate nohighlight">\( t_2 \)</span>, where their variances are <span class="math notranslate nohighlight">\( \sigma_1^2 = 2D t_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2D t_2 \)</span>.</p>
-<p>The <strong>KL divergence</strong> between two Gaussian distributions <span class="math notranslate nohighlight">\( p_1(x) \)</span> and <span class="math notranslate nohighlight">\( p_2(x) \)</span> is:</p>
-<div class="math notranslate nohighlight">
-\[
-D(p_1 \| p_2) = \int p_1(x) \log \frac{p_1(x)}{p_2(x)} dx.
-\]</div>
-<p>For two Gaussians <span class="math notranslate nohighlight">\( \mathcal{N}(0, \sigma_1^2) \)</span> and <span class="math notranslate nohighlight">\( \mathcal{N}(0, \sigma_2^2) \)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-D(p_1 \| p_2) = \frac{1}{2} \left( \frac{\sigma_1^2}{\sigma_2^2} - 1 + \log \frac{\sigma_2^2}{\sigma_1^2} \right).
-\]</div>
-<p>Substituting <span class="math notranslate nohighlight">\( \sigma_1^2 = 2Dt_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2Dt_2 \)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-D(p_1 \| p_2) = \frac{1}{2} \left( \frac{t_1}{t_2} - 1 + \log \frac{t_2}{t_1} \right).
-\]</div>
 </section>
 <section id="assymetry-of-relative-entropy-is-important">
 <h2>Assymetry of relative entropy is important<a class="headerlink" href="#assymetry-of-relative-entropy-is-important" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
+<li><p>Instead of using entropy alone, let’s compare <strong>KL divergence</strong> between two diffusion processes at times <span class="math notranslate nohighlight">\( t_1 \)</span> and <span class="math notranslate nohighlight">\( t_2 \)</span>, where their variances are <span class="math notranslate nohighlight">\( \sigma_1^2 = 2D t_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2D t_2 \)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+D(p_1 \| p_2) = \frac{1}{2} \left( \frac{t_1}{t_2} - 1 + \log \frac{t_2}{t_1} \right)
+\]</div>
+<ul class="simple">
+<li><p>Note the assyetry of relative entropy: <span class="math notranslate nohighlight">\(D(p_1 \| p_2) \neq D(p_2 \| p_1)\)</span></p></li>
 <li><p>For a <strong>diffusion process</strong>, if we compare the forward evolution of a Gaussian spreading over time with the reversed process (contracting into a peak), we see that:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
