@@ -505,6 +505,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biased-die-example">2. Biased Die Example</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy">Relative Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kl-and-information">KL and information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
             </nav>
@@ -1003,11 +1006,11 @@ J[p] = S(p) - \lambda_0 \left( \sum_k p_k - 1 \right) - \lambda_1 \left( \sum_k 
 </div>
 </div>
 </div>
-<div class="tip admonition">
+<div class="tip dropdown admonition">
 <p class="admonition-title"><strong>Physical constriants on energy, particle number, volume</strong></p>
 <p><strong>1. Microcanonical Ensemble (Fixed Energy, Volume, and Particle Number)</strong></p>
 <ul class="simple">
-<li><p>For an isolated system with a fixed energy <span class="math notranslate nohighlight">\( E \)</span>, volume <span class="math notranslate nohighlight">\( V \)</span>, and particle number <span class="math notranslate nohighlight">\( N \)</span>, we maximize entropy subject to the constraint that only microstates with energy <span class="math notranslate nohighlight">\( E \)</span> are accessible:</p></li>
+<li><p>For an isolated gas with a fixed energy <span class="math notranslate nohighlight">\( E \)</span>, volume <span class="math notranslate nohighlight">\( V \)</span>, and particle number <span class="math notranslate nohighlight">\( N \)</span>, we maximize entropy subject to the constraint that only microstates with energy <span class="math notranslate nohighlight">\( E \)</span> are accessible:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[ J = -\sum_k p_k \log p_k - \lambda \left( \sum_k p_k - 1 \right). \]</div>
@@ -1015,8 +1018,10 @@ J[p] = S(p) - \lambda_0 \left( \sum_k p_k - 1 \right) - \lambda_1 \left( \sum_k 
 <li><p>Solving for <span class="math notranslate nohighlight">\( p_k \)</span>, we obtain:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[ p_k = \frac{1}{\Omega(E)}, \]</div>
-<p>where <span class="math notranslate nohighlight">\( \Omega(E) \)</span> is the number of microstates with energy <span class="math notranslate nohighlight">\( E \)</span>. This is the basis of classical thermodynamics, where entropy is defined as <span class="math notranslate nohighlight">\( S = k_B \log \Omega \)</span>.</p>
+\[ p_k = \frac{1}{\Omega}, \]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\( \Omega \)</span> is the number of microstates. This is the basis of classical thermodynamics, where entropy is defined as <span class="math notranslate nohighlight">\( S = k_B \log \Omega \)</span>.</p></li>
+</ul>
 <p><strong>2. Canonical Ensemble (Fixed Temperature, Volume, and Particle Number)</strong></p>
 <ul class="simple">
 <li><p>If the system is in thermal contact with a heat bath at temperature <span class="math notranslate nohighlight">\( T \)</span>, energy is allowed to fluctuate. The constraint now involves the mean energy <span class="math notranslate nohighlight">\( \langle E \rangle = U \)</span>:</p></li>
@@ -1033,6 +1038,231 @@ J[p] = S(p) - \lambda_0 \left( \sum_k p_k - 1 \right) - \lambda_1 \left( \sum_k 
 </ul>
 </div>
 </section>
+</section>
+<section id="relative-entropy">
+<h2>Relative Entropy<a class="headerlink" href="#relative-entropy" title="Permalink to this heading">#</a></h2>
+<p><strong>Entropy change due to Diffusion</strong></p>
+<p>In one-dimensional diffusion (Brownian motion), if a particle starts at <span class="math notranslate nohighlight">\(x_0 = 0\)</span> and diffuses freely, its probability distribution after time <span class="math notranslate nohighlight">\(t\)</span> follows a Gaussian:</p>
+<div class="math notranslate nohighlight">
+\[
+p(x, t) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{x^2}{4Dt}}
+\]</div>
+<p>The <strong>Shannon entropy</strong> of this distribution is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+S(t) = -\int p(x, t) \log p(x, t) \, dx.
+\]</div>
+<p>Evaluating the integral yields.</p>
+<div class="math notranslate nohighlight">
+\[
+S(t) = \frac{1}{2} \log (4\pi e Dt).
+\]</div>
+<ul class="simple">
+<li><p>But if we tried to evaluate integral we would run into serious problem!</p></li>
+</ul>
+<p><strong>Problem: Grid Dependence of Shannon Entropy</strong></p>
+<ul class="simple">
+<li><p>A major issue with Shannon entropy is that it <strong>depends on the choice of units</strong>. If we refine the grid by choosing a smaller <span class="math notranslate nohighlight">\(\Delta x\)</span>, the computed entropy does not converge to a well-defined value—it diverges! This makes it unsuitable for studying entropy change in diffusion.</p></li>
+<li><p>To avoid this issue, one can instead use <strong>relative entropy</strong> (Kullback-Leibler divergence), which remains well-defined and independent of discretization.</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title"><strong>Relative Entropy</strong></p>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}(P || Q) = \sum_x P(x) \ln \frac{P(x)}{Q(x)}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}(P || Q) = \int P(x) \ln \frac{P(x)}{Q(x)} \, dx.
+\]</div>
+</div>
+<ul class="simple">
+<li><p><strong>Relative entropy is always non-negative and equals zero if and only if <span class="math notranslate nohighlight">\(P = Q \)</span> everywhere.</strong></p></li>
+<li><p>It is widely used in statistical mechanics, information theory, and thermodynamics as a measure of information loss when approximating one distribution with another.</p></li>
+</ul>
+<p>Instead of using entropy alone, let’s compare two diffusion processes at times <span class="math notranslate nohighlight">\( t_1 \)</span> and <span class="math notranslate nohighlight">\( t_2 \)</span>, where their variances are <span class="math notranslate nohighlight">\( \sigma_1^2 = 2D t_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2D t_2 \)</span>.</p>
+<p>The <strong>KL divergence</strong> between two Gaussian distributions <span class="math notranslate nohighlight">\( p_1(x) \)</span> and <span class="math notranslate nohighlight">\( p_2(x) \)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+D(p_1 \| p_2) = \int p_1(x) \log \frac{p_1(x)}{p_2(x)} dx.
+\]</div>
+<p>For two Gaussians <span class="math notranslate nohighlight">\( \mathcal{N}(0, \sigma_1^2) \)</span> and <span class="math notranslate nohighlight">\( \mathcal{N}(0, \sigma_2^2) \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+D(p_1 \| p_2) = \frac{1}{2} \left( \frac{\sigma_1^2}{\sigma_2^2} - 1 + \log \frac{\sigma_2^2}{\sigma_1^2} \right).
+\]</div>
+<p>Substituting <span class="math notranslate nohighlight">\( \sigma_1^2 = 2Dt_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2Dt_2 \)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+D(p_1 \| p_2) = \frac{1}{2} \left( \frac{t_1}{t_2} - 1 + \log \frac{t_2}{t_1} \right).
+\]</div>
+</section>
+<section id="assymetry-of-relative-entropy-is-important">
+<h2>Assymetry of relative entropy is important<a class="headerlink" href="#assymetry-of-relative-entropy-is-important" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>For a <strong>diffusion process</strong>, if we compare the forward evolution of a Gaussian spreading over time with the reversed process (contracting into a peak), we see that:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}(P_{\text{forward}} || P_{\text{backward}}) &gt; 0.
+\]</div>
+<ul class="simple">
+<li><p>This indicates that diffusion is an <strong>irreversible</strong> process in the absence of external driving forces (since it tends to increase entropy). In contrast, a time-reversed diffusion process (all particles contracting back into the initial state) would violate the second law of thermodynamics.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+
+<span class="c1"># Define parameters</span>
+<span class="n">D</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Diffusion coefficient</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Time for first Gaussian</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># Time for second Gaussian</span>
+<span class="n">sigma1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">D</span> <span class="o">*</span> <span class="n">t1</span><span class="p">)</span>  <span class="c1"># Standard deviation at t1</span>
+<span class="n">sigma2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">D</span> <span class="o">*</span> <span class="n">t2</span><span class="p">)</span>  <span class="c1"># Standard deviation at t2</span>
+
+<span class="c1"># Define grid for discretization</span>
+<span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>  <span class="c1"># Range of x values</span>
+<span class="n">num_bins_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">500</span><span class="p">]</span>  <span class="c1"># Different resolutions</span>
+
+<span class="c1"># Compute Shannon entropy for discretized Gaussian</span>
+<span class="n">shannon_entropies</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">num_bins</span> <span class="ow">in</span> <span class="n">num_bins_list</span><span class="p">:</span>
+    <span class="n">x_bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">num_bins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Bin edges</span>
+    <span class="n">x_centers</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_bins</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_bins</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># Bin centers</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x_bins</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_bins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Bin width</span>
+    
+    <span class="c1"># Compute probability mass function for discretized Gaussian</span>
+    <span class="n">p_i</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_centers</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sigma1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dx</span>
+    <span class="n">p_i</span> <span class="o">=</span> <span class="n">p_i</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p_i</span><span class="p">)</span>  <span class="c1"># Normalize</span>
+
+    <span class="c1"># Compute Shannon entropy</span>
+    <span class="n">S_shannon</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">p_i</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p_i</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">))</span>  <span class="c1"># Avoid log(0)</span>
+    <span class="n">shannon_entropies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">S_shannon</span><span class="p">)</span>
+
+<span class="c1"># Compute differential entropy for continuous Gaussian</span>
+<span class="n">S_diff</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span> <span class="o">*</span> <span class="n">D</span> <span class="o">*</span> <span class="n">t1</span><span class="p">)</span>
+
+<span class="c1"># Compute KL divergence between Gaussians at t1 and t2</span>
+<span class="n">KL_div</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">t1</span> <span class="o">/</span> <span class="n">t2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t2</span> <span class="o">/</span> <span class="n">t1</span><span class="p">))</span>
+
+<span class="c1"># Plot Shannon entropy vs. grid resolution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">num_bins_list</span><span class="p">,</span> <span class="n">shannon_entropies</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Shannon Entropy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">S_diff</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Differential Entropy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Bins&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Entropy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Shannon Entropy vs. Grid Resolution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Display results</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Grid Size (Bins)&quot;</span><span class="p">:</span> <span class="n">num_bins_list</span><span class="p">,</span>
+    <span class="s2">&quot;Shannon Entropy&quot;</span><span class="p">:</span> <span class="n">shannon_entropies</span>
+<span class="p">})</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ace_tools</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tools</span>
+<span class="n">tools</span><span class="o">.</span><span class="n">display_dataframe_to_user</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Shannon Entropy Computation&quot;</span><span class="p">,</span> <span class="n">dataframe</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Display final computed entropies</span>
+<span class="p">{</span><span class="s2">&quot;Differential Entropy&quot;</span><span class="p">:</span> <span class="n">S_diff</span><span class="p">,</span> <span class="s2">&quot;KL Divergence (t1 vs. t2)&quot;</span><span class="p">:</span> <span class="n">KL_div</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/9257b2f590675541d66528b9ca743b4d32dd155e7b899bd5068399d2f0e26b7e.png" src="../_images/9257b2f590675541d66528b9ca743b4d32dd155e7b899bd5068399d2f0e26b7e.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">56</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span> <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span>     <span class="s2">&quot;Grid Size (Bins)&quot;</span><span class="p">:</span> <span class="n">num_bins_list</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="s2">&quot;Shannon Entropy&quot;</span><span class="p">:</span> <span class="n">shannon_entropies</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="p">})</span>
+<span class="ne">---&gt; </span><span class="mi">56</span> <span class="kn">import</span><span class="w"> </span><span class="nn">ace_tools</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tools</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="n">tools</span><span class="o">.</span><span class="n">display_dataframe_to_user</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Shannon Entropy Computation&quot;</span><span class="p">,</span> <span class="n">dataframe</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="c1"># Display final computed entropies</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ace_tools&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kl-and-information">
+<h2>KL and information<a class="headerlink" href="#kl-and-information" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}(P || Q) = \int P(x) \log \frac{P(x)}{Q(x)} \,dx,
+\]</div>
+<p>The <strong>nominator</strong> <span class="math notranslate nohighlight">\( P(x) \)</span> is treated as the “true” distribution, and the <strong>denominator</strong> <span class="math notranslate nohighlight">\( Q(x) \)</span> is the approximation.</p>
+<p><strong>Intuition</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(x)\)</span> represents the actual distribution of data or the “ground truth.”</p></li>
+<li><p><span class="math notranslate nohighlight">\(Q(x)\)</span> represents a model or approximation of <span class="math notranslate nohighlight">\(P(x)\)</span>.</p></li>
+<li><p>KL divergence quantifies how much information is lost when using <span class="math notranslate nohighlight">\(Q(x)\)</span> instead of <span class="math notranslate nohighlight">\(P(x)\)</span>.</p></li>
+</ul>
+<p><strong>Key Consequences</strong></p>
+<ol class="arabic simple">
+<li><p>If <span class="math notranslate nohighlight">\( Q(x) \)</span> <strong>assigns very low probability</strong> to a region where <span class="math notranslate nohighlight">\( P(x) \)</span> is high, the term <span class="math notranslate nohighlight">\( \log \frac{P(x)}{Q(x)} \)</span> becomes large, <strong>strongly penalizing <span class="math notranslate nohighlight">\( Q \)</span> for underestimating <span class="math notranslate nohighlight">\( P \)</span></strong>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\( Q(x) \)</span> <strong>is broader than <span class="math notranslate nohighlight">\( P(x) \)</span>, assigning extra probability mass to unlikely regions</strong>, this does not contribute as significantly to <span class="math notranslate nohighlight">\( D_{\text{KL}}(P || Q) \)</span>, because <span class="math notranslate nohighlight">\( P(x) \)</span> is small in those regions.</p></li>
+</ol>
+<ul class="simple">
+<li><p>Thus, <strong>KL divergence is asymmetric</strong> because underestimating true probability mass is penalized more than overestimating it.</p></li>
+</ul>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define two Gaussian distributions with different means and variances</span>
+<span class="n">mu1</span><span class="p">,</span> <span class="n">sigma1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1"># Mean and standard deviation for P</span>
+<span class="n">mu2</span><span class="p">,</span> <span class="n">sigma2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>  <span class="c1"># Mean and standard deviation for Q</span>
+
+<span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Define spatial grid</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma1</span><span class="p">)</span>  <span class="c1"># First Gaussian</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma2</span><span class="p">)</span>  <span class="c1"># Second Gaussian</span>
+
+<span class="c1"># Compute KL divergences</span>
+<span class="n">D_KL_PQ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">P</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">P</span> <span class="o">/</span> <span class="n">Q</span><span class="p">),</span> <span class="n">x_values</span><span class="p">)</span>  <span class="c1"># D_KL(P || Q)</span>
+<span class="n">D_KL_QP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">Q</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">Q</span> <span class="o">/</span> <span class="n">P</span><span class="p">),</span> <span class="n">x_values</span><span class="p">)</span>  <span class="c1"># D_KL(Q || P)</span>
+
+<span class="c1"># Plot the distributions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$P(x) \sim \mathcal</span><span class="si">{N}</span><span class="s1">(0,1)$&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$Q(x) \sim \mathcal</span><span class="si">{N}</span><span class="s1">(1,2)$&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Difference between $P$ and $Q$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Annotate KL divergences</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="sa">rf</span><span class="s1">&#39;$D_</span><span class="se">{{</span><span class="s1">KL</span><span class="se">}}</span><span class="s1">(P || Q) = </span><span class="si">{</span><span class="n">D_KL_PQ</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="sa">rf</span><span class="s1">&#39;$D_</span><span class="se">{{</span><span class="s1">KL</span><span class="se">}}</span><span class="s1">(Q || P) = </span><span class="si">{</span><span class="n">D_KL_QP</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Labels and legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability Density&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Illustration of KL Asymmetry Between Two Gaussians&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
@@ -1122,6 +1352,9 @@ J[p] = S(p) - \lambda_0 \left( \sum_k p_k - 1 \right) - \lambda_1 \left( \sum_k 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biased-die-example">2. Biased Die Example</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy">Relative Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kl-and-information">KL and information</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 </ul>
   </nav></div>
