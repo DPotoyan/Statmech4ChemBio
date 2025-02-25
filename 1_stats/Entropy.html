@@ -1047,56 +1047,38 @@ p_k = \frac{1}{Z} e^{- \lambda_1 x_k^a} e^{- \lambda_2 x_k^b} \dots
 <div class="tip dropdown admonition">
 <p class="admonition-title"><strong>Newton’s Method for Optimization</strong></p>
 <ul class="simple">
-<li><p>Newton’s method is used to find a root <span class="math notranslate nohighlight">\( B^* \)</span> of a function <span class="math notranslate nohighlight">\( f(B) \)</span>, meaning we want to solve:</p></li>
+<li><p>Used to find the root <span class="math notranslate nohighlight">\( B^* \)</span> of <span class="math notranslate nohighlight">\( f(B) = 0 \)</span> via iterative refinement.</p></li>
+<li><p>Given an initial guess <span class="math notranslate nohighlight">\( B_0 \)</span>, we update using:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-f(B) = 0
+B_{n+1} = B_n - \frac{f(B_n)}{f'(B_n)}
 \]</div>
+<p><strong>Derivation via Taylor Expansion</strong></p>
 <ul class="simple">
-<li><p>To approximate the solution, we start with an initial guess <span class="math notranslate nohighlight">\( B_0 \)</span> and iteratively refine it.</p></li>
-</ul>
-<p><strong>Taylor Expansion of <span class="math notranslate nohighlight">\( f(B) \)</span></strong></p>
-<ul class="simple">
-<li><p>Using a first-order Taylor expansion around <span class="math notranslate nohighlight">\( B_n \)</span>:</p></li>
+<li><p>Expanding <span class="math notranslate nohighlight">\( f(B) \)</span> around <span class="math notranslate nohighlight">\( B_n \)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 f(B) \approx f(B_n) + f'(B_n)(B - B_n)
 \]</div>
 <ul class="simple">
-<li><p>Setting <span class="math notranslate nohighlight">\( f(B) = 0 \)</span> to approximate the root:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-0 \approx f(B_n) + f'(B_n)(B - B_n)
-\]</div>
-<p><strong>Solving for <span class="math notranslate nohighlight">\( B \)</span></strong></p>
-<ul class="simple">
-<li><p>Rearranging for <span class="math notranslate nohighlight">\( B \)</span>:</p></li>
+<li><p>Setting <span class="math notranslate nohighlight">\( f(B) = 0 \)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 B = B_n - \frac{f(B_n)}{f'(B_n)}
 \]</div>
+<p><strong>Application to Optimization</strong></p>
 <ul class="simple">
-<li><p>This gives the iterative update rule:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-B_{n+1} = B_n - \frac{f(B_n)}{f'(B_n)}
-\]</div>
-<p><strong>Applying to Optimization</strong></p>
-<ul class="simple">
-<li><p>In optimization, we often minimize a function <span class="math notranslate nohighlight">\( g(B) \)</span>. To find its critical points, we set its derivative <span class="math notranslate nohighlight">\( f(B) = g'(B) \)</span> to zero and apply Newton’s method:</p></li>
+<li><p>For minimization, set <span class="math notranslate nohighlight">\( f(B) = g'(B) \)</span> and apply:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 B_{n+1} = B_n - \frac{g'(B_n)}{g''(B_n)}
 \]</div>
 <ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\( g''(B) \)</span> is the second derivative (Hessian in multiple dimensions).</p></li>
-<li><p>This equation is widely used in optimization, including <strong>Maximum Entropy (MaxEnt)</strong> problems, where we adjust <span class="math notranslate nohighlight">\( B \)</span> to satisfy constraints.</p></li>
+<li><p>This efficiently finds critical points and is useful in <strong>MaxEnt</strong> problems.</p></li>
 </ul>
 </div>
 <div class="cell tag_hide-input docutils container">
