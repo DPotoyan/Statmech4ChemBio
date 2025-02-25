@@ -506,9 +506,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy">Relative Entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility-of-diffusion">Assymetry of KL and irreversibility of diffusion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-in-machine-learning">Assymetry of KL in Machine learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility">Assymetry of KL and irreversibility</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy-in-machine-learning">Relative Entropy in Machine learning</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
@@ -789,14 +788,14 @@ document.write(`
 <section id="entropy-micro-and-macro-states">
 <h2>Entropy, micro and macro states<a class="headerlink" href="#entropy-micro-and-macro-states" title="Permalink to this heading">#</a></h2>
 <div class="important admonition">
-<p class="admonition-title"><strong>Entropy for equally probably microstates</strong></p>
+<p class="admonition-title"><strong>Entropy for equally probable microstates</strong></p>
 <ul class="simple">
-<li><p>When all microstates in sample space <span class="math notranslate nohighlight">\(\Omega\)</span> have equal probability <span class="math notranslate nohighlight">\(p_i=\frac{1}{\Omega}\)</span> we arrive at an expression of Entropy first obtained by Boltzmann</p></li>
+<li><p>When all <span class="math notranslate nohighlight">\(\Omega\)</span> number of microstates have equal probability <span class="math notranslate nohighlight">\(p_i=\frac{1}{\Omega}\)</span> we arrive at an expression of Entropy first obtained by Boltzmann</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S(\Omega) = -\sum_i \frac{1}{\Omega} log \frac{1}{\Omega} = log \Omega\]</div>
 <ul class="simple">
-<li><p><strong>Entropy for a macrostate</strong> with <span class="math notranslate nohighlight">\(\Omega(A)\)</span> number of microstates can be written in terms of probability <span class="math notranslate nohighlight">\(P(A) = \frac{\Omega(A)}{\Omega}\)</span>:</p></li>
+<li><p><strong>Entropy for a macrostate</strong> with <span class="math notranslate nohighlight">\(\Omega(A)\)</span> number of microstates can be written in terms of macrostate probability <span class="math notranslate nohighlight">\(P(A) = \frac{\Omega(A)}{\Omega}\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S(A) = log \Omega(A) = log P(A) + const\]</div>
@@ -1128,8 +1127,8 @@ D_{\text{KL}}(P || Q) = \int P(x) \ln \frac{P(x)}{Q(x)} \, dx.
 </ul>
 </div>
 </section>
-<section id="assymetry-of-relative-entropy-is-important">
-<h2>Assymetry of relative entropy is important<a class="headerlink" href="#assymetry-of-relative-entropy-is-important" title="Permalink to this heading">#</a></h2>
+<section id="assymetry-of-kl-and-irreversibility">
+<h2>Assymetry of KL and irreversibility<a class="headerlink" href="#assymetry-of-kl-and-irreversibility" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Given two normal distributions:</p></li>
 </ul>
@@ -1216,8 +1215,6 @@ Expanding <span class="math notranslate nohighlight">\( (x - \mu_2)^2 \)</span>,
 D_{\text{KL}}(P || Q) = \ln \frac{\sigma_2}{\sigma_1} + \frac{\sigma_1^2 + (\mu_1 - \mu_2)^2}{2\sigma_2^2} - \frac{1}{2}.
 \]</div>
 </div>
-<section id="assymetry-of-kl-and-irreversibility-of-diffusion">
-<h3>Assymetry of KL and irreversibility of diffusion<a class="headerlink" href="#assymetry-of-kl-and-irreversibility-of-diffusion" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Computing <strong>KL divergence</strong> between two gaussians describing diffusion at times <span class="math notranslate nohighlight">\( t_1 \)</span> and <span class="math notranslate nohighlight">\( t_2 \)</span>, where their variances are <span class="math notranslate nohighlight">\( \sigma_1^2 = 2D t_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2D t_2 \)</span> results in:</p></li>
 </ul>
@@ -1298,9 +1295,8 @@ D_{\text{KL}}(P_{\text{forward}} || P_{\text{backward}}) &gt; 0.
 <img alt="../_images/9257b2f590675541d66528b9ca743b4d32dd155e7b899bd5068399d2f0e26b7e.png" src="../_images/9257b2f590675541d66528b9ca743b4d32dd155e7b899bd5068399d2f0e26b7e.png" />
 </div>
 </div>
-</section>
-<section id="assymetry-of-kl-in-machine-learning">
-<h3>Assymetry of KL in Machine learning<a class="headerlink" href="#assymetry-of-kl-in-machine-learning" title="Permalink to this heading">#</a></h3>
+<section id="relative-entropy-in-machine-learning">
+<h3>Relative Entropy in Machine learning<a class="headerlink" href="#relative-entropy-in-machine-learning" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>If <span class="math notranslate nohighlight">\( Q(x) \)</span> <strong>assigns very low probability</strong> to a region where <span class="math notranslate nohighlight">\( P(x) \)</span> is high, the term <span class="math notranslate nohighlight">\( \log \frac{P(x)}{Q(x)} \)</span> becomes large, <strong>strongly penalizing <span class="math notranslate nohighlight">\( Q \)</span> for underestimating <span class="math notranslate nohighlight">\( P \)</span></strong>.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\( Q(x) \)</span> <strong>is broader than <span class="math notranslate nohighlight">\( P(x) \)</span>, assigning extra probability mass to unlikely regions</strong>, this does not significantly affect <span class="math notranslate nohighlight">\( D_{\text{KL}}(P || Q) \)</span>, because <span class="math notranslate nohighlight">\( P(x) \)</span> is small in those regions.</p></li>
@@ -1448,9 +1444,8 @@ D_{\text{KL}}(P_{\text{forward}} || P_{\text{backward}}) &gt; 0.
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy">Relative Entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility-of-diffusion">Assymetry of KL and irreversibility of diffusion</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-in-machine-learning">Assymetry of KL in Machine learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility">Assymetry of KL and irreversibility</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy-in-machine-learning">Relative Entropy in Machine learning</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
