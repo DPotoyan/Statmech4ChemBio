@@ -507,7 +507,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy">Relative Entropy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility">Assymetry of KL and irreversibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility-of-diffusion">Assymetry of KL and irreversibility of diffusion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-in-machine-learning">Assymetry of KL in Machine learning</a></li>
 </ul>
 </li>
@@ -1130,18 +1130,103 @@ D_{\text{KL}}(P || Q) = \int P(x) \ln \frac{P(x)}{Q(x)} \, dx.
 </section>
 <section id="assymetry-of-relative-entropy-is-important">
 <h2>Assymetry of relative entropy is important<a class="headerlink" href="#assymetry-of-relative-entropy-is-important" title="Permalink to this heading">#</a></h2>
-<section id="assymetry-of-kl-and-irreversibility">
-<h3>Assymetry of KL and irreversibility<a class="headerlink" href="#assymetry-of-kl-and-irreversibility" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Instead of using entropy alone, let’s compare <strong>KL divergence</strong> between two diffusion processes at times <span class="math notranslate nohighlight">\( t_1 \)</span> and <span class="math notranslate nohighlight">\( t_2 \)</span>, where their variances are <span class="math notranslate nohighlight">\( \sigma_1^2 = 2D t_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2D t_2 \)</span>.</p></li>
+<li><p>Given two normal distributions:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(x) = \mathcal{N}(\mu_1, \sigma_1^2), \quad Q(x) = \mathcal{N}(\mu_2, \sigma_2^2),
+\]</div>
+<ul class="simple">
+<li><p>We can compute KL divergence analytically showing that the function is assymteric</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}(P || Q) = \ln \frac{\sigma_2}{\sigma_1} + \frac{\sigma_1^2 + (\mu_1 - \mu_2)^2}{2\sigma_2^2} - \frac{1}{2}.
+\]</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>KL Divergence between two Gaussians</strong></p>
+<p class="rubric"><strong>Derivation of KL Divergence Between Two Gaussians</strong></p>
+<p>Given two normal distributions:</p>
+<div class="math notranslate nohighlight">
+\[
+P(x) = \mathcal{N}(\mu_1, \sigma_1^2), \quad Q(x) = \mathcal{N}(\mu_2, \sigma_2^2),
+\]</div>
+<p>the <strong>Kullback-Leibler (KL) divergence</strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}(P || Q) = \int_{-\infty}^{\infty} p(x) \ln \frac{p(x)}{q(x)} \,dx.
+\]</div>
+<p><strong>Step 1: Write Out the Gaussian PDFs</strong>
+The probability density functions of the two Gaussians are:</p>
+<div class="math notranslate nohighlight">
+\[
+P(x) = \frac{1}{\sqrt{2\pi \sigma_1^2}} e^{-\frac{(x - \mu_1)^2}{2\sigma_1^2}},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Q(x) = \frac{1}{\sqrt{2\pi \sigma_2^2}} e^{-\frac{(x - \mu_2)^2}{2\sigma_2^2}}.
+\]</div>
+<p>Taking their ratio:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{P(x)}{Q(x)} = \frac{\sigma_2}{\sigma_1} \exp \left[ \frac{(x - \mu_2)^2}{2\sigma_2^2} - \frac{(x - \mu_1)^2}{2\sigma_1^2} \right].
+\]</div>
+<p>Taking the natural logarithm:</p>
+<div class="math notranslate nohighlight">
+\[
+\ln \frac{P(x)}{Q(x)} = \ln \frac{\sigma_2}{\sigma_1} + \frac{(x - \mu_2)^2}{2\sigma_2^2} - \frac{(x - \mu_1)^2}{2\sigma_1^2}.
+\]</div>
+<p><strong>Step 2: Compute the Expectation <span class="math notranslate nohighlight">\( \mathbb{E}_P[\ln P(x)/Q(x)] \)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}(P || Q) = \mathbb{E}_P \left[ \ln \frac{P(x)}{Q(x)} \right] = \int P(x) \ln \frac{P(x)}{Q(x)} \,dx.
+\]</div>
+<p>Since expectation under <span class="math notranslate nohighlight">\( P(x) \)</span> means integrating with <span class="math notranslate nohighlight">\( P(x) \)</span>, we evaluate the three terms separately.</p>
+<ol class="arabic">
+<li><p><strong>First term:</strong><br />
+$<span class="math notranslate nohighlight">\(
+\mathbb{E}_P \left[ \ln \frac{\sigma_2}{\sigma_1} \right] = \ln \frac{\sigma_2}{\sigma_1}
+\)</span>$
+since it is a constant.</p></li>
+<li><p><strong>Second term:</strong><br />
+Using the property of a Gaussian expectation <span class="math notranslate nohighlight">\( \mathbb{E}_P [(x - \mu_1)^2] = \sigma_1^2 \)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathbb{E}_P \left[ \frac{(x - \mu_1)^2}{2\sigma_1^2} \right] = \frac{1}{2}.
+   \]</div>
+</li>
+<li><p><strong>Third term:</strong><br />
+Expanding <span class="math notranslate nohighlight">\( (x - \mu_2)^2 \)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   (x - \mu_2)^2 = (x - \mu_1 + \mu_1 - \mu_2)^2.
+   \]</div>
+<p>Taking expectation under <span class="math notranslate nohighlight">\( P(x) \)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+   \mathbb{E}_P \left[ \frac{(x - \mu_2)^2}{2\sigma_2^2} \right] = \frac{1}{2\sigma_2^2} \left( \sigma_1^2 + (\mu_1 - \mu_2)^2 \right).
+   \]</div>
+</li>
+</ol>
+<p><strong>Step 3: Final KL Divergence Formula</strong></p>
+<p>Combining all terms, we get:</p>
+<div class="math notranslate nohighlight">
+\[
+D_{\text{KL}}(P || Q) = \ln \frac{\sigma_2}{\sigma_1} + \frac{\sigma_1^2 + (\mu_1 - \mu_2)^2}{2\sigma_2^2} - \frac{1}{2}.
+\]</div>
+</div>
+<section id="assymetry-of-kl-and-irreversibility-of-diffusion">
+<h3>Assymetry of KL and irreversibility of diffusion<a class="headerlink" href="#assymetry-of-kl-and-irreversibility-of-diffusion" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Computing <strong>KL divergence</strong> between two gaussians describing diffusion at times <span class="math notranslate nohighlight">\( t_1 \)</span> and <span class="math notranslate nohighlight">\( t_2 \)</span>, where their variances are <span class="math notranslate nohighlight">\( \sigma_1^2 = 2D t_1 \)</span> and <span class="math notranslate nohighlight">\( \sigma_2^2 = 2D t_2 \)</span> results in:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 D(p_1 \| p_2) = \frac{1}{2} \left( \frac{t_1}{t_2} - 1 + \log \frac{t_2}{t_1} \right)
 \]</div>
 <ul class="simple">
-<li><p>Note the assyetry of relative entropy: <span class="math notranslate nohighlight">\(D(p_1 \| p_2) \neq D(p_2 \| p_1)\)</span></p></li>
-<li><p>For a <strong>diffusion process</strong>, if we compare the forward evolution of a Gaussian spreading over time with the reversed process (contracting into a peak), we see that:</p></li>
+<li><p>For a <strong>diffusion process</strong>, if we compare the <strong>forward evolution</strong>of diffusion where variance is spreading over time <span class="math notranslate nohighlight">\(t1=t\)</span> with the hypothetical <strong>reversed process</strong> where guassian contraints into a peak over time <span class="math notranslate nohighlight">\(t_2=T-t\)</span> we can see that:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1364,7 +1449,7 @@ D_{\text{KL}}(P_{\text{forward}} || P_{\text{backward}}) &gt; 0.
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy">Relative Entropy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-relative-entropy-is-important">Assymetry of relative entropy is important</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility">Assymetry of KL and irreversibility</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-and-irreversibility-of-diffusion">Assymetry of KL and irreversibility of diffusion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assymetry-of-kl-in-machine-learning">Assymetry of KL in Machine learning</a></li>
 </ul>
 </li>
