@@ -934,9 +934,10 @@ P(f) \sim e^{N s(f)}
 <section id="maximum-entropy-maxent-principle">
 <h2>Maximum Entropy (MaxEnt) Principle<a class="headerlink" href="#maximum-entropy-maxent-principle" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Probability is an expression of incomplete information. Given that we have some information, how should we construct a probability distribution that reflects that knowledge, but is otherwise unbiased?</p></li>
-<li><p>The best general procedure, known as Maximum Entropy (MaxEnt) Principle, is to choose the probabilities <span class="math notranslate nohighlight">\( p_k \)</span> to <strong>maximize the Shannon entropy</strong> of the distribution, <strong>subject to constraints</strong> that express what we do know.</p></li>
-<li><p>Maximizing entropy in this way ensures that we select the least biased distribution possible, given the constraints.</p></li>
+<li><p>Probability represents incomplete information. Given partial knowledge, how should we construct a probability distribution that is unbiased beyond what we know?</p></li>
+<li><p>The <strong>Maximum Entropy (MaxEnt) Principle</strong> provides the best approach: we choose probabilities <span class="math notranslate nohighlight">\(p_k\)</span> to <strong>maximize Shannon entropy</strong> while satisfying given constraints.</p></li>
+<li><p>This ensures the least biased distribution possible, consistent with the available information.</p></li>
+<li><p>In MaxEnt, entropy is maximized <strong>relative to an underlying assumption of equal-probability microstates</strong> (i.e., maximum ignorance in the absence of constraints).</p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>MaxEnt Principle</strong></p>
@@ -1101,9 +1102,9 @@ J[p] = S(p) - \lambda_0 \left( \sum_k p_k - 1 \right) - \lambda_1 \left( \sum_k 
 </section>
 <section id="relative-entropy">
 <h2>Relative Entropy<a class="headerlink" href="#relative-entropy" title="Permalink to this heading">#</a></h2>
-<p><strong>Entropy change due to Diffusion</strong></p>
 <ul class="simple">
-<li><p>In one-dimensional diffusion (Brownian motion), if a particle starts at <span class="math notranslate nohighlight">\(x_0 = 0\)</span> and diffuses freely, its probability distribution after time <span class="math notranslate nohighlight">\(t\)</span> follows a Gaussian:</p></li>
+<li><p>We mentioned that in MaxEnt derivation we maximized entropy relative to an underlying assumption of equal-probability microstates. We make this idea precise here</p></li>
+<li><p>Consider example of 1D brownian particle starting at <span class="math notranslate nohighlight">\(x_0 = 0\)</span> and diffusing freely. Its probability distribution after time <span class="math notranslate nohighlight">\(t\)</span> follows a Gaussian:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1123,11 +1124,10 @@ S(t) = -\int p(x, t) \log p(x, t) \, dx.
 \[
 S(t) = \frac{1}{2} \log (4\pi e Dt).
 \]</div>
-<ul class="simple">
-<li><p>But if we tried to evaluate integral we would run into serious problem!</p></li>
-</ul>
 <p><strong>Problem: Grid Dependence of Shannon Entropy</strong></p>
 <ul class="simple">
+<li><p>All is good but if we tried to evaluate the integral we would run into serious problem!</p></li>
+<li><p>Also how to interpret integral expression in terms of binary yes/no quesionts?</p></li>
 <li><p>A major issue with Shannon entropy is that it <strong>depends on the choice of units</strong>. If we refine the grid by choosing a smaller <span class="math notranslate nohighlight">\(\Delta x\)</span>, the computed entropy does not converge to a well-defined value—it diverges! This makes it unsuitable for studying entropy change in diffusion.</p></li>
 <li><p>To avoid this issue, one can instead use <strong>relative entropy</strong> (Kullback-Leibler divergence), which remains well-defined and independent of discretization.</p></li>
 </ul>
