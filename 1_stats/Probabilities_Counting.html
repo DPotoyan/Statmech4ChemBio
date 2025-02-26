@@ -506,7 +506,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-nature-of-fluctuations">Gaussian nature of fluctuations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-nature-of-fluctuations">Gaussian Nature of Fluctuations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-explicit-derivations">Appendix: Explicit derivations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-counting-dies-and-coins">Problem 1: Counting Dies and coins</a></li>
@@ -1306,32 +1306,35 @@ I(f) = f_+ \log \frac{f_+}{p_+} + f_- \log \frac{f_-}{p_-}
 </div>
 </section>
 <section id="gaussian-nature-of-fluctuations">
-<h2>Gaussian nature of fluctuations<a class="headerlink" href="#gaussian-nature-of-fluctuations" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>The Taylor expansion of the large deviation function around its minimum leads to a Gaussian distribution in the limit of small fluctuations. This is a key result in large deviation theory, often used to justify the Gaussian nature of fluctuations in equilibrium statistical mechanics.</p></li>
-<li><p>Since <span class="math notranslate nohighlight">\(I(f)\)</span> has a minimum at <span class="math notranslate nohighlight">\(f^*\)</span>, we expand it in a Taylor series around <span class="math notranslate nohighlight">\(f^*\)</span>:</p></li>
-</ul>
+<h2>Gaussian Nature of Fluctuations<a class="headerlink" href="#gaussian-nature-of-fluctuations" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>The Taylor expansion of the large deviation function around its <strong>minimum</strong> leads to a <strong>Gaussian distribution</strong> in the limit of small fluctuations. This fundamental result in large deviation theory explains why fluctuations in equilibrium statistical mechanics are often Gaussian.</p></li>
+<li><p>Let <span class="math notranslate nohighlight">\( I(f) \)</span> be the large deviation function, which attains a minimum at <span class="math notranslate nohighlight">\( f_{\text{min}} \)</span>. Expanding around <span class="math notranslate nohighlight">\( f_{\text{min}} \)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-I(f) = I(f^*) + \frac{1}{2} I''(f^*) (f - f^*)^2 + \mathcal{O}((f - f^*)^3).
-\]</div>
-<ul class="simple">
-<li><p>Since <span class="math notranslate nohighlight">\(I(f^*) = 0\)</span> (by definition, the probability is maximal at <span class="math notranslate nohighlight">\(X^*\)</span>, we obtain:</p></li>
-</ul>
+  I(f) = I(f_{\text{min}}) + \frac{1}{2} I''(f_{\text{min}}) (f - f_{\text{min}})^2 + \mathcal{O}((f - f_{\text{min}})^3).
+  \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\( I(f_{\text{min}}) = 0 \)</span> (by definition, probability is maximal at <span class="math notranslate nohighlight">\( f_{\text{min}} \)</span>), we obtain:</p>
 <div class="math notranslate nohighlight">
 \[
-I(f) \approx \frac{1}{2} I''(f^*) (f - f^*)^2.
-\]</div>
-<ul class="simple">
-<li><p>Using this expansion in the large deviation form,</p></li>
-</ul>
+  I(f) \approx \frac{1}{2} I''(f_{\text{min}}) (f - f_{\text{min}})^2.
+  \]</div>
+</li>
+<li><p>Substituting this into the large deviation form:</p>
 <div class="math notranslate nohighlight">
 \[
-P(f) \approx e^{-N I(f)} \approx e^{-N \frac{1}{2} I''(f^*) (f - f^*)^2} = e^{-\frac{(f - f^*)^2}{2 \sigma^2}}
-\]</div>
-<ul class="simple">
-<li><p>Where we define the variance as <span class="math notranslate nohighlight">\(\sigma^2 = \frac{1}{N I''(f^*)}\)</span>. This is precisely a <strong>Gaussian distribution</strong> centered at <span class="math notranslate nohighlight">\(f^*\)</span>, with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Note that f refers to fraction or normalized particle quantity <span class="math notranslate nohighlight">\(f = n/N\)</span>. You may also encounter distribution as a function of absolte particle numbers <span class="math notranslate nohighlight">\(P(n)\)</span></p></li>
-<li><p>Thus, the Taylor expansion of the large deviation function around its minimum shows that, in the limit of small fluctuations large <span class="math notranslate nohighlight">\(N\)</span>, the probability distribution approximates a Gaussian. This result underpins why <strong>equilibrium fluctuations in statistical physics and thermodynamics are often Gaussian.</strong></p></li>
+  P(f) \approx e^{-N I(f)} \approx e^{-N \frac{1}{2} I''(f_{\text{min}}) (f - f_{\text{min}})^2} = e^{-\frac{(f - f_{\text{min}})^2}{2 \sigma^2}}
+  \]</div>
+</li>
+<li><p>where the <strong>variance</strong> is:</p>
+<div class="math notranslate nohighlight">
+\[
+  \sigma^2 = \frac{1}{N I''(f_{\text{min}})}.
+  \]</div>
+</li>
+<li><p>This is a <strong>Gaussian distribution</strong> centered at <span class="math notranslate nohighlight">\( f_{\text{min}} \)</span>, with variance <span class="math notranslate nohighlight">\( \sigma^2 \)</span>. Here, <span class="math notranslate nohighlight">\( f \)</span> represents the <strong>fractional quantity</strong> <span class="math notranslate nohighlight">\( f = n/N \)</span>, though one may also express the distribution in terms of absolute particle numbers, <span class="math notranslate nohighlight">\( P(n) \)</span>.</p></li>
+<li><p>Thus, the Taylor expansion of <span class="math notranslate nohighlight">\( I(f) \)</span> near its minimum shows that, for large <span class="math notranslate nohighlight">\( N \)</span>, <strong>fluctuations become Gaussian</strong>, explaining why equilibrium statistical physics often exhibits Gaussian distributions.</p></li>
 </ul>
 </section>
 <section id="appendix-explicit-derivations">
@@ -1587,7 +1590,7 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-nature-of-fluctuations">Gaussian nature of fluctuations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-nature-of-fluctuations">Gaussian Nature of Fluctuations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix-explicit-derivations">Appendix: Explicit derivations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-counting-dies-and-coins">Problem 1: Counting Dies and coins</a></li>
