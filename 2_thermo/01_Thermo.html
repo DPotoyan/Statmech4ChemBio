@@ -501,8 +501,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Gibbs Relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-duhem-relation">Gibbs Duhem relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-thermodynamic-quantities">Second order thermodynamic quantities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms">Free Energies and Legendre transforms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-thermodynamic-quantities">Second order thermodynamic quantities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-capacities-at-constant-volume-and-pressure">Heat Capacities at Constant Volume and Pressure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-expansion-and-isothermal-compressibility">Thermal Expansion and Isothermal Compressibility</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms"><strong>Free Energies and Legendre Transforms</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transformation">Legendre Transformation</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equations">Fundamental equations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-gas-into-the-vacuum">Expansion of gas into the vacuum</a></li>
@@ -839,50 +847,111 @@ Solution<div class="sd-summary-down docutils">
 </section>
 <section id="second-order-thermodynamic-quantities">
 <h2>Second order thermodynamic quantities<a class="headerlink" href="#second-order-thermodynamic-quantities" title="Permalink to this heading">#</a></h2>
-<p><strong><span class="math notranslate nohighlight">\(C_v\)</span> and <span class="math notranslate nohighlight">\(C_p\)</span>: Heat capacities at constant V and P.</strong></p>
-<div class="math notranslate nohighlight">
-\[C_v = \Big(\frac{d Q}{dT} \Big)_{v,N}\]</div>
-<div class="math notranslate nohighlight">
-\[C_p = \Big(\frac{d Q}{dT} \Big)_{p,N}\]</div>
+<section id="heat-capacities-at-constant-volume-and-pressure">
+<h3>Heat Capacities at Constant Volume and Pressure<a class="headerlink" href="#heat-capacities-at-constant-volume-and-pressure" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Thermal stability requires <span class="math notranslate nohighlight">\(c_v,c_p\geq 0\)</span></p></li>
+<li><p>The <strong>heat capacities</strong> quantify the amount of heat required to change the temperature of a system under different constraints:</p></li>
 </ul>
-<p><strong><span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\kappa_T\)</span>: Thermal expansion and isothermal compression coefficients.</strong></p>
 <div class="math notranslate nohighlight">
-\[\alpha  = \frac{1}{V}\Big(\frac{d V}{dT} \Big)_{p,N}\]</div>
+\[
+C_V = \left(\frac{d Q}{dT} \right)_{V,N}
+\]</div>
 <div class="math notranslate nohighlight">
-\[\kappa_T  = -\frac{1}{V}\Big(\frac{d V}{dP} \Big)_{T,N}\]</div>
-<ul class="simple">
-<li><p>Mechanical stability requires <span class="math notranslate nohighlight">\(\kappa_T\geq 0\)</span></p></li>
+\[
+C_P = \left(\frac{d Q}{dT} \right)_{P,N}
+\]</div>
+<ul>
+<li><p><strong>Thermal stability</strong> requires that heat capacities be <strong>non-negative</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+  C_V, C_P \geq 0.
+  \]</div>
+</li>
 </ul>
 </section>
-<section id="free-energies-and-legendre-transforms">
-<h2>Free Energies and Legendre transforms<a class="headerlink" href="#free-energies-and-legendre-transforms" title="Permalink to this heading">#</a></h2>
-<p><strong>Motivation:</strong> The energy <span class="math notranslate nohighlight">\(E\)</span> is natural a function of all extensive variables <span class="math notranslate nohighlight">\((S, V, N, ...)\)</span> and can be used to find equilibrium by minimizing with respect to independent variables <span class="math notranslate nohighlight">\(min_{[S,V,N]} E\)</span>. But what if the independent variables are not convenient to control and we want to adopt a new ones where we can hold some of them constant.</p>
-<p><strong>Legendre transformation:</strong> is what we call the change of variables in thermodynamics. The Legendre transofrmation turns Energy function into free energy function. Equilibrium state is again found by minimizing Free energy function! That is Legendre transform does not change the shape of the Energy function whcih is convex with respect to independent variables!</p>
+<section id="thermal-expansion-and-isothermal-compressibility">
+<h3>Thermal Expansion and Isothermal Compressibility<a class="headerlink" href="#thermal-expansion-and-isothermal-compressibility" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>The <strong>thermal expansion coefficient</strong> <span class="math notranslate nohighlight">\( \alpha \)</span> measures how volume changes with temperature at constant pressure:</p>
 <div class="math notranslate nohighlight">
-\[E(S,V,N) \rightarrow A(T,V,N)\]</div>
+\[
+  \alpha = \frac{1}{V} \left(\frac{dV}{dT} \right)_{P,N}.
+  \]</div>
+</li>
+<li><p>The <strong>isothermal compressibility</strong> <span class="math notranslate nohighlight">\( \kappa_T \)</span> quantifies how volume responds to pressure changes at constant temperature:</p>
 <div class="math notranslate nohighlight">
-\[E(S,V,N) \rightarrow G(T,p,N)\]</div>
+\[
+  \kappa_T = -\frac{1}{V} \left(\frac{dV}{dP} \right)_{T,N}.
+  \]</div>
+</li>
+<li><p><strong>Mechanical stability</strong> requires that the compressibility be <strong>non-negative</strong>:</p>
 <div class="math notranslate nohighlight">
-\[E(S,V,N) \rightarrow \Omega(T,p,\mu)\]</div>
-<ul class="simple">
-<li><p>Note that Legendre transform of <span class="math notranslate nohighlight">\(E\)</span> ends up wapping extensive variables with intensive ones.</p></li>
-<li><p>Free energies contain as much information as the <span class="math notranslate nohighlight">\(E(S, V, N)\)</span>. THis is becasue Legendre transform is invertible! One can start with free energy and trasnform back into energy.</p></li>
-<li><p>Free energies have different independent variables that are often more convenient to control experimentally, e.g pressure and temperature instead of entropy</p></li>
+\[
+  \kappa_T \geq 0.
+  \]</div>
+</li>
+<li><p>This ensures that an increase in pressure <strong>does not lead to spontaneous expansion</strong>, which would be unphysical.</p></li>
 </ul>
-<p><strong>General Procedure:</strong> Change in energy can be seen as produced by paiars of conjugate variables: for instance <span class="math notranslate nohighlight">\((S, T)\)</span>, <span class="math notranslate nohighlight">\((p, -V)\)</span>, <span class="math notranslate nohighlight">\((\mu N)\)</span></p>
+</section>
+</section>
+<section id="free-energies-and-legendre-transforms">
+<h2><strong>Free Energies and Legendre Transforms</strong><a class="headerlink" href="#free-energies-and-legendre-transforms" title="Permalink to this heading">#</a></h2>
+<section id="motivation">
+<h3>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Energy <span class="math notranslate nohighlight">\( E(S, V, N) \)</span> is a natural function of <strong>extensive</strong> variables.</p></li>
+<li><p>Equilibrium is found by <strong>minimizing <span class="math notranslate nohighlight">\( E \)</span></strong> with respect to its independent variables.</p></li>
+<li><p>In experiments, it’s often <strong>more convenient to control intensive variables</strong> (e.g., <span class="math notranslate nohighlight">\( T \)</span>, <span class="math notranslate nohighlight">\( P \)</span>) instead of extensive ones.</p></li>
+<li><p><strong>Legendre transforms</strong> allow us to switch from energy to <strong>free energies</strong>, which have more practical independent variables.</p></li>
+</ul>
+</section>
+<section id="legendre-transformation">
+<h3>Legendre Transformation<a class="headerlink" href="#legendre-transformation" title="Permalink to this heading">#</a></h3>
+<p>The transformation replaces extensive variables with their <strong>conjugate intensive variables</strong>, giving new thermodynamic potentials:</p>
 <div class="math notranslate nohighlight">
-\[dE = TdS - pdV + \mu dN\]</div>
-<p>We can write the energy function more generally in terms of aribitrary number and kind of cojugate pairs (<span class="math notranslate nohighlight">\(f_i\)</span>, <span class="math notranslate nohighlight">\(X_i\)</span>)</p>
+\[
+E(S, V, N) \rightarrow A(T, V, N) \quad \text{(Helmholtz Free Energy)}
+\]</div>
 <div class="math notranslate nohighlight">
-\[dE = \sum_i f_i dX_i\]</div>
-<p>For each pair <span class="math notranslate nohighlight">\(f_i\)</span>, <span class="math notranslate nohighlight">\(X_i\)</span> we can define a new thermodynamic potential by the Legendre transformation.</p>
+\[
+E(S, V, N) \rightarrow G(T, P, N) \quad \text{(Gibbs Free Energy)}
+\]</div>
 <div class="math notranslate nohighlight">
-\[A = E − \sum_i f_i X_i\]</div>
-<p>The sum goes over those variables <span class="math notranslate nohighlight">\(X_i\)</span> that we would like to replace with <span class="math notranslate nohighlight">\(f_i\)</span>.</p>
+\[
+E(S, V, N) \rightarrow \Omega(T, P, \mu) \quad \text{(Grand Potential)}
+\]</div>
+<ul class="simple">
+<li><p><strong>Legendre transform preserves convexity</strong>: equilibrium is still found by <strong>minimization</strong>.</p></li>
+<li><p>Free energies <strong>contain the same information as <span class="math notranslate nohighlight">\( E \)</span></strong> since the transform is <strong>invertible</strong>.</p></li>
+<li><p>Free energies use <strong>experimentally controllable variables</strong> (e.g., <span class="math notranslate nohighlight">\( T \)</span>, <span class="math notranslate nohighlight">\( P \)</span>).</p></li>
+</ul>
+<div class="admonition-general-procedure-of-legendre-transform-in-thermodynamics admonition">
+<p class="admonition-title"><strong>General Procedure of Legendre Transform in Thermodynamics</strong></p>
+<ul class="simple">
+<li><p>Energy change is described by conjugate variable pairs <span class="math notranslate nohighlight">\((X_i, f_i)\)</span>.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[dA = dE - \sum_i f_i dX_i  - \sum_i X_i df_i = - \sum_i X_i df_i\]</div>
+\[
+dE = \sum_i f_i dX_i
+\]</div>
+<ul class="simple">
+<li><p>We define a <strong>new thermodynamic potential</strong> by a Legendre transformation:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+A = E - \sum_i f_i X_i
+\]</div>
+<ul class="simple">
+<li><p>The sum runs over those variables <span class="math notranslate nohighlight">\( X_i \)</span> we want to <strong>replace with <span class="math notranslate nohighlight">\( f_i \)</span></strong>. Differentiating:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+dA = dE - \sum_i f_i dX_i - \sum_i X_i df_i = - \sum_i X_i df_i
+\]</div>
+<ul class="simple">
+<li><p>Thus, the new potential depends on the <strong>intensive variables</strong> <span class="math notranslate nohighlight">\( f_i \)</span>, making it easier to describe equilibrium in controlled settings.</p></li>
+</ul>
+</div>
 <p><strong>Helmholtz Free energy</strong></p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{S} E(S,V,N) = U - T\cdot S = F(N, V, T)\]</div>
@@ -893,8 +962,6 @@ Solution<div class="sd-summary-down docutils">
 <p><strong>Gibbs Free energy</strong></p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}_{S, V} E(S,V,N) = U - T\cdot S + pV = G(N, p, T)\]</div>
-<div class="math notranslate nohighlight">
-\[F = E- TS + pV\]</div>
 <div class="math notranslate nohighlight">
 \[dG = dE -d(TS) + d(pV) = dE - TdS - SdT + pdV + Vdp\]</div>
 <div class="math notranslate nohighlight">
@@ -929,6 +996,7 @@ Solution<div class="sd-summary-down docutils">
 </ol>
 </div>
 </details></section>
+</section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
 <section id="fundamental-equations">
@@ -1065,8 +1133,16 @@ Solution<div class="sd-summary-down docutils">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Gibbs Relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-duhem-relation">Gibbs Duhem relation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-thermodynamic-quantities">Second order thermodynamic quantities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms">Free Energies and Legendre transforms</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-order-thermodynamic-quantities">Second order thermodynamic quantities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-capacities-at-constant-volume-and-pressure">Heat Capacities at Constant Volume and Pressure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-expansion-and-isothermal-compressibility">Thermal Expansion and Isothermal Compressibility</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms"><strong>Free Energies and Legendre Transforms</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transformation">Legendre Transformation</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equations">Fundamental equations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-gas-into-the-vacuum">Expansion of gas into the vacuum</a></li>
