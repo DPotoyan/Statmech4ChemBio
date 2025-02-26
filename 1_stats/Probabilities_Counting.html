@@ -500,7 +500,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-macrostate-probability-entropy-and-energy">Log of Macrostate Probability, Entropy, and Energy</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-macrostate-probability-entropy-and-fluctuations">Log of Macrostate Probability, Entropy, and fluctuations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-a-measure-of-bias">Energy as a Measure of Bias</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-the-logarithm-of-microstates-in-a-macrostate">Entropy as the Logarithm of Microstates in a Macrostate</a></li>
 </ul>
@@ -1065,14 +1065,27 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 </div>
 </div>
 </section>
-<section id="log-of-macrostate-probability-entropy-and-energy">
-<h2>Log of Macrostate Probability, Entropy, and Energy<a class="headerlink" href="#log-of-macrostate-probability-entropy-and-energy" title="Permalink to this heading">#</a></h2>
+<section id="log-of-macrostate-probability-entropy-and-fluctuations">
+<h2>Log of Macrostate Probability, Entropy, and fluctuations<a class="headerlink" href="#log-of-macrostate-probability-entropy-and-fluctuations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The logarithm of the probability of a given macrostate, <span class="math notranslate nohighlight">\( P(N_{+} | N, p_{+}) \)</span>, can be written as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\log P(N_{+} | N, p_{+}) = \bigg[ \log \frac{N!}{N_{+}! N_{-}!} \bigg] + \log \bigg[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \bigg] = S - E
+\log P(N_{+} | N, p_{+}) = \bigg[ \log \frac{N!}{N_{+}! N_{-}!} \bigg] + \log \bigg[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \bigg] 
+\]</div>
+<ul class="simple">
+<li><p>In simulations, we measure the <strong>fraction of steps</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[f_{\pm} = \frac{N_{\pm}}{N}\]</div>
+<ul class="simple">
+<li><p>Fractions will fluctuate but, in the limit of an infinitely long simulation, should converge to the true probabilities <span class="math notranslate nohighlight">\(f_{\pm} \to p_{\pm}\)</span></p></li>
+<li><p>Since <span class="math notranslate nohighlight">\( f_{+} + f_{-} = 1 \)</span> and <span class="math notranslate nohighlight">\( p_{+} + p_{-} = 1 \)</span>, we introduce the <span class="math notranslate nohighlight">\(f = f_{+}, \quad p = p_{+}\)</span> notation to simplify subsequent expressions</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\log P(f| N, p)  = S(f) - E(f)
 \]</div>
 <p>where:</p>
 <ul class="simple">
@@ -1081,32 +1094,15 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 </ul>
 <section id="energy-as-a-measure-of-bias">
 <h3>Energy as a Measure of Bias<a class="headerlink" href="#energy-as-a-measure-of-bias" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p>Taking the logarithm of the probability factor results in an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\( \epsilon \)</span>, which introduces a bias that shifts the distribution left or right depending on the <strong>probabilities of left/right steps</strong>, <span class="math notranslate nohighlight">\( p_{\pm} \)</span>, determined by microscopic details of the random walk.</p></li>
-<li><p>In simulations, we measure the <strong>fraction of steps</strong></p>
-<div class="math notranslate nohighlight">
-\[
-  f_{\pm} = \frac{N_{\pm}}{N}
-  \]</div>
 <ul class="simple">
-<li><p>fractions will fluctuate but, in the limit of an infinitely long simulation, should converge to the true probabilities:</p></li>
+<li><p>Taking the logarithm of the probability factor results in an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\( \epsilon \)</span>, which introduces a bias that shifts the distribution left or right depending on the <strong>probabilities of left/right steps</strong>, <span class="math notranslate nohighlight">\( p_{\pm} \)</span>, determined by microscopic details of the random walk.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-  f_{\pm} \to p_{\pm}
-  \]</div>
-</li>
-<li><p>Since <span class="math notranslate nohighlight">\( f_{+} + f_{-} = 1 \)</span> and <span class="math notranslate nohighlight">\( p_{+} + p_{-} = 1 \)</span>, we introduce the notation to simplify subsequent expressions of Energy and Entropy</p>
-<div class="math notranslate nohighlight">
-\[
-  f = f_{+}, \quad p = p_{+}
-  \]</div>
-</li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-E = - \log \Big[ p^{Nf} \cdot (1-p)^{N(1-f)} \Big] = -N \Big[ f \log p + (1-f) \log (1-p) \Big] = -N \epsilon(f)
+E = - \log \big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \big] = - \log \big[p^{Nf} \cdot (1-p)^{N(1-f)} \big]
 \]</div>
+<div class="math notranslate nohighlight">
+\[E= -N \big[ f \log p + (1-f) \log (1-p) \big] = -N \epsilon(f)\]</div>
 <ul class="simple">
 <li><p>Where <span class="math notranslate nohighlight">\(\epsilon=E/N\)</span> is energy term per step of a random walk.</p></li>
 <li><p>When <span class="math notranslate nohighlight">\( p = \frac{1}{2} \)</span>, there is no bias, and the energy simplifies to <span class="math notranslate nohighlight">\(E = N \log 2\)</span></p></li>
@@ -1115,19 +1111,14 @@ E = - \log \Big[ p^{Nf} \cdot (1-p)^{N(1-f)} \Big] = -N \Big[ f \log p + (1-f) \
 <section id="entropy-as-the-logarithm-of-microstates-in-a-macrostate">
 <h3>Entropy as the Logarithm of Microstates in a Macrostate<a class="headerlink" href="#entropy-as-the-logarithm-of-microstates-in-a-macrostate" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The entropy term, related to the number of ways to distribute steps, is given by:</p></li>
+<li><p>The entropy term, related to the number of ways to distribute steps. Using Stringling approximation for the log we obtain:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\log \frac{N!}{N_{+}! N_{-}!} \approx N \log N - N_{+} \log N_{+} - N_{-} \log N_{-}
+S(f) = \log \frac{N!}{N_{+}! N_{-}!} \approx NlogN - N  - [N_{+}logN_{+} - N_{+}] - [N_{-}logN - N_{-}]  = NlogN -  N_{+}logN_{+} - N_{-}logN_{-}
 \]</div>
-<ul class="simple">
-<li><p>Rewriting in terms of fractions:</p></li>
-</ul>
 <div class="math notranslate nohighlight">
-\[
-= N \Big[ -\frac{N_{+}}{N} \log \frac{N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] = N \Big[ - f_{+} \log f_{+} - f_{-} \log f_{-} \Big] = N s(f)
-\]</div>
+\[S(f) = N\Big[- \frac{N_{+}}{N} \log \frac{N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] =  N\Big[- f \log f - (1-f) \log (1-f) \Big]\]</div>
 <ul class="simple">
 <li><p>where <span class="math notranslate nohighlight">\( s(f)=S/N \)</span> is the entropy per step of a random walk.</p></li>
 </ul>
@@ -1584,7 +1575,7 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-macrostate-probability-entropy-and-energy">Log of Macrostate Probability, Entropy, and Energy</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-macrostate-probability-entropy-and-fluctuations">Log of Macrostate Probability, Entropy, and fluctuations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-a-measure-of-bias">Energy as a Measure of Bias</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-the-logarithm-of-microstates-in-a-macrostate">Entropy as the Logarithm of Microstates in a Macrostate</a></li>
 </ul>
