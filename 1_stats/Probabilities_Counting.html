@@ -500,9 +500,9 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-macrostate-probability-entropy-and-energy">Log of macrostate probability, Entropy and Energy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-the-degree-of-bias-or-tilt">Energy as the degree of bias or tilt</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-macrostate-probability-entropy-and-energy">Log of Macrostate Probability, Entropy, and Energy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-a-measure-of-bias">Energy as a Measure of Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-the-logarithm-of-microstates-in-a-macrostate">Entropy as the Logarithm of Microstates in a Macrostate</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
@@ -972,7 +972,7 @@ $<span class="math notranslate nohighlight">\(n(up) = \frac{90!}{10!(80)!}\)</sp
 <div class="important admonition">
 <p class="admonition-title"><strong>Probability of a sequence (microstate)</strong></p>
 <div class="math notranslate nohighlight">
-\[p(sequence) = p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}\]</div>
+\[P(sequence) = p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}\]</div>
 </div>
 <ul class="simple">
 <li><p>A more interesting question is the probability of taking <span class="math notranslate nohighlight">\(N_{+}\)</span> steps to the right, or having a net displacement of <span class="math notranslate nohighlight">\(\Delta N \)</span>, regardless of the sequence of events.</p></li>
@@ -1066,43 +1066,75 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 </div>
 </section>
 <section id="log-of-macrostate-probability-entropy-and-energy">
-<h2>Log of macrostate probability, Entropy and Energy<a class="headerlink" href="#log-of-macrostate-probability-entropy-and-energy" title="Permalink to this heading">#</a></h2>
-<div class="math notranslate nohighlight">
-\[log\, p(N_{+}|N, p_{+}) =  {\bigg[ log  \frac{N!}{N_{+}! N_{-}!}\bigg ]} + {log \bigg[p_{+}^{N_{+}} \cdot p_{-}^{N_{-}}\bigg]} = S + E\]</div>
-<section id="energy-as-the-degree-of-bias-or-tilt">
-<h3>Energy as the degree of bias or tilt<a class="headerlink" href="#energy-as-the-degree-of-bias-or-tilt" title="Permalink to this heading">#</a></h3>
+<h2>Log of Macrostate Probability, Entropy, and Energy<a class="headerlink" href="#log-of-macrostate-probability-entropy-and-energy" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Taking the logarithm of the probability factor we get a term resembling an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\(\epsilon\)</span> that tilts distribution to left or right depending on <strong>probaility of left/right steps</strong> <span class="math notranslate nohighlight">\(p_{\pm}\)</span> which are quantities fixed by microscopic details of random walker.</p></li>
-<li><p>In simulations we are interested in measuring the <strong>fraction of steps</strong> <span class="math notranslate nohighlight">\(f_{\pm} = \frac{N_{\pm}}{N}\)</span> which are fluctuating variable quantities we observe emprically and which in infinitely long simulation should converge to true probabilities <span class="math notranslate nohighlight">\(f_{\pm}\rightarrow p_{\pm}\)</span></p></li>
-<li><p>Since these fractions are dependent we only have one variable to keep track of <span class="math notranslate nohighlight">\(f_{+}=f\)</span> and <span class="math notranslate nohighlight">\(f_{-} = 1-f\)</span></p></li>
+<li><p>The logarithm of the probability of a given macrostate, <span class="math notranslate nohighlight">\( P(N_{+} | N, p_{+}) \)</span>, can be written as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\log \Big[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \Big] = - N [ f_{+}log p_{+}+f_{-}log p_{-}] = -N \epsilon(f)
+\log P(N_{+} | N, p_{+}) = \bigg[ \log \frac{N!}{N_{+}! N_{-}!} \bigg] + \log \bigg[ p_{+}^{N_{+}} \cdot p_{-}^{N_{-}} \bigg] = S + E
 \]</div>
+<p>where:</p>
 <ul class="simple">
-<li><p>Energy term expressed via <strong>fractional displacement <span class="math notranslate nohighlight">\(x=\frac{\Delta N}{N}\)</span></strong> is:</p></li>
+<li><p><span class="math notranslate nohighlight">\( S \)</span> represents the entropy term, related to the number of ways to distribute steps,</p></li>
+<li><p><span class="math notranslate nohighlight">\( E \)</span> is an energy-like function governing the bias in step distribution.</p></li>
+</ul>
+<section id="energy-as-a-measure-of-bias">
+<h3>Energy as a Measure of Bias<a class="headerlink" href="#energy-as-a-measure-of-bias" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>Taking the logarithm of the probability factor results in an <strong>energy-like function</strong> <span class="math notranslate nohighlight">\( \epsilon \)</span>, which introduces a bias that shifts the distribution left or right depending on the <strong>probabilities of left/right steps</strong>, <span class="math notranslate nohighlight">\( p_{\pm} \)</span>, determined by microscopic details of the random walk.</p></li>
+<li><p>In simulations, we measure the <strong>fraction of steps</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  f_{\pm} = \frac{N_{\pm}}{N}
+  \]</div>
+<ul class="simple">
+<li><p>fractions will fluctuate but, in the limit of an infinitely long simulation, should converge to the true probabilities:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\log \Big[ p_{+}^{(N+\Delta N)/2} \cdot p_{-}^{(N-\Delta N)/2} \Big] = - N\Big [ \frac{1}{2}\log ( p_{+} p_{-}) + \frac{x}{2}  \log \frac{p_{+}}{p_{-}} \Big] = -N \epsilon(x)
+  f_{\pm} \to p_{\pm}
+  \]</div>
+</li>
+<li><p>Since <span class="math notranslate nohighlight">\( f_{+} + f_{-} = 1 \)</span> and <span class="math notranslate nohighlight">\( p_{+} + p_{-} = 1 \)</span>, we introduce the notation to simplify subsequent expressions of Energy and Entropy</p>
+<div class="math notranslate nohighlight">
+\[
+  f = f_{+}, \quad p = p_{+}
+  \]</div>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E = \log \Big[ p^{Nf} \cdot (1-p)^{N(1-f)} \Big] = N \Big[ f \log p + (1-f) \log (1-p) \Big] = -N \epsilon(f)
 \]</div>
 <ul class="simple">
-<li><p>The term <span class="math notranslate nohighlight">\(\frac{1}{2} (\log p_{+} + \log p_{-})\)</span> is a <strong>baseline</strong> energy-like term.</p></li>
-<li><p>The term <span class="math notranslate nohighlight">\(\frac{x}{2} (\log p_{+} - \log p_{-})\)</span> represents the <strong>bias</strong> introduced by the displacement <span class="math notranslate nohighlight">\(l\)</span>, tilting the distribution towards <span class="math notranslate nohighlight">\(p_+\)</span> or <span class="math notranslate nohighlight">\(p_-\)</span>.</p></li>
-<li><p>When <span class="math notranslate nohighlight">\(p_{-}=p_{+}=1/2\)</span> there is no bias and we have a constant baseline energy <span class="math notranslate nohighlight">\(\epsilon = Nlog2\)</span></p></li>
+<li><p>Where <span class="math notranslate nohighlight">\(\epsilon=E/N\)</span> is energy term per step of a random walk.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\( p = \frac{1}{2} \)</span>, there is no bias, and the energy simplifies to <span class="math notranslate nohighlight">\(E = N \log 2\)</span></p></li>
 </ul>
 </section>
-<section id="entropy-as-log-of-number-of-microstates-in-a-macrostate">
-<h3>Entropy as log of number of microstates in a macrostate<a class="headerlink" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\log\frac{N!}{N_{+}! \cdot N_{-}!} \approx N \log N -N_{+} \log N_{+} - N_{-} \log N_{-}  = \\ = N \Big[ -\frac{N_{+}}{N} \log\frac {N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] = N\Big[-f_{+} \log f_{+} - f_{-} \log f_{-}\Big]= N s(f)
-\end{split}\]</div>
-<div class="important admonition">
-<p class="admonition-title"><strong>Total Entropy of an <span class="math notranslate nohighlight">\(N\)</span>-Step Random Walk</strong></p>
+<section id="entropy-as-the-logarithm-of-microstates-in-a-macrostate">
+<h3>Entropy as the Logarithm of Microstates in a Macrostate<a class="headerlink" href="#entropy-as-the-logarithm-of-microstates-in-a-macrostate" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The total entropy can be expressed in terms of the fraction <span class="math notranslate nohighlight">\(f\)</span> of steps in one direction:</p></li>
+<li><p>The entropy term, related to the number of ways to distribute steps, is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\log \frac{N!}{N_{+}! N_{-}!} \approx N \log N - N_{+} \log N_{+} - N_{-} \log N_{-}
+\]</div>
+<ul class="simple">
+<li><p>Rewriting in terms of fractions:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+= N \Big[ -\frac{N_{+}}{N} \log \frac{N_{+}}{N} - \frac{N_{-}}{N} \log \frac{N_{-}}{N} \Big] = N \Big[ - f_{+} \log f_{+} - f_{-} \log f_{-} \Big] = N s(f)
+\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\( s(f)=S/N \)</span> is the entropy per step of a random walk.</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title"><strong>Entropy of a macrostate in <span class="math notranslate nohighlight">\(N\)</span>-Step Random Walk</strong></p>
+<ul class="simple">
+<li><p><strong>Entropy of a macrostate</strong> defined by a fraction of steps <span class="math notranslate nohighlight">\(f\)</span> is:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S(f) = N \Big[-f \log f - (1-f) \log (1-f)\Big]\]</div>
@@ -1117,13 +1149,14 @@ P(\Delta N | N, p_{+}) = \frac{ N!}{ \Big(\frac{N+\Delta N}{2}\Big)! \Big(\frac{
 <section id="large-deviation-theory">
 <h2>Large Deviation Theory<a class="headerlink" href="#large-deviation-theory" title="Permalink to this heading">#</a></h2>
 <ul>
-<li><p>Putting everything together we find that probability of observing a fraction of steps <span class="math notranslate nohighlight">\(f\)</span> is governed by a rate function <span class="math notranslate nohighlight">\(I(f)\)</span>, with <span class="math notranslate nohighlight">\(N\)</span> appearing as a linear factor:</p>
+<li><p>By taking log of macrostate probability as a function of fraction of steps <span class="math notranslate nohighlight">\(P(f)\)</span> we find that it <strong>scales linearly with <span class="math notranslate nohighlight">\(N\)</span></strong> and is <strong>proportional to a function <span class="math notranslate nohighlight">\(I(f)\)</span> independent of N</strong></p>
 <div class="math notranslate nohighlight">
 \[
-  \log P_{N}(f) \approx -N \big(\epsilon(f) - s(f) \big) = -N I(f).
+  \log P_{N}(f) \approx -N \Big[\epsilon(f) - s(f) \Big] = -N I(f).
   \]</div>
 </li>
-<li><p>When there are <span class="math notranslate nohighlight">\(N\)</span> steps, molecules, or components, the probability distribution over the fraction of steps <span class="math notranslate nohighlight">\(f\)</span> tends to concentrate near the minima of <span class="math notranslate nohighlight">\(I(f)\)</span>. This follows from a general mathematical property of probability distributions known as the <strong>large deviation theorem</strong>.</p></li>
+<li><p>When there are <span class="math notranslate nohighlight">\(N\)</span> steps, molecules, or components, the probability distribution over the fraction of steps <span class="math notranslate nohighlight">\(f\)</span> tends to concentrate near the minima of <span class="math notranslate nohighlight">\(I(f)\)</span>.</p></li>
+<li><p>This follows from a general mathematical property of probability distributions known as the <strong>large deviation theorem</strong>.</p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Large Deviation Theorem (LDT)</strong></p>
@@ -1548,9 +1581,9 @@ Check out this cool python lib for porosity evaluation of materials <a class="re
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-via-combinatorics">Computing number of microstates via combinatorics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strinling-approximation-of-factorial-and-binomials">Strinling approximation of factorial and binomials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-walk">Random Walk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-macrostate-probability-entropy-and-energy">Log of macrostate probability, Entropy and Energy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-the-degree-of-bias-or-tilt">Energy as the degree of bias or tilt</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-log-of-number-of-microstates-in-a-macrostate">Entropy as log of number of microstates in a macrostate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-of-macrostate-probability-entropy-and-energy">Log of Macrostate Probability, Entropy, and Energy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-as-a-measure-of-bias">Energy as a Measure of Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-the-logarithm-of-microstates-in-a-macrostate">Entropy as the Logarithm of Microstates in a Macrostate</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#large-deviation-theory">Large Deviation Theory</a></li>
