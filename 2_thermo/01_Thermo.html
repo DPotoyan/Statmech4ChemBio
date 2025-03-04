@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '2_thermo/01_Thermo';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Ensembles" href="../3_ensembles/intro.html" />
+    <link rel="next" title="Thermodynamic Potentials" href="02_FreeEnergies.html" />
     <link rel="prev" title="Thermodynamics" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,6 +183,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Thermodynamics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Review of thermodynamics principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_FreeEnergies.html"><strong>Thermodynamic Potentials</strong></a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../3_ensembles/intro.html">Ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -501,19 +502,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs Relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-duhem-relation">Gibbs Duhem relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spontaneous-change-and-partitioning-of-extensive-variables">Spontaneous Change and Partitioning of Extensive Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reversible-work-theorem">Reversible Work Theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms"><strong>Free Energies and Legendre Transforms</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transformation">Legendre Transformation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualzing-legendre-transform">Visualzing Legendre transform</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-stability-and-concavity-of-entropy">Thermodynamic Stability and Concavity of Entropy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equations">Fundamental equations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-gas-into-the-vacuum">Expansion of gas into the vacuum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-mixing-two-gases">Entropy of mixing two gases</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-heating">Entropy of heating</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transforms-and-free-energy-calculations">Legendre transforms and free energy calculations</a></li>
 </ul>
 </li>
 </ul>
@@ -541,8 +535,6 @@ document.write(`
 <li><p>The <strong>second law</strong> determines the direction of spontaneous processes. It implies that thermodynamic space is foliated into adiabatic surfaces of constant entropy.</p></li>
 </ul>
 </li>
-<li><p><strong>Thermodynamic potentials</strong>—such as Gibbs free energy and Helmholtz free energy—are obtained via <strong>Legendre transformations</strong> of energy. These potentials are essential for analyzing systems under different conditions (e.g., constant temperature, pressure).</p></li>
-<li><p>The second law, when formulated in terms of thermodynamic potentials, states that a <strong>spontaneous process decreases the free energy</strong> of the system.</p></li>
 </ul>
 </div>
 <section id="extensive-vs-intensive-variables">
@@ -758,36 +750,6 @@ dS \geq \frac{\delta Q}{T}
 </ul>
 </li>
 </ul>
-<div class="admonition-example admonition">
-<p class="admonition-title"><strong>Example</strong></p>
-<p>The fundamental equations for two systems <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> separated by diathermal wall (no heat flow allowed) is</p>
-<div class="math notranslate nohighlight">
-\[S =  \left ( N V U \right )^{1/3}\]</div>
-<ul class="simple">
-<li><p>The total energy is <span class="math notranslate nohighlight">\(U_A + U_B = 80 J\)</span></p></li>
-<li><p>The volume and mole number of system <span class="math notranslate nohighlight">\(A\)</span> are <span class="math notranslate nohighlight">\( 9 \times 10^{-6}\ m^3 \)</span> and <span class="math notranslate nohighlight">\(3\)</span> mol respectively.</p></li>
-<li><p>The volume and mole number for system <span class="math notranslate nohighlight">\(B\)</span> are <span class="math notranslate nohighlight">\( 4 \times 10^{-6}\ m^3 \)</span> and <span class="math notranslate nohighlight">\(2\)</span> mol respectively.</p></li>
-</ul>
-<ol class="arabic simple">
-<li><p>Plot the total entropy <span class="math notranslate nohighlight">\(S_A + S_B\)</span> as function of energy distribution between two systems <span class="math notranslate nohighlight">\(X=U_A/(U_A + U_B)\)</span></p></li>
-<li><p>If we enable heat flow between systems A and B a new equilibrium state would be established. What would <span class="math notranslate nohighlight">\(U_A\)</span> and <span class="math notranslate nohighlight">\(U_B\)</span> be like in this new equilibrium state?</p></li>
-</ol>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-<strong>Solution</strong><div class="sd-summary-down docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
-<div class="sd-summary-up docutils">
-<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
-</summary><div class="sd-summary-content sd-card-body docutils">
-<div class="math notranslate nohighlight">
-\[X = \frac{U_A}{U_A + U_B}\]</div>
-<p class="sd-card-text">we know <span class="math notranslate nohighlight">\(U_A + U_B = 80\)</span>, therefore</p>
-<div class="math notranslate nohighlight">
-\[ U_A = 80X,\hspace{20pt} U_B = 80(1 - X) \]</div>
-<p class="sd-card-text">Plugging in <span class="math notranslate nohighlight">\(V_A\)</span>, <span class="math notranslate nohighlight">\(V_B\)</span>, <span class="math notranslate nohighlight">\(N_A\)</span> and <span class="math notranslate nohighlight">\(N_B\)</span> we get:</p>
-<p class="sd-card-text"><span class="math notranslate nohighlight">\(S = S_A + S_B = \left(3 \times 9 \times 10^{-6} \times 80X \right)^{1/3} + \left(2 \times 4 \times 10^{-6} \times 80(1-X)\right)^{1/3} = 0.086(1-X)^{1/3} + 0.129X^{1/3}\)</span></p>
-</div>
-</details></div>
 <div class="admonition-exercise-bending-an-elastic-sheet admonition">
 <p class="admonition-title"><strong>Exercise: Bending an elastic sheet</strong></p>
 <ul class="simple">
@@ -953,187 +915,89 @@ dE = TdS - PdV + \mu dN.
 </li>
 <li><p>This <strong>maximizes the total entropy</strong>, aligning with the <strong>Second Law of Thermodynamics</strong>.</p></li>
 </ul>
-</section>
-<section id="reversible-work-theorem">
-<h2>Reversible Work Theorem<a class="headerlink" href="#reversible-work-theorem" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>To determine the conditions for a <strong>spontaneous</strong> process when heat can flow, we consider the composite <strong>system + bath</strong> in isolation. The total entropy change must be <strong>nonnegative</strong>:</p></li>
-</ul>
+<div class="admonition-example admonition">
+<p class="admonition-title"><strong>Example</strong></p>
+<p>The fundamental equations for two systems <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> separated by diathermal wall (no heat flow allowed) is</p>
 <div class="math notranslate nohighlight">
-\[
-\Delta S_{\text{sys}} + \Delta S_{\text{bath}} \geq 0
-\]</div>
+\[S =  \left ( N V U \right )^{1/3}\]</div>
 <ul class="simple">
-<li><p>For a heat bath with fixed mechanical variables, any energy change corresponds to heat exchange:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-dE_{\text{bath}} = \delta Q
-\]</div>
-<ul class="simple">
-<li><p>Assuming the bath is much larger than the system, changes in the bath due to the system occur <strong>reversibly</strong>, meaning:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\Delta S_{\text{sys}} + \frac{\delta Q_{bath}}{T} \geq 0
-\]</div>
-<ul class="simple">
-<li><p>Consider two processes between the <strong>same initial and final states</strong> with a heat bath at temperature <span class="math notranslate nohighlight">\(T\)</span>:</p></li>
+<li><p>The total energy is <span class="math notranslate nohighlight">\(U_A + U_B = 80 J\)</span></p></li>
+<li><p>The volume and mole number of system <span class="math notranslate nohighlight">\(A\)</span> are <span class="math notranslate nohighlight">\( 9 \times 10^{-6}\ m^3 \)</span> and <span class="math notranslate nohighlight">\(3\)</span> mol respectively.</p></li>
+<li><p>The volume and mole number for system <span class="math notranslate nohighlight">\(B\)</span> are <span class="math notranslate nohighlight">\( 4 \times 10^{-6}\ m^3 \)</span> and <span class="math notranslate nohighlight">\(2\)</span> mol respectively.</p></li>
 </ul>
 <ol class="arabic simple">
-<li><p>One process is <strong>irreversible</strong></p></li>
-<li><p>The other is <strong>reversible</strong></p></li>
+<li><p>Plot the total entropy <span class="math notranslate nohighlight">\(S_A + S_B\)</span> as function of energy distribution between two systems <span class="math notranslate nohighlight">\(X=U_A/(U_A + U_B)\)</span></p></li>
+<li><p>If we enable heat flow between systems A and B a new equilibrium state would be established. What would <span class="math notranslate nohighlight">\(U_A\)</span> and <span class="math notranslate nohighlight">\(U_B\)</span> be like in this new equilibrium state?</p></li>
 </ol>
-<ul class="simple">
-<li><p>Since both processes have the same energy change,</p></li>
-</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<strong>Solution</strong><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="math notranslate nohighlight">
-\[
-\Delta E = \delta W_{rev} + \delta Q_{rev} = \delta W+ \delta Q
-\]</div>
-<ul class="simple">
-<li><p>Since <span class="math notranslate nohighlight">\(\delta Q = TdS\)</span> we can rewrite work in terms ofreversible work:</p></li>
-</ul>
+\[X = \frac{U_A}{U_A + U_B}\]</div>
+<p class="sd-card-text">we know <span class="math notranslate nohighlight">\(U_A + U_B = 80\)</span>, therefore</p>
 <div class="math notranslate nohighlight">
-\[
-\delta W_{rev}  \delta W + \delta Q - TdS
-\]</div>
-<ul class="simple">
-<li><p>Using Clausius inequality <span class="math notranslate nohighlight">\(TdS-\delta Q\geq 0 \)</span> we arrive at the relationship between irreversible and reversible work</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-W_{\text{irr}} \geq W_{\text{rev}}
-\]</div>
-<ul class="simple">
-<li><p>Thus, the <strong>minimum work required</strong> for a transformation at constant <span class="math notranslate nohighlight">\(T\)</span> is given by the <strong>reversible work</strong>.</p></li>
-<li><p>For example, in a <strong>chain molecule</strong> with a linear force-extension equation of state, the <strong>work</strong>—equal to the area under the force-extension curve—is minimized when the force just suffices to induce the transition.</p></li>
-<li><p>We can write reversible work in terms of a change of state function. For a system at constant <span class="math notranslate nohighlight">\(T\)</span> using Clausius’ inequality:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\delta W \geq dE - TdS  = d(E-TS)
-\]</div>
-<ul class="simple">
-<li><p>Rewriting this, we introduce the <strong>Helmholtz free energy</strong> <span class="math notranslate nohighlight">\(F\)</span>:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\delta W \geq dF
-\]</div>
-<p>At <strong>constant volume</strong> <span class="math notranslate nohighlight">\(dV = 0\)</span>, no work is done, thus</p>
-<p><span class="math notranslate nohighlight">\(
-dF_{V,T} \leq 0
-\)</span></p>
-<ul class="simple">
-<li><p>Thus, at fixed <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(V\)</span>, the system <strong>minimizes the Helmholtz free energy at equilibrium</strong>. <span class="math notranslate nohighlight">\(F = E - TS\)</span>   The Helmholtz free energy represents the energy available to do work under isothermal conditions:</p></li>
-<li><p>This provides a fundamental thermodynamic criterion for <strong>spontaneous</strong> processes in a heat bath.</p></li>
-</ul>
-<div class="important admonition">
-<p class="admonition-title"><strong>Reversible Work Theorem</strong> </p>
-<div class="math notranslate nohighlight">
-\[
-W \geq W_{rev} = \Delta F 
-\]</div>
+\[ U_A = 80X,\hspace{20pt} U_B = 80(1 - X) \]</div>
+<p class="sd-card-text">Plugging in <span class="math notranslate nohighlight">\(V_A\)</span>, <span class="math notranslate nohighlight">\(V_B\)</span>, <span class="math notranslate nohighlight">\(N_A\)</span> and <span class="math notranslate nohighlight">\(N_B\)</span> we get:</p>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(S = S_A + S_B = \left(3 \times 9 \times 10^{-6} \times 80X \right)^{1/3} + \left(2 \times 4 \times 10^{-6} \times 80(1-X)\right)^{1/3} = 0.086(1-X)^{1/3} + 0.129X^{1/3}\)</span></p>
 </div>
-<figure class="align-default" id="non-intersecting-adiabats">
-<a class="bg-primary reference internal image-reference" href="../_images/polymer.png"><img alt="../_images/polymer.png" class="bg-primary" src="../_images/polymer.png" style="width: 500px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Comparison of a reversible and an irreversible pulling process of a chain molecule with a linear force-extension equation of state.</span><a class="headerlink" href="#non-intersecting-adiabats" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+</details></div>
 </section>
-<section id="free-energies-and-legendre-transforms">
-<h2><strong>Free Energies and Legendre Transforms</strong><a class="headerlink" href="#free-energies-and-legendre-transforms" title="Permalink to this heading">#</a></h2>
-<section id="motivation">
-<h3>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Energy <span class="math notranslate nohighlight">\( E(S, V, N) \)</span> is a natural function of <strong>extensive</strong> variables.</p></li>
-<li><p>Equilibrium is found by <strong>minimizing <span class="math notranslate nohighlight">\( E \)</span></strong> with respect to its independent variables.</p></li>
-<li><p>In experiments, it’s often <strong>more convenient to control intensive variables</strong> (e.g., <span class="math notranslate nohighlight">\( T \)</span>, <span class="math notranslate nohighlight">\( P \)</span>) instead of extensive ones.</p></li>
-<li><p><strong>Legendre transforms</strong> allow us to switch from energy to <strong>free energies</strong>, which have more practical independent variables.</p></li>
-</ul>
-</section>
-<section id="legendre-transformation">
-<h3>Legendre Transformation<a class="headerlink" href="#legendre-transformation" title="Permalink to this heading">#</a></h3>
-<p>The transformation replaces extensive variables with their <strong>conjugate intensive variables</strong>, giving new thermodynamic potentials:</p>
+<section id="thermodynamic-stability-and-concavity-of-entropy">
+<h2>Thermodynamic Stability and Concavity of Entropy<a class="headerlink" href="#thermodynamic-stability-and-concavity-of-entropy" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p><strong>Entropy</strong> <span class="math notranslate nohighlight">\( S(E) \)</span> is a <strong>continuous, differentiable, and monotonically increasing function</strong> of energy.</p></li>
+<li><p>The <strong>concavity of entropy</strong> ensures stability and is expressed as:</p>
 <div class="math notranslate nohighlight">
 \[
-E(S, V, N) \rightarrow A(T, V, N) \quad \text{(Helmholtz Free Energy)}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-E(S, V, N) \rightarrow G(T, P, N) \quad \text{(Gibbs Free Energy)}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-E(S, V, N) \rightarrow \Omega(T, P, \mu) \quad \text{(Grand Potential)}
-\]</div>
-<ul class="simple">
-<li><p><strong>Legendre transform preserves convexity</strong>: equilibrium is still found by <strong>minimization</strong>.</p></li>
-<li><p>Free energies <strong>contain the same information as <span class="math notranslate nohighlight">\( E \)</span></strong> since the transform is <strong>invertible</strong>.</p></li>
-<li><p>Free energies use <strong>experimentally controllable variables</strong> (e.g., <span class="math notranslate nohighlight">\( T \)</span>, <span class="math notranslate nohighlight">\( P \)</span>).</p></li>
-</ul>
-<div class="important admonition">
-<p class="admonition-title"><strong>General Procedure of Legendre Transform in Thermodynamics</strong></p>
-<ul class="simple">
-<li><p>Energy change is described by conjugate variable pairs <span class="math notranslate nohighlight">\((X_i, f_i)\)</span>.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-dE = \sum_i f_i dX_i
-\]</div>
-<ul class="simple">
-<li><p>We define a <strong>new thermodynamic potential</strong> by a Legendre transformation:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-A = E - \sum_i f_i X_i
-\]</div>
-<ul class="simple">
-<li><p>The sum runs over those variables <span class="math notranslate nohighlight">\( X_i \)</span> we want to <strong>replace with <span class="math notranslate nohighlight">\( f_i \)</span></strong>. Differentiating:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-dA = dE - \sum_i f_i dX_i - \sum_i X_i df_i = - \sum_i X_i df_i
-\]</div>
-<ul class="simple">
-<li><p>Thus, the new potential depends on the <strong>intensive variables</strong> <span class="math notranslate nohighlight">\( f_i \)</span>, making it easier to describe equilibrium in controlled settings.</p></li>
-</ul>
-</div>
-<p><strong>Helmholtz Free energy</strong></p>
-<div class="math notranslate nohighlight">
-\[\mathcal{L}_{S} E(S,V,N) = U - T\cdot S = F(N, V, T)\]</div>
-<div class="math notranslate nohighlight">
-\[dF = dE -d(TS) = dE - TdS - SdT\]</div>
-<div class="math notranslate nohighlight">
-\[dF = -SdT - pdV + \mu dN\]</div>
-<p><strong>Gibbs Free energy</strong></p>
-<div class="math notranslate nohighlight">
-\[\mathcal{L}_{S, V} E(S,V,N) = U - T\cdot S + pV = G(N, p, T)\]</div>
-<div class="math notranslate nohighlight">
-\[dG = dE -d(TS) + d(pV) = dE - TdS - SdT + pdV + Vdp\]</div>
-<div class="math notranslate nohighlight">
-\[dG = -SdT + Vdp + \mu dN\]</div>
-</section>
-<section id="visualzing-legendre-transform">
-<h3>Visualzing Legendre transform<a class="headerlink" href="#visualzing-legendre-transform" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Put simply legendre transofrm is about swapping variable of a function <span class="math notranslate nohighlight">\(f(x)\)</span> with its derivative <span class="math notranslate nohighlight">\(y=\frac{df}{dx}\)</span> getting which result in <span class="math notranslate nohighlight">\(g(y)\)</span></p></li>
-<li><p>Visually we can see that curve can be descirbed either as collection of <span class="math notranslate nohighlight">\(x\)</span> points or collection of slopes <span class="math notranslate nohighlight">\(y\)</span>. In order for correspodence to be one to one <strong>function must be convex!</strong> have well defined minima.</p></li>
+  S(\alpha E + (1-\alpha) E', \alpha V + (1-\alpha) V') \geq \alpha S(E, V) + (1-\alpha) S(E', V')
+  \]</div>
+</li>
+<li><p>for <span class="math notranslate nohighlight">\( 0 \leq \alpha \leq 1 \)</span>, which guarantees that entropy is a <strong>concave function</strong> in its extensive variables.</p></li>
 </ul>
 <figure class="align-default" id="id5">
-<a class="bg-primary reference internal image-reference" href="../_images/Legendre.png"><img alt="../_images/Legendre.png" class="bg-primary" src="../_images/Legendre.png" style="width: 300px;" /></a>
+<a class="bg-primary reference internal image-reference" href="../_images/concave_convex.png"><img alt="../_images/concave_convex.png" class="bg-primary" src="../_images/concave_convex.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Visualizing a convex function and its legendre transform.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Entropy is a concave function of extensive variables.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id6">
-<a class="bg-primary reference internal image-reference" href="../_images/Leg1.png"><img alt="../_images/Leg1.png" class="bg-primary" src="../_images/Leg1.png" style="width: 300px;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Draw a line (red line) with the same slope passing through the origin, <span class="math notranslate nohighlight">\(E=TS\)</span>. Then, <span class="math notranslate nohighlight">\(A=e-TS\)</span> is the <span class="math notranslate nohighlight">\(E\)</span>-coordinate value of the yellow dot subtracted that of the red dot. This implies that the minimum of the (signed) distance measured along the <span class="math notranslate nohighlight">\(E\)</span>-axis between the curve <span class="math notranslate nohighlight">\(E(S)\)</span> and the line <span class="math notranslate nohighlight">\(E=TS\)</span> is <span class="math notranslate nohighlight">\(A\)</span></span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
+<p><strong>Relation to Heat Capacity</strong></p>
+<ul>
+<li><p>The <strong>entropy function</strong> <span class="math notranslate nohighlight">\( S(E, V, N) \)</span> must be <strong>concave</strong> to ensure stability.</p></li>
+<li><p>Mathematically, for equilibrium stability, the <strong>second derivative of entropy</strong> must satisfy:</p>
+<div class="math notranslate nohighlight">
+\[
+     \left( \frac{\partial^2 S}{\partial E^2} \right)_{V, N} \leq 0.
+     \]</div>
+</li>
+<li><p>This ensures that fluctuations in energy do not lead to runaway instabilities.</p></li>
+<li><p>From the thermodynamic relation:</p>
+<div class="math notranslate nohighlight">
+\[
+     \frac{1}{T} = \frac{\partial S}{\partial E},
+     \]</div>
+<p>differentiating again gives:</p>
+<div class="math notranslate nohighlight">
+\[
+     \left( \frac{\partial^2 S}{\partial E^2} \right)_{V} = -\frac{1}{T^2} \left( \frac{\partial T}{\partial E} \right)_{V}.
+     \]</div>
+</li>
+<li><p>Since <strong>heat capacity at constant volume</strong> is:</p>
+<div class="math notranslate nohighlight">
+\[
+     C_V = \left( \frac{\partial E}{\partial T} \right)_{V},
+     \]</div>
+<p>we obtain the stability condition:</p>
+<div class="math notranslate nohighlight">
+\[
+     C_V = -\frac{T^2}{\left( \frac{\partial^2 S}{\partial E^2} \right)_V} &gt; 0.
+     \]</div>
+</li>
+<li><p><strong>Implication:</strong> A positive heat capacity (<span class="math notranslate nohighlight">\( C_V &gt; 0 \)</span>) ensures <strong>local thermodynamic stability</strong>.</p></li>
+</ul>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <strong>Review of thermo concenpts</strong><div class="sd-summary-down docutils">
@@ -1164,7 +1028,6 @@ dA = dE - \sum_i f_i dX_i - \sum_i X_i df_i = - \sum_i X_i df_i
 </ol>
 </div>
 </details></section>
-</section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
 <section id="fundamental-equations">
@@ -1215,13 +1078,6 @@ dA = dE - \sum_i f_i dX_i - \sum_i X_i df_i = - \sum_i X_i df_i
 <li><p>Show that in the two-step heating process, whatever the first heat bath temperature T is between <span class="math notranslate nohighlight">\(0^oC\)</span> and <span class="math notranslate nohighlight">\(50^oC\)</span>, the total change of entropy of the water plus heat baths is less than the case of (1)</p></li>
 </ol>
 </section>
-<section id="legendre-transforms-and-free-energy-calculations">
-<h3>Legendre transforms and free energy calculations<a class="headerlink" href="#legendre-transforms-and-free-energy-calculations" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Use Legendre transform to go from <span class="math notranslate nohighlight">\(E(N, V, T)\)</span> to <span class="math notranslate nohighlight">\(F(S,p,N)\)</span> and to <span class="math notranslate nohighlight">\(G(T,p,N)\)</span>.</p></li>
-<li><p>1 mole of an ideal gas at 300 K is quasistatically and isothermally compressed from 5 to 25atm. Find <span class="math notranslate nohighlight">\(\Delta F\)</span> and <span class="math notranslate nohighlight">\(\Delta G\)</span></p></li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -1265,11 +1121,11 @@ dA = dE - \sum_i f_i dX_i - \sum_i X_i df_i = - \sum_i X_i df_i
       </div>
     </a>
     <a class="right-next"
-       href="../3_ensembles/intro.html"
+       href="02_FreeEnergies.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Ensembles</p>
+        <p class="prev-next-title"><strong>Thermodynamic Potentials</strong></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1301,19 +1157,12 @@ dA = dE - \sum_i f_i dX_i - \sum_i X_i df_i = - \sum_i X_i df_i
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs Relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-duhem-relation">Gibbs Duhem relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spontaneous-change-and-partitioning-of-extensive-variables">Spontaneous Change and Partitioning of Extensive Variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reversible-work-theorem">Reversible Work Theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms"><strong>Free Energies and Legendre Transforms</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transformation">Legendre Transformation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualzing-legendre-transform">Visualzing Legendre transform</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-stability-and-concavity-of-entropy">Thermodynamic Stability and Concavity of Entropy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equations">Fundamental equations</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expansion-of-gas-into-the-vacuum">Expansion of gas into the vacuum</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-mixing-two-gases">Entropy of mixing two gases</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-of-heating">Entropy of heating</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-transforms-and-free-energy-calculations">Legendre transforms and free energy calculations</a></li>
 </ul>
 </li>
 </ul>
