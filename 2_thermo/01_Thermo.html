@@ -492,9 +492,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-the-observation-time">Equilibrium and the observation time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equation-of-thermodynamics">Fundamental equation of thermodynamics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-law">First Law</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-entropy">The Need Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adiabatic-processes-and-need-for-entropy">Adiabatic Processes and need for Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reversible-heat-exchange"><strong>Reversible Heat Exchange</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-law">Second Law</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-on-signs">Note on signs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-signs">Understanding the Signs</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs Relation</a></li>
@@ -584,10 +585,15 @@ document.write(`
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p><strong>Equilibrium</strong> refers to a state of matter which is unchanging. There are no macroscopic fluxes or flows of energy or matter.</p></li>
+<li><p><strong>Equilibrium</strong> refers to a state of matter which is unchanging. There are no macroscopic fluxes or flows of energy or matter.</p>
+<ul>
 <li><p>The state of Equilibrium is defined relative to <strong>observation time</strong>! A glass of water on the table is in a state of equilibrium on the time scale of minutes but in a state of non-equilibrium over the scale of days because water evaporates, changing the thermodynamic state of the glass.</p></li>
-<li><p>Equilibrium can also be defined as a particular state of matter where a simple macroscopic (as opposed to complex microscopic) thermodynamic description is possible regarding extensive variables. Many of the quantities of interest are ill-defined if the system is not in equilibrium (temperature, pressure, etc).</p></li>
-<li><p>In thermodynamics, we can calculate changes from state A to state B of a system that proceeds via non-equilibrium paths, but it does so by constructing <strong>quasi-static</strong> paths ensuring that state A and B are both in equilibrium.</p></li>
+<li><p>Equilibrium can also be defined as a particular state of matter where a simple macroscopic (as opposed to complex microscopic) thermodynamic description is possible regarding extensive variables. Many quantites are ill-defined if the system is not in equilibrium (temperature, pressure, etc).</p></li>
+</ul>
+</li>
+<li><p>The state of equilibrium is defined as a point in the space of thermodynamic coordinates. These coordinates have <strong>unique</strong> and well-defined values for each equilibrium state irrespective to how such state was created.</p></li>
+<li><p>This is why functions like energy <span class="math notranslate nohighlight">\(E\)</span> are called <strong>state functions</strong>, and their changes are given by differences between initial or final state only <span class="math notranslate nohighlight">\(\Delta E =E_f -E_i\)</span>.</p></li>
+<li><p>On the other hand one can have quantities such as work <span class="math notranslate nohighlight">\(W\)</span> or heat <span class="math notranslate nohighlight">\(Q\)</span> are <strong>path dependent</strong> characterizing the way energy is transferred to the system and not characterizing equilibrium states itself.</p></li>
 </ul>
 </section>
 <section id="fundamental-equation-of-thermodynamics">
@@ -601,9 +607,6 @@ document.write(`
 </ul>
 </div>
 <ul class="simple">
-<li><p>The state of equilibrium is defined as a point in the space of thermodynamic coordinates. These coordinates have <strong>unique</strong> and well-defined values for each equilibrium state irrespective to how such state was created.</p></li>
-<li><p>This is why functions like <span class="math notranslate nohighlight">\(E({\bf X})\)</span> are called <strong>state functions</strong>, and their changes are given by differences between initial or final state only <span class="math notranslate nohighlight">\(\Delta E =E_f -E_i\)</span>.</p></li>
-<li><p>On the other hand one can have quantities such as work <span class="math notranslate nohighlight">\(W\)</span> or heat <span class="math notranslate nohighlight">\(Q\)</span> are <strong>path dependent</strong> characterizing the way energy is transferred to the system and not characterizing equilibrium states itself.</p></li>
 <li><p><strong>Transformations between equilibrium states</strong> is the central task of thermodynamics. Knowing the fundamental equation, one can predict the equilibrium state B, which results from equilibrium state A through spontaneous transformation upon removal of a <strong>constraint.</strong>  E.g computing <span class="math notranslate nohighlight">\(\Delta E = E_B - E_A\)</span> given expansion of a box.</p></li>
 <li><p><strong>Quasi-static path: a dense succession of equilibrium states</strong> that connects A with B in extensive variables is constructed to compute changes in thermodynamic variables between states A and B. The quasistatic process ensures the system does not deviate from the equilibrium state during transformation.</p></li>
 <li><p><strong>The quasistatic path may or may not be reversible</strong> When the path from B to A can be re-traced with zero change in the universe while the system remains in equilibrium. This necessitates the introduction of Entropy, which differentiates reversible from non-reversible changes.</p></li>
@@ -624,7 +627,7 @@ document.write(`
 <p><strong>Note on signs</strong></p>
 <ul class="simple">
 <li><p>By convention sign of work or heat is positive if energy is transfered to the system. Negative if it system loses energy. Hence think about signs from the perspective ofa system under study.</p></li>
-<li><p>If engine does work against external pressure <span class="math notranslate nohighlight">\(p\)</span> then <span class="math notranslate nohighlight">\(dW= -pdV\)</span>. You can see work is going to be negative for expanding volume <span class="math notranslate nohighlight">\(V_2&gt;V_1\)</span>:  <span class="math notranslate nohighlight">\(-p (V_2-V_1)&lt; 0\)</span></p></li>
+<li><p>If engine does work against external pressure <span class="math notranslate nohighlight">\(p\)</span> then <span class="math notranslate nohighlight">\(dW= -pdV\)</span>. You can see work is going to be negative for expanding volume <span class="math notranslate nohighlight">\(dV&gt;0\)</span> and positive for contracting <span class="math notranslate nohighlight">\(dV&lt;0\)</span></p></li>
 <li><p>If system is absorbing heat from environment (heating up) <span class="math notranslate nohighlight">\(\delta Q&gt;0\)</span>. If the system is refridgerating then <span class="math notranslate nohighlight">\(\delta Q&lt;0\)</span></p></li>
 </ul>
 <p><strong>Adiabatic Change <span class="math notranslate nohighlight">\(dQ=0\)</span></strong></p>
@@ -634,17 +637,17 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[dE = dQ\]</div>
 </section>
-<section id="the-need-entropy">
-<h2>The Need Entropy<a class="headerlink" href="#the-need-entropy" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>There are many ways of formulating the second Law. Here we State the formulation of Planck that focus on energy of an isolated system, that is we look at <strong>Adiabatic Changes</strong> first.</p></li>
-<li><p>For any adiabatic process in which all <strong>work coordinates return to their initial values</strong> (i.e., a cyclic process), the energy of a thermally isolated system <strong>cannot decrease</strong>:</p></li>
-</ul>
+<section id="adiabatic-processes-and-need-for-entropy">
+<h2>Adiabatic Processes and need for Entropy<a class="headerlink" href="#adiabatic-processes-and-need-for-entropy" title="Permalink to this heading">#</a></h2>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/plank.png"><img alt="../_images/plank.png" class="bg-primary mb-1" src="../_images/plank.png" style="width: 400px;" /></a>
 <div class="important admonition">
 <p class="admonition-title"><strong>Planck’s Formulation of the Second Law</strong></p>
+<ul>
+<li><p>For any adiabatic process in which all <strong>work coordinates return to their initial values</strong> (i.e., a cyclic process), the energy of a thermally isolated system <strong>cannot decrease</strong>:</p>
 <div class="math notranslate nohighlight">
 \[\Delta E \geq 0\]</div>
+</li>
+</ul>
 </div>
 <ul class="simple">
 <li><p>Intuitively, this means that when performing pure mechanical work on a system, we can only impart energy to it due to friction or dissipation. Conversely, it is impossible to “steal” energy from a closed system purely through mechanical work without any accompanying environmental change.</p></li>
@@ -653,70 +656,104 @@ document.write(`
 <figure class="align-default" id="id2">
 <a class="bg-primary reference internal image-reference" href="../_images/Adiabats.png"><img alt="../_images/Adiabats.png" class="bg-primary" src="../_images/Adiabats.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 13 </span><span class="caption-text"><strong>Adiabatic surfaces (or lines) cannot intersect!</strong></span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Let Q be a state on a vertical line L (along which we can move with heat exchange alone) that can be reached from state P adiabatically and quasistatically. If state A can be reached by an adiabatic process from P, then adiabatically we can go from Q to A via P, violating Planck’s principle. Thus, the shaded portion is inaccessible from P adiabatically.
+If state B can be reached by an adiabatic and quasistatic process from P, then adiabatically we can go from B to Q via P, violating Planck’s principle, again. Thus, Q is unique: there is only one point on L that can be reached from P adiabatically and quasistatically. (We can adiabatically go from P to B, but it is an irreversible process.)</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<ul class="simple">
-<li><p>This restriction implies that <strong>adiabatic surfaces (or lines) cannot intersect</strong>. If they did, one could design a cyclic mechanical process that decreases the system’s energy, violating the second law. Moreover, an intersection would imply that the same thermodynamic coordinates correspond to two different forces (energy derivatives), which is physically inconsistent.</p></li>
-<li><p>Therefore, thermodynamic space is structured by <strong>non-intersecting adiabats</strong>. This naturally leads to the definition of an extensive variable, <strong>Entropy</strong> <span class="math notranslate nohighlight">\(S(E)\)</span>, which remains constant along adiabatic surfaces and serves as a fundamental quantity characterizing them.</p></li>
-</ul>
 <figure class="align-default" id="id3">
 <a class="bg-primary reference internal image-reference" href="../_images/NO1.png"><img alt="../_images/NO1.png" class="bg-primary" src="../_images/NO1.png" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 14 </span><span class="caption-text"><strong>Adiabatic surface can not cross otherwise they will violate the Second Law!</strong></span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">If two adiabats cross or touch, then we can make a cycle that can be traced in any direction, because PQ and P’Q can be traced in either directions, so Planck’s principle is violated.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>To jump from one adiabat to another we must transfer heat into the system <span class="math notranslate nohighlight">\(dE=dQ\)</span>.</p></li>
+<li><p>This restriction implies that <strong>adiabatic surfaces (or lines) cannot intersect</strong>. If they did, one could design a cyclic mechanical process that decreases the system’s energy, violating the second law. Moreover, an intersection would imply that the same thermodynamic coordinates correspond to two different forces (energy derivatives), which is physically inconsistent.</p>
+<ul>
+<li><p>Therefore, thermodynamic space is <strong>foliated by non-intersecting adiabats</strong>.</p></li>
+<li><p>This structure naturally leads to the definition of an extensive variable, <strong>Entropy</strong> <span class="math notranslate nohighlight">\(S(E)\)</span>, which remains constant along each adiabatic surface and <strong>increases with energy</strong> across different adiabats.</p></li>
+<li><p>Since entropy is a <strong>monotonic increasing function of energy</strong> <span class="math notranslate nohighlight">\(S(E)\)</span>, it follows that Planck’s formulation implies:</p></li>
 </ul>
-<p>$$dS = S(E+dE) - S(E) = \frac{dS}{dE}dE = \frac{dQ}{T}</p>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Delta \geq 0\]</div>
 <ul class="simple">
-<li><p>Were we identified the prefactors as temperature <span class="math notranslate nohighlight">\(T = \frac{dS}{dE}\)</span> soon to be rediscovered statistcal mechanically.</p></li>
-<li><p>Since mechanical manipulation does not get us out of adiabats this also implies that <strong>entropy can only be reduced by cooling</strong> <span class="math notranslate nohighlight">\(dQ&lt;0\)</span></p></li>
+<li><p>However, as we shall see the entropy-based Second Law is <strong>more general</strong>, as it applies to both <strong>adiabatic</strong> and <strong>non-adiabatic</strong> transformations. In the presence of heat exchange, the entropy of the system satisfies:</p></li>
+</ul>
+</section>
+<section id="reversible-heat-exchange">
+<h2><strong>Reversible Heat Exchange</strong><a class="headerlink" href="#reversible-heat-exchange" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Moving from one adiabat to another requires heat input or removal.</p></li>
+<li><p>This structure underlies entropy-based formulations of the Second Law, as entropy remains constant or increases in an adiabatic process.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+dS = S(E + dE) - S(E) = \frac{dS}{dE} dE = \frac{dQ}{T}
+\]</div>
+<ul class="simple">
+<li><p>Here, we identify the prefactor as the <strong>temperature</strong>,  which we will soon rediscover in statistical mechanics.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+  T = \left( \frac{dS}{dE} \right)^{-1},
+\]</div>
+<ul class="simple">
+<li><p>Since mechanical manipulation alone does not move the system between adiabats, this implies that <strong>entropy can only be reduced by cooling</strong> (<span class="math notranslate nohighlight">\( dQ &lt; 0 \)</span>).</p></li>
 </ul>
 </section>
 <section id="second-law">
 <h2>Second Law<a class="headerlink" href="#second-law" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>For general non-adiabatic case of system in contact with an infinitely large reservoir (heat bath) it is the entropy of the combined system+reservoir that must increase.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+dS + dS_r \geq 0
+\]</div>
+<ul class="simple">
+<li><p>The reservoir the entropy change is solely due to heat exchange <span class="math notranslate nohighlight">\(Q_r=-Q\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+dS_r = \frac{\delta Q_r}{T} = -\frac{\delta Q}{T}
+\]</div>
 <div class="important admonition">
 <p class="admonition-title"><strong>Second Law of Thermodynamics</strong>  </p>
-<ul>
-<li><p><strong>Adiabatic Processes (No Heat Exchange)</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-    dS \geq 0
-    \]</div>
-</li>
-<li><p><strong>Systems in Contact with a Heat Bath</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-    dS + dS_r \geq 0
-    \]</div>
-<div class="math notranslate nohighlight">
-\[
-    dS \geq \frac{\delta Q}{T}
-    \]</div>
-</li>
-<li><p><span class="math notranslate nohighlight">\(dS\)</span> change in system entropy</p></li>
-<li><p><span class="math notranslate nohighlight">\(dS_r = \frac{\delta Q_r}{T}=-\frac{\delta Q}{T}\)</span> change in reservoir entropy</p></li>
-</ul>
+dS \geq \frac{\delta Q}{T}
+\]</div>
 </div>
-<section id="note-on-signs">
-<h3>Note on signs<a class="headerlink" href="#note-on-signs" title="Permalink to this heading">#</a></h3>
+<section id="understanding-the-signs">
+<h3>Understanding the Signs<a class="headerlink" href="#understanding-the-signs" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The <strong>inequality <span class="math notranslate nohighlight">\(dS&gt; \frac{\delta Q}{T}\)</span></strong> tells us that <strong>entropy increase is not solely due to heat transfer</strong> it also captures <strong>internal irreversible effects</strong> that make a process depart from equilibrium.</p>
+<li><p><strong>Irreversibility and Entropy Production</strong></p>
 <ul>
-<li><p><strong>Friction, viscosity, turbulence</strong> in fluid systems.</p></li>
-<li><p><strong>Chemical reactions</strong> that are not at equilibrium.</p></li>
-<li><p><strong>Unrestrained expansion</strong> (free expansion of gas into a vacuum).</p></li>
+<li><p>The inequality <strong><span class="math notranslate nohighlight">\(dS &gt; \frac{\delta Q}{T} \)</span></strong> captures <strong>entropy increase due to internal irreversibilities</strong>, such as:</p>
+<ul>
+<li><p><strong>Friction, viscosity, turbulence</strong> in fluids.</p></li>
+<li><p><strong>Non-equilibrium chemical reactions.</strong></p></li>
+<li><p><strong>Unrestrained (free) expansion.</strong></p></li>
 </ul>
 </li>
-<li><p>The <strong>equality <span class="math notranslate nohighlight">\(dS =  \frac{\delta Q}{T}\)</span></strong> in the second law of thermodynamics means <strong>Reversible Heat Transfer</strong>:</p>
-<ul>
-<li><p>The system is in <strong>thermal equilibrium</strong> with the surroundings at every step.</p></li>
-<li><p>Heat exchange occurs <strong>infinitesimally slowly</strong>, allowing the system to remain in a near-equilibrium state. E.g having two objects with infinitesimally differnet temperatures.</p></li>
 </ul>
 </li>
-<li><p>When a system reaches <strong>equilibrium</strong>, <strong>entropy is maximized <span class="math notranslate nohighlight">\(dS=0\)</span></strong> and no spontaneous changes occur:</p></li>
+<li><p><strong>Reversible Heat Transfer</strong></p>
+<ul>
+<li><p>The equality <strong><span class="math notranslate nohighlight">\( dS = \frac{\delta Q}{T} \)</span></strong> holds when:</p>
+<ul>
+<li><p>The system remains in <strong>thermal equilibrium</strong> with surroundings.</p></li>
+<li><p>Heat exchange occurs <strong>infinitesimally slowly</strong> (e.g., between objects with an infinitesimal temperature difference).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Equilibrium Condition:</strong></p>
+<ul>
+<li><p><strong>Entropy is maximized <span class="math notranslate nohighlight">\(dS=0\)</span></strong> and no spontaneous changes occur:</p></li>
+</ul>
+</li>
 </ul>
 <div class="admonition-example admonition">
 <p class="admonition-title"><strong>Example</strong></p>
@@ -886,7 +923,7 @@ dE = TdS - PdV + \mu dN.
   S_{\text{tot}}(E) = S_I(E_I) + S_{II}(E - E_I)
   \]</div>
 </li>
-<li><p>At equilibrium, entropy is maximized by varying the only free variable, ( E_I ), which determines energy partitioning:</p>
+<li><p>At equilibrium, entropy is maximized by varying the only free variable, <span class="math notranslate nohighlight">\( E_I \)</span>, which determines energy partitioning:</p>
 <div class="math notranslate nohighlight">
 \[
   \delta S_{\text{tot}}(E) = \frac{\partial S_I}{\partial E_I} \delta E_I - \frac{\partial S_{II}}{\partial E_I} \delta E_I = 0
@@ -1252,9 +1289,10 @@ dA = dE - \sum_i f_i dX_i - \sum_i X_i df_i = - \sum_i X_i df_i
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-the-observation-time">Equilibrium and the observation time</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equation-of-thermodynamics">Fundamental equation of thermodynamics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-law">First Law</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-need-entropy">The Need Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adiabatic-processes-and-need-for-entropy">Adiabatic Processes and need for Entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reversible-heat-exchange"><strong>Reversible Heat Exchange</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-law">Second Law</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-on-signs">Note on signs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-signs">Understanding the Signs</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs Relation</a></li>
