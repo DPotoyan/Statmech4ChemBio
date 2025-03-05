@@ -490,7 +490,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensive-vs-intensive-variables">Extensive vs Intensive variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-the-observation-time">Equilibrium and the observation time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-thermodynamic-space">Equilibrium and thermodynamic space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equation-of-thermodynamics">Fundamental equation of thermodynamics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-law">First Law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adiabatic-processes">Adiabatic Processes</a></li>
@@ -501,6 +501,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs Relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-duhem-relation">Gibbs Duhem relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#emtropy-maximization-principle">Emtropy Maximization Principle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spontaneous-change-and-partitioning-of-extensive-variables">Spontaneous Change and Partitioning of Extensive Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-stability-and-concavity-of-entropy">Thermodynamic Stability and Concavity of Entropy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
@@ -526,9 +527,12 @@ document.write(`
 <div class="admonition-what-you-will-know admonition">
 <p class="admonition-title"><strong>What you will know</strong></p>
 <ul class="simple">
-<li><p><strong>Thermodynamics</strong> is an exact <strong>phenomenological theory</strong> that describes changes in material systems in <strong>equilibrium</strong>. “Phenomenological” means that macroscopic phenomena are defined in terms of a few observable and measurable quantities, without reference to microscopic details.</p></li>
-<li><p>Thermodynamics operates with <strong>extensive variables</strong>—additive quantities such as energy, volume, and the number of moles—that completely define the <strong>thermodynamic space</strong>.</p></li>
+<li><p><strong>Thermodynamics</strong> is an exact <strong>phenomenological theory</strong> that describes changes in material systems in <strong>equilibrium</strong>. “Phenomenological” means that macroscopic phenomena are defined in terms of a few observable and measurable variables, without reference to microscopic details.</p>
+<ul>
+<li><p><strong>Extensive variables</strong>—additive quantities such as energy, volume, and the number of moles—that completely define the <strong>thermodynamic space</strong>.</p></li>
 <li><p><strong>Intensive variables</strong>—such as temperature, pressure, and magnetic field—are derived from extensive variables and provide a convenient way to describe a system under constant external conditions.</p></li>
+</ul>
+</li>
 <li><p>Thermodynamics is built upon <strong>fundamental laws</strong>:</p>
 <ul>
 <li><p>The <strong>first law</strong> expresses the conservation of energy.</p></li>
@@ -549,7 +553,7 @@ document.write(`
 </ul>
 </li>
 </ul>
-<div class="note admonition">
+<div class="note dropdown admonition">
 <p class="admonition-title"><strong>Exercise: Extensivity of Energy</strong></p>
 <ul class="simple">
 <li><p>For volume, it may be straightforward to explain why it is extensive. But why is Energy an extensive quantity <span class="math notranslate nohighlight">\(E= E_1 + E_2\)</span> for a system with N interacting particles?</p></li>
@@ -568,8 +572,8 @@ document.write(`
 </div>
 </details></div>
 </section>
-<section id="equilibrium-and-the-observation-time">
-<h2>Equilibrium and the observation time<a class="headerlink" href="#equilibrium-and-the-observation-time" title="Permalink to this heading">#</a></h2>
+<section id="equilibrium-and-thermodynamic-space">
+<h2>Equilibrium and thermodynamic space<a class="headerlink" href="#equilibrium-and-thermodynamic-space" title="Permalink to this heading">#</a></h2>
 <figure class="align-default" id="id1">
 <a class="bg-primary reference internal image-reference" href="../_images/adiabat.png"><img alt="../_images/adiabat.png" class="bg-primary" src="../_images/adiabat.png" style="width: 300px;" /></a>
 <figcaption>
@@ -577,15 +581,16 @@ document.write(`
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p><strong>Equilibrium</strong> refers to a state of matter which is unchanging. There are no macroscopic fluxes or flows of energy or matter.</p>
-<ul>
+<li><p><strong>Equilibrium</strong> refers to a state of matter which is unchanging. There are no macroscopic fluxes or flows of energy or matter.</p></li>
 <li><p>The state of Equilibrium is defined relative to <strong>observation time</strong>! A glass of water on the table is in a state of equilibrium on the time scale of minutes but in a state of non-equilibrium over the scale of days because water evaporates, changing the thermodynamic state of the glass.</p></li>
-<li><p>Equilibrium can also be defined as a particular state of matter where a simple macroscopic (as opposed to complex microscopic) thermodynamic description is possible regarding extensive variables. Many quantites are ill-defined if the system is not in equilibrium (temperature, pressure, etc).</p></li>
+<li><p>Euilibrium is represented as a point in the <strong>Thermodynamic space</strong> <span class="math notranslate nohighlight">\(E(X_1, X_2, ...)\)</span> where <span class="math notranslate nohighlight">\(X_i\)</span> are extensive variables.</p>
+<ul>
+<li><p>These coordinates have <strong>unique</strong> and well-defined values for each equilibrium state irrespective to how such state was created.</p></li>
+<li><p>Intensive variables become ill-defined if the system is not in equilibrium (temperature, pressure, etc).</p></li>
+<li><p>Functions like energy <span class="math notranslate nohighlight">\(E\)</span> are called <strong>state functions</strong>, and their changes are given by differences between initial or final state only <span class="math notranslate nohighlight">\(\Delta E =E_f -E_i\)</span>.</p></li>
+<li><p>On the other hand one can have quantities such as work <span class="math notranslate nohighlight">\(W\)</span> or heat <span class="math notranslate nohighlight">\(Q\)</span>. These are <strong>path dependent</strong> characterizing the way energy is transferred to the system and not characterizing equilibrium states!</p></li>
 </ul>
 </li>
-<li><p>The state of equilibrium is defined as a point in the space of thermodynamic coordinates. These coordinates have <strong>unique</strong> and well-defined values for each equilibrium state irrespective to how such state was created.</p></li>
-<li><p>This is why functions like energy <span class="math notranslate nohighlight">\(E\)</span> are called <strong>state functions</strong>, and their changes are given by differences between initial or final state only <span class="math notranslate nohighlight">\(\Delta E =E_f -E_i\)</span>.</p></li>
-<li><p>On the other hand one can have quantities such as work <span class="math notranslate nohighlight">\(W\)</span> or heat <span class="math notranslate nohighlight">\(Q\)</span> are <strong>path dependent</strong> characterizing the way energy is transferred to the system and not characterizing equilibrium states itself.</p></li>
 </ul>
 </section>
 <section id="fundamental-equation-of-thermodynamics">
@@ -601,8 +606,8 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Transformations between equilibrium states</strong> is the central task of thermodynamics. Knowing the fundamental equation, one can predict the equilibrium state B, which results from equilibrium state A through spontaneous transformation upon removal of a <strong>constraint.</strong>  E.g computing <span class="math notranslate nohighlight">\(\Delta E = E_B - E_A\)</span> given expansion of a box.</p></li>
 <li><p><strong>Quasi-static path: a dense succession of equilibrium states</strong> that connects A with B in extensive variables is constructed to compute changes in thermodynamic variables between states A and B. The quasistatic process ensures the system does not deviate from the equilibrium state during transformation.</p></li>
-<li><p><strong>The quasistatic path may or may not be reversible</strong> When the path from B to A can be re-traced with zero change in the universe while the system remains in equilibrium. This necessitates the introduction of Entropy, which differentiates reversible from non-reversible changes.</p></li>
-<li><p><strong>Reversible transformations can go in either direction without any change in the environment</strong> Quasistatic paths may correspond to irreversible or reversible transformations! Just because the process is infinitely slow and locally in equilibrium does not make it reversible. For instance, poking a small hole in a container and letting one molecule out very slowly does not make the process reversible. This motivates us to introduce a quantity called entropy, the change of which will tell us whether the process is reversible or not.</p></li>
+<li><p><strong>Reversible transformations</strong> can go forward or backward without any change in the environment. This necessitates the introduction of Entropy, which differentiates reversible from non-reversible changes.</p></li>
+<li><p><strong>The quasistatic path may or may not be reversible</strong> Just because the process is infinitely slow and locally in equilibrium does not make it reversible along the path of transofrmation. For instance, poking a small hole in a container and letting one molecule out very slowly does not make the process reversible.</p></li>
 </ul>
 </section>
 <section id="first-law">
@@ -649,7 +654,7 @@ document.write(`
 <a class="bg-primary reference internal image-reference" href="../_images/Adiabats.png"><img alt="../_images/Adiabats.png" class="bg-primary" src="../_images/Adiabats.png" style="width: 300px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 13 </span><span class="caption-text">Let Q be a state on a vertical line L (along which we can move with heat exchange alone) that can be reached from state P adiabatically and quasistatically. If state A can be reached by an adiabatic process from P, then adiabatically we can go from Q to A via P, violating Planck’s principle. Thus, the shaded portion is inaccessible from P adiabatically.
-If state B can be reached by an adiabatic and quasistatic process from P, then adiabatically we can go from B to Q via P, violating Planck’s principle, again. Thus, Q is unique: there is only one point on L that can be reached from P adiabatically and quasistatically. (We can adiabatically go from P to B, but it is an irreversible process.)</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+If state B can be reached by an adiabatic and quasistatic process from P, then adiabatically we can go from B to Q via P, violating Planck’s principle, again. Thus, Q is unique: there is only one point on L that can be reached from P adiabatically and quasistatically.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id3">
@@ -804,12 +809,11 @@ dE = \left(\frac{\partial E}{\partial S} \right)_{V,N} dS + \left(\frac{\partial
 dE = TdS - PdV + \mu dN.
 \]</div>
 </div>
-<div class="admonition-example admonition">
-<p class="admonition-title"><strong>Example</strong></p>
+<div class="admonition-example-fundamental-equation-of-ideal-gas admonition">
+<p class="admonition-title"><strong>Example: Fundamental equation of ideal gas</strong></p>
 <p>Consider an ideal gas in a container that is in a state of equilibrium and is therefore described by <span class="math notranslate nohighlight">\(E(S, N, V)\)</span> or <span class="math notranslate nohighlight">\(S(E, N, V)\)</span> fundamental equation.</p>
 <ul class="simple">
 <li><p>Using the ideal gas relation <span class="math notranslate nohighlight">\(PV=Nk_B T\)</span> for monoatomic gas, derive an expression for entropy</p></li>
-<li><p>Plot entropy surface as a function of Volume and Energy</p></li>
 </ul>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -851,7 +855,7 @@ dE = TdS - PdV + \mu dN.
 <li><p>Using chain rule we get a liner relationship between extensive variables not involving any differentials:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[E(S, V, N) = \frac{\partial E(\lambda S, \lambda V, \lambda N}{\partial \lambda} =  \Big(\frac{\partial E}{\partial \lambda S} \Big)_{V,N}S+ \Big(\frac{\partial E}{\partial  \lambda V} \Big)_{S,N}V+\Big(\frac{\partial E}{\partial  \lambda N} \Big)_{S,V}N\]</div>
+\[E(S, V, N) = \frac{\partial E(\lambda S, \lambda V, \lambda N)}{\partial \lambda} =  \Big(\frac{\partial E}{\partial \lambda S} \Big)_{V,N}S+ \Big(\frac{\partial E}{\partial  \lambda V} \Big)_{S,N}V+\Big(\frac{\partial E}{\partial  \lambda N} \Big)_{S,V}N\]</div>
 <ul class="simple">
 <li><p>When we take the derivative of E and compare with Gibbs relation we end up with equation where independent variables are now intensive ones</p></li>
 </ul>
@@ -864,6 +868,32 @@ dE = TdS - PdV + \mu dN.
 <p class="admonition-title"><strong>Gibbs Duhem relation</strong></p>
 <div class="math notranslate nohighlight">
 \[{SdT-VdP+Nd\mu =0}\]</div>
+</div>
+</section>
+<section id="emtropy-maximization-principle">
+<h2>Emtropy Maximization Principle<a class="headerlink" href="#emtropy-maximization-principle" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>When we release a constraint in an adiabatic system the extensive coordinates <span class="math notranslate nohighlight">\(X_i\)</span> change. This spontaneous change must always lead to increase in entropy <span class="math notranslate nohighlight">\(\Delta S \geq 0\)</span></p></li>
+<li><p>Entropy can increase until reaching its maximum possible value after which no further change is possible.</p></li>
+<li><p>Therefore the second law gives us a variational principle in terms of entropy to find stable equilibrium states for an adiabatic systems.</p></li>
+</ul>
+<div class="admonition-entropy-maximization-principle admonition">
+<p class="admonition-title"><strong>Entropy Maximization Principle</strong></p>
+<ul class="simple">
+<li><p>When the state <strong>spontaneously evolves</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\delta S &gt; 0 \]</div>
+<ul class="simple">
+<li><p>When the state is <strong>thermodynamically stable</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\delta S &lt; 0 \]</div>
+<ul class="simple">
+<li><p>The state of equilibrium is found via <strong>entropy maximization</strong> over variable constraints <span class="math notranslate nohighlight">\({\bf X}=X_1, X_2, ...\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[max_{\bf X} S(S, {\bf X}) \rightarrow X^{eq}_1, X^{eq}_2,...\]</div>
 </div>
 </section>
 <section id="spontaneous-change-and-partitioning-of-extensive-variables">
@@ -1145,7 +1175,7 @@ dE = TdS - PdV + \mu dN.
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensive-vs-intensive-variables">Extensive vs Intensive variables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-the-observation-time">Equilibrium and the observation time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-and-thermodynamic-space">Equilibrium and thermodynamic space</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-equation-of-thermodynamics">Fundamental equation of thermodynamics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-law">First Law</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adiabatic-processes">Adiabatic Processes</a></li>
@@ -1156,6 +1186,7 @@ dE = TdS - PdV + \mu dN.
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-relation">Gibbs Relation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gibbs-duhem-relation">Gibbs Duhem relation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#emtropy-maximization-principle">Emtropy Maximization Principle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spontaneous-change-and-partitioning-of-extensive-variables">Spontaneous Change and Partitioning of Extensive Variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-stability-and-concavity-of-entropy">Thermodynamic Stability and Concavity of Entropy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
