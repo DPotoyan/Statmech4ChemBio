@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>NVE &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>Ensemble equivalence &#8212; Statistical Mechanics for Chemistry and Biology</title>
   
   
   
@@ -187,7 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Ensembles</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">NVE</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ensemble equivalence</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nvt.html">NVT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npt.html">muPT</a></li>
 </ul>
@@ -478,7 +478,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>NVE</h1>
+    <h1>Ensemble equivalence</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -518,8 +518,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="nve">
-<h1>NVE<a class="headerlink" href="#nve" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="ensemble-equivalence">
+<h1>Ensemble equivalence<a class="headerlink" href="#ensemble-equivalence" title="Permalink to this heading">#</a></h1>
 <div class="admonition-what-you-need-to-know admonition">
 <p class="admonition-title">What you need to know</p>
 <ul class="simple">
@@ -534,20 +534,31 @@ Such a system, however, would consist of a vast number of microstates. The numbe
 <li><p>Thermodynamics while agnostic to atomic details is an exact theory. Predictions of statistical mechanics must obey the rules of thermodynamics.</p></li>
 </ul>
 </div>
+<p><img alt="" src="../_images/ensembl.png" /></p>
 <section id="boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamics">
 <h2>Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamics<a class="headerlink" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamics" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Consider an isolated fluid system with <span class="math notranslate nohighlight">\(N=const\)</span>, <span class="math notranslate nohighlight">\(V=const\)</span> and <span class="math notranslate nohighlight">\(E=const\)</span> which we will refer to as NVE system. What should be the probabilities of various states sampled by this system?</p></li>
-<li><p>It is clear that in the absence of any other information, no states should have higher probabilities than others. This is known as “principle of equal a priory probability”</p></li>
-<li><p>Mathematically, this can be expressed by maximizing entropy <span class="math notranslate nohighlight">\(S=-\sum p_i log p_i\)</span> with no constraints other than normalization. We end up with <span class="math notranslate nohighlight">\(p_i = \frac{1}{\Omega}\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> microstates since we have no objective reason to favor any one microstate.</p></li>
+<li><p>Consider an isolated fluid system with <span class="math notranslate nohighlight">\(N=const\)</span>, <span class="math notranslate nohighlight">\(V=const\)</span> and <span class="math notranslate nohighlight">\(E=const\)</span> which we will refer to as NVE system. What should be the probabilities of configurations observed in the system?</p></li>
+<li><p>It is clear that in the absence of any physical constraints, no states should have higher probabilities than others. This is known as “principle of equal a priory probability”</p></li>
+</ul>
+<div class="admonition-a-priori-equal-probability admonition">
+<p class="admonition-title"><strong>A priori equal probability</strong></p>
+<ul class="simple">
+<li><p><strong>Probability of a microstate</strong></p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{S = k_B log \Omega}\]</div>
+\[p(E) = \frac{1}{\Omega(N, V, E)}\]</div>
+</div>
+<div class="admonition-boltzmann-equation admonition">
+<p class="admonition-title"><strong>Boltzmann equation</strong></p>
+<div class="math notranslate nohighlight">
+\[S = k_B log \Omega\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\Omega\)</span> is the number of micro-states <strong>consistent with a macrostate of our system</strong>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(S(N, V, E)\)</span> is the entropy of an isolated system (we are in the NVE).</p></li>
 <li><p><span class="math notranslate nohighlight">\(k_B =1.380649\cdot 10^{-23} J/K\)</span>,  Boltzmann’s constant</p></li>
 </ul>
+</div>
 </section>
 <section id="computing-number-of-microstates-omega-using-quantum-mechanics">
 <h2>Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using quantum mechanics<a class="headerlink" href="#computing-number-of-microstates-omega-using-quantum-mechanics" title="Permalink to this heading">#</a></h2>
