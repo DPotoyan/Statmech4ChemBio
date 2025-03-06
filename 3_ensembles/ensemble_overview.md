@@ -216,3 +216,94 @@ $$Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{X_{0}, ... 
 - Free energies as Laplace transform of internal energy function $E(S,V,N,...)$
 
 $$Z(\beta, N, V) = e^{-\beta F(\beta, N, V)}$$
+
+
+### Monoatomic ideal gas
+
+**Quantum density of states of an ideal gas**
+
+![](./figs/pib-states.png)
+
+$$E({\bf n}) = \frac{h^2}{8mL^2} {\bf n^2}$$
+
+$$\Omega(N,V, E) = \int_{E(n)=E} dn = \frac{C_{3N-1}}{2^{3N}} \int \delta \Big(\frac{(8mE)^{1/2}L}{h}-{\bf n}  \Big) d {\bf n}$$
+
+- A sum over all total quantum number of N 3D particles in a box ends up being a problem of finding the volume of an N-dimensional sphere
+
+**Classical density of states of an ideal gas**
+
+$$H(p,q) =\frac{p^2}{2m} = E$$
+
+$${\Omega(E) = \frac{1}{N! h^{3N}}\int_{p^N,q^N} dp^N dq^N \delta(H(p,q) -E) =\frac{V^N}{N! h^{3N}} \int dp^N \delta(p^2/2m -E)}$$
+
+$$ \Omega(E) = \frac{V^N}{N! h^{3N}} \delta V(R)$$
+
+Where $\delta V(R)$ is a volume of a spherical shell with radius $R = (2mE)^{1/2}$ and thickness $\delta R = 1/2 (2m/E)^{1/2} \delta E$
+
+**Volume of a sphere in N dimesnional space**
+
+$$V(R) = \frac{\pi^{D/2}}{(D/2)!} R^D$$
+
+For $D\rightarrow \infty$ we discover that most of the volume of the sphere is concentrated at its surface!
+<br>
+
+$$\delta V(R) = V(R) -V(R-\delta R) = C [R^D - (R-\delta R)^D] = CR^D [1-(1- (\delta R/R)^D)] = CR^D = V(R)$$
+
+### Classical density of states of an ideal gas
+
+$$\boxed{\Omega(E) = \frac{V^N}{h^{3N} N!} \cdot \frac{(2m\pi E)^{3N/2}}{(3N/2)!}}$$
+ 
+$$\boxed{ S = log \Omega(E) = k_B N \cdot  \Big [ log \Big(\frac{V}{N \lambda^3}\Big) + \frac{5}{2}\Big]}$$
+
+- Note linear dependence on N. Entropy is an extensive quantity!
+
+- exponent 3/2 reflexts that each particle has 3 degrees of freedom
+
+- $\lambda = \Big(\frac{3h^2 N}{4\pi m E}\Big)^{1/2}$ thermal de Broglie wavelength.
+
+- This result know as "Sackur Tetrode equation" was known long before statistical mechanics. 
+
+
+#### Equations of state for ideal gas
+
+$$\frac{1}{T} = \frac{\partial S}{\partial E} = \frac{3}{2}k_B \frac{N}{E}$$
+
+<br>
+
+$$\frac{p}{T} =  \frac{\partial S}{\partial V} = k_B N \frac{1}{V}$$
+
+<br>
+
+$$\frac{\mu}{T} = -\frac{\partial S}{\partial N} = k_B T \cdot log \frac{N}{V} \lambda^3$$
+
+
+### Quasistatic process and Irreversibility
+
+- From the NVE ensemble reasoning, we can now state that a quasistatic process corresponds to a process that does not change in the number of microstates. That is removal of a constraint keeps the "volume" of microstates intact.  
+
+$$\Delta S = k_B log \frac{\Omega_f}{\Omega_i} = 0$$
+
+- On the other hand, once the number of microstates grows upon removal of a constraint, then re-instating the constraint will not shrink the "volume" of microstate space. 
+
+$$\Delta S = k_B log \frac{\Omega_f}{\Omega_i} > 0$$
+
+### Thermal, Mechanical and chemical equilibrium
+
+- The number of microstate for a system consisting of two parts can be written as a sum of all posisble energy partitionings among the two states. 
+
+$$\Omega(E) = \sum_{E_1} \Omega_1(E_1) \Omega_2 (E-E_1) \approx \Omega_1(U_1) \Omega_2 (E-U_1)$$
+
+- Since $\Omega(E)$ is a sharply increasing function of energy we expect the maximum term for some energy $E_1=U_1$  to dominate the sum. Let us find what state this maximum value should correspond to?
+
+$$\frac{\partial log \Omega (E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{\partial log\Omega_1(E_1)}{\partial E_1} - \frac{\partial log\Omega(E_2)}{\partial E_2}=0$$
+
+
+#### Example: thermal contact between two ideal gases
+
+Recall that for ideal gas we have $\Omega(E) = C V^N E^{3/2 N}$.  Therefore for an ideal gas we will have:
+
+$$\frac{\partial log \Omega (E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{3}{2}\frac{N_1}{U_1} - \frac{3}{2}\frac{N_2}{U_2} = 0$$
+
+Using definition of entropy we get the most probable value of energy $(U_1)$ corresponding to the equilibirum state 
+
+$$\frac{1}{k_B T} = \frac{3}{2}\frac{N_1}{U_1} = \frac{3}{2}\frac{N_2}{U_2}$$
