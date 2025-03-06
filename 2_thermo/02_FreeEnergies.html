@@ -490,7 +490,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reversible-work-theorem">Reversible Work Theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-minimum-principle">Free Energy Minimum principle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-minimization-principle">Free Energy Minimization principle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms">Free Energies and Legendre Transforms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-legendre-transform"><strong>Visualizing the Legendre Transform</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation-of-legendre-transform">Mathematical Formulation of Legendre Transform</a></li>
@@ -586,8 +586,8 @@ W \geq W_{rev} = \Delta F
 \]</div>
 </div>
 </section>
-<section id="free-energy-minimum-principle">
-<h2>Free Energy Minimum principle<a class="headerlink" href="#free-energy-minimum-principle" title="Permalink to this heading">#</a></h2>
+<section id="free-energy-minimization-principle">
+<h2>Free Energy Minimization principle<a class="headerlink" href="#free-energy-minimization-principle" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Reversible work theorem can be used to derive a principle for spontaneous processes.</p></li>
 </ul>
@@ -611,8 +611,64 @@ dF_{V,T} \leq 0
 </ul>
 <div class="math notranslate nohighlight">
 \[ 
-min_{\bf X} F( \rightarrow X^{eq}_1, X^{eq}_2,...)
+min_X F(X_1, X_2)  \rightarrow X^{eq}_1, X^{eq}_2,...
 \]</div>
+</div>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>Free Energy and the System-Centric Perspective</strong></p>
+<ul class="simple">
+<li><p>In thermodynamics, a system in contact with a thermal reservoir undergoes energy exchange, affecting both the system’s entropy <span class="math notranslate nohighlight">\(S\)</span> and the reservoir’s entropy <span class="math notranslate nohighlight">\(S_{\text{res}}\)</span>. Directly tracking these changes can be cumbersome. The adoption of free energy circumvents this issue by encapsulating the reservoir’s effects into a single function.</p></li>
+<li><p>Consider the total entropy change in an isothermal process at temperature <span class="math notranslate nohighlight">\(T\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Delta S_{\text{total}} = \Delta S + \Delta S_{\text{res}} \geq 0
+\]</div>
+<ul class="simple">
+<li><p>Since the heat exchanged with the reservoir is <span class="math notranslate nohighlight">\(Q = \Delta U - W \)</span>, where <span class="math notranslate nohighlight">\( U \)</span> is internal energy and <span class="math notranslate nohighlight">\( W \)</span> is work done on the system, the reservoir’s entropy change is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Delta S_{\text{res}} = -\frac{Q}{T} = -\frac{\Delta U - W}{T}
+\]</div>
+<ul class="simple">
+<li><p>Thus, the total entropy change can be rewritten as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Delta S_{\text{total}} = \Delta S - \frac{\Delta U - W}{T}
+\]</div>
+<ul class="simple">
+<li><p>Rearranging, we obtain:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+T \Delta S_{\text{total}} = T\Delta S - \Delta U + W
+\]</div>
+<ul class="simple">
+<li><p>Defining the Helmholtz free energy <span class="math notranslate nohighlight">\( F = U - TS \)</span>, we arrive at:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+T \Delta S_{\text{total}} =  W - \Delta F \geq 0
+\]</div>
+<ul class="simple">
+<li><p>We arrive at reversible work theorem stating that work we do on the system goes into free energy change and the rest dissipated</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Delta F \leq W
+\]</div>
+<ul class="simple">
+<li><p>For spontaneous processes at constant <span class="math notranslate nohighlight">\( T \)</span> and volume (<span class="math notranslate nohighlight">\( W = 0 \)</span>), this simplifies to:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Delta F \leq 0
+\]</div>
+<ul class="simple">
+<li><p>This result shows that minimizing <span class="math notranslate nohighlight">\( F \)</span> governs equilibrium and spontaneous evolution. The key advantage is that we focus only on the system’s free energy <span class="math notranslate nohighlight">\( F \)</span>, avoiding explicit tracking of the entropy changes in the reservoir. This simplification makes free energy a powerful tool in equilibrium thermodynamics and statistical mechanics.</p></li>
+</ul>
 </div>
 </section>
 <section id="free-energies-and-legendre-transforms">
@@ -992,42 +1048,42 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img2397087b888c4ef1b210113d1cc5915b">
+  <img id="_anim_img9f239a8075954ad9b8c60fd154fa42fd">
   <div class="anim-controls">
-    <input id="_anim_slider2397087b888c4ef1b210113d1cc5915b" type="range" class="anim-slider"
+    <input id="_anim_slider9f239a8075954ad9b8c60fd154fa42fd" type="range" class="anim-slider"
            name="points" min="0" max="1" step="1" value="0"
-           oninput="anim2397087b888c4ef1b210113d1cc5915b.set_frame(parseInt(this.value));">
+           oninput="anim9f239a8075954ad9b8c60fd154fa42fd.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim2397087b888c4ef1b210113d1cc5915b.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim2397087b888c4ef1b210113d1cc5915b.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim2397087b888c4ef1b210113d1cc5915b.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim2397087b888c4ef1b210113d1cc5915b.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim2397087b888c4ef1b210113d1cc5915b.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim2397087b888c4ef1b210113d1cc5915b.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim2397087b888c4ef1b210113d1cc5915b.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim2397087b888c4ef1b210113d1cc5915b.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim2397087b888c4ef1b210113d1cc5915b.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim9f239a8075954ad9b8c60fd154fa42fd.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select2397087b888c4ef1b210113d1cc5915b"
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select9f239a8075954ad9b8c60fd154fa42fd"
           class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_2397087b888c4ef1b210113d1cc5915b"
+      <input type="radio" name="state" value="once" id="_anim_radio1_9f239a8075954ad9b8c60fd154fa42fd"
              >
-      <label for="_anim_radio1_2397087b888c4ef1b210113d1cc5915b">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_2397087b888c4ef1b210113d1cc5915b"
+      <label for="_anim_radio1_9f239a8075954ad9b8c60fd154fa42fd">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_9f239a8075954ad9b8c60fd154fa42fd"
              checked>
-      <label for="_anim_radio2_2397087b888c4ef1b210113d1cc5915b">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_2397087b888c4ef1b210113d1cc5915b"
+      <label for="_anim_radio2_9f239a8075954ad9b8c60fd154fa42fd">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_9f239a8075954ad9b8c60fd154fa42fd"
              >
-      <label for="_anim_radio3_2397087b888c4ef1b210113d1cc5915b">Reflect</label>
+      <label for="_anim_radio3_9f239a8075954ad9b8c60fd154fa42fd">Reflect</label>
     </form>
   </div>
 </div>
@@ -1037,9 +1093,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img2397087b888c4ef1b210113d1cc5915b";
-    var slider_id = "_anim_slider2397087b888c4ef1b210113d1cc5915b";
-    var loop_select_id = "_anim_loop_select2397087b888c4ef1b210113d1cc5915b";
+    var img_id = "_anim_img9f239a8075954ad9b8c60fd154fa42fd";
+    var slider_id = "_anim_slider9f239a8075954ad9b8c60fd154fa42fd";
+    var loop_select_id = "_anim_loop_select9f239a8075954ad9b8c60fd154fa42fd";
     var frames = new Array(80);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA+gAAAH0CAYAAACuKActAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -47777,7 +47833,7 @@ Ah0AAAAKINABAACgAH8AQUNPeTJHYF4AAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim2397087b888c4ef1b210113d1cc5915b = new Animation(frames, img_id, slider_id, 100.0,
+        anim9f239a8075954ad9b8c60fd154fa42fd = new Animation(frames, img_id, slider_id, 100.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -47914,7 +47970,7 @@ f(x) = \max_{\alpha} \big[ \alpha x - f^*(\alpha) \big].
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reversible-work-theorem">Reversible Work Theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-minimum-principle">Free Energy Minimum principle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-minimization-principle">Free Energy Minimization principle</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energies-and-legendre-transforms">Free Energies and Legendre Transforms</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-the-legendre-transform"><strong>Visualizing the Legendre Transform</strong></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation-of-legendre-transform">Mathematical Formulation of Legendre Transform</a></li>
