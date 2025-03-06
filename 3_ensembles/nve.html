@@ -490,19 +490,18 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-nve">Microcanonical Ensemble (NVE)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchanging-energy">Exchanging Energy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-a-macrostate-energy-e">Probability of a Macrostate (Energy <span class="math notranslate nohighlight">\( E \)</span>)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Probability of a Macrostate (Energy <span class="math notranslate nohighlight">\( E \)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-a-macrostate">Probability of a Macrostate</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-a-microstate">Probability of a Microstate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-physical-insights"><strong>Key Physical Insights</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-and-fluctuations-in-energy">Average and fluctuations in Energy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble">Example-1: A two-state model in NVE vs NVT ensemble</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-non-interacting-spins">Example-2 Non-interacting spins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nve">NVE</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt">NVT</a></li>
 </ul>
 </li>
@@ -573,7 +572,7 @@ Such a system, however, would consist of a vast number of microstates. The numbe
 <h3>Exchanging Energy<a class="headerlink" href="#exchanging-energy" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Consider a <strong>small system</strong> in thermal contact with a <strong>large reservoir</strong> at temperature <span class="math notranslate nohighlight">\( T \)</span>.</p></li>
-<li><p>The <strong>total system (system + reservoir) is isolated</strong>, meaning the total energy is fixed at <span class="math notranslate nohighlight">\( E_t \)</span>.</p></li>
+<li><p>The <strong>total system (system + reservoir) is isolated</strong>, with a fixed at <span class="math notranslate nohighlight">\( E_t \)</span> hence we have a microcanonical ensemble.</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -592,12 +591,7 @@ Such a system, however, would consist of a vast number of microstates. The numbe
 <li><p><span class="math notranslate nohighlight">\( \Omega_r(E_t - E) \)</span> is the <strong>number of microstates</strong> available to the reservoir when the system has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
 </ul>
 </li>
-</ul>
-</section>
-<section id="probability-of-a-macrostate-energy-e">
-<h3>Probability of a Macrostate (Energy <span class="math notranslate nohighlight">\( E \)</span>)<a class="headerlink" href="#probability-of-a-macrostate-energy-e" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p>The probability of the system being in a <strong>macrostate</strong> (i.e., having energy <span class="math notranslate nohighlight">\( E \)</span>) is:</p>
+<li><p>The probability of the system being in a <strong>macrostate</strong> that is, having energy <span class="math notranslate nohighlight">\(E\)</span> is:</p>
 <div class="math notranslate nohighlight">
 \[
   p(E) = \frac{\Omega(E) \Omega_r(E_t - E)}{\sum_E \Omega(E) \Omega_r(E_t - E)}
@@ -610,21 +604,23 @@ Such a system, however, would consist of a vast number of microstates. The numbe
 <section id="constant-temperature-ensemble-nvt">
 <h2>Constant temperature ensemble (NVT)<a class="headerlink" href="#constant-temperature-ensemble-nvt" title="Permalink to this heading">#</a></h2>
 <ul>
-<li><p>Since the reservoir is <strong>much larger than the system</strong> <span class="math notranslate nohighlight">\( E \ll E_t \)</span>, its entropy is a <strong>smooth function</strong> of energy:</p>
+<li><p>Since the reservoir is <strong>much larger than the system</strong> <span class="math notranslate nohighlight">\( E \ll E_t \)</span>, its entropy or log of microstates is a <strong>smooth function</strong> of energy:</p>
 <div class="math notranslate nohighlight">
-\[log\Omega_r(E_t-E) \approx log\Omega_r(E_t)  - \frac{E}{T} \]</div>
+\[log\Omega_r(E_t-E) \approx log\Omega_r(E_t)  - \frac{\partial log \Omega_r}{\partial E}E = const  - \beta E\]</div>
 </li>
-<li><p>Where the absolaute temperature comes from thermodynamic derivative of ennropy with respect to energy <span class="math notranslate nohighlight">\( \frac{\partial (k_B log \Omega_r)}{\partial E} = \frac{1}{T}\)</span></p></li>
-<li><p>We find that number of microstates of large reservoir decrease exponentially when system borrows energy <span class="math notranslate nohighlight">\(E\)</span></p>
+<li><p>First factor is constnatn independent of energy and the reservoir influence is now only described by the coefficient which is related to temperature!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\beta  = \frac{1}{k_B}\frac{dS}{dE}=\frac{1}{k_BT}\]</div>
+<ul class="simple">
+<li><p>We find that number of microstates of large reservoir decrease exponentially when system borrows energy <span class="math notranslate nohighlight">\(E\)</span></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
-  \Omega_r(E_t - E) \sim e^{-E/k_B T}
-  \]</div>
-</li>
-<li><p>The constant factor is independent of <span class="math notranslate nohighlight">\( E \)</span> and cancels in the ratio.</p></li>
-</ul>
-<section id="id1">
-<h3>Probability of a Macrostate (Energy <span class="math notranslate nohighlight">\( E \)</span>)<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+\Omega_r(E_t - E) \sim e^{- \beta E}
+\]</div>
+<section id="probability-of-a-macrostate">
+<h3>Probability of a Macrostate<a class="headerlink" href="#probability-of-a-macrostate" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
   p(E) = \frac{\Omega(E) e^{-\beta E}}{Z}
@@ -634,7 +630,7 @@ Such a system, however, would consist of a vast number of microstates. The numbe
   Z = \sum_E \Omega(E) e^{-\beta E}
   \]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(Z\)</span> is called a <strong>partition function</strong> which is sum over all  macrostates (i.e., the system having energy <span class="math notranslate nohighlight">\( E \)</span>  weighted by <span class="math notranslate nohighlight">\( e^{-\beta E} \)</span></p></li>
+<li><p>Factor <span class="math notranslate nohighlight">\(Z\)</span> keeps the ration normalized is called a <strong>partition function</strong> which is sum over all  macrostates (i.e., the system having energy <span class="math notranslate nohighlight">\( E \)</span>  weighted by <span class="math notranslate nohighlight">\( e^{-\beta E} \)</span>.</p></li>
 </ul>
 </section>
 <section id="probability-of-a-microstate">
@@ -650,28 +646,7 @@ Such a system, however, would consist of a vast number of microstates. The numbe
 <div class="math notranslate nohighlight">
 \[ Z = \sum_i e^{-\beta E_i} \]</div>
 <ul class="simple">
-<li><p>Where  is the <strong>partition function</strong>, is now sum over all microstates weighted by <span class="math notranslate nohighlight">\(e^{-\beta E_i}\)</span></p></li>
-</ul>
-</section>
-<section id="key-physical-insights">
-<h3><strong>Key Physical Insights</strong><a class="headerlink" href="#key-physical-insights" title="Permalink to this heading">#</a></h3>
-<p><strong>Microstate vs. Macrostate:</strong></p>
-<ul class="simple">
-<li><p>A <strong>macrostate</strong> is specified by an energy <span class="math notranslate nohighlight">\( E \)</span>, and its probability depends on both <span class="math notranslate nohighlight">\( e^{-\beta E} \)</span> and the number of microstates <span class="math notranslate nohighlight">\( \Omega(E) \)</span>.</p></li>
-<li><p>A <strong>microstate</strong> is a specific configuration at energy <span class="math notranslate nohighlight">\( E \)</span>, with probability given by the Boltzmann factor <span class="math notranslate nohighlight">\( e^{-\beta E_i} \)</span>.</p></li>
-</ul>
-<p><strong>Why does <span class="math notranslate nohighlight">\( e^{-\beta E} \)</span> appear?</strong></p>
-<ul class="simple">
-<li><p>Higher-energy macrostates are <strong>less probable</strong> because they leave <strong>fewer microstates available to the reservoir</strong> (which reduces <span class="math notranslate nohighlight">\( \Omega_r \)</span>).</p></li>
-</ul>
-<p><strong>Role of the Partition Function <span class="math notranslate nohighlight">\( Z \)</span></strong></p>
-<ul class="simple">
-<li><p>It ensures that <strong>probabilities sum to 1</strong> and encodes all thermodynamic information about the system.</p></li>
-</ul>
-<p><strong><span class="math notranslate nohighlight">\(\beta\)</span> and kT (energy)</strong></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(kT\)</span> (also written as <span class="math notranslate nohighlight">\(k_BT\)</span>) or its inverse <span class="math notranslate nohighlight">\(\beta =(k_BT)^{-1}\)</span> contain a product of the Boltzmann constant <span class="math notranslate nohighlight">\(k_B\)</span> and the temperature, T.</p></li>
-<li><p>This product is used as a scale factor for energy values in molecular-scale systems (sometimes it is used as a unit of energy), as the rates and frequencies of many processes and phenomena depend not on their energy alone but on the ratio of that energy and kT.</p></li>
+<li><p>The <strong>partition function</strong>, is now sum over all microstates weighted by <span class="math notranslate nohighlight">\(e^{-\beta E_i}\)</span></p></li>
 </ul>
 </section>
 </section>
@@ -779,6 +754,9 @@ Let us consider a simple two-level system where lower level <span class="math no
 \[\langle E \rangle  = \frac{\partial log Z}{\partial (-\beta)} =  \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
 <section id="example-2-non-interacting-spins">
 <h3>Example-2 Non-interacting spins<a class="headerlink" href="#example-2-non-interacting-spins" title="Permalink to this heading">#</a></h3>
+</section>
+<section id="nve">
+<h3>NVE<a class="headerlink" href="#nve" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Consider a single spin atom under an external magnetic field <span class="math notranslate nohighlight">\(B\)</span>. The system can be in two states with energy <span class="math notranslate nohighlight">\(\epsilon = −m_z B\)</span> where <span class="math notranslate nohighlight">\(m_z=\pm \mu\)</span> is the spin magnetic number and <span class="math notranslate nohighlight">\(\mu\)</span> magnetic moment of the spin. Generalizing to N spins is straightforward</p></li>
 <li><p><span class="math notranslate nohighlight">\(N= N_{\uparrow} + N_{\downarrow}\)</span> <strong>total number of spins</strong></p></li>
@@ -935,19 +913,18 @@ Let us consider a simple two-level system where lower level <span class="math no
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-nve">Microcanonical Ensemble (NVE)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchanging-energy">Exchanging Energy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-a-macrostate-energy-e">Probability of a Macrostate (Energy <span class="math notranslate nohighlight">\( E \)</span>)</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Probability of a Macrostate (Energy <span class="math notranslate nohighlight">\( E \)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-a-macrostate">Probability of a Macrostate</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-a-microstate">Probability of a Microstate</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-physical-insights"><strong>Key Physical Insights</strong></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-and-fluctuations-in-energy">Average and fluctuations in Energy</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble">Example-1: A two-state model in NVE vs NVT ensemble</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-non-interacting-spins">Example-2 Non-interacting spins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nve">NVE</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt">NVT</a></li>
 </ul>
 </li>
