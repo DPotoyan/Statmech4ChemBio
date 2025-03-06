@@ -489,18 +489,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamics">Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-omega-using-quantum-mechanics">Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using quantum mechanics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-collection-of-up-down-spins">A collection of up/down spins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-and-kt-energy"><span class="math notranslate nohighlight">\(\beta\)</span> and kT (energy)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-limit-and-partition-functions">Thermodynamic limit and partition functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-and-fluctuations-in-energy">Average and fluctuations in Energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble">Example-1: A two-state model in NVE vs NVT ensemble</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-non-interacting-spins">Example-2 Non-interacting spins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt">NVT</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monoatomic-ideal-gas">Monoatomic ideal gas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-density-of-states-of-an-ideal-gas">Classical density of states of an ideal gas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-mechanical-and-chemical-equilibrium">Thermal, Mechanical and chemical equilibrium</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-thermal-contact-between-two-ideal-gases">Example: thermal contact between two ideal gases</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equations-of-state-for-ideal-gas">Equations of state for ideal gas</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quasistatic-process-and-irreversibility">Quasistatic process and Irreversibility</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shottky-defects">Shottky defects</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lattice-gas">Lattice gas</a></li>
@@ -559,11 +555,180 @@ Such a system, however, would consist of a vast number of microstates. The numbe
 <li><p><span class="math notranslate nohighlight">\(k_B =1.380649\cdot 10^{-23} J/K\)</span>,  Boltzmann’s constant</p></li>
 </ul>
 </div>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>An intuitive derivation of Boltzmann distribution</strong></p>
+<p><strong>Probability of macrostates</strong></p>
+<ul class="simple">
+<li><p>Consider a system in contact with the thermal reservoir. The combined system is isolated, which means we can write down the NVE partition function as a sum over different ways of partitioning total energy between the system and the reservoir.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Omega_{t}(E_t) = \sum_E \Omega(E) \Omega_r(E-E) \cdot\]</div>
+<ul class="simple">
+<li><p>The probability of being in any thermodynamic <strong>macrostate</strong>  described by energy <span class="math notranslate nohighlight">\(E\)</span> will be given by the ratio of one term over all possible partitionings of energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E) = \frac{\Omega(E) \Omega_r(E_t-E) }{\sum_E \Omega(E) \Omega_r(E_t-E) }\]</div>
+<p><strong>Reservoir is much larger than the system</strong></p>
+<ul class="simple">
+<li><p>We can take advantage of the fact that the system <span class="math notranslate nohighlight">\(E_t \sim E_r \ll E\)</span> is small compared to the reservoir. We can expand entropy in the exponent of partition function <span class="math notranslate nohighlight">\(\Omega_r = e^{S_r/k_B}\)</span> which is a smoothly varying function of energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S_r(E_t-E)  \approx S_r(E_t)- \Big(\frac{\partial S_r}{\partial E}\Big) E =  S_r(E_t)- \frac{1}{T} E\]</div>
+<ul class="simple">
+<li><p>The constant reservoir term  ends up canceling out from the ratio!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p(E) = \frac{ \Omega(E)  e^{\frac{1}{k_B}S(E_t)} e^{-\beta E} }{\sum_E \Omega(E) e^{\frac{1}{k_B}S(E_t)}  e^{-\beta E}} = \frac{ \Omega(E)  e^{-\beta E} }{\sum_E \Omega(E)  e^{-\beta E}}\]</div>
+<ul class="simple">
+<li><p>We can also write down the probability of a single specific microstate <span class="math notranslate nohighlight">\(E=E_i\)</span> for which <span class="math notranslate nohighlight">\(\Omega(E_i)=1\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p_i = \frac{ e^{-\beta E_i} }{\sum_i e^{-\beta E_i}}\]</div>
+<p><strong>Connection with Thermodynamics</strong></p>
+<ul class="simple">
+<li><p>Let us now connect the entropy of the whole system to entropy in thermodynamics. Recall that in thermodynamics, entropy is an extensive quantity, meaning that total entropy should be expressed as the sum of entropies of system+reservoir. This is possible only if the sum of the <span class="math notranslate nohighlight">\(\Omega_t(E_t)\)</span> expression is sharply dominated by a single term that is centered on some (average) value of energy <span class="math notranslate nohighlight">\(U\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S_t(E_t) = k_B log \sum_E \Omega(E) \Omega_r(E_t-E) \approx k_B log \Omega(U)+k_B log \Omega_r(E_t-U) = S(U) + S_r(E_t-U)\]</div>
+<div class="math notranslate nohighlight">
+\[Z = \sum_E \Omega(E) e^{-\beta E} \approx \Omega (U) e^{-\beta U} = e^{-\beta(U-TS)} = e^{-\beta F}\]</div>
+<ul class="simple">
+<li><p>We see that the reservoir’s contribution to the distribution of energy in the system is only through temperature!</p></li>
+<li><p>We could also carry our similar derivation by expanding reservoir entropy around the average energy of the system  <span class="math notranslate nohighlight">\(U = \sum_i p_i E_i\)</span> by making use of the central limit theorem, which predicts small fluctuations around averages <span class="math notranslate nohighlight">\(U - E_i = \delta E_i \sim O(N^{1/2})\)</span></p></li>
+</ul>
+</div>
 </section>
-<section id="computing-number-of-microstates-omega-using-quantum-mechanics">
-<h2>Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using quantum mechanics<a class="headerlink" href="#computing-number-of-microstates-omega-using-quantum-mechanics" title="Permalink to this heading">#</a></h2>
-<section id="a-collection-of-up-down-spins">
-<h3>A collection of up/down spins<a class="headerlink" href="#a-collection-of-up-down-spins" title="Permalink to this heading">#</a></h3>
+<section id="beta-and-kt-energy">
+<h2><span class="math notranslate nohighlight">\(\beta\)</span> and kT (energy)<a class="headerlink" href="#beta-and-kt-energy" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(kT\)</span> (also written as <span class="math notranslate nohighlight">\(k_BT\)</span>) or its inverse <span class="math notranslate nohighlight">\(\beta =(k_BT)^{-1}\)</span> contain a product of the Boltzmann constant <span class="math notranslate nohighlight">\(k_B\)</span> and the temperature, T.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p_i \sim e^{-E_i/k_BT} = e^{-\beta E_i}\]</div>
+<ul class="simple">
+<li><p>This product is used as a scale factor for energy values in molecular-scale systems (sometimes it is used as a unit of energy), as the rates and frequencies of many processes and phenomena depend not on their energy alone but on the ratio of that energy and kT.</p></li>
+</ul>
+</section>
+<section id="thermodynamic-limit-and-partition-functions">
+<h2>Thermodynamic limit and partition functions<a class="headerlink" href="#thermodynamic-limit-and-partition-functions" title="Permalink to this heading">#</a></h2>
+<p><strong>Partition functions</strong></p>
+<ul class="simple">
+<li><p>Recall that we counted microstates with equal weights <span class="math notranslate nohighlight">\(\Omega\)</span> in NVE. In other words, states were equipartitioned.</p></li>
+<li><p>In NVT, states are weighted by exponential factors. In other words, low-energy states contribute more than high-energy states. The situation is more severe at low temperatures where only ground states contribute to thermodynamics.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Omega = \sum_i w_i = \sum_i 1\]</div>
+<div class="math notranslate nohighlight">
+\[Z(\beta) = \sum_i w_i = \sum_i e^{-\beta E_i}\]</div>
+<p><strong>Sum over microstates or macrostates</strong></p>
+<ul class="simple">
+<li><p>Partition function Z can be written down as a sum of microstates or macrostates. Since Energies of macrosystems vary smoothly we can also replace the sum as integral over energies</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z(\beta, N, V) = \sum_i e^{-\beta E_i}= \sum_E \Omega (E) e^{-\beta E} = \int \Omega(E) e^{-\beta E}dE\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Omega(E)\sim e^N\)</span> rapidly increasing function with N because of limit theorems: e.g., the large deviation, central limit theorem, law of large numbers.</p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{-\beta E}\sim e^{-N}\)</span> rapidly decreasing function with N</p></li>
+</ul>
+<p><strong>Connection with Free energy</strong></p>
+<ul class="simple">
+<li><p>In the thermodynamic limit of a large number of particles and volumes, only the region of energy survives that guarantees a non-negligible contribution to the partition function</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[{Z(\beta) = \int \Omega(E) e^{-\beta E}dE = \int e^{-\beta (E-T S(E))}dE }\]</div>
+<div class="math notranslate nohighlight">
+\[{Z(\beta) = \int e^{-\beta (E-TS)}dE \approx e^{min_E [-\beta(E-TS)]} = e^{-\beta(U-TS)} = e^{-\beta F}}\]</div>
+<ul class="simple">
+<li><p>Where <span class="math notranslate nohighlight">\(U =\langle E \rangle\)</span> is the thermodynamic average energy, fluctuations around which are on the order of <span class="math notranslate nohighlight">\(O(N^{1/2})\)</span></p></li>
+<li><p>It can be seen that <span class="math notranslate nohighlight">\(Z\)</span>, the partition function of NVT is <strong>Laplace Transform</strong> of the density of states of NVE.</p></li>
+<li><p>The connection between energy and free energy <span class="math notranslate nohighlight">\(F= U -TS\)</span> is via <strong>Legendre Transform</strong></p></li>
+</ul>
+</section>
+<section id="average-and-fluctuations-in-energy">
+<h2>Average and fluctuations in Energy<a class="headerlink" href="#average-and-fluctuations-in-energy" title="Permalink to this heading">#</a></h2>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>Deriving average and fluctuation expression for energy</strong></p>
+<p><strong>Average Energy</strong></p>
+<ul class="simple">
+<li><p>Having determined probability distribution over microstates, we can calculate the mean value of energy, which corresponds to the energy in thermodynamics.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \langle E \rangle = \sum_{i} P_i E_i \]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(P_i = \frac{e^{-\beta E_i}}{Z}\)</span> is the probability of the system being in state <span class="math notranslate nohighlight">\(i\)</span>. Plugging the expression of <span class="math notranslate nohighlight">\(P_i\)</span> we get</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \langle E \rangle = \sum_{i} \frac{e^{-\beta E_i}}{Z} E_i = \frac{1}{Z} \sum_{i} E_i e^{-\beta E_i} = \frac{1}{Z} \frac{\partial}{\partial (-\beta)} \sum_{i} e^{-\beta E_i} =\frac{1}{Z} \frac{\partial}{\partial (-\beta)} Z =   - \frac{\partial log Z}{\partial \beta}\]</div>
+<ul class="simple">
+<li><p>We thus find that <span class="math notranslate nohighlight">\( \langle E \rangle\)</span> can be obtained by taking the derivative of <span class="math notranslate nohighlight">\(-\log Z\)</span> with respect to <span class="math notranslate nohighlight">\(\beta\)</span>:</p></li>
+</ul>
+<p><strong>Heat Capacity</strong></p>
+<ul class="simple">
+<li><p>The heat capacity at constant volume <span class="math notranslate nohighlight">\(C_V\)</span> is defined as the derivative of the average energy with respect to temperature:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ C_V = \left( \frac{\partial \langle E \rangle}{\partial T} \right)_V \]</div>
+<ul class="simple">
+<li><p>Using the chain rule, <span class="math notranslate nohighlight">\(C_V\)</span> can be expressed as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ C_V = \frac{\partial \langle E \rangle}{\partial \beta} \frac{\partial \beta}{\partial T} \]</div>
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(\beta = \frac{1}{k_B T}\)</span>, we have <span class="math notranslate nohighlight">\(\frac{\partial \beta}{\partial T} = -\frac{1}{k_B T^2}\)</span>. taking the derivative of <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> with respect to <span class="math notranslate nohighlight">\(\beta\)</span> gives:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \langle E \rangle}{\partial \beta} = \frac{\partial}{\partial \beta} \left( -\frac{1}{Z} \frac{\partial Z}{\partial \beta} \right) \]</div>
+<ul class="simple">
+<li><p>Simplifying this derivative and substituting <span class="math notranslate nohighlight">\(\frac{\partial \beta}{\partial T}\)</span> yields the heat capacity:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ C_V = -k_B \beta^2 \frac{\partial^2 \ln Z}{\partial \beta^2} \]</div>
+</div>
+<ul class="simple">
+<li><p>Mean and fluctuation of energy are computed from partition function as first and second derivatives (see derivation above)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle = -\frac{\partial log Z}{\partial (\beta)}\]</div>
+<ul class="simple">
+<li><p>The relationship between fluctuations and heat capacity is known as <strong>fluctuation-response theorem</strong> in statistical mechanics</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\sigma^2_E = \frac{\partial^2 log Z}{\partial \beta^2}  = k_BT^2 C_v\]</div>
+<ul class="simple">
+<li><p>The fluctuations in energy are small relative to the mean. This shows that thermodynamic quantities computed in NVE and NVT should not differ in the thermodynamic limit of large systems! Thus, we are free to choose any convenient ensemble if we want to calculate, let’s say, temperature dependence on entropy.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\sigma_E}{\langle E\rangle} = \frac{(k_BT^2 C_v)^{1/2}}{\langle E\rangle}\sim O(N^{-1/2})\]</div>
+</section>
+<section id="example-1-a-two-state-model-in-nve-vs-nvt-ensemble">
+<h2>Example-1: A two-state model in NVE vs NVT ensemble<a class="headerlink" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>NVE</strong>
+Let us consider a simple two-level system where lower level <span class="math notranslate nohighlight">\(\epsilon_0 = 0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon_1 =\epsilon\)</span>. We will now use <span class="math notranslate nohighlight">\(NVE\)</span> ensemble to obtain thermodynamic quantities <span class="math notranslate nohighlight">\((S, T, C_v)\)</span> and then obtain the same quantities with <span class="math notranslate nohighlight">\(NVT\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E = n\epsilon\]</div>
+<div class="math notranslate nohighlight">
+\[\Omega(E) = \frac{N!}{(N-n)! n!}\]</div>
+<div class="math notranslate nohighlight">
+\[S = k_B log \Omega(E) = N k_B \Big [- \frac{n}{N}log \frac{n}{N} - \frac{N-n}{N}log \frac{N-n}{N} \Big]\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{1}{T} = \frac{\partial S(E)}{\partial E} =  \frac{k_B}{\epsilon}\frac{\partial log\Omega(n)}{\partial  n} = \frac{k_B}{\epsilon}log \frac{N-n}{N}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{n}{N} = \frac{1}{1+e^{\beta \epsilon}}\]</div>
+<div class="math notranslate nohighlight">
+\[E = n\epsilon = \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
+<ul class="simple">
+<li><p><strong>NVT</strong> Solving a two-state system in an NVT ensemble is much easier because the partition function decouples into single particle contributions.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z = \sum^{n=N}_{n=0} e^{-\beta E_n}  = (1+e^{-\beta \epsilon})^N\]</div>
+<div class="math notranslate nohighlight">
+\[F= -k_B T log Z = -k_BT N log(1+e^{-\beta \epsilon})\]</div>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle  = \frac{\partial log Z}{\partial (-\beta)} =  \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
+<section id="example-2-non-interacting-spins">
+<h3>Example-2 Non-interacting spins<a class="headerlink" href="#example-2-non-interacting-spins" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Consider a single spin atom under an external magnetic field <span class="math notranslate nohighlight">\(B\)</span>. The system can be in two states with energy <span class="math notranslate nohighlight">\(\epsilon = −m_z B\)</span> where <span class="math notranslate nohighlight">\(m_z=\pm \mu\)</span> is the spin magnetic number and <span class="math notranslate nohighlight">\(\mu\)</span> magnetic moment of the spin. Generalizing to N spins is straightforward</p></li>
 <li><p><span class="math notranslate nohighlight">\(N= N_{\uparrow} + N_{\downarrow}\)</span> <strong>total number of spins</strong></p></li>
@@ -575,7 +740,7 @@ Such a system, however, would consist of a vast number of microstates. The numbe
 <div class="math notranslate nohighlight">
 \[\Omega(N, N_{\uparrow}) = \frac{N!}{N_{\uparrow}! N_{\downarrow}!}  = \frac{N!}{[1/2(N+M)!] [1/2(N-M)!]}\]</div>
 <div class="math notranslate nohighlight">
-\[\boxed{\Omega (E,N)= \frac{N!}{\Big[\frac{1}{2}(N-E/B\mu)\Big]! \Big[\frac{1}{2}(N+E/B\mu)\Big]!}}\]</div>
+\[{\Omega (E,N)= \frac{N!}{\Big[\frac{1}{2}(N-E/B\mu)\Big]! \Big[\frac{1}{2}(N+E/B\mu)\Big]!}}\]</div>
 <div class="math notranslate nohighlight">
 \[S = Nk_B \Big[log 2 - \frac{1}{2}log(1-m^2)-\frac{m}{2} log \frac{1+m}{1-m} \Big]\]</div>
 <ul class="simple">
@@ -589,92 +754,35 @@ Such a system, however, would consist of a vast number of microstates. The numbe
 <div class="math notranslate nohighlight">
 \[m = tanh \Big(\frac{\mu B}{k_B T} \Big)\]</div>
 </section>
+<section id="nvt">
+<h3>NVT<a class="headerlink" href="#nvt" title="Permalink to this heading">#</a></h3>
+<p><strong>Partition function of a single spin</strong></p>
+<div class="math notranslate nohighlight">
+\[Z_1 = \sum_{s_1} e^{\beta \mu B s_1} = e^{\beta \mu B} + e^{-\beta \mu B}  = 2 cosh(\beta \mu B)\]</div>
+<p><strong>Partition function of N spins</strong></p>
+<div class="math notranslate nohighlight">
+\[Z =Z_1^N\]</div>
+<p><strong>Free energy</strong></p>
+<div class="math notranslate nohighlight">
+\[ F(T, B) = - \beta^{-1} log Z = - N \beta^{-1} log \Big [ 2 cosh (\beta \mu B )  \Big ]\]</div>
+<p><strong>Entropy</strong></p>
+<div class="math notranslate nohighlight">
+\[S = - \Big(\frac{\partial F}{\partial T} \Big)_B = k_B log \Big [ 2 cosh (\beta \mu H )  \Big ] - k_B (\beta \mu B)\cdot tanh (\beta \mu B)\]</div>
+<p><strong>Magnetization</strong></p>
+<p>Magnetization <span class="math notranslate nohighlight">\(M\)</span> (extensive quantity) or magnetization per particle <span class="math notranslate nohighlight">\(m=M/N\)</span> (intensive quantity) is given as another free energy derivative:</p>
+<div class="math notranslate nohighlight">
+\[M = - \Big(\frac{\partial F}{\partial B} \Big)_T = \mu tanh \Big(\beta \mu B \Big)\]</div>
+<p><strong>Magnetizatic susceptibility</strong></p>
+<p>In the context of paramagnet, we have another response function in the form of magnetic susceptibility.</p>
+<div class="math notranslate nohighlight">
+\[\chi(T, B) =  \Big(\frac{\partial m}{\partial B} \Big)_T = \mu^2 \beta B cosh^{-2} (\beta \mu B)\]</div>
+<p>which leads to a well-known <strong>Curie Law</strong></p>
+<div class="math notranslate nohighlight">
+\[\chi(T, B=0) = \frac{\mu^2 }{k_B T}\]</div>
+<p>Finally, as a consistency check we can combine entropy and free energy expressions to obtain internal energy:</p>
+<div class="math notranslate nohighlight">
+\[U = F+TS = -\mu B tanh(\beta \mu B)\]</div>
 </section>
-<section id="monoatomic-ideal-gas">
-<h2>Monoatomic ideal gas<a class="headerlink" href="#monoatomic-ideal-gas" title="Permalink to this heading">#</a></h2>
-<p><strong>Quantum density of states of an ideal gas</strong></p>
-<p><img alt="" src="../_images/pib-states.png" /></p>
-<div class="math notranslate nohighlight">
-\[E({\bf n}) = \frac{h^2}{8mL^2} {\bf n^2}\]</div>
-<div class="math notranslate nohighlight">
-\[\Omega(N,V, E) = \int_{E(n)=E} dn = \frac{C_{3N-1}}{2^{3N}} \int \delta \Big(\frac{(8mE)^{1/2}L}{h}-{\bf n}  \Big) d {\bf n}\]</div>
-<ul class="simple">
-<li><p>A sum over all total quantum number of N 3D particles in a box ends up being a problem of finding the volume of an N-dimensional sphere</p></li>
-</ul>
-<p><strong>Classical density of states of an ideal gas</strong></p>
-<div class="math notranslate nohighlight">
-\[H(p,q) =\frac{p^2}{2m} = E\]</div>
-<div class="math notranslate nohighlight">
-\[{\Omega(E) = \frac{1}{N! h^{3N}}\int_{p^N,q^N} dp^N dq^N \delta(H(p,q) -E) =\frac{V^N}{N! h^{3N}} \int dp^N \delta(p^2/2m -E)}\]</div>
-<div class="math notranslate nohighlight">
-\[ \Omega(E) = \frac{V^N}{N! h^{3N}} \delta V(R)\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\delta V(R)\)</span> is a volume of a spherical shell with radius <span class="math notranslate nohighlight">\(R = (2mE)^{1/2}\)</span> and thickness <span class="math notranslate nohighlight">\(\delta R = 1/2 (2m/E)^{1/2} \delta E\)</span></p>
-<p><strong>Volume of a sphere in N dimesnional space</strong></p>
-<div class="math notranslate nohighlight">
-\[V(R) = \frac{\pi^{D/2}}{(D/2)!} R^D\]</div>
-<p>For <span class="math notranslate nohighlight">\(D\rightarrow \infty\)</span> we discover that most of the volume of the sphere is concentrated at its surface!
-<br></p>
-<div class="math notranslate nohighlight">
-\[\delta V(R) = V(R) -V(R-\delta R) = C [R^D - (R-\delta R)^D] = CR^D [1-(1- (\delta R/R)^D)] = CR^D = V(R)\]</div>
-</section>
-<section id="classical-density-of-states-of-an-ideal-gas">
-<h2>Classical density of states of an ideal gas<a class="headerlink" href="#classical-density-of-states-of-an-ideal-gas" title="Permalink to this heading">#</a></h2>
-<div class="math notranslate nohighlight">
-\[\boxed{\Omega(E) = \frac{V^N}{h^{3N} N!} \cdot \frac{(2m\pi E)^{3N/2}}{(3N/2)!}}\]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{ S = log \Omega(E) = k_B N \cdot  \Big [ log \Big(\frac{V}{N \lambda^3}\Big) + \frac{5}{2}\Big]}\]</div>
-<ul class="simple">
-<li><p>Note linear dependence on N. Entropy is an extensive quantity!</p></li>
-<li><p>exponent 3/2 reflexts that each particle has 3 degrees of freedom</p></li>
-<li><p><span class="math notranslate nohighlight">\(\lambda = \Big(\frac{3h^2 N}{4\pi m E}\Big)^{1/2}\)</span> thermal de Broglie wavelength.</p></li>
-<li><p>This result know as “Sackur Tetrode equation” was known long before statistical mechanics.</p></li>
-</ul>
-</section>
-<section id="thermal-mechanical-and-chemical-equilibrium">
-<h2>Thermal, Mechanical and chemical equilibrium<a class="headerlink" href="#thermal-mechanical-and-chemical-equilibrium" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>The number of microstate for a system consisting of two parts can be written as a sum of all posisble energy partitionings among the two states.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\Omega(E) = \sum_{E_1} \Omega_1(E_1) \Omega_2 (E-E_1) \approx \Omega_1(U_1) \Omega_2 (E-U_1)\]</div>
-<ul class="simple">
-<li><p>Since <span class="math notranslate nohighlight">\(\Omega(E)\)</span> is a sharply increasing function of energy we expect the maximum term for some energy <span class="math notranslate nohighlight">\(E_1=U_1\)</span>  to dominate the sum. Let us find what state this maximum value should correspond to?</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\frac{\partial log \Omega (E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{\partial log\Omega_1(E_1)}{\partial E_1} - \frac{\partial log\Omega(E_2)}{\partial E_2}=0\]</div>
-<section id="example-thermal-contact-between-two-ideal-gases">
-<h3>Example: thermal contact between two ideal gases<a class="headerlink" href="#example-thermal-contact-between-two-ideal-gases" title="Permalink to this heading">#</a></h3>
-<p>Recall that for ideal gas we have <span class="math notranslate nohighlight">\(\Omega(E) = C V^N E^{3/2 N}\)</span>.  Therefore for an ideal gas we will have:</p>
-<div class="math notranslate nohighlight">
-\[\frac{\partial log \Omega (E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{3}{2}\frac{N_1}{U_1} - \frac{3}{2}\frac{N_2}{U_2} = 0\]</div>
-<p>Using definition of entropy we get the most probable value of energy <span class="math notranslate nohighlight">\((U_1)\)</span> corresponding to the equilibirum state</p>
-<div class="math notranslate nohighlight">
-\[\frac{1}{k_B T} = \frac{3}{2}\frac{N_1}{U_1} = \frac{3}{2}\frac{N_2}{U_2}\]</div>
-</section>
-<section id="equations-of-state-for-ideal-gas">
-<h3>Equations of state for ideal gas<a class="headerlink" href="#equations-of-state-for-ideal-gas" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[\frac{1}{T} = \frac{\partial S}{\partial E} = \frac{3}{2}k_B \frac{N}{E}\]</div>
-<br>
-<div class="math notranslate nohighlight">
-\[\frac{p}{T} =  \frac{\partial S}{\partial V} = k_B N \frac{1}{V}\]</div>
-<br>
-<div class="math notranslate nohighlight">
-\[\frac{\mu}{T} = -\frac{\partial S}{\partial N} = k_B T \cdot log \frac{N}{V} \lambda^3\]</div>
-</section>
-</section>
-<section id="quasistatic-process-and-irreversibility">
-<h2>Quasistatic process and Irreversibility<a class="headerlink" href="#quasistatic-process-and-irreversibility" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>From the NVE ensemble reasoning, we can now state that a quasistatic process corresponds to a process that does not change in the number of microstates. That is removal of a constraint keeps the “volume” of microstates intact.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\Delta S = k_B log \frac{\Omega_f}{\Omega_i} = 0\]</div>
-<ul class="simple">
-<li><p>On the other hand, once the number of microstates grows upon removal of a constraint, then re-instating the constraint will not shrink the “volume” of microstate space.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\Delta S = k_B log \frac{\Omega_f}{\Omega_i} &gt; 0\]</div>
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
@@ -776,18 +884,14 @@ Such a system, however, would consist of a vast number of microstates. The numbe
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boltzmanns-equation-a-bridge-between-microscopic-dynamics-and-macroscopic-thermodynamics">Boltzmann’s equation: “A bridge” between microscopic dynamics and macroscopic thermodynamics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-number-of-microstates-omega-using-quantum-mechanics">Computing number of microstates <span class="math notranslate nohighlight">\(\Omega\)</span> using quantum mechanics</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-collection-of-up-down-spins">A collection of up/down spins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-and-kt-energy"><span class="math notranslate nohighlight">\(\beta\)</span> and kT (energy)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-limit-and-partition-functions">Thermodynamic limit and partition functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-and-fluctuations-in-energy">Average and fluctuations in Energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble">Example-1: A two-state model in NVE vs NVT ensemble</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-non-interacting-spins">Example-2 Non-interacting spins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt">NVT</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monoatomic-ideal-gas">Monoatomic ideal gas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-density-of-states-of-an-ideal-gas">Classical density of states of an ideal gas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-mechanical-and-chemical-equilibrium">Thermal, Mechanical and chemical equilibrium</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-thermal-contact-between-two-ideal-gases">Example: thermal contact between two ideal gases</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equations-of-state-for-ideal-gas">Equations of state for ideal gas</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quasistatic-process-and-irreversibility">Quasistatic process and Irreversibility</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shottky-defects">Shottky defects</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lattice-gas">Lattice gas</a></li>
