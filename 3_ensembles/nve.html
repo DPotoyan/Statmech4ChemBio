@@ -494,7 +494,8 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-and-fluctuations-in-energy">Average and fluctuations in Energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-average-energy-and-fluctuations"><strong>Derivation of Average Energy and Fluctuations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble">Example-1: A two-state model in NVE vs NVT ensemble</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-non-interacting-spins">Example-2 Non-interacting spins</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nve">NVE</a></li>
@@ -520,26 +521,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ensemble-equivalence">
 <h1>Ensemble equivalence<a class="headerlink" href="#ensemble-equivalence" title="Permalink to this heading">#</a></h1>
-<div class="admonition-what-you-need-to-know admonition">
-<p class="admonition-title">What you need to know</p>
+<div class="admonition-what-you-will-learn admonition">
+<p class="admonition-title"><strong>What you will learn</strong></p>
 <ul class="simple">
-<li><p>Understand that the essence of equilirbium statistical mechanics is connecting thermodynamics operating at macroscopic scales with the microscopic states of atoms and molecules.</p></li>
-<li><p>The macro-to-micro connection is established using probability arguments with <strong>Entropy</strong> playing the central role (Boltzmann equation)
-From the thermodynamics point of view, an isolated system with N particles, fixed volume, and Energy is a single macrostate.
-Such a system, however, would consist of a vast number of microstates. The number can be quantified for some simple systems analytically but is generally intractable even using computers!</p></li>
-<li><p>In StatMech we replace the dynamics of N particle system with an ensemble of all possible microstates that the system can be consistent with a macrostate (NVE).</p></li>
-<li><p>Ensemble essentially gives us a probability distribution over microstates, which allows the calculation of Entropy.</p></li>
-<li><p>Through entropy, all kinds of substance-specific thermodynamic quantities can be computed from the first principles.</p></li>
-<li><p>E.g., heat capacities, magnetic susceptibilities, free energy differences. These quantities serve as an input for thermodynamics because thermodynamics does not refer to the microscopic world.</p></li>
-<li><p>Thermodynamics while agnostic to atomic details is an exact theory. Predictions of statistical mechanics must obey the rules of thermodynamics.</p></li>
+<li><p><strong>Statistical Ensembles</strong>: Understanding the role of ensembles in statistical mechanics and how they describe macroscopic systems using probability distributions.</p></li>
+<li><p><strong>Microcanonical Ensemble (NVE)</strong>: Definition, characteristics, and assumptions—fixed energy, volume, and particle number; statistical weight of microstates.</p></li>
+<li><p><strong>Equivalence of Ensembles</strong>: Conditions under which the microcanonical and canonical ensembles give equivalent thermodynamic predictions in the thermodynamic limit.</p></li>
+<li><p><strong>Canonical Ensemble (NVT)</strong>: Definition and significance—fixed temperature, volume, and particle number; derivation of the Boltzmann factor.</p></li>
+<li><p><strong>Partition Function (<span class="math notranslate nohighlight">\(Z\)</span>)</strong>: Role of the partition function in statistical mechanics, its connection to thermodynamic properties (free energy, entropy, internal energy).</p></li>
+<li><p><strong>Boltzmann Distribution</strong>: Probability of a system being in a given energy state at equilibrium, leading to macroscopic observables.</p></li>
+<li><p><strong>Thermodynamic Connections</strong>: How ensemble averages link to macroscopic properties such as energy, entropy, and pressure.</p></li>
+<li><p><strong>Fluctuations and Large System Limits</strong>: How energy fluctuations in the canonical ensemble become negligible for large systems, reinforcing ensemble equivalence.</p></li>
 </ul>
 </div>
 <p><img alt="" src="../_images/ensembl.png" /></p>
 <section id="microcanonical-ensemble-nve">
 <h2>Microcanonical Ensemble (NVE)<a class="headerlink" href="#microcanonical-ensemble-nve" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Consider an isolated fluid system with <span class="math notranslate nohighlight">\(N=const\)</span>, <span class="math notranslate nohighlight">\(V=const\)</span> and <span class="math notranslate nohighlight">\(E=const\)</span> which we will refer to as NVE system. What should be the probabilities of configurations observed in the system?</p></li>
-<li><p>It is clear that in the absence of any physical constraints, no states should have higher probabilities than others. This is known as “principle of equal a priory probability”</p></li>
+<li><p>Consider an isolated fluid system with <span class="math notranslate nohighlight">\(N=const\)</span>, <span class="math notranslate nohighlight">\(V=const\)</span> and <span class="math notranslate nohighlight">\(E=const\)</span>. A collection of all possible microscopic arrangements that are consistend with this thermodynamic state is called <strong>microcanonical ensemble</strong></p></li>
+<li><p>In the absence of any physical constraints, no micro state is more probable than any other. This is known as “principle of equal a priory probability”</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -660,61 +660,61 @@ Z \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U - TS)} = e^{-\beta F}
 <li><p><span class="math notranslate nohighlight">\( F = U - TS \)</span> is the <strong>Helmholtz free energy</strong>.</p></li>
 </ul>
 </section>
-<section id="average-and-fluctuations-in-energy">
-<h2>Average and fluctuations in Energy<a class="headerlink" href="#average-and-fluctuations-in-energy" title="Permalink to this heading">#</a></h2>
-<div class="tip dropdown admonition">
-<p class="admonition-title"><strong>Deriving average and fluctuation expression for energy</strong></p>
-<p><strong>Average Energy</strong></p>
+<section id="derivation-of-average-energy-and-fluctuations">
+<h2><strong>Derivation of Average Energy and Fluctuations</strong><a class="headerlink" href="#derivation-of-average-energy-and-fluctuations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Having determined probability distribution over microstates, we can calculate the mean value of energy, which corresponds to the energy in thermodynamics.</p></li>
+<li><p>The probability of the system being in microstate  i  is given by the Boltzmann distribution:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[ \langle E \rangle = \sum_{i} P_i E_i \]</div>
+\[
+P_i = \frac{e^{-\beta E_i}}{Z}, \quad Z = \sum_i e^{-\beta E_i}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\langle E \rangle = \sum_i P_i E_i = \frac{1}{Z} \sum_i E_i e^{-\beta E_i} 
+\]</div>
 <ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\(P_i = \frac{e^{-\beta E_i}}{Z}\)</span> is the probability of the system being in state <span class="math notranslate nohighlight">\(i\)</span>. Plugging the expression of <span class="math notranslate nohighlight">\(P_i\)</span> we get</p></li>
+<li><p>The ensemble average energy can be related to the  derivative of log of partition function:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[ \langle E \rangle = \sum_{i} \frac{e^{-\beta E_i}}{Z} E_i = \frac{1}{Z} \sum_{i} E_i e^{-\beta E_i} = \frac{1}{Z} \frac{\partial}{\partial (-\beta)} \sum_{i} e^{-\beta E_i} =\frac{1}{Z} \frac{\partial}{\partial (-\beta)} Z =   - \frac{\partial log Z}{\partial \beta}\]</div>
-<ul class="simple">
-<li><p>We thus find that <span class="math notranslate nohighlight">\( \langle E \rangle\)</span> can be obtained by taking the derivative of <span class="math notranslate nohighlight">\(-\log Z\)</span> with respect to <span class="math notranslate nohighlight">\(\beta\)</span>:</p></li>
-</ul>
-<p><strong>Heat Capacity</strong></p>
-<ul class="simple">
-<li><p>The heat capacity at constant volume <span class="math notranslate nohighlight">\(C_V\)</span> is defined as the derivative of the average energy with respect to temperature:</p></li>
-</ul>
+\[
+ \langle E \rangle= -\frac{1}{Z} \frac{\partial Z}{\partial \beta} = -\frac{\partial \ln Z}{\partial \beta}
+\]</div>
+<div class="important admonition">
+<p class="admonition-title"><strong>Moments of Energy in NVT ensemble</strong></p>
 <div class="math notranslate nohighlight">
-\[ C_V = \left( \frac{\partial \langle E \rangle}{\partial T} \right)_V \]</div>
-<ul class="simple">
-<li><p>Using the chain rule, <span class="math notranslate nohighlight">\(C_V\)</span> can be expressed as:</p></li>
-</ul>
+\[
+\langle E\rangle  = -\frac{\partial \ln Z}{\partial \beta}
+\]</div>
 <div class="math notranslate nohighlight">
-\[ C_V = \frac{\partial \langle E \rangle}{\partial \beta} \frac{\partial \beta}{\partial T} \]</div>
-<ul class="simple">
-<li><p>Since <span class="math notranslate nohighlight">\(\beta = \frac{1}{k_B T}\)</span>, we have <span class="math notranslate nohighlight">\(\frac{\partial \beta}{\partial T} = -\frac{1}{k_B T^2}\)</span>. taking the derivative of <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> with respect to <span class="math notranslate nohighlight">\(\beta\)</span> gives:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[ \frac{\partial \langle E \rangle}{\partial \beta} = \frac{\partial}{\partial \beta} \left( -\frac{1}{Z} \frac{\partial Z}{\partial \beta} \right) \]</div>
-<ul class="simple">
-<li><p>Simplifying this derivative and substituting <span class="math notranslate nohighlight">\(\frac{\partial \beta}{\partial T}\)</span> yields the heat capacity:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[ C_V = -k_B \beta^2 \frac{\partial^2 \ln Z}{\partial \beta^2} \]</div>
+\[
+  \sigma_E^2 = \langle E^2 \rangle - \langle E \rangle^2 = \frac{\partial^2 \ln Z}{\partial \beta^2}
+\]</div>
 </div>
+</section>
+<section id="fluctuation-response-and-ensemble-equivalence">
+<h2>Fluctuation-response and ensemble equivalence<a class="headerlink" href="#fluctuation-response-and-ensemble-equivalence" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Mean and fluctuation of energy are computed from partition function as first and second derivatives (see derivation above)</p></li>
+<li><p>We can now show that heat capaicty is related to energy fluctuations a result known as fluctuation-response theorem</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\langle E \rangle = -\frac{\partial log Z}{\partial (\beta)}\]</div>
-<ul class="simple">
-<li><p>The relationship between fluctuations and heat capacity is known as <strong>fluctuation-response theorem</strong> in statistical mechanics</p></li>
-</ul>
+\[
+C_V = \left( \frac{\partial \langle E \rangle}{\partial T} \right)_V = - k_B \beta^2 \frac{\partial^2 \ln Z}{\partial \beta^2}
+\]</div>
+<div class="important admonition">
+<p class="admonition-title"><strong>Fluctuation-Response Theorem</strong></p>
 <div class="math notranslate nohighlight">
-\[\sigma^2_E = \frac{\partial^2 log Z}{\partial \beta^2}  = k_BT^2 C_v\]</div>
-<ul class="simple">
-<li><p>The fluctuations in energy are small relative to the mean. This shows that thermodynamic quantities computed in NVE and NVT should not differ in the thermodynamic limit of large systems! Thus, we are free to choose any convenient ensemble if we want to calculate, let’s say, temperature dependence on entropy.</p></li>
-</ul>
+\[\sigma_E^2 = k_B T^2 C_V \]</div>
+</div>
+<ul>
+<li><p>Relative energy fluctuations scale as:</p>
 <div class="math notranslate nohighlight">
-\[\frac{\sigma_E}{\langle E\rangle} = \frac{(k_BT^2 C_v)^{1/2}}{\langle E\rangle}\sim O(N^{-1/2})\]</div>
+\[
+  \frac{\sigma_E}{\langle E \rangle} = \frac{(k_B T^2 C_V)^{1/2}}{\langle E \rangle} \sim O(N^{-1/2})
+  \]</div>
+</li>
+<li><p>In the thermodynamic limit <span class="math notranslate nohighlight">\(N\rightarrow \infty \)</span>, fluctuations become negligible, justifying <strong>ensemble equivalence</strong>.</p></li>
+</ul>
 </section>
 <section id="example-1-a-two-state-model-in-nve-vs-nvt-ensemble">
 <h2>Example-1: A two-state model in NVE vs NVT ensemble<a class="headerlink" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble" title="Permalink to this heading">#</a></h2>
@@ -908,7 +908,8 @@ Let us consider a simple two-level system where lower level <span class="math no
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#average-and-fluctuations-in-energy">Average and fluctuations in Energy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-average-energy-and-fluctuations"><strong>Derivation of Average Energy and Fluctuations</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble">Example-1: A two-state model in NVE vs NVT ensemble</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-non-interacting-spins">Example-2 Non-interacting spins</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nve">NVE</a></li>
