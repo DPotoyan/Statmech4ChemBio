@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>NVT &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>Ensembles in phase-space &#8212; Statistical Mechanics for Chemistry and Biology</title>
   
   
   
@@ -188,7 +188,7 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Ensembles</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="nve.html">Ensemble equivalence</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">NVT</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ensembles in phase-space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npt.html">muPT</a></li>
 </ul>
 </li>
@@ -478,7 +478,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>NVT</h1>
+    <h1>Ensembles in phase-space</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -520,38 +520,40 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="nvt">
-<h1>NVT<a class="headerlink" href="#nvt" title="Permalink to this heading">#</a></h1>
-<div class="admonition-what-you-need-to-know admonition">
-<p class="admonition-title">What you need to know</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="ensembles-in-phase-space">
+<h1>Ensembles in phase-space<a class="headerlink" href="#ensembles-in-phase-space" title="Permalink to this heading">#</a></h1>
+<div class="admonition-what-you-will-learn admonition">
+<p class="admonition-title"><strong>What you will learn</strong></p>
 <ul class="simple">
-<li><p><strong>In NVT, ensemble</strong> each microstates of the system has different energies because the system can exchange energy with an environment to maintain <span class="math notranslate nohighlight">\(T=const\)</span>.</p></li>
-<li><p><strong>The Boltzmann distribution</strong> gives the probability of being in any particular macro or microstate in the NVT ensemble. Probability depends exponentially on energy, which shows that the system pays an exponentially high penalty for borrowing power from the environment to occupy excited states. As temperature increases, the price of more excited states is populated.</p></li>
-<li><p><strong>Free energy captures</strong> the entropy-energy tradeoff, which shows which macrostates are more likely to occur at any given temperature!</p></li>
-<li><p><strong>Legendre transform</strong> <span class="math notranslate nohighlight">\(F = U-TS\)</span> makes free energy the central object in thermodynamics of systems under <span class="math notranslate nohighlight">\(T=const\)</span>.   <span class="math notranslate nohighlight">\(\Delta F \leq 0\)</span> replaces <span class="math notranslate nohighlight">\(\Delta S \geq 0\)</span> as the condition for spontaneous process of the system.</p></li>
-<li><p><strong>The partition function</strong> <span class="math notranslate nohighlight">\(Z\)</span> in the NVT ensemble is a Boltzman-weighted sum over microstates.</p></li>
-<li><p><strong>Bridge equations in NVE and NVT.</strong> While in NVE entropy was linked directly with partition function <span class="math notranslate nohighlight">\(S=k_B log \Omega\)</span>, in NVT, it is free energy that is directly linked with partition function Z, <span class="math notranslate nohighlight">\(F=-k_BT logZ\)</span></p></li>
-<li><p><strong>The Laplace transform</strong> connections partition functions of NVT and NVE <span class="math notranslate nohighlight">\(Z\)</span> and <span class="math notranslate nohighlight">\(\Omega\)</span>. This shows <strong>ensemble equivalence</strong>, e.g., thermodynamics quantities computed in either ensemble are the same!</p></li>
+<li><p>Counting microstates in quantum systems or lattice models is natural as these systems are already discretized</p></li>
+<li><p>Defining microstates in classical mechanics requires us to divide phase-space into small volumes of size <span class="math notranslate nohighlight">\(\sim h^N\)</span></p></li>
+<li><p>Using classical hailtonians for non-interacting particles we can derive a number of useful relations between free energies chemical potentials.</p></li>
+<li><p>Equipartition theorem says ever quadratic degree term in Hamiltonian contributes <span class="math notranslate nohighlight">\(kT\)</span> of energy</p></li>
+<li><p>De Broglie wavelength demarcates domain of applicability of classical and quantum mechanics</p></li>
 </ul>
 </div>
 <section id="computing-z-via-classical-mechanics">
 <h2>Computing Z via classical mechanics<a class="headerlink" href="#computing-z-via-classical-mechanics" title="Permalink to this heading">#</a></h2>
-<p><strong>Integrals over phase space</strong></p>
 <ul class="simple">
-<li><p>In quantum mechanics counting microsites is easy, we have discrete energies and  could simply sum over microstates to compute partition functions <span class="math notranslate nohighlight">\(Z=\sum_i e^{-\beta E_i}\)</span></p></li>
-<li><p>Counting microstates in classical mechanics is done by discretizing phase space <span class="math notranslate nohighlight">\(\Gamma = (x^{3N}, p^{3N})\)</span> into small cubes of units <span class="math notranslate nohighlight">\(dx^Ndp^N\sim h^N\)</span>. In other words, we replace summation over quantum states with integral over phase space <span class="math notranslate nohighlight">\(\sum_i \rightarrow \int \frac{dpdx}{h}\)</span></p></li>
+<li><p>In quantum mechanics counting microsites is easy, we have discrete energies and  could simply sum over microstates to compute partition functions</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z=\sum_i e^{-\beta E_i}\]</div>
+<ul class="simple">
+<li><p>Each particle in quantum mechanics can not be defined beyond <span class="math notranslate nohighlight">\(\delta d \delta p \sim h\)</span> limit imposed by quantum mechanics.</p></li>
+<li><p>Counting microstates in classical mechanics is therefore done by discretizing phase space for N particle system <span class="math notranslate nohighlight">\(x^N, p^N\)</span> into smallest unit boxes of size <span class="math notranslate nohighlight">\(h^N\)</span>.</p></li>
+<li><p>In other words, we replace summation over quantum states with integral over phase space</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\sum_i \rightarrow \int \frac{dpdx}{h}\]</div>
+<ul class="simple">
 <li><p>Recall that we need to correct classical mechanics for “double counting” microstates if we have N indistinguishable “particles” with a factor of <span class="math notranslate nohighlight">\(N!\)</span></p></li>
 </ul>
+<div class="important admonition">
+<p class="admonition-title"><strong>Classical partition function</strong></p>
 <div class="math notranslate nohighlight">
-\[\Omega(E) = \frac{1}{N! h^{3N}} \int_{\Gamma}  \delta \big( H(\Gamma)-E) d \Gamma\]</div>
-<div class="math notranslate nohighlight">
-\[Z(\beta) = \int_{E} \Omega(E) e^{-\beta E} dE  = \frac{1}{N! h^{3N}} \int_{\Gamma} \Bigg[\int_{E} d \Gamma \delta \big( H(\Gamma)-E) e^{-\beta E}dE \Bigg] d\Gamma\]</div>
-<ul class="simple">
-<li><p>We thus obtain an expression of partition function expressed as integral over phase-space. This expression will be useful for computing partition functions of atomic and molecular gasses with simple Hamiltonian functions.</p></li>
-<li></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\boxed{Z(\beta) = \frac{1}{N! h^{3N}} \int_{\Gamma} e^{-\beta H(\Gamma)} d\Gamma}\]</div>
+\[Z(\beta) = \frac{1}{N! h^{N}} \int e^{-\beta H(x^N, p^N)} dx^N dp^N\]</div>
+</div>
 </section>
 <section id="the-power-and-utility-of-nvt-the-non-interacting-system">
 <h2>The power and utility of NVT: The non-interacting system<a class="headerlink" href="#the-power-and-utility-of-nvt-the-non-interacting-system" title="Permalink to this heading">#</a></h2>
@@ -605,8 +607,6 @@ document.write(`
 <h3>Example-2: Ideal gas (classical)<a class="headerlink" href="#example-2-ideal-gas-classical" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[H(p^N, x^N) = K(p^N)  = \sum^{i=N}_{i=1}\frac{p^2_i}{2m}\]</div>
-<div class="math notranslate nohighlight">
-\[\boxed{Z(\beta) = \frac{1}{h^{N} N!} \int dp^N dx^N e^{-\beta H(p^N,x^N)}}\]</div>
 <p><strong>Partition function for a single atom</strong></p>
 <ul class="simple">
 <li><p>Let us evaluate the partition function for a single particle in 3D:</p></li>
