@@ -495,10 +495,8 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-state-particle-system">Two state particle system</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-and-macrostate-probabilities">Free energy and macrostate probabilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-average-energy-and-fluctuations"><strong>Derivation of Average Energy and Fluctuations</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples">More examples</a></li>
@@ -571,9 +569,9 @@ document.write(`
 </section>
 <section id="applications-of-nve">
 <h2>Applications of NVE<a class="headerlink" href="#applications-of-nve" title="Permalink to this heading">#</a></h2>
-<div class="tip admonition">
+<div class="note admonition">
 <p class="admonition-title"><strong>Two-state partciles</strong></p>
-<p>consider a simple two-level system where lower level has energy <span class="math notranslate nohighlight">\(0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon\)</span>. Determine how the fraction of excited states <span class="math notranslate nohighlight">\(f=\frac{n}{N}\)</span> changes with temperature.</p>
+<p>Cnsider a simple two-level system where lower level has energy <span class="math notranslate nohighlight">\(0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon\)</span>. Determine how the fraction of excited states <span class="math notranslate nohighlight">\(f=\frac{n}{N}\)</span> changes with temperature.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 <strong>Solution</strong><div class="sd-summary-down docutils">
@@ -712,10 +710,18 @@ Z \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U - TS)} = e^{-\beta F}
 </section>
 <section id="examples-of-using-nvt">
 <h2>Examples of using NVT<a class="headerlink" href="#examples-of-using-nvt" title="Permalink to this heading">#</a></h2>
-<section id="two-state-particle-system">
-<h3>Two state particle system<a class="headerlink" href="#two-state-particle-system" title="Permalink to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title"><strong>Two-state partciles (NVT)</strong></p>
+<p>Cnsider a simple two-level system where lower level has energy <span class="math notranslate nohighlight">\(0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon\)</span>. Determine how the fraction of excited states <span class="math notranslate nohighlight">\(f=\frac{n}{N}\)</span> changes with temperature.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<strong>Solution</strong><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <ul class="simple">
-<li><p>Solving a two-state system in an NVT ensemble is much easier because the partition function decouples into single particle contributions.</p></li>
+<li><p class="sd-card-text">Solving a two-state particle system in an NVT ensemble is much easier because the partition function decouples into single particle contributions.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[Z = \sum^{n=N}_{n=0} e^{-\beta E_n}  = (1+e^{-\beta \epsilon})^N\]</div>
@@ -723,7 +729,28 @@ Z \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U - TS)} = e^{-\beta F}
 \[F= -k_B T log Z = -k_BT N log(1+e^{-\beta \epsilon})\]</div>
 <div class="math notranslate nohighlight">
 \[\langle E \rangle  = \frac{\partial log Z}{\partial (-\beta)} =  \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
+</div>
+</details></div>
 </section>
+<section id="free-energy-and-macrostate-probabilities">
+<h2>Free energy and macrostate probabilities<a class="headerlink" href="#free-energy-and-macrostate-probabilities" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Microstates:</strong> The relative population of microstates is dictated by the ratio of Boltzmann weights which depends on energy difference <span class="math notranslate nohighlight">\(\Delta E\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[p_1 = \frac{e^{-\beta E_1}}{Z} = \frac{e^{-\beta E_1}}{e^{-\beta F}}\]</div>
+<div class="math notranslate nohighlight">
+\[{\frac{p_2}{p_1} = e^{-\beta (E_2-E_1)}}\]</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>Macrostates:</strong> Probability of macrostates with energy <span class="math notranslate nohighlight">\(E_A\)</span> is obtained by summing over all microstates with energy E_A or simply by multiplying by <span class="math notranslate nohighlight">\(\Omega_A\)</span>. The latter is related to entropy, which ends up turning the numerator into the free energy of a macrostate <span class="math notranslate nohighlight">\(A\)</span>: <span class="math notranslate nohighlight">\(F_A = E_A-TS_A\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[p_A =\frac{\Omega (E_A) e^{-\beta E_A}}{Z_A} = \frac{e^{-\beta F_A}}{e^{-\beta F}}\]</div>
+<ul class="simple">
+<li><p>The relative population of macrostates is dictated by the ratio of entropic term times Boltzmann weights which depends on free energy difference <span class="math notranslate nohighlight">\(\Delta F\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[{\frac{p_B}{p_A} = e^{-\beta (F_B-F_A)}}\]</div>
 </section>
 <section id="derivation-of-average-energy-and-fluctuations">
 <h2><strong>Derivation of Average Energy and Fluctuations</strong><a class="headerlink" href="#derivation-of-average-energy-and-fluctuations" title="Permalink to this heading">#</a></h2>
@@ -960,10 +987,8 @@ DefiningDefine <span class="math notranslate nohighlight">\(M =  N_{\uparrow} - 
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-state-particle-system">Two state particle system</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-and-macrostate-probabilities">Free energy and macrostate probabilities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-average-energy-and-fluctuations"><strong>Derivation of Average Energy and Fluctuations</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples">More examples</a></li>
