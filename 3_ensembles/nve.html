@@ -488,15 +488,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-nve">Microcanonical Ensemble (NVE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-nve">Microcanonical Ensemble (NVE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-nve">Applications of NVE</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchanging-energy">Exchanging Energy</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-state-particle-system">Two state particle system</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-average-energy-and-fluctuations"><strong>Derivation of Average Energy and Fluctuations</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble">Example-1: A two-state model in NVE vs NVT ensemble</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-non-interacting-spins">Example-2 Non-interacting spins</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nve">NVE</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt">NVT</a></li>
@@ -564,6 +568,52 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(\Omega\)</span> is the number of micro-states <strong>consistent with a macrostate of our system</strong>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(S(N, V, E)\)</span> is the entropy of an isolated system (we are in the NVE).</p></li>
 <li><p><span class="math notranslate nohighlight">\(k_B =1.380649\cdot 10^{-23} J/K\)</span>,  Boltzmann’s constant</p></li>
+</ul>
+</div>
+</section>
+<section id="applications-of-nve">
+<h2>Applications of NVE<a class="headerlink" href="#applications-of-nve" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Two-state partciles</strong></p>
+<p>consider a simple two-level system where lower level has energy <span class="math notranslate nohighlight">\(0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon\)</span>. Determine how the fraction of excited states <span class="math notranslate nohighlight">\(f=\frac{n}{N}\)</span> changes with temperature.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<strong>Solution</strong><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">The total energy when we have a <span class="math notranslate nohighlight">\(n\)</span> number of particles in upper level is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[E = n\epsilon\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">Number of microstaates is all possible ways of arranging N number of particles given fixed energy <span class="math notranslate nohighlight">\(E\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\Omega = \frac{N!}{(N-n)! n!} = \frac{N!}{(N-n)! n!}\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">Taking log of binomial (see random walk section) we get expression of entropy</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[S = k_B log \Omega = N k_B \Big [- \frac{n}{N}log \frac{n}{N} - (1-\frac{n}{N})log (1-\frac{n}{N}) \Big]\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">Since we have entropy as a function of energy <span class="math notranslate nohighlight">\(n=E/\epsilon\)</span> we can use thermodynamic relations to obain expression for how fraction of excited states changes with temperature:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{1}{T} = \frac{\partial S(E)}{\partial E} \frac{\partial E}{\partial n}=  \frac{k_B}{\epsilon}\frac{\partial 
+log\Omega(n)}{\partial  n} = \frac{k_B}{\epsilon}log \frac{N-n}{N}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{n}{N} = \frac{1}{1+e^{\beta \epsilon}}\]</div>
+<div class="math notranslate nohighlight">
+\[E = n\epsilon = \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
+</div>
+</details></div>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>Random polymer chain</strong></p>
+<ul class="simple">
+<li><p>Consider 1D polymer where <span class="math notranslate nohighlight">\(N\)</span> monomers are randomly oriended with <span class="math notranslate nohighlight">\(+l\)</span> and <span class="math notranslate nohighlight">\(-l\)</span> orientation along the <span class="math notranslate nohighlight">\(x\)</span> axis</p></li>
 </ul>
 </div>
 <section id="exchanging-energy">
@@ -662,6 +712,21 @@ Z \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U - TS)} = e^{-\beta F}
 <li><p><span class="math notranslate nohighlight">\( F = U - TS \)</span> is the <strong>Helmholtz free energy</strong>.</p></li>
 </ul>
 </section>
+<section id="examples-of-using-nvt">
+<h2>Examples of using NVT<a class="headerlink" href="#examples-of-using-nvt" title="Permalink to this heading">#</a></h2>
+<section id="two-state-particle-system">
+<h3>Two state particle system<a class="headerlink" href="#two-state-particle-system" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Solving a two-state system in an NVT ensemble is much easier because the partition function decouples into single particle contributions.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z = \sum^{n=N}_{n=0} e^{-\beta E_n}  = (1+e^{-\beta \epsilon})^N\]</div>
+<div class="math notranslate nohighlight">
+\[F= -k_B T log Z = -k_BT N log(1+e^{-\beta \epsilon})\]</div>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle  = \frac{\partial log Z}{\partial (-\beta)} =  \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
+</section>
+</section>
 <section id="derivation-of-average-energy-and-fluctuations">
 <h2><strong>Derivation of Average Energy and Fluctuations</strong><a class="headerlink" href="#derivation-of-average-energy-and-fluctuations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -717,34 +782,6 @@ C_V = \left( \frac{\partial \langle E \rangle}{\partial T} \right)_V = - k_B \be
 </li>
 <li><p>In the thermodynamic limit <span class="math notranslate nohighlight">\(N\rightarrow \infty \)</span>, fluctuations become negligible, justifying <strong>ensemble equivalence</strong>.</p></li>
 </ul>
-</section>
-<section id="example-1-a-two-state-model-in-nve-vs-nvt-ensemble">
-<h2>Example-1: A two-state model in NVE vs NVT ensemble<a class="headerlink" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>NVE</strong>
-Let us consider a simple two-level system where lower level <span class="math notranslate nohighlight">\(\epsilon_0 = 0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon_1 =\epsilon\)</span>. We will now use <span class="math notranslate nohighlight">\(NVE\)</span> ensemble to obtain thermodynamic quantities <span class="math notranslate nohighlight">\((S, T, C_v)\)</span> and then obtain the same quantities with <span class="math notranslate nohighlight">\(NVT\)</span>.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[E = n\epsilon\]</div>
-<div class="math notranslate nohighlight">
-\[\Omega(E) = \frac{N!}{(N-n)! n!}\]</div>
-<div class="math notranslate nohighlight">
-\[S = k_B log \Omega(E) = N k_B \Big [- \frac{n}{N}log \frac{n}{N} - \frac{N-n}{N}log \frac{N-n}{N} \Big]\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{1}{T} = \frac{\partial S(E)}{\partial E} =  \frac{k_B}{\epsilon}\frac{\partial log\Omega(n)}{\partial  n} = \frac{k_B}{\epsilon}log \frac{N-n}{N}\]</div>
-<div class="math notranslate nohighlight">
-\[\frac{n}{N} = \frac{1}{1+e^{\beta \epsilon}}\]</div>
-<div class="math notranslate nohighlight">
-\[E = n\epsilon = \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
-<ul class="simple">
-<li><p><strong>NVT</strong> Solving a two-state system in an NVT ensemble is much easier because the partition function decouples into single particle contributions.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[Z = \sum^{n=N}_{n=0} e^{-\beta E_n}  = (1+e^{-\beta \epsilon})^N\]</div>
-<div class="math notranslate nohighlight">
-\[F= -k_B T log Z = -k_BT N log(1+e^{-\beta \epsilon})\]</div>
-<div class="math notranslate nohighlight">
-\[\langle E \rangle  = \frac{\partial log Z}{\partial (-\beta)} =  \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
 <section id="example-2-non-interacting-spins">
 <h3>Example-2 Non-interacting spins<a class="headerlink" href="#example-2-non-interacting-spins" title="Permalink to this heading">#</a></h3>
 </section>
@@ -904,15 +941,19 @@ Let us consider a simple two-level system where lower level <span class="math no
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-nve">Microcanonical Ensemble (NVE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-nve">Microcanonical Ensemble (NVE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-nve">Applications of NVE</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchanging-energy">Exchanging Energy</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-state-particle-system">Two state particle system</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-average-energy-and-fluctuations"><strong>Derivation of Average Energy and Fluctuations</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-a-two-state-model-in-nve-vs-nvt-ensemble">Example-1: A two-state model in NVE vs NVT ensemble</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-non-interacting-spins">Example-2 Non-interacting spins</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nve">NVE</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nvt">NVT</a></li>
