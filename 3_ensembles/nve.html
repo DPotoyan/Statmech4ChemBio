@@ -489,11 +489,15 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-nve">Microcanonical Ensemble (NVE)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-nve">Applications of NVE</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-partition-function-grows-exponentially-with-system-size">Microcanonical partition function grows exponentially with system size</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#particles-in-a-box">Particles in a box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spins-on-a-lattice">Spins on a lattice</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchanging-energy">Exchanging Energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-as-the-driver-of-energy-partitioning">Temperature as the driver of energy partitioning</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#canonical-distribution">Canonical distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-and-macrostate-probabilities">Free energy and macrostate probabilities</a></li>
@@ -545,7 +549,7 @@ document.write(`
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/96620645e040268e7d6200db2e230f8c4c183b6fe1f0cde7f10190fee55fbd71.png" src="../_images/96620645e040268e7d6200db2e230f8c4c183b6fe1f0cde7f10190fee55fbd71.png" />
+<img alt="../_images/940d937a24d3868dd2a911055ef3bfdca04c59451b03db77100a8430f50c3af3.png" src="../_images/940d937a24d3868dd2a911055ef3bfdca04c59451b03db77100a8430f50c3af3.png" />
 </div>
 </div>
 <div class="important admonition">
@@ -566,11 +570,346 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(k_B =1.380649\cdot 10^{-23} J/K\)</span>,  Boltzmann’s constant</p></li>
 </ul>
 </div>
+<ul>
+<li><p>Consider a system of three spins where <span class="math notranslate nohighlight">\(\uparrow\)</span> and <span class="math notranslate nohighlight">\(\downarrow\)</span> have the same energy <span class="math notranslate nohighlight">\(\epsilon\)</span>. We have microcanonical ensemble defined by <span class="math notranslate nohighlight">\(N=3\)</span> and <span class="math notranslate nohighlight">\(E=3\epsilon\)</span> thermodynamic variables.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{aligned}
+  &amp;\uparrow \uparrow \uparrow \\
+  &amp;\uparrow \uparrow \downarrow \\
+  &amp;\uparrow \downarrow \uparrow \\
+  &amp;\downarrow \uparrow \uparrow \\
+  &amp;\uparrow \downarrow \downarrow \\
+  &amp;\downarrow \uparrow \downarrow \\
+  &amp;\downarrow \downarrow \uparrow \\
+  &amp;\downarrow \downarrow \downarrow \\
+  \end{aligned}
+ $$ $$\end{split}\]</div>
+</li>
+<li><p>There are <span class="math notranslate nohighlight">\(\Omega = 2^3\)</span> microstates with entropy being:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+S = k_B \log 2^3  = 3k_B log2
+\]</div>
+<ul class="simple">
+<li><p>For N spins we see that <span class="math notranslate nohighlight">\(\Omega=2^N\)</span> and therefore entropy scales linearly with system size <span class="math notranslate nohighlight">\(N\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+S = Nk_B log2
+\]</div>
 </section>
-<section id="applications-of-nve">
-<h2>Applications of NVE<a class="headerlink" href="#applications-of-nve" title="Permalink to this heading">#</a></h2>
+<section id="microcanonical-partition-function-grows-exponentially-with-system-size">
+<h2>Microcanonical partition function grows exponentially with system size<a class="headerlink" href="#microcanonical-partition-function-grows-exponentially-with-system-size" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Let us estimate just how the number of microstates behave as a function of system size <span class="math notranslate nohighlight">\(N\)</span> and total energy in isolated system.</p></li>
+<li><p>Consider <strong><span class="math notranslate nohighlight">\( N \)</span> particles</strong> in a volume <strong><span class="math notranslate nohighlight">\( V \)</span></strong>, let the <strong>particle density</strong> be  <span class="math notranslate nohighlight">\(\rho = \frac{N}{V}\)</span></p></li>
+<li><p>Dividing the system into <span class="math notranslate nohighlight">\( M \)</span> independent subregions of volume <span class="math notranslate nohighlight">\( v = V/M \)</span>, each subregion contains:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+N_{\text{sub}} = \rho v = \frac{N}{M}
+\]</div>
+<div class="math notranslate nohighlight">
+\[M = \frac{N}{\rho v}\]</div>
+<ul class="simple">
+<li><p>Since each independent subregion has <span class="math notranslate nohighlight">\( \Omega_{\text{sub}}(E_{\text{sub}}) \)</span> microstates, the total number of microstates is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Omega(E) = \left( \Omega_{\text{sub}} \right)^M = \left( \Omega^{1/\rho v}_{\text{sub}} \right)^N = \omega^N
+\]</div>
+<ul class="simple">
+<li><p>We find that number of mirostates grows exponentially with syste size <span class="math notranslate nohighlight">\(N\)</span>. This is large deviation princple in action. Note that <span class="math notranslate nohighlight">\(\omega\)</span> is independent of total size of the system N</p></li>
+<li><p>This large deivaiton property implies that entropy <strong>scales extensively</strong> and grows <strong>monotonically</strong> with energy.</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title"><strong>Large deviation propery of <span class="math notranslate nohighlight">\(\Omega\)</span></strong></p>
+<div class="math notranslate nohighlight">
+\[
+\Omega(E) \sim e^{N s(E/N)}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+S(E) = k_B \log \Omega(E) \sim k_B N s(E/N)
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s(E/N)\)</span> is an intensive quantity of entropy per-particle.</p></li>
+<li><p><span class="math notranslate nohighlight">\(S(E)\)</span> is an extensive quantity of total entropy of N partice system.</p></li>
+</ul>
+</div>
+<section id="particles-in-a-box">
+<h3>Particles in a box<a class="headerlink" href="#particles-in-a-box" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For a <strong>single</strong> quantum particle in a <strong>cubical box</strong> of side <span class="math notranslate nohighlight">\( L \)</span>, the allowed energy levels are:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E_{n_x, n_y, n_z} \sim (n_x^2 + n_y^2 + n_z^2)
+\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\( n_x, n_y, n_z \)</span> are <strong>positive integers</strong> (quantum numbers).</p></li>
+<li><p>To determine the number of microstates with total energy <strong>at most</strong> <span class="math notranslate nohighlight">\( E \)</span>, we count the number of allowed quantum states <span class="math notranslate nohighlight">\( (n_x, n_y, n_z) \)</span> satisfying:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+n_x^2 + n_y^2 + n_z^2 \leq E
+\]</div>
+<ul class="simple">
+<li><p>For large <span class="math notranslate nohighlight">\( E \)</span>, this corresponds to counting integer lattice points inside a sphere of radius:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+R = \sqrt{E}
+\]</div>
+<ul class="simple">
+<li><p>Since the number of points inside a sphere scales approximately as the <strong>volume</strong> of the sphere, we get:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Omega(E) \approx \frac{4}{3} \pi R^3  \propto E^{3/2}
+\]</div>
+<ul class="simple">
+<li><p>Thus, for a <strong>single</strong> particle, the number of accessible microstates grows as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Omega(E) \sim E^{3/2}
+\]</div>
+<ul class="simple">
+<li><p>For <strong><span class="math notranslate nohighlight">\( N \)</span> independent particles</strong>, each particle contributes an independent set of quantum numbers, meaning we now count lattice points in a <strong><span class="math notranslate nohighlight">\( 3N \)</span>-dimensional hypersphere</strong>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Omega(E) \sim E^{3N/2}
+\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Choose a few system sizes for N</span>
+<span class="n">N_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+
+<span class="c1"># Define a range of energy values (avoid E=0 to prevent singularities)</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_values</span><span class="p">:</span>
+    <span class="c1"># Compute the number of microstates scaling as Omega(E) ~ E^(3N/2)</span>
+    <span class="n">Omega</span> <span class="o">=</span> <span class="n">E</span><span class="o">**</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">Omega</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Energy E&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\Omega(E) \sim E^{\frac</span><span class="si">{3N}{2}</span><span class="s2">}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scaling of $\Omega(E)$ as a Function of Energy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Logarithmic scale to better display the exponential growth</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/e70f35b6a4bc6e3e90ea3b7152891257763ae8d849f6b03bd32bd9f97129b0da.png" src="../_images/e70f35b6a4bc6e3e90ea3b7152891257763ae8d849f6b03bd32bd9f97129b0da.png" />
+</div>
+</div>
+</section>
+<section id="spins-on-a-lattice">
+<h3>Spins on a lattice<a class="headerlink" href="#spins-on-a-lattice" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>Lets explorea system of <span class="math notranslate nohighlight">\(N\)</span> non-interacting spins (or particles) where each spin can be up (<span class="math notranslate nohighlight">\(\uparrow\)</span>) with energy <span class="math notranslate nohighlight">\( \epsilon \)</span> or down (<span class="math notranslate nohighlight">\(\downarrow\)</span>) with energy <span class="math notranslate nohighlight">\( 0 \)</span>.</p></li>
+<li><p>The total energy is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+  E = N_{\uparrow} \epsilon
+  \]</div>
+</li>
+<li><p>where <span class="math notranslate nohighlight">\( N_{\uparrow} \)</span> is the number of up spins. the number of microstates for each macrostate follows the binomial coefficient</p>
+<div class="math notranslate nohighlight">
+\[
+  S(E, N) = log \Omega(N, N_{\uparrow}) = log \frac{N!}{N_{\uparrow}! (N-N_{\uparrow}!)} = \frac{N!}{(E/\epsilon)! (N-(E/\epsilon_!)}
+  \]</div>
+</li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<strong>See the ensembles of microstates for a four spin system</strong><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><strong>Macrostate: <span class="math notranslate nohighlight">\(E = 4\epsilon\)</span> (<span class="math notranslate nohighlight">\(N_{\uparrow} = 4\)</span>)</strong>
+$<span class="math notranslate nohighlight">\(
+\Omega(4) = \binom{4}{4} = 1
+\)</span>$</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Microstate</p></th>
+<th class="head"><p class="sd-card-text">Configuration (<span class="math notranslate nohighlight">\(\uparrow = 1\)</span>, <span class="math notranslate nohighlight">\(\downarrow = 0\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">1</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \uparrow \uparrow \uparrow \uparrow \)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p class="sd-card-text"><strong>Macrostate: <span class="math notranslate nohighlight">\(E = 3\epsilon\)</span> (<span class="math notranslate nohighlight">\(N_{\uparrow} = 3\)</span>)</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\Omega(3) = \binom{4}{3} = 4
+\]</div>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Microstate</p></th>
+<th class="head"><p class="sd-card-text">Configuration (<span class="math notranslate nohighlight">\(\uparrow = 1\)</span>, <span class="math notranslate nohighlight">\(\downarrow = 0\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">2</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \uparrow \uparrow \uparrow \downarrow \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">3</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \uparrow \uparrow \downarrow \uparrow \)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">4</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \uparrow \downarrow \uparrow \uparrow \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">5</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \downarrow \uparrow \uparrow \uparrow \)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p class="sd-card-text"><strong>Macrostate: <span class="math notranslate nohighlight">\(E = 2\epsilon\)</span> (<span class="math notranslate nohighlight">\(N_{\uparrow} = 2\)</span>)</strong>
+$<span class="math notranslate nohighlight">\(
+\Omega(2) = \binom{4}{2} = 6
+\)</span>$</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Microstate</p></th>
+<th class="head"><p class="sd-card-text">Configuration (<span class="math notranslate nohighlight">\(\uparrow = 1\)</span>, <span class="math notranslate nohighlight">\(\downarrow = 0\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">6</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \uparrow \uparrow \downarrow \downarrow \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">7</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \uparrow \downarrow \uparrow \downarrow \)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">8</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \uparrow \downarrow \downarrow \uparrow \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">9</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \downarrow \uparrow \uparrow \downarrow \)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">10</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \downarrow \uparrow \downarrow \uparrow \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">11</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \downarrow \downarrow \uparrow \uparrow \)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p class="sd-card-text"><strong>Macrostate: <span class="math notranslate nohighlight">\(E = \epsilon\)</span> (<span class="math notranslate nohighlight">\(N_{\uparrow} = 1\)</span>)</strong>
+$<span class="math notranslate nohighlight">\(
+\Omega(1) = \binom{4}{1} = 4
+\)</span>$</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Microstate</p></th>
+<th class="head"><p class="sd-card-text">Configuration (<span class="math notranslate nohighlight">\(\uparrow = 1\)</span>, <span class="math notranslate nohighlight">\(\downarrow = 0\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">12</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \uparrow \downarrow \downarrow \downarrow \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">13</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \downarrow \uparrow \downarrow \downarrow \)</span></p></td>
+</tr>
+<tr class="row-even"><td><p class="sd-card-text">14</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \downarrow \downarrow \uparrow \downarrow \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p class="sd-card-text">15</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \downarrow \downarrow \downarrow \uparrow \)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p class="sd-card-text"><strong>Macrostate: <span class="math notranslate nohighlight">\(E = 0\)</span> (<span class="math notranslate nohighlight">\(N_{\uparrow} = 0\)</span>)</strong>
+$<span class="math notranslate nohighlight">\(
+\Omega(0) = \binom{4}{0} = 1
+\)</span>$</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p class="sd-card-text">Microstate</p></th>
+<th class="head"><p class="sd-card-text">Configuration (<span class="math notranslate nohighlight">\(\uparrow = 1\)</span>, <span class="math notranslate nohighlight">\(\downarrow = 0\)</span>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p class="sd-card-text">16</p></td>
+<td><p class="sd-card-text"><span class="math notranslate nohighlight">\( \downarrow \downarrow \downarrow \downarrow \)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</details><div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define system sizes for the toy example</span>
+<span class="n">N_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>  <span class="c1"># Different spin system sizes</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_values</span><span class="p">:</span>
+    <span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Possible energy levels</span>
+    <span class="n">multiplicities</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">energies</span><span class="p">)</span>  <span class="c1"># Compute binomial coefficient</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">multiplicities</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot settings</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Use logarithmic scale to highlight exponential growth</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Total Energy $E$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Omega(E)$ (Number of Microstates)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Growth of $\Omega(E)$ with Energy for Different Spin System Sizes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_values</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Possible energy levels</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="n">multiplicities</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">energies</span><span class="p">)</span>  <span class="c1"># Compute binomial coefficient</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">multiplicities</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Plot settings</span>
+
+<span class="ne">NameError</span>: name &#39;sp&#39; is not defined
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1000x600 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
 <div class="note admonition">
-<p class="admonition-title"><strong>Two-state partciles</strong></p>
+<p class="admonition-title"><strong>Two-state particles</strong></p>
 <p>Cnsider a simple two-level system where lower level has energy <span class="math notranslate nohighlight">\(0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon\)</span>. Determine how the fraction of excited states <span class="math notranslate nohighlight">\(f=\frac{n}{N}\)</span> changes with temperature.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -606,12 +945,92 @@ log\Omega(n)}{\partial  n} = \frac{k_B}{\epsilon}log \frac{N-n}{N}\]</div>
 \[E = n\epsilon = \frac{N\epsilon}{1+e^{\beta \epsilon}}\]</div>
 </div>
 </details></div>
-<div class="tip dropdown admonition">
+<div class="note dropdown admonition">
 <p class="admonition-title"><strong>Random polymer chain</strong></p>
 <ul class="simple">
-<li><p>Consider 1D polymer where <span class="math notranslate nohighlight">\(N\)</span> monomers are randomly oriended with <span class="math notranslate nohighlight">\(+l\)</span> and <span class="math notranslate nohighlight">\(-l\)</span> orientation along the <span class="math notranslate nohighlight">\(x\)</span> axis</p></li>
+<li><p>Consider 1D polymer where <span class="math notranslate nohighlight">\(N\)</span> monomers are randomly oriended with <span class="math notranslate nohighlight">\(+l\)</span> and <span class="math notranslate nohighlight">\(-l\)</span> orientation along the <span class="math notranslate nohighlight">\(x\)</span> axis.</p></li>
+<li><p>Microcanonical ensmeble here is defined as all possible microstates given fixed value of end to end distance <span class="math notranslate nohighlight">\(X\)</span> of this polymer.</p></li>
+<li><p>Compute entropy <span class="math notranslate nohighlight">\(S(X)\)</span> and argue that if polymer length is free to move most likely configuraiton would be where the polymer remains compact with nearly equal numbers of <span class="math notranslate nohighlight">\( +l \)</span> and <span class="math notranslate nohighlight">\( -l \)</span> orientations.</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<strong>Solution</strong><div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">We consider a 1D polymer consisting of <span class="math notranslate nohighlight">\( N \)</span> monomers, where each monomer can be oriented either in the <span class="math notranslate nohighlight">\( +l \)</span> or <span class="math notranslate nohighlight">\( -l \)</span> direction along the <span class="math notranslate nohighlight">\( x \)</span>-axis. The total end-to-end distance of the polymer is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+X = \sum_{i=1}^{N} s_i l
+\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">where <span class="math notranslate nohighlight">\( s_i = \pm 1 \)</span> represents the orientation of the <span class="math notranslate nohighlight">\( i \)</span>th monomer.</p></li>
+</ul>
+<p class="sd-card-text"><strong>Microcanonical Partition Function</strong></p>
+<ul class="simple">
+<li><p class="sd-card-text">The total number of microstates corresponding to a given end-to-end distance <span class="math notranslate nohighlight">\( X \)</span> is determined by the number of ways to distribute <span class="math notranslate nohighlight">\( N_+ \)</span> monomers in the <span class="math notranslate nohighlight">\( +l \)</span> direction and <span class="math notranslate nohighlight">\( N_- \)</span> monomers in the <span class="math notranslate nohighlight">\( -l \)</span> direction, such that:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+N_+ + N_- = N, \quad N_+ - N_- = \frac{X}{l}
+\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">Solving for <span class="math notranslate nohighlight">\( N_+ \)</span> and <span class="math notranslate nohighlight">\( N_- \)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+N_+ = \frac{N + X/l}{2}, \quad N_- = \frac{N - X/l}{2}
+\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">The number of microstates corresponding to a given <span class="math notranslate nohighlight">\( X \)</span> is given by the binomial coefficient:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Omega(X) = \binom{N}{N_+} = \frac{N!}{N_+! N_-!}
+\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">For large <span class="math notranslate nohighlight">\( N \)</span>, we approximate using <strong>Stirling’s approximation</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\ln \Omega(X) \approx N \ln N - N_+ \ln N_+ - N_- \ln N_-
+\]</div>
+<p class="sd-card-text"><strong>Entropy Calculation</strong></p>
+<div class="math notranslate nohighlight">
+\[
+S(X) = k_B \ln \Omega(X)
+\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">Using Stirling’s approximation and expressing <span class="math notranslate nohighlight">\( N_+ \)</span> and <span class="math notranslate nohighlight">\( N_- \)</span> in terms of <span class="math notranslate nohighlight">\( X \)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+S(X) \approx k_B \left[ N \ln N - \frac{N+X/l}{2} \ln \frac{N+X/l}{2} - \frac{N-X/l}{2} \ln \frac{N-X/l}{2} \right]
+\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">To simplify, define the <strong>normalized displacement</strong> <span class="math notranslate nohighlight">\( x = X / (N l) \)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+S(X) \approx k_B N \left[ \ln N - \frac{1+x}{2} \ln \frac{1+x}{2} - \frac{1-x}{2} \ln \frac{1-x}{2} \right]
+\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">For small <span class="math notranslate nohighlight">\(x\)</span>, we can approximate using a Taylor expansion:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
+\]</div>
+<ul class="simple">
+<li><p class="sd-card-text">Thus, the entropy has a <strong>maximum</strong> at <span class="math notranslate nohighlight">\(X = 0 \)</span>, meaning the most probable configuration is one where the polymer remains compact with nearly equal numbers of <span class="math notranslate nohighlight">\( +l \)</span> and <span class="math notranslate nohighlight">\( -l \)</span> orientations.</p></li>
+<li><p class="sd-card-text">This shows a decrease in entropy as the polymer is more stretched (<span class="math notranslate nohighlight">\(|X|\)</span> increases), reflecting fewer accessible configurations.</p></li>
 </ul>
 </div>
+</details></div>
+</section>
 <section id="exchanging-energy">
 <h3>Exchanging Energy<a class="headerlink" href="#exchanging-energy" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -624,35 +1043,172 @@ log\Omega(n)}{\partial  n} = \frac{k_B}{\epsilon}log \frac{N-n}{N}\]</div>
 </div>
 </div>
 <ul>
-<li><p>The total number of microstates for the combined system is:</p>
+<li><p><span class="math notranslate nohighlight">\( \Omega(E) \)</span> is the <strong>number of microstates</strong> available to the system when it has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \Omega_r(E_t - E) \)</span> is the <strong>number of microstates</strong> available to the reservoir when the system has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
+<li><p>The probability of the system being in a <strong>macrostate</strong> that is, having energy <span class="math notranslate nohighlight">\(E\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+  p(E) = \frac{\Omega(E) \Omega_r(E_t - E)}{\Omega_t(E_t)} 
+  \]</div>
+</li>
+<li><p>The total number of microstates for the combined system is sum of all possible partitionings of energy between system and reservoir ensuring normalization</p>
 <div class="math notranslate nohighlight">
 \[
   \Omega_t(E_t) = \sum_E \Omega(E) \Omega_r(E_t - E)
   \]</div>
-<p>where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( \Omega(E) \)</span> is the <strong>number of microstates</strong> available to the system when it has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\( \Omega_r(E_t - E) \)</span> is the <strong>number of microstates</strong> available to the reservoir when the system has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
-</ul>
 </li>
-<li><p>The probability of the system being in a <strong>macrostate</strong> that is, having energy <span class="math notranslate nohighlight">\(E\)</span> is:</p>
+<li><p>The system is more likely to be in a macrostate <span class="math notranslate nohighlight">\( E \)</span> if the reservoir has <strong>many ways</strong> to accommodate the remaining energy <span class="math notranslate nohighlight">\(E_t - E\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Consider partition of energy between system and reserovir</p></li>
+<li><p><span class="math notranslate nohighlight">\(N_1 = 5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(N_2 = 20\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{tot}= 10\)</span></p></li>
+<li><p>We use the scaling <span class="math notranslate nohighlight">\(\Omega\sim E^N\)</span> to estimate how energy will be partitione to give us maximum number of microstates</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Re-run with corrected LaTeX syntax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define system sizes</span>
+<span class="n">N1</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">N2</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Define total energy</span>
+<span class="n">E_total</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Define energy range for system 1 (from 0 to E_total)</span>
+<span class="n">E1_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">E_total</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>  <span class="c1"># Avoid E=0 to prevent singularities</span>
+<span class="n">E2_values</span> <span class="o">=</span> <span class="n">E_total</span> <span class="o">-</span> <span class="n">E1_values</span>  <span class="c1"># Energy remaining for system 2</span>
+
+<span class="c1"># Compute microstates using Omega(E) ~ E^(3N/2)</span>
+<span class="n">Omega1</span> <span class="o">=</span> <span class="n">E1_values</span><span class="o">**</span><span class="p">(</span><span class="n">N1</span><span class="p">)</span>
+<span class="n">Omega2</span> <span class="o">=</span> <span class="n">E2_values</span><span class="o">**</span><span class="p">(</span><span class="n">N2</span><span class="p">)</span>
+
+<span class="c1"># Avoid zero energy cases causing singularities (set Omega=0 when E=0)</span>
+<span class="n">Omega1</span><span class="p">[</span><span class="n">E1_values</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">Omega2</span><span class="p">[</span><span class="n">E2_values</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Compute total number of microstates (product of subsystems)</span>
+<span class="n">Omega_total</span> <span class="o">=</span> <span class="n">Omega1</span> <span class="o">*</span> <span class="n">Omega2</span>
+
+<span class="c1"># Plot results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E1_values</span><span class="p">,</span> <span class="n">Omega_total</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\Omega_{\mathrm</span><span class="si">{total}</span><span class="s1">} = \Omega_1 \cdot \Omega_2$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Energy given to System 1 ($E_1$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Total Microstates ($\Omega_{\mathrm</span><span class="si">{total}</span><span class="s2">}$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Total Number of Microstates as Energy is Partitioned&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="temperature-as-the-driver-of-energy-partitioning">
+<h3>Temperature as the driver of energy partitioning<a class="headerlink" href="#temperature-as-the-driver-of-energy-partitioning" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Which paritioning is most likely? we write down probability of macrostate and find its maxima with respect to <span class="math notranslate nohighlight">\(E\)</span></p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
-  p(E) = \frac{\Omega(E) \Omega_r(E_t - E)}{\sum_E \Omega(E) \Omega_r(E_t - E)}
-  \]</div>
-</li>
-<li><p>The system is more likely to be in a macrostate <span class="math notranslate nohighlight">\( E \)</span> if the reservoir has <strong>many ways</strong> to accommodate the remaining energy <span class="math notranslate nohighlight">\( E_t - E \)</span>.</p></li>
+\frac{d }{dE}logP(E) = \frac{d }{dE} \bigg[ log\Omega_1(E)\Omega_2(E_{tot}-E) \bigg]= 0
+\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{d }{dE}logP(E) = \bigg[ \frac{d }{dE} log\Omega_1 - \frac{d}{dE}\Omega_2 \bigg]= 0\]</div>
+<ul class="simple">
+<li><p>We once again come to appreacite that <span class="math notranslate nohighlight">\(\frac{1}{T} = \frac{dS}{dE} = \frac{d log\Omega}{dE}\)</span></p></li>
+<li><p>Recall what we learned form thermodynamics: System undergoes spotnaenous change drive by maximization of entropy.</p></li>
+<li><p>In other words we see very clearly that <strong>maximizing probability of a macrostate is the same as maximizing entropy!</strong></p></li>
 </ul>
+<div class="admonition-exercise admonition">
+<p class="admonition-title"><strong>exercise</strong></p>
+<p>class: note</p>
+<ul class="simple">
+<li><p>Use the <span class="math notranslate nohighlight">\(\Omega = E^{3/2N}\)</span> to derive how energy will be partitioned between <span class="math notranslate nohighlight">\(N_1\)</span> and <span class="math notranslate nohighlight">\(N_2\)</span> system.</p></li>
+<li><p>Also show that equilibrium corresponds to equal temperatures which will lead to expression of energy in terms of temperature</p></li>
+</ul>
+</div>
 </section>
 </section>
 <section id="constant-temperature-ensemble-nvt">
 <h2>Constant temperature ensemble (NVT)<a class="headerlink" href="#constant-temperature-ensemble-nvt" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Re-import necessary libraries after execution state reset</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Function to draw a system (box with particles and motion arrows), representing the NVT ensemble</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">draw_nvt_system</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">x_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="c1"># Draw the box</span>
+    <span class="n">box</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">x_offset</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+    
+    <span class="c1"># Fixed parameters label</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_offset</span> <span class="o">+</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39; Fixed: $ N$, $V$, $T$&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="c1"># Randomly place particles</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">x_offset</span><span class="p">)</span>  <span class="c1"># Ensure different particles per box</span>
+    <span class="n">num_particles</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="n">particle_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_particles</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_offset</span> <span class="o">+</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">px</span><span class="p">,</span> <span class="n">py</span> <span class="ow">in</span> <span class="n">particle_positions</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">,</span> <span class="s1">&#39;ko&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>  <span class="c1"># Particles as black dots</span>
+        <span class="c1"># Add motion arrows</span>
+        <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">px</span><span class="p">,</span> <span class="n">py</span><span class="p">,</span> <span class="n">dx</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">dy</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Draw a wavy line to represent thermal contact with a heat bath</span>
+    <span class="n">heat_bath_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">heat_bath_x</span> <span class="o">=</span> <span class="n">x_offset</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">heat_bath_y</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">heat_bath_x</span><span class="p">,</span> <span class="n">heat_bath_y</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    
+<span class="c1"># Create figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="c1"># Draw three systems connected to a heat bath (NVT ensemble representation)</span>
+<span class="n">draw_nvt_system</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">x_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">draw_nvt_system</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">x_offset</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">draw_nvt_system</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">x_offset</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Label the entire system</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;Canonical Ensemble ($NVT$)&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># Label the heat bath</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;Heat Bath&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="c1"># Show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="canonical-distribution">
+<h2>Canonical distribution<a class="headerlink" href="#canonical-distribution" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Let us write down probability of a macrostate where an isolated system has energy <span class="math notranslate nohighlight">\(E\)</span> and resorovir has <span class="math notranslate nohighlight">\(E_t-E\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p(E) = \frac{\Omega(E) \Omega_r(E_t - E)}{\Omega_t(E_t)} 
+\]</div>
 <ul>
-<li><p>Since the reservoir is <strong>much larger than the system</strong> <span class="math notranslate nohighlight">\( E \ll E_t \)</span>, its entropy or log of microstates is a <strong>smooth function</strong> of energy:</p>
+<li><p>Since the reservoir is <strong>much larger than the system</strong> <span class="math notranslate nohighlight">\( E \ll E_t \)</span>, its log of microstates is a <strong>smooth function</strong> of energy we can expand in Tayor series</p>
 <div class="math notranslate nohighlight">
 \[log\Omega_r(E_t-E) \approx log\Omega_r(E_t)  - \frac{\partial log \Omega_r}{\partial E}E = const  - \beta E\]</div>
 </li>
-<li><p>First factor is constnatn independent of energy and the reservoir influence is now only described by the coefficient which is related to temperature!</p></li>
+<li><p>First factor is constnatn independent of energy and the reservoir influence is now only described by temperature!</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\beta  = \frac{1}{k_B}\frac{dS}{dE}=\frac{1}{k_BT}\]</div>
@@ -681,7 +1237,7 @@ log\Omega(n)}{\partial  n} = \frac{k_B}{\epsilon}log \frac{N-n}{N}\]</div>
   Z = \sum_E \Omega(E) e^{-\beta E} = \sum_i e^{-\beta E_i} 
 \]</div>
 <ul class="simple">
-<li><p>The <strong>partition function</strong> <span class="math notranslate nohighlight">\(Z\)</span> keeps the normalization of the ratio and is a sum over all micro or macrostates weighted by exponential Boltzman factor.</p></li>
+<li><p>The <strong>partition function</strong> <span class="math notranslate nohighlight">\(Z\)</span> keeps the normalization of the ratio. It can be written either as a sum over all micro or macrostates weighted by exponential Boltzman factor.</p></li>
 </ul>
 </div>
 <div class="tip admonition">
@@ -710,6 +1266,44 @@ Z \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U - TS)} = e^{-\beta F}
 </section>
 <section id="examples-of-using-nvt">
 <h2>Examples of using NVT<a class="headerlink" href="#examples-of-using-nvt" title="Permalink to this heading">#</a></h2>
+<p><strong>Sum over macrostates</strong></p>
+<ul class="simple">
+<li><p>Consider three spins where up and down orientations have equal energy <span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z = \sum_E \Omega(E)e^{-\beta E} = 8e^{-3\beta\epsilon }\]</div>
+<p><strong>Sum over microstates</strong></p>
+<ul class="simple">
+<li><p>Alternatively, instead of summing over energy levels, we can sum over <strong>all microstates explicitly</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z = \sum_i e^{-\beta E_i}
+\]</div>
+<ul class="simple">
+<li><p>Since each spin is independent, <span class="math notranslate nohighlight">\(E=E_1+E_2+E_3\)</span> the sum factorizes!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z = \sum_{s_1} e^{-\beta E_1}   \sum_{s_2} e^{-\beta E_2}  \sum_{s_3} e^{-\beta E_3}
+\]</div>
+<ul class="simple">
+<li><p>Each sum runs over the two possible spin orientations (<span class="math notranslate nohighlight">\(\uparrow\)</span>, <span class="math notranslate nohighlight">\(\downarrow\)</span>), both of which have the same energy <span class="math notranslate nohighlight">\( \epsilon \)</span>, so:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\sum_{s_i} e^{-\beta E_i} = e^{-\beta \epsilon} + e^{-\beta \epsilon} = 2 e^{-\beta \epsilon}
+\]</div>
+<ul class="simple">
+<li><p>Thus, for three spins:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z = \left( 2 e^{-\beta \epsilon} \right)^3 = 8 e^{-\beta \epsilon}
+\]</div>
+<ul class="simple">
+<li><p>which agrees with our previous result.</p></li>
+</ul>
 <div class="note admonition">
 <p class="admonition-title"><strong>Two-state partciles (NVT)</strong></p>
 <p>Cnsider a simple two-level system where lower level has energy <span class="math notranslate nohighlight">\(0\)</span> and upper level <span class="math notranslate nohighlight">\(\epsilon\)</span>. Determine how the fraction of excited states <span class="math notranslate nohighlight">\(f=\frac{n}{N}\)</span> changes with temperature.</p>
@@ -981,11 +1575,15 @@ DefiningDefine <span class="math notranslate nohighlight">\(M =  N_{\uparrow} - 
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-ensemble-nve">Microcanonical Ensemble (NVE)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications-of-nve">Applications of NVE</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microcanonical-partition-function-grows-exponentially-with-system-size">Microcanonical partition function grows exponentially with system size</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#particles-in-a-box">Particles in a box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spins-on-a-lattice">Spins on a lattice</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exchanging-energy">Exchanging Energy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-as-the-driver-of-energy-partitioning">Temperature as the driver of energy partitioning</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#canonical-distribution">Canonical distribution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-and-macrostate-probabilities">Free energy and macrostate probabilities</a></li>
