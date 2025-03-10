@@ -1035,6 +1035,11 @@ S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
 <img alt="../_images/34c9909762b81959b21ee963cbfd33556e1be0c90bd02f9e9b9362dede8005ad.png" src="../_images/34c9909762b81959b21ee963cbfd33556e1be0c90bd02f9e9b9362dede8005ad.png" />
 </div>
 </div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/fb56bd226eda89c94a681c6a9e2e455f57c978edecb33b9b26ccf0653cb79d5e.png" src="../_images/fb56bd226eda89c94a681c6a9e2e455f57c978edecb33b9b26ccf0653cb79d5e.png" />
+</div>
+</div>
 <ul>
 <li><p><span class="math notranslate nohighlight">\( \Omega(E) \)</span> is the <strong>number of microstates</strong> available to the system when it has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\( \Omega_r(E_t - E) \)</span> is the <strong>number of microstates</strong> available to the reservoir when the system has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
@@ -1050,14 +1055,7 @@ S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
   \Omega_t(E_t) = \sum_E \Omega(E) \Omega_r(E_t - E)
   \]</div>
 </li>
-<li><p>The system is more likely to be in a macrostate <span class="math notranslate nohighlight">\( E \)</span> if the reservoir has <strong>many ways</strong> to accommodate the remaining energy <span class="math notranslate nohighlight">\(E_t - E\)</span>.</p></li>
-</ul>
-<ul class="simple">
-<li><p>Consider partition of energy between system and reserovir</p></li>
-<li><p><span class="math notranslate nohighlight">\(N_1 = 5\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(N_2 = 20\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(E_{tot}= 10\)</span></p></li>
-<li><p>We use the scaling <span class="math notranslate nohighlight">\(\Omega\sim E^N\)</span> to estimate how energy will be partitione to give us maximum number of microstates</p></li>
+<li><p>The system is more likely to be in a macrostate <span class="math notranslate nohighlight">\( E \)</span> if the are are <strong>many ways</strong> to accommodate the system and remaining energy <span class="math notranslate nohighlight">\(E_t - E\)</span>. Lets us find the most likely paritioning of energy!</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -1066,65 +1064,71 @@ S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Re-run with corrected LaTeX syntax</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="c1"># Define system sizes</span>
-<span class="n">N1</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">N2</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="c1"># Define different system sizes</span>
+<span class="n">system_sizes</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">)]</span>
 
 <span class="c1"># Define total energy</span>
-<span class="n">E_total</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">E_total</span> <span class="o">=</span> <span class="mi">5</span>
 
-<span class="c1"># Define energy range for system 1 (from 0 to E_total)</span>
-<span class="n">E1_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">E_total</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>  <span class="c1"># Avoid E=0 to prevent singularities</span>
-<span class="n">E2_values</span> <span class="o">=</span> <span class="n">E_total</span> <span class="o">-</span> <span class="n">E1_values</span>  <span class="c1"># Energy remaining for system 2</span>
-
-<span class="c1"># Compute microstates using Omega(E) ~ E^(3N/2)</span>
-<span class="n">Omega1</span> <span class="o">=</span> <span class="n">E1_values</span><span class="o">**</span><span class="p">(</span><span class="n">N1</span><span class="p">)</span>
-<span class="n">Omega2</span> <span class="o">=</span> <span class="n">E2_values</span><span class="o">**</span><span class="p">(</span><span class="n">N2</span><span class="p">)</span>
-
-<span class="c1"># Avoid zero energy cases causing singularities (set Omega=0 when E=0)</span>
-<span class="n">Omega1</span><span class="p">[</span><span class="n">E1_values</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">Omega2</span><span class="p">[</span><span class="n">E2_values</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="c1"># Compute total number of microstates (product of subsystems)</span>
-<span class="n">Omega_total</span> <span class="o">=</span> <span class="n">Omega1</span> <span class="o">*</span> <span class="n">Omega2</span>
-
-<span class="c1"># Plot results</span>
+<span class="c1"># Create figure</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E1_values</span><span class="p">,</span> <span class="n">Omega_total</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\Omega_{\mathrm</span><span class="si">{total}</span><span class="s1">} = \Omega_1 \cdot \Omega_2$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Energy given to System 1 ($E_1$)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Total Microstates ($\Omega_{\mathrm</span><span class="si">{total}</span><span class="s2">}$)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Total Number of Microstates as Energy is Partitioned&quot;</span><span class="p">)</span>
+
+<span class="c1"># Loop over different system sizes and plot</span>
+<span class="k">for</span> <span class="n">N1</span><span class="p">,</span> <span class="n">N2</span> <span class="ow">in</span> <span class="n">system_sizes</span><span class="p">:</span>
+    <span class="c1"># Define energy range for system 1 (from 0 to E_total)</span>
+    <span class="n">E1_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">E_total</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>  <span class="c1"># Avoid E=0 to prevent singularities</span>
+    <span class="n">E2_values</span> <span class="o">=</span> <span class="n">E_total</span> <span class="o">-</span> <span class="n">E1_values</span>  <span class="c1"># Energy remaining for system 2</span>
+
+    <span class="c1"># Compute microstates using Omega(E) ~ E^(3N/2)</span>
+    <span class="n">Omega1</span> <span class="o">=</span> <span class="n">E1_values</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">N1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">Omega2</span> <span class="o">=</span> <span class="n">E2_values</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">N2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Compute total number of microstates (product of subsystems)</span>
+    <span class="n">Omega_total</span> <span class="o">=</span> <span class="n">Omega1</span> <span class="o">*</span> <span class="n">Omega2</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">Omega1</span> <span class="o">*</span> <span class="n">Omega2</span><span class="p">)</span>  <span class="c1"># Normalize to get probability</span>
+
+    <span class="c1"># Plot results</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E1_values</span><span class="p">,</span> <span class="n">Omega_total</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;$N_1=</span><span class="si">{</span><span class="n">N1</span><span class="si">}</span><span class="s1">, N_2=</span><span class="si">{</span><span class="n">N2</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot settings</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Energy given to System: $E_1$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$P(E_1)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Probability Distribution of Energy Partitioning&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show plot</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/eefff977a86bcc929038c839d5ca056d57c0b7e93b161ba94eaecb16d9878e97.png" src="../_images/eefff977a86bcc929038c839d5ca056d57c0b7e93b161ba94eaecb16d9878e97.png" />
+<img alt="../_images/0aa8af83d113904267ff78d3314c7b514a25ca52527f679838bebdc691f3001b.png" src="../_images/0aa8af83d113904267ff78d3314c7b514a25ca52527f679838bebdc691f3001b.png" />
 </div>
 </div>
 </section>
 <section id="temperature-as-the-driver-of-energy-partitioning">
 <h3>Temperature as the driver of energy partitioning<a class="headerlink" href="#temperature-as-the-driver-of-energy-partitioning" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Which paritioning is most likely? we write down probability of macrostate and find its maxima with respect to <span class="math notranslate nohighlight">\(E\)</span></p></li>
+<li><p>Which paritioning is most likely? For two systems exchanging energy we can write down probability of macrostate and find its maxima with respect to <span class="math notranslate nohighlight">\(E\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \frac{d }{dE}logP(E) = \frac{d }{dE} \bigg[ log\Omega_1(E)\Omega_2(E_{tot}-E) \bigg]= 0
 \]</div>
 <div class="math notranslate nohighlight">
-\[\frac{d }{dE}logP(E) = \bigg[ \frac{d }{dE} log\Omega_1 - \frac{d}{dE}\Omega_2 \bigg]= 0\]</div>
+\[\frac{d}{dE}logP(E) = \bigg[ \frac{d }{dE} log\Omega_1 - \frac{d}{dE}\Omega_2 \bigg]= 0\]</div>
 <ul class="simple">
-<li><p>We once again come to appreacite that <span class="math notranslate nohighlight">\(\frac{1}{T} = \frac{dS}{dE} = \frac{d log\Omega}{dE}\)</span></p></li>
-<li><p>Recall what we learned form thermodynamics: System undergoes spotnaenous change drive by maximization of entropy.</p></li>
-<li><p>In other words we see very clearly that <strong>maximizing probability of a macrostate is the same as maximizing entropy!</strong></p></li>
+<li><p>We come to appreacite that <strong>temperature quantifies growth of microstates with energy</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{1}{T} = \frac{dS}{dE} = k_B\frac{d log\Omega}{dE}\]</div>
+<ul class="simple">
+<li><p>From thermodynamics we learned that system undergoes spotnaenous change to attain maximization of entropy.</p></li>
+<li><p>We thus see that <strong>Maximizing probability of a macrostate is the same as maximizing entropy!</strong></p></li>
 </ul>
 </section>
 <section id="thermal-equilirbium-in-ideal-gasses">
@@ -1276,7 +1280,7 @@ Z =\int e^{-\beta (E-TS)}dE \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U -
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Recalculate entropy and probability density</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">S_new</span> <span class="o">=</span> <span class="n">S_prefactor_new</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">E</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">Probability_density_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">S_new</span><span class="p">)</span> <span class="o">*</span> <span class="n">Boltzmann_factor</span>
