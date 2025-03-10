@@ -820,58 +820,6 @@ R = \sqrt{E}
 <img alt="../_images/a57bcf62c5f9b773719345c554739c8b4ff20b4efa41b39910ca4e124f46e1d5.png" src="../_images/a57bcf62c5f9b773719345c554739c8b4ff20b4efa41b39910ca4e124f46e1d5.png" />
 </div>
 </div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="c1"># Define parameters</span>
-<span class="n">R_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>  <span class="c1"># Different radius values representing energy levels</span>
-<span class="n">n_max</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Maximum quantum number to consider</span>
-
-<span class="c1"># Generate quantum states (n_x, n_y) within the given R values</span>
-<span class="n">n_x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">n_y_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="c1"># Create plot</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-
-<span class="c1"># Plot quantum states as dots</span>
-<span class="k">for</span> <span class="n">n_x</span> <span class="ow">in</span> <span class="n">n_x_values</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">n_y</span> <span class="ow">in</span> <span class="n">n_y_values</span><span class="p">:</span>
-        <span class="n">energy</span> <span class="o">=</span> <span class="n">n_x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n_y</span><span class="o">**</span><span class="mi">2</span>
-        <span class="k">if</span> <span class="n">energy</span> <span class="o">&lt;=</span> <span class="nb">max</span><span class="p">(</span><span class="n">R_values</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">:</span>  <span class="c1"># Only plot states within the largest R</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="c1"># Plot circles representing total number of states within radius R</span>
-<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">R</span> <span class="ow">in</span> <span class="n">R_values</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">R</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;R = </span><span class="si">{</span><span class="n">R</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
-
-<span class="c1"># Labels and legend</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$n_x$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$n_y$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Growth of Quantum States for 2D Particle in a Box&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_max</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_max</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>  <span class="c1"># Ensure equal scaling</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="../_images/ae159b9d48582aa6c2372a9c9361469a1b15f7ad5736a2ccdffad36edc313f8b.png" src="../_images/ae159b9d48582aa6c2372a9c9361469a1b15f7ad5736a2ccdffad36edc313f8b.png" />
-</div>
-</div>
 </section>
 <section id="two-state-system">
 <h3>Two state system<a class="headerlink" href="#two-state-system" title="Permalink to this heading">#</a></h3>
@@ -884,10 +832,7 @@ R = \sqrt{E}
   E = n\epsilon
   \]</div>
 </li>
-<li><p>The fraction would therefore be:</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[f = \frac{E}{N \epsilon}\]</div>
 <div class="math notranslate nohighlight">
 \[
 log\Omega(E, N) = log \Omega(N, n) = log \frac{N!}{n! (N-n)!} = \frac{N!}{(E/\epsilon)! (N-E/\epsilon)!}
@@ -900,33 +845,31 @@ log\Omega(E, N) = log \Omega(N, n) = log \frac{N!}{n! (N-n)!} = \frac{N!}{(E/\ep
 log\Omega(E, N)  \approx N \log N - \frac{E}{\epsilon} \log \frac{E}{\epsilon} - (N - E/\epsilon) \log (N - E/\epsilon) 
 \]</div>
 <ul class="simple">
-<li><p>Keeping in mind that <span class="math notranslate nohighlight">\(E\)</span> is extensive quantity growing with <span class="math notranslate nohighlight">\(N\)</span> we once again demonstrated <span class="math notranslate nohighlight">\(\Omega(E, N)\sim e^{Ns}\)</span> property</p></li>
-<li><p>The equilibrium value of <span class="math notranslate nohighlight">\( E \)</span> is determined by maximizing the entropy <span class="math notranslate nohighlight">\( S = k_B \log \Omega \)</span>. Using the given expression for <span class="math notranslate nohighlight">\( \log \Omega \)</span>, we differentiate with respect to <span class="math notranslate nohighlight">\( E \)</span>:</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(E\)</span> is extensive quantity growing with <span class="math notranslate nohighlight">\(N\)</span> we once again demonstrated <span class="math notranslate nohighlight">\(\Omega(E, N)\sim e^{Ns}\)</span> property</p></li>
+<li><p>We connect number of excited states to equilibrium temperature via:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
+\[\frac{1}{T} = \frac{dS}{dE} = k_B\frac{d log\Omega}{dE}\]</div>
+<div class="math notranslate nohighlight">
 \[
-\frac{\partial \log \Omega}{\partial E} = - \frac{1}{\epsilon} \log \frac{E}{\epsilon} + \frac{1}{\epsilon} \log (N - E/\epsilon) = 0
+\frac{1}{k_BT} = - \frac{1}{\epsilon} \log \frac{E}{\epsilon} + \frac{1}{\epsilon} \log (N - E/\epsilon) 
 \]</div>
 <ul class="simple">
-<li><p>This simplifies to:</p></li>
+<li><p>Denoting <span class="math notranslate nohighlight">\(\beta= \frac{1}{k_BT}\)</span> after some manipulation we get:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \frac{E}{\epsilon} = (N - E/\epsilon) e^{-\beta \epsilon}
 \]</div>
-<div class="math notranslate nohighlight">
-\[
-\frac{E}{N\epsilon} = \frac{1}{1 + e^{\beta \epsilon}}
-\]</div>
 <ul class="simple">
-<li><p>Thus, the fraction of particles in the excited state follows the Fermi-Dirac-like distribution:</p></li>
+<li><p>The fraction would therefore be:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-f = \frac{1}{1 + e^{\beta \epsilon}}
+f = \frac{n}{N} = \frac{E}{N\epsilon} = \frac{1}{1 + e^{\beta \epsilon}}
 \]</div>
 <ul class="simple">
-<li><p>which is the well-known Boltzmann factor result for a two-level system in thermal equilibrium.</p></li>
+<li><p>This is the well-known Boltzmann factor result for a two-level system in thermal equilibrium.</p></li>
 <li><p>This means that at high temperatures (<span class="math notranslate nohighlight">\( k_B T \gg \epsilon \)</span>), approximately half the particles are excited, while at low temperatures (<span class="math notranslate nohighlight">\( k_B T \ll \epsilon \)</span>), the fraction of excited particles is exponentially suppressed.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
@@ -940,48 +883,31 @@ f = \frac{1}{1 + e^{\beta \epsilon}}
 <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="c1"># Create a figure with two subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-<span class="c1"># Define system sizes for the toy example</span>
+<span class="c1"># Subplot 1: Growth of Ω(E) with Energy for Different Spin System Sizes</span>
 <span class="n">N_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>  <span class="c1"># Different spin system sizes</span>
 
 <span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_values</span><span class="p">:</span>
     <span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Possible energy levels</span>
     <span class="n">multiplicities</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">energies</span><span class="p">)</span>  <span class="c1"># Compute binomial coefficient</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">multiplicities</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">multiplicities</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
 
-<span class="c1"># Plot settings</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Use logarithmic scale to highlight exponential growth</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Total Energy $E$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Omega(E)$ (Number of Microstates)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Growth of $\Omega(E)$ with Energy for Different Spin System Sizes&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="../_images/15c92677479d505f33bb88e804e33e1c876acacdcf1202ab9176f1962e4e6fc4.png" src="../_images/15c92677479d505f33bb88e804e33e1c876acacdcf1202ab9176f1962e4e6fc4.png" />
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="c1"># Plot settings for first subplot</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>  <span class="c1"># Use logarithmic scale to highlight exponential growth</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Total Energy $E$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Omega(E)$ (Number of Microstates)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Growth of $\Omega(E)$ with Energy&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 
-<span class="c1"># Define parameters</span>
+<span class="c1"># Subplot 2: Fraction of Particles in the Excited State vs. Temperature</span>
 <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Set energy scale to 1 for simplicity</span>
 <span class="n">k_B</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Boltzmann constant set to 1 for simplicity</span>
 <span class="n">T_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]</span>  <span class="c1"># Different temperature values</span>
 
-<span class="c1"># Define function for f</span>
+<span class="c1"># Define function for fraction of excited particles</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">fraction_excited</span><span class="p">(</span><span class="n">beta_epsilon</span><span class="p">):</span>
     <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">beta_epsilon</span><span class="p">))</span>
 
@@ -989,26 +915,27 @@ f = \frac{1}{1 + e^{\beta \epsilon}}
 <span class="n">beta_epsilon_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
 <span class="c1"># Plot f for different temperatures</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
 <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">T_values</span><span class="p">:</span>
     <span class="n">beta_epsilon</span> <span class="o">=</span> <span class="n">epsilon</span> <span class="o">/</span> <span class="p">(</span><span class="n">k_B</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">beta_epsilon_values</span>
     <span class="n">f_values</span> <span class="o">=</span> <span class="n">fraction_excited</span><span class="p">(</span><span class="n">beta_epsilon</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">beta_epsilon_values</span><span class="p">,</span> <span class="n">f_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T = </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">beta_epsilon_values</span><span class="p">,</span> <span class="n">f_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;T = </span><span class="si">{</span><span class="n">T</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="c1"># Labels and legend</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\beta \epsilon$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Fraction of Excited Particles $f$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Fraction of Particles in the Excited State vs. Temperature&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1"># Plot settings for second subplot</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\beta \epsilon$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Fraction of Excited Particles $f$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Fraction of Particles in the Excited State&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/eadcc1e4b2e0b51d074551fcff0c8dc1d2fd2c7831c124d2afab5339c599be0c.png" src="../_images/eadcc1e4b2e0b51d074551fcff0c8dc1d2fd2c7831c124d2afab5339c599be0c.png" />
+<img alt="../_images/d717ab920389c5a524342c670da909011367acd339cab018386d6d2ebddf97e3.png" src="../_images/d717ab920389c5a524342c670da909011367acd339cab018386d6d2ebddf97e3.png" />
 </div>
 </div>
 <div class="note dropdown admonition">
@@ -1349,7 +1276,7 @@ Z =\int e^{-\beta (E-TS)}dE \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U -
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Recalculate entropy and probability density</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">S_new</span> <span class="o">=</span> <span class="n">S_prefactor_new</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">E</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">Probability_density_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">S_new</span><span class="p">)</span> <span class="o">*</span> <span class="n">Boltzmann_factor</span>
