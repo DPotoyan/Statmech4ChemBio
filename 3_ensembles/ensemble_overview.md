@@ -300,10 +300,4 @@ $$\frac{\partial log \Omega (E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{\partia
 
 #### Example: thermal contact between two ideal gases
 
-Recall that for ideal gas we have $\Omega(E) = C V^N E^{3/2 N}$.  Therefore for an ideal gas we will have:
-
-$$\frac{\partial log \Omega (E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{3}{2}\frac{N_1}{U_1} - \frac{3}{2}\frac{N_2}{U_2} = 0$$
-
-Using definition of entropy we get the most probable value of energy $(U_1)$ corresponding to the equilibirum state 
-
-$$\frac{1}{k_B T} = \frac{3}{2}\frac{N_1}{U_1} = \frac{3}{2}\frac{N_2}{U_2}$$
+Therefore for an ideal gas we will have:
