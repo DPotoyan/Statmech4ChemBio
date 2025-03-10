@@ -17,7 +17,7 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 ------------------
 # Increase the number of particles
 num_particles = 200  # More particles
-
+Lx, Ly=10,10
 # Generate new random particle positions
 x_positions = np.random.uniform(0, Lx, num_particles)
 y_positions = np.random.uniform(0, Ly, num_particles)
@@ -50,12 +50,12 @@ plt.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[2], line 5[0m
-[1;32m      2[0m num_particles [38;5;241m=[39m [38;5;241m200[39m  [38;5;66;03m# More particles[39;00m
-[1;32m      4[0m [38;5;66;03m# Generate new random particle positions[39;00m
-[0;32m----> 5[0m x_positions [38;5;241m=[39m np[38;5;241m.[39mrandom[38;5;241m.[39muniform([38;5;241m0[39m, [43mLx[49m, num_particles)
-[1;32m      6[0m y_positions [38;5;241m=[39m np[38;5;241m.[39mrandom[38;5;241m.[39muniform([38;5;241m0[39m, Ly, num_particles)
-[1;32m      8[0m [38;5;66;03m# Create plot[39;00m
+Cell [0;32mIn[2], line 15[0m
+[1;32m     12[0m plt[38;5;241m.[39mscatter(x_positions, y_positions, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mblue[39m[38;5;124m'[39m, s[38;5;241m=[39m[38;5;241m20[39m, alpha[38;5;241m=[39m[38;5;241m0.7[39m, label[38;5;241m=[39m[38;5;124m"[39m[38;5;124mParticles[39m[38;5;124m"[39m)
+[1;32m     14[0m [38;5;66;03m# Draw grid[39;00m
+[0;32m---> 15[0m [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m np[38;5;241m.[39marange([38;5;241m0[39m, Lx [38;5;241m+[39m [43mcell_size[49m, cell_size):
+[1;32m     16[0m     plt[38;5;241m.[39maxvline(x, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mblack[39m[38;5;124m'[39m, linestyle[38;5;241m=[39m[38;5;124m'[39m[38;5;124m-[39m[38;5;124m'[39m, linewidth[38;5;241m=[39m[38;5;241m0.8[39m)
+[1;32m     17[0m [38;5;28;01mfor[39;00m y [38;5;129;01min[39;00m np[38;5;241m.[39marange([38;5;241m0[39m, Ly [38;5;241m+[39m cell_size, cell_size):
 
-[0;31mNameError[0m: name 'Lx' is not defined
+[0;31mNameError[0m: name 'cell_size' is not defined
 

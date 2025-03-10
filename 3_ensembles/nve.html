@@ -618,7 +618,7 @@ S = Nk_B log2
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase the number of particles</span>
 <span class="n">num_particles</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># More particles</span>
-
+<span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span>
 <span class="c1"># Generate new random particle positions</span>
 <span class="n">x_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">num_particles</span><span class="p">)</span>
 <span class="n">y_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">num_particles</span><span class="p">)</span>
@@ -652,16 +652,17 @@ S = Nk_B log2
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">num_particles</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># More particles</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Generate new random particle positions</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">x_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">num_particles</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">y_positions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">num_particles</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Create plot</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_positions</span><span class="p">,</span> <span class="n">y_positions</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Particles&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="c1"># Draw grid</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span> <span class="o">+</span> <span class="n">cell_size</span><span class="p">,</span> <span class="n">cell_size</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Ly</span> <span class="o">+</span> <span class="n">cell_size</span><span class="p">,</span> <span class="n">cell_size</span><span class="p">):</span>
 
-<span class="ne">NameError</span>: name &#39;Lx&#39; is not defined
+<span class="ne">NameError</span>: name &#39;cell_size&#39; is not defined
 </pre></div>
 </div>
+<img alt="../_images/eec57c01d96f4778ed857b700d53838febd85b3dac81a45c55732d2aed7cbfd4.png" src="../_images/eec57c01d96f4778ed857b700d53838febd85b3dac81a45c55732d2aed7cbfd4.png" />
 </div>
 </div>
 <ul class="simple">
