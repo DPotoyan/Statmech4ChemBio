@@ -15,34 +15,37 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Increase the number of particles
-num_particles = 200  # More particles
-Lx, Ly=10,10
-# Generate new random particle positions
-x_positions = np.random.uniform(0, Lx, num_particles)
-y_positions = np.random.uniform(0, Ly, num_particles)
+# Increase the entropy prefactor to shift the peak to the right
+S_prefactor_new = 2.5  # Larger prefactor makes entropy increase faster
 
-# Create plot
-plt.figure(figsize=(8, 8))
+# Recalculate entropy and probability density
+S_new = S_prefactor_new * np.log(1 + E)
+Probability_density_new = np.exp(S_new) * Boltzmann_factor
 
-# Plot particles
-plt.scatter(x_positions, y_positions, color='blue', s=20, alpha=0.7, label="Particles")
+# Create the updated plot
+plt.figure(figsize=(8, 6))
 
-# Draw grid
-for x in np.arange(0, Lx + cell_size, cell_size):
-    plt.axvline(x, color='black', linestyle='-', linewidth=0.8)
-for y in np.arange(0, Ly + cell_size, cell_size):
-    plt.axhline(y, color='black', linestyle='-', linewidth=0.8)
+# Plot entropy (scaled for visualization)
+plt.plot(E, S_new / max(S_new), label=r"Entropy $S(E)$ (scaled)", color="blue", linestyle="--")
+
+# Plot Boltzmann factor (scaled for visualization)
+plt.plot(E, Boltzmann_factor / max(Boltzmann_factor), label=r"Boltzmann Factor $e^{-\beta E}$ (scaled)", color="red", linestyle="--")
+
+# Plot updated probability density (product of both)
+plt.plot(E, Probability_density_new / max(Probability_density_new), label=r"Probability Density $\Omega(E) e^{-\beta E}$", color="black")
+
+# Highlight new peak region
+E_peak_new = E[np.argmax(Probability_density_new)]
+plt.axvline(E_peak_new, color="green", linestyle=":", label="New Peak Region")
 
 # Labels and title
-plt.xlabel("x")
-plt.ylabel("y")
-plt.title("Increased Number of Particles in a 2D Box with Grid Cells")
-plt.xlim(0, Lx)
-plt.ylim(0, Ly)
+plt.xlabel("Energy $E$")
+plt.ylabel("Scaled Functions")
+plt.title("Shifted Peak: Entropy Growth, Boltzmann Factor Decay, and Probability Density")
 plt.legend()
-plt.grid(False)  # Disable matplotlib default grid to use custom grid
+plt.grid(True, linestyle="--", alpha=0.6)
 
+# Show plot
 plt.show()
 
 ------------------
@@ -50,12 +53,12 @@ plt.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[2], line 15[0m
-[1;32m     12[0m plt[38;5;241m.[39mscatter(x_positions, y_positions, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mblue[39m[38;5;124m'[39m, s[38;5;241m=[39m[38;5;241m20[39m, alpha[38;5;241m=[39m[38;5;241m0.7[39m, label[38;5;241m=[39m[38;5;124m"[39m[38;5;124mParticles[39m[38;5;124m"[39m)
-[1;32m     14[0m [38;5;66;03m# Draw grid[39;00m
-[0;32m---> 15[0m [38;5;28;01mfor[39;00m x [38;5;129;01min[39;00m np[38;5;241m.[39marange([38;5;241m0[39m, Lx [38;5;241m+[39m [43mcell_size[49m, cell_size):
-[1;32m     16[0m     plt[38;5;241m.[39maxvline(x, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mblack[39m[38;5;124m'[39m, linestyle[38;5;241m=[39m[38;5;124m'[39m[38;5;124m-[39m[38;5;124m'[39m, linewidth[38;5;241m=[39m[38;5;241m0.8[39m)
-[1;32m     17[0m [38;5;28;01mfor[39;00m y [38;5;129;01min[39;00m np[38;5;241m.[39marange([38;5;241m0[39m, Ly [38;5;241m+[39m cell_size, cell_size):
+Cell [0;32mIn[10], line 6[0m
+[1;32m      4[0m [38;5;66;03m# Recalculate entropy and probability density[39;00m
+[1;32m      5[0m S_new [38;5;241m=[39m S_prefactor_new [38;5;241m*[39m np[38;5;241m.[39mlog([38;5;241m1[39m [38;5;241m+[39m E)
+[0;32m----> 6[0m Probability_density_new [38;5;241m=[39m np[38;5;241m.[39mexp(S_new) [38;5;241m*[39m [43mBoltzmann_factor[49m
+[1;32m      8[0m [38;5;66;03m# Create the updated plot[39;00m
+[1;32m      9[0m plt[38;5;241m.[39mfigure(figsize[38;5;241m=[39m([38;5;241m8[39m, [38;5;241m6[39m))
 
-[0;31mNameError[0m: name 'cell_size' is not defined
+[0;31mNameError[0m: name 'Boltzmann_factor' is not defined
 
