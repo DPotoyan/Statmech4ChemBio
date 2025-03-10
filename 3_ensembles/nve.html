@@ -1301,6 +1301,44 @@ Z =\int e^{-\beta (E-TS)}dE \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U -
 <ul class="simple">
 <li><p>We find that <span class="math notranslate nohighlight">\(\Omega\)</span> and <span class="math notranslate nohighlight">\(Z\)</span> are related by <strong>Laplace Tranform</strong> and energy <span class="math notranslate nohighlight">\(E\)</span> and free energy <span class="math notranslate nohighlight">\(F\)</span> via <strong>Legendre transform</strong></p></li>
 </ul>
+<div class="cell tag_hied-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase the entropy prefactor to shift the peak to the right</span>
+<span class="n">S_prefactor_new</span> <span class="o">=</span> <span class="mf">2.5</span>  <span class="c1"># Larger prefactor makes entropy increase faster</span>
+
+<span class="c1"># Recalculate entropy and probability density</span>
+<span class="n">S_new</span> <span class="o">=</span> <span class="n">S_prefactor_new</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">E</span><span class="p">)</span>
+<span class="n">Probability_density_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">S_new</span><span class="p">)</span> <span class="o">*</span> <span class="n">Boltzmann_factor</span>
+
+<span class="c1"># Create the updated plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot entropy (scaled for visualization)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">S_new</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">S_new</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Entropy $S(E)$ (scaled)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot Boltzmann factor (scaled for visualization)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">Boltzmann_factor</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">Boltzmann_factor</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Boltzmann Factor $e^{-\beta E}$ (scaled)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot updated probability density (product of both)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">Probability_density_new</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">Probability_density_new</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Probability Density $\Omega(E) e^{-\beta E}$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="c1"># Highlight new peak region</span>
+<span class="n">E_peak_new</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Probability_density_new</span><span class="p">)]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">E_peak_new</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;New Peak Region&quot;</span><span class="p">)</span>
+
+<span class="c1"># Labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Energy $E$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Scaled Functions&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Shifted Peak: Entropy Growth, Boltzmann Factor Decay, and Probability Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="c1"># Show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="examples-of-using-nvt">
 <h2>Examples of using NVT<a class="headerlink" href="#examples-of-using-nvt" title="Permalink to this heading">#</a></h2>
