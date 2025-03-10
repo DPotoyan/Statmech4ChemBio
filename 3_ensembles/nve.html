@@ -750,13 +750,13 @@ R = \sqrt{E}
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
 <span class="c1"># ---------------- Plot 1: Scaling of Microstates ----------------</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
 <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">N_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
 
-<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="n">N_values</span><span class="p">:</span>
-    <span class="n">Omega</span> <span class="o">=</span> <span class="n">E</span><span class="o">**</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>
-    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">Omega</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">10</span>
+
+<span class="n">Omega</span> <span class="o">=</span> <span class="n">E</span><span class="o">**</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">Omega</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
 
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Energy E&quot;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\Omega(E) \sim E^{\frac</span><span class="si">{3N}{2}</span><span class="s2">}$&quot;</span><span class="p">)</span>
@@ -766,7 +766,7 @@ R = \sqrt{E}
 <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="c1"># ---------------- Plot 2: Growth of Quantum States in 2D ----------------</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
 <span class="n">n_max</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># Reduce max quantum number for clarity</span>
 <span class="n">R_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
 <span class="n">n_x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -792,7 +792,7 @@ R = \sqrt{E}
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 
 <span class="c1"># ---------------- Plot 3: 3D Representation of Quantum States ----------------</span>
-<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
 <span class="n">n_max_3d</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Reduce quantum number range for clarity</span>
 
 <span class="c1"># Generate 3D quantum states</span>
@@ -818,7 +818,7 @@ R = \sqrt{E}
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/a57bcf62c5f9b773719345c554739c8b4ff20b4efa41b39910ca4e124f46e1d5.png" src="../_images/a57bcf62c5f9b773719345c554739c8b4ff20b4efa41b39910ca4e124f46e1d5.png" />
+<img alt="../_images/f619d7f43f5158491fc91a38e394692c58a56ba21ccae47cd53c781bed1a6bc9.png" src="../_images/f619d7f43f5158491fc91a38e394692c58a56ba21ccae47cd53c781bed1a6bc9.png" />
 </div>
 </div>
 </section>
@@ -1309,7 +1309,7 @@ Z =\int e^{-\beta (E-TS)}dE \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U -
 <section id="examples-of-using-nvt">
 <h2>Examples of using NVT<a class="headerlink" href="#examples-of-using-nvt" title="Permalink to this heading">#</a></h2>
 <div class="note admonition">
-<p class="admonition-title"><strong>Two-state partciles (NVT)</strong></p>
+<p class="admonition-title"><strong>non-interacting spins</strong></p>
 <ul class="simple">
 <li><p>Consider three spins where up and down orientations have equal energy <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
 <li><p>Show that sum over microstates and sum over macrostates leads to same expression of parition function.</p></li>
