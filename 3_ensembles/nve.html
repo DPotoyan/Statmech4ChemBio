@@ -1241,7 +1241,19 @@ Z =\int e^{-\beta (E-TS)}dE \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U -
 </ul>
 <div class="cell tag_hied-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase the entropy prefactor to shift the peak to the right</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define energy range</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Define parameters</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Inverse temperature (1/kT)</span>
+
+<span class="c1"># Compute the Boltzmann factor</span>
+<span class="n">Boltzmann_factor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">beta</span> <span class="o">*</span> <span class="n">E</span><span class="p">)</span>
+
+<span class="c1"># Increase the entropy prefactor to shift the peak to the right</span>
 <span class="n">S_prefactor_new</span> <span class="o">=</span> <span class="mf">2.5</span>  <span class="c1"># Larger prefactor makes entropy increase faster</span>
 
 <span class="c1"># Recalculate entropy and probability density</span>
@@ -1277,18 +1289,7 @@ Z =\int e^{-\beta (E-TS)}dE \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U -
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Recalculate entropy and probability density</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">S_new</span> <span class="o">=</span> <span class="n">S_prefactor_new</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">E</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">Probability_density_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">S_new</span><span class="p">)</span> <span class="o">*</span> <span class="n">Boltzmann_factor</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Create the updated plot</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
-<span class="ne">NameError</span>: name &#39;Boltzmann_factor&#39; is not defined
-</pre></div>
-</div>
+<img alt="../_images/e9af104601dea02b51610f51d9cc351d067170b61f1823766d81c534df986d61.png" src="../_images/e9af104601dea02b51610f51d9cc351d067170b61f1823766d81c534df986d61.png" />
 </div>
 </div>
 </section>
