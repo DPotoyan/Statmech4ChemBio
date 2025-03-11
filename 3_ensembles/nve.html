@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Ensemble equivalence &#8212; Statistical Mechanics for Chemistry and Biology</title>
+    <title>Intro to Statistical Ensembles &#8212; Statistical Mechanics for Chemistry and Biology</title>
   
   
   
@@ -187,7 +187,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Ensembles</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Ensemble equivalence</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Intro to Statistical Ensembles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nvt.html">Ensembles in phase-space</a></li>
 <li class="toctree-l2"><a class="reference internal" href="npt.html">muPT</a></li>
 </ul>
@@ -478,7 +478,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Ensemble equivalence</h1>
+    <h1>Intro to Statistical Ensembles</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -527,15 +527,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ensemble-equivalence">
-<h1>Ensemble equivalence<a class="headerlink" href="#ensemble-equivalence" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="intro-to-statistical-ensembles">
+<h1>Intro to Statistical Ensembles<a class="headerlink" href="#intro-to-statistical-ensembles" title="Permalink to this heading">#</a></h1>
 <div class="admonition-what-you-will-learn admonition">
 <p class="admonition-title"><strong>What you will learn</strong></p>
 <ul class="simple">
 <li><p><strong>Statistical Ensembles</strong>: Understanding the role of ensembles in statistical mechanics and how they describe macroscopic systems using probability distributions.</p></li>
 <li><p><strong>Microcanonical Ensemble (NVE)</strong>: Definition, characteristics, and assumptions—fixed energy, volume, and particle number; statistical weight of microstates.</p></li>
-<li><p><strong>Equivalence of Ensembles</strong>: Conditions under which the microcanonical and canonical ensembles give equivalent thermodynamic predictions in the thermodynamic limit.</p></li>
 <li><p><strong>Canonical Ensemble (NVT)</strong>: Definition and significance—fixed temperature, volume, and particle number; derivation of the Boltzmann factor.</p></li>
+<li><p><strong>Equivalence of Ensembles</strong>: Conditions under which the microcanonical and canonical ensembles give equivalent thermodynamic predictions in the thermodynamic limit.</p></li>
 <li><p><strong>Partition Function (<span class="math notranslate nohighlight">\(Z\)</span>)</strong>: Role of the partition function in statistical mechanics, its connection to thermodynamic properties (free energy, entropy, internal energy).</p></li>
 <li><p><strong>Boltzmann Distribution</strong>: Probability of a system being in a given energy state at equilibrium, leading to macroscopic observables.</p></li>
 <li><p><strong>Thermodynamic Connections</strong>: How ensemble averages link to macroscopic properties such as energy, entropy, and pressure.</p></li>
@@ -575,7 +575,7 @@ document.write(`
 \[S = k_B log \Omega\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\Omega\)</span> is the number of micro-states <strong>consistent with a macrostate of our system</strong>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(S(N, V, E)\)</span> is the entropy of an isolated system (we are in the NVE).</p></li>
+<li><p><span class="math notranslate nohighlight">\(S(N, V, E)\)</span> is the entropy of an isolated system.</p></li>
 <li><p><span class="math notranslate nohighlight">\(k_B =1.380649\cdot 10^{-23} J/K\)</span>,  Boltzmann’s constant</p></li>
 </ul>
 </div>
@@ -907,19 +907,21 @@ f = \frac{E}{N\epsilon} = \frac{1}{1 + e^{\beta \epsilon}}
 <ul>
 <li><p><span class="math notranslate nohighlight">\( \Omega(E) \)</span> is the <strong>number of microstates</strong> available to the system when it has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\( \Omega_r(E_t - E) \)</span> is the <strong>number of microstates</strong> available to the reservoir when the system has energy <span class="math notranslate nohighlight">\( E \)</span>.</p></li>
-<li><p>The probability of the system being in a <strong>macrostate</strong> that is, having energy <span class="math notranslate nohighlight">\(E\)</span> is:</p>
+<li><p><span class="math notranslate nohighlight">\( \Omega_t(E_t) \)</span> is the <strong>total number of microstates</strong></p></li>
+<li><p>Since reservoir and system can be considered statistically independent, the probability of finding system in a <strong>macrostate</strong> with energy <span class="math notranslate nohighlight">\(E\)</span> is:</p>
 <div class="math notranslate nohighlight">
 \[
   p(E) = \frac{\Omega(E) \Omega_r(E_t - E)}{\Omega_t(E_t)} 
   \]</div>
 </li>
-<li><p>The total number of microstates for the combined system is sum of all possible partitionings of energy between system and reservoir ensuring normalization</p>
+<li><p>This is a ration of all microstate where system gets <span class="math notranslate nohighlight">\(E\)</span> and reservoir <span class="math notranslate nohighlight">\(E_t-E\)</span> energies divided by total number of microstates. The latter given as sum of all possible partitionings of energy</p>
 <div class="math notranslate nohighlight">
 \[
   \Omega_t(E_t) = \sum_E \Omega(E) \Omega_r(E_t - E)
   \]</div>
 </li>
-<li><p>The system is more likely to be in a macrostate <span class="math notranslate nohighlight">\( E \)</span> if the are are <strong>many ways</strong> to accommodate the system and remaining energy <span class="math notranslate nohighlight">\(E_t - E\)</span>. Lets us find the most likely paritioning of energy!</p></li>
+<li><p>We can see that probability of macrostates is normalized <span class="math notranslate nohighlight">\(\sum_E P(E)=1\)</span>. The system is more likely to be in a macrostate <span class="math notranslate nohighlight">\( E \)</span> if there are more microstates that reaalize this partitioning.</p></li>
+<li><p>To find the most likely partitioning of energy we seek to find maximum of <span class="math notranslate nohighlight">\(P(E)\)</span></p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -1008,14 +1010,16 @@ f = \frac{E}{N\epsilon} = \frac{1}{1 + e^{\beta \epsilon}}
 <div class="math notranslate nohighlight">
 \[\frac{d}{dE}logP(E) = \bigg[ \frac{d }{dE} log\Omega_1 - \frac{d}{dE}\Omega_2 \bigg]= 0\]</div>
 <ul class="simple">
-<li><p>We come to appreacite that <strong>temperature quantifies growth of microstates with energy</strong></p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(logP(E)\sim S(E)+S_r(E-E_t)\)</span> we note that <strong>Maximizing probability of a macrostate is the same as maximizing entropy of macrostate!</strong></p></li>
+<li><p>We also come to appreacite that temperature or more precisely, inverse temperature <span class="math notranslate nohighlight">\(\beta\)</span>, quantifies growth of microstates with energy</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\frac{1}{T} = \frac{dS}{dE} = k_B\frac{d log\Omega}{dE}\]</div>
-<ul class="simple">
-<li><p>From thermodynamics we learned that system undergoes spotnaenous change to attain maximization of entropy.</p></li>
-<li><p>We thus see that <strong>Maximizing probability of a macrostate is the same as maximizing entropy!</strong></p></li>
-</ul>
+\[\frac{d log\Omega}{dE}=\frac{1}{k_B}\frac{dS}{dE}=\frac{1}{k_BT}\]</div>
+<div class="important admonition">
+<p class="admonition-title"><strong>Inverse Temperature <span class="math notranslate nohighlight">\(\beta\)</span></strong>  </p>
+<div class="math notranslate nohighlight">
+\[\beta = \frac{1}{k_B T}\]</div>
+</div>
 </section>
 <section id="thermal-equilirbium-in-ideal-gasses">
 <h3>Thermal equilirbium in ideal gasses<a class="headerlink" href="#thermal-equilirbium-in-ideal-gasses" title="Permalink to this heading">#</a></h3>
@@ -1062,6 +1066,9 @@ f = \frac{E}{N\epsilon} = \frac{1}{1 + e^{\beta \epsilon}}
 </ul>
 <div class="math notranslate nohighlight">
 \[p(E) = \frac{\Omega(E)e^{-\beta E}}{\sum_E \Omega(E) e^{-\beta E}}\]</div>
+<ul class="simple">
+<li><p>By comparing with thermodynamics we can confirm that lagrange coefficinet is inverse temperature <span class="math notranslate nohighlight">\(\beta=\frac{1}{k_BT}\)</span></p></li>
+</ul>
 </div>
 </section>
 <section id="canonical-distribution">
@@ -1076,14 +1083,9 @@ p(E) = \frac{\Omega(E) \Omega_r(E_t - E)}{\Omega_t(E_t)}
 <ul>
 <li><p>Since log of microstates (entropy) is a <strong>smooth function</strong> we can Taylor expension around <span class="math notranslate nohighlight">\(E_t\)</span></p>
 <div class="math notranslate nohighlight">
-\[log\Omega_r(E_t-E) \approx log\Omega_r(E_t)  - \frac{\partial log \Omega_r}{\partial E}E = const  - \beta E\]</div>
+\[log\Omega_r(E_t-E) \approx log\Omega_r(E_t)  - \bigg(\frac{\partial log \Omega_r}{\partial E} \bigg) E = const  - \beta E\]</div>
 </li>
-<li><p>Where the first factor is a constant independent of energy.</p></li>
-<li><p>Note that <strong>reservoir influence is now described by temperature only!</strong></p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\beta  = \frac{dlog\Omega}{dE}=\frac{1}{k_BT}\]</div>
-<ul class="simple">
+<li><p>Where the first factor is a constant independent of energy and <strong>reservoir influence is now described by temperature only!</strong> <span class="math notranslate nohighlight">\(\beta  = \frac{dlog\Omega}{dE}=\frac{1}{k_BT}\)</span></p></li>
 <li><p>We find that number of microstates of a large reservoir decrease exponentially when the system borrows energy <span class="math notranslate nohighlight">\(E\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
