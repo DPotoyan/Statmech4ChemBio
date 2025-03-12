@@ -1,5 +1,5 @@
 
-# Overview of ensembles
+# Summary of Ensembles
   
 ![](./figs/ensembl.png)
 
@@ -140,7 +140,7 @@ $$p(E') = \frac{\Omega(E^{'}) e^{-E^{'}/k_BT}}{Z} = \frac{e^{-\beta F^{'}}}{Z}$$
 
 
 
-## $\mu$VT Overview
+## $\mu VT$ Overview
 
 
 ### Thermodynamics
@@ -277,27 +277,23 @@ $$\frac{p}{T} =  \frac{\partial S}{\partial V} = k_B N \frac{1}{V}$$
 $$\frac{\mu}{T} = -\frac{\partial S}{\partial N} = k_B T \cdot log \frac{N}{V} \lambda^3$$
 
 
-### Quasistatic process and Irreversibility
+Here is a refined version of your lecture note with improved clarity, correctness, and consistency in terminology:
 
-- From the NVE ensemble reasoning, we can now state that a quasistatic process corresponds to a process that does not change in the number of microstates. That is removal of a constraint keeps the "volume" of microstates intact.  
+---
 
-$$\Delta S = k_B log \frac{\Omega_f}{\Omega_i} = 0$$
+### Statistical nature of irreversibility
 
-- On the other hand, once the number of microstates grows upon removal of a constraint, then re-instating the constraint will not shrink the "volume" of microstate space. 
+- From the perspective of the **NVE ensemble**, we can state that if the number of accessible microstates increases upon the removal of a constraint, then reinstating the constraint will not reduce the "volume" of microstate space. This reflects the fundamental irreversibility of spontaneous processes in an isolated system:
 
-$$\Delta S = k_B log \frac{\Omega_f}{\Omega_i} > 0$$
+  $$
+  \Delta S = k_B \log \frac{\Omega_{B}}{\Omega_{A}} \geq 0.
+  $$
 
-### Thermal, Mechanical and chemical equilibrium
+- A similar conclusion holds in the **NVT ensemble**: Under constant temperature, the number of microstates, represented by the partition function $Z$, increases during a spontaneous process when a system is in contact with a heat bath.
 
-- The number of microstate for a system consisting of two parts can be written as a sum of all posisble energy partitionings among the two states. 
+  $$
+  \Delta F = - k_B T \log \frac{Z_{B}}{Z_{A}} \leq 0.
+  $$
 
-$$\Omega(E) = \sum_{E_1} \Omega_1(E_1) \Omega_2 (E-E_1) \approx \Omega_1(U_1) \Omega_2 (E-U_1)$$
+- This formulation underscores the irreversibility of thermodynamic processes and highlights the natural tendency of a system to evolve towards configurations with higher entropy (in the microcanonical ensemble) or lower free energy (in the canonical ensemble).
 
-- Since $\Omega(E)$ is a sharply increasing function of energy we expect the maximum term for some energy $E_1=U_1$  to dominate the sum. Let us find what state this maximum value should correspond to?
-
-$$\frac{\partial log \Omega (E_1)}{\partial E_1} \Big |_{E_1=U_1}= \frac{\partial log\Omega_1(E_1)}{\partial E_1} - \frac{\partial log\Omega(E_2)}{\partial E_2}=0$$
-
-
-#### Example: thermal contact between two ideal gases
-
-Therefore for an ideal gas we will have:
