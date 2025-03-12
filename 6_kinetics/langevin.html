@@ -1,0 +1,885 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Langevin equation and Brownian motion &#8212; Statistical Mechanics for Chemistry and Biology</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '6_kinetics/langevin';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Python" href="../labs/py-lab/intro.html" />
+    <link rel="prev" title="Kinetics" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Statistical Mechanics for Chemistry and Biology - Home"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Statistical Mechanics for Chemistry and Biology - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Schedule (Spring 2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_stats/intro.html">Stats</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Probabilities_Counting.html">Probability theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Random_Variables.html">Random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Entropy.html">Entropy and Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_thermo/01_Thermo.html">Review of thermodynamics principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_thermo/02_FreeEnergies.html">Thermodynamic Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_ensembles/intro.html">Ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_ensembles/nve.html">Intro to Statistical Ensembles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_ensembles/nvt.html">Ensembles in phase-space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_ensembles/npt.html">muPT</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_ising/intro.html">Phase transitions</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_fluids/intro.html">Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Kinetics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Langevin equation and Brownian motion</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/py-lab/intro.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2py.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2numpy.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2viz.html">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/python_OOP_challenge.html">Tutorial: Building Python Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/np-lab/intro.html">Numpy lab</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/np_prob.html">Numpy and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/sinc_function.html">Numpy Lab: Sinc Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/linear_functions.html">Numpy Lab: Linear Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/1d_gas_sim.html">Tutorial: Numpy simultions of 1D gas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/2d_gas_sim.html">Tutorial: Numpy simultions of 2D gas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/rw-lab/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random walk simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/InverseTransform.html">The Inverse Transform of RVs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/change_rv_jax.html">Change of variables with automatic differentiation (autodiff)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/langevin.html">Langevin Equation for Brownian Motion and Mean Square Displacement (MSD)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab4/intro.html">Application of ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/nvt_application.html">Free energy and protein folding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/TwoState.html">Two-state system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/mass_action.html">Mass action law</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab5/intro.html">Simulating Ising models</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/torch_ising.html">Ising-2D simulations using ML libraries</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/Wolf.html">Other Methods for sampling Ising models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/enhance-sampling.html">Non-boltzman (enhanced) sampling ideas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab6/intro.html">Simulating Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_double_well.html">Double Well potential using OpenMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_ethane.html">Simulating Ethane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_villin.html">Simulating solvated protein</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/6_kinetics/langevin.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/6_kinetics/langevin.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/6_kinetics/langevin.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Langevin equation and Brownian motion</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-dissipation-theorem">Fluctuation-dissipation theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-langevin-dynamics">Simulating Langevin dynamics</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="langevin-equation-and-brownian-motion">
+<h1>Langevin equation and Brownian motion<a class="headerlink" href="#langevin-equation-and-brownian-motion" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">c</span><span class="p">,</span><span class="n">epsilon_0</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">physical_constants</span>
+
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39; 
+</pre></div>
+</div>
+</div>
+</div>
+<section id="langevin-equation">
+<h2>Langevin Equation<a class="headerlink" href="#langevin-equation" title="Permalink to this heading">#</a></h2>
+<p>Langevin theory provides now an equation of motion for objects whoch are subject to fluctuating forces.
+In the most general way, Newtons equation of motion is written as</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{d\vec{v}}{dt}=\vec{F}(t)
+\]</div>
+<p>and contains on the right side the sum of all forces <span class="math notranslate nohighlight">\(\vec{F}\)</span> acting on a particle. This total force can be separated into</p>
+<ul class="simple">
+<li><p>a viscous drag force, e.g. <span class="math notranslate nohighlight">\(6\pi \eta R \vec{v}\)</span> for a spherical particle</p></li>
+<li><p>a force coming from and external potential <span class="math notranslate nohighlight">\(U\)</span></p></li>
+<li><p>random fluctuating force <span class="math notranslate nohighlight">\(\vec{\zeta}\)</span> due to the collisions with the solvent</p></li>
+</ul>
+<p>With the force arising from an external potential we find the Langevin equation</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{d\vec{v}}{dt}=-6\pi \eta R \vec{v}-\nabla U +\vec{\zeta}(t) \tag{Langevin Equation}
+\]</div>
+<p>The time dependence of the fluctuating force is not known in detail. Thus we can only refer to the statistical properties (e.g. its moments) when solving the Langevin equation. Therefore also not analytical solution for the position can be written down, only average proerties over an ensemble or over time (given ergodicity).</p>
+<p>The first moment (the mean) of the fluctuating force gives</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\vec{\zeta}(t) \rangle =0
+\]</div>
+<p>i.e. there is no net force acting on average on the particle considered. Yet the mean velocity of the particle is not zero, <span class="math notranslate nohighlight">\(\langle \vec{v}\rangle\neq 0\)</span>. Considering the mean velocity at short times, for example, yields</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{d\langle \vec{v}\rangle}{dt}=-6\pi \eta R \langle \vec{v}\rangle
+\]</div>
+<p>giving</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \vec{v}\rangle=\vec{v}(0)\exp\left ( -\frac{t}{\tau_{mr}}\right)
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\tau_{mr}\)</span> is a characteristic relaxation time for velocity of brownian particle. We can further continue to derive the mean squared position by taking the scalar product of the Langevin equation with <span class="math notranslate nohighlight">\(\vec{r}\)</span> and neglecting the potential. Taking the ensemble average yields</p>
+<div class="math notranslate nohighlight">
+\[
+m\frac{d}{dt}\langle \vec{r}\cdot \vec{v}\rangle =-6\pi \eta R \langle \vec{r}\cdot \vec{v}\rangle + m\langle v^2\rangle 
+\]</div>
+<p>since</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{r}\cdot \frac{d\vec{v}}{dt}=\frac{d}{dt}(\vec{r}\cdot \vec{v})-v^2
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(\langle \vec{r}\cdot \vec{\zeta}\rangle =0\)</span>. Using our previous result for the mean squared velocity, i.e. <span class="math notranslate nohighlight">\(\langle v^2\rangle =3k_B T\)</span> we obtain after integrating over time</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \vec{r}\cdot \vec{v}\rangle =C\exp\left ( -\frac{t}{\tau_{mr}}\right)+ \frac{k_B T}{2\pi\eta R}
+\]</div>
+<p>Using the initial condition <span class="math notranslate nohighlight">\(\vec{r}(t=0)=0\)</span> this gives</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \vec{r}\cdot \vec{v}\rangle =\frac{k_B T}{2\pi\eta R}\left (1 -\exp\left ( -\frac{t}{\tau_{mr}}\right)\right) 
+\]</div>
+<p>A second integration over time of <span class="math notranslate nohighlight">\(\langle \vec{r}\cdot \vec{v}\rangle\)</span> can be carried out using</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \vec{r}\cdot \vec{v}\rangle=\frac{1}{2}\frac{d}{dt}\langle r^2\rangle 
+\]</div>
+<p>and we finally obtain the mean squared displacement</p>
+<div class="math notranslate nohighlight">
+\[
+\langle r^2\rangle =\frac{k_B T}{\pi \eta R}\left [ t-\tau_{mr}\left ( 1-\exp\left (-\frac{t}{\tau_{mr}}\right )\right )\right ]
+\]</div>
+<p>This is the mean squared displacement for an Ornstein Uhlenbeck process, a process, which has a persistence for a certain time and then is randomized. It described the transition from the ballistic to diffusive regime for a Brownian particle except that it misses the hydrodynamic memory in the intermediate regime.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">k_B</span><span class="o">=</span><span class="mf">1.381e-23</span> <span class="c1">#J/K</span>
+<span class="n">T</span><span class="o">=</span><span class="mi">300</span> <span class="c1">#K</span>
+<span class="n">eta</span><span class="o">=</span><span class="mf">1e-3</span> <span class="c1">#mPa s</span>
+<span class="n">R</span><span class="o">=</span><span class="mf">200e-9</span> <span class="c1">#m</span>
+<span class="n">gamma</span><span class="o">=</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">eta</span><span class="o">*</span><span class="n">R</span>
+<span class="n">k</span><span class="o">=</span><span class="mf">1e-9</span> <span class="c1">#N/m</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">MSD</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">taumr</span><span class="p">):</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">k_B</span><span class="o">*</span><span class="n">T</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">taumr</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">/</span><span class="n">taumr</span><span class="p">))))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">MSD</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mf">1e-9</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\tau_</span><span class="si">{mr}</span><span class="s2">=1e-9$ s&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$&lt;r^2(t)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/884937946a8f14028721d53ce39bf5d427574de4081f59189f13af70ff0f79dc.png" src="../_images/884937946a8f14028721d53ce39bf5d427574de4081f59189f13af70ff0f79dc.png" />
+</div>
+</div>
+<p><img alt="" src="6_kinetics/img/test1.pdf" /></p>
+<p>We can look at different limits of the process with respect to the momentum relaxation time, ie.</p>
+<p><strong>1) long time limits:</strong> <span class="math notranslate nohighlight">\(t\gg \tau_{mr}\)</span></p>
+<p>In this regime, the exponential function has already decayed to zero and we obtain</p>
+<div class="math notranslate nohighlight">
+\[
+\langle r^{2}\rangle =6Dt 
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+D=\frac{k_B T}{6\pi\eta R}
+\]</div>
+<p><strong>1) short times:</strong> <span class="math notranslate nohighlight">\(t\approx \tau_{mr}\)</span></p>
+<p>For short times, we can expand the exponential function up to second order</p>
+<div class="math notranslate nohighlight">
+\[
+\exp\left ( -\frac{t}{\tau_{mr}}\right )\approx 1-\frac{t}{\tau_{mr}}+\frac{t^2}{\tau_{mr}^2}
+\]</div>
+<p>to obtain for</p>
+<div class="math notranslate nohighlight">
+\[ 
+t-\tau_{mr}\left ( 1-\exp\left (-\frac{t}{\tau_{mr}}\right )\right )\approx \frac{t^2}{2\tau_{mr}}
+\]</div>
+<p>and for the mean squared displacement</p>
+<div class="math notranslate nohighlight">
+\[
+\langle r^2 \rangle \propto t^2
+\]</div>
+<p>which is the result we expect for ballistic motion. Between both regimes, the MSD could be complicated as the short time motion starts a hydrodynamic flux in the environment which is influencing the particle motion again. These hydrodynamic memory effects cause the so called long time tails in the mean squared displacement.</p>
+<section id="fluctuation-dissipation-theorem">
+<h3>Fluctuation-dissipation theorem<a class="headerlink" href="#fluctuation-dissipation-theorem" title="Permalink to this heading">#</a></h3>
+<p>While we so far only know that <span class="math notranslate nohighlight">\(\langle\vec{\zeta}(t) \rangle =0\)</span>, we also know that there must be a certain magnitude of the random force that is connected to the temperature of the sample. The short time autocorrelation of the noise should be of the type</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\vec{\zeta}(t_1)\cdot \vec{\zeta}(t_2) \rangle =A\delta (t_1-t_2)
+\]</div>
+<p>stating the the forces are truly random and only correlated, when the times conincide. We would like to determine the prefactor <span class="math notranslate nohighlight">\(A\)</span> now. We can write down the Langevin equation with</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{d}{dt}\vec{v}(t)=-\frac{1}{\tau_{mr}}\vec{v}(t)+\frac{1}{m}\vec{\zeta}(t)
+\]</div>
+<p>and multiply by <span class="math notranslate nohighlight">\(\exp(t/\tau_{mr})\)</span>, which results in</p>
+<div class="math notranslate nohighlight">
+\[
+\exp\left (\frac{t}{\tau_{mr}}\right )\frac{d}{dt}\vec{v}(t)+\frac{1}{\tau_{mr}}\exp\left (\frac{t}{\tau_{mr}}\right )\vec{v}(t)=\frac{d}{dt}\left (\exp\left (\frac{t}{\tau_{mr}}\right )\vec{v}(t) \right )=\exp\left(\frac{t}{\tau_{mr}}\right )\frac{1}{m}\vec{\zeta}(t)
+\]</div>
+<p>Integrating both sides of the two right parts over time results in</p>
+<div class="math notranslate nohighlight">
+\[
+\vec{v}(t)=\vec{v}(0)\exp \left (-\frac{t}{\tau_{mr}} \right )+\exp \left (-\frac{t}{\tau_{mr}} \right )\frac{1}{m}\int_0^t \exp \left (\frac{t'}{\tau_{mr}} \right )\vec{\zeta}(t')dt'
+\]</div>
+<p>which is the time evolution of the velocity. To obtain <span class="math notranslate nohighlight">\(\langle\vec{\zeta}(t_1)\cdot \vec{\zeta}(t_2) \rangle\)</span>, we need to calculate the product of the velocity at two times and take the ensemble average. The calculation is essentially a writing exercise which at the end yields three different terms.</p>
+<p>The first term contains</p>
+<div class="math notranslate nohighlight">
+\[
+\langle v_0^2 \rangle \exp\left (-\frac{2t}{\tau_{mr}} \right )\rightarrow 0
+\]</div>
+<p>which decays to zero for long times. The second term contains two mixed terms of the type</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{v_0}{m}\exp\left (-\frac{t}{\tau_{mr}} \right ) \int \ldots \rightarrow 0
+\]</div>
+<p>which also decay to zero for long times. The last term contains</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{m^2}\int_{-\infty}^{t}dt' \int_{-\infty}^{t}dt''\exp\left ( -\frac{t-t'}{\tau_{mr}} \right )\exp\left ( -\frac{t-t''}{\tau_{mr}} \right )\langle \vec{\zeta}(t')\vec{\zeta}(t'')\rangle
+\]</div>
+<p>whcih is the only nonzero term. Inserting our initial assumption <span class="math notranslate nohighlight">\(\langle\vec{\zeta}(t_1)\cdot \vec{\zeta}(t_2) \rangle =A\delta (t_1-t_2)\)</span> results in the mean squared velocity</p>
+<div class="math notranslate nohighlight">
+\[
+\langle v^2\rangle =\frac{A}{2m}\int_{-\infty}^{t}dt' \exp\left ( -\frac{2(t-t')}{\tau_{mr}}\right)=\frac{A\tau_{mr}}{2m^2}
+\]</div>
+<p>Since the velocity also has to comply with equipartition, i.e.</p>
+<div class="math notranslate nohighlight">
+\[
+\langle v^2\rangle=\frac{k_B T}{m}=\frac{A\tau_{mr}}{2m^2}
+\]</div>
+<p>we find</p>
+<div class="math notranslate nohighlight">
+\[
+A=2\gamma k_B T
+\]</div>
+<p>with <span class="math notranslate nohighlight">\(\gamma=6\pi\eta R\)</span> or</p>
+<div class="math notranslate nohighlight">
+\[
+\langle\vec{\zeta}(t_1)\cdot \vec{\zeta}(t_2) \rangle =2\gamma k_B T\delta (t_1-t_2)
+\]</div>
+<p>which is a very fundamental result. It states that the fluctuating force <span class="math notranslate nohighlight">\(\vec{\zeta}(t)\)</span> are related to the viscous forces expressed by the friction coefficient <span class="math notranslate nohighlight">\(\gamma\)</span>. This makes sensse, since the friction forces must dissipate energy into heat. The motion would thus come to a rest if heat and dynamics would be decoupled. The law we obtained is thus stateing the dissipated energy goes back again into kinetic energy. This is the statement of the fluctuation dissipation theorem,</p>
+</section>
+<section id="simulating-langevin-dynamics">
+<h3>Simulating Langevin dynamics<a class="headerlink" href="#simulating-langevin-dynamics" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Langevin_dynamics">Wiki on langevin dynamics</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Brownian_dynamics">Wiki on Brownian dynamics</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">langevin</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="c1"># Implements numerical solution by means of the Euler-Maruyama method of the Langevin which is known as an SDE (Stochastic Differential equation)</span>
+    <span class="c1"># dz = v * dt</span>
+    <span class="c1"># dv = -1/tau * v * dt + eta dW</span>
+    
+    <span class="n">dW</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dt</span><span class="p">),</span> <span class="n">size</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">z_new</span> <span class="o">=</span> <span class="n">z</span> <span class="o">+</span> <span class="n">v</span><span class="o">*</span><span class="n">dt</span>
+    <span class="n">v_new</span> <span class="o">=</span> <span class="n">v</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">tau</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">dt</span> <span class="o">+</span> <span class="n">eta</span><span class="o">*</span><span class="n">dW</span>
+    
+    <span class="k">return</span> <span class="n">z_new</span><span class="p">,</span> <span class="n">v_new</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Numerical parameters and system coefficients</span>
+<span class="n">Np</span>   <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">Tmax</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">tau</span>  <span class="o">=</span> <span class="mi">10</span>
+<span class="n">eta</span>  <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">dt</span>   <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">Nt</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Tmax</span><span class="o">/</span><span class="n">dt</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1"># Output interval</span>
+<span class="n">Nskip</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Initial values</span>
+<span class="n">Z</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="p">)</span>
+<span class="n">V</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Np</span><span class="p">)</span>
+<span class="n">time</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Nt</span><span class="p">):</span>
+
+    <span class="n">Z</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">langevin</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="c1"># write time and variance every Nskip timesteps</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="n">Nskip</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">dt</span><span class="p">)</span>
+        <span class="n">var</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">var</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$&lt;r^2(t)&gt;$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
+</pre></div>
+</div>
+<img alt="../_images/1f075e0ce906557f5d62e056102305519b45743e99f6086e9dc66fac7afdab55.png" src="../_images/1f075e0ce906557f5d62e056102305519b45743e99f6086e9dc66fac7afdab55.png" />
+</div>
+</div>
+<p><img alt="" src="6_kinetics/img/test.pdf" /></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "DPotoyan/Statmech4ChemBio",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./6_kinetics"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Kinetics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../labs/py-lab/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin Equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-dissipation-theorem">Fluctuation-dissipation theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-langevin-dynamics">Simulating Langevin dynamics</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Davit Potoyan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
