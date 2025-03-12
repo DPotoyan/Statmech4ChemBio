@@ -491,9 +491,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-partitioning-in-an-isolated-system">Energy partitioning in an isolated system</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-as-the-driver-of-energy-partitioning">Temperature as the driver of energy partitioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-is-the-driver-of-energy-partitioning">Temperature is the driver of energy partitioning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-equilibrium-in-ideal-gases">Thermal Equilibrium in Ideal Gases</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-fluctuations-around-equilibrium">Energy Fluctuations Around Equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-fluctuations-are-gaussian">Energy Fluctuations are Gaussian</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a><ul class="nav section-nav flex-column">
@@ -985,8 +985,8 @@ f = \frac{E}{N\epsilon} = \frac{1}{1 + e^{\frac{\epsilon}{k_B T} }}
 </div>
 </section>
 </section>
-<section id="temperature-as-the-driver-of-energy-partitioning">
-<h2>Temperature as the driver of energy partitioning<a class="headerlink" href="#temperature-as-the-driver-of-energy-partitioning" title="Permalink to this heading">#</a></h2>
+<section id="temperature-is-the-driver-of-energy-partitioning">
+<h2>Temperature is the driver of energy partitioning<a class="headerlink" href="#temperature-is-the-driver-of-energy-partitioning" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Which paritioning is most likely? For two systems exchanging energy we can write down probability of macrostate and find its maxima with respect to <span class="math notranslate nohighlight">\(E\)</span></p></li>
 </ul>
@@ -1043,8 +1043,8 @@ f = \frac{E}{N\epsilon} = \frac{1}{1 + e^{\frac{\epsilon}{k_B T} }}
 </li>
 </ul>
 </section>
-<section id="energy-fluctuations-around-equilibrium">
-<h2>Energy Fluctuations Around Equilibrium<a class="headerlink" href="#energy-fluctuations-around-equilibrium" title="Permalink to this heading">#</a></h2>
+<section id="energy-fluctuations-are-gaussian">
+<h2>Energy Fluctuations are Gaussian<a class="headerlink" href="#energy-fluctuations-are-gaussian" title="Permalink to this heading">#</a></h2>
 <ul>
 <li><p>To analyze small fluctuations <span class="math notranslate nohighlight">\(\Delta E = E_1 - U_1\)</span>, we expand the total entropy <span class="math notranslate nohighlight">\(S_{\text{total}}(E_1)\)</span> around <span class="math notranslate nohighlight">\(U_1\)</span> in a Taylor series:</p>
 <div class="math notranslate nohighlight">
@@ -1398,6 +1398,78 @@ Z = \left( 2 e^{-\beta \epsilon} \right)^3 = 8 e^{-\beta \epsilon}
 <div class="math notranslate nohighlight">
 \[F(X) = -k_BT log P(X)+const\]</div>
 </div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define reaction coordinate</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># Define a tilted asymmetric double-well free energy profile</span>
+<span class="n">F_x</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mf">1.2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">x</span>  <span class="c1"># Added tilt to shift one minimum</span>
+
+<span class="c1"># Identify macrostates A and B based on regions left and right of the transition state (x=0)</span>
+<span class="n">x_A_region</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Left basin (macrostate A)</span>
+<span class="n">x_B_region</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Right basin (macrostate B)</span>
+<span class="n">F_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">F_x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># Free energy of macrostate A (left well minimum)</span>
+<span class="n">F_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">F_x</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># Free energy of macrostate B (right well minimum)</span>
+<span class="n">ΔF</span> <span class="o">=</span> <span class="n">F_B</span> <span class="o">-</span> <span class="n">F_A</span>  <span class="c1"># Free energy difference</span>
+
+<span class="c1"># Compute probability distribution P(X) from free energy F(X)</span>
+<span class="n">P_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">F_x</span><span class="p">)</span>  <span class="c1"># Exponential of negative free energy</span>
+<span class="n">P_x</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">P_x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># Normalize probability</span>
+
+<span class="c1"># Create figure with side-by-side subplots: Free Energy and Probability Distribution</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># --- Free Energy Profile ---</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">F_x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Free Energy $F(X)$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_A_region</span><span class="p">,</span> <span class="n">F_x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">],</span> <span class="nb">max</span><span class="p">(</span><span class="n">F_x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Macrostate A&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_B_region</span><span class="p">,</span> <span class="n">F_x</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">],</span> <span class="nb">max</span><span class="p">(</span><span class="n">F_x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Macrostate B&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">F_A</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$F_A$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">F_B</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$F_B$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Indicate ΔF with an arrow</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">F_B</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">F_A</span><span class="p">),</span>
+                 <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;&lt;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.15</span><span class="p">,</span> <span class="p">(</span><span class="n">F_A</span> <span class="o">+</span> <span class="n">F_B</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\Delta F$&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Reaction Coordinate X&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Free Energy $F(X)$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Free Energy Profile of Macrostates A and B&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># --- Probability Distribution ---</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">P_x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Probability $P(X) \propto e^{-F(X)}$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_A_region</span><span class="p">,</span> <span class="n">P_x</span><span class="p">[</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Macrostate A&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_B_region</span><span class="p">,</span> <span class="n">P_x</span><span class="p">[</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Macrostate B&quot;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Reaction Coordinate X&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Probability $P(X)$&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Probability Distribution of Macrostates A and B&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout and show the plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/570dcd4be7428e8e4e55b6ca4e8cbba94db2b3d1256391c9885e5d3845edc527.png" src="../_images/570dcd4be7428e8e4e55b6ca4e8cbba94db2b3d1256391c9885e5d3845edc527.png" />
+</div>
+</div>
 <div class="note admonition">
 <p class="admonition-title"><strong>Exercise</strong></p>
 <ul class="simple">
@@ -1701,9 +1773,9 @@ S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-partitioning-in-an-isolated-system">Energy partitioning in an isolated system</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-as-the-driver-of-energy-partitioning">Temperature as the driver of energy partitioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-is-the-driver-of-energy-partitioning">Temperature is the driver of energy partitioning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-equilibrium-in-ideal-gases">Thermal Equilibrium in Ideal Gases</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-fluctuations-around-equilibrium">Energy Fluctuations Around Equilibrium</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-fluctuations-are-gaussian">Energy Fluctuations are Gaussian</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a><ul class="nav section-nav flex-column">
