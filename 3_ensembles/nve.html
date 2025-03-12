@@ -497,6 +497,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-interacting-spins">non-interacting spins</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-state-particles-nvt">Two-state particles (NVT)</a></li>
 </ul>
 </li>
@@ -1231,8 +1232,79 @@ Z =\int e^{-\beta (E-TS)}dE \approx e^{\min_E [-\beta (E - TS)]} = e^{-\beta(U -
 </section>
 <section id="examples-of-using-nvt">
 <h2>Examples of using NVT<a class="headerlink" href="#examples-of-using-nvt" title="Permalink to this heading">#</a></h2>
+<section id="non-interacting-spins">
+<h3>non-interacting spins<a class="headerlink" href="#non-interacting-spins" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Consider an ensemble of three non-interaacting spins under constant temperature. The up spin has <span class="math notranslate nohighlight">\(\epsilon\)</span> and down spin <span class="math notranslate nohighlight">\(0\)</span> energy.</p></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Microstate</p></th>
+<th class="head"><p>Configuration</p></th>
+<th class="head"><p>Total Energy <span class="math notranslate nohighlight">\(E\)</span></p></th>
+<th class="head"><p>Degeneracy <span class="math notranslate nohighlight">\(\Omega(E)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(\downarrow \downarrow \downarrow\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0\)</span></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\downarrow \downarrow \uparrow\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\epsilon\)</span></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(\downarrow \uparrow \downarrow\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\epsilon\)</span></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><span class="math notranslate nohighlight">\(\uparrow \downarrow \downarrow\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\epsilon\)</span></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><span class="math notranslate nohighlight">\(\downarrow \uparrow \uparrow\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\epsilon\)</span></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p><span class="math notranslate nohighlight">\(\uparrow \downarrow \uparrow\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\epsilon\)</span></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p><span class="math notranslate nohighlight">\(\uparrow \uparrow \downarrow\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2\epsilon\)</span></p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p><span class="math notranslate nohighlight">\(\uparrow \uparrow \uparrow\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(3\epsilon\)</span></p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>The partition function would be sum over all <span class="math notranslate nohighlight">\(2^3=8\)</span> microstaes.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Z = 1+3e^{-\beta \epsilon}+ 3e^{-2\beta \epsilon}+e^{-3\beta \epsilon}\]</div>
+<ul class="simple">
+<li><p>Probability of a microstate <span class="math notranslate nohighlight">\(\downarrow \downarrow \uparrow\)</span> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[p_2 = \frac{e^{-\beta \epsilon}}{Z}\]</div>
+<ul class="simple">
+<li><p>Probability of a macrostate <span class="math notranslate nohighlight">\(E=\epsilon\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[P(E=\epsilon) = \frac{3e^{-\beta \epsilon}}{Z}\]</div>
 <div class="note admonition">
-<p class="admonition-title"><strong>non-interacting spins</strong></p>
+<p class="admonition-title"><strong>non-interacting indentical spins</strong></p>
 <ul class="simple">
 <li><p>Consider three spins where up and down orientations have equal energy <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p></li>
 <li><p>Show that sum over microstates and sum over macrostates leads to same expression of parition function.</p></li>
@@ -1279,6 +1351,7 @@ Z = \left( 2 e^{-\beta \epsilon} \right)^3 = 8 e^{-\beta \epsilon}
 \[F = -k_BTlogZ = -k_BT\epsilon log 8 + \epsilon\]</div>
 </div>
 </details></div>
+</section>
 <section id="two-state-particles-nvt">
 <h3>Two-state particles (NVT)<a class="headerlink" href="#two-state-particles-nvt" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -1634,6 +1707,7 @@ S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constant-temperature-ensemble-nvt">Constant temperature ensemble (NVT)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-and-thermodynamic-limit">Partition Functions and Thermodynamic limit</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-using-nvt">Examples of using NVT</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-interacting-spins">non-interacting spins</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-state-particles-nvt">Two-state particles (NVT)</a></li>
 </ul>
 </li>
