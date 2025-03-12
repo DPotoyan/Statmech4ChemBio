@@ -277,23 +277,81 @@ $$\frac{p}{T} =  \frac{\partial S}{\partial V} = k_B N \frac{1}{V}$$
 $$\frac{\mu}{T} = -\frac{\partial S}{\partial N} = k_B T \cdot log \frac{N}{V} \lambda^3$$
 
 
-Here is a refined version of your lecture note with improved clarity, correctness, and consistency in terminology:
+### More Examples of using statistical Ensembles
 
----
+::::{admonition} **Exercise: Random polymer chain**
+:class: note
 
-### Statistical nature of irreversibility
+- Consider 1D polymer where $N$ monomers are randomly oriended with $+l$ and $-l$ orientation along the $x$ axis.
+- Microcanonical ensmeble here is defined as all possible microstates given fixed value of end to end distance $X$ of this polymer. 
+- Compute entropy $S(X)$ and argue that if polymer length is free to move most likely configuraiton would be where the polymer remains compact with nearly equal numbers of $ +l $ and $ -l $ orientations.
 
-- From the perspective of the **NVE ensemble**, we can state that if the number of accessible microstates increases upon the removal of a constraint, then reinstating the constraint will not reduce the "volume" of microstate space. This reflects the fundamental irreversibility of spontaneous processes in an isolated system:
+:::{dropdown} **Solution**
 
-  $$
-  \Delta S = k_B \log \frac{\Omega_{B}}{\Omega_{A}} \geq 0.
-  $$
+- We consider a 1D polymer consisting of $ N $ monomers, where each monomer can be oriented either in the $ +l $ or $ -l $ direction along the $ x $-axis. The total end-to-end distance of the polymer is given by:
 
-- A similar conclusion holds in the **NVT ensemble**: Under constant temperature, the number of microstates, represented by the partition function $Z$, increases during a spontaneous process when a system is in contact with a heat bath.
+$$
+X = \sum_{i=1}^{N} s_i l
+$$
 
-  $$
-  \Delta F = - k_B T \log \frac{Z_{B}}{Z_{A}} \leq 0.
-  $$
+- where $ s_i = \pm 1 $ represents the orientation of the $ i $th monomer.
 
-- This formulation underscores the irreversibility of thermodynamic processes and highlights the natural tendency of a system to evolve towards configurations with higher entropy (in the microcanonical ensemble) or lower free energy (in the canonical ensemble).
+**Microcanonical Partition Function**
 
+- The total number of microstates corresponding to a given end-to-end distance $ X $ is determined by the number of ways to distribute $ N_+ $ monomers in the $ +l $ direction and $ N_- $ monomers in the $ -l $ direction, such that:
+
+$$
+N_+ + N_- = N, \quad N_+ - N_- = \frac{X}{l}
+$$
+
+- Solving for $ N_+ $ and $ N_- $,
+
+$$
+N_+ = \frac{N + X/l}{2}, \quad N_- = \frac{N - X/l}{2}
+$$
+
+- The number of microstates corresponding to a given $ X $ is given by the binomial coefficient:
+
+$$
+\Omega(X) = \binom{N}{N_+} = \frac{N!}{N_+! N_-!}
+$$
+
+- For large $ N $, we approximate using **Stirling’s approximation**:
+
+$$
+\ln \Omega(X) \approx N \ln N - N_+ \ln N_+ - N_- \ln N_-
+$$
+
+**Entropy Calculation**
+
+
+$$
+S(X) = k_B \ln \Omega(X)
+$$
+
+- Using Stirling's approximation and expressing $ N_+ $ and $ N_- $ in terms of $ X $,
+
+$$
+S(X) \approx k_B \left[ N \ln N - \frac{N+X/l}{2} \ln \frac{N+X/l}{2} - \frac{N-X/l}{2} \ln \frac{N-X/l}{2} \right]
+$$
+
+- To simplify, define the **normalized displacement** $ x = X / (N l) $
+
+$$
+S(X) \approx k_B N \left[ \ln N - \frac{1+x}{2} \ln \frac{1+x}{2} - \frac{1-x}{2} \ln \frac{1-x}{2} \right]
+$$
+
+- For small $x$, we can approximate using a Taylor expansion:
+
+$$
+S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
+$$
+
+- Thus, the entropy has a **maximum** at $X = 0 $, meaning the most probable configuration is one where the polymer remains compact with nearly equal numbers of $ +l $ and $ -l $ orientations.
+
+- This shows a decrease in entropy as the polymer is more stretched ($|X|$ increases), reflecting fewer accessible configurations.
+
+
+:::
+
+::::
