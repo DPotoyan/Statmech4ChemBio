@@ -502,8 +502,8 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-and-macrostate-probabilities">Free energy and macrostate probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-fluctuations"><strong>Energy Fluctuations</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-fluctuations">Energy Fluctuations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-nature-of-irreversibility">Statistical nature of irreversibility</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples-of-using-statistical-ensembles">More Examples of using statistical Ensembles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shottky-defects">Shottky defects</a><ul class="nav section-nav flex-column">
@@ -1279,25 +1279,55 @@ Z = \left( 2 e^{-\beta \epsilon} \right)^3 = 8 e^{-\beta \epsilon}
 </div>
 </section>
 <section id="energy-fluctuations">
-<h2><strong>Energy Fluctuations</strong><a class="headerlink" href="#energy-fluctuations" title="Permalink to this heading">#</a></h2>
+<h2>Energy Fluctuations<a class="headerlink" href="#energy-fluctuations" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The probability of the system being in microstate  i  is given by the Boltzmann distribution:</p></li>
+<li><p>Log of canonical parition function <span class="math notranslate nohighlight">\(logZ\)</span> has some interesting mathematical properties.</p></li>
+<li><p>We are going to show that first and second derivatives yield average and fluctuations of energy.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[
-P_i = \frac{e^{-\beta E_i}}{Z}, \quad Z = \sum_i e^{-\beta E_i}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\langle E \rangle = \sum_i P_i E_i = \frac{1}{Z} \sum_i E_i e^{-\beta E_i} 
-\]</div>
+\[P_i = \frac{e^{-\beta E_i}}{Z}, \quad Z = \sum_i e^{-\beta E_i}\]</div>
 <ul class="simple">
 <li><p>The ensemble average energy can be related to the  derivative of log of partition function:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
- \langle E \rangle= -\frac{1}{Z} \frac{\partial Z}{\partial \beta} = -\frac{\partial \ln Z}{\partial \beta}
+\langle E \rangle = \sum_i P_i E_i = \frac{1}{Z} \sum_i E_i e^{-\beta E_i} = -\frac{1}{Z} \frac{\partial Z}{\partial \beta} = -\frac{\partial \ln Z}{\partial \beta}
 \]</div>
+<ul class="simple">
+<li><p>To quantify fluctuations, we define the variance of energy and proceed to show that this is equal to second erivative of logZ</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle (\Delta E)^2 \rangle = \langle E^2 \rangle - \langle E \rangle^2
+\]</div>
+<ul class="simple">
+<li><p>Taking first derivative:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \ln Z}{\partial \beta} = -\frac{1}{Z} \sum_i E_i e^{-\beta E_i} = -\langle E \rangle
+\]</div>
+<ul class="simple">
+<li><p>Taking the second derivative:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial^2 \ln Z}{\partial \beta^2} = \frac{1}{Z} \sum_i E_i^2 e^{-\beta E_i} - \left(\frac{1}{Z} \sum_i E_i e^{-\beta E_i} \right)^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial^2 \ln Z}{\partial \beta^2} = \langle E^2 \rangle - \langle E \rangle^2 = \langle (\Delta E)^2 \rangle
+\]</div>
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\( \beta = \frac{1}{k_B T} \)</span>, we can use chain rule and express this in terms of temperature:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle (\Delta E)^2 \rangle = k_B T^2 \frac{\partial \langle E \rangle}{\partial T} = k_B T^2C_v
+\]</div>
+<ul class="simple">
+<li><p>Where in the last line we used definition of heat capacity <span class="math notranslate nohighlight">\(C_V = \frac{d\langle E\rangle}{dT}\)</span></p></li>
+</ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Moments of Energy in NVT ensemble</strong></p>
 <div class="math notranslate nohighlight">
@@ -1309,20 +1339,10 @@ P_i = \frac{e^{-\beta E_i}}{Z}, \quad Z = \sum_i e^{-\beta E_i}
   \sigma_E^2 = \langle E^2 \rangle - \langle E \rangle^2 = \frac{\partial^2 \ln Z}{\partial \beta^2}
 \]</div>
 </div>
-</section>
-<section id="fluctuation-response-and-ensemble-equivalence">
-<h2>Fluctuation-response and ensemble equivalence<a class="headerlink" href="#fluctuation-response-and-ensemble-equivalence" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>We can now show that heat capaicty is related to energy fluctuations a result known as fluctuation-response theorem</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-C_V = \left( \frac{\partial \langle E \rangle}{\partial T} \right)_V = - k_B \beta^2 \frac{\partial^2 \ln Z}{\partial \beta^2}
-\]</div>
 <div class="important admonition">
 <p class="admonition-title"><strong>Fluctuation-Response Theorem</strong></p>
 <div class="math notranslate nohighlight">
-\[\sigma_E^2 = k_B T^2 C_V \]</div>
+\[\langle (\Delta E)^2 \rangle = k_B T^2 C_V \]</div>
 </div>
 <ul>
 <li><p>The probability distribution of energy, <span class="math notranslate nohighlight">\(P(E)\)</span>, follows a <strong>Gaussian distribution</strong> in equilibrium:</p>
@@ -1337,6 +1357,24 @@ C_V = \left( \frac{\partial \langle E \rangle}{\partial T} \right)_V = - k_B \be
   \frac{\sigma_E}{\langle E \rangle} \sim \frac{C_V^{1/2}}{\langle E \rangle} \sim O(N^{-1/2})
   \]</div>
 </li>
+</ul>
+</section>
+<section id="statistical-nature-of-irreversibility">
+<h2>Statistical nature of irreversibility<a class="headerlink" href="#statistical-nature-of-irreversibility" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>From the perspective of the <strong>NVE ensemble</strong>, we can state that if the number of accessible microstates increases upon the removal of a constraint, then reinstating the constraint will not reduce the “volume” of microstate space. This reflects the fundamental irreversibility of spontaneous processes in an isolated system:</p>
+<div class="math notranslate nohighlight">
+\[
+  \Delta S = k_B \log \frac{\Omega_{B}}{\Omega_{A}} \geq 0.
+  \]</div>
+</li>
+<li><p>A similar conclusion holds in the <strong>NVT ensemble</strong>: Under constant temperature, the number of microstates, represented by the partition function <span class="math notranslate nohighlight">\(Z\)</span>, increases during a spontaneous process when a system is in contact with a heat bath.</p>
+<div class="math notranslate nohighlight">
+\[
+  \Delta F = - k_B T \log \frac{Z_{B}}{Z_{A}} \leq 0.
+  \]</div>
+</li>
+<li><p>This formulation underscores the irreversibility of thermodynamic processes and highlights the natural tendency of a system to evolve towards configurations with higher entropy (in the microcanonical ensemble) or lower free energy (in the canonical ensemble).</p></li>
 </ul>
 </section>
 <section id="more-examples-of-using-statistical-ensembles">
@@ -1545,8 +1583,8 @@ S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-and-macrostate-probabilities">Free energy and macrostate probabilities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-fluctuations"><strong>Energy Fluctuations</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-and-ensemble-equivalence">Fluctuation-response and ensemble equivalence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#energy-fluctuations">Energy Fluctuations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-nature-of-irreversibility">Statistical nature of irreversibility</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-examples-of-using-statistical-ensembles">More Examples of using statistical Ensembles</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shottky-defects">Shottky defects</a><ul class="nav section-nav flex-column">
