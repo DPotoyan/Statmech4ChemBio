@@ -1045,7 +1045,7 @@ f = \frac{E}{N\epsilon} = \frac{1}{1 + e^{\frac{\epsilon}{k_B T} }}
 <section id="energy-fluctuations-around-equilibrium">
 <h2>Energy Fluctuations Around Equilibrium<a class="headerlink" href="#energy-fluctuations-around-equilibrium" title="Permalink to this heading">#</a></h2>
 <ul>
-<li><p>To analyze small fluctuations <span class="math notranslate nohighlight">\(\Delta E = E_1 - U_1\)</span>, we expand the total entropy around <span class="math notranslate nohighlight">\(U_1\)</span> in a Taylor series:</p>
+<li><p>To analyze small fluctuations <span class="math notranslate nohighlight">\(\Delta E = E_1 - U_1\)</span>, we expand the total entropy <span class="math notranslate nohighlight">\(S_{\text{total}}(E_1)\)</span> around <span class="math notranslate nohighlight">\(U_1\)</span> in a Taylor series:</p>
 <div class="math notranslate nohighlight">
 \[
   S_{\text{total}}(E_1) \approx S_{\text{total}}(U_1) + \frac{1}{2} \frac{\partial^2 S_{\text{total}}}{\partial E_1^2} \Big|_{U_1} (E_1 - U_1)^2.
@@ -1054,28 +1054,28 @@ f = \frac{E}{N\epsilon} = \frac{1}{1 + e^{\frac{\epsilon}{k_B T} }}
 <li><p>Since the first derivative vanishes at equilibrium, the dominant term governing the probability is the second derivative:</p>
 <div class="math notranslate nohighlight">
 \[
-  \frac{\partial^2 S_{\text{total}}}{\partial E_1^2} = -\frac{3}{2} k_B \left( \frac{N_1}{E_1^2} + \frac{N_2}{(E - E_1)^2} \right).
+  \frac{\partial^2 S_{\text{total}}}{\partial E_1^2} = -\frac{3}{2} k_B \left( \frac{N_1}{U_1^2} + \frac{N_2}{U_2^2} \right).
   \]</div>
 </li>
-<li><p>We see from the sign that indeed Entropy is maxima</p>
+<li><p>Here, we use the equilibrium conditions where <span class="math notranslate nohighlight">\(U_1\)</span> and <span class="math notranslate nohighlight">\(U_2\)</span> denote the average internal energies of subsystems 1 and 2.</p></li>
+<li><p>The negative sign confirms that entropy is maximized at equilibrium, ensuring that small deviations follow:</p>
 <div class="math notranslate nohighlight">
 \[
-  \frac{\partial^2 S_{\text{total}}}{\partial E_1^2} \Big|_{U_1} = -\frac{3}{2} k_B \frac{N_1 + N_2}{U_1 U_2}.
+  P(E_1) \propto e^{S_{\text{total}}(E_1)/k_B} \propto e^{-\frac{(E_1 - U_1)^2}{2 \sigma^2}}.
   \]</div>
 </li>
-<li><p>From the Boltzmann distribution, the probability of small deviations follows:</p>
+<li><p>The variance of energy fluctuations follows from the curvature of entropy:</p>
 <div class="math notranslate nohighlight">
 \[
-  P(E_1) \propto e^{S_{\text{total}}(E_1)/k_B} \propto e^{-\frac{(E_1 - U_1)^2}{2 \sigma^2}}
+  \sigma^2 = \left(-\frac{\partial^2 S_{\text{total}}}{\partial E_1^2} k_B \right)^{-1} = \frac{2}{3} \frac{U_1^2 U_2^2}{(N_1 U_2^2 + N_2 U_1^2)}.
   \]</div>
-</li>
-<li><p>where the variance is:</p>
+<p>In the thermodynamic limit, where <span class="math notranslate nohighlight">\(N_1, N_2 \gg 1\)</span>, this scales as:</p>
 <div class="math notranslate nohighlight">
 \[
-  \sigma^2 = \frac{2}{3} \frac{E^2 N_1 N_2}{(N_1 + N_2)^2}.
+  \sigma^2 \sim O(N).
   \]</div>
 </li>
-<li><p>Thus, energy fluctuations around equilibrium follow a <strong>Gaussian distribution</strong>, with variance scaling as <span class="math notranslate nohighlight">\(\sim E^2/N\)</span>, meaning fluctuations become negligible in the thermodynamic limit.</p></li>
+<li><p>Thus, energy fluctuations around equilibrium follow a <strong>Gaussian distribution</strong>, with variance scaling as <span class="math notranslate nohighlight">\(O(N)\)</span>. This implies that fluctuations relative to the mean become negligible in the thermodynamic limit, reinforcing the stability of equilibrium.</p></li>
 </ul>
 </section>
 <section id="constant-temperature-ensemble-nvt">
