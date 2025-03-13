@@ -1578,6 +1578,26 @@ Z = \left( 2 e^{-\beta \epsilon} \right)^3 = 8 e^{-\beta \epsilon}
 </li>
 <li><p>This formulation underscores the irreversibility of thermodynamic processes and highlights the natural tendency of a system to evolve towards configurations with higher entropy (in the microcanonical ensemble) or lower free energy (in the canonical ensemble).</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{tikzpicture}[node distance=2.5cm, auto]
+    % Nodes
+    \node (micro) [draw, rectangle, text width=4cm, align=center] {\textbf{Microcanonical Ensemble} \\ $\Omega(E) = e^{S(E)/k_B}$};
+    
+    \node (canonical) [draw, rectangle, right=4cm of micro, text width=4cm, align=center] {\textbf{Canonical Ensemble} \\ $Z(\beta) = \sum_E \Omega(E) e^{-\beta E}$};
+    
+    \node (entropy) [draw, rectangle, below=2.5cm of micro, text width=4cm, align=center] {Entropy: $S(E) = k_B \ln \Omega(E)$};
+    
+    \node (free_energy) [draw, rectangle, below=2.5cm of canonical, text width=4cm, align=center] {Helmholtz Free Energy: $F(T) = -k_B T \ln Z(\beta)$};
+    
+    % Arrows
+    \draw[-&gt;, thick] (micro.east) -- node[above] {Laplace Transform} (canonical.west);
+    
+    \draw[-&gt;, thick] (entropy.east) -- node[above] {Legendre Transform} (free_energy.west);
+    
+    \draw[-&gt;, thick] (micro.south) -- node[left] {\textbf{Definition:} $\Omega(E) = e^{S(E)/k_B}$} (entropy.north);
+    
+    \draw[-&gt;, thick] (canonical.south) -- node[right] {\textbf{Definition:} $Z(\beta) = e^{-F(T)/k_B T}$} (free_energy.north);
+\end{tikzpicture}\end{split}\]</div>
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
