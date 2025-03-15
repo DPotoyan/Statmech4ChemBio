@@ -136,7 +136,11 @@ $$
 - The **partition function** naturally follows the structure of a **Legendre transform**, as it is related to free energy via:
 
 $$
-Z(f_0, \dots, f_n, X_{n+1}, \dots, X_N) = e^{-\beta \Psi(f_0, \dots, f_{n}, X_{n+1}, \dots, X_{N})}
+\Psi(f_1, \dots, f_{n}, X_{n+1}, \dots, X_{N}) = U(X_1, ... X_N) - (f_1 X_1+...f_nX_n)
+$$
+
+$$
+Z(f_1, \dots, f_n, X_{n+1}, \dots, X_N) = e^{-\beta \Psi(f_1, \dots, f_{n}, X_{n+1}, \dots, X_{N})}
 $$
 
 - The $\Psi$ is a **thermodynamic potential** obtained through Legendre transformation of the internal energy.
