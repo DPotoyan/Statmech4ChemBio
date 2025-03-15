@@ -1,0 +1,775 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Summary of Ensembles &#8212; Statistical Mechanics for Chemistry and Biology</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '3_ensembles/ensemble_overview';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Phase transitions" href="../4_ising/intro.html" />
+    <link rel="prev" title="muPT" href="npt.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Statistical Mechanics for Chemistry and Biology - Home"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Statistical Mechanics for Chemistry and Biology - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Schedule (Spring 2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_stats/intro.html">Stats</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Probabilities_Counting.html">Probability theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Random_Variables.html">Random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Entropy.html">Entropy and Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_thermo/01_Thermo.html">Review of thermodynamics principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_thermo/02_FreeEnergies.html">Thermodynamic Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Ensembles</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nve.html">Intro to Statistical Ensembles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nvt.html">Ensembles in phase-space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="npt.html">muPT</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Summary of Ensembles</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_ising/intro.html">Phase transitions</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_ising/00_MC.html">Monte Carlo and “the power of randomness”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_ising/01_MCMC.html">Ising models and Metropolis algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_ising/02_phase_tranistions.html">Phase transitions through the lense of Ising models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_ising/03_MeanField.html">Mean Field Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_ising/03_vdw.html">Mean Field theory of interacting fluids</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../4_ising/04_analytic.html">Analytic solutions to 1D Ising model</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_fluids/intro.html">Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_fluids/Intro2Fluids.html">Statistical mechanics of fluids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_fluids/mc_lj.html">MC simulations of fluids</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../5_fluids/Intro2MD.html">Molecular Dynamics</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../5_fluids/md_lj.html">MD simulations of fluids</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_kinetics/intro.html">Kinetics</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_kinetics/langevin.html">Langevin equation and Brownian motion</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/py-lab/intro.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2py.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2numpy.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2viz.html">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/python_OOP_challenge.html">Tutorial: Building Python Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/np-lab/intro.html">Numpy lab</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/np_prob.html">Numpy and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/sinc_function.html">Numpy Lab: Sinc Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/linear_functions.html">Numpy Lab: Linear Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/1d_gas_sim.html">Tutorial: Numpy simultions of 1D gas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/2d_gas_sim.html">Tutorial: Numpy simultions of 2D gas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/rw-lab/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random walk simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/InverseTransform.html">The Inverse Transform of RVs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/change_rv_jax.html">Change of variables with automatic differentiation (autodiff)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/langevin.html">Langevin Equation for Brownian Motion and Mean Square Displacement (MSD)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab4/intro.html">Application of ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/nvt_application.html">Free energy and protein folding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/TwoState.html">Two-state system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/mass_action.html">Mass action law</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab5/intro.html">Simulating Ising models</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/torch_ising.html">Ising-2D simulations using ML libraries</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/Wolf.html">Other Methods for sampling Ising models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/enhance-sampling.html">Non-boltzman (enhanced) sampling ideas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab6/intro.html">Simulating Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_double_well.html">Double Well potential using OpenMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_ethane.html">Simulating Ethane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_villin.html">Simulating solvated protein</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/3_ensembles/ensemble_overview.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Summary of Ensembles</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-a-function-of-microstate-probabilities">Entropy as a Function of Microstate Probabilities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-constraints-for-equilibrium">Physical Constraints for Equilibrium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-ensembles"><strong>Comparison of Ensembles</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-equivalence-and-fluctuation-response-relations"><strong>Ensemble Equivalence and Fluctuation-Response Relations</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-relations"><strong>Fluctuation-Response Relations</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smallness-of-fluctuations-in-the-thermodynamic-limit"><strong>Smallness of Fluctuations in the Thermodynamic Limit</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights"><strong>Key Insights</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-and-laplace-transforms-in-thermodynamics-and-statistical-mechanics"><strong>Legendre and Laplace Transforms in Thermodynamics and Statistical Mechanics</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-form-of-the-legendre-transform"><strong>General Form of the Legendre Transform</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laplace-transform-free-energies-as-laplace-transforms-of-energy"><strong>Laplace Transform: Free Energies as Laplace Transforms of Energy</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="summary-of-ensembles">
+<h1>Summary of Ensembles<a class="headerlink" href="#summary-of-ensembles" title="Permalink to this heading">#</a></h1>
+<p><img alt="" src="../_images/ensembl.png" /></p>
+<p>Here’s your revised <strong>Markdown-friendly LaTeX</strong> version with corrected equations and formatting.</p>
+<section id="entropy-as-a-function-of-microstate-probabilities">
+<h2>Entropy as a Function of Microstate Probabilities<a class="headerlink" href="#entropy-as-a-function-of-microstate-probabilities" title="Permalink to this heading">#</a></h2>
+<p>Entropy is given by the <strong>Shannon-Gibbs entropy formula</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+S([p]) = -k_B \sum_{i} p_i \log p_i
+\]</div>
+<p>where <span class="math notranslate nohighlight">\( p_i \)</span> is the probability of the <span class="math notranslate nohighlight">\( i \)</span>th microstate.</p>
+<section id="physical-constraints-for-equilibrium">
+<h3>Physical Constraints for Equilibrium<a class="headerlink" href="#physical-constraints-for-equilibrium" title="Permalink to this heading">#</a></h3>
+<p>For a system to maintain equilibrium values, the microstate probabilities must satisfy the following conditions:</p>
+<ol class="arabic">
+<li><p><strong>Normalization:</strong>
+$<span class="math notranslate nohighlight">\(
+\sum_{i} p_i = 1
+\)</span>$</p></li>
+<li><p><strong>Constraint to Maintain the Expectation Value of an Observable <span class="math notranslate nohighlight">\(X\)</span> (e.g., Energy or Volume):</strong></p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_{i} p_i X_i = \langle X \rangle, \quad \sum_{i} p_i Y_i = \langle Y \rangle
+   \]</div>
+<p>The probability of a macrostate <span class="math notranslate nohighlight">\( (X, Y, \dots) \)</span> follows the general form:</p>
+<div class="math notranslate nohighlight">
+\[
+   P(X, Y, \dots) = \frac{e^{S(X, Y, \dots)/k_B - \beta (X + Y + \dots)}}{Z}
+   \]</div>
+<p>where <span class="math notranslate nohighlight">\(Z\)</span> is a normalization factor.</p>
+</li>
+</ol>
+</section>
+<section id="comparison-of-ensembles">
+<h3><strong>Comparison of Ensembles</strong><a class="headerlink" href="#comparison-of-ensembles" title="Permalink to this heading">#</a></h3>
+<p><strong>Exponential dependence can be appreciated by considering exhcnage with environment or large reserovoir</strong></p>
+<div class="math notranslate nohighlight">
+\[E_r\gg E,\quad V_r \gg V, \quad N_t \gg N\]</div>
+<div class="math notranslate nohighlight">
+\[log \Omega_r(E_t-E, V_r-V, N_r-N,)\approx  const - \beta E + \beta\mu -\beta PV \]</div>
+<div class="math notranslate nohighlight">
+\[P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \cdot e^{\beta \mu N} \cdot e^{-\beta PV} \]</div>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Ensemble</strong></p></th>
+<th class="head"><p><strong><span class="math notranslate nohighlight">\( P(\text{microstate}) \)</span></strong></p></th>
+<th class="head"><p><strong><span class="math notranslate nohighlight">\( P(\text{macrostate}) \)</span></strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Microcanonical (NVE)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\( P(\text{microstate}) = \frac{1}{\Omega(E)} \)</span> (all accessible microstates are equally probable)</p></td>
+<td><p><span class="math notranslate nohighlight">\( P(E) \sim e^{S(E)/k_B} \)</span> (entropy-dominated)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Canonical (NVT)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\( P(\text{microstate}) \sim e^{-\beta E} \)</span> (Boltzmann distribution)</p></td>
+<td><p><span class="math notranslate nohighlight">\( P(E) \sim e^{S(E)/k_B - \beta E} \)</span> (entropy-weighted by energy)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Grand Canonical (µVT)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\( P(\text{microstate}) \sim e^{\beta (\mu N - E)} \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( P(N, E) \sim e^{S(N,E)/k_B + \beta (\mu N - E)} \)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Isothermal-Isobaric (NPT)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\( P(\text{microstate}) \sim e^{-\beta (E + PV)} \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\( P(E, V) \sim e^{S(E, V)/k_B - \beta (E + PV)} \)</span></p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<p><strong>Key Highlights</strong></p>
+<ul class="simple">
+<li><p><strong>Entropy dependence</strong> <span class="math notranslate nohighlight">\(e^{S/k_B}\)</span> is universal across all ensembles.</p></li>
+<li><p><strong>Microstate probability</strong> follows different forms based on constraints from different thermodynamic potentials.</p></li>
+<li><p><strong>Macrostate probability</strong> always includes an entropy term but is modified by energy, pressure, and chemical potential, depending on the ensemble.</p></li>
+</ul>
+</section>
+<section id="ensemble-equivalence-and-fluctuation-response-relations">
+<h3><strong>Ensemble Equivalence and Fluctuation-Response Relations</strong><a class="headerlink" href="#ensemble-equivalence-and-fluctuation-response-relations" title="Permalink to this heading">#</a></h3>
+<p><strong>Smallness of Fluctuations</strong></p>
+<p>The total differential of internal energy <span class="math notranslate nohighlight">\( U \)</span> in a thermodynamic system can be expressed in terms of its conjugate variables:</p>
+<div class="math notranslate nohighlight">
+\[
+dU = SdT - VdP + \mu dN + BdM + \dots = \sum_i f_i dX_i
+\]</div>
+<p>where each pair <span class="math notranslate nohighlight">\( (X_i, f_i) \)</span> represents a conjugate extensive and intensive variable, such as:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( (S, T) \)</span> → entropy and temperature,</p></li>
+<li><p><span class="math notranslate nohighlight">\( (V, -P) \)</span> → volume and pressure,</p></li>
+<li><p><span class="math notranslate nohighlight">\( (N, \mu) \)</span> → particle number and chemical potential,</p></li>
+<li><p><span class="math notranslate nohighlight">\( (M, B) \)</span> → magnetization and magnetic field.</p></li>
+</ul>
+</section>
+<section id="fluctuation-response-relations">
+<h3><strong>Fluctuation-Response Relations</strong><a class="headerlink" href="#fluctuation-response-relations" title="Permalink to this heading">#</a></h3>
+<p>For a given extensive variable <span class="math notranslate nohighlight">\( X \)</span> and its conjugate intensive variable <span class="math notranslate nohighlight">\( Y \)</span>, the partition function <span class="math notranslate nohighlight">\( Z \)</span> governs both the <strong>mean value</strong> and <strong>fluctuations</strong> of <span class="math notranslate nohighlight">\( X \)</span>.</p>
+<ul class="simple">
+<li><p><strong>Mean value of <span class="math notranslate nohighlight">\( X \)</span> at constant <span class="math notranslate nohighlight">\( Y \)</span>:</strong>
+$<span class="math notranslate nohighlight">\(
+\langle X \rangle = \frac{\partial \log Z}{\partial (\beta f)}
+\)</span>$</p></li>
+<li><p><strong>Fluctuations of <span class="math notranslate nohighlight">\( X \)</span> at constant <span class="math notranslate nohighlight">\( Y \)</span>:</strong>
+$<span class="math notranslate nohighlight">\(
+\sigma^2_X = \langle X^2 \rangle - \langle X \rangle^2 = \frac{\partial^2 \log Z}{\partial (\beta f)^2}
+\)</span>$</p></li>
+</ul>
+<p>This relation shows that fluctuations in <span class="math notranslate nohighlight">\( X \)</span> are directly linked to the second derivative of the partition function, a fundamental result of statistical mechanics.</p>
+</section>
+<section id="smallness-of-fluctuations-in-the-thermodynamic-limit">
+<h3><strong>Smallness of Fluctuations in the Thermodynamic Limit</strong><a class="headerlink" href="#smallness-of-fluctuations-in-the-thermodynamic-limit" title="Permalink to this heading">#</a></h3>
+<p>For macroscopic systems, fluctuations in extensive variables are typically small relative to their mean values. Examples include:</p>
+<ul>
+<li><p><strong>Energy fluctuations (Canonical Ensemble):</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  \sigma^2_E = k_B T^2 C_V
+  \]</div>
+<p>where <span class="math notranslate nohighlight">\( C_V \)</span> is the heat capacity at constant volume.</p>
+</li>
+<li><p><strong>Particle number fluctuations (Grand Canonical Ensemble):</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  \sigma^2_N = k_B T \frac{\kappa_T}{V}
+  \]</div>
+<p>where <span class="math notranslate nohighlight">\( \kappa_T \)</span> is the isothermal compressibility.</p>
+</li>
+</ul>
+</section>
+<section id="key-insights">
+<h3><strong>Key Insights</strong><a class="headerlink" href="#key-insights" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Fluctuations decrease as system size increases</strong>, typically scaling as <span class="math notranslate nohighlight">\( 1/\sqrt{N} \)</span>.</p></li>
+<li><p><strong>Response functions (e.g., heat capacity, compressibility) determine fluctuation magnitude</strong>.</p></li>
+<li><p><strong>Ensemble equivalence</strong> ensures that for large systems, different ensembles (canonical, grand canonical, etc.) give equivalent macroscopic results, despite differing fluctuation magnitudes.</p></li>
+</ul>
+</section>
+<section id="legendre-and-laplace-transforms-in-thermodynamics-and-statistical-mechanics">
+<h3><strong>Legendre and Laplace Transforms in Thermodynamics and Statistical Mechanics</strong><a class="headerlink" href="#legendre-and-laplace-transforms-in-thermodynamics-and-statistical-mechanics" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>The  Legendre transformation</strong> provides a way to reformulate equilibrium conditions (e.g., entropy maximization) in terms of more convenient variables (e.g., free energy minimization). This allows for the introduction of thermodynamic potentials tailored to different ensembles.</p></li>
+<li><p><strong>Free Energies as Legendre Transforms of Internal Energy</strong> The internal energy function <span class="math notranslate nohighlight">\( U(S, V, N, \dots) \)</span> depends on extensive variables (e.g., entropy <span class="math notranslate nohighlight">\( S \)</span>, volume <span class="math notranslate nohighlight">\( V \)</span>, particle number <span class="math notranslate nohighlight">\( N \)</span>). The thermodynamic free energies arise as <strong>Legendre transforms</strong> of <span class="math notranslate nohighlight">\( U \)</span> with respect to these variables:</p></li>
+<li><p><strong>Helmholtz free energy</strong> (Legendre transform over <span class="math notranslate nohighlight">\( S \)</span>):
+$<span class="math notranslate nohighlight">\(
+F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)
+\)</span>$</p></li>
+<li><p><strong>Gibbs free energy</strong> (Legendre transform over <span class="math notranslate nohighlight">\( S, V \)</span>):
+$<span class="math notranslate nohighlight">\(
+G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)
+\)</span>$</p></li>
+</ul>
+</section>
+<section id="general-form-of-the-legendre-transform">
+<h3><strong>General Form of the Legendre Transform</strong><a class="headerlink" href="#general-form-of-the-legendre-transform" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A general <strong>Legendre transformation</strong> of an energy function <span class="math notranslate nohighlight">\( U(X_1, \dots, X_N) \)</span> with respect to a subset of its extensive variables <span class="math notranslate nohighlight">\( X_0, \dots, X_n \)</span> is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{L}_{X_{1}, \dots, X_{n}} U(X_1,  \dots, X_N) = U - \sum_{k=0}^{n} f_k X_k = \Psi(f_0, \dots, f_{n}, X_{n+1}, \dots, X_{N})
+\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\( f_k = \frac{\partial U}{\partial X_k} \)</span> are the conjugate <strong>intensive variables</strong>.</p></li>
+</ul>
+<p><strong>Partition Functions and Legendre Transforms</strong></p>
+<ul class="simple">
+<li><p>The <strong>partition function</strong> in statistical mechanics naturally follows the structure of a <strong>Legendre transform</strong>, as it is related to free energy via:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z(f_0, \dots, f_n,  X_{n+1}, \dots, X_N) = e^{-\beta \Psi(f_0, \dots, f_{n}, X_{n+1}, \dots, X_{N})}
+\]</div>
+<ul class="simple">
+<li><p>This reveals a <strong>general pattern</strong>:  <strong>Partition functions are exponential functions of Legendre-transformed energy functions</strong> over the fluctuating quantities.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="laplace-transform-free-energies-as-laplace-transforms-of-energy">
+<h2><strong>Laplace Transform: Free Energies as Laplace Transforms of Energy</strong><a class="headerlink" href="#laplace-transform-free-energies-as-laplace-transforms-of-energy" title="Permalink to this heading">#</a></h2>
+<p>In statistical mechanics, free energies also emerge as <strong>Laplace transforms</strong> of the internal energy function:</p>
+<div class="math notranslate nohighlight">
+\[
+Z(\beta, N, V) = \int dE \, e^{-\beta E} \Omega(E)
+\]</div>
+<p>which, in the thermodynamic limit, simplifies to:</p>
+<div class="math notranslate nohighlight">
+\[
+Z(\beta, N, V) = e^{-\beta F(\beta, N, V)}
+\]</div>
+<p>This shows that the <strong>partition function is the Laplace transform of the density of states</strong> <span class="math notranslate nohighlight">\( \Omega(E) \)</span>, and the <strong>free energy is the negative logarithm of this Laplace transform</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+F(\beta, N, V) = -\frac{1}{\beta} \log Z(\beta, N, V)
+\]</div>
+<p><strong>Key Insights</strong></p>
+<ul class="simple">
+<li><p><strong>Legendre transforms</strong> convert energy functions into free energies by replacing <strong>extensive</strong> variables with their conjugate <strong>intensive</strong> counterparts.</p></li>
+<li><p><strong>Laplace transforms</strong> relate partition functions to energy distributions, providing a statistical interpretation of free energy.</p></li>
+<li><p>The <strong>partition function takes the form</strong> <span class="math notranslate nohighlight">\( Z \sim e^{-\beta \Psi} \)</span>, where <span class="math notranslate nohighlight">\( \Psi \)</span> is a Legendre-transformed potential.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "DPotoyan/Statmech4ChemBio",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./3_ensembles"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="npt.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">muPT</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../4_ising/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Phase transitions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropy-as-a-function-of-microstate-probabilities">Entropy as a Function of Microstate Probabilities</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-constraints-for-equilibrium">Physical Constraints for Equilibrium</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-ensembles"><strong>Comparison of Ensembles</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-equivalence-and-fluctuation-response-relations"><strong>Ensemble Equivalence and Fluctuation-Response Relations</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fluctuation-response-relations"><strong>Fluctuation-Response Relations</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#smallness-of-fluctuations-in-the-thermodynamic-limit"><strong>Smallness of Fluctuations in the Thermodynamic Limit</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights"><strong>Key Insights</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#legendre-and-laplace-transforms-in-thermodynamics-and-statistical-mechanics"><strong>Legendre and Laplace Transforms in Thermodynamics and Statistical Mechanics</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-form-of-the-legendre-transform"><strong>General Form of the Legendre Transform</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#laplace-transform-free-energies-as-laplace-transforms-of-energy"><strong>Laplace Transform: Free Energies as Laplace Transforms of Energy</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Davit Potoyan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
