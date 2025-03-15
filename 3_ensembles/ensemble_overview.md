@@ -64,7 +64,7 @@ $$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \
 
 
 
-### **Ensemble Equivalence and Fluctuation-Response Relations**
+### **Extensive vs intensive variables**
 
 - The total differential of internal energy $ U $ in a thermodynamic system can be expressed in terms of its conjugate variables:
 
@@ -79,9 +79,8 @@ $$
   - $ (M, B) $ → magnetization and magnetic field.
 
 
-### **Legendre and Laplace Transforms in Thermodynamics and Statistical Mechanics**
 
-#### **Laplace Transform and Ensemble Connections**
+### **Laplace Transform and Ensemble Connections**
 
 - The **Laplace transform** connects different thermodynamic ensembles by linking the **partition function** to energy and volume fluctuations. It effectively approximates a **Legendre transform** in the thermodynamic limit.
 
@@ -108,7 +107,6 @@ $$
   $$
 
 - Thus, **free energy functions naturally emerge as Legendre transforms of internal energy** through Laplace integration over fluctuating variables.
-
 
 
 ### **Legendre Transform and Thermodynamic Potentials**
