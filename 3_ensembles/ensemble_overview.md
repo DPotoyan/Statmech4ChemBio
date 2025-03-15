@@ -4,354 +4,188 @@
 ![](./figs/ensembl.png)
 
 
-1. **Entropy as a function of microstate probabilities**:
- 
-   $$S = -k \sum_{i} p_i \log p_i$$
+Here’s your revised **Markdown-friendly LaTeX** version with corrected equations and formatting.
 
-3. **Constraint imposed on thermodynamic coordinates to maintain constant values**:
-   - Normalization of probabilities(all ensembles):
-     
-     $$\sum_{i} p_i = 1$$
-     
-   - Expected energy (for certain ensembles):
-     
-     $$\sum_{i} p_i E_i = \langle E \rangle$$
-     
-   - Expected number of particles (for certain ensembles):
-     
-     $$\sum_{N} p_N N = \langle N \rangle$$
-     
-   - Expected volume (for certain ensembles):
-     
-     $$\sum_{i} p_V V = \langle V \rangle$$
 
-4. **Lagrange Multipliers**:
-   Construct the Lagrangian with Lagrange multipliers} $\alpha$, $\beta$, ...
-   
-   $$L = -k \sum_{i} p_i \log p_i - \alpha \left( \sum_{i} p_i - 1 \right) - \beta \left( \sum_{i} p_i E_i - ...$$
+## Entropy as a Function of Microstate Probabilities
 
-
-### Finding maximum entropy solution with constraints (NVE example)
-
-**Seek maximum of entropy**
-    
-   $$\frac{\partial L}{\partial p_j} = -k_B (\log p_j + 1) - \alpha  = 0$$
-
-   $$p_j = e^{-\frac{\alpha}{k_B } - 1}$$
-
-**Determine Lagrange multipliers**
-
-   - Normalize $p_j$ to find $\alpha$:
-     
-     $$\sum_j p_j = \sum_j e^{-\frac{\alpha}{k_B} - 1} =\Omega$$
-     
-   - probabilities are independent of the microstate, and the sum can be set to be equal to a constant denoted as $\Omega$
-
-**Probability Expression:**
-
-  $$ p_j = \frac{1}{\Omega}$$
-
-
-### Finding maximum entropy solution with constraints (NVT example)
-    
-   $$\frac{\partial L}{\partial p_j} = -k (\log p_j + 1) - \alpha - \beta E_j = 0$$
-
-   $$p_j = e^{-\frac{\alpha}{k} - 1} e^{-\frac{\beta E_j}{k}}$$
-
-**Determine Lagrange multipliers**
-
-   - Normalize $p_j$ to find $\alpha$:
-     
-     $$e^{-\frac{\alpha}{k} - 1} = \frac{1}{Z}$$
-   
-     $$Z = \sum_{j} e^{-\frac{\beta E_j}{k}}$$
-
-   - $\beta$ is typically identified with $\frac{1}{kT}$.
-
-**Probability Expression:**
-
-  $$ p_j = \frac{e^{-\frac{\beta E_j}{k}}}{Z}$$
-
-## NVE Overview
-
-### Thermodynamics
-
-- **Fundamental relation**
-
-$$dE = TdS-pdV+\mu dN$$
-
-- **Derivatives of energy**
-
-$$T = \Big(\frac{\partial E}{\partial S}\Big)_{V,N}\,\,\,\,\,\, p = -\Big(\frac{\partial E}{\partial V}\Big)_{S,N} \,\,\,\,\,\, \mu = \Big(\frac{\partial E}{\partial N}\Big)_{S,V}$$
-
-- **Second law**
-
-$$dS(E,V,N)\geq 0\,\,\,\,\,\,\,\,\, dE(S,V,N)\leq 0$$ 
-
-### Statistical mechanics 
-
-- **Bridge equation**
-
-$$\Omega(N,V,E) = \sum^{}_{i} 1$$
-
-$$S(N,V,E) = k_B log \Omega(N, V, E)$$
-
-- **Probability of a microstate**
-
-$$p(E) = \frac{1}{\Omega(N, V, E)}$$
-
-- **Probability of a macrostate**
-
-$$p(E_1, E-E_1) = \frac{\Omega(E_1) \Omega(E-E_1)}{\sum_{E_1} \Omega(E_1) \Omega(E-E_1)} = \frac{e^{S_1(E_1)+S_2(E-E_1)}}{e^{S(E)}}$$
-
-
-## NVT Overview
-
-### Thermodynamics
-
-- **Fundamental relation**
-
-$$dF = d(E-TS) = -SdT -pdV + \mu dN$$
-
-- **Derivatives of free energy**
-
-$$S = -\Big(\frac{\partial F}{\partial T}\Big)_{V,N}\,\,\,\,\,\, p = -\Big(\frac{\partial F}{\partial V}\Big)_{T,N} \,\,\,\,\,\, \mu = \Big(\frac{\partial F}{\partial N}\Big)_{T,V}$$
-
-- **Second law**
-
-$$dF(T,V,N)\leq 0$$ 
-
-### Statistical mechanics
-
-- **Bridge equation**
-
-$$Z(N,V,T) = \sum^{}_{i} e^{-E_i/k_B T} = \sum_E \Omega(E) e^{-E/k_B T}$$
-
-$$F=-k_BT log Z$$
-
-- **Probability of a microstate**
-
-$$p(E_i) = \frac{e^{-E_i/k_BT}}{Z}$$
-
-- **Probability of a macrostate**
-
-$$p(E') = \frac{\Omega(E^{'}) e^{-E^{'}/k_BT}}{Z} = \frac{e^{-\beta F^{'}}}{Z}$$
-
-
-
-
-## $\mu VT$ Overview
-
-
-### Thermodynamics
-
-- **Fundamental relation**
-
-$$d\Phi_{\mu, T} = d(U-TS - \mu N) = -SdT-pdV-Nd\mu$$
-
-- **Derivatives of free energy**
-
-$$S = -\Big(\frac{\partial \Phi}{\partial T}\Big)_{V,N}\,\,\,\,\,\, p = -\Big(\frac{\partial \Phi}{\partial V}\Big)_{T,\mu} \,\,\,\,\,\, N = - \Big(\frac{\partial \Phi}{\partial \mu}\Big)_{T,V}$$
-
-
-- **Second law**
-
-$$d\Phi\leq 0$$
-
-### Statistical mechanics
-
-- **Bridge equation**
-
-$$Z_G(\mu,V,T) = \sum^{}_{i, N} e^{-E_i/k_B T} \cdot e^{\mu N/k_B T} = \sum_E \Omega(E, N) e^{-E/k_B T} e^{\mu N/k_B T}$$
-
-$$\Phi(\mu, V, T) =-k_BT log Z_G$$
-
-- **Probability of a microstate**
-
-$$p(E_i) = \frac{e^{-E_i/k_BT} e^{\mu N_i/k_BT}}{Z_G}$$
-
-- **Probability of a macrostate**
-
-$$p(E', N') = \frac{\Omega(E', N') e^{-E'/k_BT} e^{ \beta \mu N'}}{Z_G} = \frac{e^{-\beta \Phi'}}{Z_G}$$
-
-
-## Ensemble equivalence
-
-### Smallness of fluctuations
-
-$$dU = SdT -VdP +\mu dN + BdM +... = \sum_i Y_i dX_i$$
-
-Consider a conjucate pair of extensive $X_i$ and intensive $Y_i$ variables. For instnace $(1, E)$, $(S, T)$ or $(V, -p)$. The average and fluctuations of extensive variable $X$ for constant $Y$ is given by derivatives of parition function:
-
-$$\langle X \rangle  = \frac{\partial log Z}{\partial \beta Y}$$
-
-$$\sigma^2_X = \langle X^2 \rangle - \langle X \rangle^2  = \frac{\partial^2 log Z}{\partial (\beta Y)^2}$$
-
-- **Smallness of fluctuations**
-
- $$\sigma^2_E = k_B T^2 C_v(T) $$
-
- $$\sigma^2_N = \frac{k_B T}{v} \kappa_T$$
-
-### Legendre and Laplace transforms
-
-Legendre transformation enables expressing the condition of equilibrium (e.g. maximium of entropy function) in terms of convenient variables (e.g minimum of some free eneergy function). 
-
-- **Free energies are Legedre transforms of internal energy function $E(S,V,N,...)$**
-
-$$\mathcal{L}_{S} E(S,V,N) = U - T\cdot S = F(N, V, T)$$ 
-
-$$\mathcal{L}_{S, V} E(S,V,N) = U - T\cdot S + pV = G(N, p, T)$$
-
-**General expression of Legendtre transform**
-
-A general expression for legendre transform of energy $U(X_0, X_1, ...X_n, X_n+1, ... X_t)$ with respect to its extensive variables can be written down as:
-
-$$\mathcal{L}_{X_{0}, ... X_{n}} U = U - \sum Y_k X_k = \Psi(Y_0,... Y_{n}, X_{n+1}, ...X_{t})$$
-
-The various **partion functions** can then be seen to be of general form $e^{\beta \Psi}$ where the free energy function is a **Legendre transform over fluctuating quantities.**
-
-$$Z(X_0, ... X_n | X_{n+1}, ... X_{t}) = exp \big(-\beta \mathcal{L_{X_{0}, ... X_{n}}} E (X_0, ... X_t) \big)$$
-
-- Free energies as Laplace transform of internal energy function $E(S,V,N,...)$
-
-$$Z(\beta, N, V) = e^{-\beta F(\beta, N, V)}$$
-
-
-### Monoatomic ideal gas
-
-**Quantum density of states of an ideal gas**
-
-![](./figs/pib-states.png)
-
-$$E({\bf n}) = \frac{h^2}{8mL^2} {\bf n^2}$$
-
-$$\Omega(N,V, E) = \int_{E(n)=E} dn = \frac{C_{3N-1}}{2^{3N}} \int \delta \Big(\frac{(8mE)^{1/2}L}{h}-{\bf n}  \Big) d {\bf n}$$
-
-- A sum over all total quantum number of N 3D particles in a box ends up being a problem of finding the volume of an N-dimensional sphere
-
-**Classical density of states of an ideal gas**
-
-$$H(p,q) =\frac{p^2}{2m} = E$$
-
-$${\Omega(E) = \frac{1}{N! h^{3N}}\int_{p^N,q^N} dp^N dq^N \delta(H(p,q) -E) =\frac{V^N}{N! h^{3N}} \int dp^N \delta(p^2/2m -E)}$$
-
-$$ \Omega(E) = \frac{V^N}{N! h^{3N}} \delta V(R)$$
-
-Where $\delta V(R)$ is a volume of a spherical shell with radius $R = (2mE)^{1/2}$ and thickness $\delta R = 1/2 (2m/E)^{1/2} \delta E$
-
-**Volume of a sphere in N dimesnional space**
-
-$$V(R) = \frac{\pi^{D/2}}{(D/2)!} R^D$$
-
-For $D\rightarrow \infty$ we discover that most of the volume of the sphere is concentrated at its surface!
-<br>
-
-$$\delta V(R) = V(R) -V(R-\delta R) = C [R^D - (R-\delta R)^D] = CR^D [1-(1- (\delta R/R)^D)] = CR^D = V(R)$$
-
-### Classical density of states of an ideal gas
-
-$$\boxed{\Omega(E) = \frac{V^N}{h^{3N} N!} \cdot \frac{(2m\pi E)^{3N/2}}{(3N/2)!}}$$
- 
-$$\boxed{ S = log \Omega(E) = k_B N \cdot  \Big [ log \Big(\frac{V}{N \lambda^3}\Big) + \frac{5}{2}\Big]}$$
-
-- Note linear dependence on N. Entropy is an extensive quantity!
-
-- exponent 3/2 reflexts that each particle has 3 degrees of freedom
-
-- $\lambda = \Big(\frac{3h^2 N}{4\pi m E}\Big)^{1/2}$ thermal de Broglie wavelength.
-
-- This result know as "Sackur Tetrode equation" was known long before statistical mechanics. 
-
-
-#### Equations of state for ideal gas
-
-$$\frac{1}{T} = \frac{\partial S}{\partial E} = \frac{3}{2}k_B \frac{N}{E}$$
-
-<br>
-
-$$\frac{p}{T} =  \frac{\partial S}{\partial V} = k_B N \frac{1}{V}$$
-
-<br>
-
-$$\frac{\mu}{T} = -\frac{\partial S}{\partial N} = k_B T \cdot log \frac{N}{V} \lambda^3$$
-
-
-### More Examples of using statistical Ensembles
-
-::::{admonition} **Exercise: Random polymer chain**
-:class: note
-
-- Consider 1D polymer where $N$ monomers are randomly oriended with $+l$ and $-l$ orientation along the $x$ axis.
-- Microcanonical ensmeble here is defined as all possible microstates given fixed value of end to end distance $X$ of this polymer. 
-- Compute entropy $S(X)$ and argue that if polymer length is free to move most likely configuraiton would be where the polymer remains compact with nearly equal numbers of $ +l $ and $ -l $ orientations.
-
-:::{dropdown} **Solution**
-
-- We consider a 1D polymer consisting of $ N $ monomers, where each monomer can be oriented either in the $ +l $ or $ -l $ direction along the $ x $-axis. The total end-to-end distance of the polymer is given by:
+Entropy is given by the **Shannon-Gibbs entropy formula**:
 
 $$
-X = \sum_{i=1}^{N} s_i l
+S([p]) = -k_B \sum_{i} p_i \log p_i
 $$
 
-- where $ s_i = \pm 1 $ represents the orientation of the $ i $th monomer.
+where $ p_i $ is the probability of the $ i $th microstate.
 
-**Microcanonical Partition Function**
+### Physical Constraints for Equilibrium
 
-- The total number of microstates corresponding to a given end-to-end distance $ X $ is determined by the number of ways to distribute $ N_+ $ monomers in the $ +l $ direction and $ N_- $ monomers in the $ -l $ direction, such that:
+For a system to maintain equilibrium values, the microstate probabilities must satisfy the following conditions:
+
+1. **Normalization:**
+   $$
+   \sum_{i} p_i = 1
+   $$
+
+2. **Constraint to Maintain the Expectation Value of an Observable $X$ (e.g., Energy or Volume):**
+
+   $$
+   \sum_{i} p_i X_i = \langle X \rangle, \quad \sum_{i} p_i Y_i = \langle Y \rangle
+   $$
+
+   The probability of a macrostate $ (X, Y, \dots) $ follows the general form:
+
+   $$
+   P(X, Y, \dots) = \frac{e^{S(X, Y, \dots)/k_B - \beta (X + Y + \dots)}}{Z}
+   $$
+
+   where $Z$ is a normalization factor.
+
+### **Comparison of Ensembles**
+
+
+**Exponential dependence can be appreciated by considering exhcnage with environment or large reserovoir**
+
+$$E_r\gg E,\quad V_r \gg V, \quad N_t \gg N$$
+
+$$log \Omega_r(E_t-E, V_r-V, N_r-N,)\approx  const - \beta E + \beta\mu -\beta PV $$
+
+$$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \cdot e^{\beta \mu N} \cdot e^{-\beta PV} $$
+
+
+| **Ensemble** | **$ P(\text{microstate}) $** | **$ P(\text{macrostate}) $** |
+|-------------|------------------------------------------------------|------------------------------------------------------|
+| **Microcanonical (NVE)** | $ P(\text{microstate}) = \frac{1}{\Omega(E)} $ (all accessible microstates are equally probable) | $ P(E) \sim e^{S(E)/k_B} $ (entropy-dominated) |
+| **Canonical (NVT)** | $ P(\text{microstate}) \sim e^{-\beta E} $ (Boltzmann distribution) | $ P(E) \sim e^{S(E)/k_B - \beta E} $ (entropy-weighted by energy) |
+| **Grand Canonical (µVT)** | $ P(\text{microstate}) \sim e^{\beta (\mu N - E)} $ | $ P(N, E) \sim e^{S(N,E)/k_B + \beta (\mu N - E)} $ |
+| **Isothermal-Isobaric (NPT)** | $ P(\text{microstate}) \sim e^{-\beta (E + PV)} $ | $ P(E, V) \sim e^{S(E, V)/k_B - \beta (E + PV)} $ |
+
+---
+
+**Key Highlights**
+- **Entropy dependence** $e^{S/k_B}$ is universal across all ensembles.
+- **Microstate probability** follows different forms based on constraints from different thermodynamic potentials.
+- **Macrostate probability** always includes an entropy term but is modified by energy, pressure, and chemical potential, depending on the ensemble.
+
+
+
+### **Ensemble Equivalence and Fluctuation-Response Relations**
+
+**Smallness of Fluctuations**
+
+The total differential of internal energy $ U $ in a thermodynamic system can be expressed in terms of its conjugate variables:
 
 $$
-N_+ + N_- = N, \quad N_+ - N_- = \frac{X}{l}
+dU = SdT - VdP + \mu dN + BdM + \dots = \sum_i f_i dX_i
 $$
 
-- Solving for $ N_+ $ and $ N_- $,
+where each pair $ (X_i, f_i) $ represents a conjugate extensive and intensive variable, such as:
+- $ (S, T) $ → entropy and temperature,
+- $ (V, -P) $ → volume and pressure,
+- $ (N, \mu) $ → particle number and chemical potential,
+- $ (M, B) $ → magnetization and magnetic field.
+
+### **Fluctuation-Response Relations**
+For a given extensive variable $ X $ and its conjugate intensive variable $ Y $, the partition function $ Z $ governs both the **mean value** and **fluctuations** of $ X $. 
+
+- **Mean value of $ X $ at constant $ Y $:**
+  $$
+  \langle X \rangle = \frac{\partial \log Z}{\partial (\beta f)}
+  $$
+
+- **Fluctuations of $ X $ at constant $ Y $:**
+  $$
+  \sigma^2_X = \langle X^2 \rangle - \langle X \rangle^2 = \frac{\partial^2 \log Z}{\partial (\beta f)^2}
+  $$
+
+This relation shows that fluctuations in $ X $ are directly linked to the second derivative of the partition function, a fundamental result of statistical mechanics.
+
+### **Smallness of Fluctuations in the Thermodynamic Limit**
+For macroscopic systems, fluctuations in extensive variables are typically small relative to their mean values. Examples include:
+
+- **Energy fluctuations (Canonical Ensemble):**
+
+  $$
+  \sigma^2_E = k_B T^2 C_V
+  $$
+  where $ C_V $ is the heat capacity at constant volume.
+
+- **Particle number fluctuations (Grand Canonical Ensemble):**
+
+  $$
+  \sigma^2_N = k_B T \frac{\kappa_T}{V}
+  $$
+  where $ \kappa_T $ is the isothermal compressibility.
+
+### **Key Insights**
+
+- **Fluctuations decrease as system size increases**, typically scaling as $ 1/\sqrt{N} $.
+- **Response functions (e.g., heat capacity, compressibility) determine fluctuation magnitude**.
+- **Ensemble equivalence** ensures that for large systems, different ensembles (canonical, grand canonical, etc.) give equivalent macroscopic results, despite differing fluctuation magnitudes.
+
+
+
+### **Legendre and Laplace Transforms in Thermodynamics and Statistical Mechanics**
+
+
+- **The  Legendre transformation** provides a way to reformulate equilibrium conditions (e.g., entropy maximization) in terms of more convenient variables (e.g., free energy minimization). This allows for the introduction of thermodynamic potentials tailored to different ensembles.
+
+- **Free Energies as Legendre Transforms of Internal Energy** The internal energy function $ U(S, V, N, \dots) $ depends on extensive variables (e.g., entropy $ S $, volume $ V $, particle number $ N $). The thermodynamic free energies arise as **Legendre transforms** of $ U $ with respect to these variables:
+
+- **Helmholtz free energy** (Legendre transform over $ S $):
+  $$
+  F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)
+  $$
+
+- **Gibbs free energy** (Legendre transform over $ S, V $):
+  $$
+  G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)
+  $$
+
+### **General Form of the Legendre Transform**
+
+- A general **Legendre transformation** of an energy function $ U(X_1, \dots, X_N) $ with respect to a subset of its extensive variables $ X_0, \dots, X_n $ is given by:
 
 $$
-N_+ = \frac{N + X/l}{2}, \quad N_- = \frac{N - X/l}{2}
+\mathcal{L}_{X_{1}, \dots, X_{n}} U(X_1,  \dots, X_N) = U - \sum_{k=0}^{n} f_k X_k = \Psi(f_0, \dots, f_{n}, X_{n+1}, \dots, X_{N})
 $$
 
-- The number of microstates corresponding to a given $ X $ is given by the binomial coefficient:
+- where $ f_k = \frac{\partial U}{\partial X_k} $ are the conjugate **intensive variables**.
+
+**Partition Functions and Legendre Transforms**
+
+- The **partition function** in statistical mechanics naturally follows the structure of a **Legendre transform**, as it is related to free energy via:
 
 $$
-\Omega(X) = \binom{N}{N_+} = \frac{N!}{N_+! N_-!}
+Z(f_0, \dots, f_n,  X_{n+1}, \dots, X_N) = e^{-\beta \Psi(f_0, \dots, f_{n}, X_{n+1}, \dots, X_{N})}
 $$
 
-- For large $ N $, we approximate using **Stirling’s approximation**:
+- This reveals a **general pattern**:  **Partition functions are exponential functions of Legendre-transformed energy functions** over the fluctuating quantities.
+
+---
+
+## **Laplace Transform: Free Energies as Laplace Transforms of Energy**
+In statistical mechanics, free energies also emerge as **Laplace transforms** of the internal energy function:
 
 $$
-\ln \Omega(X) \approx N \ln N - N_+ \ln N_+ - N_- \ln N_-
+Z(\beta, N, V) = \int dE \, e^{-\beta E} \Omega(E)
 $$
 
-**Entropy Calculation**
-
-
-$$
-S(X) = k_B \ln \Omega(X)
-$$
-
-- Using Stirling's approximation and expressing $ N_+ $ and $ N_- $ in terms of $ X $,
+which, in the thermodynamic limit, simplifies to:
 
 $$
-S(X) \approx k_B \left[ N \ln N - \frac{N+X/l}{2} \ln \frac{N+X/l}{2} - \frac{N-X/l}{2} \ln \frac{N-X/l}{2} \right]
+Z(\beta, N, V) = e^{-\beta F(\beta, N, V)}
 $$
 
-- To simplify, define the **normalized displacement** $ x = X / (N l) $
+This shows that the **partition function is the Laplace transform of the density of states** $ \Omega(E) $, and the **free energy is the negative logarithm of this Laplace transform**:
 
 $$
-S(X) \approx k_B N \left[ \ln N - \frac{1+x}{2} \ln \frac{1+x}{2} - \frac{1-x}{2} \ln \frac{1-x}{2} \right]
+F(\beta, N, V) = -\frac{1}{\beta} \log Z(\beta, N, V)
 $$
 
-- For small $x$, we can approximate using a Taylor expansion:
-
-$$
-S(X) \approx k_B N \left[ \ln 2 - \frac{x^2}{2} \right]
-$$
-
-- Thus, the entropy has a **maximum** at $X = 0 $, meaning the most probable configuration is one where the polymer remains compact with nearly equal numbers of $ +l $ and $ -l $ orientations.
-
-- This shows a decrease in entropy as the polymer is more stretched ($|X|$ increases), reflecting fewer accessible configurations.
 
 
-:::
+**Key Insights**
+- **Legendre transforms** convert energy functions into free energies by replacing **extensive** variables with their conjugate **intensive** counterparts.
+- **Laplace transforms** relate partition functions to energy distributions, providing a statistical interpretation of free energy.
+- The **partition function takes the form** $ Z \sim e^{-\beta \Psi} $, where $ \Psi $ is a Legendre-transformed potential.
 
-::::
