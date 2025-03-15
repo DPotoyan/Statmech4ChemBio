@@ -3,10 +3,6 @@
   
 ![](./figs/ensembl.png)
 
-
-Here’s your revised **Markdown-friendly LaTeX** version with corrected equations and formatting.
-
-
 ## Entropy as a Function of Microstate Probabilities
 
 Entropy is given by the **Shannon-Gibbs entropy formula**:
@@ -15,7 +11,7 @@ $$
 S([p]) = -k_B \sum_{i} p_i \log p_i
 $$
 
-where $ p_i $ is the probability of the $ i $th microstate.
+where $p_i$ is the probability of the $i$ th microstate.
 
 ### Physical Constraints for Equilibrium
 
