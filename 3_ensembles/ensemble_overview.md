@@ -70,8 +70,6 @@ $$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \
 
 ### **Ensemble Equivalence and Fluctuation-Response Relations**
 
-**Smallness of Fluctuations**
-
 The total differential of internal energy $ U $ in a thermodynamic system can be expressed in terms of its conjugate variables:
 
 $$
@@ -132,6 +130,7 @@ For macroscopic systems, fluctuations in extensive variables are typically small
 - **Free Energies as Legendre Transforms of Internal Energy** The internal energy function $ U(S, V, N, \dots) $ depends on extensive variables (e.g., entropy $ S $, volume $ V $, particle number $ N $). The thermodynamic free energies arise as **Legendre transforms** of $ U $ with respect to these variables:
 
 - **Helmholtz free energy** (Legendre transform over $ S $):
+
   $$
   F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)
   $$
@@ -141,7 +140,7 @@ For macroscopic systems, fluctuations in extensive variables are typically small
   G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)
   $$
 
-### **General Form of the Legendre Transform**
+ **General Form of the Legendre Transform**
 
 - A general **Legendre transformation** of an energy function $ U(X_1, \dots, X_N) $ with respect to a subset of its extensive variables $ X_0, \dots, X_n $ is given by:
 
@@ -161,31 +160,9 @@ $$
 
 - This reveals a **general pattern**:  **Partition functions are exponential functions of Legendre-transformed energy functions** over the fluctuating quantities.
 
----
-
-## **Laplace Transform: Free Energies as Laplace Transforms of Energy**
-In statistical mechanics, free energies also emerge as **Laplace transforms** of the internal energy function:
-
-$$
-Z(\beta, N, V) = \int dE \, e^{-\beta E} \Omega(E)
-$$
-
-which, in the thermodynamic limit, simplifies to:
-
-$$
-Z(\beta, N, V) = e^{-\beta F(\beta, N, V)}
-$$
-
-This shows that the **partition function is the Laplace transform of the density of states** $ \Omega(E) $, and the **free energy is the negative logarithm of this Laplace transform**:
-
-$$
-F(\beta, N, V) = -\frac{1}{\beta} \log Z(\beta, N, V)
-$$
-
-
-
-**Key Insights**
 - **Legendre transforms** convert energy functions into free energies by replacing **extensive** variables with their conjugate **intensive** counterparts.
 - **Laplace transforms** relate partition functions to energy distributions, providing a statistical interpretation of free energy.
 - The **partition function takes the form** $ Z \sim e^{-\beta \Psi} $, where $ \Psi $ is a Legendre-transformed potential.
+
+
 
