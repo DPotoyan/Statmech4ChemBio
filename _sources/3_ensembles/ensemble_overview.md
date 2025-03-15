@@ -111,19 +111,11 @@ $$
 
 - The **Legendre transformation** allows us to reformulate equilibrium conditions (e.g., **entropy maximization**) in terms of more convenient variables (e.g., **free energy minimization**). This introduces thermodynamic potentials suited to different ensembles.
 
-#### **Free Energies as Legendre Transforms of Internal Energy**
+- **Free Energies as Legendre Transforms of Internal Energy** The internal energy function $ U(S, V, N, \dots) $ depends on **extensive** variables (e.g., entropy $ S $, volume $ V $, particle number $ N $). Thermodynamic free energies arise as **Legendre transforms** of $ U $ with respect to these variables:
 
-- The internal energy function $ U(S, V, N, \dots) $ depends on **extensive** variables (e.g., entropy $ S $, volume $ V $, particle number $ N $). Thermodynamic free energies arise as **Legendre transforms** of $ U $ with respect to these variables:
-
-- **Helmholtz Free Energy** (Legendre transform over $ S $):
-  $$
-  F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)
-  $$
-
-- **Gibbs Free Energy** (Legendre transform over $ S, V $):
-  $$
-  G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)
-  $$
+- **Helmholtz Free Energy** (Legendre transform over $ S $): $F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)$
+  
+- **Gibbs Free Energy** (Legendre transform over $ S, V $):   $G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)$
 
 - This transformation shifts from an **entropy-based** description to a **free-energy-based** description, making it possible to work with **temperature and pressure** as control variables instead of entropy and volume.
 
