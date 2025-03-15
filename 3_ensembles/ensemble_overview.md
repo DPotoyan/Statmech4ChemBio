@@ -37,9 +37,6 @@ For a system to maintain equilibrium values, the microstate probabilities must s
 
    where $Z$ is a normalization factor.
 
-### **Comparison of Ensembles**
-
-
 **Exponential dependence can be appreciated by considering exhcnage with environment or large reserovoir**
 
 $$E_r\gg E,\quad V_r \gg V, \quad N_t \gg N$$
@@ -48,6 +45,10 @@ $$log \Omega_r(E_t-E, V_r-V, N_r-N,)\approx  const - \beta E + \beta\mu -\beta P
 
 $$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \cdot e^{\beta \mu N} \cdot e^{-\beta PV} $$
 
+
+### **Comparison of Ensembles**
+
+---
 
 | **Ensemble** | **$ P(\text{microstate}) $** | **$ P(\text{macrostate}) $** |
 |-------------|------------------------------------------------------|------------------------------------------------------|
@@ -63,8 +64,6 @@ $$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \
 - **Microstate probability** follows different forms based on constraints from different thermodynamic potentials.
 - **Macrostate probability** always includes an entropy term but is modified by energy, pressure, and chemical potential, depending on the ensemble.
 
-
-
 ### **Extensive vs intensive variables**
 
 - The total differential of internal energy $ U $ in a thermodynamic system can be expressed in terms of its conjugate variables:
@@ -78,8 +77,6 @@ $$
   - $ (V, -P) $ → volume and pressure,
   - $ (N, \mu) $ → particle number and chemical potential,
   - $ (M, B) $ → magnetization and magnetic field.
-
-
 
 ### **Laplace Transform and Ensemble Connections**
 
@@ -130,8 +127,6 @@ $$
 
 - This transformation shifts from an **entropy-based** description to a **free-energy-based** description, making it possible to work with **temperature and pressure** as control variables instead of entropy and volume.
 
-
-
 #### **Partition Functions and Legendre Transforms**
 
 - The **partition function** naturally follows the structure of a **Legendre transform**, as it is related to free energy via:
@@ -145,9 +140,6 @@ Z(f_1, \dots, f_n, X_{n+1}, \dots, X_N) = e^{-\beta \Psi(f_1, \dots, f_{n}, X_{n
 $$
 
 - The $\Psi$ is a **thermodynamic potential** obtained through Legendre transformation of the internal energy.
-
-
-
 
 
 ### **Fluctuation-Response Relations**
@@ -167,10 +159,6 @@ $$
   $$
 
 - This relation shows that fluctuations in $ X $ are directly linked to the second derivative of the partition function, a fundamental result of statistical mechanics.
-
-### **Smallness of Fluctuations in the Thermodynamic Limit**
-
-- For macroscopic systems, fluctuations in extensive variables are typically small relative to their mean values. Examples include:
 
 #### **Energy fluctuations (Canonical Ensemble):**
 
