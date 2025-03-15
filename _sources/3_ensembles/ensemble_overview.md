@@ -32,12 +32,14 @@ For a system to maintain equilibrium values, the microstate probabilities must s
    The probability of a macrostate $ (X, Y, \dots) $ follows the general form:
 
    $$
-   P(X, Y, \dots) = \frac{e^{S(X, Y, \dots)/k_B - \beta (X + Y + \dots)}}{Z}
+   P(X, Y, \dots) = \frac{e^{\frac{1}{k_B}S(X, Y, ..)} \cdot e^{- \beta X} \cdot e^{- \gamma Y}...}{Z}
    $$
 
-   where $Z$ is a normalization factor.
+  $$Z(\beta, \gamma, ...) = \sum_{X, Y, ...} e^{\frac{1}{k_B}S(X, Y, ..)} e^{- \beta X}  e^{- \gamma Y}...$$
 
-**Exponential dependence can be appreciated by considering exhcnage with environment or large reserovoir**
+- where $Z$ is a normalization factor called **partition function**
+
+- **Exponential dependence** can also be seen as consequence of exchange of (energy, volume ,etc) with an environment or a large reserovoir. 
 
 $$E_r\gg E,\quad V_r \gg V, \quad N_t \gg N$$
 
@@ -52,8 +54,8 @@ $$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \
 
 | **Ensemble** | **$ P(\text{microstate}) $** | **$ P(\text{macrostate}) $** |
 |-------------|------------------------------------------------------|------------------------------------------------------|
-| **Microcanonical (NVE)** | $ P(\text{microstate}) = \frac{1}{\Omega(E)} $ (all accessible microstates are equally probable) | $ P(E) \sim e^{S(E)/k_B} $ (entropy-dominated) |
-| **Canonical (NVT)** | $ P(\text{microstate}) \sim e^{-\beta E} $ (Boltzmann distribution) | $ P(E) \sim e^{S(E)/k_B - \beta E} $ (entropy-weighted by energy) |
+| **Microcanonical (NVE)** | $ P(\text{microstate}) = \frac{1}{\Omega(E)} $  | $ P(E) \sim e^{S(E)/k_B} $ (entropy-dominated) |
+| **Canonical (NVT)** | $ P(\text{microstate}) \sim e^{-\beta E} $  | $ P(E) \sim e^{S(E)/k_B - \beta E} $ (entropy-weighted by energy) |
 | **Grand Canonical (µVT)** | $ P(\text{microstate}) \sim e^{\beta (\mu N - E)} $ | $ P(N, E) \sim e^{S(N,E)/k_B + \beta (\mu N - E)} $ |
 | **Isothermal-Isobaric (NPT)** | $ P(\text{microstate}) \sim e^{-\beta (E + PV)} $ | $ P(E, V) \sim e^{S(E, V)/k_B - \beta (E + PV)} $ |
 

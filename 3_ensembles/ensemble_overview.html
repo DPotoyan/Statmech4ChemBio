@@ -474,12 +474,16 @@ S([p]) = -k_B \sum_{i} p_i \log p_i
 <p>The probability of a macrostate <span class="math notranslate nohighlight">\( (X, Y, \dots) \)</span> follows the general form:</p>
 <div class="math notranslate nohighlight">
 \[
-   P(X, Y, \dots) = \frac{e^{S(X, Y, \dots)/k_B - \beta (X + Y + \dots)}}{Z}
+   P(X, Y, \dots) = \frac{e^{\frac{1}{k_B}S(X, Y, ..)} \cdot e^{- \beta X} \cdot e^{- \gamma Y}...}{Z}
    \]</div>
-<p>where <span class="math notranslate nohighlight">\(Z\)</span> is a normalization factor.</p>
 </li>
 </ol>
-<p><strong>Exponential dependence can be appreciated by considering exhcnage with environment or large reserovoir</strong></p>
+<div class="math notranslate nohighlight">
+\[Z(\beta, \gamma, ...) = \sum_{X, Y, ...} e^{\frac{1}{k_B}S(X, Y, ..)} e^{- \beta X}  e^{- \gamma Y}...\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(Z\)</span> is a normalization factor called <strong>partition function</strong></p></li>
+<li><p><strong>Exponential dependence</strong> can also be seen as consequence of exchange of (energy, volume ,etc) with an environment or a large reserovoir.</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[E_r\gg E,\quad V_r \gg V, \quad N_t \gg N\]</div>
 <div class="math notranslate nohighlight">
@@ -499,11 +503,11 @@ S([p]) = -k_B \sum_{i} p_i \log p_i
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Microcanonical (NVE)</strong></p></td>
-<td><p><span class="math notranslate nohighlight">\( P(\text{microstate}) = \frac{1}{\Omega(E)} \)</span> (all accessible microstates are equally probable)</p></td>
+<td><p><span class="math notranslate nohighlight">\( P(\text{microstate}) = \frac{1}{\Omega(E)} \)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\( P(E) \sim e^{S(E)/k_B} \)</span> (entropy-dominated)</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Canonical (NVT)</strong></p></td>
-<td><p><span class="math notranslate nohighlight">\( P(\text{microstate}) \sim e^{-\beta E} \)</span> (Boltzmann distribution)</p></td>
+<td><p><span class="math notranslate nohighlight">\( P(\text{microstate}) \sim e^{-\beta E} \)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\( P(E) \sim e^{S(E)/k_B - \beta E} \)</span> (entropy-weighted by energy)</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Grand Canonical (µVT)</strong></p></td>
