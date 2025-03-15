@@ -11,7 +11,7 @@ $$
 S([p]) = -k_B \sum_{i} p_i \log p_i
 $$
 
-where $ p_i $ is the probability of the $ i $th microstate.
+where $p_i$ is the probability of the $i$ th microstate.
 
 ### Physical Constraints for Equilibrium
 
