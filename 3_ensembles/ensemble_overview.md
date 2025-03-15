@@ -71,10 +71,10 @@ $$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \
 - The total differential of internal energy $ U $ in a thermodynamic system can be expressed in terms of its conjugate variables:
 
 $$
-dU = SdT - VdP + \mu dN + BdM + \dots = \sum_i f_i dX_i
+dU = TdS-pdV + \mu dN + BdM + \dots = \sum_i f_i dX_i
 $$
 
-- where each pair $(X_i, f_i)$ represents a conjugate extensive and intensive variable, such as:
+- where each pair $(X_i, f_i)$ represents a **conjugate extensive and intensive variable** respectively, such as:
   - $ (S, T) $ → entropy and temperature,
   - $ (V, -P) $ → volume and pressure,
   - $ (N, \mu) $ → particle number and chemical potential,
