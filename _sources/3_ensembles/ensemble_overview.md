@@ -18,6 +18,7 @@ where $p_i$ is the probability of the $i$ th microstate.
 For a system to maintain equilibrium values, the microstate probabilities must satisfy the following conditions:
 
 1. **Normalization:**
+
    $$
    \sum_{i} p_i = 1
    $$
@@ -72,7 +73,7 @@ $$
 dU = SdT - VdP + \mu dN + BdM + \dots = \sum_i f_i dX_i
 $$
 
-- where each pair $ (X_i, f_i) $ represents a conjugate extensive and intensive variable, such as:
+- where each pair $(X_i, f_i)$ represents a conjugate extensive and intensive variable, such as:
   - $ (S, T) $ → entropy and temperature,
   - $ (V, -P) $ → volume and pressure,
   - $ (N, \mu) $ → particle number and chemical potential,
@@ -154,11 +155,13 @@ $$
 - For a given extensive variable $ X $ and its conjugate intensive variable $ f $, the partition function $ Z $ governs both the **mean value** and **fluctuations** of $ X $. 
 
 - **Mean value of $ X $ at constant $ f $:**
+
   $$
   \langle X \rangle = \frac{\partial \log Z}{\partial (\beta f)}
   $$
 
 - **Fluctuations of $ X $ at constant $ Y $:**
+
   $$
   \sigma^2_X = \langle X^2 \rangle - \langle X \rangle^2 = \frac{\partial^2 \log Z}{\partial (\beta f)^2}
   $$
@@ -187,6 +190,6 @@ $$
 
 #### Key Insights
 
-- **Fluctuations decrease as system size increases**, typically scaling as $ 1/\sqrt{N} $.
+- **Fluctuations decrease as system size increases**, typically scaling as $1/\sqrt{N}$.
 - **Response functions (e.g., heat capacity, compressibility) determine fluctuation magnitude**.
 - **Ensemble equivalence** ensures that for large systems, different ensembles (canonical, grand canonical, etc.) give equivalent macroscopic results, despite differing fluctuation magnitudes.
