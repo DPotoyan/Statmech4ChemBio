@@ -3,10 +3,6 @@
   
 ![](./figs/ensembl.png)
 
-
-Here’s your revised **Markdown-friendly LaTeX** version with corrected equations and formatting.
-
-
 ## Entropy as a Function of Microstate Probabilities
 
 Entropy is given by the **Shannon-Gibbs entropy formula**:
