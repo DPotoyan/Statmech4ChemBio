@@ -69,7 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Phase transitions" href="../4_ising/intro.html" />
-    <link rel="prev" title="muPT" href="npt.html" />
+    <link rel="prev" title="Open Systems" href="npt.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -189,7 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Ensembles</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="nve.html">Intro to Statistical Ensembles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nvt.html">Ensembles in phase-space</a></li>
-<li class="toctree-l2"><a class="reference internal" href="npt.html">muPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="npt.html">Open Systems</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Summary of Ensembles</a></li>
 </ul>
 </li>
@@ -471,17 +471,18 @@ S([p]) = -k_B \sum_{i} p_i \log p_i
 \[
    \sum_{i} p_i X_i = \langle X \rangle, \quad \sum_{i} p_i Y_i = \langle Y \rangle
    \]</div>
-<p>The probability of a macrostate <span class="math notranslate nohighlight">\( (X, Y, \dots) \)</span> follows the general form:</p>
+</li>
+</ol>
+<ul>
+<li><p>The probability of a macrostate <span class="math notranslate nohighlight">\( (X, Y, \dots) \)</span> follows the general form:</p>
 <div class="math notranslate nohighlight">
 \[
    P(X, Y, \dots) = \frac{e^{\frac{1}{k_B}S(X, Y, ..)} \cdot e^{- \beta X} \cdot e^{- \gamma Y}...}{Z}
    \]</div>
-</li>
-</ol>
 <div class="math notranslate nohighlight">
 \[Z(\beta, \gamma, ...) = \sum_{X, Y, ...} e^{\frac{1}{k_B}S(X, Y, ..)} e^{- \beta X}  e^{- \gamma Y}...\]</div>
-<ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\(Z\)</span> is a normalization factor called <strong>partition function</strong></p></li>
+</li>
+<li><p>Where <span class="math notranslate nohighlight">\(Z\)</span> is a normalization factor called <strong>partition function</strong></p></li>
 <li><p><strong>Exponential dependence</strong> can also be seen as consequence of exchange of (energy, volume ,etc) with an environment or a large reserovoir.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -521,7 +522,6 @@ S([p]) = -k_B \sum_{i} p_i \log p_i
 </tbody>
 </table>
 <hr class="docutils" />
-<p><strong>Key Highlights</strong></p>
 <ul class="simple">
 <li><p><strong>Entropy dependence</strong> <span class="math notranslate nohighlight">\(e^{S/k_B}\)</span> is universal across all ensembles.</p></li>
 <li><p><strong>Microstate probability</strong> follows different forms based on constraints from different thermodynamic potentials.</p></li>
@@ -578,12 +578,18 @@ dU = TdS-pdV + \mu dN + BdM + \dots = \sum_i f_i dX_i
 <section id="legendre-transform-and-thermodynamic-potentials">
 <h3><strong>Legendre Transform and Thermodynamic Potentials</strong><a class="headerlink" href="#legendre-transform-and-thermodynamic-potentials" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>The <strong>Legendre transformation</strong> allows us to reformulate equilibrium conditions (e.g., <strong>entropy maximization</strong>) in terms of more convenient variables (e.g., <strong>free energy minimization</strong>). This introduces thermodynamic potentials suited to different ensembles.</p></li>
-<li><p><strong>Free Energies as Legendre Transforms of Internal Energy</strong> The internal energy function <span class="math notranslate nohighlight">\( U(S, V, N, \dots) \)</span> depends on <strong>extensive</strong> variables (e.g., entropy <span class="math notranslate nohighlight">\( S \)</span>, volume <span class="math notranslate nohighlight">\( V \)</span>, particle number <span class="math notranslate nohighlight">\( N \)</span>). Thermodynamic free energies arise as <strong>Legendre transforms</strong> of <span class="math notranslate nohighlight">\( U \)</span> with respect to these variables:</p></li>
-<li><p><strong>Helmholtz Free Energy</strong> (Legendre transform over <span class="math notranslate nohighlight">\( S \)</span>): <span class="math notranslate nohighlight">\(F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)\)</span></p></li>
-<li><p><strong>Gibbs Free Energy</strong> (Legendre transform over <span class="math notranslate nohighlight">\( S, V \)</span>):   <span class="math notranslate nohighlight">\(G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)\)</span></p></li>
-<li><p>This transformation shifts from an <strong>entropy-based</strong> description to a <strong>free-energy-based</strong> description, making it possible to work with <strong>temperature and pressure</strong> as control variables instead of entropy and volume.</p></li>
+<li><p>The <strong>Legendre transformation</strong> allows us to reformulate equilibrium conditions (e.g., <strong>entropy maximization</strong>) in terms of more convenient variables (e.g., <strong>free energy minimization</strong>).</p></li>
+<li><p>This transformation makes it possible to work with <strong>temperature and pressure</strong> as control variables instead of entropy and volume.</p></li>
+<li><p><strong>Free Energies as Legendre Transforms of Internal Energy</strong></p></li>
+<li><p><strong>Helmholtz Free Energy</strong> (Legendre transform over <span class="math notranslate nohighlight">\( S \)</span>):</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)\]</div>
+<ul class="simple">
+<li><p><strong>Gibbs Free Energy</strong> (Legendre transform over <span class="math notranslate nohighlight">\( S, V \)</span>):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)\]</div>
 <section id="partition-functions-and-legendre-transforms">
 <h4><strong>Partition Functions and Legendre Transforms</strong><a class="headerlink" href="#partition-functions-and-legendre-transforms" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
@@ -688,7 +694,7 @@ Z(f_1, \dots, f_n, X_{n+1}, \dots, X_N) = e^{-\beta \Psi(f_1, \dots, f_{n}, X_{n
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">muPT</p>
+        <p class="prev-next-title">Open Systems</p>
       </div>
     </a>
     <a class="right-next"
