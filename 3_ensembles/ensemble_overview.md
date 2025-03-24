@@ -29,7 +29,7 @@ For a system to maintain equilibrium values, the microstate probabilities must s
    \sum_{i} p_i X_i = \langle X \rangle, \quad \sum_{i} p_i Y_i = \langle Y \rangle
    $$
 
-   The probability of a macrostate $ (X, Y, \dots) $ follows the general form:
+- The probability of a macrostate $ (X, Y, \dots) $ follows the general form:
 
    $$
    P(X, Y, \dots) = \frac{e^{\frac{1}{k_B}S(X, Y, ..)} \cdot e^{- \beta X} \cdot e^{- \gamma Y}...}{Z}
@@ -37,7 +37,7 @@ For a system to maintain equilibrium values, the microstate probabilities must s
 
   $$Z(\beta, \gamma, ...) = \sum_{X, Y, ...} e^{\frac{1}{k_B}S(X, Y, ..)} e^{- \beta X}  e^{- \gamma Y}...$$
 
-- where $Z$ is a normalization factor called **partition function**
+- Where $Z$ is a normalization factor called **partition function**
 
 - **Exponential dependence** can also be seen as consequence of exchange of (energy, volume ,etc) with an environment or a large reserovoir. 
 
@@ -60,8 +60,6 @@ $$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \
 | **Isothermal-Isobaric (NPT)** | $ P(\text{microstate}) \sim e^{-\beta (E + PV)} $ | $ P(E, V) \sim e^{S(E, V)/k_B - \beta (E + PV)} $ |
 
 ---
-
-**Key Highlights**
 - **Entropy dependence** $e^{S/k_B}$ is universal across all ensembles.
 - **Microstate probability** follows different forms based on constraints from different thermodynamic potentials.
 - **Macrostate probability** always includes an entropy term but is modified by energy, pressure, and chemical potential, depending on the ensemble.
@@ -111,15 +109,20 @@ $$
 
 ### **Legendre Transform and Thermodynamic Potentials**
 
-- The **Legendre transformation** allows us to reformulate equilibrium conditions (e.g., **entropy maximization**) in terms of more convenient variables (e.g., **free energy minimization**). This introduces thermodynamic potentials suited to different ensembles.
+- The **Legendre transformation** allows us to reformulate equilibrium conditions (e.g., **entropy maximization**) in terms of more convenient variables (e.g., **free energy minimization**). 
+- This transformation makes it possible to work with **temperature and pressure** as control variables instead of entropy and volume.
 
-- **Free Energies as Legendre Transforms of Internal Energy** The internal energy function $ U(S, V, N, \dots) $ depends on **extensive** variables (e.g., entropy $ S $, volume $ V $, particle number $ N $). Thermodynamic free energies arise as **Legendre transforms** of $ U $ with respect to these variables:
+- **Free Energies as Legendre Transforms of Internal Energy** 
 
-- **Helmholtz Free Energy** (Legendre transform over $ S $): $F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)$
+- **Helmholtz Free Energy** (Legendre transform over $ S $): 
+
+$$F(N, V, T) = U - T S = \mathcal{L}_{S} U(S, V, N)$$
   
-- **Gibbs Free Energy** (Legendre transform over $ S, V $):   $G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)$
+- **Gibbs Free Energy** (Legendre transform over $ S, V $):   
 
-- This transformation shifts from an **entropy-based** description to a **free-energy-based** description, making it possible to work with **temperature and pressure** as control variables instead of entropy and volume.
+$$G(N, P, T) = U - T S + P V = \mathcal{L}_{S, V} U(S, V, N)$$
+
+
 
 #### **Partition Functions and Legendre Transforms**
 
