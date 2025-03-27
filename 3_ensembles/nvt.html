@@ -503,9 +503,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-elementary-derivation-of-boltzmanns-distirbution">Problem-1 Elementary derivation of Boltzmann’s distirbution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-2d-diploes-on-a-lattice">Problem-2 2D diploes on a lattice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-a-typical-spin-problem">Problem-3 A typical spin problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-1d-energy-profiles">Problem-1 1D energy profiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-maxwell-boltzman">Problem-2 Maxwell-Boltzman</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-elastic-collisions">Problem-3 Elastic Collisions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-elementary-derivation-of-boltzmanns-distirbution">Problem-4 Elementary derivation of Boltzmann’s distirbution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-2d-diploes-on-a-lattice">Problem-5 2D diploes on a lattice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-a-typical-spin-problem">Problem-6 A typical spin problem</a></li>
 </ul>
 </li>
 </ul>
@@ -836,8 +839,57 @@ n \lambda_T^3 \ll 1
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
-<section id="problem-1-elementary-derivation-of-boltzmanns-distirbution">
-<h3>Problem-1 Elementary derivation of Boltzmann’s distirbution<a class="headerlink" href="#problem-1-elementary-derivation-of-boltzmanns-distirbution" title="Permalink to this heading">#</a></h3>
+<section id="problem-1-1d-energy-profiles">
+<h3>Problem-1 1D energy profiles<a class="headerlink" href="#problem-1-1d-energy-profiles" title="Permalink to this heading">#</a></h3>
+<p>Given an energy function <span class="math notranslate nohighlight">\(E(x)=Ax^4-Bx^2+C\)</span> with constants <span class="math notranslate nohighlight">\((A=1,B=4,C=1)\)</span></p>
+<ul class="simple">
+<li><p>Compute free energy difference between minima at temperature <span class="math notranslate nohighlight">\(kBT=1,10, 100\)</span></p></li>
+<li><p>Compute free energy around minima of size <span class="math notranslate nohighlight">\(\delta x = 0.1, 0.5, 1\)</span></p></li>
+</ul>
+</section>
+<section id="problem-2-maxwell-boltzman">
+<h3>Problem-2 Maxwell-Boltzman<a class="headerlink" href="#problem-2-maxwell-boltzman" title="Permalink to this heading">#</a></h3>
+<p>You are tasked with analyzing the behavior of non-interacting nitrogen gas molecules described by Maxwell-Boltzman distirbution:</p>
+<div class="math notranslate nohighlight">
+\[
+f(v) = 4\pi \left( \frac{m}{2\pi k_B T} \right)^{3/2} v^2 e^{-\frac{mv^2}{2k_B T}}
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( f(v) \)</span> is the probability density for molecular speed <span class="math notranslate nohighlight">\( v \)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( m \)</span> is the mass of a nitrogen molecule</p></li>
+<li><p><span class="math notranslate nohighlight">\( k_B = 1.38 \times 10^{-23} \,\text{J/K} \)</span> (Boltzmann constant)</p></li>
+<li><p><span class="math notranslate nohighlight">\( T \)</span> is the temperature in Kelvin</p></li>
+</ul>
+<p><strong>Step 1: Plot the Maxwell-Boltzmann Speed Distribution</strong></p>
+<p>At room temperature (T = 300, 400, 500, 600 K), plot the distribution <span class="math notranslate nohighlight">\( f(v) \)</span> for speeds ranging from 0 to 2000 m/s.</p>
+<p><strong>Step 2: Identify Most Probable, Average, and RMS Speeds</strong></p>
+<p>Compute and print:</p>
+<ul class="simple">
+<li><p>The <strong>most probable speed</strong> <span class="math notranslate nohighlight">\( v_{mp} = \sqrt{\frac{2k_B T}{m}} \)</span></p></li>
+<li><p>The <strong>mean speed</strong> <span class="math notranslate nohighlight">\( \bar{v} = \sqrt{\frac{8k_B T}{\pi m}} \)</span></p></li>
+<li><p>The <strong>root mean square (RMS) speed</strong> <span class="math notranslate nohighlight">\( v_{rms} = \sqrt{\frac{3k_B T}{m}} \)</span></p></li>
+</ul>
+<p>Plot vertical lines on your plot from Step 1 to show these three characteristic speeds.</p>
+<p><strong>Step 3: Speed Threshold Analysis</strong></p>
+<p>Use numerical integration to calculate the <strong>fraction of molecules</strong> that have speeds:</p>
+<ul class="simple">
+<li><p><strong>(a)</strong> Greater than 1000 m/s</p></li>
+<li><p><strong>(b)</strong> Between 500 and 1000 m/s</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Hint</strong>: Use <code class="docutils literal notranslate"><span class="pre">scipy.integrate.quad</span></code> to numerically integrate the Maxwell-Boltzmann distribution.</p>
+</div></blockquote>
+</section>
+<section id="problem-3-elastic-collisions">
+<h3>Problem-3 Elastic Collisions<a class="headerlink" href="#problem-3-elastic-collisions" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://dpotoyan.github.io/Statmech4ChemBio/labs/np-lab/2d_gas_sim.html">Complete the lab</a></p>
+<ul class="simple">
+<li><p>In this problem need to modify the code to add elastic collisions to the ideal gas simulations</p></li>
+</ul>
+</section>
+<section id="problem-4-elementary-derivation-of-boltzmanns-distirbution">
+<h3>Problem-4 Elementary derivation of Boltzmann’s distirbution<a class="headerlink" href="#problem-4-elementary-derivation-of-boltzmanns-distirbution" title="Permalink to this heading">#</a></h3>
 <p>Let us do an elementary derivation of Boltzman distribution showing that when a macroscopic system is in equilibrium and coupled to a heat bath at temperatere <span class="math notranslate nohighlight">\(T\)</span> we have a universal dependence of probability for finding system at different energies:</p>
 <div class="math notranslate nohighlight">
 \[\boxed{P(r')/P(r)=e^{-\beta (U(r)-U(r'))}}\]</div>
@@ -851,8 +903,8 @@ n \lambda_T^3 \ll 1
 <div><p>Tip: you may use <span class="math notranslate nohighlight">\(P=nkT\)</span> for pressure and <span class="math notranslate nohighlight">\(mgh\)</span> for the gravitational force)</p>
 </div></blockquote>
 </section>
-<section id="problem-2-2d-diploes-on-a-lattice">
-<h3>Problem-2 2D diploes on a lattice<a class="headerlink" href="#problem-2-2d-diploes-on-a-lattice" title="Permalink to this heading">#</a></h3>
+<section id="problem-5-2d-diploes-on-a-lattice">
+<h3>Problem-5 2D diploes on a lattice<a class="headerlink" href="#problem-5-2d-diploes-on-a-lattice" title="Permalink to this heading">#</a></h3>
 <p>Consider a 2D square lattice with <span class="math notranslate nohighlight">\(M\)</span> lattice points. On each point we have a mangeetic moment that can point in four possible directions: <span class="math notranslate nohighlight">\(+x, -x, +y, -y\)</span>. Along <span class="math notranslate nohighlight">\(y\)</span> axis, the dipole has the energy <span class="math notranslate nohighlight">\(\epsilon&gt;0\)</span> and along the x axis <span class="math notranslate nohighlight">\(\epsilon=0\)</span>.</p>
 <p>Dipoles are not interacting with each other and we also ingnore kinetic energy of diplos since they are fixed at lattice positions.</p>
 <ul class="simple">
@@ -863,8 +915,8 @@ n \lambda_T^3 \ll 1
 <li><p>Show that we get the same entropy expression by using <span class="math notranslate nohighlight">\(NVE\)</span> and <span class="math notranslate nohighlight">\(NVT\)</span> ensembles.</p></li>
 </ul>
 </section>
-<section id="problem-3-a-typical-spin-problem">
-<h3>Problem-3 A typical spin problem<a class="headerlink" href="#problem-3-a-typical-spin-problem" title="Permalink to this heading">#</a></h3>
+<section id="problem-6-a-typical-spin-problem">
+<h3>Problem-6 A typical spin problem<a class="headerlink" href="#problem-6-a-typical-spin-problem" title="Permalink to this heading">#</a></h3>
 <p>Due to a ligand field, the degeneracy of d-orbital of chromium ion <span class="math notranslate nohighlight">\(Cr^{3+}\)</span> is partially lifted. The spin part of the hamiltonian that lifts this degeneracy has the following form.</p>
 <div class="math notranslate nohighlight">
 \[H =  D \big(S_z^2 -S(S+1)/2 \big)\]</div>
@@ -961,9 +1013,12 @@ n \lambda_T^3 \ll 1
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-elementary-derivation-of-boltzmanns-distirbution">Problem-1 Elementary derivation of Boltzmann’s distirbution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-2d-diploes-on-a-lattice">Problem-2 2D diploes on a lattice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-a-typical-spin-problem">Problem-3 A typical spin problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-1d-energy-profiles">Problem-1 1D energy profiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-maxwell-boltzman">Problem-2 Maxwell-Boltzman</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-elastic-collisions">Problem-3 Elastic Collisions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-elementary-derivation-of-boltzmanns-distirbution">Problem-4 Elementary derivation of Boltzmann’s distirbution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-2d-diploes-on-a-lattice">Problem-5 2D diploes on a lattice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-a-typical-spin-problem">Problem-6 A typical spin problem</a></li>
 </ul>
 </li>
 </ul>

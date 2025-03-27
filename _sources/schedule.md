@@ -7,3 +7,4 @@
 | HW3, Mar 5 |    [Problems of Entropy 1-5](https://dpotoyan.github.io/Statmech4ChemBio/1_stats/Entropy.html#problems) | Diffusion and Entropy|   
 | HW4, Mar 12 |   [Problems of Thermodynamics 2,3,4](https://dpotoyan.github.io/Statmech4ChemBio/2_thermo/01_Thermo.html#problems)  | Thermodynamics|  
 | HW5, Mar 26 |   [Problems of Ensembles 1-5](https://dpotoyan.github.io/Statmech4ChemBio/3_ensembles/nve.html#problems)  | NVE Ensemble|  
+| HW6, April 2 |   [Problems of Canonical Ensemble](https://dpotoyan.github.io/Statmech4ChemBio/3_ensembles/nvt.html)  | NVT Ensemble|  
