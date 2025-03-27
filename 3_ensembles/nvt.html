@@ -484,11 +484,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-of-phase-space-in-units-of-h">Quantization of Phase Space in Units of <span class="math notranslate nohighlight">\( h \)</span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-space-of-a-harmonic-oscillator">Phase-space of a harmonic oscillator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-of-the-ellipse-classical-action">Area of the Ellipse (Classical Action)</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-of-phase-space-in-units-of-h">Quantization of Phase Space in Units of <span class="math notranslate nohighlight">\( h \)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ideal-gas">Ideal Gas</a></li>
@@ -564,8 +560,8 @@ document.write(`
 <li><p>To compute the number of accessible microstates <span class="math notranslate nohighlight">\( \Omega \)</span> in a given region of phase space, we divide the <strong>classical phase space volume</strong> <span class="math notranslate nohighlight">\( \Gamma \)</span> by the <strong>quantum volume</strong> per state:</p></li>
 <li><p>Since N particles are indistingusihable and classical mechanics has no such concept we have to manually divide numer of microstates by <span class="math notranslate nohighlight">\(N!\)</span></p></li>
 </ul>
-<section id="phase-space-of-a-harmonic-oscillator">
-<h3>Phase-space of a harmonic oscillator<a class="headerlink" href="#phase-space-of-a-harmonic-oscillator" title="Permalink to this heading">#</a></h3>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>Phase-space of a harmonic oscillator</strong></p>
 <div class="math notranslate nohighlight">
 \[
 H(x, p) = \frac{p^2}{2m} + \frac{1}{2} m \omega^2 x^2
@@ -587,9 +583,7 @@ H(x, p) = \frac{p^2}{2m} + \frac{1}{2} m \omega^2 x^2
 </ul>
 </li>
 </ul>
-</section>
-<section id="area-of-the-ellipse-classical-action">
-<h3>Area of the Ellipse (Classical Action)<a class="headerlink" href="#area-of-the-ellipse-classical-action" title="Permalink to this heading">#</a></h3>
+<p><strong>Compute Area of the Ellipse (Classical Action)</strong></p>
 <div class="math notranslate nohighlight">
 \[
 A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{\omega}
@@ -606,6 +600,7 @@ A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{
 \[
 \oint p \, dx = (n + \tfrac{1}{2}) h
 \]</div>
+</div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -672,7 +667,6 @@ A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{
 </div>
 </div>
 </section>
-</section>
 <section id="computing-z-via-classical-mechanics">
 <h2>Computing Z via classical mechanics<a class="headerlink" href="#computing-z-via-classical-mechanics" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -721,8 +715,37 @@ A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{
 </div>
 <section id="ideal-gas">
 <h3>Ideal Gas<a class="headerlink" href="#ideal-gas" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Since the kinetic and potential energy functions depend separately on momenta and positions, the total probability distribution factorizes into a product of position and momentum distributions:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
-\[H(p^N, x^N) = K(p^N)  = \sum^{i=N}_{i=1}\frac{p^2_i}{2m}\]</div>
+\[
+H(p^N, x^N) = V(x^N) + K(p^N) = V(x^N) + \sum_{i=1}^{N} \frac{p_i^2}{2m}
+\]</div>
+<p>This leads to:</p>
+<div class="math notranslate nohighlight">
+\[
+P(x^N, p^N) = P(x^N) \cdot P(p^N)
+\]</div>
+<ul class="simple">
+<li><p>We note that the momentum term has a simple quadratic dependence and can be readily integrated analytically. In contrast, the position-dependent potential term is often more complicated and may require numerical methods for evaluation.</p></li>
+<li><p>A useful approximation is to consider the limit of a very dilute gas, known as an <strong>ideal gas</strong>, where interactions between particles are neglected and the potential energy is set to zero, <span class="math notranslate nohighlight">\(V = 0\)</span>. In this limit, particles are uniformly distributed over the configuration space <span class="math notranslate nohighlight">\(x^N\)</span>, and their momenta (or velocities) follow a Gaussian distribution.</p></li>
+<li><p>This momentum (or velocity) distribution is described by the <strong>Maxwell-Boltzmann distribution</strong>, which characterizes the probability distribution of speeds (or kinetic energies) of particles in an ideal gas at thermal equilibrium.</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title"><strong>Maxwell-Boltzmann distribution</strong></p>
+<div class="math notranslate nohighlight">
+\[
+f(v) = \left( \frac{m}{2\pi k_B T} \right)^{3/2} 4\pi v^2 e^{-\frac{mv^2}{2k_B T}}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( v \)</span> is the speed of a particle,</p></li>
+<li><p><span class="math notranslate nohighlight">\( m \)</span> is the mass of a particle,</p></li>
+<li><p><span class="math notranslate nohighlight">\( k_B \)</span> is Boltzmann’s constant,</p></li>
+<li><p><span class="math notranslate nohighlight">\( T \)</span> is the absolute temperature.</p></li>
+</ul>
+</div>
 <p><strong>Partition Function for a Single Atom</strong></p>
 <ul class="simple">
 <li><p>Consider a single particle in a 3D box. Its classical partition function is:</p></li>
@@ -994,11 +1017,7 @@ f(v) = 4\pi \left( \frac{m}{2\pi k_B T} \right)^{3/2} v^2 e^{-\frac{mv^2}{2k_B T
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-of-phase-space-in-units-of-h">Quantization of Phase Space in Units of <span class="math notranslate nohighlight">\( h \)</span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phase-space-of-a-harmonic-oscillator">Phase-space of a harmonic oscillator</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#area-of-the-ellipse-classical-action">Area of the Ellipse (Classical Action)</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-of-phase-space-in-units-of-h">Quantization of Phase Space in Units of <span class="math notranslate nohighlight">\( h \)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ideal-gas">Ideal Gas</a></li>
