@@ -488,14 +488,24 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ideal-gas">Ideal Gas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equipartition-theorem">Equipartition Theorem</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-interacting-molecules">Non-interacting molecules</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translational-degrees-of-freedom-particle-in-a-box">Translational degrees of freedom: particle in a box</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotatational-degrees-of-freedom-rigid-rotor-model">Rotatational degrees of freedom: Rigid rotor model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vibrational-degrees-of-freedom-harmonic-oscillator-model">Vibrational degrees of freedom: Harmonic oscillator model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-function-for-a-molecular-gas">Partition function for a molecular gas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equipartion-theorem">Equipartion theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-for-non-interacting-molecules">Partition functions for non-interacting molecules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translational-degrees-of-freedom-particle-in-a-box">Translational Degrees of Freedom: Particle in a Box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotational-degrees-of-freedom-rigid-rotor-model">Rotational Degrees of Freedom: Rigid Rotor Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vibrational-degrees-of-freedom-harmonic-oscillator-model">Vibrational Degrees of Freedom: Harmonic Oscillator Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#low-and-high-temperature-behaviours-of-harmonic-oscillators">Low and high temperature behaviours of harmonic oscillators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-heat-capacity-of-harmonic-oscillators">On heat capacity of harmonic-oscillators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#einstein-model-of-solids">Einstein Model of solids</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-predictions-of-einstein-model-of-solids">Key predictions of Einstein model of solids</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#debye-model-of-solids">Debye Model of Solids</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-of-debye-model">Behavior of Debye Model</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
@@ -504,7 +514,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-elastic-collisions">Problem-3 Elastic Collisions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-elementary-derivation-of-boltzmanns-distirbution">Problem-4 Elementary derivation of Boltzmann’s distirbution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-2d-diploes-on-a-lattice">Problem-5 2D diploes on a lattice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-a-typical-spin-problem">Problem-6 A typical spin problem</a></li>
 </ul>
 </li>
 </ul>
@@ -542,7 +551,7 @@ document.write(`
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>However, in <strong>quantum mechanics</strong>, the Heisenberg uncertainty principle imposes a <strong>fundamental limit</strong> on how precisely position and momentum can be specified:</p></li>
+<li><p>However, in quantum mechanics, the Heisenberg uncertainty principle imposes a fundamental limit on how precisely position and momentum can be specified:</p></li>
 <li><p>This implies that <strong>we cannot resolve phase space with arbitrary precision</strong>. Instead, each distinguishable quantum state occupies a <strong>minimum phase space volume</strong> on the order of:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
@@ -550,14 +559,14 @@ document.write(`
 \Delta x \, \Delta p \sim h
 \]</div>
 <ul class="simple">
-<li><p>For a system with <span class="math notranslate nohighlight">\( f \)</span> degrees of freedom (e.g., <span class="math notranslate nohighlight">\( N \)</span> particles in 3D: <span class="math notranslate nohighlight">\( f = 3N \)</span>), the smallest resolvable <strong>cell in phase space</strong> has volume:</p></li>
+<li><p>For a system with <span class="math notranslate nohighlight">\( f \)</span> degrees of freedom (e.g., <span class="math notranslate nohighlight">\( N \)</span> particles in 3D: <span class="math notranslate nohighlight">\( f = 3N \)</span>), the smallest resolvable cell in phase space has volume:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 (\Delta x \, \Delta p)^f \sim h^f
 \]</div>
 <ul class="simple">
-<li><p>To compute the number of accessible microstates <span class="math notranslate nohighlight">\( \Omega \)</span> in a given region of phase space, we divide the <strong>classical phase space volume</strong> <span class="math notranslate nohighlight">\( \Gamma \)</span> by the <strong>quantum volume</strong> per state:</p></li>
+<li><p>To compute the number of accessible microstates <span class="math notranslate nohighlight">\( \Omega \)</span> in a given region of phase space, we divide the <strong>classical phase space volume</strong> <span class="math notranslate nohighlight">\( \Gamma \)</span> by the smallest quantum volume <span class="math notranslate nohighlight">\(h^f\)</span></p></li>
 <li><p>Since N particles are indistingusihable and classical mechanics has no such concept we have to manually divide numer of microstates by <span class="math notranslate nohighlight">\(N!\)</span></p></li>
 </ul>
 <div class="tip dropdown admonition">
@@ -621,7 +630,7 @@ A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{
 <span class="n">n_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 
 <span class="c1"># Prepare plot</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
 <span class="c1"># Colors for each energy level</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_values</span><span class="p">)))</span>
@@ -663,7 +672,7 @@ A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/8eb01094f72795b8258289ffc98044906e8e32afa6d6a9087b9872f7ea42bb59.png" src="../_images/8eb01094f72795b8258289ffc98044906e8e32afa6d6a9087b9872f7ea42bb59.png" />
+<img alt="../_images/87d045616f253e07bc6f2295dfa22389d0d9e494fba0569b718053c214a18ab9.png" src="../_images/87d045616f253e07bc6f2295dfa22389d0d9e494fba0569b718053c214a18ab9.png" />
 </div>
 </div>
 </section>
@@ -728,9 +737,10 @@ H(p^N, x^N) = V(x^N) + K(p^N) = V(x^N) + \sum_{i=1}^{N} \frac{p_i^2}{2m}
 P(x^N, p^N) = P(x^N) \cdot P(p^N)
 \]</div>
 <ul class="simple">
-<li><p>We note that the momentum term has a simple quadratic dependence and can be readily integrated analytically. In contrast, the position-dependent potential term is often more complicated and may require numerical methods for evaluation.</p></li>
-<li><p>A useful approximation is to consider the limit of a very dilute gas, known as an <strong>ideal gas</strong>, where interactions between particles are neglected and the potential energy is set to zero, <span class="math notranslate nohighlight">\(V = 0\)</span>. In this limit, particles are uniformly distributed over the configuration space <span class="math notranslate nohighlight">\(x^N\)</span>, and their momenta (or velocities) follow a Gaussian distribution.</p></li>
-<li><p>This momentum (or velocity) distribution is described by the <strong>Maxwell-Boltzmann distribution</strong>, which characterizes the probability distribution of speeds (or kinetic energies) of particles in an ideal gas at thermal equilibrium.</p></li>
+<li><p>We note that the momentum term <strong>always has a simple quadratic dependence</strong> and can be readily integrated analytically.</p></li>
+<li><p>In contrast, the position-dependent potential term is often more complicated and may require numerical methods for evaluation.</p></li>
+<li><p>A useful approximation is to consider the limit of a very dilute gas, known as an <strong>ideal gas</strong>, where interactions between particles are neglected <span class="math notranslate nohighlight">\(V = 0\)</span>.</p></li>
+<li><p>The momentum (or velocity) distribution is described by the <strong>Maxwell-Boltzmann distribution</strong> for all systems in equilibrium regardless how complicate the molecular interactions.</p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Maxwell-Boltzmann distribution</strong></p>
@@ -738,13 +748,63 @@ P(x^N, p^N) = P(x^N) \cdot P(p^N)
 \[
 f(v) = \left( \frac{m}{2\pi k_B T} \right)^{3/2} 4\pi v^2 e^{-\frac{mv^2}{2k_B T}}
 \]</div>
-<p>where:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\( v \)</span> is the speed of a particle,</p></li>
 <li><p><span class="math notranslate nohighlight">\( m \)</span> is the mass of a particle,</p></li>
 <li><p><span class="math notranslate nohighlight">\( k_B \)</span> is Boltzmann’s constant,</p></li>
 <li><p><span class="math notranslate nohighlight">\( T \)</span> is the absolute temperature.</p></li>
 </ul>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Constants for Maxwell-Boltzmann Distribution (in arbitrary units)</span>
+<span class="n">k_B</span> <span class="o">=</span> <span class="mf">1.38e-23</span>   <span class="c1"># Boltzmann constant (J/K), not used directly since we&#39;ll use reduced units</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">300</span>          <span class="c1"># Temperature in K</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mf">4.65e-26</span>     <span class="c1"># Mass of nitrogen molecule (kg), approximate</span>
+
+<span class="c1"># Define velocity range</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Maxwell-Boltzmann distribution function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_MB</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">v</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">m</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">k_B</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">m</span> <span class="o">*</span> <span class="n">v</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">k_B</span> <span class="o">*</span> <span class="n">T</span><span class="p">))</span>
+
+<span class="c1"># Compute distribution</span>
+<span class="n">f_v</span> <span class="o">=</span> <span class="n">f_MB</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Characteristic velocities</span>
+<span class="n">v_mp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">k_B</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span>         <span class="c1"># Most probable speed</span>
+<span class="n">v_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">k_B</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">m</span><span class="p">))</span>  <span class="c1"># Average speed</span>
+<span class="n">v_rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">k_B</span> <span class="o">*</span> <span class="n">T</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span>        <span class="c1"># Root mean square speed</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">f_v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Maxwell-Boltzmann Distribution&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">v_mp</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$v_</span><span class="se">{{\\</span><span class="s2">rm mp</span><span class="se">}}</span><span class="s2">$ = </span><span class="si">{</span><span class="n">v_mp</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> m/s&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">v_avg</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">langle v </span><span class="se">\\</span><span class="s2">rangle$ = </span><span class="si">{</span><span class="n">v_avg</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> m/s&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">v_rms</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$v_</span><span class="se">{{\\</span><span class="s2">rm rms</span><span class="se">}}</span><span class="s2">$ = </span><span class="si">{</span><span class="n">v_rms</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> m/s&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Maxwell-Boltzmann Speed Distribution for $N_2$ at 300 K&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Speed (m/s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probability Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/2eca3706c13d6d566c127e5900c58f1af422805a488f2019ede5a86cf32f5bb6.png" src="../_images/2eca3706c13d6d566c127e5900c58f1af422805a488f2019ede5a86cf32f5bb6.png" />
+</div>
 </div>
 <p><strong>Partition Function for a Single Atom</strong></p>
 <ul class="simple">
@@ -781,7 +841,7 @@ n \lambda_T^3 \ll 1
 <li><p>This ensures that wavefunction overlap is negligible and particles behave classically.</p></li>
 </ul>
 <div class="important admonition">
-<p class="admonition-title"><strong>Classical partition function for N atom Ideal gas</strong></p>
+<p class="admonition-title"><strong>Classical partition function for N Atom Ideal gas</strong></p>
 <div class="math notranslate nohighlight">
 \[Z = \frac{Z^N}{N!}  = \frac{(V n_Q)^N}{N!}\]</div>
 <div class="math notranslate nohighlight">
@@ -790,7 +850,7 @@ n \lambda_T^3 \ll 1
 \[\mu = \frac{\partial F}{\partial N} =k_B T \cdot log  \Big(\frac{n}{n_Q(T)}\Big)\]</div>
 </div>
 <ul class="simple">
-<li><p>We can also calculate entropy and other thermodynamic quantities and compare with expressions obtained in NVE</p></li>
+<li><p>We can also calculate entropy and other thermodynamic quantities and compare with expressions obtained in<span class="math notranslate nohighlight">\( NVE\)</span> ensemble</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[S = -\Big( \frac{\partial F}{\partial T}\Big)_{N,V}  = Nk_B \Bigg[log \Big( \frac{n_Q}{n} \Big)+ \frac{5}{2} \Bigg]\]</div>
@@ -799,65 +859,422 @@ n \lambda_T^3 \ll 1
 <div class="math notranslate nohighlight">
 \[p = -\frac{\partial F}{\partial V} =\frac{N k_B T}{V}\]</div>
 </section>
-</section>
-<section id="non-interacting-molecules">
-<h2>Non-interacting molecules<a class="headerlink" href="#non-interacting-molecules" title="Permalink to this heading">#</a></h2>
-<section id="translational-degrees-of-freedom-particle-in-a-box">
-<h3>Translational degrees of freedom: particle in a box<a class="headerlink" href="#translational-degrees-of-freedom-particle-in-a-box" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[E_{n_x, n_y, n_z} = \frac{\hbar^2 \pi^2}{2m L^2} \big(n^2_x+n^2_y+n^2_z \big)\]</div>
-<div class="math notranslate nohighlight">
-\[ Z \approx \Bigg [\int^{\infty}_0 dn e^{-\frac{\hbar^2 \pi^2}{2m k_B TL^2}n^2} \Bigg]^{3} = V \Bigg[\frac{m k_B T}{2\pi \hbar^2} \Bigg]^{3/2} =  V n_Q\]</div>
+<section id="equipartition-theorem">
+<h3>Equipartition Theorem<a class="headerlink" href="#equipartition-theorem" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>For <span class="math notranslate nohighlight">\(N\)</span> molecules in a box</p></li>
+<li><p>Consider a classical system with a Hamiltonian containing a <strong>quadratic degree of freedom</strong> <span class="math notranslate nohighlight">\(x\)</span>, such that:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[Z= \frac{(V n_Q)^N}{N!}\]</div>
-</section>
-<section id="rotatational-degrees-of-freedom-rigid-rotor-model">
-<h3>Rotatational degrees of freedom: Rigid rotor model<a class="headerlink" href="#rotatational-degrees-of-freedom-rigid-rotor-model" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[E = \frac{\hbar^2}{2I} J (J+1) \]</div>
-<div class="math notranslate nohighlight">
-\[Z \approx \int^{J=\infty}_{J=0} (2J+1)e^{-\Big[\beta \frac{\hbar^2}{2I} J (J+1)\Big]}\approx \frac{T}{\theta_{rot}}\]</div>
+\[
+E(x) = \frac{1}{2} a x^2
+\]</div>
 <ul class="simple">
-<li><p>Where <span class="math notranslate nohighlight">\(\theta_{rot} = \frac{\hbar^2}{2 I_0 k_B}\)</span> is called rotational temperature.</p></li>
+<li><p>The <strong>canonical partition function</strong> for this degree of freedom is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z = \int_{-\infty}^{\infty} e^{-\beta \frac{1}{2} a x^2} dx = \sqrt{\frac{2\pi}{\beta a}}
+\]</div>
+<ul class="simple">
+<li><p>The <strong>average energy</strong> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle E \rangle = -\frac{\partial \log Z}{\partial \beta}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\log Z = \frac{1}{2} \log \left( \frac{2\pi}{\beta a} \right) = \text{const} - \frac{1}{2} \log \beta
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\langle E \rangle = -\frac{\partial}{\partial \beta} \left( -\frac{1}{2} \log \beta \right) = \frac{1}{2\beta} = \frac{1}{2} k_B T
+\]</div>
+<div class="admonition-equipartition-function-for-f-independent-quadratic-degrees-of-freedom admonition">
+<p class="admonition-title"><strong>equipartition function for <span class="math notranslate nohighlight">\(f\)</span> independent quadratic degrees of freedom</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\langle E \rangle = \frac{f}{2} k_B T
+\]</div>
+</div>
+<section id="examples">
+<h4>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Monatomic ideal gas</strong>: 3 translational degrees → <span class="math notranslate nohighlight">\(\langle E \rangle = \frac{3}{2} k_B T\)</span></p></li>
+<li><p><strong>Diatomic molecule</strong> at high <span class="math notranslate nohighlight">\(T\)</span>: 3 translational + 2 rotational + <span class="math notranslate nohighlight">\(n\)</span> active vibrational modes<br />
+→ <span class="math notranslate nohighlight">\(\langle E \rangle = \left( \frac{5}{2} + n \right) k_B T\)</span></p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note</strong>: Equipartition only applies when the quadratic modes are <strong>thermally accessible</strong>, i.e., when <span class="math notranslate nohighlight">\(k_B T \gg\)</span> energy level spacing (e.g., <span class="math notranslate nohighlight">\(\hbar \omega\)</span> for vibrations).</p>
+</div></blockquote>
+</section>
+</section>
+<section id="partition-functions-for-non-interacting-molecules">
+<h3>Partition functions for non-interacting molecules<a class="headerlink" href="#partition-functions-for-non-interacting-molecules" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Total energy and partition function for a molecule with separable degrees of freedom:</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title"><strong>Partition Function for a Molecular Gas</strong></p>
+<div class="math notranslate nohighlight">
+\[
+E = E_{\text{transl}} + E_{\text{vib}} + E_{\text{rot}} + E_{\text{elec}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Z = Z_{\text{transl}} \cdot Z_{\text{vib}} \cdot Z_{\text{rot}} \cdot Z_{\text{elec}}
+\]</div>
+</div>
+</section>
+<section id="translational-degrees-of-freedom-particle-in-a-box">
+<h3>Translational Degrees of Freedom: Particle in a Box<a class="headerlink" href="#translational-degrees-of-freedom-particle-in-a-box" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For a particle in a 3D box of volume <span class="math notranslate nohighlight">\(V = L^3\)</span>, the energy levels are:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E_{n_x, n_y, n_z} = \frac{\hbar^2 \pi^2}{2m L^2} \left(n_x^2 + n_y^2 + n_z^2 \right)
+\]</div>
+<ul class="simple">
+<li><p>To approximate the partition function at high temperatures (many levels populated), we replace the discrete sum with an integral:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z = \sum_{n_x, n_y, n_z} e^{-\beta E_{n_x, n_y, n_z}} \approx \left[ \int_0^\infty dn\, e^{-\beta \frac{\hbar^2 \pi^2}{2m L^2} n^2} \right]^3
+\]</div>
+<ul class="simple">
+<li><p>This is a Gaussian integral:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\int_0^\infty e^{-a n^2} dn = \frac{1}{2} \sqrt{\frac{\pi}{a}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Z = \left[ \frac{1}{2} \sqrt{\frac{\pi}{\frac{\hbar^2 \pi^2}{2m L^2} \beta}} \right]^3 = \left( \frac{L}{h} \sqrt{2 \pi m k_B T} \right)^3 = V \left( \frac{m k_B T}{2\pi \hbar^2} \right)^{3/2} = V n_Q
+\]</div>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(N\)</span> indistinguishable molecules:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z = \frac{(V n_Q)^N}{N!}
+\]</div>
+</section>
+<section id="rotational-degrees-of-freedom-rigid-rotor-model">
+<h3>Rotational Degrees of Freedom: Rigid Rotor Model<a class="headerlink" href="#rotational-degrees-of-freedom-rigid-rotor-model" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>For a linear molecule (diatomic rotor), the rotational energy levels are:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E_J = \frac{\hbar^2}{2I} J(J + 1), \quad \text{with degeneracy } (2J + 1)
+\]</div>
+<ul class="simple">
+<li><p>The partition function is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z = \sum_{J=0}^\infty (2J + 1) e^{-\beta \frac{\hbar^2}{2I} J(J + 1)}
+\]</div>
+<ul class="simple">
+<li><p>At high temperatures (<span class="math notranslate nohighlight">\(k_B T \gg \hbar^2 / 2I\)</span>), this sum can be approximated as an integral:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z \approx \int_0^\infty (2J + 1)\, e^{-\beta \frac{\hbar^2}{2I} J(J + 1)}\, dJ
+\]</div>
+<ul class="simple">
+<li><p>Let <span class="math notranslate nohighlight">\(x = J(J+1) \approx J^2\)</span> for large <span class="math notranslate nohighlight">\(J\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z \approx \int_0^\infty 2J\, e^{-\beta \frac{\hbar^2}{2I} J^2}\, dJ
+\]</div>
+<ul class="simple">
+<li><p>This integral is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\int_0^\infty J e^{-a J^2} dJ = \frac{1}{2a}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Z \approx \frac{1}{\beta \frac{\hbar^2}{2I}} = \frac{2I k_B T}{\hbar^2} = \frac{T}{\theta_{\text{rot}}}
+\]</div>
+<ul class="simple">
+<li><p>Where <span class="math notranslate nohighlight">\(\theta_{\text{rot}} = \frac{\hbar^2}{2I k_B}\)</span> is the <strong>rotational temperature</strong>.</p></li>
 </ul>
 </section>
 <section id="vibrational-degrees-of-freedom-harmonic-oscillator-model">
-<h3>Vibrational degrees of freedom: Harmonic oscillator model<a class="headerlink" href="#vibrational-degrees-of-freedom-harmonic-oscillator-model" title="Permalink to this heading">#</a></h3>
+<h3>Vibrational Degrees of Freedom: Harmonic Oscillator Model<a class="headerlink" href="#vibrational-degrees-of-freedom-harmonic-oscillator-model" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
-\[E_n = \hbar \omega (n+1/2)\]</div>
-<div class="math notranslate nohighlight">
-\[z = \sum^{n=+\infty}_{n=0} = e^{-\frac{1}{2}\beta \hbar \omega} (1 + e^{-\beta\hbar\omega}+e^{-2\beta\hbar\omega}+...) = \frac{e^{-\frac{1}{2}\beta \hbar \omega}}{1-e^{-\beta\hbar\omega}}\]</div>
-<div class="math notranslate nohighlight">
-\[Z = z^N\]</div>
-<div class="math notranslate nohighlight">
-\[E = \frac{\partial log Z}{\partial (-\beta)} = N\hbar \omega \Big(\frac{1}{2}+ \frac{1}{1+e^{\beta\hbar\omega}} \Big) \]</div>
+\[
+E_n = \hbar \omega \left(n + \frac{1}{2}\right)
+\]</div>
 <ul class="simple">
-<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow 0\)</span> we are left with zero point energies <span class="math notranslate nohighlight">\(E \rightarrow \frac{N \hbar \omega}{2}\)</span></p></li>
-<li><p>When <span class="math notranslate nohighlight">\(T \rightarrow \infty\)</span> we get equipartion of energy! <span class="math notranslate nohighlight">\(E \rightarrow \frac{3}{2} N k_B T\)</span></p></li>
+<li><p>Partition function for one oscillator:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+z = \sum_{n=0}^\infty e^{-\beta \hbar \omega (n + \frac{1}{2})} = e^{-\frac{1}{2} \beta \hbar \omega} \sum_{n=0}^\infty \left(e^{-\beta \hbar \omega}\right)^n = \frac{e^{-\frac{1}{2} \beta \hbar \omega}}{1 - e^{-\beta \hbar \omega}}
+\]</div>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(N\)</span> independent oscillators:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Z = z^N
+\]</div>
+<ul class="simple">
+<li><p>Average energy would then be:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E = -\frac{\partial \log Z}{\partial \beta} = -N \frac{\partial \log z}{\partial \beta}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\log z = -\frac{1}{2} \beta \hbar \omega - \log\left(1 - e^{-\beta \hbar \omega} \right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \log z}{\partial \beta} = -\frac{1}{2} \hbar \omega + \frac{\hbar \omega\, e^{-\beta \hbar \omega}}{1 - e^{-\beta \hbar \omega}} = -\frac{1}{2} \hbar \omega + \frac{\hbar \omega}{e^{\beta \hbar \omega} - 1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+E = N \hbar \omega \left( \frac{1}{2} + \frac{1}{e^{\beta \hbar \omega} - 1} \right)
+\]</div>
+<section id="low-and-high-temperature-behaviours-of-harmonic-oscillators">
+<h4>Low and high temperature behaviours of harmonic oscillators<a class="headerlink" href="#low-and-high-temperature-behaviours-of-harmonic-oscillators" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Notice the two important limits. At low temperature quantization of energy becomes important while at high temperature result matches with classical mechanics predictions;</p></li>
+<li><p>As <span class="math notranslate nohighlight">\(T \rightarrow 0\)</span>, <span class="math notranslate nohighlight">\(e^{\beta \hbar \omega} \gg 1\)</span>, so:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E \rightarrow N \cdot \frac{1}{2} \hbar \omega
+\]</div>
+<ul class="simple">
+<li><p>As <span class="math notranslate nohighlight">\(T \rightarrow \infty\)</span>, <span class="math notranslate nohighlight">\(e^{\beta \hbar \omega} \approx 1 + \beta \hbar \omega\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{e^{\beta \hbar \omega} - 1} \approx \frac{1}{\beta \hbar \omega} \Rightarrow E \approx N k_B T
+\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Temperature range in Kelvin</span>
+<span class="n">T_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Vibrational frequency (typical for molecular vibration)</span>
+<span class="c1"># Use hbar*omega = energy quantum = ~0.2 eV (~3200 cm^-1 IR band), convert to J</span>
+<span class="n">hbar_omega</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="mf">1.602e-19</span>  <span class="c1"># in J</span>
+
+<span class="c1"># Dimensionless variable x = hbar*omega / (k_B * T)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">hbar_omega</span> <span class="o">/</span> <span class="p">(</span><span class="n">k_B</span> <span class="o">*</span> <span class="n">T_vals</span><span class="p">)</span>
+
+<span class="c1"># Heat capacity C_v of harmonic oscillator (per mode)</span>
+<span class="c1"># C_v = k_B * (x^2 * exp(x)) / (exp(x) - 1)^2</span>
+<span class="n">C_v</span> <span class="o">=</span> <span class="n">k_B</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Convert C_v to units of k_B</span>
+<span class="n">C_v_over_kB</span> <span class="o">=</span> <span class="n">C_v</span> <span class="o">/</span> <span class="n">k_B</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_vals</span><span class="p">,</span> <span class="n">C_v_over_kB</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature (K)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Heat Capacity $C_V / k_B$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Heat Capacity of a Quantum Harmonic Oscillator vs Temperature&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/996a82d262dbadf80d8a8a0d1ffcdcdc657b404d1963caecc84dd62081323243.png" src="../_images/996a82d262dbadf80d8a8a0d1ffcdcdc657b404d1963caecc84dd62081323243.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="on-heat-capacity-of-harmonic-oscillators">
+<h3>On heat capacity of harmonic-oscillators<a class="headerlink" href="#on-heat-capacity-of-harmonic-oscillators" title="Permalink to this heading">#</a></h3>
+<section id="einstein-model-of-solids">
+<h4>Einstein Model of solids<a class="headerlink" href="#einstein-model-of-solids" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>A simple model for solids due to Einstein describes it as <span class="math notranslate nohighlight">\(N\)</span> independent harmonic oscillators representing localized atomic vibrations.</p></li>
+<li><p>The average energy of a quantum harmonic oscillator is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle E \rangle = \hbar \omega \left( \frac{1}{2} + \frac{1}{e^{\beta \hbar \omega} - 1} \right)
+\]</div>
+<ul class="simple">
+<li><p>The heat capacity is the derivative:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+C_V = \frac{\partial \langle E \rangle}{\partial T} = k_B \left( \frac{x^2 e^x}{(e^x - 1)^2} \right), \quad x = \frac{\hbar \omega}{k_B T}
+\]</div>
+</section>
+<section id="key-predictions-of-einstein-model-of-solids">
+<h4>Key predictions of Einstein model of solids<a class="headerlink" href="#key-predictions-of-einstein-model-of-solids" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>At <strong>low T</strong>: <span class="math notranslate nohighlight">\(C_V \to 0\)</span> — the oscillator is frozen in its ground state.</p></li>
+<li><p>At <strong>high T</strong>: <span class="math notranslate nohighlight">\(C_V \to k_B\)</span> — classical equipartition is recovered.</p></li>
 </ul>
 </section>
-<section id="partition-function-for-a-molecular-gas">
-<h3>Partition function for a molecular gas<a class="headerlink" href="#partition-function-for-a-molecular-gas" title="Permalink to this heading">#</a></h3>
-<div class="math notranslate nohighlight">
-\[E = E_{transl}+E_{vib}+E_{rot}+E_{elec} \]</div>
-<div class="math notranslate nohighlight">
-\[Z = Z_{transl} Z_{vib} Z_{rot} Z_{elec} \]</div>
-</section>
-<section id="equipartion-theorem">
-<h3>Equipartion theorem<a class="headerlink" href="#equipartion-theorem" title="Permalink to this heading">#</a></h3>
-<p>Finally, we can also prove a powerful general result showing us that each degree of freedom that appears in Hamiltonian as a quadratic function, e.g., <span class="math notranslate nohighlight">\(kx^2\)</span>, contributes on average <span class="math notranslate nohighlight">\(\frac{1}{2}k_BT\)</span> of energy. Hence we can count degrees of freedom and write down average energy!</p>
-<div class="math notranslate nohighlight">
-\[U(x) = kx^2 \]</div>
-<div class="math notranslate nohighlight">
-\[\langle U \rangle = \int p(x) U(x) dx = \frac{\int kx^2 e^{-\beta kx^2}dx}{\int e^{-\beta kx^2}dx} = \frac{k_B T}{2}\]</div>
+<section id="debye-model-of-solids">
+<h4>Debye Model of Solids<a class="headerlink" href="#debye-model-of-solids" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
-<li><p>The answer is found quickly by identifying variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> in gaussian function with zero mean <span class="math notranslate nohighlight">\(e^{\frac{-x^2}{2\sigma^2}}\)</span></p></li>
-<li><p>Notice the spring constant does not figure in the average energy expression!</p></li>
+<li><p>The <strong>Debye model</strong> improves upon Einstein’s and matches experimental data much better than the Einstein model, especially at low temperatures.</p></li>
+<li><p>Main distinguishing features of Debye model are:</p>
+<ul>
+<li><p>Treating atomic vibrations as a continuum of phonon modes.</p></li>
+<li><p>Including a full spectrum of frequencies up to a <strong>Debye cutoff</strong> <span class="math notranslate nohighlight">\(\omega_D\)</span>.</p></li>
+<li><p>Predicting the correct <strong>low-temperature behavior</strong> of solids.</p></li>
 </ul>
-<p><strong>Example</strong> Calculate heat capacity of diatomic gas.</p>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+U = 9 N k_B T \left( \frac{T}{T_D} \right)^3 \int_0^{T_D/T} \frac{x^3}{e^x - 1} dx
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+C_V = 9 N k_B \left( \frac{T}{T_D} \right)^3 \int_0^{T_D/T} \frac{x^4 e^x}{(e^x - 1)^2} dx
+\]</div>
+</section>
+<section id="behavior-of-debye-model">
+<h4>Behavior of Debye Model<a class="headerlink" href="#behavior-of-debye-model" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Low T</strong>: <span class="math notranslate nohighlight">\(C_V \propto T^3\)</span> — from long-wavelength (acoustic) phonons.</p></li>
+<li><p><strong>High T</strong>: <span class="math notranslate nohighlight">\(C_V \to 3R\)</span> — classical limit.</p></li>
+</ul>
+<div class="tip collapse admonition">
+<p class="admonition-title"><strong>Derivation of Debye Model and phonons</strong></p>
+<ul class="simple">
+<li><p>Instead of treating each atom as an independent oscillator (like in Einstein’s model), Debye considered <strong>collective vibrations</strong> of the entire lattice — i.e., <strong>phonons</strong>, which are quantized sound waves.</p></li>
+<li><p>In 3D, the <strong>number of vibrational modes</strong> with frequencies less than <span class="math notranslate nohighlight">\( \omega \)</span> is proportional to <span class="math notranslate nohighlight">\( \omega^3 \)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+g(\omega) \, d\omega = \frac{9N}{\omega_D^3} \, \omega^2 \, d\omega
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( g(\omega) \)</span>: phonon density of states</p></li>
+<li><p><span class="math notranslate nohighlight">\( N \)</span>: number of atoms</p></li>
+<li><p><span class="math notranslate nohighlight">\( \omega_D \)</span>: Debye cutoff frequency, chosen so total modes = <span class="math notranslate nohighlight">\( 3N \)</span></p></li>
+<li><p>Each mode contributes energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle E(\omega) \rangle = \frac{\hbar \omega}{e^{\beta \hbar \omega} - 1}
+\]</div>
+<ul class="simple">
+<li><p>Total internal energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+U = \int_0^{\omega_D} g(\omega) \langle E(\omega) \rangle d\omega = \int_0^{\omega_D} \frac{9N}{\omega_D^3} \omega^2 \cdot \frac{\hbar \omega}{e^{\beta \hbar \omega} - 1} d\omega
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x = \frac{\hbar \omega}{k_B T} \quad \Rightarrow \quad \omega = \frac{k_B T}{\hbar} x, \quad d\omega = \frac{k_B T}{\hbar} dx
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+x_D = \frac{\hbar \omega_D}{k_B T} = \frac{T_D}{T}
+\]</div>
+<ul class="simple">
+<li><p>Then the internal energy becomes:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+U = 9N k_B T \left( \frac{T}{T_D} \right)^3 \int_0^{x_D} \frac{x^3}{e^x - 1} dx
+\]</div>
+<ul class="simple">
+<li><p>Now take the derivative:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+C_V = \frac{dU}{dT} = 9N k_B \left( \frac{T}{T_D} \right)^3 \int_0^{x_D} \frac{x^4 e^x}{(e^x - 1)^2} dx
+\]</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+
+<span class="c1"># Constants</span>
+<span class="n">k_B</span> <span class="o">=</span> <span class="mf">1.38e-23</span>        <span class="c1"># Boltzmann constant (J/K)</span>
+<span class="n">N_A</span> <span class="o">=</span> <span class="mf">6.022e23</span>        <span class="c1"># Avogadro&#39;s number</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">N_A</span> <span class="o">*</span> <span class="n">k_B</span>         <span class="c1"># Gas constant (J/mol·K)</span>
+
+<span class="c1"># Debye model parameters</span>
+<span class="n">T_D</span> <span class="o">=</span> <span class="mi">400</span>  <span class="c1"># Debye temperature in Kelvin (can be adjusted)</span>
+
+<span class="c1"># Debye heat capacity function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">debye_integral</span><span class="p">(</span><span class="n">x_D</span><span class="p">):</span>
+    <span class="n">integrand</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">val</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x_D</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">val</span>
+
+<span class="c1"># Temperature range</span>
+<span class="n">T_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">C_v_debye</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Calculate heat capacity at each temperature</span>
+<span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="n">T_vals</span><span class="p">:</span>
+    <span class="n">x_D</span> <span class="o">=</span> <span class="n">T_D</span> <span class="o">/</span> <span class="n">T</span>
+    <span class="k">if</span> <span class="n">T</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">C_v_debye</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="n">debye_integral</span><span class="p">(</span><span class="n">x_D</span><span class="p">)</span>
+        <span class="n">C_v</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span> <span class="o">/</span> <span class="n">T_D</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">integral</span>
+        <span class="n">C_v_debye</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">C_v</span><span class="p">)</span>
+
+<span class="c1"># Convert to numpy array</span>
+<span class="n">C_v_debye</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">C_v_debye</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_vals</span><span class="p">,</span> <span class="n">C_v_debye</span> <span class="o">/</span> <span class="n">R</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;teal&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Debye Heat Capacity&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dulong-Petit Limit ($3R$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature (K)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$C_V / R$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Debye Model Heat Capacity of a Solid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2218/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
+  integrand = lambda x: (x**4 * np.exp(x)) / (np.exp(x) - 1)**2
+</pre></div>
+</div>
+<img alt="../_images/bd62542bffe4d4c43550e2445dc453fccf6926364823f63a2f82626e3ad486b0.png" src="../_images/bd62542bffe4d4c43550e2445dc453fccf6926364823f63a2f82626e3ad486b0.png" />
+</div>
+</div>
+</section>
 </section>
 </section>
 <section id="problems">
@@ -938,19 +1355,6 @@ f(v) = 4\pi \left( \frac{m}{2\pi k_B T} \right)^{3/2} v^2 e^{-\frac{mv^2}{2k_B T
 <li><p>Show that we get the same entropy expression by using <span class="math notranslate nohighlight">\(NVE\)</span> and <span class="math notranslate nohighlight">\(NVT\)</span> ensembles.</p></li>
 </ul>
 </section>
-<section id="problem-6-a-typical-spin-problem">
-<h3>Problem-6 A typical spin problem<a class="headerlink" href="#problem-6-a-typical-spin-problem" title="Permalink to this heading">#</a></h3>
-<p>Due to a ligand field, the degeneracy of d-orbital of chromium ion <span class="math notranslate nohighlight">\(Cr^{3+}\)</span> is partially lifted. The spin part of the hamiltonian that lifts this degeneracy has the following form.</p>
-<div class="math notranslate nohighlight">
-\[H =  D \big(S_z^2 -S(S+1)/2 \big)\]</div>
-<p>Where <span class="math notranslate nohighlight">\(D&gt;0\)</span> is some constant and <span class="math notranslate nohighlight">\(S=3/2\)</span> (the cation has an electronic term <span class="math notranslate nohighlight">\({F}^ 4_{3/2}\)</span></p>
-<ul class="simple">
-<li><p>Conceptual question: Why can we apply statisical mechanics to a “single” ion?</p></li>
-<li><p>Obtain the occupation probability of each discrete energy level <span class="math notranslate nohighlight">\(P(E)\)</span>.</p></li>
-<li><p>Calculate the entropy and the specific heat then show that heat capacity behaves as <span class="math notranslate nohighlight">\(T^{-2}\)</span> at high temperatures.</p></li>
-<li><p>Supose heat capacity is <span class="math notranslate nohighlight">\(C=k_b \Big(\frac{T}{T_0} \Big)^2\)</span> with <span class="math notranslate nohighlight">\(T_0=0.18 K\)</span> at higher temperatures. Determine the energy spacing.</p></li>
-</ul>
-</section>
 </section>
 </section>
 
@@ -1021,14 +1425,24 @@ f(v) = 4\pi \left( \frac{m}{2\pi k_B T} \right)^{3/2} v^2 e^{-\frac{mv^2}{2k_B T
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ideal-gas">Ideal Gas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equipartition-theorem">Equipartition Theorem</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#non-interacting-molecules">Non-interacting molecules</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translational-degrees-of-freedom-particle-in-a-box">Translational degrees of freedom: particle in a box</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotatational-degrees-of-freedom-rigid-rotor-model">Rotatational degrees of freedom: Rigid rotor model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vibrational-degrees-of-freedom-harmonic-oscillator-model">Vibrational degrees of freedom: Harmonic oscillator model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-function-for-a-molecular-gas">Partition function for a molecular gas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equipartion-theorem">Equipartion theorem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partition-functions-for-non-interacting-molecules">Partition functions for non-interacting molecules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translational-degrees-of-freedom-particle-in-a-box">Translational Degrees of Freedom: Particle in a Box</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotational-degrees-of-freedom-rigid-rotor-model">Rotational Degrees of Freedom: Rigid Rotor Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vibrational-degrees-of-freedom-harmonic-oscillator-model">Vibrational Degrees of Freedom: Harmonic Oscillator Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#low-and-high-temperature-behaviours-of-harmonic-oscillators">Low and high temperature behaviours of harmonic oscillators</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-heat-capacity-of-harmonic-oscillators">On heat capacity of harmonic-oscillators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#einstein-model-of-solids">Einstein Model of solids</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#key-predictions-of-einstein-model-of-solids">Key predictions of Einstein model of solids</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#debye-model-of-solids">Debye Model of Solids</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#behavior-of-debye-model">Behavior of Debye Model</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a><ul class="nav section-nav flex-column">
@@ -1037,7 +1451,6 @@ f(v) = 4\pi \left( \frac{m}{2\pi k_B T} \right)^{3/2} v^2 e^{-\frac{mv^2}{2k_B T
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-elastic-collisions">Problem-3 Elastic Collisions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-4-elementary-derivation-of-boltzmanns-distirbution">Problem-4 Elementary derivation of Boltzmann’s distirbution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-5-2d-diploes-on-a-lattice">Problem-5 2D diploes on a lattice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-6-a-typical-spin-problem">Problem-6 A typical spin problem</a></li>
 </ul>
 </li>
 </ul>
