@@ -487,6 +487,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-of-phase-space-in-units-of-h">Quantization of Phase Space in Units of <span class="math notranslate nohighlight">\( h \)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-boltzman-distribution">Maxwell-Boltzman distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ideal-gas">Ideal Gas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equipartition-theorem">Equipartition Theorem</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
@@ -736,25 +737,32 @@ A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{
 <li><p>Take <strong>derivatives of free energy</strong> to get the thermodynamic quantities. E.g one is often interested in computing temperature dependence of <span class="math notranslate nohighlight">\(\mu(T), U(T), S(T)\)</span></p></li>
 </ol>
 </div>
-<section id="ideal-gas">
-<h3>Ideal Gas<a class="headerlink" href="#ideal-gas" title="Permalink to this heading">#</a></h3>
+<section id="maxwell-boltzman-distribution">
+<h3>Maxwell-Boltzman distribution<a class="headerlink" href="#maxwell-boltzman-distribution" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Since the kinetic and potential energy functions depend separately on momenta and positions, the total probability distribution factorizes into a product of position and momentum distributions:</p></li>
+<li><p>Since the kinetic and potential energy functions depend separately on momenta and positions, the total probability distribution <strong>factorizes</strong> into a product of position and momentum distributions:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-H(p^N, x^N) = V(x^N) + K(p^N) = V(x^N) + \sum_{i=1}^{N} \frac{p_i^2}{2m}
-\]</div>
-<p>This leads to:</p>
-<div class="math notranslate nohighlight">
-\[
-P(x^N, p^N) = P(x^N) \cdot P(p^N)
+H(p^N, r^N) = U(r^N) + K(p^N) = U(r^N) + \sum_{i=1}^{N} \frac{p_i^2}{2m}
 \]</div>
 <ul class="simple">
-<li><p>We note that the momentum term <strong>always has a simple quadratic dependence</strong> and can be readily integrated analytically.</p></li>
-<li><p>In contrast, the position-dependent potential term is often more complicated and may require numerical methods for evaluation.</p></li>
-<li><p>A useful approximation is to consider the limit of a very dilute gas, known as an <strong>ideal gas</strong>, where interactions between particles are neglected <span class="math notranslate nohighlight">\(V = 0\)</span>.</p></li>
-<li><p>The momentum (or velocity) distribution is described by the <strong>Maxwell-Boltzmann distribution</strong> for all systems in equilibrium regardless how complicate the molecular interactions.</p></li>
+<li><p>This separation leads to:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(r^N, p^N) = P(r^N) \cdot P(p^N) = \int_V dr^N \, e^{-\beta U(r^N)} \cdot \int_{-\infty}^{+\infty} dp^N \, e^{-\beta \sum_{i=1}^{N} \frac{p_i^2}{2m}}
+\]</div>
+<ul class="simple">
+<li><p>The momentum-dependent part is always a <strong>simple quadratic function</strong>, making it analytically tractable:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(p^N) = \left[ \int_{-\infty}^{+\infty} dp \, e^{-\beta \frac{p^2}{2m}} \right]^N
+\]</div>
+<ul class="simple">
+<li><p>In contrast, the position-dependent potential term is typically more complex and often requires <strong>numerical methods</strong> for evaluation.</p></li>
+<li><p>The momentum (or velocity) distribution follows the <strong>Maxwell-Boltzmann distribution</strong> in all equilibrium systems, regardless of the complexity of the molecular interactions.</p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Maxwell-Boltzmann distribution</strong></p>
@@ -820,17 +828,20 @@ f(v) = \left( \frac{m}{2\pi k_B T} \right)^{3/2} 4\pi v^2 e^{-\frac{mv^2}{2k_B T
 <img alt="../_images/2eca3706c13d6d566c127e5900c58f1af422805a488f2019ede5a86cf32f5bb6.png" src="../_images/2eca3706c13d6d566c127e5900c58f1af422805a488f2019ede5a86cf32f5bb6.png" />
 </div>
 </div>
-<p><strong>Partition Function for a Single Atom</strong></p>
+</section>
+<section id="ideal-gas">
+<h3>Ideal Gas<a class="headerlink" href="#ideal-gas" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Consider a single particle in a 3D box. Its classical partition function is:</p></li>
+<li><p>A useful approximation is to consider the limit of a very dilute gas, known as an <strong>ideal gas</strong>, where interactions between particles are neglected <span class="math notranslate nohighlight">\(V = 0\)</span>.</p></li>
+<li><p>Lets evaluate partition function for a single atom of idea gas:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-Z(\beta) = \left[ \frac{1}{h} \int_{0}^{L} dx \int_{-\infty}^{+\infty} dp \, e^{- \frac{p^2}{2m k_B T}} \right]^3 = V \left( \frac{2\pi m k_B T}{h^2 } \right)^{3/2}  
+z(\beta) = \left[ \frac{1}{h} \int_{0}^{L} dx \int_{-\infty}^{+\infty} dp \, e^{- \frac{p^2}{2m k_B T}} \right]^3 = V \left( \frac{2\pi m k_B T}{h^2 } \right)^{3/2}  
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-Z = \frac{V}{\lambda^3_T} = V n_Q
+z = \frac{V}{\lambda^3_T} = V n_Q
 \]</div>
 <div class="important admonition">
 <p class="admonition-title"><strong>De Broglie Thermal Wavelength and quantum concentration</strong></p>
@@ -1281,7 +1292,7 @@ C_V = \frac{dU}{dT} = 9N k_B \left( \frac{T}{T_D} \right)^3 \int_0^{x_D} \frac{x
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2219/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2211/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
   integrand = lambda x: (x**4 * np.exp(x)) / (np.exp(x) - 1)**2
 </pre></div>
 </div>
@@ -1438,6 +1449,7 @@ f(v) = 4\pi \left( \frac{m}{2\pi k_B T} \right)^{3/2} v^2 e^{-\frac{mv^2}{2k_B T
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quantization-of-phase-space-in-units-of-h">Quantization of Phase Space in Units of <span class="math notranslate nohighlight">\( h \)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-z-via-classical-mechanics">Computing Z via classical mechanics</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-and-utility-of-nvt-the-non-interacting-system">The power and utility of NVT: The non-interacting system</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maxwell-boltzman-distribution">Maxwell-Boltzman distribution</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ideal-gas">Ideal Gas</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equipartition-theorem">Equipartition Theorem</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
