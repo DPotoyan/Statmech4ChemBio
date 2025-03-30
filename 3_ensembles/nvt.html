@@ -559,7 +559,7 @@ document.write(`
 \Delta x \, \Delta p \sim h
 \]</div>
 <ul class="simple">
-<li><p>For a system with <span class="math notranslate nohighlight">\( f \)</span> degrees of freedom (e.g., <span class="math notranslate nohighlight">\( N \)</span> particles in 3D: <span class="math notranslate nohighlight">\( f = 3N \)</span>), the smallest resolvable cell in phase space has volume:</p></li>
+<li><p>For a system with <span class="math notranslate nohighlight">\( f \)</span> degrees of freedom (<span class="math notranslate nohighlight">\(3N\)</span> for <span class="math notranslate nohighlight">\(N\)</span> particles in 3D), the smallest resolvable cell in phase space has volume:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -569,11 +569,18 @@ document.write(`
 <li><p>To compute the number of accessible microstates <span class="math notranslate nohighlight">\( \Omega \)</span> in a given region of phase space, we divide the <strong>classical phase space volume</strong> <span class="math notranslate nohighlight">\( \Gamma \)</span> by the smallest quantum volume <span class="math notranslate nohighlight">\(h^f\)</span></p></li>
 <li><p>Since N particles are indistingusihable and classical mechanics has no such concept we have to manually divide numer of microstates by <span class="math notranslate nohighlight">\(N!\)</span></p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[
+\Omega(E) = \frac{\Gamma}{h^f N!}
+\]</div>
+<ul class="simple">
+<li><p>We can write explicit expression for phase-space volume or number of microstates for a given energy <span class="math notranslate nohighlight">\(E\)</span> by using delta function showing that we only count phase-space points where <span class="math notranslate nohighlight">\(H(p^N, x^N)=E\)</span> and nothing else.</p></li>
+</ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Microcanonical partition function in phase-space</strong></p>
 <div class="math notranslate nohighlight">
 \[
-\Omega = \frac{\Gamma}{N! h^f} 
+\Omega(E) =  \frac{1}{N! h^N}\int dp^N dx^N \delta \big(H(p^N, x^N)-E\big)
 \]</div>
 </div>
 <div class="tip dropdown admonition">
@@ -1274,7 +1281,7 @@ C_V = \frac{dU}{dT} = 9N k_B \left( \frac{T}{T_D} \right)^3 \int_0^{x_D} \frac{x
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2351/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2271/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
   integrand = lambda x: (x**4 * np.exp(x)) / (np.exp(x) - 1)**2
 </pre></div>
 </div>
