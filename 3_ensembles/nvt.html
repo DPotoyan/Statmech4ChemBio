@@ -542,9 +542,6 @@ document.write(`
 </div>
 <section id="quantization-of-phase-space-in-units-of-h">
 <h2>Quantization of Phase Space in Units of <span class="math notranslate nohighlight">\( h \)</span><a class="headerlink" href="#quantization-of-phase-space-in-units-of-h" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>In classical mechanics, a system’s state is represented as a point in <strong>phase space</strong>, with coordinates <span class="math notranslate nohighlight">\((x, p)\)</span> for each degree of freedom. The number of microstates is, in principle, infinite because both position and momentum can vary continuously.</p></li>
-</ul>
 <figure class="align-default" id="id1">
 <a class="bg-primary reference internal image-reference" href="../_images/1d-pspace.png"><img alt="../_images/1d-pspace.png" class="bg-primary" src="../_images/1d-pspace.png" style="width: 300px;" /></a>
 <figcaption>
@@ -552,6 +549,7 @@ document.write(`
 </figcaption>
 </figure>
 <ul class="simple">
+<li><p>In classical mechanics, a system’s state is represented as a point in <strong>phase space</strong>, with coordinates <span class="math notranslate nohighlight">\((x, p)\)</span> for each degree of freedom. The number of microstates is, in principle, infinite because both position and momentum can vary continuously.</p></li>
 <li><p>However, in quantum mechanics, the Heisenberg uncertainty principle imposes a fundamental limit on how precisely position and momentum can be specified:</p></li>
 <li><p>This implies that <strong>we cannot resolve phase space with arbitrary precision</strong>. Instead, each distinguishable quantum state occupies a <strong>minimum phase space volume</strong> on the order of:</p></li>
 </ul>
@@ -560,7 +558,7 @@ document.write(`
 \Delta x \, \Delta p \sim h
 \]</div>
 <ul class="simple">
-<li><p>For a system with <span class="math notranslate nohighlight">\( f \)</span> degrees of freedom (<span class="math notranslate nohighlight">\(3N\)</span> for <span class="math notranslate nohighlight">\(N\)</span> particles in 3D), the smallest resolvable cell in phase space has volume:</p></li>
+<li><p>For a system with <span class="math notranslate nohighlight">\( f \)</span> degrees of freedom (e.g <span class="math notranslate nohighlight">\(3N\)</span> for <span class="math notranslate nohighlight">\(N\)</span> particles in three dimensions), the smallest resolvable cell in phase space has volume:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -575,7 +573,7 @@ document.write(`
 \Omega(E) = \frac{\Gamma}{h^f N!}
 \]</div>
 <ul class="simple">
-<li><p>We can write explicit expression for phase-space volume or number of microstates for a given energy <span class="math notranslate nohighlight">\(E\)</span> by using delta function showing that we only count phase-space points where <span class="math notranslate nohighlight">\(H(p^N, x^N)=E\)</span> and nothing else.</p></li>
+<li><p>An explicit expression for number of microstates for a given energy <span class="math notranslate nohighlight">\(E\)</span> is written by using delta function which counts all microstates in phase-space where <span class="math notranslate nohighlight">\(H(p^N, x^N)=E\)</span></p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Microcanonical partition function in phase-space</strong></p>
@@ -645,7 +643,7 @@ A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{
 <span class="n">n_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 
 <span class="c1"># Prepare plot</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
 <span class="c1"># Colors for each energy level</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">viridis</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_values</span><span class="p">)))</span>
@@ -704,7 +702,7 @@ A = \pi a b = \pi \sqrt{\frac{2E}{m \omega^2}} \cdot \sqrt{2mE} = \frac{2\pi E}{
 <div class="math notranslate nohighlight">
 \[\sum_i \rightarrow \int \frac{dpdx}{h}\]</div>
 <ul class="simple">
-<li><p>Recall that we need to correct classical mechanics for “double counting” microstates if we have N indistinguishable “particles” with a factor of <span class="math notranslate nohighlight">\(N!\)</span></p></li>
+<li><p>Once agan to correct classical mechanics for “double counting” of microstates if we have N indistinguishable “particles” with a factor of <span class="math notranslate nohighlight">\(N!\)</span></p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Classical partition function</strong></p>
@@ -754,21 +752,153 @@ H(p^N, r^N) = U(r^N) + K(p^N) = U(r^N) + \sum_{i=1}^{N} \frac{p_i^2}{2m}
 P(r^N, p^N) = P(r^N) \cdot P(p^N) = \int_V dr^N \, e^{-\beta U(r^N)} \cdot \int_{-\infty}^{+\infty} dp^N \, e^{-\beta \sum_{i=1}^{N} \frac{p_i^2}{2m}}
 \]</div>
 <ul class="simple">
-<li><p>The momentum-dependent part is always a <strong>simple quadratic function</strong>, making it analytically tractable:</p></li>
+<li><p>The intergarlwith position-dependent potential for interacting particle system is impossible to evaluate except by simulations or numerical techniques</p></li>
+<li><p>The momentum-dependent part splits into individaul integrals for every particle and is always a <strong>simple quadratic function</strong>, making it analytically tractable:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 P(p^N) = \left[ \int_{-\infty}^{+\infty} dp \, e^{-\beta \frac{p^2}{2m}} \right]^N
 \]</div>
 <ul class="simple">
-<li><p>In contrast, the position-dependent potential term is typically more complex and often requires <strong>numerical methods</strong> for evaluation.</p></li>
 <li><p>The momentum (or velocity) distribution follows the <strong>Maxwell-Boltzmann distribution</strong> in all equilibrium systems, regardless of the complexity of the molecular interactions.</p></li>
 </ul>
-<div class="important admonition">
-<p class="admonition-title"><strong>Maxwell-Boltzmann distribution</strong></p>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>Maxwell-Boltzmann Velocity Distribution: Full Derivation</strong></p>
+<p><strong>Separation of variables</strong></p>
+<ul class="simple">
+<li><p>In equilibrium, the distribution of velocities in the <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> directions are <strong>independent and identical</strong>, because there’s no preferred direction in an ideal gas. Therefore, we can write the joint probability distribution as:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[
-f(v) = \left( \frac{m}{2\pi k_B T} \right)^{3/2} 4\pi v^2 e^{-\frac{mv^2}{2k_B T}}
+f(v_x, v_y, v_z) = f(v_x)f(v_y)f(v_z)
+\]</div>
+<ul class="simple">
+<li><p>Furthermore, the probability of finding a particle with velocity components between <span class="math notranslate nohighlight">\((v_x, v_x + dv_x)\)</span>, <span class="math notranslate nohighlight">\((v_y, v_y + dv_y)\)</span>, and <span class="math notranslate nohighlight">\((v_z, v_z + dv_z)\)</span> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v_x, v_y, v_z) dv_x dv_y dv_z
+\]</div>
+<p><strong>Form of the velocity component distribution</strong></p>
+<ul class="simple">
+<li><p>The system is in thermal equilibrium, so the probability of a particle having a certain velocity corresponds to the <strong>Boltzmann factor</strong> for its kinetic energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{Probability} \propto e^{-E_{\text{kin}} / k_B T}
+\]</div>
+<ul class="simple">
+<li><p>For a single particle of mass <span class="math notranslate nohighlight">\(m\)</span>, the kinetic energy is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E_{\text{kin}} = \frac{1}{2}m(v_x^2 + v_y^2 + v_z^2)
+\]</div>
+<ul class="simple">
+<li><p>So we postulate:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v_x, v_y, v_z) \propto e^{-\frac{1}{2}m(v_x^2 + v_y^2 + v_z^2)/k_B T}
+\]</div>
+<ul class="simple">
+<li><p>Using the independence of the components:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v_x) \propto e^{- \frac{1}{2} m v_x^2 / k_B T}
+\]</div>
+<ul class="simple">
+<li><p>This is a <strong>Gaussian</strong> distribution. To normalize this one-dimensional distribution, we write:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v_x) = A e^{- \frac{1}{2} m v_x^2 / k_B T}
+\]</div>
+<ul class="simple">
+<li><p>We require that:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^\infty f(v_x) dv_x = 1
+\]</div>
+<ul class="simple">
+<li><p>Substitute and integrate:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+A \int_{-\infty}^\infty e^{- \frac{1}{2} m v_x^2 / k_B T} dv_x = 1
+\]</div>
+<ul class="simple">
+<li><p>This is a standard Gaussian integral. Let <span class="math notranslate nohighlight">\(\alpha = \frac{1}{2} \frac{m}{k_B T}\)</span>, then:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\int_{-\infty}^\infty e^{-\alpha v_x^2} dv_x = \sqrt{\frac{\pi}{\alpha}} = \sqrt{\frac{2\pi k_B T}{m}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+A = \sqrt{\frac{m}{2\pi k_B T}}
+\]</div>
+<ul class="simple">
+<li><p>Therefore, the normalized one-dimensional distribution is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v_x) = \sqrt{\frac{m}{2\pi k_B T}} \, e^{- \frac{1}{2} m v_x^2 / k_B T}
+\]</div>
+<ul class="simple">
+<li><p>The same form holds for <span class="math notranslate nohighlight">\(v_y\)</span> and <span class="math notranslate nohighlight">\(v_z\)</span>.</p></li>
+</ul>
+<p><strong>Distribution of speeds</strong></p>
+<ul class="simple">
+<li><p>Now, let’s consider the <strong>speed</strong> <span class="math notranslate nohighlight">\(v = \sqrt{v_x^2 + v_y^2 + v_z^2}\)</span>.</p></li>
+<li><p>The probability density for the speed (regardless of direction) is obtained by converting to spherical coordinates in velocity space. The volume element in velocity space becomes:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+dv_x dv_y dv_z = v^2 \sin\theta \, dv \, d\theta \, d\phi
+\]</div>
+<ul class="simple">
+<li><p>Integrating over angles gives a factor of <span class="math notranslate nohighlight">\(4\pi\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v) dv = \underbrace{4\pi v^2}_{\text{Jacobian}} \cdot f(v_x)f(v_y)f(v_z) dv
+\]</div>
+<ul class="simple">
+<li><p>Substitute in the expressions for <span class="math notranslate nohighlight">\(f(v_x)\)</span>, <span class="math notranslate nohighlight">\(f(v_y)\)</span>, and <span class="math notranslate nohighlight">\(f(v_z)\)</span>, and recall that the total exponent is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v_x)f(v_y)f(v_z) = \left(\frac{m}{2\pi k_B T}\right)^{3/2} e^{-\frac{1}{2} m (v_x^2 + v_y^2 + v_z^2) / k_B T} = \left(\frac{m}{2\pi k_B T}\right)^{3/2} e^{- \frac{1}{2} m v^2 / k_B T}
+\]</div>
+<ul class="simple">
+<li><p>Therefore, the <strong>speed distribution</strong> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v) = 4\pi v^2 \left( \frac{m}{2\pi k_B T} \right)^{3/2} e^{- \frac{1}{2} m v^2 / k_B T}
+\]</div>
+<ul class="simple">
+<li><p>This is the <strong>Maxwell-Boltzmann speed distribution</strong>. It gives the probability density that a particle in a gas has speed <span class="math notranslate nohighlight">\(v\)</span>.</p></li>
+</ul>
+</div>
+<div class="important admonition">
+<p class="admonition-title"><strong>Maxwell-Boltzmann distribution</strong></p>
+<ul class="simple">
+<li><p><strong>Velocity component distribution</strong> (1D Gaussian):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v_x) = \sqrt{\frac{m}{2\pi k_B T}} \, e^{- \frac{1}{2} m v_x^2 / k_B T}
+\]</div>
+<ul class="simple">
+<li><p><strong>Speed distribution</strong> (Maxwell-Boltzmann form):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(v) = 4\pi v^2 \left( \frac{m}{2\pi k_B T} \right)^{3/2} e^{- \frac{1}{2} m v^2 / k_B T}
 \]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\( v \)</span> is the speed of a particle,</p></li>
@@ -1292,7 +1422,7 @@ C_V = \frac{dU}{dT} = 9N k_B \left( \frac{T}{T_D} \right)^3 \int_0^{x_D} \frac{x
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2211/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2246/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
   integrand = lambda x: (x**4 * np.exp(x)) / (np.exp(x) - 1)**2
 </pre></div>
 </div>
