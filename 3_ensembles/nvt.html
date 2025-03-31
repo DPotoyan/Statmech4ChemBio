@@ -799,21 +799,14 @@ E_{\text{kin}} = \frac{1}{2}m(v_x^2 + v_y^2 + v_z^2)
 </ul>
 <div class="math notranslate nohighlight">
 \[
-f(v_x, v_y, v_z) \propto e^{-\frac{1}{2}m(v_x^2 + v_y^2 + v_z^2)/k_B T}
+f(v_x, v_y, v_z) \propto e^{-m(v_x^2 + v_y^2 + v_z^2)/2k_B T}
 \]</div>
 <ul class="simple">
 <li><p>Using the independence of the components:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-f(v_x) \propto e^{- \frac{1}{2} m v_x^2 / k_B T}
-\]</div>
-<ul class="simple">
-<li><p>This is a <strong>Gaussian</strong> distribution. To normalize this one-dimensional distribution, we write:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-f(v_x) = A e^{- \frac{1}{2} m v_x^2 / k_B T}
+f(v_x) \propto e^{- m v_x^2 / 2 k_B T}
 \]</div>
 <ul class="simple">
 <li><p>We require that:</p></li>
@@ -823,33 +816,12 @@ f(v_x) = A e^{- \frac{1}{2} m v_x^2 / k_B T}
 \int_{-\infty}^\infty f(v_x) dv_x = 1
 \]</div>
 <ul class="simple">
-<li><p>Substitute and integrate:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-A \int_{-\infty}^\infty e^{- \frac{1}{2} m v_x^2 / k_B T} dv_x = 1
-\]</div>
-<ul class="simple">
-<li><p>This is a standard Gaussian integral. Let <span class="math notranslate nohighlight">\(\alpha = \frac{1}{2} \frac{m}{k_B T}\)</span>, then:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\int_{-\infty}^\infty e^{-\alpha v_x^2} dv_x = \sqrt{\frac{\pi}{\alpha}} = \sqrt{\frac{2\pi k_B T}{m}}
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-A = \sqrt{\frac{m}{2\pi k_B T}}
-\]</div>
-<ul class="simple">
-<li><p>Therefore, the normalized one-dimensional distribution is:</p></li>
+<li><p>This is a standard Gaussian integral of form <span class="math notranslate nohighlight">\(p(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{x^2}{2\sigma^2}}\)</span> where <span class="math notranslate nohighlight">\(\sigma^2 = \frac{k_B T}{m}\)</span> and therefore we write down:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 f(v_x) = \sqrt{\frac{m}{2\pi k_B T}} \, e^{- \frac{1}{2} m v_x^2 / k_B T}
 \]</div>
-<ul class="simple">
-<li><p>The same form holds for <span class="math notranslate nohighlight">\(v_y\)</span> and <span class="math notranslate nohighlight">\(v_z\)</span>.</p></li>
-</ul>
 <p><strong>Distribution of speeds</strong></p>
 <ul class="simple">
 <li><p>Now, let’s consider the <strong>speed</strong> <span class="math notranslate nohighlight">\(v = \sqrt{v_x^2 + v_y^2 + v_z^2}\)</span>.</p></li>
@@ -1422,7 +1394,7 @@ C_V = \frac{dU}{dT} = 9N k_B \left( \frac{T}{T_D} \right)^3 \int_0^{x_D} \frac{x
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2246/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2212/174881513.py:15: RuntimeWarning: overflow encountered in scalar power
   integrand = lambda x: (x**4 * np.exp(x)) / (np.exp(x) - 1)**2
 </pre></div>
 </div>
