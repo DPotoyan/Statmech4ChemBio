@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+from scipy.optimize import root
+import matplotlib.pyplot as plt
+
+x = np.arange(1, 7)
+target_mean = 5.5
+
+def maxent_prob(lambdas):
+    '''
+    Input: array of lambdas [lambda1, lambda2, ...]
+    Return: array of probabilities [p1, p2, ...]
+    '''
+
+    lambda1= lambdas[0]
+    Z = np.sum(np.exp(-lambda1 * x))
+    return np.exp(-lambda1 * x) / Z
+
+def constraint(lambdas):
+    '''
+    Input: array of lambdas [lambda1, lambda2, ...]
+    Return: array of constraints [constraint1, constraint2, ...]
+    '''
+
+    p = maxent_prob(lambdas)
+    mean = np.sum(x * p)
+    return [mean - target_mean]
+
+# Use root with initial guess
+sol = root(constraint, [0.0])
+lambda1 = sol.x[0]
+p_opt = maxent_prob([lambda1]) # more then one lambda should go into array [lambda1, lambda2, ...]
+
+print(f"λ1 = {lambda1_opt:.4f}")
+for i, p in enumerate(p_opt, 1):
+    print(f"P({i}) = {p:.4f}")
+
+# Plot
+plt.bar(x, p_opt, edgecolor='black')
+plt.title("MaxEnt Distribution (Mean Constraint Only, using root)")
+plt.xlabel("Die Outcome")
+plt.ylabel("Probability")
+plt.grid(axis='y', linestyle='--', alpha=0.6)
+plt.xticks(x)
+plt.show()
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[3], line 33[0m
+[1;32m     30[0m lambda1 [38;5;241m=[39m sol[38;5;241m.[39mx[[38;5;241m0[39m]
+[1;32m     31[0m p_opt [38;5;241m=[39m maxent_prob([lambda1]) [38;5;66;03m# more then one lambda should go into array [lambda1, lambda2, ...][39;00m
+[0;32m---> 33[0m [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mλ1 = [39m[38;5;132;01m{[39;00mlambda1_opt[38;5;132;01m:[39;00m[38;5;124m.4f[39m[38;5;132;01m}[39;00m[38;5;124m"[39m)
+[1;32m     34[0m [38;5;28;01mfor[39;00m i, p [38;5;129;01min[39;00m [38;5;28menumerate[39m(p_opt, [38;5;241m1[39m):
+[1;32m     35[0m     [38;5;28mprint[39m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mP([39m[38;5;132;01m{[39;00mi[38;5;132;01m}[39;00m[38;5;124m) = [39m[38;5;132;01m{[39;00mp[38;5;132;01m:[39;00m[38;5;124m.4f[39m[38;5;132;01m}[39;00m[38;5;124m"[39m)
+
+[0;31mNameError[0m: name 'lambda1_opt' is not defined
+
