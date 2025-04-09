@@ -15,73 +15,89 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Range for plotting
-y_vals = np.linspace(-6, 6, 500)
+def triangular_pdf(x, a, b, c):
+    """Triangular distribution PDF."""
+    if a <= x < c:
+        return 2 * (x - a) / ((b - a) * (c - a))
+    elif c <= x <= b:
+        return 2 * (b - x) / ((b - a) * (b - c))
+    else:
+        return 0
 
-# Evaluate functions
-p_vals = p(y_vals)
-q_uniform_vals = q_uniform(y_vals)
-q_better_vals = q_better(y_vals)
+def rejection_sampling_triangular(n_samples, a, b, c):
+    """
+    Rejection sampling from a triangular distribution.
 
-# Normalize p(y) for display only
-p_vals_normalized = p_vals / np.trapz(p_vals, y_vals)
+    Parameters:
+    - n_samples: Number of samples to generate.
+    - a: Minimum value of the triangular distribution.
+    - b: Maximum value of the triangular distribution.
+    - c: Mode (peak) of the triangular distribution.
 
-# Evaluate on wide range
-y_vals = np.linspace(-6, 6, 1000)
-p_vals = p(y_vals)
+    Returns:
+    - samples: Array of generated samples.
+    """
+    samples = []
 
-# Determine region of significant mass: where p(y) > 1% of max
-threshold = 0.01 * np.max(p_vals)
-mask = p_vals > threshold
-y_zoom = y_vals[mask]
-p_zoom = p_vals[mask]
-q_uniform_zoom = q_uniform(y_zoom)
-q_better_zoom = q_better(y_zoom)
+    # Proposal distribution is uniform on [a, b]
+    proposal_sampler = lambda: np.random.uniform(a, b)
 
-# Normalize p for plotting
-p_zoom_normalized = p_zoom / np.trapz(p_zoom, y_zoom)
+    # Find the maximum value of the triangular PDF for normalization
+    max_pdf = triangular_pdf(c, a, b, c)
 
-# Importance weights (unnormalized)
-w_uniform_zoom = p_zoom / q_uniform_zoom
-w_better_zoom = p_zoom / q_better_zoom
+    while len(samples) < n_samples:
+        # Step 1: Generate a proposal sample
+        x = proposal_sampler()
 
-# Plot
-fig, axes = plt.subplots(2, 1, figsize=(10, 10), sharex=True)
+        # Step 2: Generate a uniform random number for acceptance criterion
+        u = npr.uniform(0, max_pdf)
 
-# Top: Distributions
-axes[0].plot(y_zoom, p_zoom_normalized, label='Target $p(y)$ (normalized)', color='crimson', linewidth=2)
-axes[0].plot(y_zoom, q_uniform_zoom, label='Uniform proposal $q_{\\mathrm{uniform}}$', color='dodgerblue', linestyle='--')
-axes[0].plot(y_zoom, q_better_zoom, label='Gaussian proposal $q_{\\mathrm{better}}$', color='forestgreen', linestyle='-.')
-axes[0].set_ylabel('Density')
-axes[0].set_title('Zoomed-In Target and Proposal Distributions')
-axes[0].legend()
-axes[0].grid(True, linestyle=':', alpha=0.7)
+        # Step 3: Accept or reject the sample based on the triangular PDF
+        if u <= triangular_pdf(x, a, b, c):
+            samples.append(x)
 
-# Bottom: Weights
-axes[1].plot(y_zoom, w_uniform_zoom, label=r'$w(y) = p(y)/q_{\mathrm{uniform}}$', color='dodgerblue', linestyle='--')
-axes[1].plot(y_zoom, w_better_zoom, label=r'$w(y) = p(y)/q_{\mathrm{better}}$', color='forestgreen', linestyle='-.')
-axes[1].set_xlabel('$y$')
-axes[1].set_ylabel('Importance weight')
-axes[1].set_yscale('log')
-axes[1].set_title('Zoomed-In Importance Weights (Log Scale)')
-axes[1].legend()
-axes[1].grid(True, linestyle=':', alpha=0.7)
+    return np.array(samples)
 
-plt.tight_layout()
+# Parameters for the triangular distribution
+a = 0   # Minimum
+b = 10  # Maximum
+c = 5   # Mode
+
+# Generate samples using rejection sampling
+n_samples = 10000
+samples = rejection_sampling_triangular(n_samples, a, b, c)
+
+# Plot the samples
+plt.hist(samples, bins=50, density=True, alpha=0.6, color='blue', label='Samples')
+
+# Plot the triangular PDF for comparison
+x_vals = np.linspace(a, b, 1000)
+pdf_vals = [triangular_pdf(x, a, b, c) for x in x_vals]
+plt.plot(x_vals, pdf_vals, label='Triangular PDF', color='red', lw=2)
+
+plt.xlabel('x')
+plt.ylabel('Density')
+plt.title('Rejection Sampling from Triangular Distribution')
+plt.legend()
 plt.show()
-
-
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[10], line 5[0m
-[1;32m      2[0m y_vals [38;5;241m=[39m np[38;5;241m.[39mlinspace([38;5;241m-[39m[38;5;241m6[39m, [38;5;241m6[39m, [38;5;241m500[39m)
-[1;32m      4[0m [38;5;66;03m# Evaluate functions[39;00m
-[0;32m----> 5[0m p_vals [38;5;241m=[39m [43mp[49m(y_vals)
-[1;32m      6[0m q_uniform_vals [38;5;241m=[39m q_uniform(y_vals)
-[1;32m      7[0m q_better_vals [38;5;241m=[39m q_better(y_vals)
+Cell [0;32mIn[12], line 51[0m
+[1;32m     49[0m [38;5;66;03m# Generate samples using rejection sampling[39;00m
+[1;32m     50[0m n_samples [38;5;241m=[39m [38;5;241m10000[39m
+[0;32m---> 51[0m samples [38;5;241m=[39m [43mrejection_sampling_triangular[49m[43m([49m[43mn_samples[49m[43m,[49m[43m [49m[43ma[49m[43m,[49m[43m [49m[43mb[49m[43m,[49m[43m [49m[43mc[49m[43m)[49m
+[1;32m     53[0m [38;5;66;03m# Plot the samples[39;00m
+[1;32m     54[0m plt[38;5;241m.[39mhist(samples, bins[38;5;241m=[39m[38;5;241m50[39m, density[38;5;241m=[39m[38;5;28;01mTrue[39;00m, alpha[38;5;241m=[39m[38;5;241m0.6[39m, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mblue[39m[38;5;124m'[39m, label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mSamples[39m[38;5;124m'[39m)
 
-[0;31mNameError[0m: name 'p' is not defined
+Cell [0;32mIn[12], line 36[0m, in [0;36mrejection_sampling_triangular[0;34m(n_samples, a, b, c)[0m
+[1;32m     33[0m x [38;5;241m=[39m proposal_sampler()
+[1;32m     35[0m [38;5;66;03m# Step 2: Generate a uniform random number for acceptance criterion[39;00m
+[0;32m---> 36[0m u [38;5;241m=[39m [43mnpr[49m[38;5;241m.[39muniform([38;5;241m0[39m, max_pdf)
+[1;32m     38[0m [38;5;66;03m# Step 3: Accept or reject the sample based on the triangular PDF[39;00m
+[1;32m     39[0m [38;5;28;01mif[39;00m u [38;5;241m<[39m[38;5;241m=[39m triangular_pdf(x, a, b, c):
+
+[0;31mNameError[0m: name 'npr' is not defined
 
