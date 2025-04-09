@@ -485,9 +485,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shapes-more-complex-than-a-circle">Shapes more complex than a circle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-essence-of-monte-carlo-simulations">The Essence of Monte Carlo Simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-1d-applications-of-mc">Simple 1D applications of MC</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-monte-carlo-and-uniform-sampling">Ordinary Monte Carlo and Uniform Sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-the-boltzmann-distribution">Sampling from the Boltzmann Distribution</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-dimensions">More dimensions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-essence-of-monte-carlo">The Essence of Monte Carlo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-monte-carlo-outperform-brute-force-integration">Why Does Monte Carlo Outperform Brute-Force Integration?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-monte-carlo-outperform-brute-force-integration">Why Does Monte Carlo Outperform Brute-Force Integration?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-convergence-of-mc-simulations">On convergence of MC simulations</a></li>
 </ul>
 </li>
@@ -577,7 +582,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6f50b2a75475e2de4a808518df3bd8f9f17f81e57f9b9c0eaa9fb0f4aca43587.png" src="../_images/6f50b2a75475e2de4a808518df3bd8f9f17f81e57f9b9c0eaa9fb0f4aca43587.png" />
+<img alt="../_images/ce23ad522ba232b46eded2708456cc07ab755d0ddbe6df908a39dfc0f458f871.png" src="../_images/ce23ad522ba232b46eded2708456cc07ab755d0ddbe6df908a39dfc0f458f871.png" />
 </div>
 </div>
 <section id="shapes-more-complex-than-a-circle">
@@ -657,8 +662,6 @@ document.write(`
       
     <span class="k">return</span> <span class="n">I</span>
 
-
-
 <span class="c1">### Calculate integral numerically first</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">integrate</span>
 
@@ -679,12 +682,156 @@ document.write(`
 </details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exact result: 2.2898343018663505
-MC result: 2.1978
+MC result: 2.2715
 </pre></div>
 </div>
-<img alt="../_images/9dee56f13f078541b918639f6fb10f69258ea02b8c5e0b8f8f90b0b0cb3bdb90.png" src="../_images/9dee56f13f078541b918639f6fb10f69258ea02b8c5e0b8f8f90b0b0cb3bdb90.png" />
+<img alt="../_images/941ddfa91abc4d8a630b17bc43b73149ad83de37c67485d8c5d86342865f99be.png" src="../_images/941ddfa91abc4d8a630b17bc43b73149ad83de37c67485d8c5d86342865f99be.png" />
 </div>
 </div>
+</section>
+<section id="the-essence-of-monte-carlo-simulations">
+<h2>The Essence of Monte Carlo Simulations<a class="headerlink" href="#the-essence-of-monte-carlo-simulations" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Suppose we want to evaluate an integral <span class="math notranslate nohighlight">\( I \)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[I = \int f(x) \, dx\]</div>
+<ul class="simple">
+<li><p>A powerful perspective is to reinterpret this integral as the expectation of a function <span class="math notranslate nohighlight">\( g(x) \)</span> under some probability distribution <span class="math notranslate nohighlight">\( p(x) \)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+I = \int \frac{f(x)}{p(x)} p(x) \, dx = \int g(x) \, p(x) \, dx = \mathbb{E}_p[g(x)]
+\]</div>
+<ul class="simple">
+<li><p>In this form, the integral becomes the expected value of <span class="math notranslate nohighlight">\( g(x) \)</span> with respect to the distribution <span class="math notranslate nohighlight">\( p(x) \)</span>.</p></li>
+<li><p>To estimate <span class="math notranslate nohighlight">\( \mathbb{E}_p[g] \)</span>, we draw samples <span class="math notranslate nohighlight">\( x_i \sim p(x) \)</span> and apply the <strong>law of large numbers</strong>, which guarantees that the sample average converges to the expected value as <span class="math notranslate nohighlight">\( n \to \infty \)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{E}_p[g] \approx \frac{1}{n} \sum_{i=1}^n g(x_i), \quad \text{where } x_i \sim p(x)
+\]</div>
+</section>
+<section id="simple-1d-applications-of-mc">
+<h2>Simple 1D applications of MC<a class="headerlink" href="#simple-1d-applications-of-mc" title="Permalink to this heading">#</a></h2>
+<section id="ordinary-monte-carlo-and-uniform-sampling">
+<h3>Ordinary Monte Carlo and Uniform Sampling<a class="headerlink" href="#ordinary-monte-carlo-and-uniform-sampling" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>A common and intuitive case is when we draw samples uniformly from the interval <span class="math notranslate nohighlight">\([a, b]\)</span>. In this setting, the sampling distribution is constant: <span class="math notranslate nohighlight">\( p(x) = \frac{1}{b-a} \)</span>, and the integral simplifies as follows:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+I = \int_a^b f(x) \, dx = (b - a) \int_a^b \frac{f(x)}{b - a} \, dx \approx (b - a) \cdot \frac{1}{n} \sum_{i=1}^n f(x_i) = (b - a) \cdot \bar{f}_n
+\]</div>
+<ul class="simple">
+<li><p>This gives a clear interpretation of Monte Carlo integration: we approximate the average height of the function <span class="math notranslate nohighlight">\( f(x) \)</span> over the interval by randomly sampling points, much like tossing pebbles onto a plot and estimating the shaded area.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">myfunc1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="n">integral</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>  <span class="n">myfunc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MC result&#39;</span><span class="p">,</span> <span class="n">integral</span><span class="p">)</span>
+
+<span class="n">y</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">myfunc1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exact result:&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MC result 2.298817876320732
+Exact result: 2.2898343018663505
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sampling-from-the-boltzmann-distribution">
+<h3>Sampling from the Boltzmann Distribution<a class="headerlink" href="#sampling-from-the-boltzmann-distribution" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Quantities like average energy, heat capacity, or pressure are computed as <strong>ensemble averages</strong> under the Boltzmann distribution.</p></li>
+<li><p>The Boltzmann distribution for a system with energy <span class="math notranslate nohighlight">\(E(x)\)</span> at inverse temperature <span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p(x) = \frac{e^{-\beta E(x)}}{Z}, \quad \text{where } Z = \int e^{-\beta E(x)} \, dx
+\]</div>
+<ul class="simple">
+<li><p>Suppose we are interested in the average energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle E \rangle = \int E(x) \, p(x) \, dx 
+\]</div>
+<ul class="simple">
+<li><p>This is an <strong>expectation value</strong> under the Boltzmann distribution <span class="math notranslate nohighlight">\(p(x)\)</span>.</p></li>
+<li><p>If we can draw samples <span class="math notranslate nohighlight">\(x_i \sim p(x)\)</span>, we can estimate <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle E \rangle \approx \frac{1}{n} \sum_{i=1}^n E(x_i)
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># inverse temperature</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># Boltzmann sampling for harmonic oscillator: Gaussian with variance 1/beta</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">beta</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">)</span>
+
+<span class="c1"># Energy function E(x) = (1/2) * x^2</span>
+<span class="n">E</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x_samples</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Estimate average energy ⟨E⟩</span>
+<span class="n">E_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">E</span><span class="p">)</span>
+<span class="n">E_exact</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="n">beta</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated ⟨E⟩: </span><span class="si">{</span><span class="n">E_mean</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exact ⟨E⟩:     </span><span class="si">{</span><span class="n">E_exact</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot histogram and overlay Boltzmann density</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">p_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">x_vals</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">p_vals</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">p_vals</span><span class="p">,</span> <span class="n">x_vals</span><span class="p">)</span>  <span class="c1"># normalize for display</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x_samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sampled $x_i$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">p_vals</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Boltzmann $p(x) </span><span class="se">\\</span><span class="s1">propto e^{-</span><span class="se">\\</span><span class="s1">beta E(x)}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Boltzmann Sampling from Harmonic Potential&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated ⟨E⟩: 0.4857
+Exact ⟨E⟩:     0.5000
+</pre></div>
+</div>
+<img alt="../_images/9eaaeabfe37a1d23ef7669cf45525574152896149972035a4e93d6b2c1a36293.png" src="../_images/9eaaeabfe37a1d23ef7669cf45525574152896149972035a4e93d6b2c1a36293.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="more-dimensions">
 <h2>More dimensions<a class="headerlink" href="#more-dimensions" title="Permalink to this heading">#</a></h2>
@@ -727,85 +874,20 @@ MC result: 2.1978
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9946076967722628, 0.9956715013816346)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9946076967722628, 0.9936188624753757)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="the-essence-of-monte-carlo">
-<h2>The Essence of Monte Carlo<a class="headerlink" href="#the-essence-of-monte-carlo" title="Permalink to this heading">#</a></h2>
-<p><strong>Transforming Integrals into Expectations</strong></p>
-<ul class="simple">
-<li><p>Suppose we want to evaluate an integral <span class="math notranslate nohighlight">\( I \)</span>.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[I = \int f(x) \, dx\]</div>
-<ul class="simple">
-<li><p>A powerful perspective is to reinterpret this integral as the expectation of a function <span class="math notranslate nohighlight">\( g(x) \)</span> under some probability distribution <span class="math notranslate nohighlight">\( p(x) \)</span>:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-I = \int \frac{f(x)}{p(x)} p(x) \, dx = \int g(x) \, p(x) \, dx = \mathbb{E}_p[g(x)]
-\]</div>
-<ul class="simple">
-<li><p>In this form, the integral becomes the expected value of <span class="math notranslate nohighlight">\( g(x) \)</span> with respect to the distribution <span class="math notranslate nohighlight">\( p(x) \)</span>. To estimate <span class="math notranslate nohighlight">\( \mathbb{E}_p[g] \)</span>, we draw samples <span class="math notranslate nohighlight">\( x_i \sim p(x) \)</span> and apply the <strong>law of large numbers</strong>, which guarantees that the sample average converges to the expected value as <span class="math notranslate nohighlight">\( n \to \infty \)</span>:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\mathbb{E}_p[g] \approx \frac{1}{n} \sum_{i=1}^n g(x_i), \quad \text{where } x_i \sim p(x)
-\]</div>
-<p><strong>Ordinary Monte Carlo and Uniform Sampling</strong></p>
-<ul class="simple">
-<li><p>A common and intuitive case is when we draw samples uniformly from the interval <span class="math notranslate nohighlight">\([a, b]\)</span>. In this setting, the sampling distribution is constant: <span class="math notranslate nohighlight">\( p(x) = \frac{1}{b-a} \)</span>, and the integral simplifies as follows:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-I = \int_a^b f(x) \, dx = (b - a) \int_a^b \frac{f(x)}{b - a} \, dx \approx (b - a) \cdot \frac{1}{n} \sum_{i=1}^n f(x_i) = (b - a) \cdot \bar{f}_n
-\]</div>
-<ul class="simple">
-<li><p>This gives a clear interpretation of Monte Carlo integration: we approximate the average height of the function <span class="math notranslate nohighlight">\( f(x) \)</span> over the interval by randomly sampling points, much like tossing pebbles onto a plot and estimating the shaded area.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">myfunc1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-
-<span class="n">integral</span> <span class="o">=</span> <span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>  <span class="n">myfunc1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MC result&#39;</span><span class="p">,</span> <span class="n">integral</span><span class="p">)</span>
-
-<span class="n">y</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">myfunc1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exact result:&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MC result 2.2935662240656765
-Exact result: 2.2898343018663505
-</pre></div>
-</div>
-</div>
-</div>
 <section id="why-does-monte-carlo-outperform-brute-force-integration">
-<h3>Why Does Monte Carlo Outperform Brute-Force Integration?<a class="headerlink" href="#why-does-monte-carlo-outperform-brute-force-integration" title="Permalink to this heading">#</a></h3>
+<h2>Why Does Monte Carlo Outperform Brute-Force Integration?<a class="headerlink" href="#why-does-monte-carlo-outperform-brute-force-integration" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Using i.i.d. random variables in Monte Carlo (MC) allows us to apply the Central Limit Theorem and infer that the mean we are calculating <span class="math notranslate nohighlight">\(\bar{g}\)</span> will have variance proportional to N number of samples <span class="math notranslate nohighlight">\(\sigma_N^2 = N\sigma^2_1\)</span> where <span class="math notranslate nohighlight">\(\sigma_1\)</span> is variance in single steps.</p></li>
 <li><p>Consequently, the convergence rate of Monte Carlo integration is <span class="math notranslate nohighlight">\(\mathcal{O}(n^{-1/2})\)</span>, which is notable because it is independent of the number of dimensions of the integral.</p></li>
 <li><p>This property gives Monte Carlo an edge over numerical integration methods, which have a convergence rate of <span class="math notranslate nohighlight">\(\mathcal{O}(n^{-d})\)</span>, especially in moderate- to high-dimensional contexts.
 Even in low-dimensional scenarios, Monte Carlo can be advantageous, particularly when the region of interest within the integration space is small. This allows for targeted sampling in critical areas.</p></li>
 </ul>
-</section>
 <section id="on-convergence-of-mc-simulations">
 <h3>On convergence of MC simulations<a class="headerlink" href="#on-convergence-of-mc-simulations" title="Permalink to this heading">#</a></h3>
 <p>We are often interested in knowing how many iterations it takes for Monte Carlo integration to “converge”. To do this, we would like some estimate of the variance, and it is useful to inspect such plots. One simple way to get confidence intervals for the plot of Monte Carlo estimate against number of iterations is simply to do many such simulations.</p>
@@ -882,7 +964,7 @@ f(x) = x \cos 71 x + \sin 13x, \ \  0 \le x \le 1
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/3b20ebbcfc6c6e58b56e401dfee4e0df436092bd1cd011aefb46fccdbd287f0a.png" src="../_images/3b20ebbcfc6c6e58b56e401dfee4e0df436092bd1cd011aefb46fccdbd287f0a.png" />
+<img alt="../_images/81d74ae89601c4b359ef4ecaf2d0342969d3cffb33e078d2e9d1354565b768f7.png" src="../_images/81d74ae89601c4b359ef4ecaf2d0342969d3cffb33e078d2e9d1354565b768f7.png" />
 </div>
 </div>
 </section>
@@ -981,7 +1063,7 @@ I \approx \frac{1}{n} \sum_{i=1}^n \frac{p(y_i)}{q(y_i)} h(y_i)
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Evaluate functions</span>
 <span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">p_vals</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">y_vals</span><span class="p">)</span>
@@ -1289,9 +1371,14 @@ I \approx \frac{1}{n} \sum_{i=1}^n \frac{p(y_i)}{q(y_i)} h(y_i)
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shapes-more-complex-than-a-circle">Shapes more complex than a circle</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-essence-of-monte-carlo-simulations">The Essence of Monte Carlo Simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-1d-applications-of-mc">Simple 1D applications of MC</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ordinary-monte-carlo-and-uniform-sampling">Ordinary Monte Carlo and Uniform Sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-from-the-boltzmann-distribution">Sampling from the Boltzmann Distribution</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-dimensions">More dimensions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-essence-of-monte-carlo">The Essence of Monte Carlo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-monte-carlo-outperform-brute-force-integration">Why Does Monte Carlo Outperform Brute-Force Integration?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-monte-carlo-outperform-brute-force-integration">Why Does Monte Carlo Outperform Brute-Force Integration?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-convergence-of-mc-simulations">On convergence of MC simulations</a></li>
 </ul>
 </li>
