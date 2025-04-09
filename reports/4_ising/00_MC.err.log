@@ -15,49 +15,73 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-mu_q_better = 0
-sigma_q_better = 1.2
-def q_better(x):
-    return (1/(sigma_q_better * np.sqrt(2*np.pi))) * np.exp(-0.5 * ((x - mu_q_better)/sigma_q_better)**2)
+# Range for plotting
+y_vals = np.linspace(-6, 6, 500)
 
-# Recalculate convergence with better proposal
-better_importance_estimates = []
+# Evaluate functions
+p_vals = p(y_vals)
+q_uniform_vals = q_uniform(y_vals)
+q_better_vals = q_better(y_vals)
 
-for N in sample_sizes:
-    y_samples = np.random.normal(mu_q_better, sigma_q_better, N)
-    weights = p(y_samples) / q_better(y_samples)
-    importance_f = h(y_samples) * weights
-    better_importance_estimates.append(np.mean(importance_f))
+# Normalize p(y) for display only
+p_vals_normalized = p_vals / np.trapz(p_vals, y_vals)
 
-# Plot updated convergence comparison
-fig, ax = plt.subplots(figsize=(10, 6))
+# Evaluate on wide range
+y_vals = np.linspace(-6, 6, 1000)
+p_vals = p(y_vals)
 
-ax.plot(sample_sizes, uniform_estimates, label='Uniform Sampling', marker='o', alpha=0.6)
-ax.plot(sample_sizes, importance_estimates, label='Importance Sampling (poor q)', marker='s', alpha=0.6)
-ax.plot(sample_sizes, better_importance_estimates, label='Importance Sampling (better q)', marker='^', alpha=0.9)
-ax.axhline(true_value, color='black', linestyle='--', label='True Value')
+# Determine region of significant mass: where p(y) > 1% of max
+threshold = 0.01 * np.max(p_vals)
+mask = p_vals > threshold
+y_zoom = y_vals[mask]
+p_zoom = p_vals[mask]
+q_uniform_zoom = q_uniform(y_zoom)
+q_better_zoom = q_better(y_zoom)
 
-ax.set_xscale('log')
-ax.set_title('Convergence Comparison with Better-Aligned Proposal')
-ax.set_xlabel('Number of Samples (log scale)')
-ax.set_ylabel('Estimated Integral')
-ax.legend()
-ax.grid(True)
+# Normalize p for plotting
+p_zoom_normalized = p_zoom / np.trapz(p_zoom, y_zoom)
+
+# Importance weights (unnormalized)
+w_uniform_zoom = p_zoom / q_uniform_zoom
+w_better_zoom = p_zoom / q_better_zoom
+
+# Plot
+fig, axes = plt.subplots(2, 1, figsize=(10, 10), sharex=True)
+
+# Top: Distributions
+axes[0].plot(y_zoom, p_zoom_normalized, label='Target $p(y)$ (normalized)', color='crimson', linewidth=2)
+axes[0].plot(y_zoom, q_uniform_zoom, label='Uniform proposal $q_{\\mathrm{uniform}}$', color='dodgerblue', linestyle='--')
+axes[0].plot(y_zoom, q_better_zoom, label='Gaussian proposal $q_{\\mathrm{better}}$', color='forestgreen', linestyle='-.')
+axes[0].set_ylabel('Density')
+axes[0].set_title('Zoomed-In Target and Proposal Distributions')
+axes[0].legend()
+axes[0].grid(True, linestyle=':', alpha=0.7)
+
+# Bottom: Weights
+axes[1].plot(y_zoom, w_uniform_zoom, label=r'$w(y) = p(y)/q_{\mathrm{uniform}}$', color='dodgerblue', linestyle='--')
+axes[1].plot(y_zoom, w_better_zoom, label=r'$w(y) = p(y)/q_{\mathrm{better}}$', color='forestgreen', linestyle='-.')
+axes[1].set_xlabel('$y$')
+axes[1].set_ylabel('Importance weight')
+axes[1].set_yscale('log')
+axes[1].set_title('Zoomed-In Importance Weights (Log Scale)')
+axes[1].legend()
+axes[1].grid(True, linestyle=':', alpha=0.7)
 
 plt.tight_layout()
 plt.show()
+
 
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[11], line 9[0m
-[1;32m      6[0m [38;5;66;03m# Recalculate convergence with better proposal[39;00m
-[1;32m      7[0m better_importance_estimates [38;5;241m=[39m []
-[0;32m----> 9[0m [38;5;28;01mfor[39;00m N [38;5;129;01min[39;00m [43msample_sizes[49m:
-[1;32m     10[0m     y_samples [38;5;241m=[39m np[38;5;241m.[39mrandom[38;5;241m.[39mnormal(mu_q_better, sigma_q_better, N)
-[1;32m     11[0m     weights [38;5;241m=[39m p(y_samples) [38;5;241m/[39m q_better(y_samples)
+Cell [0;32mIn[10], line 5[0m
+[1;32m      2[0m y_vals [38;5;241m=[39m np[38;5;241m.[39mlinspace([38;5;241m-[39m[38;5;241m6[39m, [38;5;241m6[39m, [38;5;241m500[39m)
+[1;32m      4[0m [38;5;66;03m# Evaluate functions[39;00m
+[0;32m----> 5[0m p_vals [38;5;241m=[39m [43mp[49m(y_vals)
+[1;32m      6[0m q_uniform_vals [38;5;241m=[39m q_uniform(y_vals)
+[1;32m      7[0m q_better_vals [38;5;241m=[39m q_better(y_vals)
 
-[0;31mNameError[0m: name 'sample_sizes' is not defined
+[0;31mNameError[0m: name 'p' is not defined
 
