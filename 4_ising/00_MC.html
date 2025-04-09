@@ -582,7 +582,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/68030245ef460bab0982358477cc093d32d05fdcaea7878fd13d2d3c5a818b09.png" src="../_images/68030245ef460bab0982358477cc093d32d05fdcaea7878fd13d2d3c5a818b09.png" />
+<img alt="../_images/f55206c5b969d82dfebbe7303d005c52654d8f9da6a31b75e05c06677835f417.png" src="../_images/f55206c5b969d82dfebbe7303d005c52654d8f9da6a31b75e05c06677835f417.png" />
 </div>
 </div>
 <section id="shapes-more-complex-than-a-circle">
@@ -682,10 +682,10 @@ document.write(`
 </details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exact result: 2.2898343018663505
-MC result: 2.3353
+MC result: 2.1835
 </pre></div>
 </div>
-<img alt="../_images/b2acd137305b280c42ab45a42da62303daa8e39de81be43d68efc7690a8251a0.png" src="../_images/b2acd137305b280c42ab45a42da62303daa8e39de81be43d68efc7690a8251a0.png" />
+<img alt="../_images/1e86e9644294dc3e600239ab624b4f5fb8464b5c5fdcfdcc9351844e3e45d3e1.png" src="../_images/1e86e9644294dc3e600239ab624b4f5fb8464b5c5fdcfdcc9351844e3e45d3e1.png" />
 </div>
 </div>
 </section>
@@ -751,7 +751,7 @@ I = \int_a^b f(x) \, dx = (b - a) \int_a^b \frac{f(x)}{b - a} \, dx \approx (b -
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MC result 2.2855438916742727
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MC result 2.2916875111055885
 Exact result: 2.2898343018663505
 </pre></div>
 </div>
@@ -824,11 +824,11 @@ p(x) = \frac{e^{-\beta E(x)}}{Z}, \quad \text{where } Z = \int e^{-\beta E(x)} \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated ⟨E⟩: 0.5020
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated ⟨E⟩: 0.5036
 Exact ⟨E⟩:     0.5000
 </pre></div>
 </div>
-<img alt="../_images/7e214d48cab80944c0b6b0a07ba87e01bd0c1c0d92001a2531356c4ff282daf5.png" src="../_images/7e214d48cab80944c0b6b0a07ba87e01bd0c1c0d92001a2531356c4ff282daf5.png" />
+<img alt="../_images/3f2136aa58dfe049e4365bd4dd781d6a5211177215dd85bd49c6f0ef5959a4e3.png" src="../_images/3f2136aa58dfe049e4365bd4dd781d6a5211177215dd85bd49c6f0ef5959a4e3.png" />
 </div>
 </div>
 </section>
@@ -874,7 +874,7 @@ Exact ⟨E⟩:     0.5000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9946076967722628, 0.9964614196267758)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9946076967722628, 0.9949129391330922)
 </pre></div>
 </div>
 </div>
@@ -964,7 +964,7 @@ f(x) = x \cos 71 x + \sin 13x, \ \  0 \le x \le 1
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/ba351036e6d9e56f01780d45b11104e6898efd6466d48bf2e31aa0c6f5c60c33.png" src="../_images/ba351036e6d9e56f01780d45b11104e6898efd6466d48bf2e31aa0c6f5c60c33.png" />
+<img alt="../_images/af3d4d7f5f12765521331ff7b83f75dce3c8d6d42dde2b8175414eedef68496f.png" src="../_images/af3d4d7f5f12765521331ff7b83f75dce3c8d6d42dde2b8175414eedef68496f.png" />
 </div>
 </div>
 </section>
@@ -1152,27 +1152,71 @@ I \approx \frac{1}{n} \sum_{i=1}^n \frac{p(y_i)}{q(y_i)} h(y_i)
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mc_randnum_sample</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">Lx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Ly</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Sample random variables according to a distribution.</span>
-<span class="sd">    func: given prob dist</span>
-<span class="sd">    N:    random numbers used for sampling and rejection</span>
-<span class="sd">    Lx, Ly range and domain size of distribution</span>
-<span class="sd">    &#39;&#39;&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">triangular_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Triangular distribution PDF.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">a</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">c</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
 
-    <span class="c1"># uniform random samples</span>
-    <span class="n">ux</span> <span class="o">=</span>     <span class="n">Lx</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
-    <span class="n">uy</span> <span class="o">=</span>     <span class="n">Ly</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>  
+<span class="k">def</span><span class="w"> </span><span class="nf">rejection_sampling_triangular</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rejection sampling from a triangular distribution.</span>
 
-    <span class="c1">#rejection criteria</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="n">uy</span><span class="o">&lt;=</span><span class="n">func</span><span class="p">(</span><span class="n">ux</span><span class="p">)</span>          
-    
-    <span class="n">sampled_ux</span> <span class="o">=</span> <span class="n">ux</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - n_samples: Number of samples to generate.</span>
+<span class="sd">    - a: Minimum value of the triangular distribution.</span>
+<span class="sd">    - b: Maximum value of the triangular distribution.</span>
+<span class="sd">    - c: Mode (peak) of the triangular distribution.</span>
 
-    <span class="c1">### Plotting    </span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="sd">    Returns:</span>
+<span class="sd">    - samples: Array of generated samples.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sampled_ux</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Proposal distribution is uniform on [a, b]</span>
+    <span class="n">proposal_sampler</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="c1"># Find the maximum value of the triangular PDF for normalization</span>
+    <span class="n">max_pdf</span> <span class="o">=</span> <span class="n">triangular_pdf</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n_samples</span><span class="p">:</span>
+        <span class="c1"># Step 1: Generate a proposal sample</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">proposal_sampler</span><span class="p">()</span>
+
+        <span class="c1"># Step 2: Generate a uniform random number for acceptance criterion</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">npr</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_pdf</span><span class="p">)</span>
+
+        <span class="c1"># Step 3: Accept or reject the sample based on the triangular PDF</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;=</span> <span class="n">triangular_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+            <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+
+<span class="c1"># Parameters for the triangular distribution</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># Minimum</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Maximum</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">5</span>   <span class="c1"># Mode</span>
+
+<span class="c1"># Generate samples using rejection sampling</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">rejection_sampling_triangular</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="c1"># Plot the samples</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Samples&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the triangular PDF for comparison</span>
+<span class="n">x_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pdf_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">triangular_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_vals</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_vals</span><span class="p">,</span> <span class="n">pdf_vals</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Triangular PDF&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Rejection Sampling from Triangular Distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
