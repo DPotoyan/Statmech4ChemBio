@@ -8,5 +8,5 @@
 | HW4, Mar 12 |   [Problems of Thermodynamics 2,3,4](https://dpotoyan.github.io/Statmech4ChemBio/2_thermo/01_Thermo.html#problems)  | Thermodynamics|  
 | HW5, Mar 26 |   [Problems of Ensembles 1-5](https://dpotoyan.github.io/Statmech4ChemBio/3_ensembles/nve.html#problems)  | NVE Ensemble|  
 | HW6, April 2 |   [Problems of Canonical Ensemble](https://dpotoyan.github.io/Statmech4ChemBio/3_ensembles/nvt.html)  | NVT Ensemble|  
-| HW7, April 10 |   [Problems 1-5 of Open Systems](https://dpotoyan.github.io/Statmech4ChemBio/3_ensembles/npt.html#problems)  | Ensembles|  
-| HW8, April 17 |   [Problems 1-2 of Monte Carlo](https://dpotoyan.github.io/Statmech4ChemBio/4_ising/00_MC.html#problems)  | Ensembles|  
+| HW7, April 10 |   [Problems 1-5 of Open Systems](https://dpotoyan.github.io/Statmech4ChemBio/3_ensembles/npt.html#problems)  | Grand Canonical Ensemble|  
+| HW8, April 17 |   [Problems 1-2 of Monte Carlo](https://dpotoyan.github.io/Statmech4ChemBio/4_ising/00_MC.html#problems)  | Monte Carlo|  
