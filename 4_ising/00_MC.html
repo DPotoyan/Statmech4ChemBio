@@ -519,6 +519,49 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="monte-carlo-and-the-power-of-randomness">
 <h1>Monte Carlo and “the power of randomness”<a class="headerlink" href="#monte-carlo-and-the-power-of-randomness" title="Permalink to this heading">#</a></h1>
+<div class="admonition-what-you-will-learn admonition">
+<p class="admonition-title"><strong>What you will learn</strong></p>
+<ul class="simple">
+<li><p><strong>Monte Carlo = Random Sampling to Estimate Integrals</strong></p>
+<ul>
+<li><p>Replace integration with <strong>averaging over random samples</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Expectation Viewpoint</strong>:
+$<span class="math notranslate nohighlight">\(
+\int p(x) f(x)\,dx = \mathbb{E}_p\left[ f(x) \right]  \approx \frac{1}{n} \sum^{n}_{i=1} f(x_i)
+\)</span>$</p>
+<ul>
+<li><p>sample from  <span class="math notranslate nohighlight">\( x_i \sim p(x) \)</span>, and compute averages of <span class="math notranslate nohighlight">\(f(x)\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Law of Large Numbers</strong>:</p>
+<ul>
+<li><p>As <span class="math notranslate nohighlight">\( n \to \infty \)</span>, sample average converges to the true expectation.</p></li>
+</ul>
+</li>
+<li><p><strong>Boltzmann Sampling in Statistical Mechanics</strong>:</p>
+<ul>
+<li><p>Sample from <span class="math notranslate nohighlight">\( p(x) \propto e^{-\beta E(x)} \)</span> to estimate thermodynamic averages:
+$<span class="math notranslate nohighlight">\(
+\langle E \rangle \approx \frac{1}{n} \sum E(x_i)
+\)</span>$</p></li>
+</ul>
+</li>
+<li><p><strong>Rejection Sampling</strong>:</p>
+<ul>
+<li><p>Sample <span class="math notranslate nohighlight">\( x \sim \text{Uniform} \)</span>, accept if <span class="math notranslate nohighlight">\( y \leq f(x) \)</span>.</p></li>
+<li><p>Useful for sampling from <strong>unnormalized distributions</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Markov Chain sampling</strong></p>
+<ul>
+<li><p>generate random samples in such a way where each sample depends on previous one.</p></li>
+<li><p>This allows clevery moving into areas of interest.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 <p><strong>Fun summer game: throwing pebbles on the sand and estimatiing pi</strong></p>
 <ul class="simple">
 <li><p>The key idea of this technique is that the ratio of the area of the circle to the square area that inscribes it is <span class="math notranslate nohighlight">\(\pi/4\)</span>, so by counting the fraction of the random points in the square that are inside the circle, we get increasingly good estimates to <span class="math notranslate nohighlight">\(\pi\)</span>.</p></li>
@@ -582,7 +625,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f55206c5b969d82dfebbe7303d005c52654d8f9da6a31b75e05c06677835f417.png" src="../_images/f55206c5b969d82dfebbe7303d005c52654d8f9da6a31b75e05c06677835f417.png" />
+<img alt="../_images/4195bff23e9982276d8bf32172fb6fb5990ae06d53982142facaba56fb3cd957.png" src="../_images/4195bff23e9982276d8bf32172fb6fb5990ae06d53982142facaba56fb3cd957.png" />
 </div>
 </div>
 <section id="shapes-more-complex-than-a-circle">
@@ -682,10 +725,10 @@ document.write(`
 </details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exact result: 2.2898343018663505
-MC result: 2.1835
+MC result: 2.3166
 </pre></div>
 </div>
-<img alt="../_images/1e86e9644294dc3e600239ab624b4f5fb8464b5c5fdcfdcc9351844e3e45d3e1.png" src="../_images/1e86e9644294dc3e600239ab624b4f5fb8464b5c5fdcfdcc9351844e3e45d3e1.png" />
+<img alt="../_images/495b65e9b683ac636998964e6899aa8490f471f23158c3a9bd38532e8d036a39.png" src="../_images/495b65e9b683ac636998964e6899aa8490f471f23158c3a9bd38532e8d036a39.png" />
 </div>
 </div>
 </section>
@@ -726,17 +769,18 @@ I = \int_a^b f(x) \, dx = (b - a) \int_a^b \frac{f(x)}{b - a} \, dx \approx (b -
 <ul class="simple">
 <li><p>This gives a clear interpretation of Monte Carlo integration: we approximate the average height of the function <span class="math notranslate nohighlight">\( f(x) \)</span> over the interval by randomly sampling points, much like tossing pebbles onto a plot and estimating the shaded area.</p></li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">myfunc1</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span>
+
+
+<span class="n">x0</span><span class="p">,</span> <span class="n">x1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">100000</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 
@@ -750,8 +794,9 @@ I = \int_a^b f(x) \, dx = (b - a) \int_a^b \frac{f(x)}{b - a} \, dx \approx (b -
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MC result 2.2916875111055885
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MC result 2.3027674324777063
 Exact result: 2.2898343018663505
 </pre></div>
 </div>
@@ -783,7 +828,12 @@ p(x) = \frac{e^{-\beta E(x)}}{Z}, \quad \text{where } Z = \int e^{-\beta E(x)} \
 \[
 \langle E \rangle \approx \frac{1}{n} \sum_{i=1}^n E(x_i)
 \]</div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -823,12 +873,13 @@ p(x) = \frac{e^{-\beta E(x)}}{Z}, \quad \text{where } Z = \int e^{-\beta E(x)} \
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated ⟨E⟩: 0.5036
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated ⟨E⟩: 0.5020
 Exact ⟨E⟩:     0.5000
 </pre></div>
 </div>
-<img alt="../_images/3f2136aa58dfe049e4365bd4dd781d6a5211177215dd85bd49c6f0ef5959a4e3.png" src="../_images/3f2136aa58dfe049e4365bd4dd781d6a5211177215dd85bd49c6f0ef5959a4e3.png" />
+<img alt="../_images/2bdcc1a8dce137ed419a3d1623a7f89264666ce73ecba36f7a0706b604d0bc20.png" src="../_images/2bdcc1a8dce137ed419a3d1623a7f89264666ce73ecba36f7a0706b604d0bc20.png" />
 </div>
 </div>
 </section>
@@ -840,7 +891,12 @@ Exact ⟨E⟩:     0.5000
 </ul>
 <div class="math notranslate nohighlight">
 \[f(x,y) = \frac{1}{2\pi\sigma_x \sigma_y}e^{-\frac{x^2}{2\sigma^2_x}-\frac{y^2}{2\sigma^2_y} }\]</div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
@@ -873,8 +929,9 @@ Exact ⟨E⟩:     0.5000
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9946076967722628, 0.9949129391330922)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9946076967722628, 0.9957817773618114)
 </pre></div>
 </div>
 </div>
@@ -964,7 +1021,7 @@ f(x) = x \cos 71 x + \sin 13x, \ \  0 \le x \le 1
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/af3d4d7f5f12765521331ff7b83f75dce3c8d6d42dde2b8175414eedef68496f.png" src="../_images/af3d4d7f5f12765521331ff7b83f75dce3c8d6d42dde2b8175414eedef68496f.png" />
+<img alt="../_images/cf99a90d6c864c67bd19dca2376ce02a9d9d0c809f8ad51628bc400a3b192b5c.png" src="../_images/cf99a90d6c864c67bd19dca2376ce02a9d9d0c809f8ad51628bc400a3b192b5c.png" />
 </div>
 </div>
 </section>
@@ -1063,7 +1120,7 @@ I \approx \frac{1}{n} \sum_{i=1}^n \frac{p(y_i)}{q(y_i)} h(y_i)
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">y_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Evaluate functions</span>
 <span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">p_vals</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">y_vals</span><span class="p">)</span>
