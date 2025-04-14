@@ -1,0 +1,54 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+impot numpy as np
+# Transition probabilities
+p = 0.3  # Probability of going from A to B
+q = 0.7  # Probability of going from B to A
+
+# Transition matrix
+transition_matrix = np.array([
+    [1-p, p],  # From A to A, B
+    [q, 1-q]   # From B to A, B
+])
+
+# Initial state (0 for A, 1 for B)
+current_state = 0
+
+# Number of steps to simulate
+n_steps = 1000
+
+# Record the state at each step to visualize the approach to equilibrium
+state_history = np.zeros((n_steps, 2))  # Create a history record for both states A and B
+state_history[0, current_state] = 1
+
+# Simulate the Markov chain
+for step in range(1, n_steps):
+    current_state = np.random.choice([0, 1], p=transition_matrix[current_state])
+    state_history[step, current_state] = 1
+
+# Calculate cumulative probabilities over time to show how probabilities stabilize
+cumulative_probabilities = np.cumsum(state_history, axis=0) / np.arange(1, n_steps+1).reshape(-1, 1)
+------------------
+
+
+[0;36m  Cell [0;32mIn[6], line 1[0;36m[0m
+[0;31m    impot numpy as np[0m
+[0m          ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+
+

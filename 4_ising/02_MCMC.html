@@ -247,10 +247,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab5/intro.html">Simulating Ising models</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/torch_ising.html">Ising-2D simulations using ML libraries</a></li>
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/markov_chains.html">Markov Chains</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab5/Wolf.html">Other Methods for sampling Ising models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab5/enhance-sampling.html">Non-boltzman (enhanced) sampling ideas</a></li>
 </ul>
@@ -596,20 +593,20 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1  1 -1  1  1  1  1  1]
- [ 1  1 -1 -1 -1  1 -1  1]
- [-1 -1  1  1 -1  1 -1  1]
- [-1 -1 -1 -1  1 -1 -1  1]
- [-1  1  1  1  1  1  1  1]
- [-1  1  1  1  1  1 -1 -1]
- [ 1  1  1  1  1  1 -1  1]
- [-1 -1 -1 -1 -1 -1 -1 -1]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1 -1 -1  1 -1 -1 -1 -1]
+ [-1 -1 -1 -1  1  1  1  1]
+ [ 1  1 -1 -1 -1  1  1  1]
+ [ 1 -1  1 -1 -1  1  1 -1]
+ [-1  1  1  1 -1  1  1  1]
+ [-1 -1  1  1  1 -1  1 -1]
+ [ 1 -1 -1  1  1  1  1  1]
+ [ 1 -1  1 -1  1 -1  1  1]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f2713f04f10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f7932d06f10&gt;
 </pre></div>
 </div>
-<img alt="../_images/fefc1e33ba23eae1a70b1523cbe57714c64e186c5d7d5ad43bd7b560493fa10b.png" src="../_images/fefc1e33ba23eae1a70b1523cbe57714c64e186c5d7d5ad43bd7b560493fa10b.png" />
+<img alt="../_images/a9c34045682e68e95c89b2a187491b8e55da8a423e8c64e5c073b9990ba95a81.png" src="../_images/a9c34045682e68e95c89b2a187491b8e55da8a423e8c64e5c073b9990ba95a81.png" />
 </div>
 </div>
 </section>
@@ -689,7 +686,7 @@ j_{\text{right}} = (j + 1) \mod L
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/8b491a193cb840ae0bce41d3bc3e0df21cb2a69dd23ff574b14f9d1f40aee0f5.png" src="../_images/8b491a193cb840ae0bce41d3bc3e0df21cb2a69dd23ff574b14f9d1f40aee0f5.png" />
+<img alt="../_images/5f495fbeeb189cc78d76678da1aedf325c7bc16695c610f4722921c2ec2586c4.png" src="../_images/5f495fbeeb189cc78d76678da1aedf325c7bc16695c610f4722921c2ec2586c4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -859,54 +856,67 @@ Compute the energy difference between the trial and original configurations:</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="nd">@njit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_total_energy</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">spins</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="n">neighbors</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[i, (j+1)%N]
+            <span class="n">E</span> <span class="o">-=</span> <span class="n">J</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="n">neighbors</span>
+            <span class="n">E</span> <span class="o">-=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">S</span>
+    <span class="k">return</span> <span class="n">E</span>
+
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">run_ising2d</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">out_freq</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Metropolis Monte Carlo simulation of 2D Ising model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Blazing fast 2D Ising Metropolis MCMC.</span>
 
 <span class="sd">    Parameters:</span>
 <span class="sd">    N        : Lattice size (N x N)</span>
-<span class="sd">    T, J, B  : Temperature, coupling constant, external field</span>
+<span class="sd">    T, J, B  : Temperature, coupling, field</span>
 <span class="sd">    n_steps  : Number of Monte Carlo steps</span>
-<span class="sd">    out_freq : Interval for recording observables</span>
+<span class="sd">    out_freq : Frequency of measurements</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    S : List of 2D spin configurations</span>
-<span class="sd">    E : List of per-spin energies</span>
-<span class="sd">    M : List of per-spin magnetizations</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    
-    <span class="c1"># Initialize spin lattice</span>
+<span class="sd">    S_out    : List of sampled spin states (sparse)</span>
+<span class="sd">    E_out    : Per-spin energy list</span>
+<span class="sd">    M_out    : Per-spin magnetization list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">spins</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">M_t</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
-    <span class="n">E_t</span>   <span class="o">=</span> <span class="o">-</span><span class="n">B</span> <span class="o">*</span> <span class="n">M_t</span>
+    <span class="n">E_t</span> <span class="o">=</span> <span class="n">compute_total_energy</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+    <span class="n">M_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">spins</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-            
-            <span class="n">neighbors</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] + spins[i, (j+1)%N] + spins[i, (j-1)%N]
-            <span class="n">E_t</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">J</span> <span class="o">*</span> <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">neighbors</span>
+    <span class="c1"># Preallocate memory</span>
+    <span class="n">n_out</span> <span class="o">=</span> <span class="n">n_steps</span> <span class="o">//</span> <span class="n">out_freq</span>
+    <span class="n">S_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_out</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+    <span class="n">E_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_out</span><span class="p">)</span>
+    <span class="n">M_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_out</span><span class="p">)</span>
 
-    <span class="c1"># Lists to store observables</span>
-    <span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Output index</span>
 
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+        
+        <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
-        <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
         <span class="n">neighbors</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[(i-1)%N, j] + spins[i, (j+1)%N] + spins[i, (j-1)%N]
-        <span class="n">dE</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">J</span> <span class="o">*</span> <span class="n">neighbors</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
-        <span class="n">dM</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="n">dE</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="p">(</span><span class="n">J</span> <span class="o">*</span> <span class="n">neighbors</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dE</span> <span class="o">/</span> <span class="n">T</span><span class="p">):</span>
-            <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">dE</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dE</span> <span class="o">/</span> <span class="n">T</span><span class="p">):</span>
+            <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">S</span>
             <span class="n">E_t</span> <span class="o">+=</span> <span class="n">dE</span>
-            <span class="n">M_t</span> <span class="o">+=</span> <span class="n">dM</span>
+            <span class="n">M_t</span> <span class="o">+=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">S</span>
 
         <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">out_freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">E</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E_t</span> <span class="o">/</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-            <span class="n">M</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">M_t</span> <span class="o">/</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-            <span class="n">S</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spins</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+            <span class="n">S_out</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">spins</span>
+            <span class="n">E_out</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_t</span> <span class="o">/</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">M_out</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">M_t</span> <span class="o">/</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    <span class="k">return</span> <span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span>
+    <span class="k">return</span> <span class="n">S_out</span><span class="p">,</span> <span class="n">E_out</span><span class="p">,</span> <span class="n">M_out</span>
 </pre></div>
 </div>
 </div>
@@ -1016,16 +1026,6 @@ Compute the energy difference between the trial and original configurations:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/core/fromnumeric.py:75,</span> in <span class="ni">_wrapreduction</span><span class="nt">(obj, ufunc, method, axis, dtype, out, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">75</span>     <span class="n">reduction</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span> <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-
-<span class="ne">AttributeError</span>: &#39;list&#39; object has no attribute &#39;min&#39;
-
-<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
-
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">make_html_animation</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
@@ -1156,56 +1156,59 @@ Compute the energy difference between the trial and original configurations:</p>
 <span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">finally</span><span class="p">:</span>
 <span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/axes/_base.py:3028,</span> in <span class="ni">_AxesBase.draw</span><span class="nt">(self, renderer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3025</span>     <span class="k">for</span> <span class="n">spine</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">spines</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-<span class="g g-Whitespace">   </span><span class="mi">3026</span>         <span class="n">artists</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">spine</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">3028</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_title_position</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3030</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">axison</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">3031</span>     <span class="k">for</span> <span class="n">_axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_axis_map</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/axes/_base.py:3064,</span> in <span class="ni">_AxesBase.draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3061</span> <span class="k">if</span> <span class="n">artists_rasterized</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3062</span>     <span class="n">_draw_rasterized</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="p">,</span> <span class="n">artists_rasterized</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">3064</span> <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3065</span>     <span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">suppressComposite</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3067</span> <span class="n">renderer</span><span class="o">.</span><span class="n">close_group</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3068</span> <span class="bp">self</span><span class="o">.</span><span class="n">stale</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/axes/_base.py:2972,</span> in <span class="ni">_AxesBase._update_title_position</span><span class="nt">(self, renderer)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2970</span> <span class="n">top</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">top</span><span class="p">,</span> <span class="n">bb</span><span class="o">.</span><span class="n">ymax</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2971</span> <span class="k">if</span> <span class="n">title</span><span class="o">.</span><span class="n">get_text</span><span class="p">():</span>
-<span class="ne">-&gt; </span><span class="mi">2972</span>     <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">get_tightbbox</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>  <span class="c1"># update offsetText</span>
-<span class="g g-Whitespace">   </span><span class="mi">2973</span>     <span class="k">if</span> <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">offsetText</span><span class="o">.</span><span class="n">get_text</span><span class="p">():</span>
-<span class="g g-Whitespace">   </span><span class="mi">2974</span>         <span class="n">bb</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">offsetText</span><span class="o">.</span><span class="n">get_tightbbox</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/image.py:131,</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span> <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">131</span>         <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="c1"># Composite any adjacent images together</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="n">image_group</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/axis.py:1368,</span> in <span class="ni">Axis.get_tightbbox</span><span class="nt">(self, renderer, for_layout_only)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1365</span> <span class="n">bboxes</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bboxes</span>
-<span class="g g-Whitespace">   </span><span class="mi">1366</span>           <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">width</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">b</span><span class="o">.</span><span class="n">height</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1367</span> <span class="k">if</span> <span class="n">bboxes</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1368</span>     <span class="k">return</span> <span class="n">mtransforms</span><span class="o">.</span><span class="n">Bbox</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">bboxes</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1369</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1370</span>     <span class="k">return</span> <span class="kc">None</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/artist.py:72,</span> in <span class="ni">allow_rasterization.&lt;locals&gt;.draw_wrapper</span><span class="nt">(artist, renderer)</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">72</span>     <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/transforms.py:654,</span> in <span class="ni">BboxBase.union</span><span class="nt">(bboxes)</span>
-<span class="g g-Whitespace">    </span><span class="mi">652</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">bboxes</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">653</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;bboxes&#39; cannot be empty&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">654</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">bbox</span><span class="o">.</span><span class="n">xmin</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">655</span> <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">bbox</span><span class="o">.</span><span class="n">xmax</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">656</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">bbox</span><span class="o">.</span><span class="n">ymin</span> <span class="k">for</span> <span class="n">bbox</span> <span class="ow">in</span> <span class="n">bboxes</span><span class="p">])</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/spines.py:287,</span> in <span class="ni">Spine.draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">285</span> <span class="nd">@allow_rasterization</span>
+<span class="g g-Whitespace">    </span><span class="mi">286</span> <span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">renderer</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">287</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_adjust_location</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">288</span>     <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="bp">self</span><span class="o">.</span><span class="n">stale</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="nn">File &lt;__array_function__ internals&gt;:200,</span> in <span class="ni">amin</span><span class="nt">(*args, **kwargs)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/spines.py:236,</span> in <span class="ni">Spine._adjust_location</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bounds</span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">spine_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="s1">&#39;right&#39;</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">236</span>     <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">viewLim</span><span class="o">.</span><span class="n">intervaly</span>
+<span class="g g-Whitespace">    </span><span class="mi">237</span> <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">spine_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="s1">&#39;bottom&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span>     <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">viewLim</span><span class="o">.</span><span class="n">intervalx</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/core/fromnumeric.py:2946,</span> in <span class="ni">amin</span><span class="nt">(a, axis, out, keepdims, initial, where)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2829</span> <span class="nd">@array_function_dispatch</span><span class="p">(</span><span class="n">_amin_dispatcher</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2830</span> <span class="k">def</span><span class="w"> </span><span class="nf">amin</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">_NoValue</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">_NoValue</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2831</span>          <span class="n">where</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">_NoValue</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">2832</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">2833</span><span class="sd">     Return the minimum of an array or minimum along an axis.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2834</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2944</span><span class="sd">     6</span>
-<span class="g g-Whitespace">   </span><span class="mi">2945</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">2946</span>     <span class="k">return</span> <span class="n">_wrapreduction</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2947</span>                           <span class="n">keepdims</span><span class="o">=</span><span class="n">keepdims</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="n">initial</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">where</span><span class="p">)</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/axes/_base.py:857,</span> in <span class="ni">_AxesBase.viewLim</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span> <span class="nd">@property</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span> <span class="k">def</span><span class="w"> </span><span class="nf">viewLim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">857</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_unstale_viewLim</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_viewLim</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/core/fromnumeric.py:75,</span> in <span class="ni">_wrapreduction</span><span class="nt">(obj, ufunc, method, axis, dtype, out, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">mu</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="k">try</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">75</span>         <span class="n">reduction</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span>     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span>         <span class="k">pass</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/axes/_base.py:847,</span> in <span class="ni">_AxesBase._unstale_viewLim</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">841</span> <span class="k">def</span><span class="w"> </span><span class="nf">_unstale_viewLim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">842</span>     <span class="c1"># We should arrange to store this information once per share-group</span>
+<span class="g g-Whitespace">    </span><span class="mi">843</span>     <span class="c1"># instead of on every axis.</span>
+<span class="g g-Whitespace">    </span><span class="mi">844</span>     <span class="n">need_scale</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">845</span>         <span class="n">name</span><span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">_stale_viewlims</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="nn">    846                   for ax</span> in <span class="ni">self._shared_axes[name].get_siblings</span><span class="nt">(self))</span>
+<span class="ne">--&gt; </span><span class="mi">847</span>         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_axis_names</span><span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">848</span>     <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">need_scale</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+<span class="g g-Whitespace">    </span><span class="mi">849</span>         <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">need_scale</span><span class="p">:</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
