@@ -194,16 +194,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../4_ising/intro.html">Phase transitions</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../4_ising/02_phase_tranistions.html">Phase transitions: a birds eye view</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../4_ising/00_MC.html">Monte Carlo and “the power of randomness”</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../4_ising/01_MCMC.html">Ising models and Metropolis algorithm</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../4_ising/03_MeanField.html">Mean Field Theory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../4_ising/03_vdw.html">Mean Field theory of interacting fluids</a></li>
-
-
-
-
-
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../5_fluids/intro.html">Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -507,12 +498,12 @@ document.write(`
 <p>Topics: elementwise operations</p>
 <p><strong>Linear functions</strong><br> We will be using the term <em>linear equation</em> to mean a weighted sum of inputs plus an offset. If there is just one input <span class="math notranslate nohighlight">\(x\)</span>, then this is a straight line:</p>
 <p><strong>Equation-1</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-2f0af370-7b6b-4a19-a22c-50220b9f829f">
-<span class="eqno">(1)<a class="headerlink" href="#equation-2f0af370-7b6b-4a19-a22c-50220b9f829f" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega x,\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-193e03be-848f-4376-9245-6e5f303f3023">
+<span class="eqno">(1)<a class="headerlink" href="#equation-193e03be-848f-4376-9245-6e5f303f3023" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega x,\end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta\)</span> is the y-intercept of the linear and <span class="math notranslate nohighlight">\(\omega\)</span> is the slope of the line. When there are two inputs <span class="math notranslate nohighlight">\(x_{1}\)</span> and <span class="math notranslate nohighlight">\(x_{2}\)</span>, then this becomes:</p>
 <p><strong>Equation-2</strong></p>
-<div class="amsmath math notranslate nohighlight" id="equation-89da45b9-1c4e-4d17-bad8-73a5add4e1d1">
-<span class="eqno">(2)<a class="headerlink" href="#equation-89da45b9-1c4e-4d17-bad8-73a5add4e1d1" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega_1 x_1 + \omega_2 x_2.\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-408fc669-32ee-4d53-b428-146ab9fcfcf5">
+<span class="eqno">(2)<a class="headerlink" href="#equation-408fc669-32ee-4d53-b428-146ab9fcfcf5" title="Permalink to this equation">#</a></span>\[\begin{equation}y=\beta+\omega_1 x_1 + \omega_2 x_2.\end{equation}\]</div>
 <p>Any other functions are by definition <strong>non-linear</strong>.</p>
 <section id="type-your-code-below">
 <h2>Type your code below<a class="headerlink" href="#type-your-code-below" title="Permalink to this heading">#</a></h2>
@@ -604,17 +595,17 @@ document.write(`
 <section id="using-numpy-to-write-general-linear-functions-in-compact-form">
 <h2>Using numpy to write general linear functions in compact form<a class="headerlink" href="#using-numpy-to-write-general-linear-functions-in-compact-form" title="Permalink to this heading">#</a></h2>
 <p>Often we will want to compute many linear functions at the same time.  For example, we might have three inputs, <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>, and <span class="math notranslate nohighlight">\(x_3\)</span> and want to compute two linear functions giving <span class="math notranslate nohighlight">\(y_1\)</span> and <span class="math notranslate nohighlight">\(y_2\)</span>. Of course, we could do this by just running each equation separately,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cd113f69-866c-4fef-ba6a-68ba3ab7aee8">
-<span class="eqno">(3)<a class="headerlink" href="#equation-cd113f69-866c-4fef-ba6a-68ba3ab7aee8" title="Permalink to this equation">#</a></span>\[\begin{align}y_1 &amp;=&amp; \beta_1 + \omega_{11} x_1 + \omega_{12} x_2 + \omega_{13} x_3\\
+<div class="amsmath math notranslate nohighlight" id="equation-51d8ba29-13ed-4ee4-97d1-5e0cb4e4cdcb">
+<span class="eqno">(3)<a class="headerlink" href="#equation-51d8ba29-13ed-4ee4-97d1-5e0cb4e4cdcb" title="Permalink to this equation">#</a></span>\[\begin{align}y_1 &amp;=&amp; \beta_1 + \omega_{11} x_1 + \omega_{12} x_2 + \omega_{13} x_3\\
 y_2 &amp;=&amp; \beta_2 + \omega_{21} x_1 + \omega_{22} x_2 + \omega_{23} x_3.
 \end{align}\]</div>
 <p>However, we can write it more compactly with vectors and matrices:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6a9044a3-4baa-4d23-8e32-473f7d3be7d0">
-<span class="eqno">(4)<a class="headerlink" href="#equation-6a9044a3-4baa-4d23-8e32-473f7d3be7d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-680d6ed5-e958-4c28-bb23-065d829a59ea">
+<span class="eqno">(4)<a class="headerlink" href="#equation-680d6ed5-e958-4c28-bb23-065d829a59ea" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{bmatrix} y_1\\ y_2 \end{bmatrix} = \begin{bmatrix}\beta_{1}\\\beta_{2}\end{bmatrix}+ \begin{bmatrix}\omega_{11}&amp;\omega_{12}&amp;\omega_{13}\\\omega_{21}&amp;\omega_{22}&amp;\omega_{23}\end{bmatrix}\begin{bmatrix}x_{1}\\x_{2}\\x_{3}\end{bmatrix},
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-9896ba1e-cbdf-47a8-b2e6-86123940d955">
-<span class="eqno">(5)<a class="headerlink" href="#equation-9896ba1e-cbdf-47a8-b2e6-86123940d955" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-04bb510e-c1fe-4ae7-a402-1beaa1387294">
+<span class="eqno">(5)<a class="headerlink" href="#equation-04bb510e-c1fe-4ae7-a402-1beaa1387294" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{y} = \boldsymbol\beta +\boldsymbol\Omega\mathbf{x}.
 \end{equation}\]</div>
 <p>Here, lowercase bold symbols are used for vectors.  Upper case bold symbols are used for matrices.</p>
