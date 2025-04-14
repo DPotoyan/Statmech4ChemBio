@@ -477,10 +477,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ising-model-the-h-atom-of-phase-transitions">Ising model: The H atom of phase transitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-of-a-2d-ising-model">Hamiltonian of a 2D Ising model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-thermodynamics-from-ising-models">Extracting thermodynamics from Ising models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-response-functions">Extracting Response functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-spin-lattice">Setting up spin lattice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-spin-lattice">Setting up the spin lattice</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">Enforcing periodic boundary conditions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-boltzmann-distribution-mc-vs-mcmc">Sampling Boltzmann distribution: MC vs MCMC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-chains-master-equation-and-detailed-balance">Generating chains! Master Equation and Detailed Balance</a></li>
@@ -516,13 +516,17 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ising-models-and-metropolis-algorithm">
 <h1>Ising models and Metropolis algorithm<a class="headerlink" href="#ising-models-and-metropolis-algorithm" title="Permalink to this heading">#</a></h1>
-<section id="ising-model-the-h-atom-of-phase-transitions">
-<h2>Ising model: The H atom of phase transitions<a class="headerlink" href="#ising-model-the-h-atom-of-phase-transitions" title="Permalink to this heading">#</a></h2>
+<div class="admonition-what-you-will-learn admonition">
+<p class="admonition-title"><strong>What you will learn</strong></p>
 <ul class="simple">
-<li><p>Ising models are simple spin lattice systems widely used to study phase transitions. Many features of phase transitions are <strong>universal</strong>, meaning they do not depend on the microscopic details of the interactions. Therefore, it is desirable to study the simplest possible model that still exhibits phase transitions—and the Ising model fits this role perfectly. In some cases (1D and 2D), analytical solutions are even possible.</p></li>
-<li><p>We will see that phase transitions occur in 2D and 3D systems. This notebook focuses on simulating the 2D lattice and calculating key thermodynamic observables.</p></li>
+<li><p>Ising models are minimal models used to phase transitions.</p></li>
 <li><p>The Ising model is defined by a Hamiltonian that encodes both the interaction between neighboring spins <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> (for nearest neighbors, <span class="math notranslate nohighlight">\(|i - j| = 1\)</span>), and the interaction of spins with an external field <span class="math notranslate nohighlight">\(B\)</span>:</p></li>
+<li><p>Markov Chain Monte Carlo (MCMC) presents an straightforward and affordable way of simulating ising models.</p></li>
+<li><p>The particularly simple and efficient formulation of MCMC for ising models is given by Metropolis selection criteria.</p></li>
 </ul>
+</div>
+<section id="hamiltonian-of-a-2d-ising-model">
+<h2>Hamiltonian of a 2D Ising model<a class="headerlink" href="#hamiltonian-of-a-2d-ising-model" title="Permalink to this heading">#</a></h2>
 <div class="important admonition">
 <p class="admonition-title"><strong>Ising Model</strong></p>
 <div class="math notranslate nohighlight">
@@ -576,8 +580,8 @@ document.write(`
 \[\chi_T = \left( \frac{\partial \langle M \rangle}{\partial B} \right)_T = \frac{1}{k_B T} \left( \langle M^2 \rangle - \langle M \rangle^2 \right)\]</div>
 <p>These response functions become particularly important near critical points, where fluctuations are enhanced, and <span class="math notranslate nohighlight">\(C_V\)</span> and <span class="math notranslate nohighlight">\(\chi_T\)</span> may diverge in the thermodynamic limit.</p>
 </section>
-<section id="setting-up-spin-lattice">
-<h2>Setting up spin lattice<a class="headerlink" href="#setting-up-spin-lattice" title="Permalink to this heading">#</a></h2>
+<section id="setting-up-the-spin-lattice">
+<h2>Setting up the spin lattice<a class="headerlink" href="#setting-up-the-spin-lattice" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -592,20 +596,20 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1 -1 -1 -1  1 -1 -1  1]
- [-1  1 -1  1  1  1 -1  1]
- [-1 -1  1  1  1  1 -1 -1]
- [-1  1 -1  1  1  1 -1  1]
- [-1 -1  1 -1  1  1 -1  1]
- [-1 -1 -1 -1  1  1 -1  1]
- [ 1  1 -1  1 -1 -1 -1  1]
- [ 1  1  1 -1 -1  1  1 -1]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1  1 -1 -1 -1  1  1 -1]
+ [ 1 -1 -1  1  1 -1 -1 -1]
+ [ 1  1 -1 -1  1 -1  1 -1]
+ [-1  1  1  1 -1  1 -1  1]
+ [ 1  1  1  1 -1  1 -1 -1]
+ [ 1  1 -1  1 -1 -1  1 -1]
+ [ 1  1 -1 -1  1  1  1 -1]
+ [ 1 -1  1  1  1  1  1  1]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fd2588c4eb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f139fe85ee0&gt;
 </pre></div>
 </div>
-<img alt="../_images/8fd1a27bbebcf0da08c4715b34e3f5ff4359a91856c50ba9991736efde728d45.png" src="../_images/8fd1a27bbebcf0da08c4715b34e3f5ff4359a91856c50ba9991736efde728d45.png" />
+<img alt="../_images/888ef0704ee01fe4a8c0d34b6c90e55d5984881f9640fd63b3b266d3135d6dc3.png" src="../_images/888ef0704ee01fe4a8c0d34b6c90e55d5984881f9640fd63b3b266d3135d6dc3.png" />
 </div>
 </div>
 </section>
@@ -1355,10 +1359,10 @@ configuration as an input to the system to undergo equilibriation again.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ising-model-the-h-atom-of-phase-transitions">Ising model: The H atom of phase transitions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hamiltonian-of-a-2d-ising-model">Hamiltonian of a 2D Ising model</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-thermodynamics-from-ising-models">Extracting thermodynamics from Ising models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-response-functions">Extracting Response functions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-spin-lattice">Setting up spin lattice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-spin-lattice">Setting up the spin lattice</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-periodic-boundary-conditions">Enforcing periodic boundary conditions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-boltzmann-distribution-mc-vs-mcmc">Sampling Boltzmann distribution: MC vs MCMC</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-chains-master-equation-and-detailed-balance">Generating chains! Master Equation and Detailed Balance</a></li>
