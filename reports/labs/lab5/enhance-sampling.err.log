@@ -18,6 +18,19 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 import matplotlib.pyplot as plt
 import numpy as np
 
+
+@njit
+def compute_total_energy(spins, J, B):
+    N = spins.shape[0]
+    E = 0.0
+    for i in range(N):
+        for j in range(N):
+            S = spins[i, j]
+            neighbors = spins[(i+1)%N, j] + spins[i, (j+1)%N]
+            E -= J * S * neighbors
+            E -= B * S
+    return E
+
 @njit
 def run_umbrella_ising2d(N, T, J, B, M0, k_bias, n_steps, out_freq):
     spins = 2 * (np.random.rand(N, N) < 0.5) - 1
@@ -57,13 +70,13 @@ def run_umbrella_ising2d(N, T, J, B, M0, k_bias, n_steps, out_freq):
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[1], line 4[0m
+Cell [0;32mIn[1], line 5[0m
 [1;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
 [1;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-[0;32m----> 4[0m [38;5;129m@njit[39m
-[1;32m      5[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mrun_umbrella_ising2d[39m(N, T, J, B, M0, k_bias, n_steps, out_freq):
-[1;32m      6[0m     spins [38;5;241m=[39m [38;5;241m2[39m [38;5;241m*[39m (np[38;5;241m.[39mrandom[38;5;241m.[39mrand(N, N) [38;5;241m<[39m [38;5;241m0.5[39m) [38;5;241m-[39m [38;5;241m1[39m
-[1;32m      7[0m     E_t [38;5;241m=[39m compute_total_energy(spins, J, B)
+[0;32m----> 5[0m [38;5;129m@njit[39m
+[1;32m      6[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mcompute_total_energy[39m(spins, J, B):
+[1;32m      7[0m     N [38;5;241m=[39m spins[38;5;241m.[39mshape[[38;5;241m0[39m]
+[1;32m      8[0m     E [38;5;241m=[39m [38;5;241m0.0[39m
 
 [0;31mNameError[0m: name 'njit' is not defined
 

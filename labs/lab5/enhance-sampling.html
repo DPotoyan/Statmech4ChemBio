@@ -530,6 +530,19 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
+
+<span class="nd">@njit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_total_energy</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">spins</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+            <span class="n">S</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="n">neighbors</span> <span class="o">=</span> <span class="n">spins</span><span class="p">[(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">N</span>, j] + spins[i, (j+1)%N]
+            <span class="n">E</span> <span class="o">-=</span> <span class="n">J</span> <span class="o">*</span> <span class="n">S</span> <span class="o">*</span> <span class="n">neighbors</span>
+            <span class="n">E</span> <span class="o">-=</span> <span class="n">B</span> <span class="o">*</span> <span class="n">S</span>
+    <span class="k">return</span> <span class="n">E</span>
+
 <span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">run_umbrella_ising2d</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">M0</span><span class="p">,</span> <span class="n">k_bias</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">out_freq</span><span class="p">):</span>
     <span class="n">spins</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
@@ -569,13 +582,13 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="nd">@njit</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_umbrella_ising2d</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">M0</span><span class="p">,</span> <span class="n">k_bias</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">,</span> <span class="n">out_freq</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">spins</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">E_t</span> <span class="o">=</span> <span class="n">compute_total_energy</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="nd">@njit</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">def</span><span class="w"> </span><span class="nf">compute_total_energy</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">N</span> <span class="o">=</span> <span class="n">spins</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">E</span> <span class="o">=</span> <span class="mf">0.0</span>
 
 <span class="ne">NameError</span>: name &#39;njit&#39; is not defined
 </pre></div>
