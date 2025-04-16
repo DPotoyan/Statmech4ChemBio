@@ -15,68 +15,55 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
+# === Assume you have: ===
+# - M_all: concatenated array of all magnetizations (normalized)
+# - M0_values: umbrella centers used in the simulations
+# - all_mags: list of magnetization samples per umbrella window
+# - beta, k_bias, N, nbins
 
-@njit
-def compute_total_energy(spins, J, B):
-    N = spins.shape[0]
-    E = 0.0
-    for i in range(N):
-        for j in range(N):
-            S = spins[i, j]
-            neighbors = spins[(i+1)%N, j] + spins[i, (j+1)%N]
-            E -= J * S * neighbors
-            E -= B * S
-    return E
+# Histogram setup
+nbins = 100
+bin_edges = np.linspace(-1, 1, nbins + 1)
+bin_centers = 0.5 * (bin_edges[1:] + bin_edges[:-1])
+P_unbiased = np.zeros(nbins)
 
-@njit
-def run_umbrella_ising2d(N, T, J, B, M0, k_bias, n_steps, out_freq):
-    spins = 2 * (np.random.rand(N, N) < 0.5) - 1
-    E_t = compute_total_energy(spins, J, B)
-    M_t = np.sum(spins)
+# Loop over windows and reweight each sample
+for M0, mags in zip(M0_values, all_mags):
+    weights = np.exp(beta * 0.5 * k_bias * (mags * N**2 - M0)**2)  # undo the bias
+    hist, _ = np.histogram(mags, bins=bin_edges, weights=weights)
+    P_unbiased += hist
 
-    n_out = n_steps // out_freq
-    E_out = np.empty(n_out)
-    M_out = np.empty(n_out)
+# Normalize probability
+P_unbiased /= np.sum(P_unbiased * np.diff(bin_edges))
 
-    k = 0
-    for step in range(n_steps):
-        i = np.random.randint(N)
-        j = np.random.randint(N)
-        S = spins[i, j]
-        neighbors = spins[(i+1)%N, j] + spins[(i-1)%N, j] + spins[i, (j+1)%N] + spins[i, (j-1)%N]
-        dE = 2 * S * (J * neighbors + B)
-        
-        M_new = M_t - 2 * S
-        dU = 0.5 * k_bias * (M_new - M0)**2 - 0.5 * k_bias * (M_t - M0)**2
-        d_total = dE + dU
+# Convert to free energy
+F_reweighted = -np.log(P_unbiased + 1e-12)  # add small value to avoid log(0)
+F_reweighted -= np.nanmin(F_reweighted)
 
-        if d_total <= 0 or np.random.rand() < np.exp(-d_total / T):
-            spins[i, j] = -S
-            E_t += dE
-            M_t = M_new
-
-        if step % out_freq == 0:
-            E_out[k] = E_t / N**2
-            M_out[k] = M_t / N**2
-            k += 1
-
-    return E_out, M_out
+# === Plot ===
+plt.plot(bin_centers, F_reweighted, label="Histogram Reweighting (NumPy)", lw=2)
+plt.xlabel("Magnetization $M$")
+plt.ylabel("Free Energy $F(M)$")
+plt.title("Free Energy via Simple Histogram Reweighting")
+plt.grid(True)
+plt.tight_layout()
+plt.legend()
+plt.show()
 
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[1], line 5[0m
-[1;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-[0;32m----> 5[0m [38;5;129m@njit[39m
-[1;32m      6[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mcompute_total_energy[39m(spins, J, B):
-[1;32m      7[0m     N [38;5;241m=[39m spins[38;5;241m.[39mshape[[38;5;241m0[39m]
-[1;32m      8[0m     E [38;5;241m=[39m [38;5;241m0.0[39m
+Cell [0;32mIn[4], line 18[0m
+[1;32m     16[0m [38;5;66;03m# Loop over windows and reweight each sample[39;00m
+[1;32m     17[0m [38;5;28;01mfor[39;00m M0, mags [38;5;129;01min[39;00m [38;5;28mzip[39m(M0_values, all_mags):
+[0;32m---> 18[0m     weights [38;5;241m=[39m np[38;5;241m.[39mexp([43mbeta[49m [38;5;241m*[39m [38;5;241m0.5[39m [38;5;241m*[39m k_bias [38;5;241m*[39m (mags [38;5;241m*[39m N[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m [38;5;241m-[39m M0)[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m)  [38;5;66;03m# undo the bias[39;00m
+[1;32m     19[0m     hist, _ [38;5;241m=[39m np[38;5;241m.[39mhistogram(mags, bins[38;5;241m=[39mbin_edges, weights[38;5;241m=[39mweights)
+[1;32m     20[0m     P_unbiased [38;5;241m+[39m[38;5;241m=[39m hist
 
-[0;31mNameError[0m: name 'njit' is not defined
+[0;31mNameError[0m: name 'beta' is not defined
 

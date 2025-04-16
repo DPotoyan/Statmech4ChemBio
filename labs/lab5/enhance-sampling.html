@@ -525,11 +525,16 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 <li><p><strong>MBAR or WHAM</strong>: Statistically optimal reweighting of all biased samples to compute <span class="math notranslate nohighlight">\( F(M) = -k_B T \ln P(M) \)</span> with uncertainty estimation.</p></li>
 </ul>
 <p>The resulting <span class="math notranslate nohighlight">\( F(M) \)</span> curve characterizes the thermodynamic landscape of the Ising model and reveals signatures of symmetry breaking, phase transitions, and metastability.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
 
 <span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_total_energy</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
@@ -579,21 +584,7 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="nd">@njit</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">def</span><span class="w"> </span><span class="nf">compute_total_energy</span><span class="p">(</span><span class="n">spins</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">N</span> <span class="o">=</span> <span class="n">spins</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="n">E</span> <span class="o">=</span> <span class="mf">0.0</span>
-
-<span class="ne">NameError</span>: name &#39;njit&#39; is not defined
-</pre></div>
-</div>
-</div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -629,6 +620,9 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f349af0152c9e05ccc417ea51926ff1404edd054f8a14517c8bd30262a2a3077.png" src="../../_images/f349af0152c9e05ccc417ea51926ff1404edd054f8a14517c8bd30262a2a3077.png" />
 </div>
 </div>
 <section id="basic-reweighting">
@@ -672,6 +666,20 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">18</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="c1"># Loop over windows and reweight each sample</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="k">for</span> <span class="n">M0</span><span class="p">,</span> <span class="n">mags</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">M0_values</span><span class="p">,</span> <span class="n">all_mags</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">k_bias</span> <span class="o">*</span> <span class="p">(</span><span class="n">mags</span> <span class="o">*</span> <span class="n">N</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">M0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># undo the bias</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">mags</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bin_edges</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">P_unbiased</span> <span class="o">+=</span> <span class="n">hist</span>
+
+<span class="ne">NameError</span>: name &#39;beta&#39; is not defined
 </pre></div>
 </div>
 </div>
