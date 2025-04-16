@@ -18,39 +18,49 @@ nbclient.exceptions.CellExecutionError: An error occurred while executing the fo
 import numpy as np
 import matplotlib.pyplot as plt
 
-# === Assume you have: ===
-# - M_all: concatenated array of all magnetizations (normalized)
-# - M0_values: umbrella centers used in the simulations
-# - all_mags: list of magnetization samples per umbrella window
-# - beta, k_bias, N, nbins
-
-# Histogram setup
+# === Parameters and binning ===
+beta=1/T
 nbins = 100
 bin_edges = np.linspace(-1, 1, nbins + 1)
 bin_centers = 0.5 * (bin_edges[1:] + bin_edges[:-1])
 P_unbiased = np.zeros(nbins)
 
-# Loop over windows and reweight each sample
+# === Set up figure with 1 row, 2 columns ===
+fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+
+# === Plot overlapping histograms ===
+for mags in all_mags:
+    ax[0].hist(mags, bins=bin_edges, density=True, alpha=0.5)
+ax[0].set_xlabel("Magnetization $M$")
+ax[0].set_ylabel("Probability Density")
+ax[0].set_title("Umbrella Sampling: Histograms")
+
+# === Reweight and compute unbiased distribution ===
 for M0, mags in zip(M0_values, all_mags):
-    weights = np.exp(beta * 0.5 * k_bias * (mags * N**2 - M0)**2)  # undo the bias
-    hist, _ = np.histogram(mags, bins=bin_edges, weights=weights)
+
+    # Compute effective bias potential using normalized m
+    U = 0.5 * k_bias * N**4 * (mags - M0)**2
+    weights = np.exp(beta * U)
+
+    # Histogram
+    hist, _ = np.histogram(m, bins=bin_edges, weights=weights)
     P_unbiased += hist
 
-# Normalize probability
+# Normalize the unbiased probability density
 P_unbiased /= np.sum(P_unbiased * np.diff(bin_edges))
 
-# Convert to free energy
-F_reweighted = -np.log(P_unbiased + 1e-12)  # add small value to avoid log(0)
+# Compute free energy: F(M) = -kT ln P(M)
+F_reweighted = -np.log(P_unbiased + 1e-12)
 F_reweighted -= np.nanmin(F_reweighted)
 
-# === Plot ===
-plt.plot(bin_centers, F_reweighted, label="Histogram Reweighting (NumPy)", lw=2)
-plt.xlabel("Magnetization $M$")
-plt.ylabel("Free Energy $F(M)$")
-plt.title("Free Energy via Simple Histogram Reweighting")
-plt.grid(True)
+# === Plot F(M) ===
+ax[1].plot(bin_centers, F_reweighted, lw=2)
+ax[1].set_xlabel("Magnetization $M$")
+ax[1].set_ylabel("Free Energy $F(M)$")
+ax[1].set_title("Free Energy via Reweighting")
+ax[1].grid(True)
+
 plt.tight_layout()
-plt.legend()
 plt.show()
 
 ------------------
@@ -58,12 +68,12 @@ plt.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[4], line 18[0m
-[1;32m     16[0m [38;5;66;03m# Loop over windows and reweight each sample[39;00m
-[1;32m     17[0m [38;5;28;01mfor[39;00m M0, mags [38;5;129;01min[39;00m [38;5;28mzip[39m(M0_values, all_mags):
-[0;32m---> 18[0m     weights [38;5;241m=[39m np[38;5;241m.[39mexp([43mbeta[49m [38;5;241m*[39m [38;5;241m0.5[39m [38;5;241m*[39m k_bias [38;5;241m*[39m (mags [38;5;241m*[39m N[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m [38;5;241m-[39m M0)[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m)  [38;5;66;03m# undo the bias[39;00m
-[1;32m     19[0m     hist, _ [38;5;241m=[39m np[38;5;241m.[39mhistogram(mags, bins[38;5;241m=[39mbin_edges, weights[38;5;241m=[39mweights)
-[1;32m     20[0m     P_unbiased [38;5;241m+[39m[38;5;241m=[39m hist
+Cell [0;32mIn[3], line 29[0m
+[1;32m     26[0m     weights [38;5;241m=[39m np[38;5;241m.[39mexp(beta [38;5;241m*[39m U)
+[1;32m     28[0m     [38;5;66;03m# Histogram[39;00m
+[0;32m---> 29[0m     hist, _ [38;5;241m=[39m np[38;5;241m.[39mhistogram([43mm[49m, bins[38;5;241m=[39mbin_edges, weights[38;5;241m=[39mweights)
+[1;32m     30[0m     P_unbiased [38;5;241m+[39m[38;5;241m=[39m hist
+[1;32m     32[0m [38;5;66;03m# Normalize the unbiased probability density[39;00m
 
-[0;31mNameError[0m: name 'beta' is not defined
+[0;31mNameError[0m: name 'm' is not defined
 
