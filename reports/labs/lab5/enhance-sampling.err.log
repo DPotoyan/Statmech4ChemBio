@@ -15,38 +15,55 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-#Vary umbrella potential from 0 to 1000. Study how Tc affects the U_k and U_m 
+import matplotlib.pyplot as plt
+import numpy as np
 
-S, E, M = run_ising2d_umbrella(spins=np.random.choice([-1, 1], size=(20, 20)), 
-                T=1, 
-                J=1, 
-                B=0, 
-                U_k = 0,
-                U_m = 0.5, 
-                n_steps=2000000, 
-                out_freq=10)
+@njit
+def run_umbrella_ising2d(N, T, J, B, M0, k_bias, n_steps, out_freq):
+    spins = 2 * (np.random.rand(N, N) < 0.5) - 1
+    E_t = compute_total_energy(spins, J, B)
+    M_t = np.sum(spins)
 
-plot_US(S,E, M)
+    n_out = n_steps // out_freq
+    E_out = np.empty(n_out)
+    M_out = np.empty(n_out)
+
+    k = 0
+    for step in range(n_steps):
+        i = np.random.randint(N)
+        j = np.random.randint(N)
+        S = spins[i, j]
+        neighbors = spins[(i+1)%N, j] + spins[(i-1)%N, j] + spins[i, (j+1)%N] + spins[i, (j-1)%N]
+        dE = 2 * S * (J * neighbors + B)
+        
+        M_new = M_t - 2 * S
+        dU = 0.5 * k_bias * (M_new - M0)**2 - 0.5 * k_bias * (M_t - M0)**2
+        d_total = dE + dU
+
+        if d_total <= 0 or np.random.rand() < np.exp(-d_total / T):
+            spins[i, j] = -S
+            E_t += dE
+            M_t = M_new
+
+        if step % out_freq == 0:
+            E_out[k] = E_t / N**2
+            M_out[k] = M_t / N**2
+            k += 1
+
+    return E_out, M_out
+
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[3], line 12[0m
-[1;32m      1[0m [38;5;66;03m#Vary umbrella potential from 0 to 1000. Study how Tc affects the U_k and U_m [39;00m
-[1;32m      3[0m S, E, M [38;5;241m=[39m run_ising2d_umbrella(spins[38;5;241m=[39mnp[38;5;241m.[39mrandom[38;5;241m.[39mchoice([[38;5;241m-[39m[38;5;241m1[39m, [38;5;241m1[39m], size[38;5;241m=[39m([38;5;241m20[39m, [38;5;241m20[39m)), 
-[1;32m      4[0m                 T[38;5;241m=[39m[38;5;241m1[39m, 
-[1;32m      5[0m                 J[38;5;241m=[39m[38;5;241m1[39m, 
-[0;32m   (...)[0m
-[1;32m      9[0m                 n_steps[38;5;241m=[39m[38;5;241m2000000[39m, 
-[1;32m     10[0m                 out_freq[38;5;241m=[39m[38;5;241m10[39m)
-[0;32m---> 12[0m [43mplot_US[49m[43m([49m[43mS[49m[43m,[49m[43mE[49m[43m,[49m[43m [49m[43mM[49m[43m)[49m
+Cell [0;32mIn[1], line 4[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mplt[39;00m
+[1;32m      2[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
+[0;32m----> 4[0m [38;5;129m@njit[39m
+[1;32m      5[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mrun_umbrella_ising2d[39m(N, T, J, B, M0, k_bias, n_steps, out_freq):
+[1;32m      6[0m     spins [38;5;241m=[39m [38;5;241m2[39m [38;5;241m*[39m (np[38;5;241m.[39mrandom[38;5;241m.[39mrand(N, N) [38;5;241m<[39m [38;5;241m0.5[39m) [38;5;241m-[39m [38;5;241m1[39m
+[1;32m      7[0m     E_t [38;5;241m=[39m compute_total_energy(spins, J, B)
 
-Cell [0;32mIn[2], line 2[0m, in [0;36mplot_US[0;34m(S, E, M)[0m
-[1;32m      1[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mplot_US[39m(S, E, M):
-[0;32m----> 2[0m     fig, ax  [38;5;241m=[39m [43mplt[49m[38;5;241m.[39msubplots(ncols[38;5;241m=[39m[38;5;241m4[39m, figsize[38;5;241m=[39m([38;5;241m16[39m,[38;5;241m4[39m))
-[1;32m      4[0m     ax[[38;5;241m0[39m][38;5;241m.[39mset(xlabel[38;5;241m=[39m[38;5;124m'[39m[38;5;124mN steps[39m[38;5;124m'[39m, ylabel[38;5;241m=[39m[38;5;124mr[39m[38;5;124m'[39m[38;5;124m$E$[39m[38;5;124m'[39m)
-[1;32m      6[0m     ax[[38;5;241m0[39m][38;5;241m.[39mplot(E)
-
-[0;31mNameError[0m: name 'plt' is not defined
+[0;31mNameError[0m: name 'njit' is not defined
 
