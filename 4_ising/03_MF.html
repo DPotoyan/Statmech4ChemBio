@@ -1,0 +1,899 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Mean Field &#8212; Statistical Mechanics for Chemistry and Biology</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '4_ising/03_MF';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Mean Field Theory" href="03_MeanField.html" />
+    <link rel="prev" title="Ising models and Metropolis algorithm" href="02_MCMC.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Statistical Mechanics for Chemistry and Biology - Home"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Statistical Mechanics for Chemistry and Biology - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    About
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Schedule (Spring 2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../1_stats/intro.html">Stats</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Probabilities_Counting.html">Probability theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Random_Variables.html">Random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../1_stats/Entropy.html">Entropy and Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../2_thermo/01_Thermo.html">Review of thermodynamics principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../2_thermo/02_FreeEnergies.html">Thermodynamic Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../3_ensembles/intro.html">Ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../3_ensembles/nve.html">Intro to Statistical Ensembles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_ensembles/nvt.html">Ensembles in phase-space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_ensembles/npt.html">Open Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../3_ensembles/ensemble_overview.html">Summary of Ensembles</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Phase transitions</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00_phase_tranistions.html">Phase transitions: a birds eye view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_MC.html">Monte Carlo and “the power of randomness”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_MCMC.html">Ising models and Metropolis algorithm</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Mean Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_MeanField.html">Mean Field Theory</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../5_fluids/intro.html">Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../5_fluids/Intro2Fluids.html">Statistical mechanics of fluids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../5_fluids/mc_lj.html">MC simulations of fluids</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../5_fluids/Intro2MD.html">Molecular Dynamics</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../5_fluids/md_lj.html">MD simulations of fluids</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../6_kinetics/intro.html">Kinetics</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../6_kinetics/langevin.html">Langevin equation and Brownian motion</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/py-lab/intro.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2py.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2numpy.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/intro2viz.html">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/py-lab/python_OOP_challenge.html">Tutorial: Building Python Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/np-lab/intro.html">Numpy lab</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/np_prob.html">Numpy and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/sinc_function.html">Numpy Lab: Sinc Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/linear_functions.html">Numpy Lab: Linear Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/1d_gas_sim.html">Tutorial: Numpy simultions of 1D gas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/np-lab/2d_gas_sim.html">Tutorial: Numpy simultions of 2D gas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/rw-lab/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/rw_lab.html">Random walk simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/InverseTransform.html">The Inverse Transform of RVs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/change_rv_jax.html">Change of variables with automatic differentiation (autodiff)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../labs/rw-lab/langevin.html">Langevin Equation for Brownian Motion and Mean Square Displacement (MSD)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab4/intro.html">Application of ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/nvt_application.html">Free energy and protein folding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/TwoState.html">Two-state system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab4/mass_action.html">Mass action law</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab5/intro.html">Simulating Ising models</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/markov_chains.html">Markov Chains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/Wolf.html">Other Methods for sampling Ising models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab5/enhance-sampling.html">Non-boltzman (enhanced) sampling ideas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab6/intro.html">Simulating Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_double_well.html">Double Well potential using OpenMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_ethane.html">Simulating Ethane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_villin.html">Simulating solvated protein</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/4_ising/03_MF.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/4_ising/03_MF.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/4_ising/03_MF.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Mean Field</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-of-mean-field-ising-models">Free Energy of Mean-Field Ising Models</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="mean-field">
+<h1>Mean Field<a class="headerlink" href="#mean-field" title="Permalink to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title"><strong>What You Will Learn</strong></p>
+<ul class="simple">
+<li><p>The <strong>Mean Field Approximation (MFA)</strong> simplifies complex systems by replacing fluctuating variables with their average values.</p></li>
+<li><p>When applied to functions of many interacting variables, MFA assumes that correlations can be neglected:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle f(x_1, x_2, x_3, \dots) \rangle \approx f(\langle x_1 \rangle, \langle x_2 \rangle, \langle x_3 \rangle, \dots)
+\]</div>
+<ul class="simple">
+<li><p>This approximation is foundational across many areas of physics, including:</p>
+<ul>
+<li><p><strong>Electronic structure theory</strong> (e.g., Hartree–Fock)</p></li>
+<li><p><strong>Liquid state theory</strong> (e.g., van der Waals)</p></li>
+<li><p><strong>Condensed matter physics</strong> (e.g., Ising and Heisenberg models)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Application of Mean-Field Approximation (MFA) to the Ising Model</strong></p>
+<ul class="simple">
+<li><p>In the Ising model, the mean-field approximation (MFA) decouples spin–spin interactions, reducing the system to a single macroscopic parameter: the average magnetization per spin, denoted by <span class="math notranslate nohighlight">\( m \)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle s_i s_j \rangle \approx \langle s_i \rangle \langle s_j \rangle = m^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\langle H \rangle \approx -J \sum_{\langle ij \rangle} \langle s_i \rangle \langle s_j \rangle - h \sum_i \langle s_i \rangle = -\frac{1}{2} J q m^2 - h m
+\]</div>
+<ul class="simple">
+<li><p>The factor of <span class="math notranslate nohighlight">\( \frac{1}{2} \)</span> avoids double-counting spin pairs, and <span class="math notranslate nohighlight">\( q \)</span> is the coordination number—for instance, <span class="math notranslate nohighlight">\( q = 4 \)</span> for a 2D square lattice and <span class="math notranslate nohighlight">\( q = 6 \)</span> for a 3D cubic lattice.</p></li>
+</ul>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title"><strong>Derivation of the Mean-Field Hamiltonian</strong></p>
+<ul class="simple">
+<li><p>Consider the 2D Ising model where each spin <span class="math notranslate nohighlight">\( s_i \)</span> interacts with its <span class="math notranslate nohighlight">\( q \)</span> nearest neighbors:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H_i = -J \sum_{\delta} s_i s_{i+\delta} - h s_i = -\left( J \sum_{\delta} s_{i+\delta} + h \right) s_i
+\]</div>
+<ul class="simple">
+<li><p>Define the <strong>local mean field</strong> at site <span class="math notranslate nohighlight">\( i \)</span> as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H_i^{\text{MF}} = J \sum_{\delta} s_{i+\delta} + h
+\]</div>
+<ul class="simple">
+<li><p>Under the mean-field approximation, replace neighboring spins with their average value:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H_i^{\text{MF}} \approx J q m + h
+\]</div>
+<ul class="simple">
+<li><p>The total Hamiltonian then becomes:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H \approx - (J q m + h) \sum_i s_i
+\]</div>
+<ul class="simple">
+<li><p>Taking the thermal average and accounting for double counting leads to the previously derived mean-field expression for <span class="math notranslate nohighlight">\( \langle H \rangle \)</span>.</p></li>
+</ul>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title"><strong>Self-Consistent Equation for Magnetization</strong></p>
+<ul class="simple">
+<li><p><strong>Partition Function:</strong> After applying MFA, the system becomes effectively non-interacting, and the total partition function factorizes as <span class="math notranslate nohighlight">\( Z = z^N \)</span>, where <span class="math notranslate nohighlight">\( z \)</span> is the partition function of a single spin. For <span class="math notranslate nohighlight">\( s_i = \pm 1 \)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E(s_i = \pm 1) = \mp (J q m + h)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+z = e^{\beta (J q m + h)} + e^{-\beta (J q m + h)}
+\]</div>
+<ul class="simple">
+<li><p>The probability that a spin is in state <span class="math notranslate nohighlight">\( s_i \)</span> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p(s_i) = \frac{e^{\beta s_i (J q m + h)}}{z}
+\]</div>
+<ul class="simple">
+<li><p><strong>Average Magnetization:</strong> The mean value of a spin is then:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+m = \langle s_i \rangle = \sum_{s_i} s_i \, p(s_i) = \frac{e^{\beta (J q m + h)} - e^{-\beta (J q m + h)}}{e^{\beta (J q m + h)} + e^{-\beta (J q m + h)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+m = \tanh(\beta (J q m + h))
+\]</div>
+<ul class="simple">
+<li><p>This <strong>self-consistent equation</strong> relates the average magnetization <span class="math notranslate nohighlight">\( m \)</span> to itself via the hyperbolic tangent function, capturing the thermal competition between spin alignment and disorder.</p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Application of Mean-Field Approximation (MFA) to the Ising Model</strong></p>
+<ul class="simple">
+<li><p>In the Ising model, the mean-field approximation (MFA) decouples spin–spin interactions, reducing the system to a single macroscopic parameter: the average magnetization per spin, denoted by <span class="math notranslate nohighlight">\( m \)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle s_i s_j \rangle \approx \langle s_i \rangle \langle s_j \rangle = m^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\langle H \rangle \approx -J \sum_{\langle ij \rangle} \langle s_i \rangle \langle s_j \rangle - h \sum_i \langle s_i \rangle = -\frac{1}{2} J q m^2 - h m
+\]</div>
+<ul class="simple">
+<li><p>The factor of <span class="math notranslate nohighlight">\( \frac{1}{2} \)</span> avoids double-counting spin pairs, and <span class="math notranslate nohighlight">\( q \)</span> is the coordination number—for instance, <span class="math notranslate nohighlight">\( q = 4 \)</span> for a 2D square lattice and <span class="math notranslate nohighlight">\( q = 6 \)</span> for a 3D cubic lattice.</p></li>
+</ul>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title"><strong>Derivation of the Mean-Field Hamiltonian</strong></p>
+<ul class="simple">
+<li><p>Consider the 2D Ising model where each spin <span class="math notranslate nohighlight">\( s_i \)</span> interacts with its <span class="math notranslate nohighlight">\( q \)</span> nearest neighbors:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H_i = -J \sum_{\delta} s_i s_{i+\delta} - h s_i = -\left( J \sum_{\delta} s_{i+\delta} + h \right) s_i
+\]</div>
+<ul class="simple">
+<li><p>Define the <strong>local mean field</strong> at site <span class="math notranslate nohighlight">\( i \)</span> as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H_i^{\text{MF}} = J \sum_{\delta} s_{i+\delta} + h
+\]</div>
+<ul class="simple">
+<li><p>Under the mean-field approximation, replace neighboring spins with their average value:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H_i^{\text{MF}} \approx J q m + h
+\]</div>
+<ul class="simple">
+<li><p>The total Hamiltonian then becomes:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+H \approx - (J q m + h) \sum_i s_i
+\]</div>
+<ul class="simple">
+<li><p>Taking the thermal average and accounting for double counting leads to the previously derived mean-field expression for <span class="math notranslate nohighlight">\( \langle H \rangle \)</span>.</p></li>
+</ul>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title"><strong>Self-Consistent Equation for Magnetization</strong></p>
+<ul class="simple">
+<li><p><strong>Partition Function:</strong> After applying MFA, the system becomes effectively non-interacting, and the total partition function factorizes as <span class="math notranslate nohighlight">\( Z = z^N \)</span>, where <span class="math notranslate nohighlight">\( z \)</span> is the partition function of a single spin. For <span class="math notranslate nohighlight">\( s_i = \pm 1 \)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E(s_i = \pm 1) = \mp (J q m + h)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+z = e^{\beta (J q m + h)} + e^{-\beta (J q m + h)}
+\]</div>
+<ul class="simple">
+<li><p>The probability that a spin is in state <span class="math notranslate nohighlight">\( s_i \)</span> is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p(s_i) = \frac{e^{\beta s_i (J q m + h)}}{z}
+\]</div>
+<ul class="simple">
+<li><p><strong>Average Magnetization:</strong> The mean value of a spin is then:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+m = \langle s_i \rangle = \sum_{s_i} s_i \, p(s_i) = \frac{e^{\beta (J q m + h)} - e^{-\beta (J q m + h)}}{e^{\beta (J q m + h)} + e^{-\beta (J q m + h)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+m = \tanh(\beta (J q m + h))
+\]</div>
+<ul class="simple">
+<li><p>This <strong>self-consistent equation</strong> relates the average magnetization <span class="math notranslate nohighlight">\( m \)</span> to itself via the hyperbolic tangent function, capturing the thermal competition between spin alignment and disorder.</p></li>
+</ul>
+</div>
+<section id="free-energy-of-mean-field-ising-models">
+<h2>Free Energy of Mean-Field Ising Models<a class="headerlink" href="#free-energy-of-mean-field-ising-models" title="Permalink to this heading">#</a></h2>
+<p><strong>Defining the Macrostate <span class="math notranslate nohighlight">\( M \)</span></strong></p>
+<ul class="simple">
+<li><p>Consider a spin lattice of <span class="math notranslate nohighlight">\( N \)</span> sites, where each spin can point up or down. The total magnetization is given by:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+N = N_{+} + N_{-}, \qquad M = N_{+} - N_{-}
+\]</div>
+<ul class="simple">
+<li><p>Defining the <strong>magnetization per spin</strong> <span class="math notranslate nohighlight">\( m = M/N \)</span>, the probabilities of spin-up and spin-down states are:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p_{\pm} = \frac{1 \pm m}{2}
+\]</div>
+<p><strong>Entropy, Energy, and Free Energy</strong></p>
+<ul class="simple">
+<li><p><strong>Entropy</strong> is given by the Shannon expression using the probabilities of spin states:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+S(m) = -N k_B \left[ \left( \frac{1+m}{2} \right) \log \left( \frac{1+m}{2} \right) + \left( \frac{1-m}{2} \right) \log \left( \frac{1-m}{2} \right) \right]
+\]</div>
+<ul class="simple">
+<li><p><strong>Energy</strong> in the mean-field approximation is the sum over spins in the presence of an average field:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+E(m) = -N \left[ \frac{Jq}{2} m^2 + h m \right]
+\]</div>
+<ul class="simple">
+<li><p><strong>Free Energy</strong> is the usual Legendre transform:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+F(m) = E(m) - T S(m)
+\]</div>
+<ul class="simple">
+<li><p><strong>Dimensionless Free Energy per Spin</strong> (useful for analysis and plotting):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+f(m) = \frac{F}{N k_B T} = - \left[ \frac{Jq}{2 k_B T} m^2 + \frac{h}{k_B T} m \right] + \left[ \left( \frac{1+m}{2} \right) \log \left( \frac{1+m}{2} \right) + \left( \frac{1-m}{2} \right) \log \left( \frac{1-m}{2} \right) \right]
+\]</div>
+<p><strong>Finding the Critical Temperature <span class="math notranslate nohighlight">\( T_c \)</span></strong></p>
+<ul class="simple">
+<li><p>The critical point is determined by the second derivative of the free energy:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial^2 f}{\partial m^2} \bigg|_{m=0} = 1 - \frac{Jq}{k_B T} = 0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\Rightarrow \quad T_c = \frac{Jq}{k_B}
+\]</div>
+<p><strong>Magnetization as a Function of Temperature</strong></p>
+<ul class="simple">
+<li><p>The equilibrium magnetization minimizes the free energy, leading to a self-consistency condition:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+m = \tanh \left( \frac{Jq}{k_B T} m + \frac{h}{k_B T} \right)
+\]</div>
+<ul class="simple">
+<li><p>Rearranged as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+- \left( \frac{Jq}{k_B T} \right) m - \frac{h}{k_B T} + \tanh^{-1}(m) = 0
+\]</div>
+<ul class="simple">
+<li><p>For zero external field (<span class="math notranslate nohighlight">\( h = 0 \)</span>), the equation simplifies to:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+m = \tanh \left( \frac{T_c}{T} m \right)
+\]</div>
+<ul class="simple">
+<li><p>For small <span class="math notranslate nohighlight">\( m \)</span>, expand <span class="math notranslate nohighlight">\( \tanh^{-1}(m) \approx m + \frac{1}{3} m^3 \)</span>, yielding:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+- \frac{T_c}{T} m + m + \frac{1}{3} m^3 = 0
+\]</div>
+<ul class="simple">
+<li><p>Solving this, we find the magnetization near the critical point behaves as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+m = \pm \sqrt{ \frac{3(T_c - T)}{T_c} }
+\]</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "DPotoyan/Statmech4ChemBio",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./4_ising"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_MCMC.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Ising models and Metropolis algorithm</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03_MeanField.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mean Field Theory</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#free-energy-of-mean-field-ising-models">Free Energy of Mean-Field Ising Models</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Davit Potoyan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
