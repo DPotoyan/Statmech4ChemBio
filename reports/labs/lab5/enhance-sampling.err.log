@@ -15,65 +15,40 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import matplotlib.pyplot as plt
+xlog = sim_anneal()
 
-# === Parameters and binning ===
-beta=1/T
-nbins = 100
-bin_edges = np.linspace(-1, 1, nbins + 1)
-bin_centers = 0.5 * (bin_edges[1:] + bin_edges[:-1])
-P_unbiased = np.zeros(nbins)
+plt.plot(xlog)
 
-# === Set up figure with 1 row, 2 columns ===
-fig, ax = plt.subplots(1, 2, figsize=(12, 4))
-
-# === Plot overlapping histograms ===
-for mags in all_mags:
-    ax[0].hist(mags, bins=bin_edges, density=True, alpha=0.5)
-ax[0].set_xlabel("Magnetization $M$")
-ax[0].set_ylabel("Probability Density")
-ax[0].set_title("Umbrella Sampling: Histograms")
-
-# === Reweight and compute unbiased distribution ===
-for M0, mags in zip(M0_values, all_mags):
-
-    # Compute effective bias potential using normalized m
-    U = 0.5 * k_bias * N**4 * (mags - M0)**2
-    weights = np.exp(beta * U)
-
-    # Histogram
-    hist, _ = np.histogram(m, bins=bin_edges, weights=weights)
-    P_unbiased += hist
-
-# Normalize the unbiased probability density
-P_unbiased /= np.sum(P_unbiased * np.diff(bin_edges))
-
-# Compute free energy: F(M) = -kT ln P(M)
-F_reweighted = -np.log(P_unbiased + 1e-12)
-F_reweighted -= np.nanmin(F_reweighted)
-
-# === Plot F(M) ===
-ax[1].plot(bin_centers, F_reweighted, lw=2)
-ax[1].set_xlabel("Magnetization $M$")
-ax[1].set_ylabel("Free Energy $F(M)$")
-ax[1].set_title("Free Energy via Reweighting")
-ax[1].grid(True)
-
-plt.tight_layout()
-plt.show()
-
+plt.xlabel('MC time')
+plt.ylabel('x')
+print('Final search result for the global minimum: ', xlog[-1])
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[3], line 29[0m
-[1;32m     26[0m     weights [38;5;241m=[39m np[38;5;241m.[39mexp(beta [38;5;241m*[39m U)
-[1;32m     28[0m     [38;5;66;03m# Histogram[39;00m
-[0;32m---> 29[0m     hist, _ [38;5;241m=[39m np[38;5;241m.[39mhistogram([43mm[49m, bins[38;5;241m=[39mbin_edges, weights[38;5;241m=[39mweights)
-[1;32m     30[0m     P_unbiased [38;5;241m+[39m[38;5;241m=[39m hist
-[1;32m     32[0m [38;5;66;03m# Normalize the unbiased probability density[39;00m
+Cell [0;32mIn[9], line 1[0m
+[0;32m----> 1[0m xlog [38;5;241m=[39m [43msim_anneal[49m[43m([49m[43m)[49m
+[1;32m      3[0m plt[38;5;241m.[39mplot(xlog)
+[1;32m      5[0m plt[38;5;241m.[39mxlabel([38;5;124m'[39m[38;5;124mMC time[39m[38;5;124m'[39m)
 
-[0;31mNameError[0m: name 'm' is not defined
+Cell [0;32mIn[8], line 15[0m, in [0;36msim_anneal[0;34m(T, T_min, cool_t, x, mean, sigma)[0m
+[1;32m     11[0m xlog   [38;5;241m=[39m []
+[1;32m     13[0m [38;5;28;01mwhile[39;00m T [38;5;241m>[39m T_min:
+[0;32m---> 15[0m     x [38;5;241m=[39m [43mMCupdate[49m[43m([49m[43mT[49m[43m,[49m[43m [49m[43mx[49m[43m,[49m[43m [49m[43mmean[49m[43m,[49m[43m [49m[43msigma[49m[43m)[49m
+[1;32m     17[0m     T [38;5;241m=[39m cool(T, cool_t)
+[1;32m     19[0m     xlog[38;5;241m.[39mappend(x)
+
+Cell [0;32mIn[7], line 9[0m, in [0;36mMCupdate[0;34m(T, x, mean, sigma)[0m
+[1;32m      1[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mMCupdate[39m(T, x, mean, sigma):
+[1;32m      3[0m [38;5;250m    [39m[38;5;124;03m'''Making a new move by incremening a normal distributed step[39;00m
+[1;32m      4[0m [38;5;124;03m    We are exploring function diffusivefly, e.g doing random walk![39;00m
+[1;32m      5[0m [38;5;124;03m    T: temp[39;00m
+[1;32m      6[0m [38;5;124;03m    mean, sigma: parameters of random walk[39;00m
+[1;32m      7[0m [38;5;124;03m    '''[39;00m
+[0;32m----> 9[0m     xnew [38;5;241m=[39m x [38;5;241m+[39m [43mnormal[49m(mean, sigma)
+[1;32m     11[0m     delta_f [38;5;241m=[39m f(xnew) [38;5;241m-[39m f(x)
+[1;32m     14[0m     [38;5;28;01mif[39;00m delta_f [38;5;241m<[39m [38;5;241m0[39m [38;5;129;01mor[39;00m np[38;5;241m.[39mexp([38;5;241m-[39mdelta_f[38;5;241m/[39mT) [38;5;241m>[39m rand():
+
+[0;31mNameError[0m: name 'normal' is not defined
 
