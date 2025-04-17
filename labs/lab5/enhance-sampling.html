@@ -595,11 +595,11 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 <span class="n">T</span> <span class="o">=</span> <span class="mf">2.0</span>
 <span class="n">J</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">B</span> <span class="o">=</span> <span class="mf">0.0</span>
-<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">100_000</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">1000000</span>
 <span class="n">out_freq</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">k_bias</span> <span class="o">=</span> <span class="mf">0.01</span>
 
-<span class="n">M0_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">M0_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
 <span class="n">all_mags</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">M0</span> <span class="ow">in</span> <span class="n">M0_values</span><span class="p">:</span>
@@ -662,7 +662,7 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/737c21c96e8489d3089ec0415d46b8f4fb4657ab7ccc30c93d7cc840deaf000d.png" src="../../_images/737c21c96e8489d3089ec0415d46b8f4fb4657ab7ccc30c93d7cc840deaf000d.png" />
+<img alt="../../_images/39380a0573ead4c8e5532ac555afc491e7c390fba9a518072ed78097d25f63c9.png" src="../../_images/39380a0573ead4c8e5532ac555afc491e7c390fba9a518072ed78097d25f63c9.png" />
 </div>
 </div>
 </section>
@@ -678,7 +678,9 @@ U_{\text{bias}}(M) = \frac{1}{2} k (M - M_0)^2
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pymbar
   Downloading pymbar-4.0.3-py3-none-any.whl.metadata (1.2 kB)
 Requirement already satisfied: numpy&gt;=1.12 in /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages (from pymbar) (1.24.4)
-Requirement already satisfied: scipy in /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages (from pymbar) (1.10.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy in /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages (from pymbar) (1.10.1)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting numexpr (from pymbar)
@@ -793,7 +795,52 @@ Either install with pip or conda:
 *********************************
 </pre></div>
 </div>
-<img alt="../../_images/1ad14536b096cbbfd86bb5dd8470fac6b63276378f94cbc86102f169198db0cd.png" src="../../_images/1ad14536b096cbbfd86bb5dd8470fac6b63276378f94cbc86102f169198db0cd.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">26</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">start</span> <span class="o">+=</span> <span class="n">Nk</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="c1"># === FES INPUTS ===</span>
+<span class="ne">---&gt; </span><span class="mi">26</span> <span class="n">fes</span> <span class="o">=</span> <span class="n">FES</span><span class="p">(</span><span class="n">u_kn</span><span class="p">,</span> <span class="n">N_k</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="n">u_n</span> <span class="o">=</span> <span class="n">u_kn</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="n">x_n</span> <span class="o">=</span> <span class="n">M_all</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pymbar/fes.py:165,</span> in <span class="ni">FES.__init__</span><span class="nt">(self, u_kn, N_k, verbose, mbar_options, timings, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">162</span>     <span class="bp">self</span><span class="o">.</span><span class="n">timings</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">164</span> <span class="k">if</span> <span class="n">mbar_options</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">165</span>     <span class="n">fes_mbar</span> <span class="o">=</span> <span class="n">pymbar</span><span class="o">.</span><span class="n">MBAR</span><span class="p">(</span><span class="n">u_kn</span><span class="p">,</span> <span class="n">N_k</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">167</span>     <span class="c1"># if the dictionary does not define the option, add it in</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span>     <span class="n">required_mbar_options</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span>         <span class="s2">&quot;maximum_iterations&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span>         <span class="s2">&quot;relative_tolerance&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">175</span>         <span class="s2">&quot;x_kindices&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span>     <span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pymbar/mbar.py:410,</span> in <span class="ni">MBAR.__init__</span><span class="nt">(self, u_kn, N_k, maximum_iterations, relative_tolerance, verbose, initial_f_k, solver_protocol, initialize, x_kindices, n_bootstraps, bootstrap_solver_protocol, rseed)</span>
+<span class="g g-Whitespace">    </span><span class="mi">407</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">408</span>     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">rseed</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">410</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_k</span> <span class="o">=</span> <span class="n">mbar_solvers</span><span class="o">.</span><span class="n">solve_mbar_for_all_states</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">411</span>     <span class="bp">self</span><span class="o">.</span><span class="n">u_kn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">N_k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">f_k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">states_with_samples</span><span class="p">,</span> <span class="n">solver_protocol</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">414</span> <span class="k">if</span> <span class="n">n_bootstraps</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">415</span>     <span class="bp">self</span><span class="o">.</span><span class="n">n_bootstraps</span> <span class="o">=</span> <span class="n">n_bootstraps</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pymbar/mbar_solvers.py:993,</span> in <span class="ni">solve_mbar_for_all_states</span><span class="nt">(u_kn, N_k, f_k, states_with_samples, solver_protocol)</span>
+<span class="g g-Whitespace">    </span><span class="mi">990</span>     <span class="n">f_k_nonzero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">991</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">992</span>     <span class="n">f_k_nonzero</span><span class="p">,</span> <span class="n">all_results</span> <span class="o">=</span> <span class="n">solve_mbar</span><span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">993</span>         <span class="n">u_kn</span><span class="p">[</span><span class="n">states_with_samples</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">994</span>         <span class="n">N_k</span><span class="p">[</span><span class="n">states_with_samples</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">995</span>         <span class="n">f_k</span><span class="p">[</span><span class="n">states_with_samples</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">996</span>         <span class="n">solver_protocol</span><span class="o">=</span><span class="n">solver_protocol</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">997</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">999</span> <span class="n">f_k</span><span class="p">[</span><span class="n">states_with_samples</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">f_k_nonzero</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1001</span> <span class="c1"># Update all free energies because those from states with zero samples are not correctly computed by solvers.</span>
+
+<span class="ne">IndexError</span>: index 20 is out of bounds for axis 0 with size 20
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -874,7 +921,7 @@ Either install with pip or conda:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/0a9547e05eb1f0745717faea81f3952cf3f1ec823d9d76fa351d147c0d899e15.png" src="../../_images/0a9547e05eb1f0745717faea81f3952cf3f1ec823d9d76fa351d147c0d899e15.png" />
+<img alt="../../_images/610c2b9003398982cfb3dcb479fe6236458955e056e7b8b18fce8ea096117a25.png" src="../../_images/610c2b9003398982cfb3dcb479fe6236458955e056e7b8b18fce8ea096117a25.png" />
 </div>
 </div>
 <section id="search-for-global-minima-of-f-x-using-simulated-annealing">
@@ -953,34 +1000,10 @@ Either install with pip or conda:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">xlog</span> <span class="o">=</span> <span class="n">sim_anneal</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xlog</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;MC time&#39;</span><span class="p">)</span>
-
-<span class="nn">Cell In[8], line 15,</span> in <span class="ni">sim_anneal</span><span class="nt">(T, T_min, cool_t, x, mean, sigma)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">xlog</span>   <span class="o">=</span> <span class="p">[]</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">while</span> <span class="n">T</span> <span class="o">&gt;</span> <span class="n">T_min</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">MCupdate</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">T</span> <span class="o">=</span> <span class="n">cool</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">cool_t</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">xlog</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="nn">Cell In[7], line 9,</span> in <span class="ni">MCupdate</span><span class="nt">(T, x, mean, sigma)</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span><span class="w"> </span><span class="nf">MCupdate</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="w">     </span><span class="sd">&#39;&#39;&#39;Making a new move by incremening a normal distributed step</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd">     We are exploring function diffusivefly, e.g doing random walk!</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd">     T: temp</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span><span class="sd">     mean, sigma: parameters of random walk</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span><span class="sd">     &#39;&#39;&#39;</span>
-<span class="ne">----&gt; </span><span class="mi">9</span>     <span class="n">xnew</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">delta_f</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xnew</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="k">if</span> <span class="n">delta_f</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">delta_f</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">rand</span><span class="p">():</span>
-
-<span class="ne">NameError</span>: name &#39;normal&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final search result for the global minimum:  0.0012962682770579035
 </pre></div>
 </div>
+<img alt="../../_images/96b8905e9f9ce4c5a5d2a4090bd18d44146e1930f94cc117b4554fbfa7c3fdd9.png" src="../../_images/96b8905e9f9ce4c5a5d2a4090bd18d44146e1930f94cc117b4554fbfa7c3fdd9.png" />
 </div>
 </div>
 <div class="cell docutils container">

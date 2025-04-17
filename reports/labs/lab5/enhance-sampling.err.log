@@ -15,40 +15,138 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-xlog = sim_anneal()
+import numpy as np
+import matplotlib.pyplot as plt
+from pymbar import FES
 
-plt.plot(xlog)
+# === USER INPUTS ===
 
-plt.xlabel('MC time')
-plt.ylabel('x')
-print('Final search result for the global minimum: ', xlog[-1])
+beta = 1.0 / T
+k_bias = 0.01
+M0_values = np.linspace(-1, 1, 20)  # umbrella centers
+
+# === COLLECT ALL MAGNETIZATION DATA ===
+M_all = np.concatenate(all_mags)
+N_total = len(M_all)
+N_k = np.array([len(m) for m in all_mags])
+N_windows = len(M0_values)
+
+# === BUILD REDUCED POTENTIAL MATRIX u_kn ===
+u_kn = np.zeros((N_windows, N_total))
+start = 0
+for k, (M0, Nk) in enumerate(zip(M0_values, N_k)):
+    M_window = M_all[start:start+Nk]
+    u_kn[k, start:start+Nk] = beta * 0.5 * k_bias * (M_window * N**2 - M0)**2
+    start += Nk
+
+# === FES INPUTS ===
+fes = FES(u_kn, N_k)
+u_n = u_kn[0, :]
+x_n = M_all.reshape(-1, 1)
+
+# === DEFINE UNEQUALLY POPULATED BINS ===
+nbins = 100
+x_sorted = np.sort(M_all)
+bin_edges = np.append(x_sorted[::N_total//nbins], x_sorted.max() + 0.01)
+bin_centers = 0.5 * (bin_edges[1:] + bin_edges[:-1])
+histogram_parameters = {'bin_edges': [bin_edges]}
+
+# === GENERATE FES ===
+fes.generate_fes(u_n=u_n, x_n=x_n,
+                 fes_type='histogram',
+                 histogram_parameters=histogram_parameters)
+
+# === QUERY FES AT DATA POINTS (like pymbar docs) ===
+results = fes.get_fes(x_n, uncertainty_method='analytical')
+f_i = results['f_i']
+df_i = results['df_i']
+
+# === BIN THE FREE ENERGY BACK INTO BIN_CENTERS ===
+indices = np.digitize(M_all, bin_edges) - 1
+F_binned = np.zeros(len(bin_centers))
+dF_binned = np.zeros(len(bin_centers))
+counts = np.zeros(len(bin_centers))
+
+for i, idx in enumerate(indices):
+    if 0 <= idx < len(bin_centers):
+        F_binned[idx] += f_i[i]
+        dF_binned[idx] += df_i[i]**2
+        counts[idx] += 1
+
+mask = counts > 0
+F_binned[mask] /= counts[mask]
+dF_binned[mask] = np.sqrt(dF_binned[mask]) / counts[mask]
+
+# Normalize
+F_binned -= np.nanmin(F_binned[mask])
+
+# === PLOT ===
+plt.errorbar(bin_centers[mask], F_binned[mask], yerr=dF_binned[mask], fmt='o-', capsize=2)
+plt.xlabel("Magnetization $M$")
+plt.ylabel("Free Energy $F(M)$")
+plt.title("Free Energy Profile from Umbrella Sampling (pymbar FES)")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
 ------------------
 
+----- stderr -----
+Warning on use of the timeseries module: If the inherent timescales of the system are long compared to those being analyzed, this statistical inefficiency may be an underestimate.  The estimate presumes the use of many statistically independent samples.  Tests should be performed to assess whether this condition is satisfied.   Be cautious in the interpretation of the data.
+----- stderr -----
+
+********* JAX NOT FOUND *********
+ PyMBAR can run faster with JAX  
+ But will work fine without it   
+Either install with pip or conda:
+      pip install pybar[jax]     
+               OR                
+      conda install pymbar       
+*********************************
+------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[9], line 1[0m
-[0;32m----> 1[0m xlog [38;5;241m=[39m [43msim_anneal[49m[43m([49m[43m)[49m
-[1;32m      3[0m plt[38;5;241m.[39mplot(xlog)
-[1;32m      5[0m plt[38;5;241m.[39mxlabel([38;5;124m'[39m[38;5;124mMC time[39m[38;5;124m'[39m)
+[0;31mIndexError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[5], line 26[0m
+[1;32m     23[0m     start [38;5;241m+[39m[38;5;241m=[39m Nk
+[1;32m     25[0m [38;5;66;03m# === FES INPUTS ===[39;00m
+[0;32m---> 26[0m fes [38;5;241m=[39m [43mFES[49m[43m([49m[43mu_kn[49m[43m,[49m[43m [49m[43mN_k[49m[43m)[49m
+[1;32m     27[0m u_n [38;5;241m=[39m u_kn[[38;5;241m0[39m, :]
+[1;32m     28[0m x_n [38;5;241m=[39m M_all[38;5;241m.[39mreshape([38;5;241m-[39m[38;5;241m1[39m, [38;5;241m1[39m)
 
-Cell [0;32mIn[8], line 15[0m, in [0;36msim_anneal[0;34m(T, T_min, cool_t, x, mean, sigma)[0m
-[1;32m     11[0m xlog   [38;5;241m=[39m []
-[1;32m     13[0m [38;5;28;01mwhile[39;00m T [38;5;241m>[39m T_min:
-[0;32m---> 15[0m     x [38;5;241m=[39m [43mMCupdate[49m[43m([49m[43mT[49m[43m,[49m[43m [49m[43mx[49m[43m,[49m[43m [49m[43mmean[49m[43m,[49m[43m [49m[43msigma[49m[43m)[49m
-[1;32m     17[0m     T [38;5;241m=[39m cool(T, cool_t)
-[1;32m     19[0m     xlog[38;5;241m.[39mappend(x)
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pymbar/fes.py:165[0m, in [0;36mFES.__init__[0;34m(self, u_kn, N_k, verbose, mbar_options, timings, **kwargs)[0m
+[1;32m    162[0m     [38;5;28mself[39m[38;5;241m.[39mtimings [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[1;32m    164[0m [38;5;28;01mif[39;00m mbar_options [38;5;241m==[39m [38;5;28;01mNone[39;00m:
+[0;32m--> 165[0m     fes_mbar [38;5;241m=[39m [43mpymbar[49m[38;5;241;43m.[39;49m[43mMBAR[49m[43m([49m[43mu_kn[49m[43m,[49m[43m [49m[43mN_k[49m[43m)[49m
+[1;32m    166[0m [38;5;28;01melse[39;00m:
+[1;32m    167[0m     [38;5;66;03m# if the dictionary does not define the option, add it in[39;00m
+[1;32m    168[0m     required_mbar_options [38;5;241m=[39m (
+[1;32m    169[0m         [38;5;124m"[39m[38;5;124mmaximum_iterations[39m[38;5;124m"[39m,
+[1;32m    170[0m         [38;5;124m"[39m[38;5;124mrelative_tolerance[39m[38;5;124m"[39m,
+[0;32m   (...)[0m
+[1;32m    175[0m         [38;5;124m"[39m[38;5;124mx_kindices[39m[38;5;124m"[39m,
+[1;32m    176[0m     )
 
-Cell [0;32mIn[7], line 9[0m, in [0;36mMCupdate[0;34m(T, x, mean, sigma)[0m
-[1;32m      1[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mMCupdate[39m(T, x, mean, sigma):
-[1;32m      3[0m [38;5;250m    [39m[38;5;124;03m'''Making a new move by incremening a normal distributed step[39;00m
-[1;32m      4[0m [38;5;124;03m    We are exploring function diffusivefly, e.g doing random walk![39;00m
-[1;32m      5[0m [38;5;124;03m    T: temp[39;00m
-[1;32m      6[0m [38;5;124;03m    mean, sigma: parameters of random walk[39;00m
-[1;32m      7[0m [38;5;124;03m    '''[39;00m
-[0;32m----> 9[0m     xnew [38;5;241m=[39m x [38;5;241m+[39m [43mnormal[49m(mean, sigma)
-[1;32m     11[0m     delta_f [38;5;241m=[39m f(xnew) [38;5;241m-[39m f(x)
-[1;32m     14[0m     [38;5;28;01mif[39;00m delta_f [38;5;241m<[39m [38;5;241m0[39m [38;5;129;01mor[39;00m np[38;5;241m.[39mexp([38;5;241m-[39mdelta_f[38;5;241m/[39mT) [38;5;241m>[39m rand():
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pymbar/mbar.py:410[0m, in [0;36mMBAR.__init__[0;34m(self, u_kn, N_k, maximum_iterations, relative_tolerance, verbose, initial_f_k, solver_protocol, initialize, x_kindices, n_bootstraps, bootstrap_solver_protocol, rseed)[0m
+[1;32m    407[0m [38;5;28;01melse[39;00m:
+[1;32m    408[0m     np[38;5;241m.[39mrandom[38;5;241m.[39mseed(rseed)
+[0;32m--> 410[0m [38;5;28mself[39m[38;5;241m.[39mf_k [38;5;241m=[39m [43mmbar_solvers[49m[38;5;241;43m.[39;49m[43msolve_mbar_for_all_states[49m[43m([49m
+[1;32m    411[0m [43m    [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mu_kn[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mN_k[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mf_k[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mstates_with_samples[49m[43m,[49m[43m [49m[43msolver_protocol[49m
+[1;32m    412[0m [43m[49m[43m)[49m
+[1;32m    414[0m [38;5;28;01mif[39;00m n_bootstraps [38;5;241m>[39m [38;5;241m0[39m:
+[1;32m    415[0m     [38;5;28mself[39m[38;5;241m.[39mn_bootstraps [38;5;241m=[39m n_bootstraps
 
-[0;31mNameError[0m: name 'normal' is not defined
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/pymbar/mbar_solvers.py:993[0m, in [0;36msolve_mbar_for_all_states[0;34m(u_kn, N_k, f_k, states_with_samples, solver_protocol)[0m
+[1;32m    990[0m     f_k_nonzero [38;5;241m=[39m np[38;5;241m.[39marray([[38;5;241m0.0[39m])
+[1;32m    991[0m [38;5;28;01melse[39;00m:
+[1;32m    992[0m     f_k_nonzero, all_results [38;5;241m=[39m solve_mbar(
+[0;32m--> 993[0m         [43mu_kn[49m[43m[[49m[43mstates_with_samples[49m[43m][49m,
+[1;32m    994[0m         N_k[states_with_samples],
+[1;32m    995[0m         f_k[states_with_samples],
+[1;32m    996[0m         solver_protocol[38;5;241m=[39msolver_protocol,
+[1;32m    997[0m     )
+[1;32m    999[0m f_k[states_with_samples] [38;5;241m=[39m np[38;5;241m.[39marray(f_k_nonzero)
+[1;32m   1001[0m [38;5;66;03m# Update all free energies because those from states with zero samples are not correctly computed by solvers.[39;00m
+
+[0;31mIndexError[0m: index 20 is out of bounds for axis 0 with size 20
 
