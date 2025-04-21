@@ -1,15 +1,4 @@
 Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 778, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 198, in ensure_async
-    result = await obj
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_client/channels.py", line 313, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
   File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
@@ -20,17 +9,46 @@ Traceback (most recent call last):
     return future.result()
   File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1001, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 802, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 852, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
 #%time 
-confs, es, hists = run_MC_LJ(pos, **params)
--------------------
+confs, es = run_MC_LJ(pos, **params)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypingError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[10], line 2[0m
+[1;32m      1[0m [38;5;66;03m#%time [39;00m
+[0;32m----> 2[0m confs, es [38;5;241m=[39m [43mrun_MC_LJ[49m[43m([49m[43mpos[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mparams[49m[43m)[49m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numba/core/dispatcher.py:468[0m, in [0;36m_DispatcherBase._compile_for_args[0;34m(self, *args, **kws)[0m
+[1;32m    464[0m         msg [38;5;241m=[39m ([38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00m[38;5;28mstr[39m(e)[38;5;241m.[39mrstrip()[38;5;132;01m}[39;00m[38;5;124m [39m[38;5;130;01m\n[39;00m[38;5;130;01m\n[39;00m[38;5;124mThis error may have been caused [39m[38;5;124m"[39m
+[1;32m    465[0m                [38;5;124mf[39m[38;5;124m"[39m[38;5;124mby the following argument(s):[39m[38;5;130;01m\n[39;00m[38;5;132;01m{[39;00margs_str[38;5;132;01m}[39;00m[38;5;130;01m\n[39;00m[38;5;124m"[39m)
+[1;32m    466[0m         e[38;5;241m.[39mpatch_message(msg)
+[0;32m--> 468[0m     [43merror_rewrite[49m[43m([49m[43me[49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mtyping[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m    469[0m [38;5;28;01mexcept[39;00m errors[38;5;241m.[39mUnsupportedError [38;5;28;01mas[39;00m e:
+[1;32m    470[0m     [38;5;66;03m# Something unsupported is present in the user code, add help info[39;00m
+[1;32m    471[0m     error_rewrite(e, [38;5;124m'[39m[38;5;124munsupported_error[39m[38;5;124m'[39m)
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numba/core/dispatcher.py:409[0m, in [0;36m_DispatcherBase._compile_for_args.<locals>.error_rewrite[0;34m(e, issue_type)[0m
+[1;32m    407[0m     [38;5;28;01mraise[39;00m e
+[1;32m    408[0m [38;5;28;01melse[39;00m:
+[0;32m--> 409[0m     [38;5;28;01mraise[39;00m e[38;5;241m.[39mwith_traceback([38;5;28;01mNone[39;00m)
+
+[0;31mTypingError[0m: Failed in nopython mode pipeline (step: nopython frontend)
+failed to unpack float64
+
+File "../../../../../../tmp/ipykernel_2323/2760174395.py", line 22:
+<source missing, REPL/exec in use?>
+
+During: typing of exhaust iter at /tmp/ipykernel_2323/2760174395.py (22)
+
+File "../../../../../../tmp/ipykernel_2323/2760174395.py", line 22:
+<source missing, REPL/exec in use?>
+
 
