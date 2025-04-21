@@ -621,7 +621,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "6a9e144080314faa9782c4fffa2fe206"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9153c16b52f147c7bca16b0b669bb14a"}</script></div>
 </div>
 </section>
 <section id="periodic-boundary-conditions-and-minimum-image-criterion">
@@ -730,10 +730,9 @@ document.write(`
     <span class="n">es</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_snapshots</span><span class="p">)</span>
 
     <span class="c1"># Initial energy</span>
-    <span class="n">E_tot</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">)</span>
     <span class="n">conf_index</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">confs</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
-    <span class="n">es</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_tot</span>
+    <span class="n">es</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">)</span>
     <span class="n">conf_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
@@ -797,34 +796,32 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
-TypingError                               Traceback (most recent call last)
+NotDefinedError                           Traceback (most recent call last)
 Cell In[9], line 2
       1 #%time 
 ----&gt; 2 confs, es = run_MC_LJ(pos, **params)
 
-File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numba/core/dispatcher.py:468, in _DispatcherBase._compile_for_args(self, *args, **kws)
-    464         msg = (f&quot;{str(e).rstrip()} \n\nThis error may have been caused &quot;
-    465                f&quot;by the following argument(s):\n{args_str}\n&quot;)
-    466         e.patch_message(msg)
---&gt; 468     error_rewrite(e, &#39;typing&#39;)
-    469 except errors.UnsupportedError as e:
-    470     # Something unsupported is present in the user code, add help info
+File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numba/core/dispatcher.py:476, in _DispatcherBase._compile_for_args(self, *args, **kws)
     471     error_rewrite(e, &#39;unsupported_error&#39;)
+    472 except (errors.NotDefinedError, errors.RedefinedError,
+    473         errors.VerificationError) as e:
+    474     # These errors are probably from an issue with either the code
+    475     # supplied being syntactically or otherwise invalid
+--&gt; 476     error_rewrite(e, &#39;interpreter&#39;)
+    477 except errors.ConstantInferenceError as e:
+    478     # this is from trying to infer something as constant when it isn&#39;t
+    479     # or isn&#39;t supported as a constant
+    480     error_rewrite(e, &#39;constant_inference&#39;)
 
 File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numba/core/dispatcher.py:409, in _DispatcherBase._compile_for_args.&lt;locals&gt;.error_rewrite(e, issue_type)
     407     raise e
     408 else:
 --&gt; 409     raise e.with_traceback(None)
 
-TypingError: Failed in nopython mode pipeline (step: nopython frontend)
-failed to unpack float64
+NotDefinedError: Failed in nopython mode pipeline (step: analyzing bytecode)
+The compiler failed to analyze the bytecode. Variable &#39;E_tot&#39; is not defined.
 
-File &quot;../../../../../../tmp/ipykernel_2363/3464146160.py&quot;, line 13:
-&lt;source missing, REPL/exec in use?&gt;
-
-During: typing of exhaust iter at /tmp/ipykernel_2363/3464146160.py (13)
-
-File &quot;../../../../../../tmp/ipykernel_2363/3464146160.py&quot;, line 13:
+File &quot;../../../../../../tmp/ipykernel_2432/2393613982.py&quot;, line 39:
 &lt;source missing, REPL/exec in use?&gt;
 </pre></div>
 </div>
@@ -837,28 +834,41 @@ File &quot;../../../../../../tmp/ipykernel_2363/3464146160.py&quot;, line 13:
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">]</span><span class="o">//</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
 
-<span class="nd">@interact</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">viz_sim_lj</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="c1"># Thin frames</span>
+<span class="n">step_skip</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">confs_thinned</span> <span class="o">=</span> <span class="n">confs</span><span class="p">[::</span><span class="n">step_skip</span><span class="p">]</span>
 
-  <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
-        <span class="n">y</span><span class="o">=</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
-        <span class="n">z</span><span class="o">=</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
-        <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
-        <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-            <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># Adjust size of markers</span>
-            <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span>  <span class="c1"># Adjust opacity of markers</span>
-        <span class="p">)</span>
-    <span class="p">)])</span>
+<span class="c1"># 2D projection</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">scat</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;MC-LJ (X-Y Projection)&#39;</span><span class="p">)</span>
 
-  <span class="k">return</span> <span class="n">fig</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">confs_thinned</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
+    <span class="n">scat</span><span class="o">.</span><span class="n">set_offsets</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># XY only</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">frame</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">step_skip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scat</span><span class="p">,</span>
+
+<span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">confs_thinned</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -913,7 +923,7 @@ File &quot;../../../../../../tmp/ipykernel_2363/3464146160.py&quot;, line 13:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">g_r</span> <span class="o">=</span> <span class="n">compute_g_r</span><span class="p">(</span><span class="n">confs_prod</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">dr</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">g_r</span> <span class="o">=</span> <span class="n">compute_g_r</span><span class="p">(</span><span class="n">confs</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">dr</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

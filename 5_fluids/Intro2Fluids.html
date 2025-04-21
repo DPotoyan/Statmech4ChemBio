@@ -476,7 +476,8 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-exprssion-of-probability-distribution-of-fluids-in-phase-space">General exprssion of probability distribution of fluids in phase space</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduced-configruational-distribution-functions">Reduced configruational distribution functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-distribution-function-rdf">Radial distribution function (RDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-meaning-of-rdf"><strong>Physical meaning of RDF</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordination-shells-and-structure-in-fluids">Coordination shells and structure in fluids</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reversible-work-theorem-and-potential-of-mean-force">Reversible work theorem and potential of mean force</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-properites-of-g-r">Thermodynamic properites of <span class="math notranslate nohighlight">\(g(r)\)</span></a></li>
@@ -528,50 +529,143 @@ document.write(`
 <section id="reduced-configruational-distribution-functions">
 <h3>Reduced configruational distribution functions<a class="headerlink" href="#reduced-configruational-distribution-functions" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Hard fact:</strong> <span class="math notranslate nohighlight">\(P(r^N)\)</span> and Q do not factorize because of inteparticle interactions with stronger interactions implying stronger correlations in positions.
-<br><br></p></li>
-<li><p><strong>Probability of many-body systems:</strong> to find particle <span class="math notranslate nohighlight">\(1\)</span> at <span class="math notranslate nohighlight">\(r_1\)</span>, <span class="math notranslate nohighlight">\(2\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span> …:</p></li>
+<li><p><strong>Key fact:</strong> The full configurational probability <span class="math notranslate nohighlight">\(P(r^N)\)</span> and the partition function <span class="math notranslate nohighlight">\(Q\)</span> do <em>not</em> factorize due to interparticle interactions. Stronger interactions lead to stronger positional correlations.</p></li>
+<li><p><strong>Joint probability of particle positions:</strong><br />
+To describe the probability of finding particles at positions <span class="math notranslate nohighlight">\(r_1, r_2, \dots, r_N\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{P(r^N) = P(r_1, r_2,...r_N)}\]</div>
+\[{P(r^N) = P(r_1, r_2, \dots, r_N)}\]</div>
 <ul class="simple">
-<li><p><strong>Marginal(ized) probability</strong></p></li>
+<li><p><strong>Marginal (reduced) probability density:</strong><br />
+Probability of finding particles 1 and 2 at positions <span class="math notranslate nohighlight">\(r_1\)</span> and <span class="math notranslate nohighlight">\(r_2\)</span>, regardless of others:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{\rho^{2/N} (r_1, r_2) =  \int dr_3... dr_N P(r_1, r_2,...r_N)}\]</div>
+\[{\rho^{(2)}(r_1, r_2) = \int dr_3 \dots dr_N \, P(r^N)}\]</div>
 <ul class="simple">
-<li><p><strong>Marginal(ized) probability for any particle 1 and 2</strong></p></li>
+<li><p><strong>Symmetrized reduced pair distribution:</strong><br />
+When particles are indistinguishable, the reduced two-particle distribution becomes:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{\rho^{2/N} (r_1, r_2) =  N(N-1)\int dr_3... dr_N P(r_1, r_2,...r_N)}\]</div>
+\[{\rho^{(2)}(r_1, r_2) = N(N-1) \int dr_3 \dots dr_N \, P(r^N)}\]</div>
 </section>
 <section id="radial-distribution-function-rdf">
-<h3>Radial distribution function (RDF)<a class="headerlink" href="#radial-distribution-function-rdf" title="Permalink to this heading">#</a></h3>
-<p>For an isotropic fluid, we have one point probability density:</p>
+<h3>Radial Distribution Function (RDF)<a class="headerlink" href="#radial-distribution-function-rdf" title="Permalink to this heading">#</a></h3>
+<p>For an <strong>isotropic fluid</strong>, the one-particle probability density is uniform:</p>
 <div class="math notranslate nohighlight">
-\[\rho^{1/N} = N\frac{\int dr_2 ... dr_N}{\int dr_1...dr_N}  = N\frac{V^{N-2}}{V^N} =  \frac{N}{V}=\rho\]</div>
-<p>The joint distribution for an ideal gas:</p>
+\[
+\rho^{(1)} = N \frac{\int dr_2 \dots dr_N}{\int dr_1 \dots dr_N} = N \frac{V^{N-1}}{V^N} = \frac{N}{V} = \rho
+\]</div>
+<p>For an <strong>ideal gas</strong>, the two-particle (joint) probability density simplifies as:</p>
 <div class="math notranslate nohighlight">
-\[\rho^{2/N} = N(N-1)\frac{\int dr_3 ... dr_N}{\int dr_1...dr_N}  = N(N-1)\frac{V^{N-2}}{V^N} =  \approx \rho^2\]</div>
+\[
+\rho^{(2)} = N(N-1) \frac{\int dr_3 \dots dr_N}{\int dr_1 \dots dr_N} = N(N-1) \frac{V^{N-2}}{V^N} \approx \rho^2
+\]</div>
 <ul class="simple">
-<li><p>To measure the degree of spatial correlations, we introduce the Radial Distribution function (RDF):</p></li>
+<li><p>To quantify spatial correlations between particles, we define the <strong>Radial Distribution Function (RDF)</strong> as:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{g(r_1, r_2)  = \frac{\rho^{2/N}(r_1, r_2)}{\rho^2}}\]</div>
+\[
+{g(r_1, r_2) = \frac{\rho^{(2)}(r_1, r_2)}{\rho^2}}
+\]</div>
 <ul class="simple">
-<li><p>RDF for isotropic fluids is due to translational invariance depends only on distance between particles:</p></li>
+<li><p>For an <strong>isotropic and homogeneous fluid</strong>, RDF depends only on the <strong>distance</strong> between particles:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\boxed{g(r) =  g(|r_2-r_1|)}\]</div>
-<p><strong>Meaning of RDF</strong></p>
+\[
+{g(r) = g(|r_2 - r_1|)}
+\]</div>
+</section>
+<section id="physical-meaning-of-rdf">
+<h3><strong>Physical meaning of RDF</strong><a class="headerlink" href="#physical-meaning-of-rdf" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Since <span class="math notranslate nohighlight">\(\rho = \rho^{1/N}\)</span>, the <strong>conditional probability density of finding a particle at r distance away from a tagged particle at the origin</strong> is:</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(\rho = \rho^{(1)}\)</span>, the <strong>conditional probability density</strong> of finding a particle at distance <span class="math notranslate nohighlight">\(r\)</span> from a tagged particle at the origin is:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\frac{\rho^{2/N}(0,r)}{\rho} = \rho g(r)\]</div>
+\[
+\frac{\rho^{(2)}(0, r)}{\rho} = \rho g(r)
+\]</div>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\rho g(r)\)</span> is then average density of particles at distance r given that a tagged particle is at the origin</p></li>
+<li><p>Thus, <span class="math notranslate nohighlight">\(\rho g(r)\)</span> represents the <strong>average local density</strong> at distance <span class="math notranslate nohighlight">\(r\)</span>, given a particle is fixed at the origin.</p></li>
 </ul>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># === System parameters ===</span>
+<span class="n">N_side</span> <span class="o">=</span> <span class="mi">20</span>                <span class="c1"># particles per side for lattice</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">N_side</span><span class="o">**</span><span class="mi">2</span>              <span class="c1"># total particles</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">10.0</span>                   <span class="c1"># box length (L x L)</span>
+<span class="n">r_max</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="mi">2</span>              <span class="c1"># max distance for RDF</span>
+<span class="n">nbins</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># === Make ideal gas configuration ===</span>
+<span class="n">positions_ideal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># === Make square lattice configuration ===</span>
+<span class="n">spacing</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N_side</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span> <span class="o">-</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">N_side</span><span class="p">),</span>
+                   <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span> <span class="o">-</span> <span class="n">spacing</span><span class="p">,</span> <span class="n">N_side</span><span class="p">))</span>
+<span class="n">positions_lattice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_rdf</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">nbins</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+    <span class="n">dists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+            <span class="n">dx</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">dy</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            
+            <span class="c1"># Periodic boundary conditions</span>
+            <span class="n">dx</span> <span class="o">-=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dx</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
+            <span class="n">dy</span> <span class="o">-=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dy</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">r_max</span><span class="p">:</span>
+                <span class="n">dists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    
+    <span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dists</span><span class="p">)</span>
+    <span class="n">r_bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">nbins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">r_centers</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">r_bins</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">r_bins</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">dists</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">r_bins</span><span class="p">)</span>
+    
+    <span class="n">dr</span> <span class="o">=</span> <span class="n">r_bins</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">r_bins</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">L</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">N</span> <span class="o">/</span> <span class="n">area</span>
+    <span class="n">shell_area</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">r_centers</span> <span class="o">*</span> <span class="n">dr</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">shell_area</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>  <span class="c1"># expected number in each shell</span>
+    <span class="n">g_r</span> <span class="o">=</span> <span class="n">hist</span> <span class="o">/</span> <span class="n">norm</span>
+    
+    <span class="k">return</span> <span class="n">r_centers</span><span class="p">,</span> <span class="n">g_r</span>
+
+<span class="c1"># === Compute RDFs ===</span>
+<span class="n">r_ideal</span><span class="p">,</span> <span class="n">g_ideal</span> <span class="o">=</span> <span class="n">compute_rdf</span><span class="p">(</span><span class="n">positions_ideal</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">nbins</span><span class="p">)</span>
+<span class="n">r_lattice</span><span class="p">,</span> <span class="n">g_lattice</span> <span class="o">=</span> <span class="n">compute_rdf</span><span class="p">(</span><span class="n">positions_lattice</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">nbins</span><span class="p">)</span>
+
+<span class="c1"># === Plot ===</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r_ideal</span><span class="p">,</span> <span class="n">g_ideal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ideal Gas&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r_lattice</span><span class="p">,</span> <span class="n">g_lattice</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Square Lattice&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Distance $r$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$g(r)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Radial Distribution Function Comparison&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/01fa2d9d4cd243d56f431ab6682595f410a287877e18ef6425df419189acd35a.png" src="../_images/01fa2d9d4cd243d56f431ab6682595f410a287877e18ef6425df419189acd35a.png" />
+</div>
+</div>
 </section>
 <section id="coordination-shells-and-structure-in-fluids">
 <h3>Coordination shells and structure in fluids<a class="headerlink" href="#coordination-shells-and-structure-in-fluids" title="Permalink to this heading">#</a></h3>
@@ -582,14 +676,17 @@ document.write(`
 </section>
 <section id="reversible-work-theorem-and-potential-of-mean-force">
 <h3>Reversible work theorem and potential of mean force<a class="headerlink" href="#reversible-work-theorem-and-potential-of-mean-force" title="Permalink to this heading">#</a></h3>
+<div class="important admonition">
+<p class="admonition-title"><strong>Reversible work theorem</strong></p>
 <div class="math notranslate nohighlight">
-\[\boxed{g(r) = e^{-\beta w(r)}}\]</div>
+\[{g(r) = e^{-\beta w(r)}}\]</div>
 <div class="math notranslate nohighlight">
-\[\boxed{w(r) = - \beta^{-1} log [g(r)]}\]</div>
+\[{w(r) = - \beta^{-1} log [g(r)]}\]</div>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(w(r)\)</span> Reversible work to bring two particles from infinity to distance r</p></li>
 <li><p><span class="math notranslate nohighlight">\(g(r)\)</span> Radial distribution function</p></li>
 </ul>
+</div>
 <div class="math notranslate nohighlight">
 \[\Big \langle -\frac{d  U(r^N)}{dr_1}  \Big \rangle_{r_1, r_2} = -\frac{\int dr_3...dr_N \frac{dU(r^N)}{dr_1} e^{-\beta U}}{\int dr_3...r_N e^{-\beta U}} =  \frac{\beta^{-1} \frac{d}{d r_1} \int dr_3...dr_N e^{-\beta U}}{\int dr_3...dr_N e^{-\beta U}} = \beta^{-1} \frac{d}{d r_1} log \int dr_3...dr_N e^{-\beta U} \]</div>
 <div class="math notranslate nohighlight">
@@ -600,7 +697,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\langle E \rangle = N \Big\langle \frac{p^2}{2m} \Big\rangle + \Big\langle \sum_{j&gt;i} u(|r_i - r_j|)\Big \rangle\]</div>
 <div class="math notranslate nohighlight">
-\[\boxed{E/N  = \frac{3}{2}k_B T +\frac{1}{2}\rho \int dr g(r) u(r) }\]</div>
+\[{E/N  = \frac{3}{2}k_B T +\frac{1}{2}\rho \int dr g(r) u(r) }\]</div>
 </section>
 <section id="low-density-approximation-for-g-r">
 <h3>Low density approximation for <span class="math notranslate nohighlight">\(g(r)\)</span><a class="headerlink" href="#low-density-approximation-for-g-r" title="Permalink to this heading">#</a></h3>
@@ -684,7 +781,8 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-exprssion-of-probability-distribution-of-fluids-in-phase-space">General exprssion of probability distribution of fluids in phase space</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduced-configruational-distribution-functions">Reduced configruational distribution functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-distribution-function-rdf">Radial distribution function (RDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-distribution-function-rdf">Radial Distribution Function (RDF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-meaning-of-rdf"><strong>Physical meaning of RDF</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coordination-shells-and-structure-in-fluids">Coordination shells and structure in fluids</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reversible-work-theorem-and-potential-of-mean-force">Reversible work theorem and potential of mean force</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamic-properites-of-g-r">Thermodynamic properites of <span class="math notranslate nohighlight">\(g(r)\)</span></a></li>
