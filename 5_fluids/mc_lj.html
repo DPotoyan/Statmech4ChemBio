@@ -621,7 +621,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "a6b4f58205184a6d954c8fb4b4d03572"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8c2fefe2425d4602bbd7e83a19af1609"}</script></div>
 </div>
 </section>
 <section id="periodic-boundary-conditions-and-minimum-image-criterion">
@@ -657,27 +657,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-</div>
-<p><strong>Visualize coordinate wrapping</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@interact</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">L</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">viz_wrap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
-
-    <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
-    
-    <span class="n">x_wrap</span> <span class="o">=</span> <span class="n">pbc_wrap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span> <span class="c1">#pbc_basic(x, L)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_wrap</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;original x&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;wrapped x&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "ed79fe55dd3f4c1e897f253528767497"}</script></div>
 </div>
 </section>
 <section id="computing-pairwise-distances-and-energies">
@@ -739,48 +718,52 @@ document.write(`
 <p>Now that the main helper functions are set up we can put together a main Monte Carlo engine that loops through randomly selected particles and attemps their displacement via Metropolis Criterion.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
+
+<span class="nd">@njit</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">run_MC_LJ</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">trunc</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Run Metropolis Monte Carlo for Lennard-Jones particles in a cubic box.</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">    pos (array): Initial particle positions (N x 3).</span>
-<span class="sd">    L (float): Box length.</span>
-<span class="sd">    T (float): Temperature.</span>
-<span class="sd">    trunc (float): LJ cutoff radius.</span>
-<span class="sd">    disp (float): Max random displacement.</span>
-<span class="sd">    steps (int): Number of MC steps.</span>
-<span class="sd">    freq (int): Logging frequency.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">    confs (list): Saved configurations.</span>
-<span class="sd">    es (list): Energy values over time.</span>
-<span class="sd">    hists (list): Histograms of pairwise distances.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-    <span class="n">E_tot</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">)</span>
+    <span class="n">n_snapshots</span> <span class="o">=</span> <span class="n">steps</span> <span class="o">//</span> <span class="n">freq</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">confs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_snapshots</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">es</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_snapshots</span><span class="p">)</span>
 
-    <span class="n">confs</span> <span class="o">=</span> <span class="p">[</span><span class="n">pos</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
-    <span class="n">es</span> <span class="o">=</span> <span class="p">[</span><span class="n">E_tot</span><span class="p">]</span>
-    <span class="n">hists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Initial energy</span>
+    <span class="n">E_tot</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">)</span>
+    <span class="n">conf_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">confs</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
+    <span class="n">es</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_tot</span>
+    <span class="n">conf_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+        
         <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-        <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">disp</span><span class="p">,</span> <span class="n">disp</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+        <span class="c1"># Generate displacement</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">disp</span><span class="p">,</span> <span class="n">disp</span><span class="p">)</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">disp</span><span class="p">,</span> <span class="n">disp</span><span class="p">)</span>
+        <span class="n">dz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">disp</span><span class="p">,</span> <span class="n">disp</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">])</span>
+
         <span class="n">r_j_new</span> <span class="o">=</span> <span class="n">pbc_wrap</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
 
-        <span class="n">dE</span> <span class="o">=</span> <span class="n">E_disp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">r_j_new</span><span class="p">)</span> <span class="o">-</span> <span class="n">E_disp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="c1"># Energy change for displacement</span>
+        <span class="n">e_old</span> <span class="o">=</span> <span class="n">E_disp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">e_new</span> <span class="o">=</span> <span class="n">E_disp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">r_j_new</span><span class="p">)</span>
+        <span class="n">dE</span> <span class="o">=</span> <span class="n">e_new</span> <span class="o">-</span> <span class="n">e_old</span>
+
 
         <span class="k">if</span> <span class="n">dE</span> <span class="o">&lt;=</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dE</span> <span class="o">/</span> <span class="n">T</span><span class="p">):</span>
+
             <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_j_new</span>
             <span class="n">E_tot</span> <span class="o">+=</span> <span class="n">dE</span>
 
         <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 
-            <span class="n">es</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">E_tot</span><span class="p">)</span>
-            <span class="n">confs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+            <span class="n">confs</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
+            <span class="n">es</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_tot</span>
+            <span class="n">conf_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="n">confs</span><span class="p">,</span> <span class="n">es</span>
 </pre></div>
@@ -815,7 +798,7 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
 TypingError                               Traceback (most recent call last)
-Cell In[10], line 2
+Cell In[9], line 2
       1 #%time 
 ----&gt; 2 confs, es = run_MC_LJ(pos, **params)
 
@@ -836,12 +819,12 @@ File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numba/co
 TypingError: Failed in nopython mode pipeline (step: nopython frontend)
 failed to unpack float64
 
-File &quot;../../../../../../tmp/ipykernel_2323/2760174395.py&quot;, line 22:
+File &quot;../../../../../../tmp/ipykernel_2436/3464146160.py&quot;, line 13:
 &lt;source missing, REPL/exec in use?&gt;
 
-During: typing of exhaust iter at /tmp/ipykernel_2323/2760174395.py (22)
+During: typing of exhaust iter at /tmp/ipykernel_2436/3464146160.py (13)
 
-File &quot;../../../../../../tmp/ipykernel_2323/2760174395.py&quot;, line 22:
+File &quot;../../../../../../tmp/ipykernel_2436/3464146160.py&quot;, line 13:
 &lt;source missing, REPL/exec in use?&gt;
 </pre></div>
 </div>
