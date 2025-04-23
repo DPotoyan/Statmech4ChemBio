@@ -476,6 +476,7 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lj-model-of-a-simple-fluids-noble-gases">LJ model of a simple fluids, noble gases</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-the-system-and-watch-out-for-clashes">Initialize the system, and watch out for clashes!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-boundary-conditions-and-minimum-image-criterion">Periodic Boundary conditions and minimum image criterion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lennar-jones-potential">Lennar Jones potential</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-pairwise-distances-and-energies">Computing pairwise distances and energies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-engine-for-lj-fluid-in-3d-nvt-ensemble">MC engine for LJ fluid in 3D (NVT ensemble)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-mcmc-simulation-on-lj-system">Running MCMC simulation on LJ system</a></li>
@@ -621,7 +622,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9153c16b52f147c7bca16b0b669bb14a"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "6295d39cb86049948c3803f762ac71a7"}</script></div>
 </div>
 </section>
 <section id="periodic-boundary-conditions-and-minimum-image-criterion">
@@ -631,11 +632,18 @@ document.write(`
 <li><p>What should be the distance between partiles? There is some mbiguity because distance between atoms may now include crossing the system boundary and re-entering. This is identical to introducing copies of the particles around the simulation box. We adopt <strong>minimum image convention</strong> by choosing the shortest distance possible</p></li>
 </ul>
 <p><img alt="" src="../_images/pbc_fig1.gif" /></p>
-<p><img alt="" src="../_images/pbc_fig2.gif" /></p>
-<ul class="simple">
-<li><p>By adopting minimum image convention we consider the closest of all ‘image partners’ (plus the original) of every atom for calculating interaction. The animation below highlights the image partners of the two red atoms that are closest to the green atom.</p></li>
-<li><p>To minimize distance between points we evaluate distances along x, y and z dimension and choose the smallest possible one.</p></li>
-</ul>
+<figure class="align-default" id="id1">
+<a class="bg-primary reference internal image-reference" href="../_images/pbc1.png"><img alt="../_images/pbc1.png" class="bg-primary" src="../_images/pbc1.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Perioidc Boundary Conditions</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id2">
+<a class="bg-primary reference internal image-reference" href="../_images/pbc2.png"><img alt="../_images/pbc2.png" class="bg-primary" src="../_images/pbc2.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Minimum Image Convention showing that we only track particles with clsoest distance.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pbc_basic</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
@@ -653,10 +661,41 @@ document.write(`
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrap all vector components into [-L/2, L/2) assuming box centered at origin.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="k">return</span> <span class="p">(</span><span class="n">r_vec</span> <span class="o">+</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span> <span class="o">-</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span>
 </pre></div>
 </div>
 </div>
+</div>
+</section>
+<section id="lennar-jones-potential">
+<h2>Lennar Jones potential<a class="headerlink" href="#lennar-jones-potential" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">widgets</span>
+
+<span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span><span class="n">eps</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_lj</span><span class="p">(</span><span class="n">sig</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="n">r</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">lj</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">eps</span> <span class="o">*</span>  <span class="p">(</span> <span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">12</span> <span class="o">-</span><span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">6</span> <span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">lj</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">eps</span><span class="o">*</span><span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span>  <span class="mi">4</span><span class="o">*</span><span class="n">eps</span><span class="o">*</span><span class="p">(</span><span class="n">sig</span><span class="o">/</span><span class="n">r</span><span class="p">)</span><span class="o">**</span><span class="mi">12</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$U(r)$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;LJ&#39;</span><span class="p">,</span> <span class="s1">&#39;Attr-LJ&#39;</span><span class="p">,</span><span class="s1">&#39;Repuls-LJ&#39;</span> <span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "696e3e7b0a564117882fb87fd52b36c9"}</script></div>
 </div>
 </section>
 <section id="computing-pairwise-distances-and-energies">
@@ -691,18 +730,22 @@ document.write(`
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute interaction energy of particle j at trial position r_j.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
     <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">trunc_sq</span> <span class="o">=</span> <span class="n">trunc</span><span class="o">**</span><span class="mi">2</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
             <span class="k">continue</span>
+
         <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pbc_wrap</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">r_j</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
         <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">r_sq</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
             <span class="k">continue</span>
+
         <span class="k">if</span> <span class="n">r_sq</span> <span class="o">&lt;=</span> <span class="n">trunc_sq</span><span class="p">:</span>
             <span class="n">inv_r_sq</span> <span class="o">=</span> <span class="n">sig</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">r_sq</span>
             <span class="n">energy</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">eps</span> <span class="o">*</span> <span class="p">(</span><span class="n">inv_r_sq</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">inv_r_sq</span><span class="o">**</span><span class="mf">1.5</span><span class="p">)</span>
@@ -732,7 +775,8 @@ document.write(`
     <span class="c1"># Initial energy</span>
     <span class="n">conf_index</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">confs</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
-    <span class="n">es</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">)</span>
+    <span class="n">E_tot</span> <span class="o">=</span> <span class="n">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">)</span>
+    <span class="n">es</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_tot</span>
     <span class="n">conf_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
@@ -774,8 +818,10 @@ document.write(`
 <h2>Running MCMC simulation on LJ system<a class="headerlink" href="#running-mcmc-simulation-on-lj-system" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span>
-<span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Initial conditions and parameters</span>
+
+<span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> 
+                    <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span>
               <span class="n">T</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> 
@@ -783,46 +829,69 @@ document.write(`
               <span class="n">trunc</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
               <span class="n">disp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
               <span class="n">freq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1">#%time </span>
+<span class="n">confs</span><span class="p">,</span> <span class="n">es</span> <span class="o">=</span> <span class="n">run_MC_LJ</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#%time </span>
-<span class="n">confs</span><span class="p">,</span> <span class="n">es</span> <span class="o">=</span> <span class="n">run_MC_LJ</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncAnimation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="c1"># Thin frames</span>
+<span class="n">step_skip</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">confs_thinned</span> <span class="o">=</span> <span class="n">confs</span><span class="p">[::</span><span class="n">step_skip</span><span class="p">]</span>
+
+<span class="c1"># 2D projection</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">scat</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;MC-LJ (X-Y Projection)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">confs_thinned</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
+    <span class="n">scat</span><span class="o">.</span><span class="n">set_offsets</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># XY only</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">frame</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">step_skip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">scat</span><span class="p">,</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">confs_thinned</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>---------------------------------------------------------------------------
-NotDefinedError                           Traceback (most recent call last)
-Cell In[9], line 2
-      1 #%time 
-----&gt; 2 confs, es = run_MC_LJ(pos, **params)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">27</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">confs_thinned</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">27</span> <span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
 
-File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numba/core/dispatcher.py:476, in _DispatcherBase._compile_for_args(self, *args, **kws)
-    471     error_rewrite(e, &#39;unsupported_error&#39;)
-    472 except (errors.NotDefinedError, errors.RedefinedError,
-    473         errors.VerificationError) as e:
-    474     # These errors are probably from an issue with either the code
-    475     # supplied being syntactically or otherwise invalid
---&gt; 476     error_rewrite(e, &#39;interpreter&#39;)
-    477 except errors.ConstantInferenceError as e:
-    478     # this is from trying to infer something as constant when it isn&#39;t
-    479     # or isn&#39;t supported as a constant
-    480     error_rewrite(e, &#39;constant_inference&#39;)
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/animation.py:1284,</span> in <span class="ni">Animation.to_html5_video</span><span class="nt">(self, embed_limit)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1281</span> <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s2">&quot;temp.m4v&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1282</span> <span class="c1"># We create a writer manually so that we can get the</span>
+<span class="g g-Whitespace">   </span><span class="mi">1283</span> <span class="c1"># appropriate size for the tag</span>
+<span class="ne">-&gt; </span><span class="mi">1284</span> <span class="n">Writer</span> <span class="o">=</span> <span class="n">writers</span><span class="p">[</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.writer&#39;</span><span class="p">]]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1285</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">Writer</span><span class="p">(</span><span class="n">codec</span><span class="o">=</span><span class="s1">&#39;h264&#39;</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1286</span>                 <span class="n">bitrate</span><span class="o">=</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.bitrate&#39;</span><span class="p">],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1287</span>                 <span class="n">fps</span><span class="o">=</span><span class="mf">1000.</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interval</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1288</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">writer</span><span class="o">=</span><span class="n">writer</span><span class="p">)</span>
 
-File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numba/core/dispatcher.py:409, in _DispatcherBase._compile_for_args.&lt;locals&gt;.error_rewrite(e, issue_type)
-    407     raise e
-    408 else:
---&gt; 409     raise e.with_traceback(None)
+<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/animation.py:148,</span> in <span class="ni">MovieWriterRegistry.__getitem__</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">147</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_registered</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="ne">--&gt; </span><span class="mi">148</span> <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Requested MovieWriter (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">) not available&quot;</span><span class="p">)</span>
 
-NotDefinedError: Failed in nopython mode pipeline (step: analyzing bytecode)
-The compiler failed to analyze the bytecode. Variable &#39;E_tot&#39; is not defined.
-
-File &quot;../../../../../../tmp/ipykernel_2432/2393613982.py&quot;, line 39:
-&lt;source missing, REPL/exec in use?&gt;
+<span class="ne">RuntimeError</span>: Requested MovieWriter (ffmpeg) not available
 </pre></div>
 </div>
 </div>
@@ -847,15 +916,17 @@ File &quot;../../../../../../tmp/ipykernel_2432/2393613982.py&quot;, line 39:
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
 
 <span class="c1"># Thin frames</span>
-<span class="n">step_skip</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">step_skip</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">confs_thinned</span> <span class="o">=</span> <span class="n">confs</span><span class="p">[::</span><span class="n">step_skip</span><span class="p">]</span>
 
 <span class="c1"># 2D projection</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">scat</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+<span class="n">scat</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;MC-LJ (X-Y Projection)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
     <span class="n">pos</span> <span class="o">=</span> <span class="n">confs_thinned</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
@@ -863,6 +934,7 @@ File &quot;../../../../../../tmp/ipykernel_2432/2393613982.py&quot;, line 39:
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">frame</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">step_skip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">scat</span><span class="p">,</span>
 
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">confs_thinned</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
 </pre></div>
@@ -870,14 +942,22 @@ File &quot;../../../../../../tmp/ipykernel_2432/2393613982.py&quot;, line 39:
 </div>
 </details>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_g_r</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">dr</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">r_max</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_g_r</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">dr</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">r_max</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute radial distribution function g(r) from a list of configurations.</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">    configs (list): List of N x 3 arrays of particle positions.</span>
+<span class="sd">    configs (array): Array of shape (n_snapshots, N, 3) with particle positions.</span>
 <span class="sd">    L (float): Box length.</span>
 <span class="sd">    dr (float): Bin width for r.</span>
 <span class="sd">    r_max (float): Max distance to consider (default L/2).</span>
@@ -886,8 +966,8 @@ File &quot;../../../../../../tmp/ipykernel_2432/2393613982.py&quot;, line 39:
 <span class="sd">    r (np.ndarray): Array of distance bin centers.</span>
 <span class="sd">    g_r (np.ndarray): Radial distribution function values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
+    
     <span class="k">if</span> <span class="n">r_max</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">r_max</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="mi">2</span>
 
@@ -900,16 +980,16 @@ File &quot;../../../../../../tmp/ipykernel_2432/2393613982.py&quot;, line 39:
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
                 <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                
                 <span class="c1"># Apply minimum image convention</span>
                 <span class="n">r_vec</span> <span class="o">-=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r_vec</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
                 <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r_vec</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">r_max</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">r_max</span> <span class="o">-</span> <span class="mf">1e-8</span><span class="p">:</span>  <span class="c1"># avoid overflow</span>
                     <span class="n">bin_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span> <span class="o">/</span> <span class="n">dr</span><span class="p">)</span>
-                    <span class="n">hist</span><span class="p">[</span><span class="n">bin_index</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>  <span class="c1"># each pair counts once, but both particles contribute</span>
+                    <span class="n">hist</span><span class="p">[</span><span class="n">bin_index</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>  <span class="c1"># each pair contributes once</span>
 
         <span class="n">norm</span> <span class="o">+=</span> <span class="n">N</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="c1"># Normalize g(r)</span>
     <span class="n">rho</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">configs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">L</span><span class="o">**</span><span class="mi">3</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">+</span> <span class="n">dr</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">shell_vol</span> <span class="o">=</span> <span class="mi">4</span><span class="o">/</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">((</span><span class="n">r</span> <span class="o">+</span> <span class="n">dr</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">dr</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
@@ -920,6 +1000,7 @@ File &quot;../../../../../../tmp/ipykernel_2432/2393613982.py&quot;, line 39:
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1031,6 +1112,7 @@ Try implementing your functions using numpy methods instead of having multiple f
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lj-model-of-a-simple-fluids-noble-gases">LJ model of a simple fluids, noble gases</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-the-system-and-watch-out-for-clashes">Initialize the system, and watch out for clashes!</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-boundary-conditions-and-minimum-image-criterion">Periodic Boundary conditions and minimum image criterion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lennar-jones-potential">Lennar Jones potential</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-pairwise-distances-and-energies">Computing pairwise distances and energies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-engine-for-lj-fluid-in-3d-nvt-ensemble">MC engine for LJ fluid in 3D (NVT ensemble)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-mcmc-simulation-on-lj-system">Running MCMC simulation on LJ system</a></li>
