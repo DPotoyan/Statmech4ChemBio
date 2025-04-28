@@ -63,6 +63,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '5_fluids/mc_lj';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -204,7 +206,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="Intro2MD.html">Molecular Dynamics</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="md_lj.html">MD simulations of fluids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="md_lj.html">MD/MC simulations of fluids</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../6_kinetics/intro.html">Kinetics</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -475,10 +477,21 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">MC simulations of fluids</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lj-model-of-a-simple-fluids-noble-gases">LJ model of a simple fluids, noble gases</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-the-system-and-watch-out-for-clashes">Initialize the system, and watch out for clashes!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-simulation-of-a-lennard-jones-fluid">Monte Carlo Simulation of a Lennard-Jones Fluid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lennard-jones-lj-potential">Lennard-Jones (LJ) Potential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metropolis-monte-carlo-algorithm">Metropolis Monte Carlo Algorithm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-boundary-conditions-and-minimum-image-criterion">Periodic Boundary conditions and minimum image criterion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lennar-jones-potential">Lennar Jones potential</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-pairwise-distances-and-energies">Computing pairwise distances and energies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-structure">Code Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#init-self-rho-0-88-n-cell-3-t-1-0-rcut-2-5">1. <code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">rho=0.88,</span> <span class="pre">N_cell=3,</span> <span class="pre">T=1.0,</span> <span class="pre">rcut=2.5)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-image-rij-l">2. <code class="docutils literal notranslate"><span class="pre">minimum_image(rij,</span> <span class="pre">L)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#particle-energy-idx">3. <code class="docutils literal notranslate"><span class="pre">particle_energy(idx)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#total-energy">4. <code class="docutils literal notranslate"><span class="pre">total_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-move-max-disp-0-1">5. <code class="docutils literal notranslate"><span class="pre">mc_move(max_disp=0.1)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample">6. <code class="docutils literal notranslate"><span class="pre">sample()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-nsteps-50000-freq-out-500">7. <code class="docutils literal notranslate"><span class="pre">simulate(nsteps=50000,</span> <span class="pre">freq_out=500)</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-engine-for-lj-fluid-in-3d-nvt-ensemble">MC engine for LJ fluid in 3D (NVT ensemble)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-mcmc-simulation-on-lj-system">Running MCMC simulation on LJ system</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>
@@ -498,133 +511,62 @@ document.write(`
                   
   <section id="mc-simulations-of-fluids">
 <h1>MC simulations of fluids<a class="headerlink" href="#mc-simulations-of-fluids" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">njit</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">output</span>
-    <span class="n">output</span><span class="o">.</span><span class="n">enable_custom_widget_manager</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All good to go&#39;</span><span class="p">)</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Okay we are not in Colab just proceed as if nothing happened&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Okay we are not in Colab just proceed as if nothing happened
-</pre></div>
-</div>
-</div>
+<div class="admonition-what-we-will-learn admonition">
+<p class="admonition-title"><strong>What we will learn</strong></p>
+<ul class="simple">
+<li><p><strong>Monte Carlo sampling</strong>: Random sampling of configurations with correct Boltzmann probability.</p></li>
+<li><p><strong>Minimum image convention</strong>: Essential for periodic boundary conditions.</p></li>
+<li><p><strong>Statistical ensemble is implemented via Metropolis conditions</strong>: Simulating canonical ensemble (constant <span class="math notranslate nohighlight">\(NVT\)</span>) by accepting or rejecting moves via comparions of Botlzman weights</p></li>
+<li><p><strong>Structural characterization</strong>: Compute <span class="math notranslate nohighlight">\(g(r)\)</span> to understand spatial correlations.</p></li>
+</ul>
 </div>
 </section>
 <section id="lj-model-of-a-simple-fluids-noble-gases">
 <h1>LJ model of a simple fluids, noble gases<a class="headerlink" href="#lj-model-of-a-simple-fluids-noble-gases" title="Permalink to this heading">#</a></h1>
 <p><strong>Check out reference values of <a class="reference external" href="https://www.nist.gov/mml/csd/chemical-informatics-research-group/lennard-jones-fluid-properties">LJ fluid properties tabulated by NIST</a></strong></p>
-<section id="initialize-the-system-and-watch-out-for-clashes">
-<h2>Initialize the system, and watch out for clashes!<a class="headerlink" href="#initialize-the-system-and-watch-out-for-clashes" title="Permalink to this heading">#</a></h2>
+<section id="monte-carlo-simulation-of-a-lennard-jones-fluid">
+<h2>Monte Carlo Simulation of a Lennard-Jones Fluid<a class="headerlink" href="#monte-carlo-simulation-of-a-lennard-jones-fluid" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Density and unit cell number can be used to fully specify a lattice packed with LJ particles</p></li>
+<li><p>This simulation models a <strong>Lennard-Jones fluid</strong> using the <strong>Metropolis Monte Carlo (MC)</strong> algorithm in <strong>canonical ensemble</strong> (constant <span class="math notranslate nohighlight">\(NVT\)</span>).</p></li>
+<li><p>Particles are placed in a <strong>periodic cubic box</strong> and random moves are proposed and accepted or rejected based on the <strong>Boltzmann probability</strong>.</p></li>
+<li><p>This simulation is organized into a <strong>clean object-oriented structure</strong> where:</p>
+<ul>
+<li><p>The system state (positions, box size, temperature) is handled inside a <strong><code class="docutils literal notranslate"><span class="pre">LJ_MC_System</span></code></strong> class.</p></li>
+<li><p>The simulation tracks <strong>total energy</strong> and <strong>pair correlation function</strong> <span class="math notranslate nohighlight">\( g(r) \)</span> over time.</p></li>
 </ul>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">IC_pos</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generate FCC lattice positions for Lennard-Jones particles.</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">    rho (float): Number density (default 0.88).</span>
-<span class="sd">    N_cell (int): Number of unit cells per dimension (default 3).</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">    pos (np.ndarray): Particle positions.</span>
-<span class="sd">    L (float): Box length.</span>
-<span class="sd">    N (int): Number of particles.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-    <span class="n">N</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">N_cell</span><span class="o">**</span><span class="mi">3</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">L_cell</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">N_cell</span>
-
-    <span class="n">base</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
-                     <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
-                     <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
-
-    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">),</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">base</span><span class="p">])</span>
-    <span class="n">pos</span> <span class="o">*=</span> <span class="n">L_cell</span>
-
-    <span class="k">return</span> <span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">cell_plotter</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">marker_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">marker_opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Plot a 3D scatter of an FCC lattice for Lennard-Jones particles.</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">    rho (float): Number density (default 0.88).</span>
-<span class="sd">    N_cell (int): Number of unit cells per dimension (default 3).</span>
-<span class="sd">    marker_size (float): Size of plotted particles (default 5).</span>
-<span class="sd">    marker_opacity (float): Opacity of plotted particles (default 0.5).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="n">N_cell</span><span class="p">)</span>
-
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">z</span><span class="o">=</span><span class="n">pos</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
-        <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;markers&#39;</span><span class="p">,</span>
-        <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">marker_size</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="n">marker_opacity</span><span class="p">)</span>
-    <span class="p">)])</span>
-
-    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
-        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;FCC Lattice: ρ = </span><span class="si">{</span><span class="n">rho</span><span class="si">}</span><span class="s2">, N = </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span>
-        <span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-            <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">]),</span>
-            <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">]),</span>
-            <span class="n">zaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">]),</span>
-            <span class="n">aspectmode</span><span class="o">=</span><span class="s1">&#39;cube&#39;</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
-
-    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interactive</span><span class="p">(</span><span class="n">cell_plotter</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">N_cell</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "83af3ca3543e448497b54485f582a435"}</script></div>
-</div>
+</li>
+</ul>
+</section>
+<section id="lennard-jones-lj-potential">
+<h2>Lennard-Jones (LJ) Potential<a class="headerlink" href="#lennard-jones-lj-potential" title="Permalink to this heading">#</a></h2>
+<p>Each pair of particles interacts through the LJ potential:</p>
+<div class="math notranslate nohighlight">
+\[
+V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r\)</span> is the distance between two particles.</p></li>
+<li><p>The potential captures <strong>short-range repulsion</strong> and <strong>long-range attraction</strong> typical of simple fluids.</p></li>
+</ul>
+<p>A <strong>cutoff distance</strong> <span class="math notranslate nohighlight">\(r_c\)</span> is used to make calculations more efficient.</p>
+</section>
+<section id="metropolis-monte-carlo-algorithm">
+<h2>Metropolis Monte Carlo Algorithm<a class="headerlink" href="#metropolis-monte-carlo-algorithm" title="Permalink to this heading">#</a></h2>
+<p>At each step:</p>
+<ol class="arabic simple">
+<li><p>Randomly pick a particle.</p></li>
+<li><p>Propose a random displacement.</p></li>
+<li><p>Compute the change in energy <span class="math notranslate nohighlight">\(\Delta E\)</span>.</p></li>
+<li><p>Accept or reject the move based on the Metropolis criterion:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+P_{\text{accept}} = \min\left(1, e^{-\beta \Delta E}\right)
+\]</div>
+<ul class="simple">
+<li><p>If the move is rejected, the particle returns to its previous position.</p></li>
+</ul>
 </section>
 <section id="periodic-boundary-conditions-and-minimum-image-criterion">
 <h2><a class="reference external" href="https://en.wikipedia.org/wiki/Periodic_boundary_conditions">Periodic Boundary conditions and minimum image criterion</a><a class="headerlink" href="#periodic-boundary-conditions-and-minimum-image-criterion" title="Permalink to this heading">#</a></h2>
@@ -667,6 +609,23 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>   <span class="k">elif</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">:</span> <span class="n">x</span> <span class="o">+=</span> <span class="n">L</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>   <span class="k">return</span> <span class="n">x</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="nd">@njit</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">def</span><span class="w"> </span><span class="nf">pbc_wrap</span><span class="p">(</span><span class="n">r_vec</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span><span class="sd">     Wrap all vector components into [-L/2, L/2) assuming box centered at origin.</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="k">return</span> <span class="p">(</span><span class="n">r_vec</span> <span class="o">+</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="n">L</span> <span class="o">-</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="ne">NameError</span>: name &#39;njit&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="lennar-jones-potential">
@@ -695,67 +654,89 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "eb14af914dcc41f49727f656f509d0a6"}</script></div>
 </div>
 </section>
-<section id="computing-pairwise-distances-and-energies">
-<h2>Computing pairwise distances and energies<a class="headerlink" href="#computing-pairwise-distances-and-energies" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@njit</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">,</span> <span class="n">sig</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute total Lennard-Jones energy with cutoff and PBC.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-    <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">trunc_sq</span> <span class="o">=</span> <span class="n">trunc</span><span class="o">**</span><span class="mi">2</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-            <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pbc_wrap</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">L</span><span class="p">)</span>
-            <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">r_sq</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-                <span class="k">continue</span>  <span class="c1"># avoid singularity</span>
-                
-            <span class="k">if</span> <span class="n">r_sq</span> <span class="o">&lt;=</span> <span class="n">trunc_sq</span><span class="p">:</span>
-                <span class="n">inv_r_sq</span> <span class="o">=</span> <span class="n">sig</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">r_sq</span>
-                <span class="n">energy</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">eps</span> <span class="o">*</span> <span class="p">(</span><span class="n">inv_r_sq</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">inv_r_sq</span><span class="o">**</span><span class="mf">1.5</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">energy</span>
-
-<span class="nd">@njit</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">E_disp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">r_j</span><span class="p">,</span> <span class="n">sig</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute interaction energy of particle j at trial position r_j.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-    <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">trunc_sq</span> <span class="o">=</span> <span class="n">trunc</span><span class="o">**</span><span class="mi">2</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-
-        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
-            <span class="k">continue</span>
-
-        <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pbc_wrap</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">r_j</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
-        <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">r_sq</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-            <span class="k">continue</span>
-
-        <span class="k">if</span> <span class="n">r_sq</span> <span class="o">&lt;=</span> <span class="n">trunc_sq</span><span class="p">:</span>
-            <span class="n">inv_r_sq</span> <span class="o">=</span> <span class="n">sig</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">r_sq</span>
-            <span class="n">energy</span> <span class="o">+=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">eps</span> <span class="o">*</span> <span class="p">(</span><span class="n">inv_r_sq</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="n">inv_r_sq</span><span class="o">**</span><span class="mf">1.5</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">energy</span>
-</pre></div>
-</div>
-</div>
-</div>
+<section id="code-structure">
+<h2>Code Structure<a class="headerlink" href="#code-structure" title="Permalink to this heading">#</a></h2>
+<p>The simulation is organized into a <strong>single class</strong>: <code class="docutils literal notranslate"><span class="pre">LJ_MC_System</span></code>.</p>
+<p>Each function of the class has a clear role:</p>
+<section id="init-self-rho-0-88-n-cell-3-t-1-0-rcut-2-5">
+<h3>1. <code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">rho=0.88,</span> <span class="pre">N_cell=3,</span> <span class="pre">T=1.0,</span> <span class="pre">rcut=2.5)</span></code><a class="headerlink" href="#init-self-rho-0-88-n-cell-3-t-1-0-rcut-2-5" title="Permalink to this heading">#</a></h3>
+<p><strong>Purpose</strong>: Initialize the system.</p>
+<ul class="simple">
+<li><p>Set up the <strong>system parameters</strong>:</p>
+<ul>
+<li><p>Number of particles <span class="math notranslate nohighlight">\(N\)</span>, box length <span class="math notranslate nohighlight">\(L\)</span>, temperature <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Arrange particles initially in a <strong>face-centered cubic (FCC)</strong> lattice to avoid overlaps.</p></li>
+<li><p>Initialize <strong>pair indices</strong> for efficient distance calculations.</p></li>
+<li><p>Store parameters like <strong>cutoff distance</strong> <span class="math notranslate nohighlight">\(r_c\)</span> and <strong>inverse temperature</strong> <span class="math notranslate nohighlight">\(\beta\)</span>.</p></li>
+</ul>
+</section>
+<section id="minimum-image-rij-l">
+<h3>2. <code class="docutils literal notranslate"><span class="pre">minimum_image(rij,</span> <span class="pre">L)</span></code><a class="headerlink" href="#minimum-image-rij-l" title="Permalink to this heading">#</a></h3>
+<p><strong>Purpose</strong>:<br />
+Apply the <strong>minimum image convention</strong> to correctly compute distances across periodic boundaries.</p>
+<p>Formula:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{r}_{ij} = \mathbf{r}_{ij} - L \times \text{round}(\mathbf{r}_{ij}/L)
+\]</div>
+</section>
+<section id="particle-energy-idx">
+<h3>3. <code class="docutils literal notranslate"><span class="pre">particle_energy(idx)</span></code><a class="headerlink" href="#particle-energy-idx" title="Permalink to this heading">#</a></h3>
+<p><strong>Purpose</strong>:</p>
+<p>Compute the <strong>interaction energy</strong> between a single particle and all others.</p>
+<ul class="simple">
+<li><p>Needed to evaluate the energy change <span class="math notranslate nohighlight">\(\Delta E\)</span> during a move.</p></li>
+<li><p>Excludes self-interactions.</p></li>
+<li><p>Only includes pairs within cutoff radius <span class="math notranslate nohighlight">\(r_c\)</span>.</p></li>
+</ul>
+</section>
+<section id="total-energy">
+<h3>4. <code class="docutils literal notranslate"><span class="pre">total_energy()</span></code><a class="headerlink" href="#total-energy" title="Permalink to this heading">#</a></h3>
+<p><strong>Purpose</strong>:<br />
+Compute the <strong>total potential energy</strong> of the entire system.</p>
+<ul class="simple">
+<li><p>Loops over all unique particle pairs.</p></li>
+<li><p>Applies the Lennard-Jones potential with cutoff.</p></li>
+</ul>
+</section>
+<section id="mc-move-max-disp-0-1">
+<h3>5. <code class="docutils literal notranslate"><span class="pre">mc_move(max_disp=0.1)</span></code><a class="headerlink" href="#mc-move-max-disp-0-1" title="Permalink to this heading">#</a></h3>
+<p><strong>Purpose</strong>:</p>
+<p>Perform a <strong>single Metropolis MC move</strong>:</p>
+<ul class="simple">
+<li><p>Randomly choose a particle.</p></li>
+<li><p>Propose a random displacement up to <code class="docutils literal notranslate"><span class="pre">max_disp</span></code>.</p></li>
+<li><p>Accept or reject the move based on the energy difference and Metropolis criterion.</p></li>
+</ul>
+</section>
+<section id="sample">
+<h3>6. <code class="docutils literal notranslate"><span class="pre">sample()</span></code><a class="headerlink" href="#sample" title="Permalink to this heading">#</a></h3>
+<p><strong>Purpose</strong>:<br />
+Compute a <strong>histogram</strong> of pair distances.</p>
+<ul class="simple">
+<li><p>Used for calculating the <strong>pair correlation function</strong> <span class="math notranslate nohighlight">\(g(r)\)</span>.</p></li>
+<li><p>Histograms the distance between all unique particle pairs.</p></li>
+</ul>
+</section>
+<section id="simulate-nsteps-50000-freq-out-500">
+<h3>7. <code class="docutils literal notranslate"><span class="pre">simulate(nsteps=50000,</span> <span class="pre">freq_out=500)</span></code><a class="headerlink" href="#simulate-nsteps-50000-freq-out-500" title="Permalink to this heading">#</a></h3>
+<p><strong>Purpose</strong>:<br />
+Run the full <strong>Monte Carlo simulation loop</strong>.</p>
+<ul class="simple">
+<li><p>Repeat <code class="docutils literal notranslate"><span class="pre">mc_move()</span></code> for <code class="docutils literal notranslate"><span class="pre">nsteps</span></code> steps.</p></li>
+<li><p>Every <code class="docutils literal notranslate"><span class="pre">freq_out</span></code> steps:</p>
+<ul>
+<li><p>Record the total energy.</p></li>
+<li><p>Sample the pair distance histogram.</p></li>
+</ul>
+</li>
+<li><p>Return arrays of recorded energies and histograms.</p></li>
+</ul>
+</section>
 </section>
 <section id="mc-engine-for-lj-fluid-in-3d-nvt-ensemble">
 <h2>MC engine for LJ fluid in 3D (NVT ensemble)<a class="headerlink" href="#mc-engine-for-lj-fluid-in-3d-nvt-ensemble" title="Permalink to this heading">#</a></h2>
@@ -763,53 +744,84 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
 
-<span class="nd">@njit</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">run_MC_LJ</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">trunc</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LJ_MC_System</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">rcut</span><span class="o">=</span><span class="mf">2.5</span><span class="p">):</span>
+        <span class="c1"># System parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">N_cell</span><span class="o">**</span><span class="mi">3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rho</span> <span class="o">=</span> <span class="n">rho</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">/</span> <span class="n">rho</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">T</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">T</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rcut</span> <span class="o">=</span> <span class="n">rcut</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rcut_sq</span> <span class="o">=</span> <span class="n">rcut</span><span class="o">**</span><span class="mi">2</span>
 
-    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-    <span class="n">n_snapshots</span> <span class="o">=</span> <span class="n">steps</span> <span class="o">//</span> <span class="n">freq</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="n">confs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n_snapshots</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-    <span class="n">es</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_snapshots</span><span class="p">)</span>
+        <span class="c1"># Create FCC lattice positions</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]])</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">b</span> <span class="o">+</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_cell</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">base</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">/</span> <span class="n">N_cell</span><span class="p">)</span>
 
-    <span class="c1"># Initial energy</span>
-    <span class="n">conf_index</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">confs</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
-    <span class="n">E_tot</span> <span class="o">=</span> <span class="n">getE_tot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">)</span>
-    <span class="n">es</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_tot</span>
-    <span class="n">conf_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Pair indices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu_indices</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
-        
-        <span class="n">j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">minimum_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_vec</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">r_vec</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span>
 
-        <span class="c1"># Generate displacement</span>
-        <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">disp</span><span class="p">,</span> <span class="n">disp</span><span class="p">)</span>
-        <span class="n">dy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">disp</span><span class="p">,</span> <span class="n">disp</span><span class="p">)</span>
-        <span class="n">dz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">disp</span><span class="p">,</span> <span class="n">disp</span><span class="p">)</span>
-        <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">])</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">total_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">r_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">])</span>
+        <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">r_sq</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcut_sq</span>
+        <span class="n">r2_inv</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">r_sq</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">r6_inv</span> <span class="o">=</span> <span class="n">r2_inv</span><span class="o">**</span><span class="mi">3</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r6_inv</span> <span class="o">*</span> <span class="p">(</span><span class="n">r6_inv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
-        <span class="n">r_j_new</span> <span class="o">=</span> <span class="n">pbc_wrap</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">particle_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">rij</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+        <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rij</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">r_sq</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcut_sq</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">r_sq</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># exclude self-interaction</span>
+        <span class="n">r2_inv</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">r_sq</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">r6_inv</span> <span class="o">=</span> <span class="n">r2_inv</span><span class="o">**</span><span class="mi">3</span>
+        <span class="k">return</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r6_inv</span> <span class="o">*</span> <span class="p">(</span><span class="n">r6_inv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
-        <span class="c1"># Energy change for displacement</span>
-        <span class="n">e_old</span> <span class="o">=</span> <span class="n">E_disp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
-        <span class="n">e_new</span> <span class="o">=</span> <span class="n">E_disp</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">trunc</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">r_j_new</span><span class="p">)</span>
-        <span class="n">dE</span> <span class="o">=</span> <span class="n">e_new</span> <span class="o">-</span> <span class="n">e_old</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mc_move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_disp</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">old_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">old_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_energy</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
 
+        <span class="c1"># Propose move</span>
+        <span class="n">displacement</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">max_disp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">displacement</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span>
 
-        <span class="k">if</span> <span class="n">dE</span> <span class="o">&lt;=</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">dE</span> <span class="o">/</span> <span class="n">T</span><span class="p">):</span>
+        <span class="n">new_energy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">particle_energy</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="n">dE</span> <span class="o">=</span> <span class="n">new_energy</span> <span class="o">-</span> <span class="n">old_energy</span>
 
-            <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_j_new</span>
-            <span class="n">E_tot</span> <span class="o">+=</span> <span class="n">dE</span>
+        <span class="c1"># Metropolis criterion</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">beta</span> <span class="o">*</span> <span class="n">dE</span><span class="p">):</span>
+            <span class="c1"># Reject move</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">old_pos</span>
 
-        <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">freq</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Sample pair distances for g(r) &quot;&quot;&quot;</span>
+        <span class="n">r_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">])</span>
+        <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">hist</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r_sq</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">hist</span>
 
-            <span class="n">confs</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span>
-            <span class="n">es</span><span class="p">[</span><span class="n">conf_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">E_tot</span>
-            <span class="n">conf_index</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nsteps</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">freq_out</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+        <span class="n">hists</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">return</span> <span class="n">confs</span><span class="p">,</span> <span class="n">es</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsteps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mc_move</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="n">freq_out</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">hist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+                <span class="n">hists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+                <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">total_energy</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">hists</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -819,193 +831,22 @@ document.write(`
 <h2>Running MCMC simulation on LJ system<a class="headerlink" href="#running-mcmc-simulation-on-lj-system" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Initial conditions and parameters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lj_mc</span> <span class="o">=</span> <span class="n">LJ_MC_System</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
 
-<span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">N</span> <span class="o">=</span> <span class="n">IC_pos</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> 
-                    <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># Run simulation</span>
+<span class="n">energies</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">lj_mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">nsteps</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">freq_out</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
-<span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span>
-              <span class="n">T</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> 
-              <span class="n">steps</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> 
-              <span class="n">trunc</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
-              <span class="n">disp</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-              <span class="n">freq</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1"># Post-processing</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">lj_mc</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">dr</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">shell_volumes</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">dr</span>
+<span class="n">g_r</span> <span class="o">=</span> <span class="n">hist</span> <span class="o">/</span> <span class="p">(</span><span class="n">lj_mc</span><span class="o">.</span><span class="n">N</span> <span class="o">*</span> <span class="n">lj_mc</span><span class="o">.</span><span class="n">rho</span> <span class="o">*</span> <span class="n">shell_volumes</span><span class="p">)</span>
 
-<span class="c1">#%time </span>
-<span class="n">confs</span><span class="p">,</span> <span class="n">es</span> <span class="o">=</span> <span class="n">run_MC_LJ</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncAnimation</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
-
-<span class="c1"># Thin frames</span>
-<span class="n">step_skip</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">confs_thinned</span> <span class="o">=</span> <span class="n">confs</span><span class="p">[::</span><span class="n">step_skip</span><span class="p">]</span>
-
-<span class="c1"># 2D projection</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">scat</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;MC-LJ (X-Y Projection)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
-    <span class="n">pos</span> <span class="o">=</span> <span class="n">confs_thinned</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
-    <span class="n">scat</span><span class="o">.</span><span class="n">set_offsets</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># XY only</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">frame</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">step_skip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">scat</span><span class="p">,</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">confs_thinned</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">27</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">confs_thinned</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">27</span> <span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/animation.py:1284,</span> in <span class="ni">Animation.to_html5_video</span><span class="nt">(self, embed_limit)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1281</span> <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="s2">&quot;temp.m4v&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1282</span> <span class="c1"># We create a writer manually so that we can get the</span>
-<span class="g g-Whitespace">   </span><span class="mi">1283</span> <span class="c1"># appropriate size for the tag</span>
-<span class="ne">-&gt; </span><span class="mi">1284</span> <span class="n">Writer</span> <span class="o">=</span> <span class="n">writers</span><span class="p">[</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.writer&#39;</span><span class="p">]]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1285</span> <span class="n">writer</span> <span class="o">=</span> <span class="n">Writer</span><span class="p">(</span><span class="n">codec</span><span class="o">=</span><span class="s1">&#39;h264&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1286</span>                 <span class="n">bitrate</span><span class="o">=</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;animation.bitrate&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1287</span>                 <span class="n">fps</span><span class="o">=</span><span class="mf">1000.</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interval</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1288</span> <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">writer</span><span class="o">=</span><span class="n">writer</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/animation.py:148,</span> in <span class="ni">MovieWriterRegistry.__getitem__</span><span class="nt">(self, name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">146</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">147</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_registered</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">148</span> <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Requested MovieWriter (</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">) not available&quot;</span><span class="p">)</span>
-
-<span class="ne">RuntimeError</span>: Requested MovieWriter (ffmpeg) not available
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">es</span><span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.animation</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncAnimation</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">HTML</span>
-
-<span class="c1"># Thin frames</span>
-<span class="n">step_skip</span> <span class="o">=</span> <span class="mi">200</span>
-<span class="n">confs_thinned</span> <span class="o">=</span> <span class="n">confs</span><span class="p">[::</span><span class="n">step_skip</span><span class="p">]</span>
-
-<span class="c1"># 2D projection</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">scat</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;MC-LJ (X-Y Projection)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>
-    <span class="n">pos</span> <span class="o">=</span> <span class="n">confs_thinned</span><span class="p">[</span><span class="n">frame</span><span class="p">]</span>
-    <span class="n">scat</span><span class="o">.</span><span class="n">set_offsets</span><span class="p">(</span><span class="n">pos</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># XY only</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">frame</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">step_skip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">scat</span><span class="p">,</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">ani</span> <span class="o">=</span> <span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="n">frames</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">confs_thinned</span><span class="p">),</span> <span class="n">interval</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">HTML</span><span class="p">(</span><span class="n">ani</span><span class="o">.</span><span class="n">to_html5_video</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_g_r</span><span class="p">(</span><span class="n">configs</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">dr</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">r_max</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute radial distribution function g(r) from a list of configurations.</span>
-
-<span class="sd">    Parameters:</span>
-<span class="sd">    configs (array): Array of shape (n_snapshots, N, 3) with particle positions.</span>
-<span class="sd">    L (float): Box length.</span>
-<span class="sd">    dr (float): Bin width for r.</span>
-<span class="sd">    r_max (float): Max distance to consider (default L/2).</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">    r (np.ndarray): Array of distance bin centers.</span>
-<span class="sd">    g_r (np.ndarray): Radial distribution function values.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    
-    <span class="k">if</span> <span class="n">r_max</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">r_max</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="mi">2</span>
-
-    <span class="n">n_bins</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r_max</span> <span class="o">/</span> <span class="n">dr</span><span class="p">)</span>
-    <span class="n">hist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_bins</span><span class="p">)</span>
-    <span class="n">norm</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
-        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-                <span class="n">r_vec</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                
-                <span class="c1"># Apply minimum image convention</span>
-                <span class="n">r_vec</span> <span class="o">-=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">r_vec</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r_vec</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="n">r_max</span> <span class="o">-</span> <span class="mf">1e-8</span><span class="p">:</span>  <span class="c1"># avoid overflow</span>
-                    <span class="n">bin_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span> <span class="o">/</span> <span class="n">dr</span><span class="p">)</span>
-                    <span class="n">hist</span><span class="p">[</span><span class="n">bin_index</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span>  <span class="c1"># each pair contributes once</span>
-
-        <span class="n">norm</span> <span class="o">+=</span> <span class="n">N</span> <span class="o">*</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">rho</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">configs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="n">L</span><span class="o">**</span><span class="mi">3</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_bins</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">+</span> <span class="n">dr</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">shell_vol</span> <span class="o">=</span> <span class="mi">4</span><span class="o">/</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">((</span><span class="n">r</span> <span class="o">+</span> <span class="n">dr</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">dr</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">ideal_counts</span> <span class="o">=</span> <span class="n">norm</span> <span class="o">*</span> <span class="n">rho</span> <span class="o">*</span> <span class="n">shell_vol</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">configs</span><span class="p">)</span>
-    <span class="n">g_r</span> <span class="o">=</span> <span class="n">hist</span> <span class="o">/</span> <span class="n">ideal_counts</span>
-
-    <span class="k">return</span> <span class="n">r</span><span class="p">,</span> <span class="n">g_r</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">g_r</span> <span class="o">=</span> <span class="n">compute_g_r</span><span class="p">(</span><span class="n">confs</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">dr</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g_r</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$g(r)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1013,29 +854,12 @@ document.write(`
 </section>
 <section id="problems">
 <h2>Problems<a class="headerlink" href="#problems" title="Permalink to this heading">#</a></h2>
-<p><strong>1. Implementing PBC and minimal image convention methods outlined on  <a class="reference external" href="https://en.wikipedia.org/wiki/Periodic_boundary_conditions">Wikipeida</a> in python.</strong></p>
+<p><strong>1. Vary sim parameters</strong></p>
 <ul class="simple">
-<li><p>Write a few functions that take positions of N particles in 3D with shape (N,3) return new coordinates and all inter-particle distances.</p></li>
-</ul>
-<blockquote>
-<div><p>You can generate random positions using <code class="docutils literal notranslate"><span class="pre">np.random</span></code> make sure you have enough particles outside of box to test your functions.
-Try implementing your functions using numpy methods instead of having multiple for loops. That way your functions will run singnificantly faster.</p>
-</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pbc_dists</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
-
-    <span class="o">...</span>
-    
-    <span class="k">return</span> <span class="n">pos</span><span class="p">,</span> <span class="n">dists</span>
-
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Evaluate distribution of energies of your random positions before and after applying pbc_dists.</p></li>
-</ul>
-<p><strong>2. Simulating 2D random walk with PBCs.</strong></p>
-<ul class="simple">
-<li><p>Create a sequence of images or better yet an animation showing the temporal evolution of 10 independent random walkers in 100 by 100 square. Consult the random walk section and notebooks to refresh your memory of random walk simulations.</p></li>
-<li><p>Calculate the root mean square displacement from the origin and show how it scales with time (steps)!</p></li>
+<li><p><strong>Tune maximum displacement</strong> (<code class="docutils literal notranslate"><span class="pre">max_disp</span></code>) to optimize acceptance rate (~40%-50% is ideal).</p></li>
+<li><p><strong>Check how <span class="math notranslate nohighlight">\(g(r)\)</span></strong> changes when density or temperature changes.</p></li>
+<li><p><strong>Implement energy cutoffs with shifted potentials</strong> to smooth out the energy at <span class="math notranslate nohighlight">\(r_c\)</span>.</p></li>
+<li><p><strong>Try simulating hard spheres</strong> (infinite repulsion at contact).</p></li>
 </ul>
 <p><strong>2. Run MC simulations of LJ fluid at several temperatures to identify critical temperature.</strong></p>
 <ul class="simple">
@@ -1111,10 +935,21 @@ Try implementing your functions using numpy methods instead of having multiple f
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">MC simulations of fluids</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lj-model-of-a-simple-fluids-noble-gases">LJ model of a simple fluids, noble gases</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialize-the-system-and-watch-out-for-clashes">Initialize the system, and watch out for clashes!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monte-carlo-simulation-of-a-lennard-jones-fluid">Monte Carlo Simulation of a Lennard-Jones Fluid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lennard-jones-lj-potential">Lennard-Jones (LJ) Potential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metropolis-monte-carlo-algorithm">Metropolis Monte Carlo Algorithm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-boundary-conditions-and-minimum-image-criterion">Periodic Boundary conditions and minimum image criterion</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lennar-jones-potential">Lennar Jones potential</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-pairwise-distances-and-energies">Computing pairwise distances and energies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-structure">Code Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#init-self-rho-0-88-n-cell-3-t-1-0-rcut-2-5">1. <code class="docutils literal notranslate"><span class="pre">__init__(self,</span> <span class="pre">rho=0.88,</span> <span class="pre">N_cell=3,</span> <span class="pre">T=1.0,</span> <span class="pre">rcut=2.5)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimum-image-rij-l">2. <code class="docutils literal notranslate"><span class="pre">minimum_image(rij,</span> <span class="pre">L)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#particle-energy-idx">3. <code class="docutils literal notranslate"><span class="pre">particle_energy(idx)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#total-energy">4. <code class="docutils literal notranslate"><span class="pre">total_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-move-max-disp-0-1">5. <code class="docutils literal notranslate"><span class="pre">mc_move(max_disp=0.1)</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample">6. <code class="docutils literal notranslate"><span class="pre">sample()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulate-nsteps-50000-freq-out-500">7. <code class="docutils literal notranslate"><span class="pre">simulate(nsteps=50000,</span> <span class="pre">freq_out=500)</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-engine-for-lj-fluid-in-3d-nvt-ensemble">MC engine for LJ fluid in 3D (NVT ensemble)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-mcmc-simulation-on-lj-system">Running MCMC simulation on LJ system</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems</a></li>

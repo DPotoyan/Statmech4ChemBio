@@ -15,57 +15,37 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
-from IPython.display import HTML
+def pbc_basic(x, L):
+  '''Wrap a single components into [-L/2, L/2) assuming box centered at origin'''
+    
+  if   x >=  L/2: x -= L  
 
-# Thin frames
-step_skip = 500
-confs_thinned = confs[::step_skip]
+  elif x <= -L/2: x += L
 
-# 2D projection
-fig, ax = plt.subplots(figsize=(5, 5))
-scat = ax.scatter([], [], s=30, alpha=0.6)
-ax.set_xlim(-L/2, L/2)
-ax.set_ylim(-L/2, L/2)
-ax.set_title('MC-LJ (X-Y Projection)')
-ax.set_xlabel('X')
-ax.set_ylabel('Y')
+  return x
 
-def update(frame):
-    pos = confs_thinned[frame]
-    scat.set_offsets(pos[:, :2])  # XY only
-    ax.set_title(f"Step {frame * step_skip}")
-    return scat,
 
-plt.close()
-ani = FuncAnimation(fig, update, frames=len(confs_thinned), interval=100)
-HTML(ani.to_html5_video())
+@njit
+def pbc_wrap(r_vec, L):
+    """
+    Wrap all vector components into [-L/2, L/2) assuming box centered at origin.
+    """
+    
+    return (r_vec + L/2) % L - L/2
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mRuntimeError[0m                              Traceback (most recent call last)
-Cell [0;32mIn[10], line 27[0m
-[1;32m     25[0m plt[38;5;241m.[39mclose()
-[1;32m     26[0m ani [38;5;241m=[39m FuncAnimation(fig, update, frames[38;5;241m=[39m[38;5;28mlen[39m(confs_thinned), interval[38;5;241m=[39m[38;5;241m100[39m)
-[0;32m---> 27[0m HTML([43mani[49m[38;5;241;43m.[39;49m[43mto_html5_video[49m[43m([49m[43m)[49m)
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[1], line 11[0m
+[1;32m      6[0m   [38;5;28;01melif[39;00m x [38;5;241m<[39m[38;5;241m=[39m [38;5;241m-[39mL[38;5;241m/[39m[38;5;241m2[39m: x [38;5;241m+[39m[38;5;241m=[39m L
+[1;32m      8[0m   [38;5;28;01mreturn[39;00m x
+[0;32m---> 11[0m [38;5;129m@njit[39m
+[1;32m     12[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21mpbc_wrap[39m(r_vec, L):
+[1;32m     13[0m [38;5;250m    [39m[38;5;124;03m"""[39;00m
+[1;32m     14[0m [38;5;124;03m    Wrap all vector components into [-L/2, L/2) assuming box centered at origin.[39;00m
+[1;32m     15[0m [38;5;124;03m    """[39;00m
+[1;32m     17[0m     [38;5;28;01mreturn[39;00m (r_vec [38;5;241m+[39m L[38;5;241m/[39m[38;5;241m2[39m) [38;5;241m%[39m L [38;5;241m-[39m L[38;5;241m/[39m[38;5;241m2[39m
 
-File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/animation.py:1284[0m, in [0;36mAnimation.to_html5_video[0;34m(self, embed_limit)[0m
-[1;32m   1281[0m path [38;5;241m=[39m Path(tmpdir, [38;5;124m"[39m[38;5;124mtemp.m4v[39m[38;5;124m"[39m)
-[1;32m   1282[0m [38;5;66;03m# We create a writer manually so that we can get the[39;00m
-[1;32m   1283[0m [38;5;66;03m# appropriate size for the tag[39;00m
-[0;32m-> 1284[0m Writer [38;5;241m=[39m [43mwriters[49m[43m[[49m[43mmpl[49m[38;5;241;43m.[39;49m[43mrcParams[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43manimation.writer[39;49m[38;5;124;43m'[39;49m[43m][49m[43m][49m
-[1;32m   1285[0m writer [38;5;241m=[39m Writer(codec[38;5;241m=[39m[38;5;124m'[39m[38;5;124mh264[39m[38;5;124m'[39m,
-[1;32m   1286[0m                 bitrate[38;5;241m=[39mmpl[38;5;241m.[39mrcParams[[38;5;124m'[39m[38;5;124manimation.bitrate[39m[38;5;124m'[39m],
-[1;32m   1287[0m                 fps[38;5;241m=[39m[38;5;241m1000.[39m [38;5;241m/[39m [38;5;28mself[39m[38;5;241m.[39m_interval)
-[1;32m   1288[0m [38;5;28mself[39m[38;5;241m.[39msave([38;5;28mstr[39m(path), writer[38;5;241m=[39mwriter)
-
-File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/animation.py:148[0m, in [0;36mMovieWriterRegistry.__getitem__[0;34m(self, name)[0m
-[1;32m    146[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mis_available(name):
-[1;32m    147[0m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_registered[name]
-[0;32m--> 148[0m [38;5;28;01mraise[39;00m [38;5;167;01mRuntimeError[39;00m([38;5;124mf[39m[38;5;124m"[39m[38;5;124mRequested MovieWriter ([39m[38;5;132;01m{[39;00mname[38;5;132;01m}[39;00m[38;5;124m) not available[39m[38;5;124m"[39m)
-
-[0;31mRuntimeError[0m: Requested MovieWriter (ffmpeg) not available
+[0;31mNameError[0m: name 'njit' is not defined
 
