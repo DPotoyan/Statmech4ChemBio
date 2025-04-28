@@ -490,18 +490,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="langevin-equation-and-brownian-motion">
 <h1>Langevin equation and Brownian motion<a class="headerlink" href="#langevin-equation-and-brownian-motion" title="Permalink to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">c</span><span class="p">,</span><span class="n">epsilon_0</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">physical_constants</span>
-
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39; 
-</pre></div>
-</div>
-</div>
-</div>
 <section id="langevin-equation">
 <h2>Langevin Equation<a class="headerlink" href="#langevin-equation" title="Permalink to this heading">#</a></h2>
 <p>Langevin theory provides now an equation of motion for objects whoch are subject to fluctuating forces.
@@ -568,9 +556,21 @@ m\frac{d}{dt}\langle \vec{r}\cdot \vec{v}\rangle =-6\pi \eta R \langle \vec{r}\c
 \langle r^2\rangle =\frac{k_B T}{\pi \eta R}\left [ t-\tau_{mr}\left ( 1-\exp\left (-\frac{t}{\tau_{mr}}\right )\right )\right ]
 \]</div>
 <p>This is the mean squared displacement for an Ornstein Uhlenbeck process, a process, which has a persistence for a certain time and then is randomized. It described the transition from the ballistic to diffusive regime for a Brownian particle except that it misses the hydrodynamic memory in the intermediate regime.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">c</span><span class="p">,</span><span class="n">epsilon_0</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">physical_constants</span>
+
+
+
+<span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">k_B</span><span class="o">=</span><span class="mf">1.381e-23</span> <span class="c1">#J/K</span>
 <span class="n">T</span><span class="o">=</span><span class="mi">300</span> <span class="c1">#K</span>
 <span class="n">eta</span><span class="o">=</span><span class="mf">1e-3</span> <span class="c1">#mPa s</span>
@@ -580,13 +580,9 @@ m\frac{d}{dt}\langle \vec{r}\cdot \vec{v}\rangle =-6\pi \eta R \langle \vec{r}\c
 
 <span class="k">def</span><span class="w"> </span><span class="nf">MSD</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">taumr</span><span class="p">):</span>
     <span class="k">return</span><span class="p">(</span><span class="n">k_B</span><span class="o">*</span><span class="n">T</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">taumr</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">/</span><span class="n">taumr</span><span class="p">))))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+
+<span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">MSD</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mf">1e-9</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\tau_</span><span class="si">{mr}</span><span class="s2">=1e-9$ s&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
@@ -597,8 +593,9 @@ m\frac{d}{dt}\langle \vec{r}\cdot \vec{v}\rangle =-6\pi \eta R \langle \vec{r}\c
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/884937946a8f14028721d53ce39bf5d427574de4081f59189f13af70ff0f79dc.png" src="../_images/884937946a8f14028721d53ce39bf5d427574de4081f59189f13af70ff0f79dc.png" />
+<img alt="../_images/cfd9ccd1f55190b6551c775deed95d562586d5b4a731d394d3ac581c6ebef28a.png" src="../_images/cfd9ccd1f55190b6551c775deed95d562586d5b4a731d394d3ac581c6ebef28a.png" />
 </div>
 </div>
 <p><img alt="" src="5_fluids/img/test1.pdf" /></p>
@@ -758,7 +755,7 @@ A=2\gamma k_B T
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
 </pre></div>
 </div>
-<img alt="../_images/43f56bc0d18ea223fd5bcf3a0a954199ede92db76d99fd3ed807362671769586.png" src="../_images/43f56bc0d18ea223fd5bcf3a0a954199ede92db76d99fd3ed807362671769586.png" />
+<img alt="../_images/4b42c95ad4a2e4318b4d321f28310a9ac9729ac81fc3b9572510871d116342e4.png" src="../_images/4b42c95ad4a2e4318b4d321f28310a9ac9729ac81fc3b9572510871d116342e4.png" />
 </div>
 </div>
 <p><img alt="" src="5_fluids/img/test.pdf" /></p>
