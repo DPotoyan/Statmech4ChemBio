@@ -255,6 +255,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 has-children"><a class="reference internal" href="../labs/lab6/intro.html">Simulating Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_harm_osc.html">Molecular dynamics simulations with OpenMM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_double_well.html">Double Well potential using OpenMM</a></li>
+
+
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_ethane.html">Simulating Ethane</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../labs/lab6/openmm_villin.html">Simulating solvated protein</a></li>
@@ -485,12 +487,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-loop-simulate">5. Simulation Loop: <code class="docutils literal notranslate"><span class="pre">simulate</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-run-the-simulation">How to Run the Simulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-initialize-the-system">Step 1: Initialize the system</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-run-the-simulation">Step 2: Run the simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-analyze-results">Step 3: Analyze results</a></li>
-</ul>
-</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simulation-and-analysis">Example simulation and analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-simulation">MC simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differences-of-monte-carlo-vs-molecular-dynamics">Differences of Monte Carlo vs Molecular Dynamics</a></li>
@@ -604,7 +600,12 @@ V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
 </ul>
 </li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -696,56 +697,7 @@ V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
 </pre></div>
 </div>
 </div>
-</div>
-</section>
-</section>
-<section id="how-to-run-the-simulation">
-<h2>How to Run the Simulation<a class="headerlink" href="#how-to-run-the-simulation" title="Permalink to this heading">#</a></h2>
-<section id="step-1-initialize-the-system">
-<h3>Step 1: Initialize the system<a class="headerlink" href="#step-1-initialize-the-system" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lj</span> <span class="o">=</span> <span class="n">LJSystem</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">N_cell</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Creates a system with a given density, number of unit cells, and target temperature.</p>
-</section>
-<section id="step-2-run-the-simulation">
-<h3>Step 2: Run the simulation<a class="headerlink" href="#step-2-run-the-simulation" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">kins</span><span class="p">,</span> <span class="n">pots</span><span class="p">,</span> <span class="n">Ps</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">lj</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">dt</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">nsteps</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">freq_out</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">dt</span></code>: time step size</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nsteps</span></code>: number of MD steps</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">freq_out</span></code>: save outputs every <code class="docutils literal notranslate"><span class="pre">freq_out</span></code> steps</p></li>
-</ul>
-</section>
-<section id="step-3-analyze-results">
-<h3>Step 3: Analyze results<a class="headerlink" href="#step-3-analyze-results" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Plot pair correlation function <span class="math notranslate nohighlight">\(g(r)\)</span>:</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">lj</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-<span class="n">dr</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">shell_volumes</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">dr</span>
-<span class="n">g_r</span> <span class="o">=</span> <span class="n">hist</span> <span class="o">/</span> <span class="p">(</span><span class="n">lj</span><span class="o">.</span><span class="n">N</span> <span class="o">*</span> <span class="n">lj</span><span class="o">.</span><span class="n">rho</span> <span class="o">*</span> <span class="n">shell_volumes</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g_r</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$r$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$g(r)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Plot energies:</p></li>
-</ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kins</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Kinetic Energy&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pots</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Potential Energy&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kins</span> <span class="o">+</span> <span class="n">pots</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total Energy&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Steps&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Energy&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
+</details>
 </div>
 </section>
 </section>
@@ -790,19 +742,18 @@ V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
 <span class="g g-Whitespace">     </span><span class="mi">78</span>     <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>  <span class="c1"># Temperature stabilization</span>
 <span class="g g-Whitespace">     </span><span class="mi">79</span>         <span class="bp">self</span><span class="o">.</span><span class="n">rescale_velocities</span><span class="p">(</span><span class="n">kin</span><span class="p">)</span>
 
-<span class="nn">Cell In[1], line 63,</span> in <span class="ni">LJSystem.integrate</span><span class="nt">(self, dt)</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">forces</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span>
-<span class="ne">---&gt; </span><span class="mi">63</span> <span class="n">forces_new</span><span class="p">,</span> <span class="n">U_new</span><span class="p">,</span> <span class="n">Pvir_new</span><span class="p">,</span> <span class="n">hist_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_forces</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">forces_new</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span> <span class="n">kin</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vel</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nn">Cell In[1], line 60,</span> in <span class="ni">LJSystem.integrate</span><span class="nt">(self, dt)</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="k">def</span><span class="w"> </span><span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">60</span>     <span class="n">forces</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">Pvir</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_forces</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="bp">self</span><span class="o">.</span><span class="n">vel</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">forces</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span>
 
-<span class="nn">Cell In[1], line 46,</span> in <span class="ni">LJSystem.compute_forces</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span>  <span class="n">F_ij</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">46</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="o">-</span><span class="n">F_ij</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Potential energy</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span> <span class="n">U</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r6_inv</span> <span class="o">*</span> <span class="p">(</span><span class="n">r6_inv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+<span class="nn">Cell In[1], line 35,</span> in <span class="ni">LJSystem.compute_forces</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">r_sq</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcut_sq</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="n">r_vec</span> <span class="o">=</span> <span class="n">r_vec</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">35</span> <span class="n">r_sq</span> <span class="o">=</span> <span class="n">r_sq</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">r2_inv</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">r_sq</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span> <span class="n">r6_inv</span> <span class="o">=</span> <span class="n">r2_inv</span><span class="o">**</span><span class="mi">3</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -1032,12 +983,6 @@ V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-integration-integrate">3. Time Integration: <code class="docutils literal notranslate"><span class="pre">integrate</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-control-rescale-velocities">4. Temperature Control: <code class="docutils literal notranslate"><span class="pre">rescale_velocities</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-loop-simulate">5. Simulation Loop: <code class="docutils literal notranslate"><span class="pre">simulate</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-run-the-simulation">How to Run the Simulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-initialize-the-system">Step 1: Initialize the system</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-run-the-simulation">Step 2: Run the simulation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-analyze-results">Step 3: Analyze results</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simulation-and-analysis">Example simulation and analysis</a></li>

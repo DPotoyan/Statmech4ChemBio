@@ -63,6 +63,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/lab6/openmm_double_well';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -253,6 +255,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Simulating Fluids</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="openmm_harm_osc.html">Molecular dynamics simulations with OpenMM</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Double Well potential using OpenMM</a></li>
+
+
 <li class="toctree-l2"><a class="reference internal" href="openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openmm_ethane.html">Simulating Ethane</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openmm_villin.html">Simulating solvated protein</a></li>
@@ -450,7 +454,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -466,6 +472,23 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Double Well potential using OpenMM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#caclulate-free-energy-profile">Caclulate Free energy profile</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem">Problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#claculation-of-rates-big-picture">Claculation of rates: big picture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-1-kramers-theory">Approach 1: Kramers’ theory*</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-2-direct-transition-counting">Approach 2: Direct Transition Counting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-3-correlation-functions">Approach 3: Correlation Functions</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -587,6 +610,134 @@ document.write(`
 </div>
 </div>
 </section>
+<section id="caclulate-free-energy-profile">
+<h1>Caclulate Free energy profile<a class="headerlink" href="#caclulate-free-energy-profile" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Extract x coordinate</span>
+<span class="n">x_positions</span> <span class="o">=</span> <span class="n">trajectory</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Histogram x positions</span>
+<span class="n">hist</span><span class="p">,</span> <span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">x_positions</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Midpoints of bins</span>
+<span class="n">bin_centers</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">bin_edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bin_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="c1"># Avoid log(0) by adding small constant</span>
+<span class="n">P_x</span> <span class="o">=</span> <span class="n">hist</span> <span class="o">+</span> <span class="mf">1e-12</span>
+
+<span class="c1"># Physical constants</span>
+<span class="n">kB</span> <span class="o">=</span> <span class="mf">0.0019872041</span> <span class="c1"># kcal/mol/K</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1"># K</span>
+
+<span class="c1"># Free energy in kcal/mol</span>
+<span class="n">F_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">kB</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">P_x</span><span class="p">)</span>
+
+<span class="c1"># Shift minimum to zero for nicer plotting</span>
+<span class="n">F_x</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">F_x</span><span class="p">)</span>
+
+<span class="c1"># Plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bin_centers</span><span class="p">,</span> <span class="n">F_x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Free Energy (kcal/mol)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;1D Free Energy Landscape along x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="problem">
+<h1>Problem<a class="headerlink" href="#problem" title="Permalink to this heading">#</a></h1>
+<section id="claculation-of-rates-big-picture">
+<h2>Claculation of rates: big picture<a class="headerlink" href="#claculation-of-rates-big-picture" title="Permalink to this heading">#</a></h2>
+<p>You have a particle hopping between <strong>two wells</strong>.</p>
+<p>You want to compute the <strong>rate constant</strong> <span class="math notranslate nohighlight">\(k\)</span> for transitions:</p>
+<ul class="simple">
+<li><p>from left well (<span class="math notranslate nohighlight">\(x \sim -1\)</span>) to right well (<span class="math notranslate nohighlight">\(x \sim +1\)</span>),</p></li>
+<li><p>or vice versa.</p></li>
+</ul>
+</section>
+<section id="approach-1-kramers-theory">
+<h2>Approach 1: Kramers’ theory*<a class="headerlink" href="#approach-1-kramers-theory" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If you know the <strong>barrier height <span class="math notranslate nohighlight">\(\Delta V\)</span></strong> and <strong>curvatures</strong> near minima and saddle point, you can estimate analytically:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+k \sim \frac{\omega_0}{2\pi} e^{-\beta \Delta V}
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\omega_0\)</span> is vibration frequency in the well,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta = 1/(k_B T)\)</span>.</p></li>
+</ul>
+</section>
+<section id="approach-2-direct-transition-counting">
+<h2>Approach 2: Direct Transition Counting<a class="headerlink" href="#approach-2-direct-transition-counting" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Label each frame:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Left well if <span class="math notranslate nohighlight">\(x &lt; 0\)</span>,</p></li>
+<li><p>Right well if <span class="math notranslate nohighlight">\(x &gt; 0\)</span>.</p></li>
+</ul>
+<p>(You can adjust the threshold depending on your wells.)</p>
+<ol class="arabic simple" start="2">
+<li><p>Detect crossings:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Look for when the label changes from left to right or right to left.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Count number of transitions.</p></li>
+</ol>
+<p>. Compute rate:</p>
+<ul class="simple">
+<li><p>The <strong>rate constant</strong> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+k = \frac{\text{Number of transitions}}{\text{Total simulation time}}
+\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p>Total time = (number of steps) × (time per step).</p></li>
+</ul>
+</section>
+<section id="approach-3-correlation-functions">
+<h2>Approach 3: Correlation Functions<a class="headerlink" href="#approach-3-correlation-functions" title="Permalink to this heading">#</a></h2>
+<p>Define a <strong>population indicator function</strong> <span class="math notranslate nohighlight">\(h(x)\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(h(x) = 1\)</span> if the particle is in the <strong>right</strong> well (say <span class="math notranslate nohighlight">\(x &gt; 0\)</span>),</p></li>
+<li><p><span class="math notranslate nohighlight">\(h(x) = 0\)</span> if the particle is in the <strong>left</strong> well (say <span class="math notranslate nohighlight">\(x &lt; 0\)</span>).</p></li>
+</ul>
+<p>Then compute the <strong>autocorrelation function</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+C(t) = \langle h(0) h(t) \rangle
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(h(0)\)</span> = whether the particle started in the right well,</p></li>
+<li><p><span class="math notranslate nohighlight">\(h(t)\)</span> = whether the particle is in the right well at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>If the system relaxes between wells, <span class="math notranslate nohighlight">\(C(t)\)</span> <strong>decays exponentially</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+C(t) \sim e^{-k t}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k\)</span> is the <strong>rate constant</strong>!</p>
+<p>Thus:</p>
+<ul class="simple">
+<li><p>You <strong>compute <span class="math notranslate nohighlight">\(C(t)\)</span></strong> from your trajectory,</p></li>
+<li><p><strong>Fit</strong> <span class="math notranslate nohighlight">\(C(t)\)</span> to an exponential,</p></li>
+<li><p><strong>Extract</strong> the rate constant <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ul>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -642,6 +793,29 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Double Well potential using OpenMM</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#caclulate-free-energy-profile">Caclulate Free energy profile</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem">Problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#claculation-of-rates-big-picture">Claculation of rates: big picture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-1-kramers-theory">Approach 1: Kramers’ theory*</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-2-direct-transition-counting">Approach 2: Direct Transition Counting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-3-correlation-functions">Approach 3: Correlation Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

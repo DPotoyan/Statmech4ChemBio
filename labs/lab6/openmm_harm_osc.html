@@ -255,6 +255,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Simulating Fluids</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Molecular dynamics simulations with OpenMM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openmm_double_well.html">Double Well potential using OpenMM</a></li>
+
+
 <li class="toctree-l2"><a class="reference internal" href="openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openmm_ethane.html">Simulating Ethane</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openmm_villin.html">Simulating solvated protein</a></li>
@@ -475,10 +477,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-d-harmonic-oscillator">1. A 1-D harmonic oscillator</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-results-of-openmm-simuation">Visualize results of OpenMM simuation</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-d-harmonic-oscillator">1. A 1-D harmonic oscillator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-openmm-simulation">Run openmm simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-results-of-openmm-simuation">Visualize results of OpenMM simuation</a></li>
 </ul>
             </nav>
         </div>
@@ -548,7 +549,6 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">openmm.app</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">app</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">openmm.unit</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">unit</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">nglview</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nv</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">mdtraj</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">polars</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -560,8 +560,10 @@ document.write(`
 </div>
 <section id="a-1-d-harmonic-oscillator">
 <h2>1. A 1-D harmonic oscillator<a class="headerlink" href="#a-1-d-harmonic-oscillator" title="Permalink to this heading">#</a></h2>
-<p>We will start with a simple example of a 1-D harmonic oscillator. In the example, we have a particle of mass 1 amu that is connected to a fixed point by a spring. The particle is constrained to move along the x-axis. The spring has a force constant of 1 kJ/mol/nm^2. The equilibrium position of the particle is at (0, 0, 0), which means the force is zero when the particle is at the origin.</p>
-<p>OpenMM uses a class called <code class="docutils literal notranslate"><span class="pre">System</span></code> to represent the system that we want to simulate. The <code class="docutils literal notranslate"><span class="pre">System</span></code> class contains a list of particles and a list of forces acting on those particles. To simulate the 1-D harmonic oscillator described above, we need to create a <code class="docutils literal notranslate"><span class="pre">System</span></code> object for it.</p>
+<ul class="simple">
+<li><p>We will start with a simple example of a 1-D harmonic oscillator. In the example, we have a particle of mass 1 amu that is connected to a fixed point by a spring. The particle is constrained to move along the x-axis. The spring has a force constant of 1 kJ/mol/nm^2. The equilibrium position of the particle is at (0, 0, 0), which means the force is zero when the particle is at the origin.</p></li>
+<li><p>OpenMM uses a class called <code class="docutils literal notranslate"><span class="pre">System</span></code> to represent the system that we want to simulate. The <code class="docutils literal notranslate"><span class="pre">System</span></code> class contains a list of particles and a list of forces acting on those particles. To simulate the 1-D harmonic oscillator described above, we need to create a <code class="docutils literal notranslate"><span class="pre">System</span></code> object for it.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## initialize an empty system</span>
@@ -588,7 +590,7 @@ document.write(`
 </div>
 </div>
 <ul class="simple">
-<li><p>To model the spring between the two particles, we will add a force between the two particles. The force is given by Hooke’s law: <span class="math notranslate nohighlight">\(f = -kx\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> is the force constant and <span class="math notranslate nohighlight">\(x\)</span> is the displacement from the equilibrium position. The potential energy corresponding to this force is given by <span class="math notranslate nohighlight">\(V = \frac{1}{2}kx^2\)</span>, which is called the harmonic potential. As a rule of thumb, it is usually easier to specify the potential energy function rather than the force function.</p></li>
+<li><p>To model the spring between the two particles, we will add a force between the two particles. The force is given by Hooke’s law: <span class="math notranslate nohighlight">\(f = -kx\)</span>, where <span class="math notranslate nohighlight">\(k\)</span> is the force constant and <span class="math notranslate nohighlight">\(x\)</span> is the displacement from the equilibrium position. The potential energy corresponding to this force is given by <span class="math notranslate nohighlight">\(V = \frac{1}{2}kx^2\)</span>, which is called the harmonic potential.</p></li>
 <li><p>OpenMM has a built-in class called <code class="docutils literal notranslate"><span class="pre">HarmonicBondForce</span></code> for harmonic potentials.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -615,7 +617,11 @@ document.write(`
 </div>
 </div>
 </div>
-<p>In OpenMM, each particle has three coordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span>. To mimic the constraint of the second particle along the x-axis, we add a large external force on the second particle in the y and z directions. This force is large enough to keep the second particle from moving in the y and z directions. We use <a class="reference external" href="http://docs.openmm.org/latest/api-python/generated/openmm.openmm.CustomExternalForce.html#openmm.openmm.CustomExternalForce"><code class="docutils literal notranslate"><span class="pre">CustomExternalForce</span></code></a> in OpenMM to apply this force. The <code class="docutils literal notranslate"><span class="pre">CustomExternalForce</span></code> class allows us to specify a custom force function that can depend on the coordinates of the particles. In this case, we will use a harmonic potential in the y and z directions with a large force constant and the equilibrium position at 0.0. This will create a large force on the second particle in the y and z directions if it moves away from 0 in those directions. It effectively constrains the second particle to move only in the x direction.</p>
+<ul class="simple">
+<li><p>In OpenMM, each particle has three coordinates <span class="math notranslate nohighlight">\((x, y, z)\)</span>. To mimic the constraint of the second particle along the x-axis, we add a large external force on the second particle in the y and z directions. This force is large enough to keep the second particle from moving in the y and z directions.</p></li>
+<li><p>We will use <a class="reference external" href="http://docs.openmm.org/latest/api-python/generated/openmm.openmm.CustomExternalForce.html#openmm.openmm.CustomExternalForce"><code class="docutils literal notranslate"><span class="pre">CustomExternalForce</span></code></a> in OpenMM to apply this force.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">CustomExternalForce</span></code> class allows us to specify a custom force function that can depend on the coordinates of the particles. In this case, we will use a harmonic potential in the y and z directions with a large force constant and the equilibrium position at 0.0. This will create a large force on the second particle in the y and z directions if it moves away from 0 in those directions. It <strong>effectively constrains the second particle to move only in the x direction.</strong></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_external</span> <span class="o">=</span> <span class="mi">100</span>
@@ -681,7 +687,12 @@ document.write(`
 </div>
 </div>
 </div>
-<p>Now we are ready to run the simulation. To take a time step in the simulation, we call the <code class="docutils literal notranslate"><span class="pre">step</span></code> method of the integrator. After taking a time step, we record the new positions and velocities of the particles from the context.</p>
+</section>
+<section id="run-openmm-simulation">
+<h2>Run openmm simulation<a class="headerlink" href="#run-openmm-simulation" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Now we are ready to run the simulation. To take a time step in the simulation, we call the <code class="docutils literal notranslate"><span class="pre">step</span></code> method of the integrator. After taking a time step, we record the new positions and velocities of the particles from the context.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># positions</span>
@@ -773,8 +784,9 @@ step:  50;  u:  0.460; x: -0.960; k:  0.041; v:  0.238; e:  0.501
 </div>
 </div>
 </div>
+</section>
 <section id="visualize-results-of-openmm-simuation">
-<h3>Visualize results of OpenMM simuation<a class="headerlink" href="#visualize-results-of-openmm-simuation" title="Permalink to this heading">#</a></h3>
+<h2>Visualize results of OpenMM simuation<a class="headerlink" href="#visualize-results-of-openmm-simuation" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Plot the numerical trajectory in the phase space of <span class="math notranslate nohighlight">\((x, p_x)\)</span> where x is the x-coordinate of the particle and p_x is the x-component of the momentum of the particle. The numerical trajectory is compared to the analytical trajectory. You could change the step size used in the integrator to see how it affects the accuracy of the numerical trajectory.</p></li>
 </ul>
@@ -1013,7 +1025,9 @@ variance of p_x: 2.695
 <img alt="../../_images/f4d70332157dc988d042d265d33c45234f8c9817eb32c1714a329dfd82fb6710.png" src="../../_images/f4d70332157dc988d042d265d33c45234f8c9817eb32c1714a329dfd82fb6710.png" />
 </div>
 </div>
-</section>
+<ul class="simple">
+<li><p>Why is <span class="math notranslate nohighlight">\(P(E)\)</span> not look like gaussian? Hint: think of <span class="math notranslate nohighlight">\(\Omega(E)\)</span></p></li>
+</ul>
 </section>
 </section>
 
@@ -1080,10 +1094,9 @@ variance of p_x: 2.695
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-d-harmonic-oscillator">1. A 1-D harmonic oscillator</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-results-of-openmm-simuation">Visualize results of OpenMM simuation</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-1-d-harmonic-oscillator">1. A 1-D harmonic oscillator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-openmm-simulation">Run openmm simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-results-of-openmm-simuation">Visualize results of OpenMM simuation</a></li>
 </ul>
   </nav></div>
 
