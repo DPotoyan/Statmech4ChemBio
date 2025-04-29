@@ -619,7 +619,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f3caffae3d0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa8606b73d0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/5270e89b3f3c57b5bfaf7a2d7bfb758726d09b228ec9924a21b07519356ae68d.png" src="../_images/5270e89b3f3c57b5bfaf7a2d7bfb758726d09b228ec9924a21b07519356ae68d.png" />
@@ -755,7 +755,7 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f3cacf811c0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa8602c5190&gt;]
 </pre></div>
 </div>
 <img alt="../_images/f2783a64eea31bb07afdb17c607c32a06b991b394823e0999df3accc6954550d.png" src="../_images/f2783a64eea31bb07afdb17c607c32a06b991b394823e0999df3accc6954550d.png" />
@@ -1149,28 +1149,38 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 </table>
 <div class="tip admonition">
 <p class="admonition-title"><strong>BAOAB scheme</strong></p>
-<ol class="arabic simple">
-<li><p><strong>B: Drift half-step in position</strong>
-$<span class="math notranslate nohighlight">\(
-x \to x + \frac{\Delta t}{2} v
-\)</span>$</p></li>
-<li><p><strong>A: Kick velocity half-step using force</strong>
-$<span class="math notranslate nohighlight">\(
-v \to v + \frac{\Delta t}{2m} F(x)
-\)</span>$</p></li>
-<li><p><strong>O: Apply stochastic friction and noise to velocity</strong>
-$<span class="math notranslate nohighlight">\(
-v \to e^{-\gamma \Delta t} v + \sqrt{k_B T (1 - e^{-2\gamma \Delta t})/m} \, R,
-\)</span>$
-where (R) is a standard normal random number.</p></li>
-<li><p><strong>A: Kick velocity half-step again</strong>
-$<span class="math notranslate nohighlight">\(
-v \to v + \frac{\Delta t}{2m} F(x)
-\)</span>$</p></li>
-<li><p><strong>B: Drift half-step in position</strong>
-$<span class="math notranslate nohighlight">\(
-x \to x + \frac{\Delta t}{2} v
-\)</span>$</p></li>
+<ol class="arabic">
+<li><p><strong>B: Drift half-step in position</strong></p>
+<div class="math notranslate nohighlight">
+\[
+   x \to x + \frac{\Delta t}{2} v
+   \]</div>
+</li>
+<li><p><strong>A: Kick velocity half-step using force</strong></p>
+<div class="math notranslate nohighlight">
+\[
+   v \to v + \frac{\Delta t}{2m} F(x)
+   \]</div>
+</li>
+<li><p><strong>O: Apply stochastic friction and noise to velocity</strong></p>
+<div class="math notranslate nohighlight">
+\[
+   v \to e^{-\gamma \Delta t} v + \sqrt{k_B T (1 - e^{-2\gamma \Delta t})/m} \, R,
+   \]</div>
+<p>where (R) is a standard normal random number.</p>
+</li>
+<li><p><strong>A: Kick velocity half-step again</strong></p>
+<div class="math notranslate nohighlight">
+\[
+   v \to v + \frac{\Delta t}{2m} F(x)
+   \]</div>
+</li>
+<li><p><strong>B: Drift half-step in position</strong></p>
+<div class="math notranslate nohighlight">
+\[
+   x \to x + \frac{\Delta t}{2} v
+   \]</div>
+</li>
 </ol>
 </div>
 <div class="cell docutils container">
@@ -1231,10 +1241,10 @@ x \to x + \frac{\Delta t}{2} v
 <span class="n">freq</span>  <span class="o">=</span> <span class="mi">10</span>
 
 <span class="c1">### Define Potential</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">ho_en_force</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ho_en_force</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     
-    <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> 
-    <span class="n">force</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> 
+    <span class="n">force</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">x</span>
     
     <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="n">force</span>
 
@@ -1270,82 +1280,7 @@ x \to x + \frac{\Delta t}{2} v
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2417/920811732.py:30: RuntimeWarning: overflow encountered in scalar multiply
-  times.append(t), pos.append(x), vel.append(v), KE.append(0.5*v*v), PE.append(pe)
-/tmp/ipykernel_2417/196690491.py:15: RuntimeWarning: overflow encountered in scalar power
-  energy = 0.5*k*((x-a)**2)
-/tmp/ipykernel_2417/196690491.py:16: RuntimeWarning: overflow encountered in scalar multiply
-  force = -k*x*(x-a)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/core/function_base.py:157: RuntimeWarning: invalid value encountered in multiply
-  y *= step
-/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/core/function_base.py:167: RuntimeWarning: invalid value encountered in add
-  y += start
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">36</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="k">return</span>  <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">v</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">kBT</span><span class="p">))</span>  <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">kBT</span><span class="p">)</span> 
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">bins</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">36</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gaussian_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">kBT</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span> <span class="n">bins</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/__init__.py:1446,</span> in <span class="ni">_preprocess_data.&lt;locals&gt;.inner</span><span class="nt">(ax, data, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1443</span> <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1444</span> <span class="k">def</span><span class="w"> </span><span class="nf">inner</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1445</span>     <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1446</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">sanitize_sequence</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1448</span>     <span class="n">bound</span> <span class="o">=</span> <span class="n">new_sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1449</span>     <span class="n">auto_label</span> <span class="o">=</span> <span class="p">(</span><span class="n">bound</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label_namer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1450</span>                   <span class="ow">or</span> <span class="n">bound</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label_namer</span><span class="p">))</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/axes/_axes.py:6791,</span> in <span class="ni">Axes.hist</span><span class="nt">(self, x, bins, range, density, weights, cumulative, bottom, histtype, align, orientation, rwidth, log, color, label, stacked, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6787</span> <span class="c1"># Loop through datasets</span>
-<span class="g g-Whitespace">   </span><span class="mi">6788</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nx</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">6789</span>     <span class="c1"># this will automatically overwrite bins,</span>
-<span class="g g-Whitespace">   </span><span class="mi">6790</span>     <span class="c1"># so that each histogram uses the same bins</span>
-<span class="ne">-&gt; </span><span class="mi">6791</span>     <span class="n">m</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">bins</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">**</span><span class="n">hist_kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6792</span>     <span class="n">tops</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">6793</span> <span class="n">tops</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tops</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>  <span class="c1"># causes problems later if it&#39;s an int</span>
-
-<span class="nn">File &lt;__array_function__ internals&gt;:200,</span> in <span class="ni">histogram</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/lib/histograms.py:780,</span> in <span class="ni">histogram</span><span class="nt">(a, bins, range, density, weights)</span>
-<span class="g g-Whitespace">    </span><span class="mi">680</span><span class="w"> </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">681</span><span class="sd"> Compute the histogram of a dataset.</span>
-<span class="g g-Whitespace">    </span><span class="mi">682</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">776</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">777</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">778</span> <span class="n">a</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">_ravel_and_check_weights</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">780</span> <span class="n">bin_edges</span><span class="p">,</span> <span class="n">uniform_bins</span> <span class="o">=</span> <span class="n">_get_bin_edges</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="nb">range</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">782</span> <span class="c1"># Histogram is an integer or a float array depending on the weights.</span>
-<span class="g g-Whitespace">    </span><span class="mi">783</span> <span class="k">if</span> <span class="n">weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/lib/histograms.py:426,</span> in <span class="ni">_get_bin_edges</span><span class="nt">(a, bins, range, weights)</span>
-<span class="g g-Whitespace">    </span><span class="mi">423</span>     <span class="k">if</span> <span class="n">n_equal_bins</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">424</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;`bins` must be positive, when an integer&#39;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">426</span>     <span class="n">first_edge</span><span class="p">,</span> <span class="n">last_edge</span> <span class="o">=</span> <span class="n">_get_outer_edges</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">range</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">428</span> <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">429</span>     <span class="n">bin_edges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/lib/histograms.py:315,</span> in <span class="ni">_get_outer_edges</span><span class="nt">(a, range)</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">313</span>             <span class="s1">&#39;max must be larger than min in range parameter.&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">314</span>     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">first_edge</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">last_edge</span><span class="p">)):</span>
-<span class="ne">--&gt; </span><span class="mi">315</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">316</span>             <span class="s2">&quot;supplied range of [</span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">] is not finite&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first_edge</span><span class="p">,</span> <span class="n">last_edge</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">317</span> <span class="k">elif</span> <span class="n">a</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">318</span>     <span class="c1"># handle empty arrays. Can&#39;t determine range, so use 0-1.</span>
-<span class="g g-Whitespace">    </span><span class="mi">319</span>     <span class="n">first_edge</span><span class="p">,</span> <span class="n">last_edge</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-
-<span class="ne">ValueError</span>: supplied range of [-inf, 1.0261402560446282] is not finite
-</pre></div>
-</div>
-<img alt="../_images/fa2174613ec2ab98548d9795362f64aefd34b17238234fd54b1c5a7bf878d6cd.png" src="../_images/fa2174613ec2ab98548d9795362f64aefd34b17238234fd54b1c5a7bf878d6cd.png" />
+<img alt="../_images/80cc713f15202a68c16d03c15df2e939b5e2e1550ac8aa2ea4b073e0f4d7be98.png" src="../_images/80cc713f15202a68c16d03c15df2e939b5e2e1550ac8aa2ea4b073e0f4d7be98.png" />
 </div>
 </div>
 </section>
@@ -1379,7 +1314,19 @@ x \to x + \frac{\Delta t}{2} v
 </div>
 </details>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "5c8646d733e44926a421c0911e97fd39", "version_major": 2, "version_minor": 0}</script></div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="k">return</span> <span class="n">energy</span><span class="p">,</span> <span class="n">force</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">energy</span><span class="p">,</span> <span class="n">force</span> <span class="o">=</span> <span class="n">double_well</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> 
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="s1">&#39;-o&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">force</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;a&#39; is not defined
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
