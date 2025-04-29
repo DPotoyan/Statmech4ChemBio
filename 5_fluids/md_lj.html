@@ -541,13 +541,13 @@ V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
 <figure class="align-default" id="id1">
 <a class="bg-primary reference internal image-reference" href="../_images/pbc1.png"><img alt="../_images/pbc1.png" class="bg-primary" src="../_images/pbc1.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 28 </span><span class="caption-text">Perioidc Boundary Conditions</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">Perioidc Boundary Conditions</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="id2">
 <a class="bg-primary reference internal image-reference" href="../_images/pbc2.png"><img alt="../_images/pbc2.png" class="bg-primary" src="../_images/pbc2.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 29 </span><span class="caption-text">Minimum Image Convention showing that we only track particles with clsoest distance.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">Minimum Image Convention showing that we only track particles with clsoest distance.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -729,15 +729,12 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 <span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">forces_new</span>
 <span class="g g-Whitespace">     </span><span class="mi">65</span> <span class="n">kin</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vel</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="nn">Cell In[1], line 30,</span> in <span class="ni">LJSystem.compute_forces</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="k">def</span><span class="w"> </span><span class="nf">compute_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">30</span>     <span class="n">r_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="n">mask</span> <span class="o">=</span> <span class="n">r_sq</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcut_sq</span>
-
-<span class="nn">Cell In[1], line 27,</span> in <span class="ni">LJSystem.minimum_image</span><span class="nt">(self, r_vec)</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">def</span><span class="w"> </span><span class="nf">minimum_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_vec</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>     <span class="k">return</span> <span class="p">(</span><span class="n">r_vec</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span>
+<span class="nn">Cell In[1], line 46,</span> in <span class="ni">LJSystem.compute_forces</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span>  <span class="n">F_ij</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">46</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="o">-</span><span class="n">F_ij</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Potential energy</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span> <span class="n">U</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r6_inv</span> <span class="o">*</span> <span class="p">(</span><span class="n">r6_inv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
