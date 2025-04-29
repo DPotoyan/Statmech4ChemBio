@@ -475,7 +475,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-equations-of-motion">Integrating equations of motion</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verlet-algortihm">Verlet algortihm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-updating-scheme">Velocity Verlet updating scheme</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-vs-time-average-and-ergodicity">Ensemble vs time average and ergodicity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-averages">Ensemble averages</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynaamics-of-classical-harmonic-oscillator-nve">Molecular Dynaamics of Classical Harmonic Oscillator (NVE)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nvt">Molecualr Dynamics of Harmonic oscillator (NVT)</a></li>
@@ -758,10 +758,18 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </details>
 </div>
 </section>
-<section id="ensemble-vs-time-average-and-ergodicity">
-<h3>Ensemble vs time average and ergodicity<a class="headerlink" href="#ensemble-vs-time-average-and-ergodicity" title="Permalink to this heading">#</a></h3>
+<section id="ensemble-averages">
+<h3>Ensemble averages<a class="headerlink" href="#ensemble-averages" title="Permalink to this heading">#</a></h3>
+<div class="importnat admonition">
+<p class="admonition-title"><strong>Ergonic hypothesis</strong></p>
 <div class="math notranslate nohighlight">
-\[\langle A \rangle  = \frac{1}{T_{prod}} \int^{T_{eq} +T_{prod}}_{T_{eq}} A(t)\]</div>
+\[\langle A \rangle  = \frac{1}{t}} \int^{\tau_{eq} +T}_{\tau_{eq}} A(t)\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tau_{eq}\)</span> time it teks for system to “settle into” equilibrium and <span class="math notranslate nohighlight">\(t\)</span> time of simulation.</p></li>
+<li><p>Time averages are equal to ensemble averages when <span class="math notranslate nohighlight">\(t\lim \infty\)</span>. But in real life we need to determine how long to sample.</p></li>
+<li><p>Ergodic assumption is: during the coruse of MD we visit all the microstates (or small but representative subset) that go into the ensemble average!</p></li>
+</ul>
+</div>
 <div class="tip admonition">
 <p class="admonition-title"><strong>Energy conservation in simulations</strong></p>
 <ul class="simple">
@@ -881,18 +889,20 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 <section id="langevin-equation">
 <h3>Langevin equation<a class="headerlink" href="#langevin-equation" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
-<li><p><strong>Challenge:</strong> What should we do when we have only a few particles, or even just one particle, and cannot explicitly simulate the vast surrounding environment?</p></li>
-<li><p><strong>Solution:</strong> We model the surrounding medium (e.g., a solvent) as an <strong>implicit thermal bath</strong> that interacts with the particle.</p></li>
-<li><p>The particle exchanges energy with the bath, maintaining <strong>thermal equilibrium</strong> at a fixed temperature <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
-<li><p>This motivates <strong>Langevin dynamics</strong>, where the effects of the solvent are captured by <strong>friction</strong> (dissipation) and <strong>random thermal kicks</strong> (fluctuations), without simulating solvent molecules explicitly.</p></li>
+<li><p>A particle of mass <span class="math notranslate nohighlight">\(m\)</span> moves under the force derived from a potential energy <span class="math notranslate nohighlight">\(U(x)\)</span>. The motion is purely deterministic.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 m \ddot{x} = -\nabla_x U
 \]</div>
 <ul class="simple">
-<li><p>A particle of mass <span class="math notranslate nohighlight">\(m\)</span> moves under the force derived from a potential energy <span class="math notranslate nohighlight">\(U(x)\)</span>. The motion is purely deterministic.</p></li>
-<li><p>In realistic environments (like fluids), a particle experiences both viscous drag (proportional to velocity, with friction coefficient ( \lambda )) and random thermal kicks modeled by noise ( \eta(t) ).</p></li>
+<li><p><strong>Challenge:</strong> What should we do when we have only a one or few particles, and cannot explicitly simulate the vast surrounding environment in order to assign temperature?</p></li>
+<li><p><strong>Solution:</strong> We model the surrounding medium (e.g., a solvent) as an <strong>implicit thermal bath</strong> that interacts with the particle.</p>
+<ul>
+<li><p>The particle exchanges energy with the bath, maintaining <strong>thermal equilibrium</strong> at a fixed temperature <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+<li><p>This motivates <strong>Langevin dynamics</strong>, where the effects of the solvent are captured by <strong>friction</strong> (dissipation) and <strong>random thermal kicks</strong> (fluctuations), without simulating solvent molecules explicitly.</p></li>
+</ul>
+</li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title"><strong>Langevin Equation</strong></p>
@@ -1227,7 +1237,7 @@ V(x) = Ax^2 + Bx^3 + Cx^4
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-equations-of-motion">Integrating equations of motion</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verlet-algortihm">Verlet algortihm</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-updating-scheme">Velocity Verlet updating scheme</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-vs-time-average-and-ergodicity">Ensemble vs time average and ergodicity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-averages">Ensemble averages</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynaamics-of-classical-harmonic-oscillator-nve">Molecular Dynaamics of Classical Harmonic Oscillator (NVE)</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin equation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nvt">Molecualr Dynamics of Harmonic oscillator (NVT)</a></li>
