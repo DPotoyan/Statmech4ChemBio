@@ -474,6 +474,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-simulation-of-a-lennard-jones-fluid">Molecular Dynamics Simulation of a Lennard-Jones Fluid</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-model-of-lj-fluid">Physical Model of LJ fluid</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pbc">PBC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#md-of-lj-fluid">MD of LJ fluid</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simulation-and-analysis">Example simulation and analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-simulation">MC simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mc-simulation-and-analysis">Example MC simulation and analysis</a></li>
@@ -549,6 +550,37 @@ V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
 <p><span class="caption-number">Fig. 29 </span><span class="caption-text">Minimum Image Convention showing that we only track particles with clsoest distance.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="md-of-lj-fluid">
+<h2>MD of LJ fluid<a class="headerlink" href="#md-of-lj-fluid" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Velocity Verlet Algorithm</strong>  </p>
+<p><strong>1. Evaluate the initial force from the current position:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+F_t = -\frac{\partial U(r)}{\partial r} \Bigg|_{r(t)}
+\]</div>
+<p><strong>2. Update the position:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+r_{t+\Delta t} = r_t + v_t \Delta t + \frac{F_t}{2m} \Delta t^2
+\]</div>
+<p><strong>3. Partially update the velocity:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+v_{t+\Delta t/2} = v_t + \frac{F_t}{2m} \Delta t
+\]</div>
+<p><strong>4. Evaluate the force at the new position:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+F_{t+\Delta t} = -\frac{\partial U(r)}{\partial r} \Bigg|_{r(t+\Delta t)}
+\]</div>
+<p><strong>5. Complete the velocity update:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
+\]</div>
+</div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -696,12 +728,12 @@ V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
 <span class="g g-Whitespace">     </span><span class="mi">61</span>     <span class="bp">self</span><span class="o">.</span><span class="n">vel</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">forces</span>
 <span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span>
 
-<span class="nn">Cell In[1], line 45,</span> in <span class="ni">LJSystem.compute_forces</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> <span class="c1"># Forces on each particle</span>
+<span class="nn">Cell In[1], line 46,</span> in <span class="ni">LJSystem.compute_forces</span><span class="nt">(self)</span>
 <span class="g g-Whitespace">     </span><span class="mi">44</span> <span class="n">forces</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">45</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span>  <span class="n">F_ij</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="o">-</span><span class="n">F_ij</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span>  <span class="n">F_ij</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">46</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">forces</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="o">-</span><span class="n">F_ij</span><span class="p">)</span>
 <span class="g g-Whitespace">     </span><span class="mi">48</span> <span class="c1"># Potential energy</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span> <span class="n">U</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r6_inv</span> <span class="o">*</span> <span class="p">(</span><span class="n">r6_inv</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -711,8 +743,8 @@ V(r) = 4 \left( \frac{1}{r^{12}} - \frac{1}{r^6} \right)
 </section>
 <section id="mc-simulation">
 <h2>MC simulation<a class="headerlink" href="#mc-simulation" title="Permalink to this heading">#</a></h2>
-<p><strong>Metropolis Monte Carlo Algorithm</strong></p>
-<p>At each step:</p>
+<div class="tip admonition">
+<p class="admonition-title"><strong>MCMC of LJ fluid</strong></p>
 <ol class="arabic simple">
 <li><p>Randomly pick a particle.</p></li>
 <li><p>Propose a random displacement.</p></li>
@@ -726,6 +758,7 @@ P_{\text{accept}} = \min\left(1, e^{-\beta \Delta E}\right)
 <ul class="simple">
 <li><p>If the move is rejected, the particle returns to its previous position.</p></li>
 </ul>
+</div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -972,6 +1005,7 @@ P_{\text{accept}} = \min\left(1, e^{-\beta \Delta E}\right)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-simulation-of-a-lennard-jones-fluid">Molecular Dynamics Simulation of a Lennard-Jones Fluid</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physical-model-of-lj-fluid">Physical Model of LJ fluid</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pbc">PBC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#md-of-lj-fluid">MD of LJ fluid</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simulation-and-analysis">Example simulation and analysis</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mc-simulation">MC simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mc-simulation-and-analysis">Example MC simulation and analysis</a></li>
