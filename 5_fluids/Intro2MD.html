@@ -934,6 +934,118 @@ m \ddot{x} = -\nabla_x U - \lambda \dot{x} + \eta(t)
 <li><p>FDT guarantees that thermal fluctuations (random noise) and viscous dissipation are balanced, preventing runaway motion and stabilizing equilibrium.</p></li>
 <li><p>FDT connects diffusion (random spreading) and viscosity (resistance to motion), both fundamentally controlled by temperature.</p></li>
 </ul>
+<div class="tip dropdown admonition">
+<p class="admonition-title"><strong>Derivation of FDT</strong></p>
+<ul class="simple">
+<li><p>Let us focus on the <strong>overdamped Langevin equation</strong> for simplicity:</p></li>
+<li><p>Assume a <strong>flat potential</strong> first (i.e., <span class="math notranslate nohighlight">\(U(x) = 0\)</span>) to understand the role of friction and noise alone. (You can later generalize to nonzero <span class="math notranslate nohighlight">\(U(x)\)</span>, but this captures the key idea.)</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\lambda \dot{x}(t) = -\nabla_x U(x) + \eta(t)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\lambda \dot{x}(t) = \eta(t)
+\quad \Rightarrow \quad
+\dot{x}(t) = \frac{1}{\lambda} \eta(t)
+\]</div>
+<ul class="simple">
+<li><p>Thus, integrating over time:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+x(t) = x(0) + \frac{1}{\lambda} \int_0^t \eta(s) \, ds
+\]</div>
+<ul class="simple">
+<li><p>Let’s compute the <strong>mean-square displacement</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle (x(t) - x(0))^2 \rangle
+= \frac{1}{\lambda^2} \left\langle \left( \int_0^t \eta(s) \, ds \right)^2 \right\rangle
+\]</div>
+<ul class="simple">
+<li><p>Expanding:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+= \frac{1}{\lambda^2} \int_0^t \int_0^t \langle \eta(s) \eta(s') \rangle \, ds \, ds'
+\]</div>
+<ul class="simple">
+<li><p>Now — <strong>if</strong> we assume <span class="math notranslate nohighlight">\(\eta(t)\)</span> is <strong>delta-correlated</strong> (white noise):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle \eta(s) \eta(s') \rangle = C \delta(s-s')
+\]</div>
+<ul class="simple">
+<li><p>where <span class="math notranslate nohighlight">\(C\)</span> is some constant to be determined. Then:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+= \frac{C}{\lambda^2} \int_0^t ds
+= \frac{C}{\lambda^2} t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\langle (x(t) - x(0))^2 \rangle = \frac{C}{\lambda^2} t
+\]</div>
+<ul class="simple">
+<li><p>This shows <strong>diffusive behavior</strong> with an effective <strong>diffusion constant</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+D = \frac{C}{2\lambda^2}
+\]</div>
+<ul class="simple">
+<li><p>because for normal diffusion we expect:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\langle (x(t) - x(0))^2 \rangle = 2Dt
+\]</div>
+<p><strong>Connect to equilibrium (Einstein relation)</strong></p>
+<p>From statistical mechanics, <strong>the equilibrium distribution</strong> for <span class="math notranslate nohighlight">\(x\)</span> must obey the <strong>equipartition theorem</strong>:</p>
+<p>If we define the equilibrium probability distribution <span class="math notranslate nohighlight">\(P(x)\)</span> for the free particle:</p>
+<div class="math notranslate nohighlight">
+\[
+P(x) \propto e^{-\frac{0}{k_B T}} = \text{const}
+\]</div>
+<ul class="simple">
+<li><p>(no restoring force). But the <em>velocity</em> (or here the “rate of change”) still carries thermal energy:</p></li>
+<li><p>In equilibrium, for a particle moving slowly through a viscous medium, we know:</p></li>
+<li><p>The diffusion coefficient <span class="math notranslate nohighlight">\(D\)</span> satisfies the <strong>Einstein relation</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+D = \frac{k_B T}{\lambda}
+\]</div>
+<p>Thus, matching:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{C}{2\lambda^2} = \frac{k_B T}{\lambda}
+\]</div>
+<p>Multiplying both sides by <span class="math notranslate nohighlight">\(2\lambda^2\)</span>, we find:</p>
+<div class="math notranslate nohighlight">
+\[
+C = 2 \lambda k_B T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\boxed{ \langle \eta(t) \eta(t') \rangle = 2 \lambda k_B T \, \delta(t-t') }
+\]</div>
+<p>This is the <strong>fluctuation-dissipation theorem</strong> for Langevin dynamics:</p>
+<ul class="simple">
+<li><p><strong>Fluctuations</strong> (noise strength) are linked to <strong>dissipation</strong> (friction <span class="math notranslate nohighlight">\(lambda\)</span>) and <strong>temperature</strong> <span class="math notranslate nohighlight">\(T\)</span>).</p></li>
+</ul>
+<p><strong>Summary Intuition</strong></p>
+<ul class="simple">
+<li><p>Without friction, noise would make energy grow indefinitely → no equilibrium.</p></li>
+<li><p>Without noise, friction would freeze the system.</p></li>
+<li><p>FDT guarantees just the right balance to maintain <em>thermal equilibrium</em> at temperature <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+</ul>
+</div>
 </section>
 <section id="molecualr-dynamics-of-harmonic-oscillator-nvt">
 <h2>Molecualr Dynamics of Harmonic oscillator (NVT)<a class="headerlink" href="#molecualr-dynamics-of-harmonic-oscillator-nvt" title="Permalink to this heading">#</a></h2>
