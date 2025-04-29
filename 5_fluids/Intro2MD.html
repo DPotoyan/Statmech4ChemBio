@@ -619,7 +619,7 @@ document.write(`
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f1c845ff3a0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f3caffae3d0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/5270e89b3f3c57b5bfaf7a2d7bfb758726d09b228ec9924a21b07519356ae68d.png" src="../_images/5270e89b3f3c57b5bfaf7a2d7bfb758726d09b228ec9924a21b07519356ae68d.png" />
@@ -755,7 +755,7 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f1c841c0190&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f3cacf811c0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/f2783a64eea31bb07afdb17c607c32a06b991b394823e0999df3accc6954550d.png" src="../_images/f2783a64eea31bb07afdb17c607c32a06b991b394823e0999df3accc6954550d.png" />
@@ -1116,16 +1116,16 @@ m \ddot{x} = -\nabla V(x) - \gamma \dot{x} + \sqrt{2\gamma k_BT} \, \eta(t),
 P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right).
 \]</div>
 <ul class="simple">
-<li><p>There are many ways of simulating langevin we will use <strong>BAOAB</strong> scheme. The main idea is:</p></li>
-<li><p><strong>Split</strong> the Langevin evolution operator into three pieces:</p>
+<li><p>There are many ways of simulating langevin we will use <strong>BAOAB</strong> scheme.</p></li>
+<li><p>The main idea is to <strong>Split</strong> the Langevin evolution operator into three pieces:</p>
 <ul>
 <li><p><strong>B</strong>: Free drift in position (<span class="math notranslate nohighlight">\(x\)</span> evolution under <span class="math notranslate nohighlight">\(v\)</span>).</p></li>
 <li><p><strong>A</strong>: Velocity change under conservative force <span class="math notranslate nohighlight">\(F = -\nabla V(x)\)</span>.</p></li>
 <li><p><strong>O</strong>: Stochastic Ornstein-Uhlenbeck (OU) process (friction + random kicks in <span class="math notranslate nohighlight">\(v\)</span>).</p></li>
 </ul>
 </li>
+<li><p>Thus, <strong>BAOAB</strong> updates <strong>position and velocity</strong> via a <strong>B → A → O → A → B</strong> sequence at each timestep <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p></li>
 </ul>
-<p>Thus, <strong>BAOAB</strong> updates <strong>position and velocity</strong> via a <strong>B → A → O → A → B</strong> sequence at each timestep <span class="math notranslate nohighlight">\(\Delta t\)</span>.</p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-left"><p>Feature</p></th>
@@ -1270,11 +1270,11 @@ x \to x + \frac{\Delta t}{2} v
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2413/920811732.py:30: RuntimeWarning: overflow encountered in scalar multiply
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2417/920811732.py:30: RuntimeWarning: overflow encountered in scalar multiply
   times.append(t), pos.append(x), vel.append(v), KE.append(0.5*v*v), PE.append(pe)
-/tmp/ipykernel_2413/196690491.py:15: RuntimeWarning: overflow encountered in scalar power
+/tmp/ipykernel_2417/196690491.py:15: RuntimeWarning: overflow encountered in scalar power
   energy = 0.5*k*((x-a)**2)
-/tmp/ipykernel_2413/196690491.py:16: RuntimeWarning: overflow encountered in scalar multiply
+/tmp/ipykernel_2417/196690491.py:16: RuntimeWarning: overflow encountered in scalar multiply
   force = -k*x*(x-a)
 </pre></div>
 </div>
@@ -1342,7 +1342,7 @@ x \to x + \frac{\Delta t}{2} v
 <span class="g g-Whitespace">    </span><span class="mi">318</span>     <span class="c1"># handle empty arrays. Can&#39;t determine range, so use 0-1.</span>
 <span class="g g-Whitespace">    </span><span class="mi">319</span>     <span class="n">first_edge</span><span class="p">,</span> <span class="n">last_edge</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="ne">ValueError</span>: supplied range of [-inf, 1.4764671480909402] is not finite
+<span class="ne">ValueError</span>: supplied range of [-inf, 1.0261402560446282] is not finite
 </pre></div>
 </div>
 <img alt="../_images/fa2174613ec2ab98548d9795362f64aefd34b17238234fd54b1c5a7bf878d6cd.png" src="../_images/fa2174613ec2ab98548d9795362f64aefd34b17238234fd54b1c5a7bf878d6cd.png" />
