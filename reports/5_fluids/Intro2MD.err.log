@@ -35,7 +35,7 @@ def ho_en_force(x, k=1, a=0):
     return energy, force
 
 ### Runt the simulation
-times, pos, vel, KE, PE = langevin_md_1d(x, v, dt, kBT, gamma, t_max, ho_en_force)
+times, pos, vel, KE, PE = langevin_1d(x, v, dt, kBT, gamma, t_max, ho_en_force)
 
 
 #### Plot the results
@@ -63,15 +63,77 @@ ax[1].set_ylabel('P(v)')
 fig.tight_layout()
 ------------------
 
+----- stderr -----
+/tmp/ipykernel_2499/3139969899.py:50: RuntimeWarning: overflow encountered in scalar power
+  KE.append(0.5 * mass * v**2)
+/tmp/ipykernel_2499/1041190842.py:15: RuntimeWarning: overflow encountered in scalar power
+  energy = 0.5*k*((x-a)**2)
+/tmp/ipykernel_2499/1041190842.py:16: RuntimeWarning: overflow encountered in scalar multiply
+  force = -k*x*(x-a)
+----- stderr -----
+/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/core/function_base.py:157: RuntimeWarning: invalid value encountered in multiply
+  y *= step
+/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/core/function_base.py:167: RuntimeWarning: invalid value encountered in add
+  y += start
+------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[8], line 21[0m
-[1;32m     18[0m     [38;5;28;01mreturn[39;00m energy, force
-[1;32m     20[0m [38;5;66;03m### Runt the simulation[39;00m
-[0;32m---> 21[0m times, pos, vel, KE, PE [38;5;241m=[39m [43mlangevin_md_1d[49m(x, v, dt, kBT, gamma, t_max, ho_en_force)
-[1;32m     24[0m [38;5;66;03m#### Plot the results[39;00m
-[1;32m     25[0m fig, ax [38;5;241m=[39mplt[38;5;241m.[39msubplots(nrows[38;5;241m=[39m[38;5;241m1[39m, ncols[38;5;241m=[39m[38;5;241m2[39m, figsize[38;5;241m=[39m([38;5;241m9[39m,[38;5;241m4[39m))
+[0;31mValueError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[8], line 36[0m
+[1;32m     33[0m     [38;5;28;01mreturn[39;00m  np[38;5;241m.[39mexp([38;5;241m-[39m(v[38;5;241m*[39m[38;5;241m*[39m[38;5;241m2[39m)[38;5;241m/[39m([38;5;241m2[39m[38;5;241m*[39mkBT))  [38;5;241m/[39m np[38;5;241m.[39msqrt([38;5;241m2[39m[38;5;241m*[39mnp[38;5;241m.[39mpi[38;5;241m*[39mkBT) 
+[1;32m     35[0m x [38;5;241m=[39m np[38;5;241m.[39mlinspace([38;5;28mmin[39m(pos), [38;5;28mmax[39m(pos), bins)
+[0;32m---> 36[0m [43max[49m[43m[[49m[38;5;241;43m0[39;49m[43m][49m[38;5;241;43m.[39;49m[43mhist[49m[43m([49m[43mpos[49m[43m,[49m[43m [49m[43mbins[49m[38;5;241;43m=[39;49m[43mbins[49m[43m,[49m[43m [49m[43mdensity[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m 
+[1;32m     37[0m ax[[38;5;241m0[39m][38;5;241m.[39mplot(x, gaussian_x(x, k, kBT), lw[38;5;241m=[39m[38;5;241m2[39m, color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mk[39m[38;5;124m'[39m)
+[1;32m     39[0m v [38;5;241m=[39m np[38;5;241m.[39mlinspace([38;5;28mmin[39m(vel), [38;5;28mmax[39m(vel), bins)
 
-[0;31mNameError[0m: name 'langevin_md_1d' is not defined
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/__init__.py:1446[0m, in [0;36m_preprocess_data.<locals>.inner[0;34m(ax, data, *args, **kwargs)[0m
+[1;32m   1443[0m [38;5;129m@functools[39m[38;5;241m.[39mwraps(func)
+[1;32m   1444[0m [38;5;28;01mdef[39;00m[38;5;250m [39m[38;5;21minner[39m(ax, [38;5;241m*[39margs, data[38;5;241m=[39m[38;5;28;01mNone[39;00m, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[1;32m   1445[0m     [38;5;28;01mif[39;00m data [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[0;32m-> 1446[0m         [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[43max[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;28;43mmap[39;49m[43m([49m[43msanitize_sequence[49m[43m,[49m[43m [49m[43margs[49m[43m)[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m   1448[0m     bound [38;5;241m=[39m new_sig[38;5;241m.[39mbind(ax, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+[1;32m   1449[0m     auto_label [38;5;241m=[39m (bound[38;5;241m.[39marguments[38;5;241m.[39mget(label_namer)
+[1;32m   1450[0m                   [38;5;129;01mor[39;00m bound[38;5;241m.[39mkwargs[38;5;241m.[39mget(label_namer))
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/matplotlib/axes/_axes.py:6791[0m, in [0;36mAxes.hist[0;34m(self, x, bins, range, density, weights, cumulative, bottom, histtype, align, orientation, rwidth, log, color, label, stacked, **kwargs)[0m
+[1;32m   6787[0m [38;5;66;03m# Loop through datasets[39;00m
+[1;32m   6788[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m(nx):
+[1;32m   6789[0m     [38;5;66;03m# this will automatically overwrite bins,[39;00m
+[1;32m   6790[0m     [38;5;66;03m# so that each histogram uses the same bins[39;00m
+[0;32m-> 6791[0m     m, bins [38;5;241m=[39m [43mnp[49m[38;5;241;43m.[39;49m[43mhistogram[49m[43m([49m[43mx[49m[43m[[49m[43mi[49m[43m][49m[43m,[49m[43m [49m[43mbins[49m[43m,[49m[43m [49m[43mweights[49m[38;5;241;43m=[39;49m[43mw[49m[43m[[49m[43mi[49m[43m][49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mhist_kwargs[49m[43m)[49m
+[1;32m   6792[0m     tops[38;5;241m.[39mappend(m)
+[1;32m   6793[0m tops [38;5;241m=[39m np[38;5;241m.[39marray(tops, [38;5;28mfloat[39m)  [38;5;66;03m# causes problems later if it's an int[39;00m
+
+File [0;32m<__array_function__ internals>:200[0m, in [0;36mhistogram[0;34m(*args, **kwargs)[0m
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/lib/histograms.py:780[0m, in [0;36mhistogram[0;34m(a, bins, range, density, weights)[0m
+[1;32m    680[0m [38;5;250m[39m[38;5;124mr[39m[38;5;124;03m"""[39;00m
+[1;32m    681[0m [38;5;124;03mCompute the histogram of a dataset.[39;00m
+[1;32m    682[0m 
+[0;32m   (...)[0m
+[1;32m    776[0m 
+[1;32m    777[0m [38;5;124;03m"""[39;00m
+[1;32m    778[0m a, weights [38;5;241m=[39m _ravel_and_check_weights(a, weights)
+[0;32m--> 780[0m bin_edges, uniform_bins [38;5;241m=[39m [43m_get_bin_edges[49m[43m([49m[43ma[49m[43m,[49m[43m [49m[43mbins[49m[43m,[49m[43m [49m[38;5;28;43mrange[39;49m[43m,[49m[43m [49m[43mweights[49m[43m)[49m
+[1;32m    782[0m [38;5;66;03m# Histogram is an integer or a float array depending on the weights.[39;00m
+[1;32m    783[0m [38;5;28;01mif[39;00m weights [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/lib/histograms.py:426[0m, in [0;36m_get_bin_edges[0;34m(a, bins, range, weights)[0m
+[1;32m    423[0m     [38;5;28;01mif[39;00m n_equal_bins [38;5;241m<[39m [38;5;241m1[39m:
+[1;32m    424[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124m'[39m[38;5;124m`bins` must be positive, when an integer[39m[38;5;124m'[39m)
+[0;32m--> 426[0m     first_edge, last_edge [38;5;241m=[39m [43m_get_outer_edges[49m[43m([49m[43ma[49m[43m,[49m[43m [49m[38;5;28;43mrange[39;49m[43m)[49m
+[1;32m    428[0m [38;5;28;01melif[39;00m np[38;5;241m.[39mndim(bins) [38;5;241m==[39m [38;5;241m1[39m:
+[1;32m    429[0m     bin_edges [38;5;241m=[39m np[38;5;241m.[39masarray(bins)
+
+File [0;32m/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/numpy/lib/histograms.py:315[0m, in [0;36m_get_outer_edges[0;34m(a, range)[0m
+[1;32m    312[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m    313[0m             [38;5;124m'[39m[38;5;124mmax must be larger than min in range parameter.[39m[38;5;124m'[39m)
+[1;32m    314[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m (np[38;5;241m.[39misfinite(first_edge) [38;5;129;01mand[39;00m np[38;5;241m.[39misfinite(last_edge)):
+[0;32m--> 315[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m    316[0m             [38;5;124m"[39m[38;5;124msupplied range of [[39m[38;5;132;01m{}[39;00m[38;5;124m, [39m[38;5;132;01m{}[39;00m[38;5;124m] is not finite[39m[38;5;124m"[39m[38;5;241m.[39mformat(first_edge, last_edge))
+[1;32m    317[0m [38;5;28;01melif[39;00m a[38;5;241m.[39msize [38;5;241m==[39m [38;5;241m0[39m:
+[1;32m    318[0m     [38;5;66;03m# handle empty arrays. Can't determine range, so use 0-1.[39;00m
+[1;32m    319[0m     first_edge, last_edge [38;5;241m=[39m [38;5;241m0[39m, [38;5;241m1[39m
+
+[0;31mValueError[0m: supplied range of [-inf, 0.15023269893289026] is not finite
 
