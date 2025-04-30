@@ -928,120 +928,99 @@ m \ddot{x} = -\nabla_x U - \gamma \dot{x} + \eta(t)
 <ul class="simple">
 <li><p>The environment “forgets” what happened almost immediately after a collision very short memory hence noise terms are uncorrelated (independent). Just like what we had in brownian motion.</p></li>
 <li><p>The FDT ensures that the strength of random thermal kicks is precisely tuned to the amount of viscous damping, so that the system reaches and maintains thermal equilibrium at temperature <span class="math notranslate nohighlight">\(T\)</span></p></li>
-<li><p>FDT guarantees that thermal fluctuations (random noise) and viscous dissipation are balanced, preventing runaway motion and stabilizing equilibrium.</p></li>
 <li><p>FDT connects diffusion (random spreading) and viscosity (resistance to motion), both fundamentally controlled by temperature.</p></li>
 </ul>
 <div class="tip dropdown admonition">
 <p class="admonition-title"><strong>Derivation of FDT</strong></p>
+<p>We consider the <strong>underdamped Langevin equation</strong> for a free particle (<span class="math notranslate nohighlight">\( U(x) = 0 \)</span>):</p>
+<div class="math notranslate nohighlight">
+\[
+m \dot{v}(t) = -\gamma v(t) + \eta(t)
+\]</div>
+<p>Here:</p>
 <ul class="simple">
-<li><p>Let us focus on the <strong>overdamped Langevin equation</strong> for simplicity:</p></li>
-<li><p>Assume a <strong>flat potential</strong> first (i.e., <span class="math notranslate nohighlight">\(U(x) = 0\)</span>) to understand the role of friction and noise alone. (You can later generalize to nonzero <span class="math notranslate nohighlight">\(U(x)\)</span>, but this captures the key idea.)</p></li>
+<li><p><span class="math notranslate nohighlight">\( v(t) \)</span> is the velocity,</p></li>
+<li><p><span class="math notranslate nohighlight">\( \gamma \)</span> is the friction coefficient,</p></li>
+<li><p><span class="math notranslate nohighlight">\( \eta(t) \)</span> is Gaussian white noise with:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\gamma \dot{x}(t) = -\nabla_x U(x) + \eta(t)
+\langle \eta(t) \eta(t') \rangle = C \delta(t - t')
 \]</div>
+<p>We want to compute the <strong>steady-state</strong> value of <span class="math notranslate nohighlight">\( \langle v^2(t) \rangle \)</span> and relate it to <span class="math notranslate nohighlight">\( C \)</span>, <span class="math notranslate nohighlight">\( \gamma \)</span>, and <span class="math notranslate nohighlight">\( T \)</span>.</p>
+<p><strong>Step 1: Solve the Langevin Equation</strong></p>
+<p>We write the equation in standard ODE form:</p>
 <div class="math notranslate nohighlight">
 \[
-\gamma \dot{x}(t) = \eta(t)
+\dot{v}(t) + \frac{\gamma}{m} v(t) = \frac{1}{m} \eta(t)
+\]</div>
+<p>This is a <strong>linear inhomogeneous ODE</strong>, solvable by integrating factor:</p>
+<div class="math notranslate nohighlight">
+\[
+v(t) = v(0) e^{-\gamma t / m} + \frac{1}{m} \int_0^t e^{-\gamma (t - s) / m} \eta(s) \, ds
+\]</div>
+<p><strong>Step 2: Compute <span class="math notranslate nohighlight">\( \langle v^2(t) \rangle \)</span></strong></p>
+<p>We take the expectation:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle v^2(t) \rangle
+= \left\langle \left[ v(0) e^{-\gamma t / m} + \frac{1}{m} \int_0^t e^{-\gamma (t - s)/m} \eta(s) \, ds \right]^2 \right\rangle
+\]</div>
+<p>This expands to:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle v^2(t) \rangle
+= v^2(0) e^{-2\gamma t / m}
++ \frac{2 v(0) e^{-\gamma t / m}}{m} \left\langle \int_0^t e^{-\gamma (t - s)/m} \eta(s) \, ds \right\rangle
++ \frac{1}{m^2} \left\langle \left( \int_0^t e^{-\gamma (t - s)/m} \eta(s) \, ds \right)^2 \right\rangle
+\]</div>
+<ul class="simple">
+<li><p>The second term is zero since <span class="math notranslate nohighlight">\( \langle \eta(s) \rangle = 0 \)</span>,</p></li>
+<li><p>For the third term, use the noise correlation:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\left\langle \left( \int_0^t e^{-\gamma (t - s)/m} \eta(s) \, ds \right)^2 \right\rangle
+= \int_0^t \int_0^t e^{-\gamma (2t - s - s')/m} \langle \eta(s) \eta(s') \rangle \, ds \, ds'
+= C \int_0^t e^{-2\gamma (t - s)/m} \, ds
+\]</div>
+<p>Change variable: <span class="math notranslate nohighlight">\( u = t - s \Rightarrow du = -ds \)</span></p>
+<div class="math notranslate nohighlight">
+\[
+= C \int_0^t e^{-2\gamma (t - s)/m} \, ds
+= C \int_0^t e^{-2\gamma u/m} \, du
+= \frac{C m}{2\gamma} \left( 1 - e^{-2\gamma t/m} \right)
+\]</div>
+<p>So the full result is:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle v^2(t) \rangle = v^2(0) e^{-2\gamma t/m} + \frac{C}{2 m \gamma} \left( 1 - e^{-2\gamma t/m} \right)
+\]</div>
+<p><strong>Long-Time Limit</strong></p>
+<p>As <span class="math notranslate nohighlight">\( t \to \infty \)</span>, the exponential terms vanish:</p>
+<div class="math notranslate nohighlight">
+\[
+\boxed{ \langle v^2 \rangle = \lim_{t \to \infty} \langle v^2(t) \rangle = \frac{C}{2 m \gamma} }
+\]</div>
+<p><strong>Apply Equipartition</strong></p>
+<p>At thermal equilibrium, equipartition gives:</p>
+<div class="math notranslate nohighlight">
+\[
+\left\langle \frac{1}{2} m v^2 \right\rangle = \frac{1}{2} k_B T
 \quad \Rightarrow \quad
-\dot{x}(t) = \frac{1}{\gamma} \eta(t)
+\langle v^2 \rangle = \frac{k_B T}{m}
 \]</div>
-<ul class="simple">
-<li><p>Thus, integrating over time:</p></li>
-</ul>
+<p>Matching with the derived expression:</p>
 <div class="math notranslate nohighlight">
 \[
-x(t) = x(0) + \frac{1}{\gamma} \int_0^t \eta(s) \, ds
-\]</div>
-<ul class="simple">
-<li><p>Let’s compute the <strong>mean-square displacement</strong>:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\langle (x(t) - x(0))^2 \rangle
-= \frac{1}{\gamma^2} \left\langle \left( \int_0^t \eta(s) \, ds \right)^2 \right\rangle
-\]</div>
-<ul class="simple">
-<li><p>Expanding:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-= \frac{1}{\gamma^2} \int_0^t \int_0^t \langle \eta(s) \eta(s') \rangle \, ds \, ds'
-\]</div>
-<ul class="simple">
-<li><p>Now — <strong>if</strong> we assume <span class="math notranslate nohighlight">\(\eta(t)\)</span> is <strong>delta-correlated</strong> (white noise):</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\langle \eta(s) \eta(s') \rangle = C \delta(s-s')
-\]</div>
-<ul class="simple">
-<li><p>where <span class="math notranslate nohighlight">\(C\)</span> is some constant to be determined. Then:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-= \frac{C}{\gamma^2} \int_0^t ds
-= \frac{C}{\gamma^2} t
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\langle (x(t) - x(0))^2 \rangle = \frac{C}{\gamma^2} t
-\]</div>
-<ul class="simple">
-<li><p>This shows <strong>diffusive behavior</strong> with an effective <strong>diffusion constant</strong>:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-D = \frac{C}{2\gamma^2}
-\]</div>
-<ul class="simple">
-<li><p>because for normal diffusion we expect:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\langle (x(t) - x(0))^2 \rangle = 2Dt
-\]</div>
-<p><strong>Connect to equilibrium (Einstein relation)</strong></p>
-<p>From statistical mechanics, <strong>the equilibrium distribution</strong> for <span class="math notranslate nohighlight">\(x\)</span> must obey the <strong>equipartition theorem</strong>:</p>
-<p>If we define the equilibrium probability distribution <span class="math notranslate nohighlight">\(P(x)\)</span> for the free particle:</p>
-<div class="math notranslate nohighlight">
-\[
-P(x) \propto e^{-\frac{0}{k_B T}} = \text{const}
-\]</div>
-<ul class="simple">
-<li><p>(no restoring force). But the <em>velocity</em> (or here the “rate of change”) still carries thermal energy:</p></li>
-<li><p>In equilibrium, for a particle moving slowly through a viscous medium, we know:</p></li>
-<li><p>The diffusion coefficient <span class="math notranslate nohighlight">\(D\)</span> satisfies the <strong>Einstein relation</strong>:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-D = \frac{k_B T}{\gamma}
-\]</div>
-<p>Thus, matching:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{C}{2\gamma^2} = \frac{k_B T}{\gamma}
-\]</div>
-<p>Multiplying both sides by <span class="math notranslate nohighlight">\(2\gamma^2\)</span>, we find:</p>
-<div class="math notranslate nohighlight">
-\[
+\frac{C}{2 m \gamma} = \frac{k_B T}{m}
+\quad \Rightarrow \quad
 C = 2 \gamma k_B T
 \]</div>
 <div class="math notranslate nohighlight">
 \[
 \boxed{ \langle \eta(t) \eta(t') \rangle = 2 \gamma k_B T \, \delta(t-t') }
 \]</div>
-<p>This is the <strong>fluctuation-dissipation theorem</strong> for Langevin dynamics:</p>
-<ul class="simple">
-<li><p><strong>Fluctuations</strong> (noise strength) are linked to <strong>dissipation</strong> (friction <span class="math notranslate nohighlight">\(gamma\)</span>) and <strong>temperature</strong> <span class="math notranslate nohighlight">\(T\)</span>).</p></li>
-</ul>
-<p><strong>Summary Intuition</strong></p>
-<ul class="simple">
-<li><p>Without friction, noise would make energy grow indefinitely → no equilibrium.</p></li>
-<li><p>Without noise, friction would freeze the system.</p></li>
-<li><p>FDT guarantees just the right balance to maintain <em>thermal equilibrium</em> at temperature <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
-</ul>
 </div>
 </section>
 <section id="molecualr-dynamics-of-harmonic-oscillator-nvt">
@@ -1112,7 +1091,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 \[
    v \to e^{-\gamma \Delta t} v + \sqrt{k_B T (1 - e^{-2\gamma \Delta t})/m} \, R,
    \]</div>
-<p>where (R) is a standard normal random number.</p>
+<p>where <span class="math notranslate nohighlight">\(R\)</span> is a standard normal random number.</p>
 </li>
 <li><p><strong>A: Kick velocity half-step again</strong></p>
 <div class="math notranslate nohighlight">
@@ -1256,7 +1235,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/993a364681afd187951b2c1622ef5633db19d83d819cc013a806d0d7004e0e5b.png" src="../_images/993a364681afd187951b2c1622ef5633db19d83d819cc013a806d0d7004e0e5b.png" />
+<img alt="../_images/c6aa8db54e91282be6d4e221e00a2693f983712518b4343451ac5e9ed4407ec4.png" src="../_images/c6aa8db54e91282be6d4e221e00a2693f983712518b4343451ac5e9ed4407ec4.png" />
 </div>
 </div>
 </section>
@@ -1291,7 +1270,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcdc3f55580&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd27039fdc0&gt;
 </pre></div>
 </div>
 <img alt="../_images/d8d5c4d8b81aa1481326f0864106c164ccae687bd158cc9b4a191dde32432cda.png" src="../_images/d8d5c4d8b81aa1481326f0864106c164ccae687bd158cc9b4a191dde32432cda.png" />
@@ -1349,7 +1328,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;x&#39;)
 </pre></div>
 </div>
-<img alt="../_images/d7fa6925b64ba7ee4babb99bcf67be5f24081e2ba4c7d87ac4d0fd71fb721e83.png" src="../_images/d7fa6925b64ba7ee4babb99bcf67be5f24081e2ba4c7d87ac4d0fd71fb721e83.png" />
+<img alt="../_images/94e4d0894b22b7897e7dd10ba0c3cd849cd82b4d3395e3a31af638c004a132dc.png" src="../_images/94e4d0894b22b7897e7dd10ba0c3cd849cd82b4d3395e3a31af638c004a132dc.png" />
 </div>
 </div>
 </section>
