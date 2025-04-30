@@ -472,15 +472,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timescales-and-lengthscales">Timescales and Lengthscales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-md-just-newtons-laws-applied-on-big-systems">Is MD just Newton’s laws applied on big systems?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-equations-of-motion">Integrating equations of motion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verlet-algortihm">Verlet algortihm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-updating-scheme">Velocity Verlet updating scheme</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-averages">Ensemble averages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve">Molecular Dynamics of Classical Harmonic Oscillator (NVE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-verlet-integrator-to-loop-over-steps-and-record-data">Define the Verlet integrator to loop over steps and record data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-to-a-potential-of-harmonic-oscillator">Apply to a potential of harmonic oscillator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-equations-of-motion-numerically">Integrating equations of motion Numerically</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-harmonic-oscillator">Example: Harmonic Oscillator</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verlet-algortihm">Verlet algortihm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-updating-scheme">Velocity Verlet updating scheme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve">Molecular Dynamics of Classical Harmonic Oscillator (NVE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-averages">Ensemble averages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nvt">Molecualr Dynamics of Harmonic oscillator (NVT)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-lagevin-dynamics-of-1d-harmonic-oscillator">Run lagevin dynamics of 1d harmonic oscillator</a></li>
@@ -536,53 +535,47 @@ document.write(`
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=NuaeD9xYBtY">2013 Noble Lectures by M Karplus, A Warshell, M Levitt</a></p></li>
 </ul>
 </section>
-<section id="integrating-equations-of-motion">
-<h2>Integrating equations of motion<a class="headerlink" href="#integrating-equations-of-motion" title="Permalink to this heading">#</a></h2>
+<section id="integrating-equations-of-motion-numerically">
+<h2>Integrating equations of motion Numerically<a class="headerlink" href="#integrating-equations-of-motion-numerically" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>The simplest integrating scheme for ODEs is the <strong>Euler’s method.</strong></p></li>
-<li><p>Given the <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors from the ODE standard form we are writing down equation in finite difference form.</p></li>
+<li><p>The <strong>Euler method</strong> is the simplest numerical integrator for ordinary differential equations (ODEs).</p></li>
+<li><p>More accurate integrators that include higher-order terms are known as <strong>Runge-Kutta (RK)</strong> methods — e.g., RK2, RK4, RK6.</p></li>
+<li><p>Given an ODE in standard form:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\frac{d {y}}{dt} = {f}(t, {y})
+\frac{d \mathbf{y}}{dt} = \mathbf{f}(t, \mathbf{y}),
+\]</div>
+<ul class="simple">
+<li><p>we approximate the derivative using finite differences:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{d \mathbf{y}(t)}{dt} \approx \frac{\mathbf{y}_{n+1} - \mathbf{y}_n}{\Delta t},
+\]</div>
+<ul class="simple">
+<li><p>leading to the <strong>Euler update rule</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{y}_{n+1} \approx \mathbf{y}_n + \Delta t \cdot \mathbf{f}(t_n, \mathbf{y}_n).
+\]</div>
+<section id="example-harmonic-oscillator">
+<h3>Example: Harmonic Oscillator<a class="headerlink" href="#example-harmonic-oscillator" title="Permalink to this heading">#</a></h3>
+<p>The harmonic oscillator with parameters <span class="math notranslate nohighlight">\(m=1, k=1\)</span> is defined by the state vector <span class="math notranslate nohighlight">\(\mathbf{y} = \begin{bmatrix} x \\ v \end{bmatrix}\)</span> with components for <span class="math notranslate nohighlight">\(\dot{y}\)</span> given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\dot{x} = v, \quad \dot{v} = -x.
 \]</div>
 <div class="math notranslate nohighlight">
-\[\frac{d y(t)}{dt} \approx \frac{{y}(t_{n+1}) - {y}(t_n)}{h}\]</div>
+\[\begin{split}
+\frac{d \mathbf{y}}{dt} = \mathbf{f}(\mathbf{y}) = \begin{bmatrix} v \\ -x \end{bmatrix}.
+\end{split}\]</div>
+<p>Using the Euler method, the system evolves as:</p>
 <div class="math notranslate nohighlight">
-\[{y}_{n+1} \approx {y}_n + h {f}(t_n, {y}_n)\]</div>
-<p><strong>Much better integrators are known under the names of Runge Kutta, 2nd, 4th, 6th … order</strong></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">euler</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>   
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Euler integrator: Returns new y at t+h.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rk2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runge-Kutta RK2 midpoint&quot;&quot;&quot;</span>
-    
-    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">k1</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">k2</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">rk4</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runge-Kutta RK4&quot;&quot;&quot;</span>
-    
-    <span class="n">k1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">k2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">k1</span><span class="p">)</span>
-    <span class="n">k3</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">k2</span><span class="p">)</span>
-    <span class="n">k4</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="n">k3</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="o">/</span><span class="mi">6</span> <span class="o">*</span> <span class="p">(</span><span class="n">k1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">k2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">k3</span> <span class="o">+</span> <span class="n">k4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><strong>Integrate Harmonic Oscillator using Euler, RK2, RK4</strong></p>
+\[
+\mathbf{y}_{n+1} = \mathbf{y}_n + \Delta t \cdot \mathbf{f}(\mathbf{y}_n).
+\]</div>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -590,44 +583,55 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39; Define a simple harmonic potential&#39;&#39;&#39;</span>
-    
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-
-<span class="n">y</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="n">y</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>  <span class="c1"># Initial [x, v]</span>
 <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 <span class="n">t</span>  <span class="o">=</span> <span class="mi">0</span>
-<span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span> 
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span> 
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
     
-    <span class="n">y</span> <span class="o">=</span> <span class="n">euler</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="c1"># Change integration method venv, euler, rk2, rk4</span>
+    <span class="n">dydt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>  <span class="c1"># [v, -x]</span>
+    <span class="n">y</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">dydt</span>                  <span class="c1"># Euler update</span>
     
-    <span class="n">t</span><span class="o">+=</span><span class="n">h</span>
+    <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
     
     <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">vel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="c1"># Convert to arrays</span>
+<span class="n">pos</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
 
-<span class="n">pos</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
+<span class="c1"># Plot results</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Phase space</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Phase space (x vs v)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Time series</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;x(t)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;v(t)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Time evolution&quot;</span><span class="p">)</span>
+
+<span class="c1"># Energy</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">pos</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">vel</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Energy (should be constant)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd6cc8763a0&gt;]
-</pre></div>
-</div>
-<img alt="../_images/5270e89b3f3c57b5bfaf7a2d7bfb758726d09b228ec9924a21b07519356ae68d.png" src="../_images/5270e89b3f3c57b5bfaf7a2d7bfb758726d09b228ec9924a21b07519356ae68d.png" />
+<img alt="../_images/befc6e0fd32eaff4a278bf0522f587378b5a67502cfe9f6c16eb26141aed0844.png" src="../_images/befc6e0fd32eaff4a278bf0522f587378b5a67502cfe9f6c16eb26141aed0844.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="verlet-algortihm">
 <h2>Verlet algortihm<a class="headerlink" href="#verlet-algortihm" title="Permalink to this heading">#</a></h2>
@@ -692,128 +696,10 @@ F_{t+\Delta t} = -\frac{\partial U(r)}{\partial r} \Bigg|_{r(t+\Delta t)}
 v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 \]</div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">velv</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Velocity Verlet for solving differential equations. </span>
-<span class="sd">    A little inefficient since same force (first and last) is evaluated twice!</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="c1"># 1. Evluate force</span>
-    <span class="n">F</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    
-    <span class="c1"># 2, Velocity partial update</span>
-    <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span> <span class="o">*</span> <span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-    <span class="c1"># 3. Full step position</span>
-    <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">h</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-    
-    <span class="c1"># 4. Force re-eval</span>
-    <span class="n">F</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    
-    <span class="c1"># 5. Full step velocity </span>
-    <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">h</span> <span class="o">*</span> <span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  
-
-    <span class="k">return</span> <span class="n">y</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39; Define a simple harmonic potential&#39;&#39;&#39;</span>
-    
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-
-
-<span class="n">y</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
-<span class="n">pos</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<span class="n">t</span>  <span class="o">=</span> <span class="mi">0</span>
-<span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span> 
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
-    
-    <span class="n">y</span> <span class="o">=</span> <span class="n">velv</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="c1"># Change integration method venv, euler, rk2, rk4</span>
-    
-    <span class="n">t</span><span class="o">+=</span><span class="n">h</span>
-    
-    <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">vel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
-
-<span class="n">pos</span><span class="p">,</span> <span class="n">vel</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vel</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">pos</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">vel</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd6cc1c01c0&gt;]
-</pre></div>
-</div>
-<img alt="../_images/f2783a64eea31bb07afdb17c607c32a06b991b394823e0999df3accc6954550d.png" src="../_images/f2783a64eea31bb07afdb17c607c32a06b991b394823e0999df3accc6954550d.png" />
-</div>
-</div>
-</section>
-<section id="ensemble-averages">
-<h2>Ensemble averages<a class="headerlink" href="#ensemble-averages" title="Permalink to this heading">#</a></h2>
-<div class="important admonition">
-<p class="admonition-title"><strong>Ergodic hypothesis</strong></p>
-<div class="math notranslate nohighlight">
-\[\langle A \rangle  = \frac{1}{t} \int^{ \tau_{eq} +t}_{ \tau_{eq} }  A(t)\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\tau_{eq}\)</span> time it teks for system to “settle into” equilibrium and <span class="math notranslate nohighlight">\(t\)</span> time of simulation.</p></li>
-<li><p>Time averages are equal to ensemble averages when <span class="math notranslate nohighlight">\(t\lim \infty\)</span>. But in real life we need to determine how long to sample.</p></li>
-<li><p>Ergodic assumption is: during the coruse of MD we visit all the microstates (or small but representative subset) that go into the ensemble average!</p></li>
-</ul>
-</div>
-<div class="tip admonition">
-<p class="admonition-title"><strong>Energy conservation in simulations</strong></p>
-<ul class="simple">
-<li><p>Kinetic, potential and total energies are flcutuation quantities in the Molecualr dynamics simulations.</p></li>
-<li><p>Energy in (NVE) or its average <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> (in NVT, NPT, etc) must remain constant!</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[KE_t = \sum_i \frac{p_t^2}{2m}\]</div>
-<div class="math notranslate nohighlight">
-\[PE_t = \sum_{ij}u_{ij}(r_t)\]</div>
-<div class="math notranslate nohighlight">
-\[\langle E \rangle = \langle KE \rangle +\langle PE \rangle \approx const \]</div>
-</div>
-<div class="tip admonition">
-<p class="admonition-title"><strong>Temperature control in simulations</strong></p>
-<p>According to equipariting result of equilibrium statistical mechanics in the NVT ensmeble</p>
-<div class="math notranslate nohighlight">
-\[\Big\langle \sum_i \frac{p_t^2}{2m} \Big\rangle =\frac{3 }{2}N  k_B T\]</div>
-<div class="math notranslate nohighlight">
-\[T_t = \frac{2}{3 N k_B} \big\langle KE \big\rangle_t \]</div>
-</div>
-<div class="tip admonition">
-<p class="admonition-title"><strong>Pressure control in simulations</strong></p>
-<div class="math notranslate nohighlight">
-\[P = \frac{1}{3V} \sum^N_i \Big [\frac{p^2_i}{m} +\vec{F}_i(r) \cdot \vec{r}_i(t) \Big ]\]</div>
-</div>
 </section>
 <section id="molecular-dynamics-of-classical-harmonic-oscillator-nve">
 <h2>Molecular Dynamics of Classical Harmonic Oscillator (NVE)<a class="headerlink" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve" title="Permalink to this heading">#</a></h2>
-<section id="define-the-verlet-integrator-to-loop-over-steps-and-record-data">
-<h3>Define the Verlet integrator to loop over steps and record data<a class="headerlink" href="#define-the-verlet-integrator-to-loop-over-steps-and-record-data" title="Permalink to this heading">#</a></h3>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -892,17 +778,8 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </pre></div>
 </div>
 </div>
-</details>
 </div>
-</section>
-<section id="apply-to-a-potential-of-harmonic-oscillator">
-<h3>Apply to a potential of harmonic oscillator<a class="headerlink" href="#apply-to-a-potential-of-harmonic-oscillator" title="Permalink to this heading">#</a></h3>
-<div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#----parameters of simulation----</span>
 <span class="n">k</span>     <span class="o">=</span> <span class="mi">3</span> 
@@ -921,7 +798,35 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 <span class="c1">### Run simulation</span>
 <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">KE</span><span class="p">,</span> <span class="n">PE</span> <span class="o">=</span> <span class="n">run_md_nve_1d</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">v0</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">t_max</span><span class="p">,</span> <span class="n">ho_en_force</span><span class="p">)</span>
 
-<span class="c1">### Visualize</span>
+<span class="c1"># Plot results</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Phase space</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Phase space (x vs v)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Time series</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;x(t)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vel</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;v(t)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Time evolution&quot;</span><span class="p">)</span>
+
+<span class="c1"># Energy</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">pos</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">vel</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Energy (should be constant)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/eeccb2e17f1accef01942aae012c318c7b1248ea5a295f74f5c39031d8ba6eda.png" src="../_images/eeccb2e17f1accef01942aae012c318c7b1248ea5a295f74f5c39031d8ba6eda.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Visualize</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pos</span><span class="p">);</span>
@@ -933,12 +838,49 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <img alt="../_images/9a1a7a7eb048d94c6eef29496697b0656092c1cd937ba1dab3f45d456dcc37ef.png" src="../_images/9a1a7a7eb048d94c6eef29496697b0656092c1cd937ba1dab3f45d456dcc37ef.png" />
 </div>
 </div>
 </section>
+<section id="ensemble-averages">
+<h2>Ensemble averages<a class="headerlink" href="#ensemble-averages" title="Permalink to this heading">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title"><strong>Ergodic hypothesis</strong></p>
+<div class="math notranslate nohighlight">
+\[\langle A \rangle  = \frac{1}{t} \int^{ \tau_{eq} +t}_{ \tau_{eq} }  A(t)\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tau_{eq}\)</span> time it teks for system to “settle into” equilibrium and <span class="math notranslate nohighlight">\(t\)</span> time of simulation.</p></li>
+<li><p>Time averages are equal to ensemble averages when <span class="math notranslate nohighlight">\(t\lim \infty\)</span>. But in real life we need to determine how long to sample.</p></li>
+<li><p>Ergodic assumption is: during the coruse of MD we visit all the microstates (or small but representative subset) that go into the ensemble average!</p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Energy conservation in simulations</strong></p>
+<ul class="simple">
+<li><p>Kinetic, potential and total energies are flcutuation quantities in the Molecualr dynamics simulations.</p></li>
+<li><p>Energy in (NVE) or its average <span class="math notranslate nohighlight">\(\langle E \rangle\)</span> (in NVT, NPT, etc) must remain constant!</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[KE_t = \sum_i \frac{p_t^2}{2m}\]</div>
+<div class="math notranslate nohighlight">
+\[PE_t = \sum_{ij}u_{ij}(r_t)\]</div>
+<div class="math notranslate nohighlight">
+\[\langle E \rangle = \langle KE \rangle +\langle PE \rangle \approx const \]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Temperature control in simulations</strong></p>
+<p>According to equipariting result of equilibrium statistical mechanics in the NVT ensmeble</p>
+<div class="math notranslate nohighlight">
+\[\Big\langle \sum_i \frac{p_t^2}{2m} \Big\rangle =\frac{3 }{2}N  k_B T\]</div>
+<div class="math notranslate nohighlight">
+\[T_t = \frac{2}{3 N k_B} \big\langle KE \big\rangle_t \]</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><strong>Pressure control in simulations</strong></p>
+<div class="math notranslate nohighlight">
+\[P = \frac{1}{3V} \sum^N_i \Big [\frac{p^2_i}{m} +\vec{F}_i(r) \cdot \vec{r}_i(t) \Big ]\]</div>
+</div>
 </section>
 <section id="langevin-equation">
 <h2>Langevin equation<a class="headerlink" href="#langevin-equation" title="Permalink to this heading">#</a></h2>
@@ -1314,7 +1256,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/a52daca3cb117a32742d819c2be578d771d005d8c5f73167cc9542e85cdd8c8c.png" src="../_images/a52daca3cb117a32742d819c2be578d771d005d8c5f73167cc9542e85cdd8c8c.png" />
+<img alt="../_images/993a364681afd187951b2c1622ef5633db19d83d819cc013a806d0d7004e0e5b.png" src="../_images/993a364681afd187951b2c1622ef5633db19d83d819cc013a806d0d7004e0e5b.png" />
 </div>
 </div>
 </section>
@@ -1349,7 +1291,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd6c8b06340&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fcdc3f55580&gt;
 </pre></div>
 </div>
 <img alt="../_images/d8d5c4d8b81aa1481326f0864106c164ccae687bd158cc9b4a191dde32432cda.png" src="../_images/d8d5c4d8b81aa1481326f0864106c164ccae687bd158cc9b4a191dde32432cda.png" />
@@ -1407,7 +1349,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;x&#39;)
 </pre></div>
 </div>
-<img alt="../_images/777dd22e3faac110baa253137ca1a5a7b37b3464461bdd8ecd65647f863711eb.png" src="../_images/777dd22e3faac110baa253137ca1a5a7b37b3464461bdd8ecd65647f863711eb.png" />
+<img alt="../_images/d7fa6925b64ba7ee4babb99bcf67be5f24081e2ba4c7d87ac4d0fd71fb721e83.png" src="../_images/d7fa6925b64ba7ee4babb99bcf67be5f24081e2ba4c7d87ac4d0fd71fb721e83.png" />
 </div>
 </div>
 </section>
@@ -1523,15 +1465,14 @@ V(x) = Ax^2 + Bx^3 + Cx^4
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timescales-and-lengthscales">Timescales and Lengthscales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-md-just-newtons-laws-applied-on-big-systems">Is MD just Newton’s laws applied on big systems?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-equations-of-motion">Integrating equations of motion</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verlet-algortihm">Verlet algortihm</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-updating-scheme">Velocity Verlet updating scheme</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-averages">Ensemble averages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve">Molecular Dynamics of Classical Harmonic Oscillator (NVE)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-verlet-integrator-to-loop-over-steps-and-record-data">Define the Verlet integrator to loop over steps and record data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-to-a-potential-of-harmonic-oscillator">Apply to a potential of harmonic oscillator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integrating-equations-of-motion-numerically">Integrating equations of motion Numerically</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-harmonic-oscillator">Example: Harmonic Oscillator</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verlet-algortihm">Verlet algortihm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-updating-scheme">Velocity Verlet updating scheme</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve">Molecular Dynamics of Classical Harmonic Oscillator (NVE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-averages">Ensemble averages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nvt">Molecualr Dynamics of Harmonic oscillator (NVT)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-lagevin-dynamics-of-1d-harmonic-oscillator">Run lagevin dynamics of 1d harmonic oscillator</a></li>
