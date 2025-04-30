@@ -1,0 +1,709 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Final Project: Metastability and Nucleation in the 2D Ising Model &#8212; Statistical Mechanics for Chemistry and Biology</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/finals/nucleation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Final Project: Simulating Chemical Reactions with Langevin Dynamics" href="tst.html" />
+    <link rel="prev" title="Final Project: Simulating Ising Spin Relaxation with Glauber Dynamics" href="glauber.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.jpg" class="logo__image only-light" alt="Statistical Mechanics for Chemistry and Biology - Home"/>
+    <script>document.write(`<img src="../../_static/logo.jpg" class="logo__image only-dark" alt="Statistical Mechanics for Chemistry and Biology - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    About
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../schedule.html">Schedule (Spring 2025)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../1_stats/intro.html">Stats</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1_stats/Probabilities_Counting.html">Probability theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_stats/Random_Variables.html">Random variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_stats/Diffusion.html">Diffusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../1_stats/Entropy.html">Entropy and Information</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../2_thermo/intro.html">Thermodynamics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2_thermo/01_Thermo.html">Review of thermodynamics principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../2_thermo/02_FreeEnergies.html">Thermodynamic Potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../3_ensembles/intro.html">Ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ensembles/nve.html">Intro to Statistical Ensembles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ensembles/nvt.html">Ensembles in phase-space</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ensembles/npt.html">Open Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../3_ensembles/ensemble_overview.html">Summary of Ensembles</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../4_ising/intro.html">Phase transitions</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../4_ising/00_phase_tranistions.html">Phase transitions: a birds eye view</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4_ising/01_MC.html">Monte Carlo and “the power of randomness”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4_ising/02_MCMC.html">Ising models and Metropolis algorithm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../4_ising/03_MF.html">Mean Field</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../5_fluids/intro.html">Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../5_fluids/Intro2Fluids.html">Statistical mechanics of fluids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../5_fluids/Intro2MD.html">Molecular Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../5_fluids/md_lj.html">MD/MC simulations of fluids</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../py-lab/intro.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../py-lab/intro2py.html">Python3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../py-lab/intro2numpy.html">NumPy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../py-lab/intro2viz.html">Plotting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../py-lab/python_OOP_challenge.html">Tutorial: Building Python Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../np-lab/intro.html">Numpy lab</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../np-lab/np_prob.html">Numpy and Probabilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../np-lab/sinc_function.html">Numpy Lab: Sinc Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../np-lab/linear_functions.html">Numpy Lab: Linear Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../np-lab/1d_gas_sim.html">Tutorial: Numpy simultions of 1D gas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../np-lab/2d_gas_sim.html">Tutorial: Numpy simultions of 2D gas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rw-lab/intro.html">Random Walks</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rw-lab/rw_lab.html">Random walk simulations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rw-lab/InverseTransform.html">The Inverse Transform of RVs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rw-lab/change_rv_jax.html">Change of variables with automatic differentiation (autodiff)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rw-lab/polymer-conf.html">Conformations of Random Polymer Chains</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../rw-lab/langevin.html">Langevin Equation for Brownian Motion and Mean Square Displacement (MSD)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../lab4/intro.html">Application of ensembles</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lab4/nvt_application.html">Free energy and protein folding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lab4/TwoState.html">Two-state system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lab4/mass_action.html">Mass action law</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../lab5/intro.html">Simulating Ising models</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lab5/markov_chains.html">Markov Chains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lab5/Wolf.html">Other Methods for sampling Ising models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lab5/enhance-sampling.html">Non-boltzman (enhanced) sampling ideas</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../lab6/intro.html">Simulating Fluids</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../lab6/openmm_harm_osc.html">Molecular dynamics simulations with OpenMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lab6/openmm_double_well.html">Double Well potential using OpenMM</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../lab6/openmm_lj_chain.html">Simulating toy polymers using openMM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lab6/openmm_ethane.html">Simulating Ethane</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lab6/openmm_villin.html">Simulating solvated protein</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">Final Projects</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="glauber.html"><strong>Final Project: Simulating Ising Spin Relaxation with Glauber Dynamics</strong></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Final Project: Metastability and Nucleation in the 2D Ising Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tst.html">Final Project: Simulating Chemical Reactions with Langevin Dynamics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lj_ab_monomer.html"><strong>Final Project: Phase Separation in Binary Lennard-Jones Mixtures</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="lj_ab_polymer.html">Final Project: Sequence-Dependent Structure in Lennard-Jones Polymers Using OpenMM</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/DPotoyan/Statmech4ChemBio/master?urlpath=lab/tree/labs/finals/nucleation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/DPotoyan/Statmech4ChemBio/blob/master/labs/finals/nucleation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/labs/finals/nucleation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Final Project: Metastability and Nucleation in the 2D Ising Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-and-motivation">Background and Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-objective">Project Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks">Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes"><strong>Learning Outcomes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hints-and-suggestions"><strong>Hints and Suggestions</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="final-project-metastability-and-nucleation-in-the-2d-ising-model">
+<h1>Final Project: Metastability and Nucleation in the 2D Ising Model<a class="headerlink" href="#final-project-metastability-and-nucleation-in-the-2d-ising-model" title="Permalink to this heading">#</a></h1>
+<section id="background-and-motivation">
+<h2>Background and Motivation<a class="headerlink" href="#background-and-motivation" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In many physical systems, a state can appear <em>stable</em> for long times despite being thermodynamically unfavorable. Such states are called <strong>metastable</strong>. One familiar example is supercooled water—it remains liquid below the freezing point until a crystal nucleus forms and initiates freezing.</p></li>
+<li><p>In this project, you will explore <strong>metastability and nucleation</strong> using the 2D Ising model. This model—originally developed to describe ferromagnetism—consists of a grid of spins <span class="math notranslate nohighlight">\( s_i = \pm 1 \)</span>, with nearest-neighbor interactions and an external magnetic field <span class="math notranslate nohighlight">\( h \)</span>. At temperatures below the critical temperature <span class="math notranslate nohighlight">\( T_c \)</span>, the system tends to spontaneously align into one of two magnetized states. But what happens when the system is initially in a “wrong” state, e.g., aligned opposite to the magnetic field?</p></li>
+<li><p>This setup creates a <strong>metastable state</strong>. It takes a rare fluctuation to nucleate a critical-size droplet of the stable phase, which then grows and flips the entire system. These types of processes are central to <strong>first-order phase transitions</strong>, nucleation in supersaturated vapors, and many biological self-assembly events.</p></li>
+</ul>
+</section>
+<section id="project-objective">
+<h2>Project Objective<a class="headerlink" href="#project-objective" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>You will simulate a 2D Ising model <em>below</em> the critical temperature, with a small external magnetic field <span class="math notranslate nohighlight">\( h &lt; 0 \)</span>, starting from a fully <span class="math notranslate nohighlight">\( +1 \)</span>-magnetized state (aligned opposite to the field). Over time, the system will nucleate a region of the <span class="math notranslate nohighlight">\( -1 \)</span> phase, which may grow and flip the entire system.</p></li>
+<li><p>You’ll study:</p>
+<ul>
+<li><p>How the system escapes the metastable state.</p></li>
+<li><p>The statistics of nucleation events.</p></li>
+<li><p>The dependence of nucleation time on field strength and temperature.</p></li>
+<li><p>The morphology of nucleating droplets.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="tasks">
+<h2>Tasks<a class="headerlink" href="#tasks" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Initial Setup and Simulation</strong></p>
+<ul class="simple">
+<li><p>Use the 2D Ising model with Metropolis Monte Carlo dynamics.</p></li>
+<li><p>Set temperature <span class="math notranslate nohighlight">\( T &lt; T_c \)</span> (e.g., <span class="math notranslate nohighlight">\( T = 2.0 \)</span>, since <span class="math notranslate nohighlight">\( T_c \approx 2.269 \)</span> for the square lattice).</p></li>
+<li><p>Add a small external magnetic field <span class="math notranslate nohighlight">\( h &lt; 0 \)</span> (e.g., try <span class="math notranslate nohighlight">\( h = -0.02, -0.05, -0.1 \)</span>).</p></li>
+<li><p>Initialize the system with all spins set to <span class="math notranslate nohighlight">\( +1 \)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Observe Nucleation</strong></p>
+<ul class="simple">
+<li><p>Run the simulation for long times (thousands to millions of MC steps).</p></li>
+<li><p>Monitor the magnetization <span class="math notranslate nohighlight">\( M(t) \)</span>.</p></li>
+<li><p>Plot sample trajectories where a rare nucleation event flips the sign of the magnetization.</p></li>
+</ul>
+</li>
+<li><p><strong>Measure Nucleation Time</strong></p>
+<ul class="simple">
+<li><p>Repeat the simulation many times (e.g., 100–500 trials) to get statistics.</p></li>
+<li><p>Measure the average time <span class="math notranslate nohighlight">\( \langle \tau \rangle \)</span> it takes for the system to reach negative magnetization.</p></li>
+<li><p>Plot <span class="math notranslate nohighlight">\( \langle \tau \rangle \)</span> vs. field strength <span class="math notranslate nohighlight">\( |h| \)</span> (you should observe exponential dependence).</p></li>
+</ul>
+</li>
+<li><p><strong>Analyze Droplet Formation</strong></p>
+<ul class="simple">
+<li><p>Record configurations just before the reversal event.</p></li>
+<li><p>Visualize and classify droplet shapes.</p></li>
+<li><p>Estimate typical droplet size at nucleation.</p></li>
+<li><p>Discuss whether they appear compact (circular) or ramified (fractal-like).</p></li>
+</ul>
+</li>
+<li><p><strong>Optional Challenge</strong></p>
+<ul class="simple">
+<li><p>Compare to Classical Nucleation Theory (CNT), which predicts:
+$<span class="math notranslate nohighlight">\(
+\langle \tau \rangle \sim \exp\left(\frac{\Delta F_c}{k_B T}\right)
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span> \Delta F_c $ is the free energy barrier to form a critical droplet.</p></li>
+<li><p>Try estimating <span class="math notranslate nohighlight">\( \Delta F_c \)</span> from simulation data or using CNT formulas.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="learning-outcomes">
+<h2><strong>Learning Outcomes</strong><a class="headerlink" href="#learning-outcomes" title="Permalink to this heading">#</a></h2>
+<p>By the end of this project, you will:</p>
+<ul class="simple">
+<li><p>Understand how <strong>metastability arises</strong> from energy barriers in statistical systems.</p></li>
+<li><p>Observe and analyze <strong>rare-event dynamics</strong> and <strong>nucleation phenomena</strong>.</p></li>
+<li><p>Learn techniques for <strong>sampling</strong>, <strong>averaging</strong>, and interpreting <strong>non-equilibrium trajectories</strong>.</p></li>
+<li><p>Gain insight into how <strong>droplet shape and surface tension</strong> affect the stability of phases.</p></li>
+<li><p>Appreciate the computational challenge of <strong>long timescales</strong> in simulating rare transitions.</p></li>
+</ul>
+</section>
+<section id="hints-and-suggestions">
+<h2><strong>Hints and Suggestions</strong><a class="headerlink" href="#hints-and-suggestions" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Use small system sizes at first (e.g., <span class="math notranslate nohighlight">\( L = 32 \)</span>) to speed up dynamics.</p></li>
+<li><p>Save configurations intermittently to catch droplet formation visually.</p></li>
+<li><p>Be patient—nucleation is rare! Consider parallelizing or running many short simulations instead of a few long ones.</p></li>
+<li><p>You might consider implementing early termination when the magnetization crosses zero to save time.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "DPotoyan/Statmech4ChemBio",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./labs/finals"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="glauber.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Final Project: Simulating Ising Spin Relaxation with Glauber Dynamics</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Final Project: Simulating Chemical Reactions with Langevin Dynamics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background-and-motivation">Background and Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-objective">Project Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tasks">Tasks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-outcomes"><strong>Learning Outcomes</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hints-and-suggestions"><strong>Hints and Suggestions</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Davit Potoyan
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
