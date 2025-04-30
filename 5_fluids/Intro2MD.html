@@ -478,7 +478,12 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verlet-algortihm">Verlet algortihm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-updating-scheme">Velocity Verlet updating scheme</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve">Molecular Dynamics of Classical Harmonic Oscillator (NVE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve">Molecular Dynamics of Classical Harmonic Oscillator (NVE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-integration-of-harmonic-oscillator">Velocity Verlet integration of harmonic oscillator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-nve-simulation-of-harmonic-oscillator">Run NVE simulation of harmonic oscillator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-distribution-in-phase-space">Plot Distribution in phase-space</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-averages">Ensemble averages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nvt">Molecualr Dynamics of Harmonic oscillator (NVT)</a><ul class="nav section-nav flex-column">
@@ -699,7 +704,14 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </section>
 <section id="molecular-dynamics-of-classical-harmonic-oscillator-nve">
 <h2>Molecular Dynamics of Classical Harmonic Oscillator (NVE)<a class="headerlink" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
+<section id="velocity-verlet-integration-of-harmonic-oscillator">
+<h3>Velocity Verlet integration of harmonic oscillator<a class="headerlink" href="#velocity-verlet-integration-of-harmonic-oscillator" title="Permalink to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -778,8 +790,17 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="cell docutils container">
+</section>
+<section id="run-nve-simulation-of-harmonic-oscillator">
+<h3>Run NVE simulation of harmonic oscillator<a class="headerlink" href="#run-nve-simulation-of-harmonic-oscillator" title="Permalink to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#----parameters of simulation----</span>
 <span class="n">k</span>     <span class="o">=</span> <span class="mi">3</span> 
@@ -820,11 +841,20 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../_images/eeccb2e17f1accef01942aae012c318c7b1248ea5a295f74f5c39031d8ba6eda.png" src="../_images/eeccb2e17f1accef01942aae012c318c7b1248ea5a295f74f5c39031d8ba6eda.png" />
 </div>
 </div>
-<div class="cell docutils container">
+</section>
+<section id="plot-distribution-in-phase-space">
+<h3>Plot Distribution in phase-space<a class="headerlink" href="#plot-distribution-in-phase-space" title="Permalink to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Visualize</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -838,10 +868,12 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <img alt="../_images/9a1a7a7eb048d94c6eef29496697b0656092c1cd937ba1dab3f45d456dcc37ef.png" src="../_images/9a1a7a7eb048d94c6eef29496697b0656092c1cd937ba1dab3f45d456dcc37ef.png" />
 </div>
 </div>
+</section>
 </section>
 <section id="ensemble-averages">
 <h2>Ensemble averages<a class="headerlink" href="#ensemble-averages" title="Permalink to this heading">#</a></h2>
@@ -1235,7 +1267,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/c6aa8db54e91282be6d4e221e00a2693f983712518b4343451ac5e9ed4407ec4.png" src="../_images/c6aa8db54e91282be6d4e221e00a2693f983712518b4343451ac5e9ed4407ec4.png" />
+<img alt="../_images/bbd410eec44e933565ffa5a481ed9ea1979f9b6f7eb4b34859f3aa3e8c71715a.png" src="../_images/bbd410eec44e933565ffa5a481ed9ea1979f9b6f7eb4b34859f3aa3e8c71715a.png" />
 </div>
 </div>
 </section>
@@ -1270,7 +1302,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd27039fdc0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9b9febaf70&gt;
 </pre></div>
 </div>
 <img alt="../_images/d8d5c4d8b81aa1481326f0864106c164ccae687bd158cc9b4a191dde32432cda.png" src="../_images/d8d5c4d8b81aa1481326f0864106c164ccae687bd158cc9b4a191dde32432cda.png" />
@@ -1328,7 +1360,7 @@ P(x, v) \propto \exp\left( -\beta \left( \frac{1}{2} m v^2 + V(x) \right) \right
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;x&#39;)
 </pre></div>
 </div>
-<img alt="../_images/94e4d0894b22b7897e7dd10ba0c3cd849cd82b4d3395e3a31af638c004a132dc.png" src="../_images/94e4d0894b22b7897e7dd10ba0c3cd849cd82b4d3395e3a31af638c004a132dc.png" />
+<img alt="../_images/ff6489a04685e61da7be59c31503908d4dc0a1787b1184d483102f35fc197620.png" src="../_images/ff6489a04685e61da7be59c31503908d4dc0a1787b1184d483102f35fc197620.png" />
 </div>
 </div>
 </section>
@@ -1450,7 +1482,12 @@ V(x) = Ax^2 + Bx^3 + Cx^4
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verlet-algortihm">Verlet algortihm</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-updating-scheme">Velocity Verlet updating scheme</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve">Molecular Dynamics of Classical Harmonic Oscillator (NVE)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-dynamics-of-classical-harmonic-oscillator-nve">Molecular Dynamics of Classical Harmonic Oscillator (NVE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#velocity-verlet-integration-of-harmonic-oscillator">Velocity Verlet integration of harmonic oscillator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-nve-simulation-of-harmonic-oscillator">Run NVE simulation of harmonic oscillator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-distribution-in-phase-space">Plot Distribution in phase-space</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-averages">Ensemble averages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-equation">Langevin equation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#molecualr-dynamics-of-harmonic-oscillator-nvt">Molecualr Dynamics of Harmonic oscillator (NVT)</a><ul class="nav section-nav flex-column">
