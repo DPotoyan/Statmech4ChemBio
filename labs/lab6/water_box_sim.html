@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/lab6/water_box_sim';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Create alanine dipeptide all-atom simulation" href="alanine_dipeptide.html" />
+    <link rel="next" title="Simulating Alanine dipeptide" href="alanine_dipeptide.html" />
     <link rel="prev" title="Simulating Ethane" href="openmm_ethane.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -249,11 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 <li class="toctree-l2"><a class="reference internal" href="openmm_ethane.html">Simulating Ethane</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">TIP3P/TIP4P Water Model Simulation in OpenMM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="alanine_dipeptide.html">Create alanine dipeptide all-atom simulation</a></li>
-
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="alanine_dipeptide.html">Simulating Alanine dipeptide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="openmm_villin.html">Simulating solvated protein</a></li>
 </ul>
 </li>
@@ -480,6 +476,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-simulation-in-openmm">Setup  simulation in OpenMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-simulation">Run simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyize-simulation-results">Analyize Simulation Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdf">RDF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vacf">VACF</a></li>
@@ -597,6 +595,8 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="setup-simulation-in-openmm">
+<h2>Setup  simulation in OpenMM<a class="headerlink" href="#setup-simulation-in-openmm" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nonbondedMethod</span>     <span class="o">=</span> <span class="n">PME</span>
@@ -614,14 +614,9 @@ document.write(`
 <span class="n">barostatInterval</span> <span class="o">=</span> <span class="mi">25</span>
 
 <span class="c1"># Simulation Options</span>
-<span class="n">nsteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>   <span class="c1"># run for 1e6 steps = 1ns</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dcdReporter</span>        <span class="o">=</span> <span class="n">DCDReporter</span><span class="p">(</span><span class="s1">&#39;trajectory.dcd&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">nsteps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>   <span class="c1"># run for 1e6 steps = 1ns</span>
+
+<span class="n">dcdReporter</span>        <span class="o">=</span> <span class="n">DCDReporter</span><span class="p">(</span><span class="s1">&#39;trajectory.dcd&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">dataReporter</span>       <span class="o">=</span> <span class="n">StateDataReporter</span><span class="p">(</span><span class="s1">&#39;log.txt&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> 
                                  <span class="n">totalSteps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span>
                                  <span class="n">step</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
@@ -629,8 +624,16 @@ document.write(`
                                  <span class="n">potentialEnergy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
                                  <span class="n">temperature</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
                                  <span class="n">separator</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="c1"># Prepare the Simulation</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-simulation">
+<h2>Run simulation<a class="headerlink" href="#run-simulation" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare the Simulation</span>
 <span class="n">system</span><span class="o">.</span><span class="n">addForce</span><span class="p">(</span><span class="n">MonteCarloBarostat</span><span class="p">(</span><span class="n">pressure</span><span class="p">,</span> <span class="n">temperature</span><span class="p">,</span> <span class="n">barostatInterval</span><span class="p">))</span>
 
 <span class="n">integrator</span> <span class="o">=</span> <span class="n">LangevinMiddleIntegrator</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">friction</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
@@ -651,6 +654,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 <section id="analyize-simulation-results">
 <h2>Analyize Simulation Results<a class="headerlink" href="#analyize-simulation-results" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
@@ -791,7 +795,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Create alanine dipeptide all-atom simulation</p>
+        <p class="prev-next-title">Simulating Alanine dipeptide</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -810,6 +814,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-simulation-in-openmm">Setup  simulation in OpenMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-simulation">Run simulation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyize-simulation-results">Analyize Simulation Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdf">RDF</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vacf">VACF</a></li>
