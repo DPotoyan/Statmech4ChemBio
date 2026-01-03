@@ -1,4 +1,4 @@
-# Schedule (Spring 2025)
+# Schedule (Spring 2026)
 
 | Due Date   | Assignment       | Topic                         |
 |------------|-----------------|------------------------------|

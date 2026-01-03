@@ -173,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapters</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Schedule (Spring 2025)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Schedule (Spring 2026)</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../1_stats/intro.html">Stats</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../1_stats/Probabilities_Counting.html">Probability theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../1_stats/Random_Variables.html">Random variables</a></li>
@@ -739,12 +739,15 @@ v_{t+\Delta t} = v_{t+\Delta t/2} + \frac{F_{t+\Delta t}}{2m} \Delta t
 <span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="bp">self</span><span class="o">.</span><span class="n">vel</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">forces_new</span>
 <span class="g g-Whitespace">     </span><span class="mi">65</span> <span class="n">kin</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vel</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="nn">Cell In[1], line 34,</span> in <span class="ni">LJSystem.compute_forces</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">r_sq</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcut_sq</span>
-<span class="ne">---&gt; </span><span class="mi">34</span> <span class="n">r_vec</span> <span class="o">=</span> <span class="n">r_vec</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">r_sq</span> <span class="o">=</span> <span class="n">r_sq</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span> <span class="n">r2_inv</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">r_sq</span>
+<span class="nn">Cell In[1], line 30,</span> in <span class="ni">LJSystem.compute_forces</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="k">def</span><span class="w"> </span><span class="nf">compute_forces</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">30</span>     <span class="n">r_vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">I</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">J</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="n">r_sq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">r_vec</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="n">mask</span> <span class="o">=</span> <span class="n">r_sq</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcut_sq</span>
+
+<span class="nn">Cell In[1], line 27,</span> in <span class="ni">LJSystem.minimum_image</span><span class="nt">(self, r_vec)</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">def</span><span class="w"> </span><span class="nf">minimum_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_vec</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">27</span>     <span class="k">return</span> <span class="p">(</span><span class="n">r_vec</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">L</span><span class="o">/</span><span class="mi">2</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
