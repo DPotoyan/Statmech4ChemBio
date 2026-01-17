@@ -1,87 +1,57 @@
-# Drop-in replacement for deploy.yml
-# Created for GitHub Pages via GitHub Actions.
-# Repo root contains the book (no subfolder). Forces output to ./_build/html.
+# This file has been modified, but was initially created automatically with `myst init --gh-pages` 🪄 💚
+# Ensure your GitHub Pages settings for this repository are set to deploy with **GitHub Actions**.
+# ... 
 
 name: Build and Deploy Website and PDF
-
 on:
   push:
+    # Runs on pushes targeting the default branch
     branches: [master]
-
 env:
+  # `BASE_URL` determines the website is served from, including CSS & JS assets
+  # You may need to change this to `BASE_URL: ''`
   BASE_URL: /${{ github.event.repository.name }}
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
-
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: pages
+  group: 'pages'
   cancel-in-progress: false
-
 jobs:
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - uses: actions/configure-pages@v5
-
+      - uses: actions/configure-pages@v3
       - uses: typst-community/setup-typst@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-          cache: pip
-
+          python-version: '3.12'
       - name: Install Python dependencies
         run: |
-          set -euxo pipefail
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          python -m pip show jupyter-book mystmd myst-parser sphinx || true
-          (jupyter-book --version || true)
-          (myst --version || true)
-          which jupyter-book || true
-          which myst || true
 
-      - name: Build HTML (force ./_build output)
-        run: |
-          set -euxo pipefail
-
-          # If myst is installed (MyST/Jupyter Book 2 ecosystem), use it.
-          # Otherwise fall back to classic jupyter-book.
-          if command -v myst >/dev/null 2>&1; then
-            myst build --execute --html
-          else
-            jupyter-book build . --path-output _build
-          fi
-
-          echo "=== Locate HTML outputs ==="
-          find . -maxdepth 5 -type d -path "*_build*/html" -print
-          find . -maxdepth 6 -type f -name "index.html" -print | head -n 50
-
-      - name: Verify build output exists
-        run: |
-          set -euxo pipefail
-          ls -la
-          ls -la _build
-          ls -la _build/html
-          test -f _build/html/index.html || (echo "ERROR: _build/html/index.html missing" && exit 1)
-
+      - name: Build HTML
+        run: jupyter book build --execute --html
+        
       - name: Upload Output HTML as Artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ./_build/html
-
+          path: './_build/html'
+      
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+    
