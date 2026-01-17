@@ -1,5 +1,6 @@
-# This file was initially created automatically with `myst init --gh-pages`
-# Ensure GitHub repo Settings → Pages → Source is set to "GitHub Actions".
+# Drop-in replacement for deploy.yml
+# Created for GitHub Pages via GitHub Actions.
+# Repo root contains the book (no subfolder). Forces output to ./_build/html.
 
 name: Build and Deploy Website and PDF
 
@@ -8,7 +9,6 @@ on:
     branches: [master]
 
 env:
-  # If your site assets look broken later, set this to '' or remove it.
   BASE_URL: /${{ github.event.repository.name }}
 
 permissions:
@@ -44,23 +44,38 @@ jobs:
 
       - name: Install Python dependencies
         run: |
+          set -euxo pipefail
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          jupyter-book --version
+          python -m pip show jupyter-book mystmd myst-parser sphinx || true
+          (jupyter-book --version || true)
+          (myst --version || true)
+          which jupyter-book || true
+          which myst || true
 
-      # IMPORTANT: build the book in the repo root (.)
-      # If your book is actually in a subfolder (e.g. docs/), change "." to "docs"
-      - name: Build HTML
+      - name: Build HTML (force ./_build output)
         run: |
-          jupyter-book --version
-          jupyter-book build .
+          set -euxo pipefail
 
-      # Helpful if it still fails: shows you exactly where output is
+          # If myst is installed (MyST/Jupyter Book 2 ecosystem), use it.
+          # Otherwise fall back to classic jupyter-book.
+          if command -v myst >/dev/null 2>&1; then
+            myst build --execute --html
+          else
+            jupyter-book build . --path-output _build
+          fi
+
+          echo "=== Locate HTML outputs ==="
+          find . -maxdepth 5 -type d -path "*_build*/html" -print
+          find . -maxdepth 6 -type f -name "index.html" -print | head -n 50
+
       - name: Verify build output exists
         run: |
+          set -euxo pipefail
           ls -la
-          ls -la _build || true
-          ls -la _build/html || true
+          ls -la _build
+          ls -la _build/html
+          test -f _build/html/index.html || (echo "ERROR: _build/html/index.html missing" && exit 1)
 
       - name: Upload Output HTML as Artifact
         uses: actions/upload-pages-artifact@v4
