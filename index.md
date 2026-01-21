@@ -1,4 +1,3 @@
-About 
 ---
 title: Statistical Mechanics for Chemists and Biologists
 site:
@@ -10,7 +9,7 @@ site:
 <div style="text-align: center">
 
 ```{figure} logo.jpg
-:width: 80%
+:width: 40%
 :align: center
 ```
 
