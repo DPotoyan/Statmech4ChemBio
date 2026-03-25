@@ -39,11 +39,11 @@ For a system to maintain equilibrium values, the microstate probabilities must s
 
 - Where $Z$ is a normalization factor called **partition function**
 
-- **Exponential dependence** can also be seen as consequence of exchange of (energy, volume ,etc) with an environment or a large reserovoir. 
+- **Exponential dependence** can also be seen as consequence of exchange of (energy, volume, etc) with an environment or a large reservoir.
 
-$$E_r\gg E,\quad V_r \gg V, \quad N_t \gg N$$
+$$E_r\gg E,\quad V_r \gg V, \quad N_r \gg N$$
 
-$$log \Omega_r(E_t-E, V_r-V, N_r-N,)\approx  const - \beta E + \beta\mu -\beta PV $$
+$$\log \Omega_r(E_t-E, V_r-V, N_r-N)\approx  \text{const} - \beta E  -\beta PV + \beta \mu N$$
 
 $$P(E, N, V) \sim \Omega \cdot \Omega_r \sim e^{S(E, N, V)} \cdot e^{-\beta E} \cdot e^{\beta \mu N} \cdot e^{-\beta PV} $$
 
@@ -85,7 +85,7 @@ $$
 - **Canonical Ensemble (Energy Integration):**
 
   $$
-  Z(\beta, N, V) = \int dE \, \Omega(E) e^{-\beta E} \approx e^{\min_E [S(E)/k_B - \beta E]}
+  Z(\beta, N, V) = \int dE \, \Omega(E) e^{-\beta E} \approx e^{\max_E [S(E)/k_B - \beta E]}
   $$
   
   $$
@@ -95,7 +95,7 @@ $$
 - **Isothermal-Isobaric Ensemble (Volume Integration):**
 
   $$
-  Z(\beta, N, P) = \int dV \, Z(\beta, N, V) e^{-\beta P V} \approx e^{\min_V [F(V) - \beta P V]}
+  Z(\beta, N, P) = \int dV \, Z(\beta, N, V) e^{-\beta P V} \approx e^{\max_V [F(V) - \beta P V]}
   $$
 
 
@@ -168,13 +168,13 @@ $$
 ####  **Particle number fluctuations (Grand Canonical Ensemble):**
  
   $$
-  \sigma^2_N = k_B T \frac{\kappa_T}{V}
+  \sigma^2_N = \frac{\langle N \rangle^2 k_B T \kappa_T}{V}
   $$
 
 - where $ \kappa_T $ is the isothermal compressibility.
 
 #### Key Insights
 
-- **Fluctuations decrease as system size increases**, typically scaling as $1/\sqrt{N}$.
+- **Relative fluctuations decrease as system size increases**, typically scaling as $\sigma_X/\langle X \rangle \sim 1/\sqrt{N}$.
 - **Response functions (e.g., heat capacity, compressibility) determine fluctuation magnitude**.
 - **Ensemble equivalence** ensures that for large systems, different ensembles (canonical, grand canonical, etc.) give equivalent macroscopic results, despite differing fluctuation magnitudes.
