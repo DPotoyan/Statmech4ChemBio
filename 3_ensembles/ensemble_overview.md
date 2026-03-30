@@ -2,6 +2,8 @@
 
 ![](./figs/ensembl.png)
 
+![](./figs/ensemble_connections.png)
+
 ## The Big Picture: Why Multiple Ensembles?
 
 - All ensembles describe the **same macroscopic physics** in the thermodynamic limit. They differ only in which quantities are held fixed and which are allowed to fluctuate. The choice of ensemble is a choice of **boundary conditions:** what the system exchanges with its surroundings:
