@@ -43,7 +43,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build HTML
-        run: jupyter book build --execute --html
+        # No --execute: render committed outputs only. Run notebooks locally
+        # (or on Colab) and commit their outputs to update figures.
+        run: jupyter book build --html
         
       - name: Upload Output HTML as Artifact
         uses: actions/upload-pages-artifact@v3
